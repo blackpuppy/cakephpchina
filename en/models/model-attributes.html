@@ -1,0 +1,514 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Model Attributes" lang="en" name="title" />
+<meta content="alternate table,default model,database configuration,model example,database table,default database,model class,model behavior,class model,plural form,database connections,database connection,attribute,attributes,complete list,config,cakephp,api,class example" lang="en" name="keywords" />
+
+    <title>Model Attributes &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Models" href="../models.html" />
+    <link rel="next" title="Additional Methods and Properties" href="additional-methods-and-properties.html" />
+    <link rel="prev" title="DataSources" href="datasources.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/models/model-attributes.html" /><link rel="alternate" hreflang="es" href="../../es/models/model-attributes.html" /><link rel="alternate" hreflang="ja" href="../../ja/models/model-attributes.html" /><link rel="alternate" hreflang="fr" href="../../fr/models/model-attributes.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/models/model-attributes.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../models.html" accesskey="U" itemprop="url"><span itemprop="title">Models</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/models/model-attributes.html">pt</a></li>
+				
+					<li><a href="../../es/models/model-attributes.html">es</a></li>
+				
+					<li><a href="../../ja/models/model-attributes.html">ja</a></li>
+				
+					<li><a href="../../fr/models/model-attributes.html">fr</a></li>
+				
+					<li><a href="../../zh/models/model-attributes.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/models/model-attributes.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="model-attributes">
+<h1>Model Attributes<a class="headerlink" href="#model-attributes" title="Permalink to this headline">¶</a></h1>
+<p>Model attributes allow you to set properties that can override the
+default model behavior.</p>
+<p>For a complete list of model attributes and their descriptions
+visit the <a class="reference external" href="http://api.cakephp.org/2.7/class-Model.html">CakePHP API</a>.</p>
+<div class="section" id="usedbconfig">
+<h2>useDbConfig<a class="headerlink" href="#usedbconfig" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">useDbConfig</span></tt> property is a string that specifies the name of
+the database connection to use to bind your model class to the
+related database table. You can set it to any of the database
+connections defined within your database configuration file. The
+database configuration file is stored in /app/Config/database.php.</p>
+<p>The <tt class="docutils literal"><span class="pre">useDbConfig</span></tt> property is defaulted to the &#8216;default&#8217; database
+connection.</p>
+<p>Example usage:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Example</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$useDbConfig</span> <span class="o">=</span> <span class="s1">&#39;alternate&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="usetable">
+<h2>useTable<a class="headerlink" href="#usetable" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">useTable</span></tt> property specifies the database table name. By
+default, the model uses the lowercase, plural form of the model&#8217;s
+class name. Set this attribute to the name of an alternate table,
+or set it to <tt class="docutils literal"><span class="pre">false</span></tt> if you wish the model to use no database
+table.</p>
+<p>Example usage:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Example</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$useTable</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span> <span class="c1">// This model does not use a database table</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Alternatively:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Example</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$useTable</span> <span class="o">=</span> <span class="s1">&#39;exmp&#39;</span><span class="p">;</span> <span class="c1">// This model uses a database table &#39;exmp&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tableprefix">
+<h2>tablePrefix<a class="headerlink" href="#tableprefix" title="Permalink to this headline">¶</a></h2>
+<p>The name of the table prefix used for the model. The table prefix
+is initially set in the database connection file at
+/app/Config/database.php. The default is no prefix. You can
+override the default by setting the <tt class="docutils literal"><span class="pre">tablePrefix</span></tt> attribute in
+the model.</p>
+<p>Example usage:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Example</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$tablePrefix</span> <span class="o">=</span> <span class="s1">&#39;alternate_&#39;</span><span class="p">;</span> <span class="c1">// will look for &#39;alternate_examples&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="primarykey">
+<span id="model-primarykey"></span><h2>primaryKey<a class="headerlink" href="#primarykey" title="Permalink to this headline">¶</a></h2>
+<p>Each table normally has a primary key, <tt class="docutils literal"><span class="pre">id</span></tt>. You may change which
+field name the model uses as its primary key. This is common when
+setting CakePHP to use an existing database table.</p>
+<p>Example usage:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Example</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="c1">// example_id is the field name in the database</span>
+    <span class="k">public</span> <span class="nv">$primaryKey</span> <span class="o">=</span> <span class="s1">&#39;example_id&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="displayfield">
+<span id="model-displayfield"></span><h2>displayField<a class="headerlink" href="#displayfield" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">displayField</span></tt> attribute specifies which database field
+should be used as a label for the record. The label is used in
+scaffolding and in <tt class="docutils literal"><span class="pre">find('list')</span></tt> calls. The model will use
+<tt class="docutils literal"><span class="pre">name</span></tt> or <tt class="docutils literal"><span class="pre">title</span></tt>, by default.</p>
+<p>For example, to use the <tt class="docutils literal"><span class="pre">username</span></tt> field:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$displayField</span> <span class="o">=</span> <span class="s1">&#39;username&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Multiple field names cannot be combined into a single display
+field. For example, you cannot specify,
+<tt class="docutils literal"><span class="pre">array('first_name',</span> <span class="pre">'last_name')</span></tt> as the display field. Instead
+create a virtual field with the Model attribute virtualFields</p>
+</div>
+<div class="section" id="recursive">
+<h2>recursive<a class="headerlink" href="#recursive" title="Permalink to this headline">¶</a></h2>
+<p>The recursive property defines how deep CakePHP should go to fetch
+associated model data via <tt class="docutils literal"><span class="pre">find()</span></tt>, and <tt class="docutils literal"><span class="pre">read()</span></tt> methods.</p>
+<p>Imagine your application features Groups which belong to a domain
+and have many Users which in turn have many Articles. You can set
+$recursive to different values based on the amount of data you want
+back from a $this-&gt;Group-&gt;find() call:</p>
+<ul class="simple">
+<li>-1 CakePHP fetches Group data only, no joins.</li>
+<li>0  CakePHP fetches Group data and its domain</li>
+<li>1  CakePHP fetches a Group, its domain and its associated Users</li>
+<li>2  CakePHP fetches a Group, its domain, its associated Users, and the
+Users&#8217; associated Articles</li>
+</ul>
+<p>Set it no higher than you need. Having CakePHP fetch data you
+aren&#8217;t going to use slows your app unnecessarily. Also note that
+the default recursive level is 1.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to combine $recursive with the <tt class="docutils literal"><span class="pre">fields</span></tt>
+functionality, you will have to add the columns containing the
+required foreign keys to the <tt class="docutils literal"><span class="pre">fields</span></tt> array manually. In the
+example above, this could mean adding <tt class="docutils literal"><span class="pre">domain_id</span></tt>.</p>
+</div>
+<p>The recommended recursive level for your application should be -1.
+This avoids retrieving related data where that is unnecessary or even
+unwanted. This is most likely the case for most of your find() calls.
+Raise it only when needed or use Containable behavior.</p>
+<p>You can achieve that by adding it to the AppModel:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$recursive</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>If you use events in your system, using the value -1 for recursive will
+disable all event triggering in the associated model. This happens because
+no relations are created when the value is set to -1.</p>
+</div>
+<div class="section" id="order">
+<h2>order<a class="headerlink" href="#order" title="Permalink to this headline">¶</a></h2>
+<p>The default ordering of data for any find operation. Possible
+values include:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$order</span> <span class="o">=</span> <span class="s2">&quot;field&quot;</span>
+<span class="nv">$order</span> <span class="o">=</span> <span class="s2">&quot;Model.field&quot;</span><span class="p">;</span>
+<span class="nv">$order</span> <span class="o">=</span> <span class="s2">&quot;Model.field asc&quot;</span><span class="p">;</span>
+<span class="nv">$order</span> <span class="o">=</span> <span class="s2">&quot;Model.field ASC&quot;</span><span class="p">;</span>
+<span class="nv">$order</span> <span class="o">=</span> <span class="s2">&quot;Model.field DESC&quot;</span><span class="p">;</span>
+<span class="nv">$order</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;Model.field&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;asc&quot;</span><span class="p">,</span> <span class="s2">&quot;Model.field2&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;DESC&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="data">
+<h2>data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<p>The container for the model&#8217;s fetched data. While data returned
+from a model class is normally used as returned from a find() call,
+you may need to access information stored in $data inside of model
+callbacks.</p>
+</div>
+<div class="section" id="schema">
+<h2>_schema<a class="headerlink" href="#schema" title="Permalink to this headline">¶</a></h2>
+<p>Contains metadata describing the model&#8217;s database table fields.
+Each field is described by:</p>
+<ul class="simple">
+<li>name</li>
+<li>type (integer, string, datetime, etc.)</li>
+<li>null</li>
+<li>default value</li>
+<li>length</li>
+</ul>
+<p>Example Usage:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">protected</span> <span class="nv">$_schema</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;first_name&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;length&#39;</span> <span class="o">=&gt;</span> <span class="mi">30</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;last_name&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;length&#39;</span> <span class="o">=&gt;</span> <span class="mi">30</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;length&#39;</span> <span class="o">=&gt;</span> <span class="mi">30</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="validate">
+<h2>validate<a class="headerlink" href="#validate" title="Permalink to this headline">¶</a></h2>
+<p>This attribute holds rules that allow the model to make data
+validation decisions before saving. Keys named after fields hold
+regex values allowing the model to try to make matches.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is not necessary to call validate() before save() as save() will
+automatically validate your data before actually saving.</p>
+</div>
+<p>For more information on validation, see the <a class="reference internal" href="data-validation.html"><em>Data Validation</em></a>
+later on in this manual.</p>
+</div>
+<div class="section" id="virtualfields">
+<h2>virtualFields<a class="headerlink" href="#virtualfields" title="Permalink to this headline">¶</a></h2>
+<p>Array of virtual fields this model has. Virtual fields are aliased
+SQL expressions. Fields added to this property will be read as
+other fields in a model but will not be saveable.</p>
+<p>Example usage for MySQL:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$virtualFields</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;CONCAT(User.first_name, &#39; &#39;, User.last_name)&quot;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>In subsequent find operations, your User results would contain a
+<tt class="docutils literal"><span class="pre">name</span></tt> key with the result of the concatenation. It is not
+advisable to create virtual fields with the same names as columns
+on the database, this can cause SQL errors.</p>
+<p>For more information on the <tt class="docutils literal"><span class="pre">virtualFields</span></tt> property, its proper
+usage, as well as limitations, see
+<a class="reference internal" href="virtual-fields.html"><em>Virtual fields</em></a>.</p>
+</div>
+<div class="section" id="name">
+<h2>name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
+<p>Name of the model. If you do not specify it in your model file it will
+be set to the class name by constructor.</p>
+<p>Example usage:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Example</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$name</span> <span class="o">=</span> <span class="s1">&#39;Example&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cachequeries">
+<h2>cacheQueries<a class="headerlink" href="#cachequeries" title="Permalink to this headline">¶</a></h2>
+<p>If set to true, data fetched by the model during a single request
+is cached. This caching is in-memory only, and only lasts for the
+duration of the request. Any duplicate requests for the same data
+is handled by the cache.</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../models.html">Models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="associations-linking-models-together.html">Associations: Linking Models Together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="retrieving-your-data.html">Retrieving Your Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saving-your-data.html">Saving Your Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deleting-data.html">Deleting Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-validation.html">Data Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callback-methods.html">Callback Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasources.html">DataSources</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Model Attributes</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="additional-methods-and-properties.html">Additional Methods and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtual-fields.html">Virtual fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transactions.html">Transactions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Model Attributes</a><ul>
+<li><a class="reference internal" href="#usedbconfig">useDbConfig</a></li>
+<li><a class="reference internal" href="#usetable">useTable</a></li>
+<li><a class="reference internal" href="#tableprefix">tablePrefix</a></li>
+<li><a class="reference internal" href="#primarykey">primaryKey</a></li>
+<li><a class="reference internal" href="#displayfield">displayField</a></li>
+<li><a class="reference internal" href="#recursive">recursive</a></li>
+<li><a class="reference internal" href="#order">order</a></li>
+<li><a class="reference internal" href="#data">data</a></li>
+<li><a class="reference internal" href="#schema">_schema</a></li>
+<li><a class="reference internal" href="#validate">validate</a></li>
+<li><a class="reference internal" href="#virtualfields">virtualFields</a></li>
+<li><a class="reference internal" href="#name">name</a></li>
+<li><a class="reference internal" href="#cachequeries">cacheQueries</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="additional-methods-and-properties.html" title="Additional Methods and Properties" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="datasources.html" title="DataSources" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

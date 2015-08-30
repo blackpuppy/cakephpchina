@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Cookie" lang="en" name="title" />
+<meta content="array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null" lang="en" name="keywords" />
+
+    <title>Cookie &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../../index.html" />
+    <link rel="up" title="Components" href="../toc-components.html" />
+    <link rel="next" title="Access Control Lists" href="access-control-lists.html" />
+    <link rel="prev" title="Request Handling" href="request-handling.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/components/cookie.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/components/cookie.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/components/cookie.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/components/cookie.html" /><link rel="alternate" hreflang="zh_CN" href="../../../zh/core-libraries/components/cookie.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">Core Libraries</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../toc-components.html" accesskey="U" itemprop="url"><span itemprop="title">Components</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../../pt/core-libraries/components/cookie.html">pt</a></li>
+				
+					<li><a href="../../../es/core-libraries/components/cookie.html">es</a></li>
+				
+					<li><a href="../../../ja/core-libraries/components/cookie.html">ja</a></li>
+				
+					<li><a href="../../../fr/core-libraries/components/cookie.html">fr</a></li>
+				
+					<li><a href="../../../zh/core-libraries/components/cookie.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/core-libraries/components/cookie.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="cookie">
+<h1>Cookie<a class="headerlink" href="#cookie" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="CookieComponent">
+<em class="property">class </em><tt class="descname">CookieComponent</tt><big>(</big><em>ComponentCollection $collection</em>, <em>array $settings = array()</em><big>)</big><a class="headerlink" href="#CookieComponent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The CookieComponent is a wrapper around the native PHP <tt class="docutils literal"><span class="pre">setcookie</span></tt>
+method. It also includes a host of delicious icing to make coding
+cookies in your controllers very convenient. Before attempting to
+use the CookieComponent, you must make sure that &#8216;Cookie&#8217; is listed
+in your controller&#8217;s $components array.</p>
+<div class="section" id="controller-setup">
+<h2>Controller Setup<a class="headerlink" href="#controller-setup" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of controller variables that allow you to
+configure the way cookies are created and managed. Defining these
+special variables in the beforeFilter() method of your controller
+allows you to define how the CookieComponent works.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="16%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Cookie variable</th>
+<th class="head">default</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>string $name</td>
+<td>&#8216;CakeCookie&#8217;</td>
+<td>The name of the cookie.</td>
+</tr>
+<tr class="row-odd"><td>string $key</td>
+<td>null</td>
+<td><p class="first">This string is used to encrypt
+the value written to the cookie.
+The string should be random and difficult to guess.</p>
+<p class="last">When using rijndael or aes encryption, this value
+must be longer than 32 bytes.</p>
+</td>
+</tr>
+<tr class="row-even"><td>string $domain</td>
+<td>&#8216;&#8217;</td>
+<td>The domain name allowed to access the cookie. For
+example, use &#8216;.yourdomain.com&#8217; to allow access from
+all your subdomains.</td>
+</tr>
+<tr class="row-odd"><td>int or string
+$time</td>
+<td>&#8216;5 Days&#8217;</td>
+<td>The time when your cookie will expire. Integers are
+interpreted as seconds. A value of 0 is equivalent
+to a &#8216;session cookie&#8217;: i.e., the cookie expires when
+the browser is closed. If a string is set, this will
+be interpreted with PHP function strtotime(). You can
+set this directly within the write() method.</td>
+</tr>
+<tr class="row-even"><td>string $path</td>
+<td>&#8216;/&#8217;</td>
+<td>The server path on which the cookie will be applied.
+If $path is set to &#8216;/foo/&#8217;, the cookie will
+only be available within the /foo/ directory and all
+sub-directories of your domain, such as /foo/bar. The
+default value is the entire domain. You can set this
+directly within the write() method.</td>
+</tr>
+<tr class="row-odd"><td>boolean $secure</td>
+<td>false</td>
+<td>Indicates that the cookie should only be transmitted
+over a secure HTTPS connection. When set to true, the
+cookie will only be set if a secure connection
+exists. You can set this directly within the write()
+method.</td>
+</tr>
+<tr class="row-even"><td>boolean
+$httpOnly</td>
+<td>false</td>
+<td>Set to true to make HTTP only cookies. Cookies that
+are HTTP only are not accessible in Javascript.</td>
+</tr>
+</tbody>
+</table>
+<p>The following snippet of controller code shows how to include the
+CookieComponent and set up the controller variables needed to write
+a cookie named &#8216;baker_id&#8217; for the domain &#8216;example.com&#8217; which needs
+a secure connection, is available on the path
+&#8216;/bakers/preferences/&#8217;, expires in one hour and is HTTP only:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Cookie&#39;</span><span class="p">);</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="s1">&#39;baker_id&#39;</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">time</span> <span class="o">=</span> <span class="mi">3600</span><span class="p">;</span>  <span class="c1">// or &#39;1 hour&#39;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">path</span> <span class="o">=</span> <span class="s1">&#39;/bakers/preferences/&#39;</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">domain</span> <span class="o">=</span> <span class="s1">&#39;example.com&#39;</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">secure</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>  <span class="c1">// i.e. only sent if using secure HTTPS</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">key</span> <span class="o">=</span> <span class="s1">&#39;qSI232qs*&amp;sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^&#39;</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">httpOnly</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">type</span><span class="p">(</span><span class="s1">&#39;aes&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Next, let&#8217;s look at how to use the different methods of the Cookie
+Component.</p>
+</div>
+<div class="section" id="using-the-component">
+<h2>Using the Component<a class="headerlink" href="#using-the-component" title="Permalink to this headline">¶</a></h2>
+<p>The CookieComponent offers a number of methods for working with Cookies.</p>
+<dl class="method">
+<dt id="CookieComponent::write">
+<tt class="descclassname">CookieComponent::</tt><tt class="descname">write</tt><big>(</big><em>mixed $key</em>, <em>mixed $value = null</em>, <em>boolean $encrypt = true</em>, <em>mixed $expires = null</em><big>)</big><a class="headerlink" href="#CookieComponent::write" title="Permalink to this definition">¶</a></dt>
+<dd><p>The write() method is the heart of the cookie component. $key is the
+cookie variable name you want, and the $value is the information to
+be stored:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;Larry&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You can also group your variables by using dot notation in the
+key parameter:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="s1">&#39;Larry&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;User.role&#39;</span><span class="p">,</span> <span class="s1">&#39;Lead&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If you want to write more than one value to the cookie at a time,
+you can pass an array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Larry&#39;</span><span class="p">,</span> <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Lead&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>All values in the cookie are encrypted by default. If you want to
+store the values as plain text, set the third parameter of the
+write() method to false. You should remember to set
+the encryption mode to &#8216;aes&#8217; to ensure that values are securely
+encrypted:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;Larry&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The last parameter to write is $expires – the number of seconds
+until your cookie will expire. For convenience, this parameter can
+also be passed as a string that the PHP strtotime() function
+understands:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Both cookies expire in one hour.</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;first_name&#39;</span><span class="p">,</span> <span class="s1">&#39;Larry&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="mi">3600</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;last_name&#39;</span><span class="p">,</span> <span class="s1">&#39;Masters&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;1 hour&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CookieComponent::read">
+<tt class="descclassname">CookieComponent::</tt><tt class="descname">read</tt><big>(</big><em>mixed $key = null</em><big>)</big><a class="headerlink" href="#CookieComponent::read" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method is used to read the value of a cookie variable with the
+name specified by $key.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Outputs &quot;Larry&quot;</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+
+<span class="c1">// You can also use the dot notation for read</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">);</span>
+
+<span class="c1">// To get the variables which you had grouped</span>
+<span class="c1">// using the dot notation as an array use the following</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">);</span>
+
+<span class="c1">// this outputs something like array(&#39;name&#39; =&gt; &#39;Larry&#39;, &#39;role&#39; =&gt; &#39;Lead&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CookieComponent::check">
+<tt class="descclassname">CookieComponent::</tt><tt class="descname">check</tt><big>(</big><em>$key</em><big>)</big><a class="headerlink" href="#CookieComponent::check" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$key</strong> (<em>string</em>) &#8211; The key to check.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Used to check whether a key/path exists and has a non-null value.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.3: </span><tt class="docutils literal"><span class="pre">CookieComponent::check()</span></tt> was added in 2.3</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CookieComponent::delete">
+<tt class="descclassname">CookieComponent::</tt><tt class="descname">delete</tt><big>(</big><em>mixed $key</em><big>)</big><a class="headerlink" href="#CookieComponent::delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a cookie variable of the name in $key. Works with dot
+notation:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Delete a variable</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+
+<span class="c1">// Delete the cookie variable bar, but not everything under foo</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;foo.bar&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CookieComponent::destroy">
+<tt class="descclassname">CookieComponent::</tt><tt class="descname">destroy</tt><big>(</big><big>)</big><a class="headerlink" href="#CookieComponent::destroy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Destroys the current cookie.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CookieComponent::type">
+<tt class="descclassname">CookieComponent::</tt><tt class="descname">type</tt><big>(</big><em>$type</em><big>)</big><a class="headerlink" href="#CookieComponent::type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows you to change the encryption scheme. By default the &#8216;cipher&#8217; scheme is used for
+backwards compatibility. However, you should always use either the &#8216;rijndael&#8217; or
+&#8216;aes&#8217; schemes.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.2: </span>The &#8216;rijndael&#8217; type was added.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.5: </span>The &#8216;aes&#8217; type was added.</p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../core-libraries.html">Core Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../toc-general-purpose.html">General Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-behaviors.html">Behaviors</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-components.html">Components</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pagination.html">Pagination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sessions.html">Sessions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="authentication.html">Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security-component.html">Security</a></li>
+<li class="toctree-l3"><a class="reference internal" href="request-handling.html">Request Handling</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Cookie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access-control-lists.html">Access Control Lists</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-helpers.html">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-utilities.html">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Cookie</a><ul>
+<li><a class="reference internal" href="#controller-setup">Controller Setup</a></li>
+<li><a class="reference internal" href="#using-the-component">Using the Component</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="access-control-lists.html" title="Access Control Lists" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="request-handling.html" title="Request Handling" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

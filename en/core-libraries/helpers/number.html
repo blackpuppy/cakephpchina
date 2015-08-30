@@ -1,0 +1,794 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="NumberHelper" lang="en" name="title" />
+<meta content="The Number Helper contains convenience methods that enable display numbers in common formats in your views." lang="en" name="description" />
+<meta content="number helper,currency,number format,number precision,format file size,format numbers" lang="en" name="keywords" />
+
+    <title>NumberHelper &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../../index.html" />
+    <link rel="up" title="Helpers" href="../toc-helpers.html" />
+    <link rel="next" title="Paginator" href="paginator.html" />
+    <link rel="prev" title="JsHelper" href="js.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/helpers/number.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/helpers/number.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/helpers/number.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/helpers/number.html" /><link rel="alternate" hreflang="zh_CN" href="../../../zh/core-libraries/helpers/number.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">Core Libraries</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../toc-helpers.html" accesskey="U" itemprop="url"><span itemprop="title">Helpers</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../../pt/core-libraries/helpers/number.html">pt</a></li>
+				
+					<li><a href="../../../es/core-libraries/helpers/number.html">es</a></li>
+				
+					<li><a href="../../../ja/core-libraries/helpers/number.html">ja</a></li>
+				
+					<li><a href="../../../fr/core-libraries/helpers/number.html">fr</a></li>
+				
+					<li><a href="../../../zh/core-libraries/helpers/number.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/core-libraries/helpers/number.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="numberhelper">
+<h1>NumberHelper<a class="headerlink" href="#numberhelper" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="NumberHelper">
+<em class="property">class </em><tt class="descname">NumberHelper</tt><big>(</big><em>View $view</em>, <em>array $settings = array()</em><big>)</big><a class="headerlink" href="#NumberHelper" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The NumberHelper contains convenient methods that enable display
+numbers in common formats in your views. These methods include ways
+to format currency, percentages, data sizes, format numbers to
+specific precisions and also to give you more flexibility with
+formatting numbers.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.1: </span><tt class="docutils literal"><span class="pre">NumberHelper</span></tt> have been refactored into <a class="reference internal" href="../../core-utility-libraries/number.html#CakeNumber" title="CakeNumber"><tt class="xref php php-class docutils literal"><span class="pre">CakeNumber</span></tt></a> class to
+allow easier use outside of the <tt class="docutils literal"><span class="pre">View</span></tt> layer.
+Within a view, these methods are accessible via the <tt class="docutils literal"><span class="pre">NumberHelper</span></tt>
+class and you can call it as you would call a normal helper method:
+<tt class="docutils literal"><span class="pre">$this-&gt;Number-&gt;method($args);</span></tt>.</p>
+</div>
+<p>All of these functions return the formatted number; They do not
+automatically echo the output into the view.</p>
+<dl class="method">
+<dt id="NumberHelper::currency">
+<tt class="descclassname">NumberHelper::</tt><tt class="descname">currency</tt><big>(</big><em>mixed $number</em>, <em>string $currency = 'USD'</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#NumberHelper::currency" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$number</strong> (<em>float</em>) &#8211; The value to covert.</li>
+<li><strong>$currency</strong> (<em>string</em>) &#8211; The known currency format to use.</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; Options, see below.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This method is used to display a number in common currency formats
+(EUR,GBP,USD). Usage in a view looks like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as NumberHelper</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">currency</span><span class="p">(</span><span class="nv">$number</span><span class="p">,</span> <span class="nv">$currency</span><span class="p">);</span>
+
+<span class="c1">// called as CakeNumber</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeNumber&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">CakeNumber</span><span class="o">::</span><span class="na">currency</span><span class="p">(</span><span class="nv">$number</span><span class="p">,</span> <span class="nv">$currency</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The first parameter, $number, should be a floating point number
+that represents the amount of money you are expressing. The second
+parameter is used to choose a predefined currency formatting
+scheme:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">$currency</th>
+<th class="head">1234.56, formatted by currency type</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>EUR</td>
+<td>€1.234,56</td>
+</tr>
+<tr class="row-odd"><td>GBP</td>
+<td>£1,234.56</td>
+</tr>
+<tr class="row-even"><td>USD</td>
+<td>$1,234.56</td>
+</tr>
+</tbody>
+</table>
+<p>The third parameter is an array of options for further defining the
+output. The following options are available:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>before</td>
+<td>The currency symbol to place before whole numbers
+ie. &#8216;$&#8217;</td>
+</tr>
+<tr class="row-odd"><td>after</td>
+<td>The currency symbol to place after decimal numbers
+ie. &#8216;c&#8217;. Set to boolean false to use no decimal
+symbol. eg. 0.35 =&gt; $0.35.</td>
+</tr>
+<tr class="row-even"><td>zero</td>
+<td>The text to use for zero values, can be a string or
+a number. ie. 0, &#8216;Free!&#8217;</td>
+</tr>
+<tr class="row-odd"><td>places</td>
+<td>Number of decimal places to use. ie. 2</td>
+</tr>
+<tr class="row-even"><td>thousands</td>
+<td>Thousands separator ie. &#8216;,&#8217;</td>
+</tr>
+<tr class="row-odd"><td>decimals</td>
+<td>Decimal separator symbol ie. &#8216;.&#8217;</td>
+</tr>
+<tr class="row-even"><td>negative</td>
+<td>Symbol for negative numbers. If equal to &#8216;()&#8217;, the
+number will be wrapped with ( and )</td>
+</tr>
+<tr class="row-odd"><td>escape</td>
+<td>Should the output be htmlentity escaped? Defaults
+to true</td>
+</tr>
+<tr class="row-even"><td>wholeSymbol</td>
+<td>String to use for whole numbers ie. &#8216; dollars&#8217;</td>
+</tr>
+<tr class="row-odd"><td>wholePosition</td>
+<td>Either &#8216;before&#8217; or &#8216;after&#8217; to place the whole
+symbol</td>
+</tr>
+<tr class="row-even"><td>fractionSymbol</td>
+<td>String to use for fraction numbers ie. &#8216; cents&#8217;</td>
+</tr>
+<tr class="row-odd"><td>fractionPosition</td>
+<td>Either &#8216;before&#8217; or &#8216;after&#8217; to place the fraction
+symbol</td>
+</tr>
+<tr class="row-even"><td>fractionExponent</td>
+<td>Fraction exponent of this specific currency.
+Defaults to 2.</td>
+</tr>
+</tbody>
+</table>
+<p>If a non-recognized $currency value is supplied, it is prepended to
+a USD formatted number. For example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as NumberHelper</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">currency</span><span class="p">(</span><span class="s1">&#39;1234.56&#39;</span><span class="p">,</span> <span class="s1">&#39;FOO&#39;</span><span class="p">);</span>
+
+<span class="c1">// Outputs</span>
+<span class="nx">FOO</span> <span class="mi">1</span><span class="p">,</span><span class="mf">234.56</span>
+
+<span class="c1">// called as CakeNumber</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeNumber&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">CakeNumber</span><span class="o">::</span><span class="na">currency</span><span class="p">(</span><span class="s1">&#39;1234.56&#39;</span><span class="p">,</span> <span class="s1">&#39;FOO&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.4: </span>The <tt class="docutils literal"><span class="pre">fractionExponent</span></tt> option was added.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="NumberHelper::defaultCurrency">
+<tt class="descclassname">NumberHelper::</tt><tt class="descname">defaultCurrency</tt><big>(</big><em>string $currency</em><big>)</big><a class="headerlink" href="#NumberHelper::defaultCurrency" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$currency</strong> (<em>string</em>) &#8211; Set a known currency for <a class="reference internal" href="../../core-utility-libraries/number.html#CakeNumber::currency" title="CakeNumber::currency"><tt class="xref php php-meth docutils literal"><span class="pre">CakeNumber::currency()</span></tt></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Setter/getter for default currency. This removes the need always passing the
+currency to <a class="reference internal" href="../../core-utility-libraries/number.html#CakeNumber::currency" title="CakeNumber::currency"><tt class="xref php php-meth docutils literal"><span class="pre">CakeNumber::currency()</span></tt></a> and change all currency outputs by setting other default.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.3: </span>This method was added in 2.3</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="NumberHelper::addFormat">
+<tt class="descclassname">NumberHelper::</tt><tt class="descname">addFormat</tt><big>(</big><em>string $formatName</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#NumberHelper::addFormat" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$formatName</strong> (<em>string</em>) &#8211; The format name to be used in the future</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; The array of options for this format. Uses the
+same <tt class="docutils literal"><span class="pre">$options</span></tt> keys as <a class="reference internal" href="../../core-utility-libraries/number.html#CakeNumber::currency" title="CakeNumber::currency"><tt class="xref php php-meth docutils literal"><span class="pre">CakeNumber::currency()</span></tt></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Add a currency format to the Number helper. Makes reusing
+currency formats easier:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as NumberHelper</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">addFormat</span><span class="p">(</span><span class="s1">&#39;BRL&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;before&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;R$&#39;</span><span class="p">,</span> <span class="s1">&#39;thousands&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;decimals&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;,&#39;</span><span class="p">));</span>
+
+<span class="c1">// called as CakeNumber</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeNumber&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+<span class="nx">CakeNumber</span><span class="o">::</span><span class="na">addFormat</span><span class="p">(</span><span class="s1">&#39;BRL&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;before&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;R$&#39;</span><span class="p">,</span> <span class="s1">&#39;thousands&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;decimals&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;,&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>You can now use <cite>BRL</cite> as a short form when formatting currency amounts:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as NumberHelper</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">currency</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="s1">&#39;BRL&#39;</span><span class="p">);</span>
+
+<span class="c1">// called as CakeNumber</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeNumber&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">CakeNumber</span><span class="o">::</span><span class="na">currency</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="s1">&#39;BRL&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Added formats are merged with the following defaults:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;wholeSymbol&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;wholePosition&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;before&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;fractionSymbol&#39;</span>   <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;fractionPosition&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;after&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;zero&#39;</span>             <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s1">&#39;places&#39;</span>           <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;thousands&#39;</span>        <span class="o">=&gt;</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;decimals&#39;</span>         <span class="o">=&gt;</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;negative&#39;</span>         <span class="o">=&gt;</span> <span class="s1">&#39;()&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;escape&#39;</span>           <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="s1">&#39;fractionExponent&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="NumberHelper::precision">
+<tt class="descclassname">NumberHelper::</tt><tt class="descname">precision</tt><big>(</big><em>mixed $number</em>, <em>int $precision = 3</em><big>)</big><a class="headerlink" href="#NumberHelper::precision" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$number</strong> (<em>float</em>) &#8211; The value to covert</li>
+<li><strong>$precision</strong> (<em>integer</em>) &#8211; The number of decimal places to display</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This method displays a number with the specified amount of
+precision (decimal places). It will round in order to maintain the
+level of precision defined.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as NumberHelper</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">precision</span><span class="p">(</span><span class="mf">456.91873645</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+
+<span class="c1">// Outputs</span>
+<span class="mf">456.92</span>
+
+<span class="c1">// called as CakeNumber</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeNumber&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">CakeNumber</span><span class="o">::</span><span class="na">precision</span><span class="p">(</span><span class="mf">456.91873645</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="NumberHelper::toPercentage">
+<tt class="descclassname">NumberHelper::</tt><tt class="descname">toPercentage</tt><big>(</big><em>mixed $number</em>, <em>int $precision = 2</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#NumberHelper::toPercentage" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$number</strong> (<em>float</em>) &#8211; The value to covert.</li>
+<li><strong>$precision</strong> (<em>integer</em>) &#8211; The number of decimal places to display.</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; Options, see below.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>multiply</td>
+<td>Boolean to indicate whether the value has to be
+multiplied by 100. Useful for decimal percentages.</td>
+</tr>
+</tbody>
+</table>
+<p>Like precision(), this method formats a number according to the
+supplied precision (where numbers are rounded to meet the given
+precision). This method also expresses the number as a percentage
+and prepends the output with a percent sign.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Called as NumberHelper. Output: 45.69%</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">toPercentage</span><span class="p">(</span><span class="mf">45.691873645</span><span class="p">);</span>
+
+<span class="c1">// Called as CakeNumber. Output: 45.69%</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeNumber&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">CakeNumber</span><span class="o">::</span><span class="na">toPercentage</span><span class="p">(</span><span class="mf">45.691873645</span><span class="p">);</span>
+
+<span class="c1">// Called with multiply. Output: 45.69%</span>
+<span class="k">echo</span> <span class="nx">CakeNumber</span><span class="o">::</span><span class="na">toPercentage</span><span class="p">(</span><span class="mf">0.45691</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;multiply&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.4: </span>The <tt class="docutils literal"><span class="pre">$options</span></tt> argument with the <tt class="docutils literal"><span class="pre">multiply</span></tt> option was added.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="NumberHelper::fromReadableSize">
+<tt class="descclassname">NumberHelper::</tt><tt class="descname">fromReadableSize</tt><big>(</big><em>string $size</em>, <em>$default</em><big>)</big><a class="headerlink" href="#NumberHelper::fromReadableSize" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$size</strong> (<em>string</em>) &#8211; The formatted human readable value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This method unformats a number from a human readable byte size
+to an integer number of bytes.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.3: </span>This method was added in 2.3</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="NumberHelper::toReadableSize">
+<tt class="descclassname">NumberHelper::</tt><tt class="descname">toReadableSize</tt><big>(</big><em>string $dataSize</em><big>)</big><a class="headerlink" href="#NumberHelper::toReadableSize" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$dataSize</strong> (<em>string</em>) &#8211; The number of bytes to make readable.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This method formats data sizes in human readable forms. It provides
+a shortcut way to convert bytes to KB, MB, GB, and TB. The size is
+displayed with a two-digit precision level, according to the size
+of data supplied (i.e. higher sizes are expressed in larger
+terms):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as NumberHelper</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">toReadableSize</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// 0 Bytes</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">toReadableSize</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span> <span class="c1">// 1 KB</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">toReadableSize</span><span class="p">(</span><span class="mf">1321205.76</span><span class="p">);</span> <span class="c1">// 1.26 MB</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">toReadableSize</span><span class="p">(</span><span class="mi">5368709120</span><span class="p">);</span> <span class="c1">// 5.00 GB</span>
+
+<span class="c1">// called as CakeNumber</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeNumber&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">CakeNumber</span><span class="o">::</span><span class="na">toReadableSize</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// 0 Bytes</span>
+<span class="k">echo</span> <span class="nx">CakeNumber</span><span class="o">::</span><span class="na">toReadableSize</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span> <span class="c1">// 1 KB</span>
+<span class="k">echo</span> <span class="nx">CakeNumber</span><span class="o">::</span><span class="na">toReadableSize</span><span class="p">(</span><span class="mf">1321205.76</span><span class="p">);</span> <span class="c1">// 1.26 MB</span>
+<span class="k">echo</span> <span class="nx">CakeNumber</span><span class="o">::</span><span class="na">toReadableSize</span><span class="p">(</span><span class="mi">5368709120</span><span class="p">);</span> <span class="c1">// 5.00 GB</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="NumberHelper::format">
+<tt class="descclassname">NumberHelper::</tt><tt class="descname">format</tt><big>(</big><em>mixed $number</em>, <em>mixed $options=false</em><big>)</big><a class="headerlink" href="#NumberHelper::format" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method gives you much more control over the formatting of
+numbers for use in your views (and is used as the main method by
+most of the other NumberHelper methods). Using this method might
+looks like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as NumberHelper</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">format</span><span class="p">(</span><span class="nv">$number</span><span class="p">,</span> <span class="nv">$options</span><span class="p">);</span>
+
+<span class="c1">// called as CakeNumber</span>
+<span class="nx">CakeNumber</span><span class="o">::</span><span class="na">format</span><span class="p">(</span><span class="nv">$number</span><span class="p">,</span> <span class="nv">$options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The $number parameter is the number that you are planning on
+formatting for output. With no $options supplied, the number
+1236.334 would output as 1,236. Note that the default precision is
+zero decimal places.</p>
+<p>The $options parameter is where the real magic for this method
+resides.</p>
+<ul class="simple">
+<li>If you pass an integer then this becomes the amount of precision
+or places for the function.</li>
+<li>If you pass an associated array, you can use the following keys:<ul>
+<li>places (integer): the amount of desired precision</li>
+<li>before (string): to be put before the outputted number</li>
+<li>escape (boolean): if you want the value in before to be escaped</li>
+<li>decimals (string): used to delimit the decimal places in a
+number</li>
+<li>thousands (string): used to mark off thousand, millions, …
+places</li>
+</ul>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as NumberHelper</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">format</span><span class="p">(</span><span class="s1">&#39;123456.7890&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;places&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;before&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;¥ &#39;</span><span class="p">,</span>
+    <span class="s1">&#39;escape&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;decimals&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;thousands&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;,&#39;</span>
+<span class="p">));</span>
+<span class="c1">// output &#39;¥ 123,456.79&#39;</span>
+
+<span class="c1">// called as CakeNumber</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeNumber&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">CakeNumber</span><span class="o">::</span><span class="na">format</span><span class="p">(</span><span class="s1">&#39;123456.7890&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;places&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;before&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;¥ &#39;</span><span class="p">,</span>
+    <span class="s1">&#39;escape&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;decimals&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;thousands&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;,&#39;</span>
+<span class="p">));</span>
+<span class="c1">// output &#39;¥ 123,456.79&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="NumberHelper::formatDelta">
+<tt class="descclassname">NumberHelper::</tt><tt class="descname">formatDelta</tt><big>(</big><em>mixed $number</em>, <em>mixed $options=array()</em><big>)</big><a class="headerlink" href="#NumberHelper::formatDelta" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method displays differences in value as a signed number:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as NumberHelper</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">formatDelta</span><span class="p">(</span><span class="nv">$number</span><span class="p">,</span> <span class="nv">$options</span><span class="p">);</span>
+
+<span class="c1">// called as CakeNumber</span>
+<span class="nx">CakeNumber</span><span class="o">::</span><span class="na">formatDelta</span><span class="p">(</span><span class="nv">$number</span><span class="p">,</span> <span class="nv">$options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The $number parameter is the number that you are planning on
+formatting for output. With no $options supplied, the number
+1236.334 would output as 1,236. Note that the default precision is
+zero decimal places.</p>
+<p>The $options parameter takes the same keys as <a class="reference internal" href="../../core-utility-libraries/number.html#CakeNumber::format" title="CakeNumber::format"><tt class="xref php php-meth docutils literal"><span class="pre">CakeNumber::format()</span></tt></a> itself:</p>
+<blockquote>
+<div><ul class="simple">
+<li>places (integer): the amount of desired precision</li>
+<li>before (string): to be put before the outputted number</li>
+<li>after (string): to be put after the outputted number</li>
+<li>decimals (string): used to delimit the decimal places in a
+number</li>
+<li>thousands (string): used to mark off thousand, millions, …
+places</li>
+</ul>
+</div></blockquote>
+<p>Example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as NumberHelper</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">formatDelta</span><span class="p">(</span><span class="s1">&#39;123456.7890&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;places&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;decimals&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;thousands&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;,&#39;</span>
+<span class="p">));</span>
+<span class="c1">// output &#39;+123,456.79&#39;</span>
+
+<span class="c1">// called as CakeNumber</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeNumber&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">CakeNumber</span><span class="o">::</span><span class="na">formatDelta</span><span class="p">(</span><span class="s1">&#39;123456.7890&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;places&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;decimals&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;thousands&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;,&#39;</span>
+<span class="p">));</span>
+<span class="c1">// output &#39;+123,456.79&#39;</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.3: </span>This method was added in 2.3</p>
+</div>
+</dd></dl>
+
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Since 2.4 the symbols are now UTF-8. Please see the migration guide for details if you run a
+non-UTF-8 app.</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">Controllers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../views.html">Views</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../views/themes.html">Themes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views/media-view.html">Media Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views/json-and-xml-views.html">JSON and XML views</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../views/helpers.html">Helpers</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache.html">CacheHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form.html">FormHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="html.html">HtmlHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.html">JsHelper</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">SessionHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="text.html">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">TimeHelper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../core-libraries.html">Core Libraries</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-general-purpose.html">General Purpose</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../global-constants-and-functions.html">Global Constants and Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core-utility-libraries/app.html">App Class</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../events.html">Events System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collections.html">Collections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-components.html">Components</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-helpers.html">Helpers</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache.html">CacheHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form.html">FormHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="html.html">HtmlHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.html">JsHelper</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">SessionHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="text.html">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">TimeHelper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-utilities.html">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">NumberHelper</a></li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="paginator.html" title="Paginator" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="js.html" title="JsHelper" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

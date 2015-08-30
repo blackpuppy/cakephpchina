@@ -1,0 +1,582 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="How To Create Plugins" lang="en" name="title" />
+<meta content="plugin folder,configuration database,management module,little space,webroot,contactmanager,array,config,cakephp,models,php,directories,blog,plugins,applications" lang="en" name="keywords" />
+
+    <title>How To Create Plugins &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Plugins" href="../plugins.html" />
+    <link rel="next" title="Console and Shells" href="../console-and-shells.html" />
+    <link rel="prev" title="How To Use Plugins" href="how-to-use-plugins.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/plugins/how-to-create-plugins.html" /><link rel="alternate" hreflang="es" href="../../es/plugins/how-to-create-plugins.html" /><link rel="alternate" hreflang="ja" href="../../ja/plugins/how-to-create-plugins.html" /><link rel="alternate" hreflang="fr" href="../../fr/plugins/how-to-create-plugins.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/plugins/how-to-create-plugins.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../plugins.html" accesskey="U" itemprop="url"><span itemprop="title">Plugins</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/plugins/how-to-create-plugins.html">pt</a></li>
+				
+					<li><a href="../../es/plugins/how-to-create-plugins.html">es</a></li>
+				
+					<li><a href="../../ja/plugins/how-to-create-plugins.html">ja</a></li>
+				
+					<li><a href="../../fr/plugins/how-to-create-plugins.html">fr</a></li>
+				
+					<li><a href="../../zh/plugins/how-to-create-plugins.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/plugins/how-to-create-plugins.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="how-to-create-plugins">
+<h1>How To Create Plugins<a class="headerlink" href="#how-to-create-plugins" title="Permalink to this headline">¶</a></h1>
+<p>As a working example from the <a class="reference internal" href="how-to-use-plugins.html"><em>How To Use Plugins</em></a> section, let&#8217;s
+begin to create a ContactManager plugin. To start out, we&#8217;ll set up our plugin&#8217;s
+basic directory structure. It should look like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">/</span><span class="nx">app</span>
+    <span class="o">/</span><span class="nx">Plugin</span>
+        <span class="o">/</span><span class="nx">ContactManager</span>
+            <span class="o">/</span><span class="nx">Controller</span>
+                <span class="o">/</span><span class="nx">Component</span>
+            <span class="o">/</span><span class="nx">Model</span>
+                <span class="o">/</span><span class="nx">Behavior</span>
+            <span class="o">/</span><span class="nx">View</span>
+                <span class="o">/</span><span class="nx">Helper</span>
+                <span class="o">/</span><span class="nx">Layouts</span>
+</pre></div>
+</div>
+<p>Note the name of the plugin folder, &#8216;<strong>ContactManager</strong>&#8216;. It is important
+that this folder has the same name as the plugin.</p>
+<p>Inside the plugin folder, you&#8217;ll notice it looks a lot like a CakePHP
+application, and that&#8217;s basically what it is. You don&#8217;t actually have to
+include any of those folders if you do not use them. Some plugins might
+only define a Component and a Behavior, and in that case they can completely
+omit the &#8216;View&#8217; directory.</p>
+<p>A plugin can also have basically any of the other directories that your
+application can, such as Config, Console, Lib, webroot, etc.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to be able to access your plugin with a URL, defining
+an AppController and AppModel for the plugin is required. These
+two special classes are named after the plugin, and extend the
+parent application&#8217;s AppController and AppModel. Here&#8217;s what they
+should look like for our ContactManager example:</p>
+</div>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// /app/Plugin/ContactManager/Controller/ContactManagerAppController.php:</span>
+<span class="k">class</span> <span class="nc">ContactManagerAppController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// /app/Plugin/ContactManager/Model/ContactManagerAppModel.php:</span>
+<span class="k">class</span> <span class="nc">ContactManagerAppModel</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you forgot to define these special classes, CakePHP will hand
+you &#8220;Missing Controller&#8221; errors until you&#8217;ve done so.</p>
+<p>Please note that the process of creating plugins can be greatly
+simplified by using the Cake shell.</p>
+<p>In order to bake a plugin please use the following command:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">user</span><span class="o">@</span><span class="nx">host</span><span class="err">$</span> <span class="nx">cake</span> <span class="nx">bake</span> <span class="nx">plugin</span> <span class="nx">ContactManager</span>
+</pre></div>
+</div>
+<p>Now you can bake using the same conventions which apply to the rest
+of your app. For example - baking controllers:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">user</span><span class="o">@</span><span class="nx">host</span><span class="err">$</span> <span class="nx">cake</span> <span class="nx">bake</span> <span class="nx">controller</span> <span class="nx">Contacts</span> <span class="o">--</span><span class="nx">plugin</span> <span class="nx">ContactManager</span>
+</pre></div>
+</div>
+<p>Please refer to the chapter
+<a class="reference internal" href="../console-and-shells/code-generation-with-bake.html"><em>Code Generation with Bake</em></a> if you
+have any problems with using the command line.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Plugins do not work as namespacing to separate code.
+Due to PHP lacking namespaces in older versions
+you cannot have the same class,
+or same filename, in your plugins.
+Even if it is two different plugins.
+So use unique classes and filenames, possible prefixing
+the class and filename with the plugin name.</p>
+</div>
+<div class="section" id="plugin-controllers">
+<h2>Plugin Controllers<a class="headerlink" href="#plugin-controllers" title="Permalink to this headline">¶</a></h2>
+<p>Controllers for our ContactManager plugin will be stored in
+/app/Plugin/ContactManager/Controller/. Since the main thing we&#8217;ll
+be doing is managing contacts, we&#8217;ll need a ContactsController for
+this plugin.</p>
+<p>So, we place our new ContactsController in
+/app/Plugin/ContactManager/Controller and it looks like so:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Plugin/ContactManager/Controller/ContactsController.php</span>
+<span class="k">class</span> <span class="nc">ContactsController</span> <span class="k">extends</span> <span class="nx">ContactManagerAppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$uses</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ContactManager.Contact&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">//...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This controller extends the plugin&#8217;s AppController (called
+ContactManagerAppController) rather than the parent application&#8217;s
+AppController.</p>
+<p>Also note how the name of the model is prefixed with the name of
+the plugin. This is required to differentiate between models in
+the plugin and models in the main application.</p>
+<p class="last">In this case, the $uses array would not be required as
+ContactManager.Contact would be the default model for this
+controller, however it is included to demonstrate how to
+properly prepend the plugin name.</p>
+</div>
+<p>If you want to access what we&#8217;ve got going thus far, visit
+/contact_manager/contacts. You should get a &#8220;Missing Model&#8221; error
+because we don&#8217;t have a Contact model defined yet.</p>
+</div>
+<div class="section" id="plugin-models">
+<span id="id1"></span><h2>Plugin Models<a class="headerlink" href="#plugin-models" title="Permalink to this headline">¶</a></h2>
+<p>Models for the plugin are stored in /app/Plugin/ContactManager/Model.
+We&#8217;ve already defined a ContactsController for this plugin, so let&#8217;s
+create the model for that controller, called Contact:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// /app/Plugin/ContactManager/Model/Contact.php:</span>
+<span class="k">class</span> <span class="nc">Contact</span> <span class="k">extends</span> <span class="nx">ContactManagerAppModel</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Visiting /contact_manager/contacts now (given you&#8217;ve got a table in your
+database called &#8216;contacts&#8217;) should give us a &#8220;Missing View&#8221; error.
+Let&#8217;s create that next.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you need to reference a model within your plugin, you need to
+include the plugin name with the model name, separated with a dot.</p>
+</div>
+<p>For example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// /app/Plugin/ContactManager/Model/Contact.php:</span>
+<span class="k">class</span> <span class="nc">Contact</span> <span class="k">extends</span> <span class="nx">ContactManagerAppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ContactManager.AltName&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you would prefer that the array keys for the association not
+have the plugin prefix on them, use the alternative syntax:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// /app/Plugin/ContactManager/Model/Contact.php:</span>
+<span class="k">class</span> <span class="nc">Contact</span> <span class="k">extends</span> <span class="nx">ContactManagerAppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;AltName&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ContactManager.AltName&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="plugin-views">
+<h2>Plugin Views<a class="headerlink" href="#plugin-views" title="Permalink to this headline">¶</a></h2>
+<p>Views behave exactly as they do in normal applications. Just place
+them in the right folder inside of the /app/Plugin/[PluginName]/View/
+folder. For our ContactManager plugin, we&#8217;ll need a view for our
+ContactsController::index() action, so let&#8217;s include that as
+well:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// /app/Plugin/ContactManager/View/Contacts/index.ctp:</span>
+<span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Contacts</span><span class="o">&lt;/</span><span class="nx">h1</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Following</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">sortable</span> <span class="k">list</span> <span class="nx">of</span> <span class="nx">your</span> <span class="nx">contacts</span><span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+<span class="o">&lt;!--</span> <span class="nx">A</span> <span class="nx">sortable</span> <span class="k">list</span> <span class="nx">of</span> <span class="nx">contacts</span> <span class="nx">would</span> <span class="nx">go</span> <span class="nx">here</span><span class="o">....--&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For information on how to use elements from a plugin, look up
+<a class="reference internal" href="../views.html#view-elements"><em>Elements</em></a></p>
+</div>
+<div class="section" id="overriding-plugin-views-from-inside-your-application">
+<h3>Overriding Plugin Views From Inside Your Application<a class="headerlink" href="#overriding-plugin-views-from-inside-your-application" title="Permalink to this headline">¶</a></h3>
+<p>You can override any plugin views from inside your app using
+special paths. If you have a plugin called &#8216;ContactManager&#8217; you
+can override the view files of the plugin with more application
+specific view logic by creating files using the following template
+&#8220;app/View/Plugin/[Plugin]/[Controller]/[view].ctp&#8221;. For the
+Contacts controller you could make the following file:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">/</span><span class="nx">app</span><span class="o">/</span><span class="nx">View</span><span class="o">/</span><span class="nx">Plugin</span><span class="o">/</span><span class="nx">ContactManager</span><span class="o">/</span><span class="nx">Contacts</span><span class="o">/</span><span class="nx">index</span><span class="o">.</span><span class="nx">ctp</span>
+</pre></div>
+</div>
+<p>Creating this file, would allow you to override
+&#8220;/app/Plugin/ContactManager/View/Contacts/index.ctp&#8221;.</p>
+</div>
+</div>
+<div class="section" id="plugin-assets">
+<span id="id2"></span><h2>Plugin Assets<a class="headerlink" href="#plugin-assets" title="Permalink to this headline">¶</a></h2>
+<p>A plugin&#8217;s web assets (but not PHP files) can be served through the
+plugin&#8217;s &#8216;webroot&#8217; directory, just like the main application&#8217;s assets:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">app</span><span class="o">/</span><span class="nx">Plugin</span><span class="o">/</span><span class="nx">ContactManager</span><span class="o">/</span><span class="nx">webroot</span><span class="o">/</span>
+                                    <span class="nx">css</span><span class="o">/</span>
+                                    <span class="nx">js</span><span class="o">/</span>
+                                    <span class="nx">img</span><span class="o">/</span>
+                                    <span class="nx">flash</span><span class="o">/</span>
+                                    <span class="nx">pdf</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>You may put any type of file in any directory, just like a regular
+webroot.</p>
+<p>But keep in mind that handling static assets, such as images, Javascript
+and CSS files of plugins, through the Dispatcher is incredibly inefficient.
+It is strongly recommended to symlink them for production.
+For example like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">ln</span> <span class="o">-</span><span class="nx">s</span> <span class="nx">app</span><span class="o">/</span><span class="nx">Plugin</span><span class="o">/</span><span class="nx">YourPlugin</span><span class="o">/</span><span class="nx">webroot</span><span class="o">/</span><span class="nx">css</span><span class="o">/</span><span class="nx">yourplugin</span><span class="o">.</span><span class="nx">css</span> <span class="nx">app</span><span class="o">/</span><span class="nx">webroot</span><span class="o">/</span><span class="nx">css</span><span class="o">/</span><span class="nx">yourplugin</span><span class="o">.</span><span class="nx">css</span>
+</pre></div>
+</div>
+<div class="section" id="linking-to-assets-in-plugins">
+<h3>Linking to Assets in Plugins<a class="headerlink" href="#linking-to-assets-in-plugins" title="Permalink to this headline">¶</a></h3>
+<p>Simply prepend /plugin_name/ to the beginning of a request for an
+asset within that plugin, and it will work as if the asset were
+in your application&#8217;s webroot.</p>
+<p>For example, linking to &#8216;/contact_manager/js/some_file.js&#8217;
+would serve the asset
+&#8216;app/Plugin/ContactManager/webroot/js/some_file.js&#8217;.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is important to note the <strong>/your_plugin/</strong> prefix before the
+asset path. That makes the magic happen!</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.1: </span>Use <a class="reference internal" href="../appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a> to request assets. For example in your View::</p>
+<blockquote>
+<div>&lt;?php echo $this-&gt;Html-&gt;css(&#8220;ContactManager.style&#8221;); ?&gt;</div></blockquote>
+</div>
+</div>
+</div>
+<div class="section" id="components-helpers-and-behaviors">
+<h2>Components, Helpers and Behaviors<a class="headerlink" href="#components-helpers-and-behaviors" title="Permalink to this headline">¶</a></h2>
+<p>A plugin can have Components, Helpers and Behaviors just like a
+regular CakePHP application. You can even create plugins that
+consist only of Components, Helpers or Behaviors which can be a
+great way to build reusable components that can easily be
+dropped into any project.</p>
+<p>Building these components is exactly the same as building it within
+a regular application, with no special naming convention.</p>
+<p>Referring to your component from inside or outside of your plugin
+requires only that you prefix the plugin name before the name of the
+component. For example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Component defined in &#39;ContactManager&#39; plugin</span>
+<span class="k">class</span> <span class="nc">ExampleComponent</span> <span class="k">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="c1">// within your controllers:</span>
+<span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ContactManager.Example&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The same technique applies to Helpers and Behaviors.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>When creating Helpers you may find AppHelper is not automatically
+available. You should declare the resources you need with Uses:</p>
+<div class="last highlight-phpinline"><div class="highlight"><pre><span class="c1">// Declare use of AppHelper for your Plugin&#39;s Helper</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppHelper&#39;</span><span class="p">,</span> <span class="s1">&#39;View/Helper&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="expand-your-plugin">
+<h2>Expand Your Plugin<a class="headerlink" href="#expand-your-plugin" title="Permalink to this headline">¶</a></h2>
+<p>This example created a good start for a plugin, but there is a lot
+more that you can do. As a general rule, anything you can do with your
+application, you can do inside of a plugin instead.</p>
+<p>Go ahead, include some third-party libraries in &#8216;Vendor&#8217;, add some
+new shells to the cake console, and don&#8217;t forget to create test cases
+so your plugin users can automatically test your plugin&#8217;s functionality!</p>
+<p>In our ContactManager example, we might create add/remove/edit/delete
+actions in the ContactsController, implement validation in the Contact
+model, and implement the functionality one might expect when managing
+their contacts. It&#8217;s up to you to decide what to implement in your
+plugins. Just don&#8217;t forget to share your code with the community so
+that everyone can benefit from your awesome, reusable components!</p>
+</div>
+<div class="section" id="plugin-tips">
+<h2>Plugin Tips<a class="headerlink" href="#plugin-tips" title="Permalink to this headline">¶</a></h2>
+<p>Once a plugin has been installed in /app/Plugin/, you can access it
+at the URL /plugin_name/controller_name/action. In our ContactManager
+plugin example, we&#8217;d access our ContactsController at
+/contact_manager/contacts.</p>
+<p>Some final tips on working with plugins in your CakePHP
+applications:</p>
+<ul class="simple">
+<li>When you don&#8217;t have a [Plugin]AppController and
+[Plugin]AppModel, you&#8217;ll get missing Controller errors when trying
+to access a plugin controller.</li>
+<li>You can define your own layouts for plugins, inside
+app/Plugin/[Plugin]/View/Layouts. Otherwise, plugins will use the
+layouts from the /app/View/Layouts folder by default.</li>
+<li>You can do inter-plugin communication by using
+<tt class="docutils literal"><span class="pre">$this-&gt;requestAction('/plugin_name/controller_name/action');</span></tt> in your
+controllers.</li>
+<li>If you use requestAction, make sure controller and model names
+are as unique as possible. Otherwise you might get PHP &#8220;redefined
+class ...&#8221; errors.</li>
+</ul>
+</div>
+<div class="section" id="publish-your-plugin">
+<h2>Publish Your Plugin<a class="headerlink" href="#publish-your-plugin" title="Permalink to this headline">¶</a></h2>
+<p>You can add your plugin to <a class="reference external" href="http://plugins.cakephp.org">plugins.cakephp.org</a>.</p>
+<p>Also, you might want to create a composer.json file and publish your plugin at <a class="reference external" href="https://packagist.org/">packagist.org</a>.
+This way it can easily be used through Composer.</p>
+<p>Choose a semantically meaningful name for the package name. This should ideally be prefixed with the dependency, in this case &#8220;cakephp&#8221; as the framework.
+The vendor name will usually be your GitHub username.
+Do <strong>not</strong> use the CakePHP namespace (cakephp) as this is reserved to CakePHP owned plugins.
+The convention is to use lowercase letters and dashes as separator.</p>
+<p>So if you created a plugin &#8220;Logging&#8221; with your GitHub account &#8220;FooBar&#8221;, a good name
+would be <cite>foo-bar/cakephp-logging</cite>.
+And the CakePHP owned &#8220;Localized&#8221; plugin can be found under <cite>cakephp/localized</cite> respectively.</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plugins.html">Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="how-to-install-plugins.html">How To Install Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to-use-plugins.html">How To Use Plugins</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">How To Create Plugins</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">How To Create Plugins</a><ul>
+<li><a class="reference internal" href="#plugin-controllers">Plugin Controllers</a></li>
+<li><a class="reference internal" href="#plugin-models">Plugin Models</a></li>
+<li><a class="reference internal" href="#plugin-views">Plugin Views</a><ul>
+<li><a class="reference internal" href="#overriding-plugin-views-from-inside-your-application">Overriding Plugin Views From Inside Your Application</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#plugin-assets">Plugin Assets</a><ul>
+<li><a class="reference internal" href="#linking-to-assets-in-plugins">Linking to Assets in Plugins</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#components-helpers-and-behaviors">Components, Helpers and Behaviors</a></li>
+<li><a class="reference internal" href="#expand-your-plugin">Expand Your Plugin</a></li>
+<li><a class="reference internal" href="#plugin-tips">Plugin Tips</a></li>
+<li><a class="reference internal" href="#publish-your-plugin">Publish Your Plugin</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="../console-and-shells.html" title="Console and Shells" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="how-to-use-plugins.html" title="How To Use Plugins" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

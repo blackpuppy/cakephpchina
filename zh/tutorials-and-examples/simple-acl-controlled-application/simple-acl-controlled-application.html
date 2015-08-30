@@ -1,0 +1,613 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Simple Acl controlled Application" lang="zh_CN" name="title" />
+<meta content="core libraries,auto increment,object oriented programming,database schema,sql statements,php class,stable release,code generation,database server,server configuration,reins,access control,shells,mvc,authentication,web server,cakephp,servers,checkout,apache" lang="zh_CN" name="keywords" />
+
+    <title>简单的 Acl 控制的应用 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="教程 &amp; 实例" href="../../tutorials-and-examples.html" />
+    <link rel="next" title="简单的 Acl 控制的应用 - 第 2 部分" href="part-two.html" />
+    <link rel="prev" title="简单的身份验证和授权应用" href="../blog-auth-example/auth.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="pt" href="../../../pt/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="es" href="../../../es/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="ja" href="../../../ja/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="fr" href="../../../fr/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../tutorials-and-examples.html" accesskey="U" itemprop="url"><span itemprop="title">教程 &amp; 实例</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">en</a></li>
+				
+					<li><a href="../../../pt/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">pt</a></li>
+				
+					<li><a href="../../../es/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">es</a></li>
+				
+					<li><a href="../../../ja/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">ja</a></li>
+				
+					<li><a href="../../../fr/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="acl">
+<h1>简单的 Acl 控制的应用<a class="headerlink" href="#acl" title="永久链接至标题">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">这不是初学者的教程。如果你刚刚开始学习 CakePHP，我们建议你还是先对整个框架的
+特点全面了解之后再开始本教程。</p>
+</div>
+<p>在这个教程中，你将会使用 <a class="reference internal" href="../../core-libraries/components/authentication.html"><em>Authentication 认证</em></a> 和
+<a class="reference internal" href="../../core-libraries/components/access-control-lists.html"><em>访问控制列表组件</em></a> 创建一个简单的应用。这个
+教程假设你已经阅读过 <a class="reference internal" href="../blog/blog.html"><em>博客教程</em></a>，并且熟悉
+<a class="reference internal" href="../../console-and-shells/code-generation-with-bake.html"><em>使用 Bake 来生成代码</em></a>。你应该对 CakePHP 有了一些
+经验, 并且熟悉 MVC 概念。这个教程是对 <a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><tt class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></tt></a> 和
+<a class="reference internal" href="../../core-libraries/components/access-control-lists.html#AclComponent" title="AclComponent"><tt class="xref php php-class docutils literal"><span class="pre">AclComponent</span></tt></a> 的一个简单介绍。</p>
+<p>你所需要的：</p>
+<ol class="arabic simple">
+<li>一个可以运行的 web 服务器。我们将假定你使用的是 Apache，不过使用其他服务器的
+步骤也差不多。我们也许要稍微调整服务器的配置，但大多数人完全不需要任何配置就
+可以让 CakePHP 运行起来。</li>
+<li>一个数据库服务器。在本教程中我们将使用 MySQL 数据库。你将会需要对 SQL 有足够
+的了解以便创建一个数据库：接下来就是 CakePHP 的事情了。</li>
+<li>PHP 的基础知识。你使用面向对象编程越多越好，但如果你只熟悉面向过程编程也不要
+害怕。</li>
+</ol>
+<div class="section" id="id1">
+<h2>准备我们的应用<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>首先，让我们获取一份最新的 CakePHP 的代码。</p>
+<p>要获得最新的代码，请访问在 GitHub 上的 CakePHP 项目：
+<a class="reference external" href="https://github.com/cakephp/cakephp/tags">https://github.com/cakephp/cakephp/tags</a>，并下载稳定发行版。对于本教程，你需要
+最新的 2.0 发行版本。</p>
+<p>你也可以使用 <a class="reference external" href="http://git-scm.com/">git</a> 检出最新的代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">git</span> <span class="k">clone</span> <span class="nx">git</span><span class="o">://</span><span class="nx">github</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">.</span><span class="nx">git</span>
+</pre></div>
+</div>
+<p>一旦你获得了最新的 CakePHP 代码，请设置配置文件 database.php，修改
+app/Config/core.php 文件中的 Security.salt 的值。在此我们将为应用重新建立一个
+简单的数据库结构。在数据库中执行如下的 SQL 语句:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">users</span> <span class="p">(</span>
+    <span class="nx">id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
+    <span class="nx">username</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">UNIQUE</span><span class="p">,</span>
+    <span class="nx">password</span> <span class="nx">CHAR</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">group_id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">created</span> <span class="nx">DATETIME</span><span class="p">,</span>
+    <span class="nx">modified</span> <span class="nx">DATETIME</span>
+<span class="p">);</span>
+
+
+<span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">groups</span> <span class="p">(</span>
+    <span class="nx">id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
+    <span class="nx">name</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">created</span> <span class="nx">DATETIME</span><span class="p">,</span>
+    <span class="nx">modified</span> <span class="nx">DATETIME</span>
+<span class="p">);</span>
+
+
+<span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">posts</span> <span class="p">(</span>
+    <span class="nx">id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
+    <span class="nx">user_id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">title</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">body</span> <span class="nx">TEXT</span><span class="p">,</span>
+    <span class="nx">created</span> <span class="nx">DATETIME</span><span class="p">,</span>
+    <span class="nx">modified</span> <span class="nx">DATETIME</span>
+<span class="p">);</span>
+
+<span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">widgets</span> <span class="p">(</span>
+    <span class="nx">id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
+    <span class="nx">name</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">part_no</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span>
+    <span class="nx">quantity</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>这些是我们构建应用程序的其余部分要用到的表。一旦数据库中有了表结构，我们就可以
+开始了。使用 <a class="reference internal" href="../../console-and-shells/code-generation-with-bake.html"><em>使用 Bake 来生成代码</em></a> 快速创建你的
+模型、控制器和视图。</p>
+<p>要使用 cake bake，调用 <tt class="docutils literal"><span class="pre">cake</span> <span class="pre">bake</span> <span class="pre">all</span></tt>，这会列出你插入到 MySQL 中的4个表，选择
+&#8220;1. Group&#8221; 并按照提示操作。对其他 3 个表也进行同样的操作，这会为你生成 4 个控制
+器、模型和相应的视图。</p>
+<p>在这里要避免使用脚手架(<em>Scaffold</em>)。如果生成带有脚手架功能的控制器，将会严重影响
+ACO(<em>Access Control Object</em>)的生成。</p>
+<p>当自动生成模型代码时，cake 会自动探测出模型之间的关联(即表之间的关系)。让 cake
+提供正确的 hasMany 和 belongsTo 关系。如果提示你选择 hasOne 或者 hasMany 关系，
+在本教程中通常(只)需要 hasMany 关系。</p>
+<p>现在先不管 admin 路由，没有它们这个话题已经够复杂的了。另外，在用 bake 生成控制
+器时，一定 <strong>不要</strong> 添加 Acl 或者 Auth 组件到任何控制器中。我们很快就会着手于此。
+你现在应该已经有了 users、groups、posts 和 widgets 的模型、控制器以及生成的视图。</p>
+</div>
+<div class="section" id="auth">
+<h2>准备添加 Auth<a class="headerlink" href="#auth" title="永久链接至标题">¶</a></h2>
+<p>我们现在已经有一个运行正常的 CRUD 应用了。Bake 应该已经建立了我们所需要的关系，
+如果没有，现在就加上。在添加 Auth 和 Acl 组件之前，我们还需要添加一些东西。首先，
+添加 login 和 logout 动作到 <tt class="docutils literal"><span class="pre">UsersController</span></tt> 控制器:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">login</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">redirectUrl</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Your username or password was incorrect.&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">logout</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//现在先空着。</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>然后，为 login 动作创建如下所示的视图文件 <tt class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">inputs</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;legend&#39;</span> <span class="o">=&gt;</span> <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Login&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;username&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;password&#39;</span>
+<span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">&#39;Login&#39;</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>接下来，我们需要更新我们的 User 模型，在保存到数据库之前先将密码散列化。存储普通
+文本格式的密码是极其危险的，并且 AuthComponent 组件会期望你的密码是经过散列化过
+的。在 <tt class="docutils literal"><span class="pre">app/Model/User.php</span></tt> 文件中添加如下代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AuthComponent&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller/Component&#39;</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="c1">// 其它代码。</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeSave</span><span class="p">(</span><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">][</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">AuthComponent</span><span class="o">::</span><span class="na">password</span><span class="p">(</span>
+          <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">][</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
+        <span class="p">);</span>
+        <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>接下来要改动一下 <tt class="docutils literal"><span class="pre">AppController</span></tt>。如果还没有
+<tt class="docutils literal"><span class="pre">/app/Controller/AppController.php</span></tt>，就创建该文件。因为我们要使用 Auth 和 Acl
+组件控制整个网站，所以我们会在 <tt class="docutils literal"><span class="pre">AppController</span></tt> 中把它们设置好:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Acl&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;authorize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;Actions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;actionPath&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;controllers&#39;</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;Session&#39;</span>
+    <span class="p">);</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Html&#39;</span><span class="p">,</span> <span class="s1">&#39;Form&#39;</span><span class="p">,</span> <span class="s1">&#39;Session&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">//配置 AuthComponent 组件</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">loginAction</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+          <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span>
+        <span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">logoutRedirect</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+          <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span>
+        <span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">loginRedirect</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+          <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在设置 ACL 组件之前，需要添加一些用户和组。因为启用了 <a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><tt class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></tt></a>
+组件，我们无法访问任何动作，因为还没有登录。现在我们添加一些特例，这样
+<a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><tt class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></tt></a> 组件就会允许我们创建一些组和用户。在
+<tt class="docutils literal"><span class="pre">GroupsController</span></tt> 控制器和 <tt class="docutils literal"><span class="pre">UsersController</span></tt> 控制器中 <strong>都</strong> 添加:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
+
+    <span class="c1">// 对 CakePHP 2.0</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">);</span>
+
+    <span class="c1">// 对 CakePHP 2.1 及以上版本</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这些语句告诉 AuthComponent 组件，允许公开访问所有动作。这只是临时的，一旦我们在
+数据库中有了一些用户和组之后就会去掉。只是现在还不要添加任何用户或组。</p>
+</div>
+<div class="section" id="db-acl">
+<h2>初始化 Db Acl 表<a class="headerlink" href="#db-acl" title="永久链接至标题">¶</a></h2>
+<p>在我们创建任何用户或者组之前，我们要把它们连接到 Acl 组件。不过，我们现在还没有
+任何 Acl 组件的表，如果你现在试图访问任何页面，你会得到表不存在的错误(&#8220;Error:
+Database table acos for model Aco was not found.&#8221;)。要消除这些错误，我们需要运行
+一个数据结构(<em>schema</em>)文件。在命令行执行下面的命令:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span> <span class="nx">DbAcl</span>
+</pre></div>
+</div>
+<p>这个脚本会提示你删除并新建表。对删除和创建表的请求回答 yes。</p>
+<p>如果你没有访问外壳(<em>shell</em>)的权限，或者无法使用终端，你可以执行 sql 文件
+/path/to/app/Config/Schema/db_acl.sql。</p>
+<p>为数据输入设置了控制器，也初始化了 Acl 组件的表，这就行了吗？还不够，还需要在
+用户(<em>user</em>)和组(<em>group</em>)模型中稍做改动，也就是说，让他们自动地附加上 Acl 组件。</p>
+</div>
+<div class="section" id="id2">
+<h2>作为请求者<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>为了让 Auth 组件和 Acl 组件正常工作，我们需要将用户(<em>users</em>)表和组(<em>groups</em>)表同
+Acl 组件的表中的记录进行关联。为此需要用到 <tt class="docutils literal"><span class="pre">AclBehavior</span></tt> 行为。<tt class="docutils literal"><span class="pre">AclBehavior</span></tt>
+允许将模型自动连接到 Acl 组件的表。使用它需要在模型中实现 <tt class="docutils literal"><span class="pre">parentNode()</span></tt> 方法。
+在 <tt class="docutils literal"><span class="pre">User</span></tt> 模型中添加如下代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Group&#39;</span><span class="p">);</span>
+    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">));</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">parentNode</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">&amp;&amp;</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">][</span><span class="s1">&#39;group_id&#39;</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nv">$groupId</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">][</span><span class="s1">&#39;group_id&#39;</span><span class="p">];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$groupId</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="s1">&#39;group_id&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$groupId</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Group&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$groupId</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>然后在 <tt class="docutils literal"><span class="pre">Group</span></tt> 模型中添加如下代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Group</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">));</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">parentNode</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们所做的，就是将 <tt class="docutils literal"><span class="pre">Group</span></tt> 和 <tt class="docutils literal"><span class="pre">User</span></tt> 模型与 Acl 组件联系起来，并告诉 CakePHP
+每次你创建一个用户(<em>User</em>)或组(<em>Group</em>)的同时也要在 <tt class="docutils literal"><span class="pre">aros</span></tt> 表中创建一条记录。
+这使得 Acl 的管理轻而易举，因为 ARO 透明地与 <tt class="docutils literal"><span class="pre">users</span></tt> 和 <tt class="docutils literal"><span class="pre">groups</span></tt> 表绑定在
+一起了。所以，每次创建或者删除一个用户/组的同时，Aro 表也会更新。</p>
+<p>我们的控制器和模型已经可以添加一些初始数据了，而且我们的 <tt class="docutils literal"><span class="pre">Group</span></tt> 和 <tt class="docutils literal"><span class="pre">User</span></tt>
+模型已经绑定到 Acl 组件的表了。所以可以浏览 <a class="reference external" href="http://example.com/groups/add">http://example.com/groups/add</a> 和
+<a class="reference external" href="http://example.com/users/add">http://example.com/users/add</a>，使用自动生成的表单添加一些组和用户。我添加了这些组：</p>
+<ul class="simple">
+<li>administrators</li>
+<li>managers</li>
+<li>users</li>
+</ul>
+<p>我同时也在每个组中创建了一个用户，这样每个不同访问权限组都有一个用户，用于之后的
+测试。(把这些组和用户)全部记录下来，或者选用简单的密码，以免忘记。如果在 MySQL
+提示符后运行 <tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">aros;</span></tt>，应该可以看到象下面这样的记录:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<span class="o">|</span> <span class="nx">id</span> <span class="o">|</span> <span class="nx">parent_id</span> <span class="o">|</span> <span class="nx">model</span> <span class="o">|</span> <span class="nx">foreign_key</span> <span class="o">|</span> <span class="nx">alias</span> <span class="o">|</span> <span class="nx">lft</span>  <span class="o">|</span> <span class="nx">rght</span> <span class="o">|</span>
+<span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<span class="o">|</span>  <span class="mi">1</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">1</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">1</span> <span class="o">|</span>    <span class="mi">4</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">2</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">2</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">5</span> <span class="o">|</span>    <span class="mi">8</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">3</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">3</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">9</span> <span class="o">|</span>   <span class="mi">12</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">4</span> <span class="o">|</span>         <span class="mi">1</span> <span class="o">|</span> <span class="nx">User</span>  <span class="o">|</span>           <span class="mi">1</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">2</span> <span class="o">|</span>    <span class="mi">3</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">5</span> <span class="o">|</span>         <span class="mi">2</span> <span class="o">|</span> <span class="nx">User</span>  <span class="o">|</span>           <span class="mi">2</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">6</span> <span class="o">|</span>    <span class="mi">7</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">6</span> <span class="o">|</span>         <span class="mi">3</span> <span class="o">|</span> <span class="nx">User</span>  <span class="o">|</span>           <span class="mi">3</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>   <span class="mi">10</span> <span class="o">|</span>   <span class="mi">11</span> <span class="o">|</span>
+<span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<span class="mi">6</span> <span class="nx">rows</span> <span class="nx">in</span> <span class="nx">set</span> <span class="p">(</span><span class="mf">0.00</span> <span class="nx">sec</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>这告诉我们已经有了 3 个组和 3 个用户。用户嵌套在组中，这样我们就可以按组或者按
+用户设置权限。</p>
+<div class="section" id="id3">
+<h3>只按组的 ACL<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<p>如果我们要简单一些，只按组设置的权限，需要在 <tt class="docutils literal"><span class="pre">User</span></tt> 模型中实现 <tt class="docutils literal"><span class="pre">bindNode()</span></tt>
+方法:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">bindNode</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Group&#39;</span><span class="p">,</span> <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">][</span><span class="s1">&#39;group_id&#39;</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>然后修改 <tt class="docutils literal"><span class="pre">User</span></tt> 模型的 <tt class="docutils literal"><span class="pre">actsAs</span></tt> 变量，禁用 requester 指令:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">,</span> <span class="s1">&#39;enabled&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>这两处改动会告诉 ACL 忽略检查 <tt class="docutils literal"><span class="pre">User</span></tt> Aro，而只检查 <tt class="docutils literal"><span class="pre">Group</span></tt> Aro&#8217;s。这样也避免
+了对 afterSave 回调的调用。</p>
+<p>注意：每个用户都需要设置 <tt class="docutils literal"><span class="pre">group_id</span></tt> 才行。</p>
+<p>现在 <tt class="docutils literal"><span class="pre">aros</span></tt> 表会是这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<span class="o">|</span> <span class="nx">id</span> <span class="o">|</span> <span class="nx">parent_id</span> <span class="o">|</span> <span class="nx">model</span> <span class="o">|</span> <span class="nx">foreign_key</span> <span class="o">|</span> <span class="nx">alias</span> <span class="o">|</span> <span class="nx">lft</span>  <span class="o">|</span> <span class="nx">rght</span> <span class="o">|</span>
+<span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<span class="o">|</span>  <span class="mi">1</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">1</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">1</span> <span class="o">|</span>    <span class="mi">2</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">2</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">2</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">3</span> <span class="o">|</span>    <span class="mi">4</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">3</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">3</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">5</span> <span class="o">|</span>    <span class="mi">6</span> <span class="o">|</span>
+<span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<span class="mi">3</span> <span class="nx">rows</span> <span class="nx">in</span> <span class="nx">set</span> <span class="p">(</span><span class="mf">0.00</span> <span class="nx">sec</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>注意：如果你到这里一直跟随此教程，你需要删除你的表，包括 <tt class="docutils literal"><span class="pre">aros</span></tt>，<tt class="docutils literal"><span class="pre">groups</span></tt> 和
+<tt class="docutils literal"><span class="pre">users</span></tt>，然后从头重新创建组和用户，才能得到上面的 <tt class="docutils literal"><span class="pre">aros</span></tt> 表。</p>
+</div>
+</div>
+<div class="section" id="aco-access-control-objects">
+<h2>创建 ACO (Access Control Objects)<a class="headerlink" href="#aco-access-control-objects" title="永久链接至标题">¶</a></h2>
+<p>现在我们已经有了用户和组(aro)，我们可以开始把现有的控制器输入到 Acl 中，并对组和
+用户设置权限，并启用登录/登出。</p>
+<p>我们的 ARO 会在新建户和组的时候自动创建。有没有什么办法从控制器和动作来自动创建
+ACO？可惜 CakePHP 的核心没有这样的魔法。不过核心类提供了一些方法来手动创建 ACO。
+你可以通过 Acl 外壳程序或者 <tt class="docutils literal"><span class="pre">AclComponent</span></tt> 组件创建 ACO。从外壳程序创建 Aco:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">acl</span> <span class="nx">create</span> <span class="nx">aco</span> <span class="nx">root</span> <span class="nx">controllers</span>
+</pre></div>
+</div>
+<p>而使用 AclComponent 组件就是:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">Aco</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span> <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;controllers&#39;</span><span class="p">));</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">Aco</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>上面两个例子都会创建 &#8216;root&#8217; 或者顶层 ACO，会叫做 &#8216;controllers&#8217; 。这个根(<em>root</em>)
+节点的目的，是为了在整个应用程序的范围内更容易地允许/拒绝访问，并且允许把 Acl
+组件用于和控制器/动作无关的目的，比如检查模型记录的访问权限。既然我们要使用全局
+的根(<em>root</em>) ACO，我们要略微修改 <tt class="docutils literal"><span class="pre">AuthComponent</span></tt> 组件的配置。<tt class="docutils literal"><span class="pre">AuthComponent</span></tt>
+组件需要知道这个根节点的存在，这样当进行 ACL 检查的时候，它可以在查找控制器/动作
+时使用正确的节点路径。在 <tt class="docutils literal"><span class="pre">AppController</span></tt> 中确保 <tt class="docutils literal"><span class="pre">$components</span></tt> 数组中包含先前
+定义的 <tt class="docutils literal"><span class="pre">actionPath</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Acl&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;authorize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;Actions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;actionPath&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;controllers&#39;</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;Session&#39;</span>
+    <span class="p">);</span>
+</pre></div>
+</div>
+<p>本教程在 <a class="reference internal" href="part-two.html"><em>简单的 Acl 控制的应用 - 第 2 部分</em></a> 中继续。</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../blog/blog.html">博客教程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../blog/part-two.html">博客教程——添加一个层</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../blog-auth-example/auth.html">简单的身份验证和授权应用</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">简单的 Acl 控制的应用</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="part-two.html">简单的 Acl 控制的应用 - 第 2 部分</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">简单的 Acl 控制的应用</a><ul>
+<li><a class="reference internal" href="#id1">准备我们的应用</a></li>
+<li><a class="reference internal" href="#auth">准备添加 Auth</a></li>
+<li><a class="reference internal" href="#db-acl">初始化 Db Acl 表</a></li>
+<li><a class="reference internal" href="#id2">作为请求者</a><ul>
+<li><a class="reference internal" href="#id3">只按组的 ACL</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#aco-access-control-objects">创建 ACO (Access Control Objects)</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="part-two.html" title="简单的 Acl 控制的应用 - 第 2 部分" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="../blog-auth-example/auth.html" title="简单的身份验证和授权应用" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

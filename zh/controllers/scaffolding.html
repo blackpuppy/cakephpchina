@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Scaffolding" lang="zh_CN" name="title" />
+<meta content="database schemas,loose structure,scaffolding,scaffold,php class,database tables,web developer,downside,web application,logic,developers,cakephp,running,current,delete,database application" lang="zh_CN" name="keywords" />
+
+    <title>脚手架 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="控制器" href="../controllers.html" />
+    <link rel="next" title="页面控制器" href="pages-controller.html" />
+    <link rel="prev" title="请求与响应对象" href="request-response.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/controllers/scaffolding.html" /><link rel="alternate" hreflang="pt" href="../../pt/controllers/scaffolding.html" /><link rel="alternate" hreflang="es" href="../../es/controllers/scaffolding.html" /><link rel="alternate" hreflang="ja" href="../../ja/controllers/scaffolding.html" /><link rel="alternate" hreflang="fr" href="../../fr/controllers/scaffolding.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../controllers.html" accesskey="U" itemprop="url"><span itemprop="title">控制器</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/controllers/scaffolding.html">en</a></li>
+				
+					<li><a href="../../pt/controllers/scaffolding.html">pt</a></li>
+				
+					<li><a href="../../es/controllers/scaffolding.html">es</a></li>
+				
+					<li><a href="../../ja/controllers/scaffolding.html">ja</a></li>
+				
+					<li><a href="../../fr/controllers/scaffolding.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/controllers/scaffolding.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>脚手架<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="deprecated">
+<p><span class="versionmodified">2.5 版后已移除: </span>动态脚手架将在 3.0 版本中去掉并被替换。</p>
+</div>
+<p>应用程序脚手架是这样一种技术，它允许开发者定义并且创建基本的应用程序，能够创建、
+读取、更新和删除对象。CakePHP 的脚手架还允许开发者定义对象之间如何关联，以及如何
+建立或断开这些连接。</p>
+<p>创建脚手架只需要一个模型和它的控制器。一旦在控制器中设置了 $scaffold 变量，就可以
+运行了。</p>
+<p>CakePHP 的脚手架相当酷。它可以让你在几分种内就建立起一个基本的 CRUD 应用程序。它
+甚至酷到你想在生产环境的应用程序中使用它。的确，我们也认为它很酷，但是请意识到脚
+手架……毕竟……只是脚手架。脚手架是在项目的初期为了启动而快速搭建的一种松散结构。它
+并不是要十分灵活，只是让你能够开始进行项目的一种临时方式。如果你发现你确实要定制
+逻辑或视图，那就应当推翻脚手架，开始写自己的代码。下一节介绍的 CakePHP 的 Bake
+控制台是下一步的绝佳选择：它生成所有的代码，可以产生与大部分脚手架相同的结果。</p>
+<p>脚手架是编写 web 应用程序初始部分的一个很好的方法。早期的数据库结构随时会变更，
+这在设计过程的初期是完全正常的。其负面影响是：web 开发人员痛恨编写永远不会实际用
+到的表单。为了减轻开发人员的这种愤愤不平，CakePHP 中加入了脚手架。脚手架分析数据
+库表，并且建立带有添加、删除和编辑按钮的标准列表，编辑数据库中单条记录的标准表单，
+查看数据库中单条记录的标准视图。</p>
+<p>要将脚手架添加到应用程序中，只要在控制器中加入 <tt class="docutils literal"><span class="pre">$scaffold</span></tt> 变量:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CategoriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$scaffold</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>假设你已经建立了最基本的 Category 模型类文件(位于 /app/Model/Category.php 中)，那
+么脚手架已经可以用了。要查看你的新脚手架，请访问 <a class="reference external" href="http://example.com/categories">http://example.com/categories</a>。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">在使用脚手架的控制器中新建方法可能带来不想要的结果。例如，(如果你在脚手架控制
+器中建立了 index() 方法)，你的 index 方法将被渲染，而脚手架功能则不会被渲染。</p>
+</div>
+<p>脚手架知道模型的关联，所以，如果你的 Category 模型 <tt class="docutils literal"><span class="pre">belongsTo</span></tt> (属于) User 模型，
+你将会在 Category 的列表中看到关联的 User ID。尽管脚手架“知道”模型间的关系，但是
+直到你在模型中手动添加关联代码，你才能在脚手架视图中看到关联的记录。例如，如果
+Group <tt class="docutils literal"><span class="pre">hasMany</span></tt> User (组包含很多用户)，并且 User <tt class="docutils literal"><span class="pre">belongsTo</span></tt> Group (用户也属
+于组)，你必须在 User 和 Group 模型中手动添加如下代码。在你添加这些代码之前，视图
+将在 New User 表单中显示空的 Group 下拉列表框；在你加入这些代码之后，视图将在 New
+User 表单中显示来自 Group 表的 ID 或者名字构成的下拉列表:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 在 Group.php 中</span>
+<span class="c1">// In Group.php</span>
+<span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="s1">&#39;User&#39;</span><span class="p">;</span>
+<span class="c1">// 在 User.php 中</span>
+<span class="c1">// In User.php</span>
+<span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="s1">&#39;Group&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>如果你想看到除了 ID 外更多的东西(例如用户的姓)，你可以在模型中设置
+<tt class="docutils literal"><span class="pre">$displayField</span></tt> 变量。让我们在 User 类中设置 <tt class="docutils literal"><span class="pre">$displayField</span></tt> 变量，以便在脚手
+架中显示关联到 category 的用户的姓，而不只是 ID。这个特点使脚手架在许多情况下可读
+性更强:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$displayField</span> <span class="o">=</span> <span class="s1">&#39;first_name&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="id2">
+<h2>使用脚手架建立一个简单的管理界面<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>如果你已经在 <tt class="docutils literal"><span class="pre">app/Config/core.php</span></tt> 中用
+<tt class="docutils literal"><span class="pre">Configure::write('Routing.prefixes',</span> <span class="pre">array('admin'));</span></tt> 设置了允许管理路由
+(<em>admin routing</em>)，就可以使用脚手架生成一个管理界面。</p>
+<p>一旦你允许了管理路由，只要将管理前缀赋给脚手架变量:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$scaffold</span> <span class="o">=</span> <span class="s1">&#39;admin&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>现在你就可以访问管理的脚手架动作:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">http</span><span class="o">://</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">admin</span><span class="o">/</span><span class="nx">controller</span><span class="o">/</span><span class="nx">index</span>
+<span class="nx">http</span><span class="o">://</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">admin</span><span class="o">/</span><span class="nx">controller</span><span class="o">/</span><span class="nx">view</span>
+<span class="nx">http</span><span class="o">://</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">admin</span><span class="o">/</span><span class="nx">controller</span><span class="o">/</span><span class="nx">edit</span>
+<span class="nx">http</span><span class="o">://</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">admin</span><span class="o">/</span><span class="nx">controller</span><span class="o">/</span><span class="nx">add</span>
+<span class="nx">http</span><span class="o">://</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">admin</span><span class="o">/</span><span class="nx">controller</span><span class="o">/</span><span class="nx">delete</span>
+</pre></div>
+</div>
+<p>这种方法能够很快地建立一个简单的后台界面。切记，不能同时使用脚手架搭建的管理和非
+管理两类方法。如同正常脚手架一样，你可以重载个别方法，用自己的方法代替:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">admin_view</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// custom code here</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>一旦你替换了脚手架搭建的动作，你还需要为这个动作创建视图文件。</p>
+</div>
+<div class="section" id="id3">
+<h2>定制脚手架视图<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>如果你想在你的脚手架视图中使用一些不一样的东西，可以创建模板。虽然我们仍然不推荐
+把这种技术用于生产环境的应用程序，不过在原型迭代阶段这种定制也许还是有用的。</p>
+<p>用于某个控制器的定制脚手架视图(这里以 PostsController 为例)应该位于:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">app</span><span class="o">/</span><span class="nx">View</span><span class="o">/</span><span class="nx">Posts</span><span class="o">/</span><span class="nx">scaffold</span><span class="o">.</span><span class="nx">index</span><span class="o">.</span><span class="nx">ctp</span>
+<span class="nx">app</span><span class="o">/</span><span class="nx">View</span><span class="o">/</span><span class="nx">Posts</span><span class="o">/</span><span class="nx">scaffold</span><span class="o">.</span><span class="nx">form</span><span class="o">.</span><span class="nx">ctp</span>
+<span class="nx">app</span><span class="o">/</span><span class="nx">View</span><span class="o">/</span><span class="nx">Posts</span><span class="o">/</span><span class="nx">scaffold</span><span class="o">.</span><span class="nx">view</span><span class="o">.</span><span class="nx">ctp</span>
+</pre></div>
+</div>
+<p>用于所有控制器的定制脚手架视图应该位于:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">app</span><span class="o">/</span><span class="nx">View</span><span class="o">/</span><span class="nx">Scaffolds</span><span class="o">/</span><span class="nx">index</span><span class="o">.</span><span class="nx">ctp</span>
+<span class="nx">app</span><span class="o">/</span><span class="nx">View</span><span class="o">/</span><span class="nx">Scaffolds</span><span class="o">/</span><span class="nx">form</span><span class="o">.</span><span class="nx">ctp</span>
+<span class="nx">app</span><span class="o">/</span><span class="nx">View</span><span class="o">/</span><span class="nx">Scaffolds</span><span class="o">/</span><span class="nx">view</span><span class="o">.</span><span class="nx">ctp</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../controllers.html">控制器</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="request-response.html">请求与响应对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="request-response.html#cakerequest">CakeRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="request-response.html#cakeresponse">CakeResponse</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">脚手架</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pages-controller.html">页面控制器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html">组件</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">脚手架</a><ul>
+<li><a class="reference internal" href="#id2">使用脚手架建立一个简单的管理界面</a></li>
+<li><a class="reference internal" href="#id3">定制脚手架视图</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="pages-controller.html" title="页面控制器" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="request-response.html" title="请求与响应对象" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

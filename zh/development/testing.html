@@ -1,0 +1,1503 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Testing" lang="zh_CN" name="title" />
+<meta content="web runner,phpunit,test database,database configuration,database setup,database test,public test,test framework,running one,test setup,de facto standard,pear,runners,array,databases,cakephp,php,integration" lang="zh_CN" name="keywords" />
+
+    <title>测试 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="开发" href="../development.html" />
+    <link rel="next" title="REST" href="rest.html" />
+    <link rel="prev" title="调试" href="debugging.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/development/testing.html" /><link rel="alternate" hreflang="pt" href="../../pt/development/testing.html" /><link rel="alternate" hreflang="es" href="../../es/development/testing.html" /><link rel="alternate" hreflang="ja" href="../../ja/development/testing.html" /><link rel="alternate" hreflang="fr" href="../../fr/development/testing.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../development.html" accesskey="U" itemprop="url"><span itemprop="title">开发</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/development/testing.html">en</a></li>
+				
+					<li><a href="../../pt/development/testing.html">pt</a></li>
+				
+					<li><a href="../../es/development/testing.html">es</a></li>
+				
+					<li><a href="../../ja/development/testing.html">ja</a></li>
+				
+					<li><a href="../../fr/development/testing.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/development/testing.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>测试<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>CakePHP 内置带有全面的测试支持。CakePHP 自带有与 <a class="reference external" href="http://phpunit.de">PHPUnit</a>
+的集成。除了 PHPUnit 提供的特性，CakePHP 提供了一些额外的功能，使得测试更为容易。
+本节将介绍 PHPUnit 的安装，开始进行单元测试，以及如何使用 CakePHP 提供的扩展。</p>
+<div class="section" id="id2">
+<h2>安装 PHPUnit<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>CakePHP 使用 PHPUnit 作为其底层测试框架。PHPUnit 是 PHP 单元测试事实上的标准。
+它提供了一套深刻而强大的功能，确保你的代码做了你认为它所要做的事情。</p>
+<div class="section" id="composer">
+<h3>通过 Composer 安装<a class="headerlink" href="#composer" title="永久链接至标题">¶</a></h3>
+<p>较新版本的 PHPUnit 当前不能与 CakePHP 集成:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="s2">&quot;phpunit/phpunit&quot;</span><span class="o">:</span> <span class="s2">&quot;3.7.32&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="phar">
+<h3>通过 .phar 包来安装<a class="headerlink" href="#phar" title="永久链接至标题">¶</a></h3>
+<p>你也可以直接下载文件。只是要注意从 <a class="reference external" href="https://phar.phpunit.de/">https://phar.phpunit.de/</a> 得到了正确的版本。
+确保 /usr/local/bin 位于 php.ini 文件的 include_path 中:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">wget</span> <span class="nx">https</span><span class="o">://</span><span class="nx">phar</span><span class="o">.</span><span class="nx">phpunit</span><span class="o">.</span><span class="nx">de</span><span class="o">/</span><span class="nx">phpunit</span><span class="o">-</span><span class="mf">3.7</span><span class="o">.</span><span class="mf">32.</span><span class="nx">phar</span>
+<span class="nb">chmod</span> <span class="o">+</span><span class="nx">x</span> <span class="nx">phpunit</span><span class="o">.</span><span class="nx">phar</span>
+<span class="nx">mv</span> <span class="nx">phpunit</span><span class="o">.</span><span class="nx">phar</span> <span class="o">/</span><span class="nx">usr</span><span class="o">/</span><span class="nx">local</span><span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">phpunit</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p>PHPUnit 4 与 CakePHP 的单元测试不兼容。</p>
+<p class="last">根据你系统的配置，你可能需要用 <tt class="docutils literal"><span class="pre">sudo</span></tt> 运行上面的命令。</p>
+</div>
+<p>一旦用 PEAR 安装程序安装了 PHPUnit，应当确认 PHPUnit 库在 PHP 的
+<tt class="docutils literal"><span class="pre">include_path</span></tt> 中。为此你可以检查 php.ini 文件，确保 PHPUnit 的文件在
+<tt class="docutils literal"><span class="pre">include_path</span></tt> 的其中一个目录中。</p>
+<div class="admonition tip">
+<p class="first admonition-title">小技巧</p>
+<p class="last">当使用 PHPUnit 3.6+ 时，所有的输出都会被吞没。如果使用 CLI，可以添加
+<tt class="docutils literal"><span class="pre">--debug</span></tt> 修饰符；如果使用 web 运行器来显示输出，可以添加 <tt class="docutils literal"><span class="pre">&amp;debug=1</span></tt>
+到网址中。</p>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>测试数据库的设置<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>记得在运行任何测试之前，在 <tt class="docutils literal"><span class="pre">app/Config/core.php</span></tt> 文件中的调试(debug)级别至少是
+1。当调试级别是 0 时，无法通过 web 运行器访问测试。在运行任何测试之前，应当确保
+添加 <tt class="docutils literal"><span class="pre">$test</span></tt> 数据库配置。该配置被 CakePHP 用于测试夹具(<em>fixture</em>)的表和数据:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$test</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;datasource&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Database/Mysql&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;persistent&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;host&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;dbhost&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;login&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;dblogin&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;password&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;dbpassword&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;database&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;test_database&#39;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">把测试数据库和实际的数据库分成不同的数据库比较好。这可以避免将来任何令人尴尬
+的错误。</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>检查测试数据库的设置<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>安装完了 PHPUnit，设置好了 <tt class="docutils literal"><span class="pre">$test</span></tt> 数据库配置，可以运行核心测试中的一个，来
+确保你可以编写和运行你自己的测试。测试有两个内置的运行器，我们从 web 运行器开始。
+浏览 <a class="reference external" href="http://localhost/your_app/test.php">http://localhost/your_app/test.php</a> 就可以访问测试，应当能看到核心测试列表了。
+点击 &#8216;AllConfigure&#8217; 测试。你应当看到一个绿色的(进度)条，和运行的测试的更多信息，
+以及通过的测试数量。</p>
+<p>恭喜，你现在可以开始编写测试了！</p>
+</div>
+<div class="section" id="id5">
+<h2>测试用例约定<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>象 CakePHP 中的大部分东西，测试用例也有一些约定。涉及测试的：</p>
+<ol class="arabic simple">
+<li>包含测试的 PHP 文件应当位于 <tt class="docutils literal"><span class="pre">app/Test/Case/[Type]</span></tt> 目录。</li>
+<li>这些文件的文件名应当以 <tt class="docutils literal"><span class="pre">Test.php</span></tt> 结尾，而不能仅仅是.php。</li>
+<li>含有测试的类应当扩展 <tt class="docutils literal"><span class="pre">CakeTestCase</span></tt>，<tt class="docutils literal"><span class="pre">ControllerTestCase</span></tt> 或
+<tt class="docutils literal"><span class="pre">PHPUnit_Framework_TestCase</span></tt>。</li>
+<li>象其它类名，测试用例类名应当与文件名匹配。文件 <tt class="docutils literal"><span class="pre">RouterTest.php</span></tt> 应当包含
+<tt class="docutils literal"><span class="pre">class</span> <span class="pre">RouterTest</span> <span class="pre">extends</span> <span class="pre">CakeTestCase</span></tt>。</li>
+<li>包含测试(即包含断言(<em>assertion</em>))的任何方法的名称应当以 <tt class="docutils literal"><span class="pre">test</span></tt> 开头，例如
+<tt class="docutils literal"><span class="pre">testPublished()</span></tt>。也可以使用 <tt class="docutils literal"><span class="pre">&#64;test</span></tt> 标注(<em>annotation</em>)来标记方法为测试
+方法。</li>
+</ol>
+<p>在创建了测试用例之后，可以浏览 <tt class="docutils literal"><span class="pre">http://localhost/your_app/test.php</span></tt> (取决于你
+的配置是怎样的)来运行。点击 App test cases，再点击测试文件的链接。也可以从命令行
+使用测试外壳(<em>shell</em>)来运行测试:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">test</span> <span class="nx">app</span> <span class="nx">Model</span><span class="o">/</span><span class="nx">Post</span>
+</pre></div>
+</div>
+<p>例如，就会运行 Post 模型的测试。</p>
+</div>
+<div class="section" id="id6">
+<h2>创建你的第一个测试用例<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>在下面的例子中，我们会为一个很简单的助件(<em>helper</em>)方法创建一个测试用例。我们要
+测试的助件会生成进度条 HTML。助件是这样的:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ProgressHelper</span> <span class="k">extends</span> <span class="nx">AppHelper</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">bar</span><span class="p">(</span><span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$width</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nv">$value</span> <span class="o">/</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nb">sprintf</span><span class="p">(</span>
+            <span class="s1">&#39;&lt;div class=&quot;progress-container&quot;&gt;</span>
+<span class="s1">                &lt;div class=&quot;progress-bar&quot; style=&quot;width: %s%%&quot;&gt;&lt;/div&gt;</span>
+<span class="s1">            &lt;/div&gt;&#39;</span><span class="p">,</span> <span class="nv">$width</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这是个很简单的例子，不过可以展示如何创建简单的测试用例。创建并保存助件后，我们来
+创建测试用例文件 <tt class="docutils literal"><span class="pre">app/Test/Case/View/Helper/ProgressHelperTest.php</span></tt>。在该文件
+中我们以如下代码开始:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Controller&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;View&#39;</span><span class="p">,</span> <span class="s1">&#39;View&#39;</span><span class="p">);</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;ProgressHelper&#39;</span><span class="p">,</span> <span class="s1">&#39;View/Helper&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">ProgressHelperTest</span> <span class="k">extends</span> <span class="nx">CakeTestCase</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testBar</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们很快就会填充这个骨架。我们一开始就添加了两个方法。第一个是 <tt class="docutils literal"><span class="pre">setUp()</span></tt>。这个
+方法会在测试用例类中的每个 <em>测试</em> 方法被调用之前调用。setUp 方法应当初始化测试
+需要的对象，做任何需要的配置。在我们的 setUp 方法中，我们添加如下代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">parent</span><span class="o">::</span><span class="na">setUp</span><span class="p">();</span>
+    <span class="nv">$Controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Controller</span><span class="p">();</span>
+    <span class="nv">$View</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">View</span><span class="p">(</span><span class="nv">$Controller</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Progress</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ProgressHelper</span><span class="p">(</span><span class="nv">$View</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在测试用例中调用父类方法很重要，因为 CakeTestCase::setUp() 方法会做一些事情，
+比如备份 <a class="reference internal" href="configuration.html#Configure" title="Configure"><tt class="xref php php-class docutils literal"><span class="pre">Configure</span></tt></a> 类中的值，以及保存 <a class="reference internal" href="../core-utility-libraries/app.html#App" title="App"><tt class="xref php php-class docutils literal"><span class="pre">App</span></tt></a> 类中的路径。</p>
+<p>接下来，我们要填写测试方法。我们会使用一些断言(<em>assertion</em>)来确保我们的代码生成
+了我们希望的输出:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">testBar</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Progress</span><span class="o">-&gt;</span><span class="na">bar</span><span class="p">(</span><span class="mi">90</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertContains</span><span class="p">(</span><span class="s1">&#39;width: 90%&#39;</span><span class="p">,</span> <span class="nv">$result</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertContains</span><span class="p">(</span><span class="s1">&#39;progress-bar&#39;</span><span class="p">,</span> <span class="nv">$result</span><span class="p">);</span>
+
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Progress</span><span class="o">-&gt;</span><span class="na">bar</span><span class="p">(</span><span class="mf">33.3333333</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertContains</span><span class="p">(</span><span class="s1">&#39;width: 33%&#39;</span><span class="p">,</span> <span class="nv">$result</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>上述测试很简单，但说明了使用测试用例的潜在好处。我们用 <tt class="docutils literal"><span class="pre">assertContains()</span></tt> 来
+确保助件返回的字符串包含我们期望的内容。如果结果不包含期望的内容，测试就会失败，
+我们就知道我们的代码不对了。</p>
+<p>使用测试用例，就能容易地描述一组已知输入和它们期望的输出之间的关系。这可以帮助你
+对正在编写的代码更有信心，因为你可以容易地检查你写的代码满足测试所做的期望和断言。
+而且，因为测试是代码，无论何时你做了一处改动，它们都很容易再次运行。这可以帮助
+防止新错误(<em>bug</em>)的出现。</p>
+</div>
+<div class="section" id="running-tests">
+<span id="id7"></span><h2>运行测试<a class="headerlink" href="#running-tests" title="永久链接至标题">¶</a></h2>
+<p>一旦安装了 PHPUnit，写了一些测试用例，你就应当很频繁地运行测试用例。在提交任何
+改动之前运行测试比较好，可以帮助确保你没有破坏任何东西。</p>
+<div class="section" id="id8">
+<h3>从浏览器运行测试<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<p>CakePHP 提供了 web 界面来运行测试，这样，如果你觉得这样的环境更舒服，可以通过
+浏览器运行测试。你可以通过浏览 <tt class="docutils literal"><span class="pre">http://localhost/your_app/test.php</span></tt> 来访问 web
+运行器。test.php 的确切位置根据你的设置而变化，不过该文件和 <tt class="docutils literal"><span class="pre">index.php</span></tt> 在
+同一级。</p>
+<p>一旦加载了测试运行器，就可以在 App、Core 和 Plugin 测试套件之间切换。点击单个
+测试用例就会运行该测试，并显示结果。</p>
+<div class="section" id="id9">
+<h4>查看代码覆盖<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h4>
+<p>如果你安装了 <a class="reference external" href="http://xdebug.org">Xdebug</a>，就可以查看代码覆盖的结果。代码覆盖
+可以告诉你，你的测试没有触及代码的哪部分。覆盖率用于决定今后在哪里还应当添加测试，
+并给你一个度量来监测你测试的进展。</p>
+<p><img alt="Code Coverage" src="../_images/code-coverage.png" /></p>
+<p>内嵌的代码覆盖使用绿色行来表示运行过的行。如果把鼠标悬停在一个绿色的行上，会有
+提示说明哪些测试覆盖了该行。红色的行没有运行，即没有被测试检验。灰色的行被
+Xdebug 认为是无法运行的代码。</p>
+</div>
+</div>
+<div class="section" id="run-tests-from-command-line">
+<span id="id10"></span><h3>从命令行运行测试<a class="headerlink" href="#run-tests-from-command-line" title="永久链接至标题">¶</a></h3>
+<p>CakePHP 提供 <tt class="docutils literal"><span class="pre">test</span></tt> 外壳(<em>shell</em>)来运行测试。你可以用 test 外壳容易地运行 app、
+core 和插件的测试。它也接受通常 PHPUnit 命令行期望的的所有参数。从 app 目录，
+可以象下面这样来运行测试:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1"># 运行 app 中的模型测试</span>
+<span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">test</span> <span class="nx">app</span> <span class="nx">Model</span><span class="o">/</span><span class="nx">Article</span>
+
+<span class="c1"># 运行插件中的组件测试</span>
+<span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">test</span> <span class="nx">DebugKit</span> <span class="nx">Controller</span><span class="o">/</span><span class="nx">Component</span><span class="o">/</span><span class="nx">ToolbarComponent</span>
+
+<span class="c1"># 运行 CakePHP 中的 configure 类测试</span>
+<span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">test</span> <span class="nx">core</span> <span class="nx">Core</span><span class="o">/</span><span class="nx">Configure</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">如果你运行与会话(<em>session</em>)交互的测试，通常最好使用 <tt class="docutils literal"><span class="pre">--stderr</span></tt> 选项。这
+可以修正由于 headers_sent 警告引起的测试失败的问题。</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>在 2.1 版本中增加了 <tt class="docutils literal"><span class="pre">test</span></tt> 外壳。2.0 版本的 <tt class="docutils literal"><span class="pre">testsuite</span></tt> 外壳仍然可以使用，
+但建议使用新语法。</p>
+</div>
+<p>也可以在项目根目录下运行 <tt class="docutils literal"><span class="pre">test</span></tt> 外壳。这会显示你现有全部测试的列表。然后你可以
+随意地选择要运行的一个或多个测试:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1"># 在项目根目录中运行叫做 app 的应用程序目录的测试</span>
+<span class="nx">lib</span><span class="o">/</span><span class="nx">Cake</span><span class="o">/</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">test</span> <span class="nx">app</span>
+
+<span class="c1"># 在项目根目录中运行位于 ./myapp 目录中的应用程序的测试</span>
+<span class="nx">lib</span><span class="o">/</span><span class="nx">Cake</span><span class="o">/</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">test</span> <span class="o">--</span><span class="nx">app</span> <span class="nx">myapp</span> <span class="nx">app</span>
+</pre></div>
+</div>
+<div class="section" id="id11">
+<h4>过滤测试用例<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h4>
+<p>在有大量测试用例的情况下，当你试图修复单个失败的用例时，会经常要运行测试方法的
+一个子集。使用 CLI 运行器，你可以使用一个选项来过滤测试方法:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">test</span> <span class="nx">core</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">ConsoleOutput</span> <span class="o">--</span><span class="nx">filter</span> <span class="nx">testWriteArray</span>
+</pre></div>
+</div>
+<p>过滤参数作为大小写敏感的正则表达式，来过滤要运行的测试方法。</p>
+</div>
+<div class="section" id="id12">
+<h4>生成代码覆盖率<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h4>
+<p>你可以从命令行使用 PHPUnit 内置的代码覆盖工具来生成代码覆盖报告。PHPUnit 会生成
+一组包含覆盖结果的静态 HTML 文件。你可以像下面这样来生成一个测试用例的覆盖报告:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">test</span> <span class="nx">app</span> <span class="nx">Model</span><span class="o">/</span><span class="nx">Article</span> <span class="o">--</span><span class="nx">coverage</span><span class="o">-</span><span class="nx">html</span> <span class="nx">webroot</span><span class="o">/</span><span class="nx">coverage</span>
+</pre></div>
+</div>
+<p>这会把覆盖结果放在应用程序的 webroot 目录中。你应当能够在
+<tt class="docutils literal"><span class="pre">http://localhost/your_app/coverage</span></tt> 看到结果。</p>
+</div>
+<div class="section" id="id13">
+<h4>运行使用会话的测试<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h4>
+<p>在命令行运行使用会话的测试时，需要加上 <tt class="docutils literal"><span class="pre">--stderr</span></tt> 标志。不这么做会导致会话无法
+工作。PHPUnit 默认会输出测试进程到标准输出(<em>stdout</em>)，这会使 PHP 以为头部信息
+已经发送，从而阻止会话启动。把 PHPUnit 输出切换到 stderr，就避免了这个问题。</p>
+</div>
+</div>
+</div>
+<div class="section" id="id14">
+<h2>测试用例生命周期回调<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h2>
+<p>测试用例有一些生命周期回调函数，可以在测试时使用：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">setUp</span></tt> 在每个测试方法之前调用。应当用来创建要测试的对象，为测试初始化任何
+数据。记得一定要调用 <tt class="docutils literal"><span class="pre">parent::setUp()</span></tt>。</li>
+<li><tt class="docutils literal"><span class="pre">tearDown</span></tt> 在每个测试方法之后调用。应当用来在测试完成之后进行清理。记得一定
+要调用  <tt class="docutils literal"><span class="pre">parent::tearDown()</span></tt>。</li>
+<li><tt class="docutils literal"><span class="pre">setupBeforeClass</span></tt> 在一个用例中的测试方法开始之前只调用一次。该方法必须是
+<em>静态的</em>。</li>
+<li><tt class="docutils literal"><span class="pre">tearDownAfterClass</span></tt> 在一个用例中的测试方法完成之后只调用一次。该方法必须是
+<em>静态的</em>。</li>
+</ul>
+</div>
+<div class="section" id="id15">
+<h2>测试夹具<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h2>
+<p>当测试代码依赖于模型和数据库时，可以使用 <strong>测试夹具(fixture)</strong> 来生成临时数据库
+表，加载样例数据，用于测试。使用测试夹具的好处是，你的测试不会破坏在线的应用程序
+数据。而且，在真的为应用程序开发实际内容之前，你就可以测试你的代码。</p>
+<p>CakePHP 使用 <tt class="docutils literal"><span class="pre">app/Config/database.php</span></tt> 配置文件中的名为 <tt class="docutils literal"><span class="pre">$test</span></tt> 的(数据库)
+连接。如果该连接无法使用，将引发一个异常，就无法使用数据库夹具了。</p>
+<p>在一个基于夹具的测试用例的运行过程中，CakePHP 执行下面的操作：</p>
+<ol class="arabic simple">
+<li>创建每个夹具需要的表。</li>
+<li>如果夹具中提供了数据，用数据填充表。</li>
+<li>运行测试方法。</li>
+<li>清空夹具的表。</li>
+<li>从数据库删除夹具的表。</li>
+</ol>
+<div class="section" id="id16">
+<h3>创建夹具<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h3>
+<p>在创建夹具时，主要定义两件事情：如何创建表(表里有哪些字段)，哪些记录要首先填充到
+表中。让我们来创建第一个夹具，用于测试 Article 模型。在 <tt class="docutils literal"><span class="pre">app/Test/Fixture</span></tt>
+目录中创建以下内容的文件 <tt class="docutils literal"><span class="pre">ArticleFixture.php</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticleFixture</span> <span class="k">extends</span> <span class="nx">CakeTestFixture</span> <span class="p">{</span>
+
+      <span class="c1">// 可选。</span>
+      <span class="c1">// 设置该属性来加载夹具到不同的测试数据源</span>
+      <span class="k">public</span> <span class="nv">$useDbConfig</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span><span class="p">;</span>
+      <span class="k">public</span> <span class="nv">$fields</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+          <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;primary&#39;</span><span class="p">),</span>
+          <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;length&#39;</span> <span class="o">=&gt;</span> <span class="mi">255</span><span class="p">,</span>
+            <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+          <span class="p">),</span>
+          <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+          <span class="p">),</span>
+          <span class="s1">&#39;created&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;datetime&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;updated&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;datetime&#39;</span>
+      <span class="p">);</span>
+      <span class="k">public</span> <span class="nv">$records</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+          <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;First Article&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;First Article Body&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;created&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2007-03-18 10:39:23&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;updated&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2007-03-18 10:41:31&#39;</span>
+          <span class="p">),</span>
+          <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Second Article&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Second Article Body&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;created&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2007-03-18 10:41:23&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;updated&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2007-03-18 10:43:31&#39;</span>
+          <span class="p">),</span>
+          <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Third Article&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Third Article Body&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;created&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2007-03-18 10:43:23&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;updated&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2007-03-18 10:45:31&#39;</span>
+          <span class="p">)</span>
+      <span class="p">);</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">$useDbConfig</span></tt> 属性定义夹具要使用的数据源。如果应用程序使用多个数据源，你应当
+使夹具匹配模型的数据源，但是要加上 <tt class="docutils literal"><span class="pre">test_</span></tt> 前缀。例如，如果模型使用 <tt class="docutils literal"><span class="pre">mydb</span></tt>
+数据源，夹具就应当使用 <tt class="docutils literal"><span class="pre">test_mydb</span></tt> 数据源。如果 <tt class="docutils literal"><span class="pre">test_mydb</span></tt> 连接不存在，模型
+就会使用默认的 <tt class="docutils literal"><span class="pre">test</span></tt> 数据源。夹具数据源必须前缀以 <tt class="docutils literal"><span class="pre">test</span></tt> 来降低运行测试时
+意外清除应用程序的所有数据的可能性。</p>
+<p>我们使用 <tt class="docutils literal"><span class="pre">$fields</span></tt> 来指定这个表有哪些字段，以及它们是如何定义的。用来定义这些
+字段的格式和 <tt class="xref php php-class docutils literal"><span class="pre">CakeSchema</span></tt> 类使用的相同。定义表可以使用的键为：</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">type</span></tt></dt>
+<dd><dl class="first last docutils">
+<dt>CakePHP 内部的数据类型。当前支持：</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">string</span></tt>: 映射为 <tt class="docutils literal"><span class="pre">VARCHAR</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">text</span></tt>: 映射为 <tt class="docutils literal"><span class="pre">TEXT</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">integer</span></tt>: 映射为 <tt class="docutils literal"><span class="pre">INT</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">float</span></tt>: 映射为 <tt class="docutils literal"><span class="pre">FLOAT</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">datetime</span></tt>: 映射为 <tt class="docutils literal"><span class="pre">DATETIME</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">timestamp</span></tt>: 映射为 <tt class="docutils literal"><span class="pre">TIMESTAMP</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">time</span></tt>: 映射为 <tt class="docutils literal"><span class="pre">TIME</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">date</span></tt>: 映射为 <tt class="docutils literal"><span class="pre">DATE</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">binary</span></tt>: 映射为 <tt class="docutils literal"><span class="pre">BLOB</span></tt></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">key</span></tt></dt>
+<dd>设置为 <tt class="docutils literal"><span class="pre">primary</span></tt> 来使该字段 AUTO_INCREMENT，并作为表的主键。</dd>
+<dt><tt class="docutils literal"><span class="pre">length</span></tt></dt>
+<dd>设置为字段需要的长度。</dd>
+<dt><tt class="docutils literal"><span class="pre">null</span></tt></dt>
+<dd>设置为 <tt class="docutils literal"><span class="pre">true</span></tt> (允许 NULL) 或者 <tt class="docutils literal"><span class="pre">false</span></tt> (不允许 NULL)。</dd>
+<dt><tt class="docutils literal"><span class="pre">default</span></tt></dt>
+<dd>字段的默认值。</dd>
+</dl>
+<p>我们可以定义一组记录，在夹具的表创建之后填充到表里。其格式是相当简单的，
+<tt class="docutils literal"><span class="pre">$records</span></tt> 为记录数组。<tt class="docutils literal"><span class="pre">$records</span></tt> 中的每项为一行。在每行中，应当是该行的列和
+值的关联数组。只是要记住 $records 数组中的每条记须有 <tt class="docutils literal"><span class="pre">$fields</span></tt> 数组中指定的
+<strong>每个</strong> 字段都必须有一个键。如果某条记录的一个字段需要有 <tt class="docutils literal"><span class="pre">null</span></tt> 值，只需指定
+该键的值为 <tt class="docutils literal"><span class="pre">null</span></tt>。</p>
+</div>
+<div class="section" id="id17">
+<h3>动态数据和夹具<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h3>
+<p>既然夹具的记录声明为类属性，就无法轻易使用函数或者其它动态数据来定义夹具。为了
+解决这个问题，可以在夹具的 init() 方法中定义 <tt class="docutils literal"><span class="pre">$records</span></tt>。例如，如果要所有
+created 和 updated 时间标签反应今天的日期，可以这样做:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticleFixture</span> <span class="k">extends</span> <span class="nx">CakeTestFixture</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="nv">$fields</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;primary&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span> <span class="o">=&gt;</span> <span class="mi">255</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+        <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+        <span class="s1">&#39;created&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;datetime&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;updated&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;datetime&#39;</span>
+    <span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">records</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+            <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;First Article&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;First Article Body&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;created&#39;</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d H:i:s&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;updated&#39;</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d H:i:s&#39;</span><span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">);</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">init</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>当重载 <tt class="docutils literal"><span class="pre">init()</span></tt> 方法时，只需记得一定要调用 <tt class="docutils literal"><span class="pre">parent::init()</span></tt>。</p>
+</div>
+<div class="section" id="id18">
+<h3>导入表信息和记录<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+<p>应用程序可能已经有正常工作的模型及相关的真实数据，而你可能会决定要使用这些数据来
+测试应用程序。这样再在夹具中定义表和/或记录就是重复的事情了。幸好，有办法从现有
+的模型或表来定义(夹具的)表和/或记录。</p>
+<p>让我们从一个例子开始。假定在应用程序中有一个叫做 Article 的模型(映射到名为
+articles 的表)，修改前一节的夹具例子(<tt class="docutils literal"><span class="pre">app/Test/Fixture/ArticleFixture.php</span></tt>)为:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticleFixture</span> <span class="k">extends</span> <span class="nx">CakeTestFixture</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$import</span> <span class="o">=</span> <span class="s1">&#39;Article&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这句话告诉测试套件从叫做 Article 的模型连接的表导入表的定义。你可以使用应用程序
+中的任何可以使用的模型。这条语句只导入 Article 的数据结构(<em>schema</em>)，而不导入
+记录。要导入记录，你可以这样做:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticleFixture</span> <span class="k">extends</span> <span class="nx">CakeTestFixture</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$import</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Article&#39;</span><span class="p">,</span> <span class="s1">&#39;records&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>另一方面，如果有一个创建好的表，而没有相应的模型，可以指定导入过程读取那个表的
+信息。例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticleFixture</span> <span class="k">extends</span> <span class="nx">CakeTestFixture</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$import</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;articles&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>会使用名为 &#8216;default&#8217; 的 CakePHP 数据库连接从叫做 &#8216;articles&#8217; 的表导入表的定义。
+如果要使用不同的连接，可以使用:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticleFixture</span> <span class="k">extends</span> <span class="nx">CakeTestFixture</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$import</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;articles&#39;</span><span class="p">,</span> <span class="s1">&#39;connection&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;other&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>因为它使用 CakePHP 的数据库连接，如果声明了任何表前缀，读取表的信息时就会自动
+使用该前缀。上述两段代码片段不会从表导入记录。要让夹具也导入记录，把导入改为:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticleFixture</span> <span class="k">extends</span> <span class="nx">CakeTestFixture</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$import</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;articles&#39;</span><span class="p">,</span> <span class="s1">&#39;records&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>也可以很自然地从现有的模型/表导入表的定义，但是象前一节所示的那样直接在夹具中
+定义记录。例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticleFixture</span> <span class="k">extends</span> <span class="nx">CakeTestFixture</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$import</span> <span class="o">=</span> <span class="s1">&#39;Article&#39;</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nv">$records</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span>
+          <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;First Article&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;First Article Body&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;created&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2007-03-18 10:39:23&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;updated&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2007-03-18 10:41:31&#39;</span>
+        <span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span>
+          <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Second Article&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Second Article Body&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;created&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2007-03-18 10:41:23&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;updated&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2007-03-18 10:43:31&#39;</span>
+        <span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span>
+          <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+          <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Third Article&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Third Article Body&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;created&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2007-03-18 10:43:23&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;updated&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2007-03-18 10:45:31&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id19">
+<h3>在测试用例中加载夹具<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h3>
+<p>夹具创建好之后，就要在测试用例中使用。在每个测试用例中应当加载需要的夹具。对每个
+要运行查询语句的模型都应当加载夹具。要加载夹具，在模型中定义 <tt class="docutils literal"><span class="pre">$fixtures</span></tt> 属性:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticleTest</span> <span class="k">extends</span> <span class="nx">CakeTestCase</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$fixtures</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;app.article&#39;</span><span class="p">,</span> <span class="s1">&#39;app.comment&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>上述代码会从应用程序的 Fixture 目录加载 Article 和 Comment 夹具。也可以从
+CakePHP 核心或插件中加载夹具:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticleTest</span> <span class="k">extends</span> <span class="nx">CakeTestCase</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$fixtures</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;plugin.debug_kit.article&#39;</span><span class="p">,</span> <span class="s1">&#39;core.comment&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>使用 <tt class="docutils literal"><span class="pre">core</span></tt> 前缀会从 CakePHP 加载夹具，使用插件名称作为前缀会从该命名的插件中
+加载夹具。</p>
+<p>你可以设置 <tt class="xref php php-attr docutils literal"><span class="pre">CakeTestCase::$autoFixtures</span></tt> 为 <tt class="docutils literal"><span class="pre">false</span></tt> 来控制何时加载
+夹具，之后再用 <tt class="xref php php-meth docutils literal"><span class="pre">CakeTestCase::loadFixtures()</span></tt> 来加载:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticleTest</span> <span class="k">extends</span> <span class="nx">CakeTestCase</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$fixtures</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;app.article&#39;</span><span class="p">,</span> <span class="s1">&#39;app.comment&#39;</span><span class="p">);</span>
+    <span class="k">public</span> <span class="nv">$autoFixtures</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testMyFunction</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadFixtures</span><span class="p">(</span><span class="s1">&#39;Article&#39;</span><span class="p">,</span> <span class="s1">&#39;Comment&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>从 2.5.0 版本开始，可以加载在子目录中的夹具。如果你有一个大型的应用程序，使用
+多个目录可以更容易地组织夹具。要加载子目录中的夹具，只需在夹具名称中包括子目录
+名称:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticleTest</span> <span class="k">extends</span> <span class="nx">CakeTestCase</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$fixtures</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;app.blog/article&#39;</span><span class="p">,</span> <span class="s1">&#39;app.blog/comment&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在上述例子中，两个夹具都会从 <tt class="docutils literal"><span class="pre">App/Test/Fixture/blog/</span></tt> 目录中加载。</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.5 版更改: </span>从 2.5.0 版本开始，可以加载在子目录中的夹具。</p>
+</div>
+</div>
+</div>
+<div class="section" id="id20">
+<h2>测试模型<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h2>
+<p>比如说我们已经有了在文件 <tt class="docutils literal"><span class="pre">app/Model/Article.php</span></tt> 中定义的 Article 模型，是这样
+的:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Article</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">published</span><span class="p">(</span><span class="nv">$fields</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$params</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">.</span> <span class="s1">&#39;.published&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+            <span class="p">),</span>
+            <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="nv">$fields</span>
+        <span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="nv">$params</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>现在要建立使用这个模型的测试，但是要通过夹具，来测试模型中的一些功能。CakePHP
+测试套件只加载最少的一组文件(来保持测试独立)，这样我们必须由加载模型开始 — 在
+这里就是我们已经定义了的 Article 模型。</p>
+<p>现在在目录 <tt class="docutils literal"><span class="pre">app/Test/Case/Model</span></tt> 中来创建文件 <tt class="docutils literal"><span class="pre">ArticleTest.php</span></tt>，包含如下
+内容:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Article&#39;</span><span class="p">,</span> <span class="s1">&#39;Model&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">ArticleTest</span> <span class="k">extends</span> <span class="nx">CakeTestCase</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$fixtures</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;app.article&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在测试用例的变量 <tt class="docutils literal"><span class="pre">$fixtures</span></tt> 中定义一组要使用的夹具。应当记得包含所有要运行
+查询的夹具。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">你可以通过指定 <tt class="docutils literal"><span class="pre">$useDbConfig</span></tt> 属性来覆盖测试模型数据库。确保相关的夹具使用
+相同的值，这样才会在正确的数据库中创建表。</p>
+</div>
+<div class="section" id="id21">
+<h3>创建测试方法<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h3>
+<p>现在让我们添加一个方法来测试 Article 模型中的函数 published()。编辑文件
+<tt class="docutils literal"><span class="pre">app/Test/Case/Model/ArticleTest.php</span></tt>，让它象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Article&#39;</span><span class="p">,</span> <span class="s1">&#39;Model&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">ArticleTest</span> <span class="k">extends</span> <span class="nx">CakeTestCase</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$fixtures</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;app.article&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">setUp</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span> <span class="o">=</span> <span class="nx">ClassRegistry</span><span class="o">::</span><span class="na">init</span><span class="p">(</span><span class="s1">&#39;Article&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testPublished</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">published</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">));</span>
+        <span class="nv">$expected</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+            <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;First Article&#39;</span><span class="p">)),</span>
+            <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Second Article&#39;</span><span class="p">)),</span>
+            <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Third Article&#39;</span><span class="p">))</span>
+        <span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$expected</span><span class="p">,</span> <span class="nv">$result</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>你可以看到我们添加了方法 <tt class="docutils literal"><span class="pre">testPublished()</span></tt>。我们开始先创建一个 <tt class="docutils literal"><span class="pre">Article</span></tt>
+模型的实例，然后运行 <tt class="docutils literal"><span class="pre">published()</span></tt> 方法。在变量 <tt class="docutils literal"><span class="pre">$expected</span></tt> 中设置我们期望的
+正确结果(我们知道是因为我们定义了开始要填充到文章(<em>artilce</em>)表中的记录。)我们
+使用 <tt class="docutils literal"><span class="pre">assertEquals</span></tt> 方法测试结果等于我们的期望。欲知如何运行测试用例，请参考
+<a class="reference internal" href="#running-tests"><em>运行测试</em></a> 一节。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">在为测试设置模型时，一定要使用 <tt class="docutils literal"><span class="pre">ClassRegistry::init('YourModelName');</span></tt>，
+因为它知道要使用测试数据库连接。</p>
+</div>
+</div>
+<div class="section" id="id22">
+<h3>模拟模型方法<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h3>
+<p>有时在测试模型的方法时你要模拟这些方法。你应当使用 <tt class="docutils literal"><span class="pre">getMockForModel</span></tt> 方法来
+创建模型的测试模拟。这避免了通常模拟对象有的反射属性的问题:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">testSendingEmails</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$model</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMockForModel</span><span class="p">(</span><span class="s1">&#39;EmailVerification&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;send&#39;</span><span class="p">));</span>
+    <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">once</span><span class="p">())</span>
+        <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">&#39;send&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValue</span><span class="p">(</span><span class="k">true</span><span class="p">));</span>
+
+    <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">verifyEmail</span><span class="p">(</span><span class="s1">&#39;test@example.com&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">2.3 新版功能: </span>在 2.3 版本中增加了 CakeTestCase::getMockForModel()。</p>
+</div>
+</div>
+</div>
+<div class="section" id="id23">
+<h2>测试控制器<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h2>
+<p>虽然你可以用和助件(<em>Helper</em>)、模型(<em>Model</em>)和组件(<em>Component</em>)相同的方式测试
+控制器类，CakePHP 提供了特别的 <tt class="docutils literal"><span class="pre">ControllerTestCase</span></tt> 类。用该类作为控制器测试
+用例的基类，让你可以使用 <tt class="docutils literal"><span class="pre">testAction()</span></tt> 方法，使测试用例更简单。
+<tt class="docutils literal"><span class="pre">ControllerTestCase</span></tt> 让你容易地模拟组件和模型，以及象
+<a class="reference internal" href="../controllers.html#Controller::redirect" title="Controller::redirect"><tt class="xref php php-meth docutils literal"><span class="pre">redirect()</span></tt></a> 这样可能更难测试的方法。</p>
+<p>假设你有一个典型的 Articles 控制器和相应的模型。控制器代码是这样的:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppController&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Form&#39;</span><span class="p">,</span> <span class="s1">&#39;Html&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nv">$short</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$short</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">));</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;requested&#39;</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;Articles&#39;</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;articles&#39;</span><span class="p">,</span> <span class="nv">$result</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在 <tt class="docutils literal"><span class="pre">app/Test/Case/Controller</span></tt> 目录中创建一个名为
+<tt class="docutils literal"><span class="pre">ArticlesControllerTest.php</span></tt> 的文件，放入以下代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticlesControllerTest</span> <span class="k">extends</span> <span class="nx">ControllerTestCase</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$fixtures</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;app.article&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testIndex</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">testAction</span><span class="p">(</span><span class="s1">&#39;/articles/index&#39;</span><span class="p">);</span>
+        <span class="nx">debug</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testIndexShort</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">testAction</span><span class="p">(</span><span class="s1">&#39;/articles/index/short&#39;</span><span class="p">);</span>
+        <span class="nx">debug</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testIndexShortGetRenderedHtml</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">testAction</span><span class="p">(</span>
+           <span class="s1">&#39;/articles/index/short&#39;</span><span class="p">,</span>
+            <span class="k">array</span><span class="p">(</span><span class="s1">&#39;return&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;contents&#39;</span><span class="p">)</span>
+        <span class="p">);</span>
+        <span class="nx">debug</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testIndexShortGetViewVars</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">testAction</span><span class="p">(</span>
+            <span class="s1">&#39;/articles/index/short&#39;</span><span class="p">,</span>
+            <span class="k">array</span><span class="p">(</span><span class="s1">&#39;return&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;vars&#39;</span><span class="p">)</span>
+        <span class="p">);</span>
+        <span class="nx">debug</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testIndexPostData</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;Article&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s1">&#39;slug&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;new-article&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;New Article&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;New Body&#39;</span>
+            <span class="p">)</span>
+        <span class="p">);</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">testAction</span><span class="p">(</span>
+            <span class="s1">&#39;/articles/index&#39;</span><span class="p">,</span>
+            <span class="k">array</span><span class="p">(</span><span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="nv">$data</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;post&#39;</span><span class="p">)</span>
+        <span class="p">);</span>
+        <span class="nx">debug</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这个例子展示了一些使用 testAction 方法测试控制器的方式。<tt class="docutils literal"><span class="pre">testAction</span></tt> 方法的
+第一个参数应当总是要测试的网址(<em>URL</em>)。CakePHP 会创建一个请求，调度(<em>dispatch</em>)
+控制器和动作。</p>
+<p>在测试包含 <tt class="docutils literal"><span class="pre">redirect()</span></tt> 方法和其它在重定向(<em>redirect</em>)之后的代码，通常更好的
+做法是在重定向时返回。这是因为，<tt class="docutils literal"><span class="pre">redirect()</span></tt> 方法在测试中是模拟的，并不像正常
+状态是存在的。它不会使代码退出，而是继续运行重定向之后的代码。例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppController&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="c1">// 更多代码</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>当测试上述代码时，就算遇到重定向，也还是会继续运行 <tt class="docutils literal"><span class="pre">//</span> <span class="pre">更多代码</span></tt>。所以，应当
+这样写代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppController&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="c1">// 更多代码</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这样，<tt class="docutils literal"><span class="pre">//</span> <span class="pre">更多代码</span></tt> 就不会执行，因为一到重定向那里就会返回了。</p>
+<div class="section" id="get">
+<h3>模拟 GET 请求<a class="headerlink" href="#get" title="永久链接至标题">¶</a></h3>
+<p>正如上面 <tt class="docutils literal"><span class="pre">testIndexPostData()</span></tt> 的例子中看到的，可以用 <tt class="docutils literal"><span class="pre">testAction()</span></tt> 方法来
+测试 POST 动作，也可以测试 GET 动作。只要提供了 <tt class="docutils literal"><span class="pre">data</span></tt> 键，提交给控制器的请求
+就会是 POST。默认情况下，所有的请求都是 POST 请求。可以设置 method 键来模拟 GET
+请求:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">testAdding</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Post&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;New post&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Secret sauce&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">testAction</span><span class="p">(</span><span class="s1">&#39;/posts/add&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="nv">$data</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;get&#39;</span><span class="p">));</span>
+    <span class="c1">// 一些断言(*assertion*)。</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在模拟 GET 请求时，data 键会作为查询字符串(<em>query string</em>)参数。</p>
+</div>
+<div class="section" id="id24">
+<h3>选择返回类型<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h3>
+<p>你可以从多种方法中选择如何检查控制器动作是否成功。每一种都提供了不同的方法来确保
+代码执行了你的期望：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">vars</span></tt> 得到设置的视图(<em>view</em>)变量。</li>
+<li><tt class="docutils literal"><span class="pre">view</span></tt> 得到渲染的不含布局(<em>layout</em>)的视图。</li>
+<li><tt class="docutils literal"><span class="pre">contents</span></tt> 得到渲染的包含布局(<em>layout</em>)的视图。</li>
+<li><tt class="docutils literal"><span class="pre">result</span></tt> 得到控制器动作的返回值。可用于测试 requestAction 方法。</li>
+</ul>
+<p>默认值为 <tt class="docutils literal"><span class="pre">result</span></tt>。只要返回类型不是 <tt class="docutils literal"><span class="pre">result</span></tt>，也可以在测试用例中用属性访问
+其它返回类型:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">testIndex</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">testAction</span><span class="p">(</span><span class="s1">&#39;/posts/index&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertInternalType</span><span class="p">(</span><span class="s1">&#39;array&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">vars</span><span class="p">[</span><span class="s1">&#39;posts&#39;</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testaction">
+<h3>和 testAction 方法一起使用模拟对象<a class="headerlink" href="#testaction" title="永久链接至标题">¶</a></h3>
+<p>有时你要用部分或完全模拟的对象来代替组件(<em>component</em>)或者模型(<em>model</em>)。为此可以
+使用 <tt class="xref php php-meth docutils literal"><span class="pre">ControllerTestCase::generate()</span></tt> 方法。<tt class="docutils literal"><span class="pre">generate()</span></tt> 方法从
+控制器接过生成模拟的困难工作。如果你决定要生成用于测试的控制器，你可以一起生成
+模拟版本的模型和组件:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$Posts</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">(</span><span class="s1">&#39;Posts&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;methods&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;isAuthorized&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;models&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Post&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;save&#39;</span><span class="p">)</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;components&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;RequestHandler&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;isPut&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;Email&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;send&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;Session&#39;</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>上面的代码会创建模拟的 <tt class="docutils literal"><span class="pre">PostsController</span></tt> 控制器，带有 <tt class="docutils literal"><span class="pre">isAuthorized</span></tt> 方法。
+附带的 Post 模型会有 <tt class="docutils literal"><span class="pre">save()</span></tt> 方法，而附带的组件会有相应的方法。可以选择不传递
+方法来模拟整个类，就像上面例子中的 Session。</p>
+<p>生成的控制器自动作为测试控制器，用于测试。要启用自动生成，设置测试用例的
+<tt class="docutils literal"><span class="pre">autoMock</span></tt> 变量为 true。如果 <tt class="docutils literal"><span class="pre">autoMock</span></tt> 为 false，测试就会使用原来的控制器。</p>
+<p>生成的控制器中的 response 对象总是被一个不发送头部信息的模拟对象所取代。在使用了
+<tt class="docutils literal"><span class="pre">generate()</span></tt> 或 <tt class="docutils literal"><span class="pre">testAction()</span></tt> 方法之后，可以用 <tt class="docutils literal"><span class="pre">$this-&gt;controller</span></tt> 来访问
+控制器对象。</p>
+</div>
+<div class="section" id="id25">
+<h3>更复杂的例子<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h3>
+<p>作为最简单的形式，<tt class="docutils literal"><span class="pre">testAction()</span></tt> 方法会在测试控制器(或者自动生成的控制器)包括
+所有模拟的模型和组件之上运行 <tt class="docutils literal"><span class="pre">PostsController::index()</span></tt>。测试的结果保存在
+<tt class="docutils literal"><span class="pre">vars</span></tt> 、 <tt class="docutils literal"><span class="pre">contents</span></tt> 、 <tt class="docutils literal"><span class="pre">view</span></tt> 和 <tt class="docutils literal"><span class="pre">return</span></tt> 属性中。还有 headers 属性供你
+访问已经发送的 <tt class="docutils literal"><span class="pre">headers</span></tt>，让你可以查看重定向:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">testAdd</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$Posts</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">(</span><span class="s1">&#39;Posts&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;components&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;Session&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Email&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;send&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">));</span>
+    <span class="nv">$Posts</span><span class="o">-&gt;</span><span class="na">Session</span>
+        <span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">once</span><span class="p">())</span>
+        <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">&#39;setFlash&#39;</span><span class="p">);</span>
+    <span class="nv">$Posts</span><span class="o">-&gt;</span><span class="na">Email</span>
+        <span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">once</span><span class="p">())</span>
+        <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">&#39;send&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValue</span><span class="p">(</span><span class="k">true</span><span class="p">));</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">testAction</span><span class="p">(</span><span class="s1">&#39;/posts/add&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;Post&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;New Post&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">));</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertContains</span><span class="p">(</span><span class="s1">&#39;/posts&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">headers</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">testAddGet</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">testAction</span><span class="p">(</span><span class="s1">&#39;/posts/add&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;return&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;contents&#39;</span>
+    <span class="p">));</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertRegExp</span><span class="p">(</span><span class="s1">&#39;/&lt;html/&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">contents</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertRegExp</span><span class="p">(</span><span class="s1">&#39;/&lt;form/&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这个例子展示 <tt class="docutils literal"><span class="pre">testAction()</span></tt> 和 <tt class="docutils literal"><span class="pre">generate()</span></tt> 方法稍微复杂一点儿的用法。首先，
+生成测试控制器，模拟 <a class="reference internal" href="../core-libraries/components/sessions.html#SessionComponent" title="SessionComponent"><tt class="xref php php-class docutils literal"><span class="pre">SessionComponent</span></tt></a> 组件。现在模拟了
+SessionComponent 组件，我们就能够在它上面运行测试方法。假设
+<tt class="docutils literal"><span class="pre">PostsController::add()</span></tt> 方法重定向用户到 index，发送一封邮件，设置闪动提示
+消息，测试就会通过。添加了第二个测试对获取 add 表单时进行基本的健全测试。我们
+检查整个渲染的内容，看布局(<em>layout</em>)是否加载，并检查视图(<em>view</em>)是否有 form
+标签。如你所见，这些改动极大地增加了你的自由，来测试控制器和容易地模拟控制器类。</p>
+<p>在用使用静态方法的模拟对象来测试控制器时，你不得不用另外一种方法来表明对模拟对象
+的期望。例如，如果想要模拟 <a class="reference internal" href="../core-libraries/components/authentication.html#AuthComponent::user" title="AuthComponent::user"><tt class="xref php php-meth docutils literal"><span class="pre">AuthComponent::user()</span></tt></a>，就必须这样做:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">testAdd</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$Posts</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">(</span><span class="s1">&#39;Posts&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;components&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;Session&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">));</span>
+    <span class="nv">$Posts</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">staticExpects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">any</span><span class="p">())</span>
+        <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValue</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>使用 <tt class="docutils literal"><span class="pre">staticExpects</span></tt> 方法，就可以模拟和操控组件和模型的静态方法。</p>
+</div>
+<div class="section" id="json">
+<h3>测试返回 JSON 响应的控制器<a class="headerlink" href="#json" title="永久链接至标题">¶</a></h3>
+<p>在构建网络服务(<em>web service</em>)时，JSON 是非常友好和常用的格式。用 CakePHP 测试
+网络服务的端点很简单。我们先看一个简单的返回 JSON 的控制器例子:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MarkersController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$autoRender</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Marker</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">body</span><span class="p">(</span><span class="nb">json_encode</span><span class="p">(</span><span class="nv">$data</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>现在我们创建文件 <tt class="docutils literal"><span class="pre">app/Test/Case/Controller/MarkersControllerTest.php</span></tt>，确保
+网络服务返回正确的响应:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MarkersControllerTest</span> <span class="k">extends</span> <span class="nx">ControllerTestCase</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testIndex</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">testAction</span><span class="p">(</span><span class="s1">&#39;/markers/index.json&#39;</span><span class="p">);</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nb">json_decode</span><span class="p">(</span><span class="nv">$result</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+        <span class="nv">$expected</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;Marker&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;lng&#39;</span> <span class="o">=&gt;</span> <span class="mi">66</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span> <span class="o">=&gt;</span> <span class="mi">45</span><span class="p">),</span>
+        <span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$expected</span><span class="p">,</span> <span class="nv">$result</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id26">
+<h2>测试视图<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h2>
+<p>通常大部分应用程序不会直接测试它们的 HTML 代码。这么做经常会导致脆弱、难以维护的
+测试套件，容易遭到破坏。在使用 <tt class="xref php php-class docutils literal"><span class="pre">ControllerTestCase</span></tt> 编写功能性测试时，
+可以设置 <tt class="docutils literal"><span class="pre">return</span></tt> 选项为 &#8216;view&#8217; 来检视渲染的视图内容。虽然有可能使用
+ControllerTestCase 测试视图内容，更健壮、易于维护的集成/视图测试可以使用象
+<a class="reference external" href="http://seleniumhq.org">Selenium webdriver</a> 这样的工具来实现。</p>
+</div>
+<div class="section" id="id27">
+<h2>测试组件<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h2>
+<p>假设在应用程序中有一个名为 PagematronComponent 的组件。该组件帮我们设置使用它的
+控制器的分页限制。下面是位于
+<tt class="docutils literal"><span class="pre">app/Controller/Component/PagematronComponent.php</span></tt> 的组件例子:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PagematronComponent</span> <span class="k">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$Controller</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">startup</span><span class="p">(</span><span class="nx">Controller</span> <span class="nv">$controller</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">startup</span><span class="p">(</span><span class="nv">$controller</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Controller</span> <span class="o">=</span> <span class="nv">$controller</span><span class="p">;</span>
+        <span class="c1">// 确保控制器使用分页</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Controller</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Controller</span><span class="o">-&gt;</span><span class="na">paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">adjust</span><span class="p">(</span><span class="nv">$length</span> <span class="o">=</span> <span class="s1">&#39;short&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="nv">$length</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="s1">&#39;long&#39;</span><span class="o">:</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Controller</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">[</span><span class="s1">&#39;limit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="s1">&#39;medium&#39;</span><span class="o">:</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Controller</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">[</span><span class="s1">&#39;limit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+            <span class="k">default</span><span class="o">:</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Controller</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">[</span><span class="s1">&#39;limit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>现在我们可以编写测试来确保分页 <tt class="docutils literal"><span class="pre">limit</span></tt> 参数被组件的 <tt class="docutils literal"><span class="pre">adjust</span></tt> 方法正确设置。
+我们创建文件 <tt class="docutils literal"><span class="pre">app/Test/Case/Controller/Component/PagematronComponentTest.php</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Controller&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeRequest&#39;</span><span class="p">,</span> <span class="s1">&#39;Network&#39;</span><span class="p">);</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeResponse&#39;</span><span class="p">,</span> <span class="s1">&#39;Network&#39;</span><span class="p">);</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;ComponentCollection&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;PagematronComponent&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller/Component&#39;</span><span class="p">);</span>
+
+<span class="c1">// 用于测试的假的控制器</span>
+<span class="k">class</span> <span class="nc">PagematronControllerTest</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">PagematronComponentTest</span> <span class="k">extends</span> <span class="nx">CakeTestCase</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$PagematronComponent</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nv">$Controller</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">setUp</span><span class="p">();</span>
+        <span class="c1">// 设置组件和假的测试控制器</span>
+        <span class="nv">$Collection</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ComponentCollection</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">PagematronComponent</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PagematronComponent</span><span class="p">(</span><span class="nv">$Collection</span><span class="p">);</span>
+        <span class="nv">$CakeRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CakeRequest</span><span class="p">();</span>
+        <span class="nv">$CakeResponse</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CakeResponse</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PagematronControllerTest</span><span class="p">(</span><span class="nv">$CakeRequest</span><span class="p">,</span> <span class="nv">$CakeResponse</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">PagematronComponent</span><span class="o">-&gt;</span><span class="na">startup</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Controller</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testAdjust</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// 用不同的测试测试 adjust 方法</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">PagematronComponent</span><span class="o">-&gt;</span><span class="na">adjust</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Controller</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">[</span><span class="s1">&#39;limit&#39;</span><span class="p">]);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">PagematronComponent</span><span class="o">-&gt;</span><span class="na">adjust</span><span class="p">(</span><span class="s1">&#39;medium&#39;</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Controller</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">[</span><span class="s1">&#39;limit&#39;</span><span class="p">]);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">PagematronComponent</span><span class="o">-&gt;</span><span class="na">adjust</span><span class="p">(</span><span class="s1">&#39;long&#39;</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Controller</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">[</span><span class="s1">&#39;limit&#39;</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">tearDown</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">tearDown</span><span class="p">();</span>
+        <span class="c1">// 完成后清理干净</span>
+        <span class="nb">unset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">PagematronComponent</span><span class="p">);</span>
+        <span class="nb">unset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Controller</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id28">
+<h2>测试助件<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h2>
+<p>既然相当一部分逻辑存在于助件类中，确保这些类被测试覆盖就很重要。</p>
+<p>我们先创建一个助件样例用于测试。<tt class="docutils literal"><span class="pre">CurrencyRendererHelper</span></tt> 可以在视图中帮助显示
+金额，为了简单，只有一个方法 <tt class="docutils literal"><span class="pre">usd()</span></tt>。</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/View/Helper/CurrencyRendererHelper.php</span>
+<span class="k">class</span> <span class="nc">CurrencyRendererHelper</span> <span class="k">extends</span> <span class="nx">AppHelper</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">usd</span><span class="p">(</span><span class="nv">$amount</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;USD &#39;</span> <span class="o">.</span> <span class="nb">number_format</span><span class="p">(</span><span class="nv">$amount</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们设置小数点为 2 位，小数点分隔符为点，千位分隔符为逗号，在格式化的数字前缀以
+&#8216;USD&#8217; 字符串。</p>
+<p>现在来创建测试:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Test/Case/View/Helper/CurrencyRendererHelperTest.php</span>
+
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Controller&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;View&#39;</span><span class="p">,</span> <span class="s1">&#39;View&#39;</span><span class="p">);</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CurrencyRendererHelper&#39;</span><span class="p">,</span> <span class="s1">&#39;View/Helper&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">CurrencyRendererHelperTest</span> <span class="k">extends</span> <span class="nx">CakeTestCase</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$CurrencyRenderer</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+
+    <span class="c1">// 我们在这里实例化助件</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">setUp</span><span class="p">();</span>
+        <span class="nv">$Controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Controller</span><span class="p">();</span>
+        <span class="nv">$View</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">View</span><span class="p">(</span><span class="nv">$Controller</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">CurrencyRenderer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CurrencyRendererHelper</span><span class="p">(</span><span class="nv">$View</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 测试 usd() 函数</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testUsd</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="s1">&#39;USD 5.30&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">CurrencyRenderer</span><span class="o">-&gt;</span><span class="na">usd</span><span class="p">(</span><span class="mf">5.30</span><span class="p">));</span>
+
+        <span class="c1">// 应当总是有 2 位小数</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="s1">&#39;USD 1.00&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">CurrencyRenderer</span><span class="o">-&gt;</span><span class="na">usd</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="s1">&#39;USD 2.05&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">CurrencyRenderer</span><span class="o">-&gt;</span><span class="na">usd</span><span class="p">(</span><span class="mf">2.05</span><span class="p">));</span>
+
+        <span class="c1">// 测试千位分隔符</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span>
+          <span class="s1">&#39;USD 12,000.70&#39;</span><span class="p">,</span>
+          <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">CurrencyRenderer</span><span class="o">-&gt;</span><span class="na">usd</span><span class="p">(</span><span class="mf">12000.70</span><span class="p">)</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这里，我们用不同的参数调用 <tt class="docutils literal"><span class="pre">usd()</span></tt> 方法，让测试套件检查返回值是否等于所期望的。</p>
+<p>保存并执行测试。你应当看见一个绿色进度条和消息，表示 1 个通过的测试和 4 句断言
+(<em>assertion</em>)。</p>
+</div>
+<div class="section" id="id29">
+<h2>创建测试套件<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h2>
+<p>如果你想要几个测试一起运行，可以创建测试套件。一个测试套件由多个测试用例组成。
+<tt class="docutils literal"><span class="pre">CakeTestSuite</span></tt> 提供了一些方法，来基于文件系统轻松地创建测试套件。如果我们要为
+所有的模型测试创建测试套件，可以创建 <tt class="docutils literal"><span class="pre">app/Test/Case/AllModelTest.php</span></tt>。放入
+如下代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AllModelTest</span> <span class="k">extends</span> <span class="nx">CakeTestSuite</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">suite</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$suite</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CakeTestSuite</span><span class="p">(</span><span class="s1">&#39;All model tests&#39;</span><span class="p">);</span>
+        <span class="nv">$suite</span><span class="o">-&gt;</span><span class="na">addTestDirectory</span><span class="p">(</span><span class="nx">TESTS</span> <span class="o">.</span> <span class="s1">&#39;Case/Model&#39;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$suite</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>以上代码会把目录 <tt class="docutils literal"><span class="pre">/app/Test/Case/Model/</span></tt> 中所有的测试用例组织在一起。要添加
+单个文件，使用 <tt class="docutils literal"><span class="pre">$suite-&gt;addTestFile($filename);</span></tt> 方法。可以用下面的办法递归
+添加一个目录中的所有测试:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$suite</span><span class="o">-&gt;</span><span class="na">addTestDirectoryRecursive</span><span class="p">(</span><span class="nx">TESTS</span> <span class="o">.</span> <span class="s1">&#39;Case/Model&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>这就会递归添加 <tt class="docutils literal"><span class="pre">app/Test/Case/Model</span></tt> 目录中的所有测试用例。你可以用多个测试
+套件构成一个套件，来运行应用程序的所有测试:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AllTestsTest</span> <span class="k">extends</span> <span class="nx">CakeTestSuite</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">suite</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$suite</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CakeTestSuite</span><span class="p">(</span><span class="s1">&#39;All tests&#39;</span><span class="p">);</span>
+        <span class="nv">$suite</span><span class="o">-&gt;</span><span class="na">addTestDirectoryRecursive</span><span class="p">(</span><span class="nx">TESTS</span> <span class="o">.</span> <span class="s1">&#39;Case&#39;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$suite</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>然后就可以用下面的命令从命令行运行这个测试:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">test</span> <span class="nx">app</span> <span class="nx">AllTests</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id30">
+<h2>创建插件的测试<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h2>
+<p>插件的测试在插件目录中自己的目录中创建。</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">/</span><span class="nx">app</span>
+    <span class="o">/</span><span class="nx">Plugin</span>
+        <span class="o">/</span><span class="nx">Blog</span>
+            <span class="o">/</span><span class="nx">Test</span>
+                <span class="o">/</span><span class="k">Case</span>
+                <span class="o">/</span><span class="nx">Fixture</span>
+</pre></div>
+</div>
+<p>插件的测试象普通的测试一样，但要记得在导入类时要使用插件的命名约定。这是本手册
+插件一章中 <tt class="docutils literal"><span class="pre">BlogPost</span></tt> 模型的测试用例的例子。与其它测试的区别在第一行，导入了
+&#8216;Blog.BlogPost&#8217; 模型。也需要对插件夹具(<em>fixture</em>)使用前缀
+<tt class="docutils literal"><span class="pre">plugin.blog.blog_post</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;BlogPost&#39;</span><span class="p">,</span> <span class="s1">&#39;Blog.Model&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">BlogPostTest</span> <span class="k">extends</span> <span class="nx">CakeTestCase</span> <span class="p">{</span>
+
+    <span class="c1">// 插件夹具位于 /app/Plugin/Blog/Test/Fixture/</span>
+    <span class="k">public</span> <span class="nv">$fixtures</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;plugin.blog.blog_post&#39;</span><span class="p">);</span>
+    <span class="k">public</span> <span class="nv">$BlogPost</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testSomething</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// ClassRegistry 让模型使用测试数据库连接</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">BlogPost</span> <span class="o">=</span> <span class="nx">ClassRegistry</span><span class="o">::</span><span class="na">init</span><span class="p">(</span><span class="s1">&#39;Blog.BlogPost&#39;</span><span class="p">);</span>
+
+        <span class="c1">// 这里进行一些有用的测试</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nb">is_object</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">BlogPost</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>如果想要在 app 的测试中使用插件夹具，可以在 <tt class="docutils literal"><span class="pre">$fixtures</span></tt> 数组中使用
+<tt class="docutils literal"><span class="pre">plugin.pluginName.fixtureName</span></tt> 语法来引用它们。</p>
+</div>
+<div class="section" id="jenkins">
+<h2>与 Jenkins 集成<a class="headerlink" href="#jenkins" title="永久链接至标题">¶</a></h2>
+<p><a class="reference external" href="http://jenkins-ci.org">Jenkins</a> 是持续集成服务器，可以帮你自动化运行测试用例。
+这有助于确保所有测试保持通过，应用程序总是准备就绪的。</p>
+<p>CakePHP 应用程序与 Jenkins 的集成是相当直截了当的。下面假设你已经在 *nix 系统上
+安装好了 Jenkins，并且可以管理它。你也知道如何创建作业(<em>job</em>)，运行构建。如果你
+对这些有任何不确定，请参考 <a class="reference external" href="http://jenkins-ci.org/">Jenkins 文档</a></p>
+<div class="section" id="id33">
+<h3>创建作业<a class="headerlink" href="#id33" title="永久链接至标题">¶</a></h3>
+<p>开始先为应用程序创建作业，连接到你的代码仓库(<em>repository</em>)，这样 jenkins 才能
+获得你的代码。</p>
+</div>
+<div class="section" id="id34">
+<h3>添加测试数据库配置<a class="headerlink" href="#id34" title="永久链接至标题">¶</a></h3>
+<p>通常让 Jenkins 使用分开的数据库比较好，这样就可以防止连带的危害，避免一些基本的
+问题。一旦在 jenkins 能够访问的数据库服务器(通常为 localhost)上创建了新的数据库，
+在构建(<em>build</em>)中添加包含如下代码的 <em>外壳脚本步骤(shell script step)</em>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">cat</span> <span class="o">&gt;</span> <span class="nx">app</span><span class="o">/</span><span class="nx">Config</span><span class="o">/</span><span class="nx">database</span><span class="o">.</span><span class="nx">php</span> <span class="o">&lt;&lt;</span><span class="s1">&#39;DATABASE_PHP&#39;</span>
+<span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">class</span> <span class="nc">DATABASE_CONFIG</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$test</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;datasource&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Database/Mysql&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;host&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;database&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;jenkins_test&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;login&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;jenkins&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;password&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;cakephp_jenkins&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;encoding&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;utf8&#39;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">DATABASE_PHP</span>
+</pre></div>
+</div>
+<p>这确保你总有 Jenkins 要求的正确数据库配置。对任何其它需要的配置文件做同样处理。
+经常，更好的做法是，在每次构建之前也要删除再重新创建数据库。这样隔绝了串联的失败，
+即一个失败的构建引起其它构建失败。在构建中加入另一个 <em>外壳脚本步骤(shell script
+step)</em>，包含如下代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">mysql</span> <span class="o">-</span><span class="nx">u</span> <span class="nx">jenkins</span> <span class="o">-</span><span class="nx">pcakephp_jenkins</span> <span class="o">-</span><span class="nx">e</span> <span class="s1">&#39;DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id35">
+<h3>添加测试<a class="headerlink" href="#id35" title="永久链接至标题">¶</a></h3>
+<p>在构建中加入另一个 <em>外壳脚本步骤(shell script step)</em>。在这个步骤中运行应用程序的
+测试。创建 JUnit 日志文件或者 clover 测试覆盖(<em>coverage</em>)，通常更好，因为这为
+测试结果提供了一个不错的图形显示:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">app</span><span class="o">/</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">test</span> <span class="nx">app</span> <span class="nx">AllTests</span> <span class="nx">\</span>
+<span class="o">--</span><span class="nx">stderr</span> <span class="nx">\</span>
+<span class="o">--</span><span class="nb">log</span><span class="o">-</span><span class="nx">junit</span> <span class="nx">junit</span><span class="o">.</span><span class="nx">xml</span> <span class="nx">\</span>
+<span class="o">--</span><span class="nx">coverage</span><span class="o">-</span><span class="nx">clover</span> <span class="nx">clover</span><span class="o">.</span><span class="nx">xml</span>
+</pre></div>
+</div>
+<p>如果你使用 clover 测试覆盖(<em>coverage</em>) 或者 JUnit 结果，确保这些也在 Jenkins 中
+配置好了。如果没有配置这些步骤，就不能看到结果。</p>
+</div>
+<div class="section" id="id36">
+<h3>运行构建<a class="headerlink" href="#id36" title="永久链接至标题">¶</a></h3>
+<p>现在你应当能够运行构建了。检查控制台输出，并作出必要的修改让构建通过。</p>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development.html">开发</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">路由</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sessions.html">会话</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">异常</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">错误处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">调试</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">测试</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rest.html">REST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dispatch-filters.html">调度器过滤器</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">测试</a><ul>
+<li><a class="reference internal" href="#id2">安装 PHPUnit</a><ul>
+<li><a class="reference internal" href="#composer">通过 Composer 安装</a></li>
+<li><a class="reference internal" href="#phar">通过 .phar 包来安装</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3">测试数据库的设置</a></li>
+<li><a class="reference internal" href="#id4">检查测试数据库的设置</a></li>
+<li><a class="reference internal" href="#id5">测试用例约定</a></li>
+<li><a class="reference internal" href="#id6">创建你的第一个测试用例</a></li>
+<li><a class="reference internal" href="#running-tests">运行测试</a><ul>
+<li><a class="reference internal" href="#id8">从浏览器运行测试</a><ul>
+<li><a class="reference internal" href="#id9">查看代码覆盖</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#run-tests-from-command-line">从命令行运行测试</a><ul>
+<li><a class="reference internal" href="#id11">过滤测试用例</a></li>
+<li><a class="reference internal" href="#id12">生成代码覆盖率</a></li>
+<li><a class="reference internal" href="#id13">运行使用会话的测试</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id14">测试用例生命周期回调</a></li>
+<li><a class="reference internal" href="#id15">测试夹具</a><ul>
+<li><a class="reference internal" href="#id16">创建夹具</a></li>
+<li><a class="reference internal" href="#id17">动态数据和夹具</a></li>
+<li><a class="reference internal" href="#id18">导入表信息和记录</a></li>
+<li><a class="reference internal" href="#id19">在测试用例中加载夹具</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id20">测试模型</a><ul>
+<li><a class="reference internal" href="#id21">创建测试方法</a></li>
+<li><a class="reference internal" href="#id22">模拟模型方法</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id23">测试控制器</a><ul>
+<li><a class="reference internal" href="#get">模拟 GET 请求</a></li>
+<li><a class="reference internal" href="#id24">选择返回类型</a></li>
+<li><a class="reference internal" href="#testaction">和 testAction 方法一起使用模拟对象</a></li>
+<li><a class="reference internal" href="#id25">更复杂的例子</a></li>
+<li><a class="reference internal" href="#json">测试返回 JSON 响应的控制器</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id26">测试视图</a></li>
+<li><a class="reference internal" href="#id27">测试组件</a></li>
+<li><a class="reference internal" href="#id28">测试助件</a></li>
+<li><a class="reference internal" href="#id29">创建测试套件</a></li>
+<li><a class="reference internal" href="#id30">创建插件的测试</a></li>
+<li><a class="reference internal" href="#jenkins">与 Jenkins 集成</a><ul>
+<li><a class="reference internal" href="#id33">创建作业</a></li>
+<li><a class="reference internal" href="#id34">添加测试数据库配置</a></li>
+<li><a class="reference internal" href="#id35">添加测试</a></li>
+<li><a class="reference internal" href="#id36">运行构建</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="rest.html" title="REST" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="debugging.html" title="调试" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

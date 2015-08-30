@@ -1,0 +1,1943 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="HtmlHelper" lang="zh_CN" name="title" />
+<meta content="The role of the HtmlHelper in CakePHP is to make HTML-related options easier, faster, and more resilient to change." lang="zh_CN" name="description" />
+<meta content="html helper,cakephp css,cakephp script,content type,html image,html link,html tag,script block,script start,html url,cakephp style,cakephp crumbs" lang="zh_CN" name="keywords" />
+
+    <title>HtmlHelper助件 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="助件" href="../toc-helpers.html" />
+    <link rel="next" title="JsHelper" href="js.html" />
+    <link rel="prev" title="FormHelper 助件" href="form.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/core-libraries/helpers/html.html" /><link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/helpers/html.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/helpers/html.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/helpers/html.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/helpers/html.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../toc-helpers.html" accesskey="U" itemprop="url"><span itemprop="title">助件</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/core-libraries/helpers/html.html">en</a></li>
+				
+					<li><a href="../../../pt/core-libraries/helpers/html.html">pt</a></li>
+				
+					<li><a href="../../../es/core-libraries/helpers/html.html">es</a></li>
+				
+					<li><a href="../../../ja/core-libraries/helpers/html.html">ja</a></li>
+				
+					<li><a href="../../../fr/core-libraries/helpers/html.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/helpers/html.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="htmlhelper">
+<h1>HtmlHelper助件<a class="headerlink" href="#htmlhelper" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="HtmlHelper">
+<em class="property">class </em><tt class="descname">HtmlHelper</tt><big>(</big><em>View $view</em>, <em>array $settings = array()</em><big>)</big><a class="headerlink" href="#HtmlHelper" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>HtmlHelper 助件在 CakePHP 中的作用是使 HTML 相关的工作更容易、更快，更能够适应变
+化。使用这个助件会让你的应用程序本身更轻巧，在所处领域中相对于核心功能更灵活。</p>
+<p>The role of the HtmlHelper in CakePHP is to make HTML-related
+options easier, faster, and more resilient to change. Using this
+helper will enable your application to be more light on its feet,
+and more flexible on where it is placed in relation to the root of
+a domain.</p>
+<p>许多 HtmlHelper 的方法包括一个``$htmlAttributes``参数，这让你可以采用标签的任何额
+外属性。下面是一些如何使用 $htmlAttributes 参数的例子:</p>
+<p>Many HtmlHelper methods include a <tt class="docutils literal"><span class="pre">$htmlAttributes</span></tt> parameter,
+that allow you to tack on any extra attributes on your tags. Here
+are a few examples of how to use the $htmlAttributes parameter:</p>
+<div class="highlight-html"><div class="highlight"><pre>需要的属性: <span class="nt">&lt;tag</span> <span class="na">class=</span><span class="s">&quot;someClass&quot;</span> <span class="nt">/&gt;</span>
+数组参数: array(&#39;class&#39; =&gt; &#39;someClass&#39;)
+
+需要的属性: <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">value=</span><span class="s">&quot;bar&quot;</span> <span class="nt">/&gt;</span>
+数组参数: array(&#39;name&#39; =&gt; &#39;foo&#39;, &#39;value&#39; =&gt; &#39;bar&#39;)
+
+Desired attributes: <span class="nt">&lt;tag</span> <span class="na">class=</span><span class="s">&quot;someClass&quot;</span> <span class="nt">/&gt;</span>
+Array parameter: array(&#39;class&#39; =&gt; &#39;someClass&#39;)
+
+Desired attributes: <span class="nt">&lt;tag</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">value=</span><span class="s">&quot;bar&quot;</span> <span class="nt">/&gt;</span>
+Array parameter:  array(&#39;name&#39; =&gt; &#39;foo&#39;, &#39;value&#39; =&gt; &#39;bar&#39;)
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p>缺省情况下 HtmlHelper 助件在所有视图(view)中都可以使用。如果你得到一个错误信
+息，告诉你它(HtmlHelper 助件)不存在，通常这是因为它的名字在一个手工配置的
+$helpers 控制器(controller)变量中被落掉了。</p>
+<p class="last">The HtmlHelper is available in all views by default. If you&#8217;re
+getting an error informing you that it isn&#8217;t there, it&#8217;s usually
+due to its name being missing from a manually configured $helpers
+controller variable.</p>
+</div>
+<div class="section" id="html">
+<h2>插入完好格式的(HTML)元素<a class="headerlink" href="#html" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="inserting-well-formatted-elements">
+<h2>Inserting Well-Formatted elements<a class="headerlink" href="#inserting-well-formatted-elements" title="永久链接至标题">¶</a></h2>
+<p>HtmlHelper 助件完成的最重要的任务是创建完好格式的(HTML)标记。别怕经常使用它——你
+可以在 CakePHP 中缓存视图，从而在视图渲染和发送时节约一些 CPU 时间。这一节介绍
+HtmlHelper 助件的一些方法及如何使用它们。</p>
+<p>The most important task the HtmlHelper accomplishes is creating
+well formed markup. Don&#8217;t be afraid to use it often - you can cache
+views in CakePHP in order to save some CPU cycles when views are
+being rendered and delivered. This section will cover some of the
+methods of the HtmlHelper and how to use them.</p>
+<dl class="method">
+<dt id="HtmlHelper::charset">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">charset</tt><big>(</big><em>$charset=null</em><big>)</big><a class="headerlink" href="#HtmlHelper::charset" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$charset</strong> (<em>string</em>) &#8211; 想要的字符集。如果是 null，就会使用``App.encoding``</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>的值。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$charset</strong> (<em>string</em>) &#8211; Desired character set. If null, the value of
+<tt class="docutils literal"><span class="pre">App.encoding</span></tt> will be used.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>用来创建一个 meta 标签，指明页面的字符集。
+缺省值为 UTF-8。</p>
+<p>Used to create a meta tag specifying the document&#8217;s character.
+Defaults to UTF-8</p>
+<p>用法示例:</p>
+<p>Example use:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">charset</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=utf-8&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>或者，</p>
+<p>Alternatively,</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">charset</span><span class="p">(</span><span class="s1">&#39;ISO-8859-1&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=ISO-8859-1&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::css">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">css</tt><big>(</big><em>mixed $path</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#HtmlHelper::css" title="永久链接至目标">¶</a></dt>
+<dd><div class="versionchanged">
+<p><span class="versionmodified">在 2.4 版更改.</span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$path</strong> (<em>mixed</em>) &#8211; 或者是一个字符串，指向要连接的 css 文件，或者是数组，包含</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>多个文件。
+:param string $rel: 生成标签的 rel 属性的值。如果是 null，就会使用
+&#8216;stylesheet&#8217;。.
+:param array $options: :term:<a href="#id1"><span class="problematic" id="id2">`</span></a>html attributes`数组。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$path</strong> (<em>mixed</em>) &#8211; Either a string of the CSS file to link, or an array with multiple files</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; An array of options or <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>创建 CSS 样式的链接。如果``$options``参数中的键&#8217;inline&#8217;设置为 false，link 标
+签就会被加到``css``代码块，你可以把这个代码块在 document 的 head 标签内输出。</p>
+<p>Creates a link(s) to a CSS style-sheet. If key &#8216;inline&#8217; is set to
+false in <tt class="docutils literal"><span class="pre">$options</span></tt> parameter, the link tags are added to the
+<tt class="docutils literal"><span class="pre">css</span></tt> block which you can print inside the head
+tag of the document.</p>
+<p>你可以用``block``选项来控制把 link 元素加到哪个代码块中。缺省情况下，这会加到
+<a href="#id3"><span class="problematic" id="id4">``</span></a>css``代码块。</p>
+<p>You can use the <tt class="docutils literal"><span class="pre">block</span></tt> option to control which block the link element
+will be appended to. By default it will append to the <tt class="docutils literal"><span class="pre">css</span></tt> block.</p>
+<p>If key &#8216;rel&#8217; in <tt class="docutils literal"><span class="pre">$options</span></tt> array is set to &#8216;import&#8217; the stylesheet will be imported.</p>
+<p>这种引入 CSS 的方法假定给出的 CSS 文件位于 /app/webroot/css 目录内。:</p>
+<p>This method of CSS inclusion assumes that the CSS file specified
+resides inside the /app/webroot/css directory if path doesn&#8217;t start with a &#8216;/&#8217;.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">css</span><span class="p">(</span><span class="s1">&#39;forms&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;/css/forms.css&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>第一个参数可以是数组，从而引入多个文件。:</p>
+<p>The first parameter can be an array to include multiple files.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">css</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;forms&#39;</span><span class="p">,</span> <span class="s1">&#39;tables&#39;</span><span class="p">,</span> <span class="s1">&#39;menu&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>将会输出: Will output:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;/css/forms.css&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;/css/tables.css&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;/css/menu.css&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>你可以用:term:<cite>plugin syntax`来引入任何已经加载的插件中的 css 文件。要引入
+``app/Plugin/DebugKit/webroot/css/toolbar.css`</cite>，你可以用下面的代码:</p>
+<p>You can include CSS files from any loaded plugin using
+<a class="reference internal" href="../../appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a>. To include <tt class="docutils literal"><span class="pre">app/Plugin/DebugKit/webroot/css/toolbar.css</span></tt>
+You could use the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">css</span><span class="p">(</span><span class="s1">&#39;DebugKit.toolbar.css&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果你要引入与一个加载的插件同名的 css 文件，你可以像下面这样做。例如，如果你
+有一个``Blog``插件，又要引入``app/webroot/css/Blog.common.css``，你可以:</p>
+<p>If you want to include a CSS file which shares a name with a loaded
+plugin you can do the following. For example if you had a <tt class="docutils literal"><span class="pre">Blog</span></tt> plugin,
+and also wanted to include <tt class="docutils literal"><span class="pre">app/webroot/css/Blog.common.css</span></tt>, you would:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">..</span> <span class="nx">versionchanged</span><span class="o">::</span> <span class="mf">2.4</span>
+</pre></div>
+</div>
+<blockquote>
+<div>echo $this-&gt;Html-&gt;css(&#8216;Blog.common.css&#8217;, array(&#8216;plugin&#8217; =&gt; false));</div></blockquote>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>增加了``block``选项。
+The <tt class="docutils literal"><span class="pre">block</span></tt> option was added.
+增加了对:term:<cite>plugin syntax`的支持。
+Support for :term:`plugin syntax</cite> was added.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::meta">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">meta</tt><big>(</big><em>string $type</em>, <em>string $url = null</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#HtmlHelper::meta" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$type</strong> (<em>string</em>) &#8211; 你需要的type meta 标签。</li>
+<li><strong>$url</strong> (<em>mixed</em>) &#8211; meta 标签的地址(url)，或者是字符串，或者是</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="../../appendices/glossary.html#term-routing-array"><em class="xref std std-term">routing array</em></a>。
+:param array $options: :term:<a href="#id5"><span class="problematic" id="id6">`</span></a>html attributes`的数组。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$type</strong> (<em>string</em>) &#8211; The type meta tag you want.</li>
+<li><strong>$url</strong> (<em>mixed</em>) &#8211; The URL for the meta tag, either a string or a <a class="reference internal" href="../../appendices/glossary.html#term-routing-array"><em class="xref std std-term">routing array</em></a>.</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>要链接到象 RSS/Atom 推送(<em>feed</em>)和 favicon 这样的外部资源，该方法很方便。与
+css() 类似，你可以指定你是否要让它以 inline 的方式输出，还是要通过设置
+$attributes 参数(译注：指 $options 参数)中的 &#8216;inline&#8217; 键为 false，即
+<tt class="docutils literal"><span class="pre">array('inline'</span> <span class="pre">=&gt;</span> <span class="pre">false)</span></tt>，来附加在``meta``代码块的最后。</p>
+<p>This method is handy for linking to external resources like RSS/Atom feeds
+and favicons. Like css(), you can specify whether or not you&#8217;d like this tag
+to appear inline or appended to the <tt class="docutils literal"><span class="pre">meta</span></tt> block by setting the &#8216;inline&#8217;
+key in the $attributes parameter to false, ie - <tt class="docutils literal"><span class="pre">array('inline'</span> <span class="pre">=&gt;</span> <span class="pre">false)</span></tt>.</p>
+<p>如果你使用 $attributes 参数(译注：应该是指 $options 参数)来设置&#8221;type&#8221;属性，
+CakePHP 有一些快捷方式:</p>
+<p>If you set the &#8220;type&#8221; attribute using the $attributes parameter,
+CakePHP contains a few shortcuts:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">类型</th>
+<th class="head">转译得到的值</th>
+</tr>
+<tr class="row-even"><th class="head">type</th>
+<th class="head">translated value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-odd"><td>html</td>
+<td>text/html</td>
+</tr>
+<tr class="row-even"><td>rss</td>
+<td>application/rss+xml</td>
+</tr>
+<tr class="row-odd"><td>atom</td>
+<td>application/atom+xml</td>
+</tr>
+<tr class="row-even"><td>icon</td>
+<td>image/x-icon</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">meta</span><span class="p">(</span>
+    <span class="s1">&#39;favicon.ico&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/favicon.ico&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;icon&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">// 输出(增加了换行)</span>
+<span class="x">// Output (line breaks added)</span>
+<span class="x">&lt;link</span>
+<span class="x">    href=&quot;http://example.com/favicon.ico&quot;</span>
+<span class="x">    title=&quot;favicon.ico&quot; type=&quot;image/x-icon&quot;</span>
+<span class="x">    rel=&quot;alternate&quot;</span>
+<span class="x">/&gt;</span>
+<span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">meta</span><span class="p">(</span>
+    <span class="s1">&#39;Comments&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/comments/index.rss&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;rss&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">// 输出(增加了换行)</span>
+<span class="x">// Output (line breaks added)</span>
+<span class="x">&lt;link</span>
+<span class="x">    href=&quot;http://example.com/comments/index.rss&quot;</span>
+<span class="x">    title=&quot;Comments&quot;</span>
+<span class="x">    type=&quot;application/rss+xml&quot;</span>
+<span class="x">    rel=&quot;alternate&quot;</span>
+<span class="x">/&gt;</span>
+</pre></div>
+</div>
+<p>该方法也可以用来添加 meta 关键字和描述。例如:</p>
+<p>This method can also be used to add the meta keywords and
+descriptions. Example:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">meta</span><span class="p">(</span>
+    <span class="s1">&#39;keywords&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;在这里输入任意 meta 关键字 enter any meta keyword here&#39;</span>
+<span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">// 输出</span>
+<span class="x">// Output</span>
+<span class="x">&lt;meta name=&quot;keywords&quot; content=&quot;在这里输入任意 meta 关键字 enter any meta keyword here&quot; /&gt;</span>
+
+<span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">meta</span><span class="p">(</span>
+    <span class="s1">&#39;description&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;在这里输入任意 meta 描述 enter any meta description here&#39;</span>
+<span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">// Output</span>
+<span class="x">&lt;meta name=&quot;description&quot; content=&quot;在这里输入任意 meta 描述 enter any meta description here&quot; /&gt;</span>
+</pre></div>
+</div>
+<p>如果你要添加定制的 meta 标签，那么第一个参数应当设置为数组。要输出防止漫游器
+将网页编入索引(<em>robots noindex</em>)的标签(译注：可参考`noindex
+&lt;<a class="reference external" href="http://baike.baidu.com/link?url=wZMV3V5BOO9BrKxVaSp2jEUO2ICTI">http://baike.baidu.com/link?url=wZMV3V5BOO9BrKxVaSp2jEUO2ICTI</a>-<a href="#id71"><span class="problematic" id="id72">cFhFOkcOkQ5FzxcTa0_1s9yQFib06vigYuC1RHYETpkwLHPnVS4qqd5_</span></a>&gt;`_
+)，使用下面的代码:</p>
+<p>If you want to add a custom meta tag then the first parameter
+should be set to an array. To output a robots noindex tag use the
+following code:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">meta</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;robots&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;noindex&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>添加了``block``选项。
+The <tt class="docutils literal"><span class="pre">block</span></tt> option was added.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::docType">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">docType</tt><big>(</big><em>string $type = 'xhtml-strict'</em><big>)</big><a class="headerlink" href="#HtmlHelper::docType" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$type</strong> (<em>string</em>) &#8211; 生成的 doctype 的类型。</li>
+<li><strong>$type</strong> &#8211; The type of doctype being made.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>返回 (X)HTML doctype 标签。可依据下表提供 doctype。</p>
+<p>Returns a (X)HTML doctype tag. Supply the doctype according to the
+following table:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">类型
+type</th>
+<th class="head">转换所得的值
+translated value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>html4-strict</td>
+<td>HTML4 Strict</td>
+</tr>
+<tr class="row-odd"><td>html4-trans</td>
+<td>HTML4 Transitional</td>
+</tr>
+<tr class="row-even"><td>html4-frame</td>
+<td>HTML4 Frameset</td>
+</tr>
+<tr class="row-odd"><td>html5</td>
+<td>HTML5</td>
+</tr>
+<tr class="row-even"><td>xhtml-strict</td>
+<td>XHTML1 Strict</td>
+</tr>
+<tr class="row-odd"><td>xhtml-trans</td>
+<td>XHTML1 Transitional</td>
+</tr>
+<tr class="row-even"><td>xhtml-frame</td>
+<td>XHTML1 Frameset</td>
+</tr>
+<tr class="row-odd"><td>xhtml11</td>
+<td>XHTML1.1</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">docType</span><span class="p">();</span>
+<span class="c1">// 输出 Outputs:</span>
+<span class="c1">// &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;</span>
+<span class="c1">//    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">docType</span><span class="p">(</span><span class="s1">&#39;html5&#39;</span><span class="p">);</span>
+<span class="c1">// 输出 Outputs: &lt;!DOCTYPE html&gt;</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">docType</span><span class="p">(</span><span class="s1">&#39;html4-trans&#39;</span><span class="p">);</span>
+<span class="c1">// 输出 Outputs:</span>
+<span class="c1">// &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;</span>
+<span class="c1">//    &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>在2.1版本中默认的 doctype 是html5。
+The default doctype is html5 in 2.1.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::style">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">style</tt><big>(</big><em>array $data</em>, <em>boolean $oneline = true</em><big>)</big><a class="headerlink" href="#HtmlHelper::style" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$data</strong> (<em>array</em>) &#8211; 一组代表 CSS 属性的键 =&gt; 值对。</li>
+<li><strong>$oneline</strong> (<em>boolean</em>) &#8211; 内容是否要在一行上。</li>
+<li><strong>$data</strong> &#8211; A set of key =&gt; values with CSS properties.</li>
+<li><strong>$oneline</strong> &#8211; Should the contents be on one line.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>基于传入该方法的键和值来构建 CSS 样式。如果你的 CSS 文件是动态的，这将特别方
+便。:</p>
+<p>Builds CSS style definitions based on the keys and values of the
+array passed to the method. Especially handy if your CSS file is
+dynamic.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">style</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;background&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;#633&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;border-bottom&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1px solid #000&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;padding&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;10px&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">background</span><span class="o">:</span><span class="c1">#633; border-bottom:1px solid #000; padding:10px;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::image">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">image</tt><big>(</big><em>string $path</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#HtmlHelper::image" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$path</strong> (<em>string</em>) &#8211; 图像的路径。</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; :term:<a href="#id7"><span class="problematic" id="id8">`</span></a>html attributes`数组。</li>
+<li><strong>$path</strong> &#8211; Path to the image.</li>
+<li><strong>$options</strong> &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>创建一个完整格式的 image 标签。提供的路径(path)应当是相对于 /app/webroot/img/。:</p>
+<p>Creates a formatted image tag. The path supplied should be relative
+to /app/webroot/img/.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">(</span><span class="s1">&#39;cake_logo.png&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;alt&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CakePHP&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;/img/cake_logo.png&quot;</span> <span class="na">alt=</span><span class="s">&quot;CakePHP&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>要创建图像链接，用``$htmlAttributes``(译注: 指$options 参数)中的``url``选项
+指定链接目标。:</p>
+<p>To create an image link specify the link destination using the
+<tt class="docutils literal"><span class="pre">url</span></tt> option in <tt class="docutils literal"><span class="pre">$htmlAttributes</span></tt>.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">(</span><span class="s2">&quot;recipes/6.jpg&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;alt&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Brownies&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;recipes&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/recipes/view/6&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;/img/recipes/6.jpg&quot;</span> <span class="na">alt=</span><span class="s">&quot;Brownies&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+</div>
+<p>如果你要创建电子邮件中的图像，或者需要图像的绝对路径，你可以使用``fullBase``
+选项:</p>
+<p>If you are creating images in emails, or want absolute paths to images you
+can use the <tt class="docutils literal"><span class="pre">fullBase</span></tt> option:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">(</span><span class="s2">&quot;logo.png&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;fullBase&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://example.com/img/logo.jpg&quot;</span> <span class="na">alt=</span><span class="s">&quot;&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>你可以使用:term:<cite>plugin syntax`来引入任何加载的插件中的图像。要引入
+``app/Plugin/DebugKit/webroot/img/icon.png`</cite>，你可以使用下面的代码:</p>
+<p>You can include image files from any loaded plugin using
+<a class="reference internal" href="../../appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a>. To include <tt class="docutils literal"><span class="pre">app/Plugin/DebugKit/webroot/img/icon.png</span></tt>
+You could use the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">(</span><span class="s1">&#39;DebugKit.icon.png&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果你要引入与加载的插件重名的图像文件，你可以采用下面的做法。例如，你有一个
+<tt class="docutils literal"><span class="pre">Blog``插件，又要引入``app/webroot/js/Blog.icon.png``(译注:</span> <span class="pre">应当是指</span>
+<span class="pre">``app/webroot/img/Blog.icon.png</span></tt>)，你可以:</p>
+<p>If you want to include a image file which shares a name with a loaded
+plugin you can do the following. For example if you had a <tt class="docutils literal"><span class="pre">Blog</span></tt> plugin,
+and also wanted to include <tt class="docutils literal"><span class="pre">app/webroot/js/Blog.icon.png</span></tt>, you would:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">(</span><span class="s1">&#39;Blog.icon.png&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;plugin&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>增加了``fullBase``选项。
+The <tt class="docutils literal"><span class="pre">fullBase</span></tt> option was added.
+增加了对:term:<cite>plugin syntax`的支持。
+Support for :term:`plugin syntax</cite> was added.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::link">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">link</tt><big>(</big><em>string $title</em>, <em>mixed $url = null</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#HtmlHelper::link" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$title</strong> (<em>string</em>) &#8211; 作为链接主体显示的文字。</li>
+<li><strong>$url</strong> (<em>mixed</em>) &#8211; 或者是字符串表示的位置，或者是:term:<cite>routing array</cite>。</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; :term:<a href="#id9"><span class="problematic" id="id10">`</span></a>html attributes`数组。</li>
+<li><strong>$title</strong> &#8211; The text to display as the body of the link.</li>
+<li><strong>$url</strong> &#8211; Either the string location, or a <a class="reference internal" href="../../appendices/glossary.html#term-routing-array"><em class="xref std std-term">routing array</em></a>.</li>
+<li><strong>$options</strong> &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>创建 HTML 链接的通用方法。用``$options``来指定元素的属性，及是否要转义
+<tt class="docutils literal"><span class="pre">$title</span></tt>。:</p>
+<p>General purpose method for creating HTML links. Use <tt class="docutils literal"><span class="pre">$options</span></tt> to
+specify attributes for the element and whether or not the
+<tt class="docutils literal"><span class="pre">$title</span></tt> should be escaped.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+    <span class="s1">&#39;Enter&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;/pages/home&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;button&#39;</span><span class="p">,</span> <span class="s1">&#39;target&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;_blank&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/pages/home&quot;</span> <span class="na">class=</span><span class="s">&quot;button&quot;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span><span class="nt">&gt;</span>Enter<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+</div>
+<p>用``&#8217;full_base&#8217;=&gt;true``选项来指定使用绝对网址(URL):</p>
+<p>Use <tt class="docutils literal"><span class="pre">'full_base'=&gt;true</span></tt> option for absolute URLs:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+    <span class="s1">&#39;Dashboard&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;dashboards&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;full_base&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.yourdomain.com/dashboards/index&quot;</span><span class="nt">&gt;</span>Dashboard<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+</div>
+<p>用``$confirmMessage``来显示 javascript <a href="#id11"><span class="problematic" id="id12">``</span></a>confirm()``对话框:</p>
+<p>Specify <tt class="docutils literal"><span class="pre">confirm</span></tt> key in options to display a JavaScript <tt class="docutils literal"><span class="pre">confirm()</span></tt>
+dialog:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+    <span class="s1">&#39;Delete&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;recipes&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;confirm&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Are you sure you wish to delete this recipe?&#39;</span><span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/recipes/delete/6&quot;</span>
+    <span class="na">onclick=</span><span class="s">&quot;return confirm(</span>
+<span class="s">        &#39;Are you sure you wish to delete this recipe?&#39;</span>
+<span class="s">    );&quot;</span><span class="nt">&gt;</span>
+    Delete
+<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+</div>
+<p>用``link()``也可以添加查询字符串(Query string)。:</p>
+<p>Query strings can also be created with <tt class="docutils literal"><span class="pre">link()</span></tt>.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span><span class="s1">&#39;View image&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;images&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;?&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;height&#39;</span> <span class="o">=&gt;</span> <span class="mi">400</span><span class="p">,</span> <span class="s1">&#39;width&#39;</span> <span class="o">=&gt;</span> <span class="mi">500</span><span class="p">))</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/images/view/1?height=400&amp;width=500&quot;</span><span class="nt">&gt;</span>View image<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+</div>
+<p><a href="#id13"><span class="problematic" id="id14">``</span></a>$title``中的 HTML 特殊字符会被转换成 HTML 字符实体(HTML Entities)。要禁用这
+种转换，在``$options``数组中设置 escape 选项为 false。:</p>
+<p>When using named parameters, use the array syntax and include
+names for ALL parameters in the URL. Using the string syntax for
+paramters (i.e. &#8220;recipes/view/6/comments:false&#8221; will result in
+the colon characters being HTML escaped and the link will not work
+as desired.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">(</span><span class="s2">&quot;recipes/6.jpg&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;alt&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Brownies&quot;</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;recipes&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="s1">&#39;comments&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/recipes/view/id:6/comments:false&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;/img/recipes/6.jpg&quot;</span> <span class="na">alt=</span><span class="s">&quot;Brownies&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+</div>
+<p>HTML special characters in <tt class="docutils literal"><span class="pre">$title</span></tt> will be converted to HTML
+entities. To disable this conversion, set the escape option to
+false in the <tt class="docutils literal"><span class="pre">$options</span></tt> array.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">(</span><span class="s2">&quot;recipes/6.jpg&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;alt&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Brownies&quot;</span><span class="p">)),</span>
+    <span class="s2">&quot;recipes/view/6&quot;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;escape&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/recipes/view/6&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;/img/recipes/6.jpg&quot;</span> <span class="na">alt=</span><span class="s">&quot;Brownies&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+</div>
+<p>Setting <tt class="docutils literal"><span class="pre">escape</span></tt> to false will also disable escaping of attributes of the
+link. As of 2.4 you can use the option <tt class="docutils literal"><span class="pre">escapeTitle</span></tt> to disable just
+escaping of title and not the attributes.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">(</span><span class="s1">&#39;recipes/6.jpg&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;alt&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Brownies&#39;</span><span class="p">)),</span>
+    <span class="s1">&#39;recipes/view/6&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;escapeTitle&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;hi &quot;howdy&quot;&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/recipes/view/6&quot;</span> <span class="na">title=</span><span class="s">&quot;hi &amp;quot;howdy&amp;quot;&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;/img/recipes/6.jpg&quot;</span> <span class="na">alt=</span><span class="s">&quot;Brownies&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.4 版更改: </span>The <tt class="docutils literal"><span class="pre">escapeTitle</span></tt> option was added.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.6 版更改: </span>The argument <tt class="docutils literal"><span class="pre">$confirmMessage</span></tt> was deprecated. Use <tt class="docutils literal"><span class="pre">confirm</span></tt> key
+in <tt class="docutils literal"><span class="pre">$options</span></tt> instead.</p>
+</div>
+<p>不同类型网址(url)的更多例子，也请查看:php:meth:<a href="#id15"><span class="problematic" id="id16">`</span></a>HtmlHelper::url`方法。</p>
+<p>Also check <a class="reference internal" href="#HtmlHelper::url" title="HtmlHelper::url"><tt class="xref php php-meth docutils literal"><span class="pre">HtmlHelper::url</span></tt></a> method
+for more examples of different types of URLs.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::media">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">media</tt><big>(</big><em>string|array $path</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#HtmlHelper::media" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$path</strong> (<em>string|array</em>) &#8211; 视频文件的路径，相对于</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#id17"><span class="problematic" id="id18">`</span></a>webroot/{$options[&#8216;pathPrefix&#8217;]}`目录。或者是数组，每项本身可以是路径字符串
+或包含键`src`和`type`的关联数组。
+:param array $options: HTML 属性数组，以及特殊选项。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$path</strong> (<em>string|array</em>) &#8211; Path to the video file, relative to the
+<cite>webroot/{$options[&#8216;pathPrefix&#8217;]}</cite> directory. Or an array where each
+item itself can be a path string or an associate array containing keys
+<cite>src</cite> and <cite>type</cite>.</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; <p>Array of HTML attributes, and special options.</p>
+<p>选项:</p>
+<ul>
+<li><cite>type</cite> 要生成的媒体元素的类型，合法值为&#8221;audio&#8221;或&#8221;video&#8221;。如果没有提供类
+型，媒体类型将基于文件的 mime 类型来推测。</li>
+<li><cite>text</cite> 在 video 标签(译注: 应当指生成的媒体标签)内使用的文字</li>
+<li><cite>pathPrefix</cite> 相对路径所使用的路径前缀，缺省为&#8217;files/&#8217;</li>
+<li><cite>fullBase</cite> 如果提供(译注：应当指当其值为true)，src 属性就会是包括域名
+的完整网址。</li>
+</ul>
+<p>Options:</p>
+<ul>
+<li><cite>type</cite> Type of media element to generate, valid values are &#8220;audio&#8221;
+or &#8220;video&#8221;. If type is not provided media type is guessed based on
+file&#8217;s mime type.</li>
+<li><cite>text</cite> Text to include inside the video tag</li>
+<li><cite>pathPrefix</cite> Path prefix to use for relative URLs, defaults to
+&#8216;files/&#8217;</li>
+<li><cite>fullBase</cite> If provided the src attribute will get a full address
+including domain name</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="versionadded">
+<p><span class="versionmodified">2.1 新版功能.</span></p>
+</div>
+<p>返回格式完整的 audio/video 标签:</p>
+<p>Returns a formatted audio/video tag:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x"> </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">media</span><span class="p">(</span><span class="s1">&#39;audio.mp3&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x"> // 输出</span>
+<span class="x"> // Output</span>
+<span class="x"> &lt;audio src=&quot;/files/audio.mp3&quot;&gt;&lt;/audio&gt;</span>
+
+<span class="x"> </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">media</span><span class="p">(</span><span class="s1">&#39;video.mp4&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+     <span class="s1">&#39;fullBase&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+     <span class="s1">&#39;text&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fallback text&#39;</span>
+ <span class="p">));</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x"> // 输出</span>
+<span class="x"> // Output</span>
+<span class="x"> &lt;video src=&quot;http://www.somehost.com/files/video.mp4&quot;&gt;Fallback text&lt;/video&gt;</span>
+
+<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">media</span><span class="p">(</span>
+     <span class="k">array</span><span class="p">(</span>
+         <span class="s1">&#39;video.mp4&#39;</span><span class="p">,</span>
+         <span class="k">array</span><span class="p">(</span>
+             <span class="s1">&#39;src&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;video.ogg&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;video/ogg; codecs=&#39;theora, vorbis&#39;&quot;</span>
+         <span class="p">)</span>
+     <span class="p">),</span>
+     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;autoplay&#39;</span><span class="p">)</span>
+ <span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x"> // 输出</span>
+<span class="x"> // Output</span>
+<span class="x"> &lt;video autoplay=&quot;autoplay&quot;&gt;</span>
+<span class="x">     &lt;source src=&quot;/files/video.mp4&quot; type=&quot;video/mp4&quot;/&gt;</span>
+<span class="x">     &lt;source src=&quot;/files/video.ogg&quot; type=&quot;video/ogg;</span>
+<span class="x">         codecs=&#39;theora, vorbis&#39;&quot;/&gt;</span>
+<span class="x"> &lt;/video&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::tag">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">tag</tt><big>(</big><em>string $tag</em>, <em>string $text</em>, <em>array $htmlAttributes</em><big>)</big><a class="headerlink" href="#HtmlHelper::tag" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$tag</strong> (<em>string</em>) &#8211; 生成的标签的名称。</li>
+<li><strong>$text</strong> (<em>string</em>) &#8211; 标签的内容。</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; :term:<a href="#id19"><span class="problematic" id="id20">`</span></a>html attributes`数组。</li>
+<li><strong>$tag</strong> &#8211; The tag name being generated.</li>
+<li><strong>$text</strong> &#8211; The contents for the tag.</li>
+<li><strong>$options</strong> &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>返回由指定标签包裹的文字。如果没有给出文字，则只返回开始的标签。:</p>
+<p>Returns text wrapped in a specified tag. If no text is specified
+then only the opening &lt;tag&gt; is returned.:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">tag</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello World.&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;welcome&#39;</span><span class="p">));</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">// 输出</span>
+<span class="x">// Output</span>
+<span class="x">&lt;span class=&quot;welcome&quot;&gt;Hello World&lt;/span&gt;</span>
+
+<span class="x">// 未给出文字。</span>
+<span class="x">// No text specified.</span>
+<span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">tag</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;welcome&#39;</span><span class="p">));</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">// 输出</span>
+<span class="x">// Output</span>
+<span class="x">&lt;span class=&quot;welcome&quot;&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p>缺省情况下文字没有转义，但你可以用``$htmlOptions[&#8216;escape&#8217;] = true``来转义
+文字。这代替了之前版本里的第四个参数``boolean $escape = false``。</p>
+<p class="last">Text is not escaped by default but you may use
+<tt class="docutils literal"><span class="pre">$htmlOptions['escape']</span> <span class="pre">=</span> <span class="pre">true</span></tt> to escape your text. This
+replaces a fourth parameter <tt class="docutils literal"><span class="pre">boolean</span> <span class="pre">$escape</span> <span class="pre">=</span> <span class="pre">false</span></tt> that was
+available in previous versions.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::div">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">div</tt><big>(</big><em>string $class</em>, <em>string $text</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#HtmlHelper::div" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$class</strong> (<em>string</em>) &#8211; div 的(样式)类名。</li>
+<li><strong>$text</strong> (<em>string</em>) &#8211; div 内的内容。</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; :term:<a href="#id21"><span class="problematic" id="id22">`</span></a>html attributes`数组。</li>
+<li><strong>$class</strong> &#8211; The class name for the div.</li>
+<li><strong>$text</strong> &#8211; The content inside the div.</li>
+<li><strong>$options</strong> &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>用来创建 div 包裹的标记片段。第一个参数指定 CSS 类，第二个参数用来提供要被 div
+标签包裹的文字。如果最后一个参数设置为 true (译注：应当是指设置
+<tt class="docutils literal"><span class="pre">$htmlOptions['escape']</span> <span class="pre">=</span> <span class="pre">true</span></tt>)，$text 将被 HTML 转义后再输出。</p>
+<p>Used for creating div-wrapped sections of markup. The first
+parameter specifies a CSS class, and the second is used to supply
+the text to be wrapped by div tags. If the last parameter has been
+set to true, $text will be printed HTML-escaped.</p>
+<p>如果没有给出文字，只返回开始 div 标签。:</p>
+<p>If no text is specified, only an opening div tag is returned.:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">div</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;Please enter your credit card number.&#39;</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">// 输出</span>
+<span class="x">// Output</span>
+<span class="x">&lt;div class=&quot;error&quot;&gt;Please enter your credit card number.&lt;/div&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::para">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">para</tt><big>(</big><em>string $class</em>, <em>string $text</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#HtmlHelper::para" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$class</strong> (<em>string</em>) &#8211; 段落(paragraph)的(样式)类名。</li>
+<li><strong>$text</strong> (<em>string</em>) &#8211; 段落内的内容。</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; :term:<a href="#id23"><span class="problematic" id="id24">`</span></a>html attributes`数组。</li>
+<li><strong>$class</strong> &#8211; The class name for the paragraph.</li>
+<li><strong>$text</strong> &#8211; The content inside the paragraph.</li>
+<li><strong>$options</strong> &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>返回由 CSS 类修饰的 &lt;p&gt; 标签包裹的文字。如果没有提供文字，则只返回开始 &lt;p&gt; 标
+签。:</p>
+<p>Returns a text wrapped in a CSS-classed &lt;p&gt; tag. If no text is
+supplied, only a starting &lt;p&gt; tag is returned.:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">para</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="s1">&#39;Hello World.&#39;</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">// 输出</span>
+<span class="x">// Output</span>
+<span class="x">&lt;p&gt;Hello World.&lt;/p&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::script">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">script</tt><big>(</big><em>mixed $url</em>, <em>mixed $options</em><big>)</big><a class="headerlink" href="#HtmlHelper::script" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$url</strong> (<em>mixed</em>) &#8211; 或者是指向单一 Javascript 文件的字符串，或者(指向)多个文</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>件的数组。
+:param array $options: :term:<a href="#id25"><span class="problematic" id="id26">`</span></a>html attributes`数组。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$url</strong> (<em>mixed</em>) &#8211; Either a string to a single JavaScript file, or an
+array of strings for multiple files.</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>引入一个或多个脚本文件，存在于本地或是远程地址(url)。</p>
+<p>Include a script file(s), contained either locally or as a remote URL.</p>
+<p>缺省情况下，脚本标签会以 inline 的方式添加到文档中。如果你设置
+<a href="#id27"><span class="problematic" id="id28">``</span></a>$options[&#8216;inline&#8217;]``为 false，脚本(script)标签就会被添加到``script``代码块，
+这样你就可以把它输出到文档的其它地方。
+如果你想要改变所使用的代码块名称，你可以通过设置``$options[&#8216;block&#8217;]``来实现。</p>
+<p>By default, script tags are added to the document inline. If you override
+this by setting <tt class="docutils literal"><span class="pre">$options['inline']</span></tt> to false, the script tags will instead
+be added to the <tt class="docutils literal"><span class="pre">script</span></tt> block which you can print elsewhere in the document.
+If you wish to override which block name is used, you can do so by setting
+<tt class="docutils literal"><span class="pre">$options['block']</span></tt>.</p>
+<p><a href="#id29"><span class="problematic" id="id30">``</span></a>$options[&#8216;once&#8217;]``控制你是否要在一次请求中只引入该脚本一次，或者多次。缺省
+值为 true。</p>
+<p><tt class="docutils literal"><span class="pre">$options['once']</span></tt> controls whether or
+not you want to include this script once per request or more than
+once. This defaults to true.</p>
+<p>你可以用 $options 参数来为生成的脚本标签设置额外的属性。如果用的是脚本标签数
+组，属性就会应用于所有生成的脚本标签。</p>
+<p>You can use $options to set additional properties to the
+generated script tag. If an array of script tags is used, the
+attributes will be applied to all of the generated script tags.</p>
+<p>这个引入 javascript 文件的方法假定给出的 javascript 文件位于
+<a href="#id31"><span class="problematic" id="id32">``</span></a>/app/webroot/js``目录内:</p>
+<p>This method of JavaScript file inclusion assumes that the
+JavaScript file specified resides inside the <tt class="docutils literal"><span class="pre">/app/webroot/js</span></tt>
+directory:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">script</span><span class="p">(</span><span class="s1">&#39;scripts&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">href=</span><span class="s">&quot;/js/scripts.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</div>
+<p>你也可以用绝对路径链接不在``app/webroot/js``目录之内的文件:</p>
+<p>You can link to files with absolute paths as well to link files
+that are not in <tt class="docutils literal"><span class="pre">app/webroot/js</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">script</span><span class="p">(</span><span class="s1">&#39;/otherdir/script_file&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>你也可以链接到远程地址(URL):</p>
+<p>You can also link to a remote URL:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">script</span><span class="p">(</span><span class="s1">&#39;http://code.jquery.com/jquery.min.js&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">href=</span><span class="s">&quot;http://code.jquery.com/jquery.min.js&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</div>
+<p>第一个参数可以是数组，来引入多个文件。:</p>
+<p>The first parameter can be an array to include multiple files.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">script</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;jquery&#39;</span><span class="p">,</span> <span class="s1">&#39;wysiwyg&#39;</span><span class="p">,</span> <span class="s1">&#39;scripts&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">href=</span><span class="s">&quot;/js/jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">href=</span><span class="s">&quot;/js/wysiwyg.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">href=</span><span class="s">&quot;/js/scripts.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</div>
+<p>你可以用``block``选项将脚本标签添加到一个特定的代码块:</p>
+<p>You can append the script tag to a specific block using the <tt class="docutils literal"><span class="pre">block</span></tt>
+option:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">script</span><span class="p">(</span><span class="s1">&#39;wysiwyg&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;block&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;scriptBottom&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>在你的布局中你可以输出所有添加到&#8217;scriptBottom&#8217;的脚本标签:</p>
+<p>In your layout you can output all the script tags added to &#8216;scriptBottom&#8217;:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="s1">&#39;scriptBottom&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>你可以使用:term:<cite>plugin syntax`引入任何加载的插件中的脚本文件。要引入
+``app/Plugin/DebugKit/webroot/js/toolbar.js`</cite>，你可以使用下面的代码:</p>
+<p>You can include script files from any loaded plugin using
+<a class="reference internal" href="../../appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a>. To include <tt class="docutils literal"><span class="pre">app/Plugin/DebugKit/webroot/js/toolbar.js</span></tt>
+You could use the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">script</span><span class="p">(</span><span class="s1">&#39;DebugKit.toolbar.js&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果你要引入与加载的插件重名的脚本文件，你可以采用下面的做法。例如，如果你有
+一个``Blog``插件，而又想引入``app/webroot/js/Blog.plugins.js``，你可以:</p>
+<p>If you want to include a script file which shares a name with a loaded
+plugin you can do the following. For example if you had a <tt class="docutils literal"><span class="pre">Blog</span></tt> plugin,
+and also wanted to include <tt class="docutils literal"><span class="pre">app/webroot/js/Blog.plugins.js</span></tt>, you would:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">script</span><span class="p">(</span><span class="s1">&#39;Blog.plugins.js&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;plugin&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>添加了``block``选项。
+The <tt class="docutils literal"><span class="pre">block</span></tt> option was added.
+添加了对:term:<cite>plugin syntax`的支持。
+Support for :term:`plugin syntax</cite> was added.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::scriptBlock">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">scriptBlock</tt><big>(</big><em>$code</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#HtmlHelper::scriptBlock" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$code</strong> (<em>string</em>) &#8211; 要放入脚本标签的代码。</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; :term:<a href="#id33"><span class="problematic" id="id34">`</span></a>html attributes`数组。</li>
+<li><strong>$code</strong> &#8211; The code to go in the script tag.</li>
+<li><strong>$options</strong> &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>生成包含``$code``的代码块。设置 <a href="#id35"><span class="problematic" id="id36">``</span></a>$options[&#8216;inline&#8217;]``为 false，使代码块出现
+在``script``视图代码块中。定义的其它选项会被作为脚本标签的属性。
+<a href="#id37"><span class="problematic" id="id38">``</span></a>$this-&gt;Html-&gt;scriptBlock(&#8216;stuff&#8217;, array(&#8216;defer&#8217; =&gt; true));``会创建带有
+<a href="#id39"><span class="problematic" id="id40">``</span></a>defer=&#8221;defer&#8221;<a href="#id41"><span class="problematic" id="id42">``</span></a>的脚本标签。</p>
+<p>Generate a code block containing <tt class="docutils literal"><span class="pre">$code</span></tt> set
+<tt class="docutils literal"><span class="pre">$options['inline']</span></tt> to false to have the script block appear in
+the <tt class="docutils literal"><span class="pre">script</span></tt> view block. Other options defined will be added as attributes
+to script tags.
+<tt class="docutils literal"><span class="pre">$this-&gt;Html-&gt;scriptBlock('stuff',</span> <span class="pre">array('defer'</span> <span class="pre">=&gt;</span> <span class="pre">true));</span></tt> will
+create a script tag with <tt class="docutils literal"><span class="pre">defer=&quot;defer&quot;</span></tt> attribute.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::scriptStart">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">scriptStart</tt><big>(</big><em>$options = array()</em><big>)</big><a class="headerlink" href="#HtmlHelper::scriptStart" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$options</strong> (<em>array</em>) &#8211; 当 scriptEnd 调用时使用的:term:<a href="#id43"><span class="problematic" id="id44">`</span></a>html attributes`数组。</li>
+<li><strong>$options</strong> &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a> to be used when
+scriptEnd is called.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>开始一个缓冲代码块。该代码块会捕获所有在``scriptStart()``和``scriptEnd()``之
+间的输出，并创建脚本标签。选项和``scriptBlock()``一样。</p>
+<p>Begin a buffering code block. This code block will capture all
+output between <tt class="docutils literal"><span class="pre">scriptStart()</span></tt> and <tt class="docutils literal"><span class="pre">scriptEnd()</span></tt> and create an
+script tag. Options are the same as <tt class="docutils literal"><span class="pre">scriptBlock()</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::scriptEnd">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">scriptEnd</tt><big>(</big><big>)</big><a class="headerlink" href="#HtmlHelper::scriptEnd" title="永久链接至目标">¶</a></dt>
+<dd><p>结束缓冲脚本代码块，返回生成的脚本元素，或者如果脚本代码块用 inline = false
+开始则返回 null。</p>
+<p>End a buffering script block, returns the generated script element
+or null if the script block was opened with inline = false.</p>
+<p>一个使用``scriptStart()``和``scriptEnd()``的例子会是这样:</p>
+<p>An example of using <tt class="docutils literal"><span class="pre">scriptStart()</span></tt> and <tt class="docutils literal"><span class="pre">scriptEnd()</span></tt> would
+be:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">scriptStart</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;inline&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">alert</span><span class="p">(</span><span class="s1">&#39;I am in the javascript&#39;</span><span class="p">);</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">scriptEnd</span><span class="p">();</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::nestedList">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">nestedList</tt><big>(</big><em>array $list</em>, <em>array $options = array()</em>, <em>array $itemOptions = array()</em>, <em>string $tag = 'ul'</em><big>)</big><a class="headerlink" href="#HtmlHelper::nestedList" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$list</strong> (<em>array</em>) &#8211; 要列出来的一组元素。</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; 列表(ol/ul)标签的额外 HTML 属性，或者如果是 ul/ol，</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>就用它作为标签。
+:param array $itemOptions: 列表元素(LI)标签的额外 HTML 属性。
+:param string $tag: 要使用的列表标签(ol/ul)。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$list</strong> (<em>array</em>) &#8211; Set of elements to list.</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; Additional HTML attributes of the list (ol/ul) tag
+or if ul/ol use that as tag.</li>
+<li><strong>$itemOptions</strong> (<em>array</em>) &#8211; Additional HTML attributes of the list item (LI)
+tag.</li>
+<li><strong>$tag</strong> (<em>string</em>) &#8211; Type of list tag to use (ol/ul).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>从关联数组构建嵌套列表(UL/OL):</p>
+<p>Build a nested list (UL/OL) out of an associative array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$list</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Languages&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;English&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;American&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Canadian&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;British&#39;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;Spanish&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;German&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">nestedList</span><span class="p">(</span><span class="nv">$list</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre>// Output (minus the whitespace)
+<span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Languages
+        <span class="nt">&lt;ul&gt;</span>
+            <span class="nt">&lt;li&gt;</span>English
+                <span class="nt">&lt;ul&gt;</span>
+                    <span class="nt">&lt;li&gt;</span>American<span class="nt">&lt;/li&gt;</span>
+                    <span class="nt">&lt;li&gt;</span>Canadian<span class="nt">&lt;/li&gt;</span>
+                    <span class="nt">&lt;li&gt;</span>British<span class="nt">&lt;/li&gt;</span>
+                <span class="nt">&lt;/ul&gt;</span>
+            <span class="nt">&lt;/li&gt;</span>
+            <span class="nt">&lt;li&gt;</span>Spanish<span class="nt">&lt;/li&gt;</span>
+            <span class="nt">&lt;li&gt;</span>German<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::tableHeaders">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">tableHeaders</tt><big>(</big><em>array $names</em>, <em>array $trOptions = null</em>, <em>array $thOptions = null</em><big>)</big><a class="headerlink" href="#HtmlHelper::tableHeaders" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$names</strong> (<em>array</em>) &#8211; 字符串数组，用来创建表格标题。</li>
+<li><strong>$trOptions</strong> (<em>array</em>) &#8211; &lt;tr&gt;的:term:<a href="#id45"><span class="problematic" id="id46">`</span></a>html attributes`数组</li>
+<li><strong>$thOptions</strong> (<em>array</em>) &#8211; &lt;th&gt;元素的:term:<a href="#id47"><span class="problematic" id="id48">`</span></a>html attributes`数组</li>
+<li><strong>$names</strong> &#8211; An array of strings to create table headings.</li>
+<li><strong>$trOptions</strong> &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a> for the &lt;tr&gt;</li>
+<li><strong>$thOptions</strong> &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a> for the &lt;th&gt; elements</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>创建一行表格标题格子，可放入&lt;table&gt;标签。:</p>
+<p>Creates a row of table header cells to be placed inside of &lt;table&gt;
+tags.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">tableHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="s1">&#39;Title&#39;</span><span class="p">,</span> <span class="s1">&#39;Active&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Date<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Title<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th&gt;</span>Active<span class="nt">&lt;/th&gt;</span>
+<span class="nt">&lt;/tr&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">tableHeaders</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span><span class="s1">&#39;Title&#39;</span><span class="p">,</span><span class="s1">&#39;Active&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;status&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;product_table&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">&quot;status&quot;</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;th</span> <span class="na">class=</span><span class="s">&quot;product_table&quot;</span><span class="nt">&gt;</span>Date<span class="nt">&lt;/th&gt;</span>
+     <span class="nt">&lt;th</span> <span class="na">class=</span><span class="s">&quot;product_table&quot;</span><span class="nt">&gt;</span>Title<span class="nt">&lt;/th&gt;</span>
+     <span class="nt">&lt;th</span> <span class="na">class=</span><span class="s">&quot;product_table&quot;</span><span class="nt">&gt;</span>Active<span class="nt">&lt;/th&gt;</span>
+<span class="nt">&lt;/tr&gt;</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.2 版更改: </span><tt class="docutils literal"><span class="pre">tableHeaders()``现在接受各个格子的属性，见下。</span>
+<span class="pre">``tableHeaders()</span></tt> now accepts attributes per cell, see below.</p>
+</div>
+<p>在2.2版本，你可以设置各列的属性，这些会代替``$thOptions``中提供的缺省值:</p>
+<p>As of 2.2 you can set attributes per column, these are used instead of the
+defaults provided in the <tt class="docutils literal"><span class="pre">$thOptions</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">tableHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Name&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;highlight&#39;</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;sortable&#39;</span><span class="p">))</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;th&gt;</span>id<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">class=</span><span class="s">&quot;highlight&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;th</span> <span class="na">class=</span><span class="s">&quot;sortable&quot;</span><span class="nt">&gt;</span>Date<span class="nt">&lt;/th&gt;</span>
+<span class="nt">&lt;/tr&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::tableCells">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">tableCells</tt><big>(</big><em>array $data</em>, <em>array $oddTrOptions = null</em>, <em>array $evenTrOptions = null</em>, <em>$useCount = false</em>, <em>$continueOddEven = true</em><big>)</big><a class="headerlink" href="#HtmlHelper::tableCells" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$data</strong> (<em>array</em>) &#8211; 给各行提供数据的二维数组。</li>
+<li><strong>$oddTrOptions</strong> (<em>array</em>) &#8211; 奇数&lt;tr&gt;的:term:<a href="#id49"><span class="problematic" id="id50">`</span></a>html attributes`数组。</li>
+<li><strong>$evenTrOptions</strong> (<em>array</em>) &#8211; 偶数&lt;tr&gt;的:term:<a href="#id51"><span class="problematic" id="id52">`</span></a>html attributes`数组。</li>
+<li><strong>$useCount</strong> (<em>boolean</em>) &#8211; 添加(样式)类&#8221;column-$i&#8221;。</li>
+<li><strong>$continueOddEven</strong> (<em>boolean</em>) &#8211; 如果是 false，就会使用非静态 $count 变量，
+从而对该调用的奇偶计数重置为零。</li>
+<li><strong>$data</strong> &#8211; A two dimensional array with data for the rows.</li>
+<li><strong>$oddTrOptions</strong> &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a> for the odd &lt;tr&gt;&#8217;s.</li>
+<li><strong>$evenTrOptions</strong> &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a> for the even &lt;tr&gt;&#8217;s.</li>
+<li><strong>$useCount</strong> &#8211; Adds class &#8220;column-$i&#8221;.</li>
+<li><strong>$continueOddEven</strong> &#8211; If false, will use a non-static $count variable,
+so that the odd/even count is reset to zero just for that call.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>成行地创建表格格子，给奇数行和偶数行&lt;tr&gt;设置不同的属性。对一个特定的&lt;td&gt;属性
+(译注：指不一样的属性，参看下面的例子)，将该表格格子包裹在数组中。:</p>
+<p>Creates table cells, in rows, assigning &lt;tr&gt; attributes differently
+for odd- and even-numbered rows. Wrap a single table cell within an
+array() for specific &lt;td&gt;-attributes.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">tableCells</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Jul 7th, 2007&#39;</span><span class="p">,</span> <span class="s1">&#39;Best Brownies&#39;</span><span class="p">,</span> <span class="s1">&#39;Yes&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Jun 21st, 2007&#39;</span><span class="p">,</span> <span class="s1">&#39;Smart Cookies&#39;</span><span class="p">,</span> <span class="s1">&#39;Yes&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Aug 1st, 2006&#39;</span><span class="p">,</span> <span class="s1">&#39;Anti-Java Cake&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">),</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;tr&gt;&lt;td&gt;</span>Jul 7th, 2007<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Best Brownies<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Yes<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="nt">&lt;tr&gt;&lt;td&gt;</span>Jun 21st, 2007<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Smart Cookies<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Yes<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="nt">&lt;tr&gt;&lt;td&gt;</span>Aug 1st, 2006<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Anti-Java Cake<span class="nt">&lt;/td&gt;&lt;td&gt;</span>No<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">tableCells</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Jul 7th, 2007&#39;</span><span class="p">,</span>
+        <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;Best Brownies&#39;</span><span class="p">,</span>
+            <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;highlight&#39;</span><span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;Yes&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Jun 21st, 2007&#39;</span><span class="p">,</span> <span class="s1">&#39;Smart Cookies&#39;</span><span class="p">,</span> <span class="s1">&#39;Yes&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Aug 1st, 2006&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Anti-Java Cake&#39;</span><span class="p">,</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;special&#39;</span><span class="p">))</span>
+    <span class="p">),</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>
+        Jul 7th, 2007
+    <span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">&quot;highlight&quot;</span><span class="nt">&gt;</span>
+        Best Brownies
+    <span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>
+        Yes
+    <span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>
+        Jun 21st, 2007
+    <span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>
+        Smart Cookies
+    <span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>
+        Yes
+    <span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>
+        Aug 1st, 2006
+    <span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>
+        Anti-Java Cake
+    <span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td</span> <span class="na">id=</span><span class="s">&quot;special&quot;</span><span class="nt">&gt;</span>
+        No
+    <span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;/tr&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">tableCells</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Red&#39;</span><span class="p">,</span> <span class="s1">&#39;Apple&#39;</span><span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Orange&#39;</span><span class="p">,</span> <span class="s1">&#39;Orange&#39;</span><span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;Banana&#39;</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;darker&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">&quot;darker&quot;</span><span class="nt">&gt;&lt;td&gt;</span>Red<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Apple<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="nt">&lt;tr&gt;&lt;td&gt;</span>Orange<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Orange<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">&quot;darker&quot;</span><span class="nt">&gt;&lt;td&gt;</span>Yellow<span class="nt">&lt;/td&gt;&lt;td&gt;</span>Banana<span class="nt">&lt;/td&gt;&lt;/tr&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::url">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">url</tt><big>(</big><em>mixed $url = NULL</em>, <em>boolean $full = false</em><big>)</big><a class="headerlink" href="#HtmlHelper::url" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$url</strong> (<em>mixed</em>) &#8211; 一个:term:<a href="#id53"><span class="problematic" id="id54">`</span></a>routing array`数组。</li>
+<li><strong>$full</strong> (<em>mixed</em>) &#8211; 或者是布尔值，说明是否包含根路径，或者是
+:php:meth:<a href="#id55"><span class="problematic" id="id56">`</span></a>Router::url()`的选项数组。</li>
+<li><strong>$url</strong> &#8211; A <a class="reference internal" href="../../appendices/glossary.html#term-routing-array"><em class="xref std std-term">routing array</em></a>.</li>
+<li><strong>$full</strong> &#8211; Either a boolean to indicate whether or not the base path should
+be included on an array of options for <a class="reference internal" href="../../development/routing.html#Router::url" title="Router::url"><tt class="xref php php-meth docutils literal"><span class="pre">Router::url()</span></tt></a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>返回控制器和动作组合形成的网址(URL)。如果 $url为空，它会返回REQUEST_URI，否
+则它生成控制器和动作组合而成的网址。如果参数 full 为 true，结果就会前缀以完整
+的根路径:</p>
+<p>Returns a URL pointing to a combination of controller and action.
+If $url is empty, it returns the REQUEST_URI, otherwise it
+generates the URL for the controller and action combo. If full is
+true, the full base URL will be prepended to the result:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;controller&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;posts&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;action&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;view&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;bar&quot;</span>
+<span class="p">));</span>
+
+<span class="c1">// 输出</span>
+<span class="c1">// Output</span>
+<span class="o">/</span><span class="nx">posts</span><span class="o">/</span><span class="nx">view</span><span class="o">/</span><span class="nx">bar</span>
+</pre></div>
+</div>
+<p>下面有更多用法示例:</p>
+<p>Here are a few more usage examples:</p>
+<p>带命名参数的网址(URL):</p>
+<p>URL with named parameters:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;controller&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;posts&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;action&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;view&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;foo&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;bar&quot;</span>
+<span class="p">));</span>
+
+<span class="c1">// 输出</span>
+<span class="c1">// Output</span>
+<span class="o">/</span><span class="nx">posts</span><span class="o">/</span><span class="nx">view</span><span class="o">/</span><span class="nx">foo</span><span class="o">:</span><span class="nx">bar</span>
+</pre></div>
+</div>
+<p>有扩展名的网址(URL):</p>
+<p>URL with extension:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;controller&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;posts&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;action&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;list&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ext&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;rss&quot;</span>
+<span class="p">));</span>
+
+<span class="c1">// 输出</span>
+<span class="c1">// Output</span>
+<span class="o">/</span><span class="nx">posts</span><span class="o">/</span><span class="k">list</span><span class="o">.</span><span class="nx">rss</span>
+</pre></div>
+</div>
+<p>带完整根路径的网址(以&#8217;/&#8217;开头):</p>
+<p>URL (starting with &#8216;/&#8217;) with the full base URL prepended:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="s1">&#39;/posts&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+
+<span class="c1">// 输出</span>
+<span class="c1">// Output</span>
+<span class="nx">http</span><span class="o">://</span><span class="nx">somedomain</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">posts</span>
+</pre></div>
+</div>
+<p>带 GET 参数和命名锚点的网址:</p>
+<p>URL with GET params and named anchor:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;controller&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;posts&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;action&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;search&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;?&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;bar&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;#&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;first&quot;</span>
+<span class="p">));</span>
+
+<span class="c1">// 输出</span>
+<span class="c1">// Output</span>
+<span class="o">/</span><span class="nx">posts</span><span class="o">/</span><span class="nx">search</span><span class="o">?</span><span class="nx">foo</span><span class="o">=</span><span class="nx">bar</span><span class="c1">#first</span>
+</pre></div>
+</div>
+<p>更详细的信息，请查看 API 中的
+<a class="reference external" href="http://api20.cakephp.org/class/router#method-Routerurl">Router::url</a>。</p>
+<p>For further information check
+<a class="reference external" href="http://api.cakephp.org/2.4/class-Router.html#_url">Router::url</a>
+in the API.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::useTag">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">useTag</tt><big>(</big><em>string $tag</em><big>)</big><a class="headerlink" href="#HtmlHelper::useTag" title="永久链接至目标">¶</a></dt>
+<dd><p>返回完整格式的现存``$tag``代码块:</p>
+<p>Returns a formatted existent block of <tt class="docutils literal"><span class="pre">$tag</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">useTag</span><span class="p">(</span>
+    <span class="s1">&#39;form&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;http://example.com&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;myform&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;http://example.com&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">class=</span><span class="s">&quot;myform&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="id58">
+<h2>改变 HtmlHelper 助件输出的标签<a class="headerlink" href="#id58" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="changing-the-tags-output-by-htmlhelper">
+<h2>Changing the tags output by HtmlHelper<a class="headerlink" href="#changing-the-tags-output-by-htmlhelper" title="永久链接至标题">¶</a></h2>
+<dl class="method">
+<dt id="HtmlHelper::loadConfig">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">loadConfig</tt><big>(</big><em>mixed $configFile</em>, <em>string $path = null</em><big>)</big><a class="headerlink" href="#HtmlHelper::loadConfig" title="永久链接至目标">¶</a></dt>
+<dd><p><tt class="xref php php-class docutils literal"><span class="pre">HtmlHelper`内置的标签集是兼容于</span> <span class="pre">XHTML</span> <span class="pre">的，不过如果你要生成</span> <span class="pre">HTML5</span>
+<span class="pre">的</span> <span class="pre">HTML，你需要创建并加载新的标签配置文件，该文件应当包含你要使用的标签。要改</span>
+<span class="pre">变使用的标签，创建文件``app/Config/html5_tags.php`</span></tt>，包含(如下内容):</p>
+<p>The built-in tag sets for <a class="reference internal" href="#HtmlHelper" title="HtmlHelper"><tt class="xref php php-class docutils literal"><span class="pre">HtmlHelper</span></tt></a> are XHTML compliant,
+however if you need to generate HTML for HTML5 you will need to
+create and load a new tags config file containing the tags you&#8217;d
+like to use. To change the tags used create <tt class="docutils literal"><span class="pre">app/Config/html5_tags.php</span></tt>
+containing:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$config</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;css&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;link rel=&quot;%s&quot; href=&quot;%s&quot; %s&gt;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;style&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;style%s&gt;%s&lt;/style&gt;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;charset&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;meta charset=&quot;%s&quot;&gt;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;javascriptblock&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;script%s&gt;%s&lt;/script&gt;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;javascriptstart&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;script&gt;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;javascriptlink&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;script src=&quot;%s&quot;%s&gt;&lt;/script&gt;&#39;</span><span class="p">,</span>
+    <span class="c1">// ...</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>然后你就可以通过调用``$this-&gt;Html-&gt;loadConfig(&#8216;html5_tags&#8217;);``来加载这个标签
+集。</p>
+<p>You can then load this tag set by calling
+<tt class="docutils literal"><span class="pre">$this-&gt;Html-&gt;loadConfig('html5_tags');</span></tt></p>
+</dd></dl>
+
+</div>
+<div class="section" id="htmlhelper-breadcrumb">
+<h2>用 HtmlHelper 助件来创建 breadcrumb 路径<a class="headerlink" href="#htmlhelper-breadcrumb" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="creating-breadcrumb-trails-with-htmlhelper">
+<h2>Creating breadcrumb trails with HtmlHelper<a class="headerlink" href="#creating-breadcrumb-trails-with-htmlhelper" title="永久链接至标题">¶</a></h2>
+<dl class="method">
+<dt id="HtmlHelper::getCrumbs">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">getCrumbs</tt><big>(</big><em>string $separator = '&amp;raquo;'</em>, <em>string|array|bool $startText = false</em><big>)</big><a class="headerlink" href="#HtmlHelper::getCrumbs" title="永久链接至目标">¶</a></dt>
+<dd><p>CakePHP 有内置的功能在应用程序中自动创建 breadcrumb 路径。要为此做设置，首先
+在布局模板中加入象下面这样的代码:</p>
+<p>CakePHP has the built-in ability to automatically create a
+breadcrumb trail in your app. To set this up, first add something
+similar to the following in your layout template:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">getCrumbs</span><span class="p">(</span><span class="s1">&#39; &gt; &#39;</span><span class="p">,</span> <span class="s1">&#39;Home&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><a href="#id59"><span class="problematic" id="id60">``</span></a>$startText``参数也可以接受一个数组。这为控制生成的第一个链接提供了更多的控
+制:</p>
+<p>The <tt class="docutils literal"><span class="pre">$startText</span></tt> option can also accept an array. This gives more control
+over the generated first link:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">getCrumbs</span><span class="p">(</span><span class="s1">&#39; &gt; &#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;text&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">(</span><span class="s1">&#39;home.png&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pages&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;display&#39;</span><span class="p">,</span> <span class="s1">&#39;home&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;escape&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>任何不是``text``或者``url``的键，会被作为``$options``参数传递给
+:php:meth:<a href="#id61"><span class="problematic" id="id62">`</span></a>~HtmlHelper::link()`方法。</p>
+<p>Any keys that are not <tt class="docutils literal"><span class="pre">text</span></tt> or <tt class="docutils literal"><span class="pre">url</span></tt> will be passed to
+<a class="reference internal" href="#HtmlHelper::link" title="HtmlHelper::link"><tt class="xref php php-meth docutils literal"><span class="pre">link()</span></tt></a> as the <tt class="docutils literal"><span class="pre">$options</span></tt> parameter.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>现在``$startText``参数能够接受数组了。
+The <tt class="docutils literal"><span class="pre">$startText</span></tt> parameter now accepts an array.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::addCrumb">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">addCrumb</tt><big>(</big><em>string $name</em>, <em>string $link = null</em>, <em>mixed $options = null</em><big>)</big><a class="headerlink" href="#HtmlHelper::addCrumb" title="永久链接至目标">¶</a></dt>
+<dd><p>现在，在视图中你可以添加下面的代码，来在每个页面开始 breadcrumb 路径。</p>
+<p>Now, in your view you&#8217;ll want to add the following to start the
+breadcrumb trails on each of the pages:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">addCrumb</span><span class="p">(</span><span class="s1">&#39;Users&#39;</span><span class="p">,</span> <span class="s1">&#39;/users&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">addCrumb</span><span class="p">(</span><span class="s1">&#39;Add User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>这会在调用 getCrumbs 所在的布局中添加&#8221;<strong>Home &gt; Users &gt; Add User</strong>&#8220;的输出。</p>
+<p>This will add the output of &#8220;<strong>Home &gt; Users &gt; Add User</strong>&#8221; in your
+layout where getCrumbs was added.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="HtmlHelper::getCrumbList">
+<tt class="descclassname">HtmlHelper::</tt><tt class="descname">getCrumbList</tt><big>(</big><em>array $options = array()</em>, <em>mixed $startText</em><big>)</big><a class="headerlink" href="#HtmlHelper::getCrumbList" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$options</strong> (<em>array</em>) &#8211; 包裹的``&lt;ul&gt;``元素的:term:<a href="#id63"><span class="problematic" id="id64">`</span></a>html attributes`数组。也可
+以包含&#8217;separator&#8217;、&#8217;firstClass&#8217;和&#8217;lastClass&#8217;选项。</li>
+<li><strong>$startText</strong> (<em>string|array</em>) &#8211; 在 ul 之前的文字或元素。</li>
+<li><strong>$options</strong> &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a> for the
+containing <tt class="docutils literal"><span class="pre">&lt;ul&gt;</span></tt> element. Can also contain the &#8216;separator&#8217;,
+&#8216;firstClass&#8217;, &#8216;lastClass&#8217; and &#8216;escape&#8217; options.</li>
+<li><strong>$startText</strong> &#8211; The text or element that precedes the ul.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>返回 (x)html 列表形式的 breadcrumbs。</p>
+<p>Returns breadcrumbs as a (x)html list.</p>
+<p>该方法使用:php:meth:<a href="#id65"><span class="problematic" id="id66">`</span></a>HtmlHelper::tag()`来生成列表及其元素。与
+:php:meth:<a href="#id67"><span class="problematic" id="id68">`</span></a>~HtmlHelper::getCrumbs()`的工作方式类似，所以它使用添加每个 crumb
+时所用的选项。你可以用``$startText``参数来提供第一个 breadcrumb 的链接/文字。
+这可以用于当你总是要包括一个根链接时。这个选项和
+:php:meth:<a href="#id69"><span class="problematic" id="id70">`</span></a>~HtmlHelper::getCrumbs()`的``$startText``选项是一样的。</p>
+<p>This method uses <a class="reference internal" href="#HtmlHelper::tag" title="HtmlHelper::tag"><tt class="xref php php-meth docutils literal"><span class="pre">HtmlHelper::tag()</span></tt></a> to generate list and its
+elements. Works similar to <a class="reference internal" href="#HtmlHelper::getCrumbs" title="HtmlHelper::getCrumbs"><tt class="xref php php-meth docutils literal"><span class="pre">getCrumbs()</span></tt></a>, so it uses
+options which every crumb was added with. You can use the <tt class="docutils literal"><span class="pre">$startText</span></tt>
+parameter to provide the first breadcrumb link/text. This is useful when
+you always want to include a root link. This option works the same as the
+<tt class="docutils literal"><span class="pre">$startText</span></tt> option for <a class="reference internal" href="#HtmlHelper::getCrumbs" title="HtmlHelper::getCrumbs"><tt class="xref php php-meth docutils literal"><span class="pre">getCrumbs()</span></tt></a>.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>添加了``$startText``参数。
+The <tt class="docutils literal"><span class="pre">$startText</span></tt> parameter was added.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.3 版更改: </span>添加了&#8217;separator&#8217;，&#8217;firstClass&#8217;和&#8217;lastClass&#8217;选项。
+The &#8216;separator&#8217;, &#8216;firstClass&#8217; and &#8216;lastClass&#8217; options were added.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.5 版更改: </span>The &#8216;escape&#8217; option was added.</p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../views.html">视图</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../views/themes.html">主题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views/media-view.html">媒体视图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views/json-and-xml-views.html">JSON 和 XML 视图</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../views/helpers.html">助件</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache.html">缓存助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form.html">FormHelper 助件</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">HtmlHelper助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.html">JsHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">SessionHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="text.html">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">TimeHelper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-general-purpose.html">通用</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../global-constants-and-functions.html">全局常量和函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core-utility-libraries/app.html">App Class</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../events.html">Events System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collections.html">Collections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-components.html">组件</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-helpers.html">助件</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache.html">缓存助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form.html">FormHelper 助件</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">HtmlHelper助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.html">JsHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">SessionHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="text.html">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">TimeHelper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-utilities.html">工具</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">HtmlHelper助件</a><ul>
+<li><a class="reference internal" href="#html">插入完好格式的(HTML)元素</a></li>
+<li><a class="reference internal" href="#inserting-well-formatted-elements">Inserting Well-Formatted elements</a></li>
+<li><a class="reference internal" href="#id58">改变 HtmlHelper 助件输出的标签</a></li>
+<li><a class="reference internal" href="#changing-the-tags-output-by-htmlhelper">Changing the tags output by HtmlHelper</a></li>
+<li><a class="reference internal" href="#htmlhelper-breadcrumb">用 HtmlHelper 助件来创建 breadcrumb 路径</a></li>
+<li><a class="reference internal" href="#creating-breadcrumb-trails-with-htmlhelper">Creating breadcrumb trails with HtmlHelper</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="js.html" title="JsHelper" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="form.html" title="FormHelper 助件" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

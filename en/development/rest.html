@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="REST" lang="en" name="title" />
+<meta content="application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api" lang="en" name="keywords" />
+
+    <title>REST &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Development" href="../development.html" />
+    <link rel="next" title="Dispatcher Filters" href="dispatch-filters.html" />
+    <link rel="prev" title="Testing" href="testing.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/development/rest.html" /><link rel="alternate" hreflang="es" href="../../es/development/rest.html" /><link rel="alternate" hreflang="ja" href="../../ja/development/rest.html" /><link rel="alternate" hreflang="fr" href="../../fr/development/rest.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/development/rest.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../development.html" accesskey="U" itemprop="url"><span itemprop="title">Development</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/development/rest.html">pt</a></li>
+				
+					<li><a href="../../es/development/rest.html">es</a></li>
+				
+					<li><a href="../../ja/development/rest.html">ja</a></li>
+				
+					<li><a href="../../fr/development/rest.html">fr</a></li>
+				
+					<li><a href="../../zh/development/rest.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/development/rest.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="rest">
+<h1>REST<a class="headerlink" href="#rest" title="Permalink to this headline">¶</a></h1>
+<p>Many newer application programmers are realizing the need to open
+their core functionality to a greater audience. Providing easy,
+unfettered access to your core API can help get your platform
+accepted, and allows for mashups and easy integration with other
+systems.</p>
+<p>While other solutions exist, REST is a great way to provide easy
+access to the logic you&#8217;ve created in your application. It&#8217;s
+simple, usually XML-based (we&#8217;re talking simple XML, nothing like a
+SOAP envelope), and depends on HTTP headers for direction. Exposing
+an API via REST in CakePHP is simple.</p>
+<div class="section" id="the-simple-setup">
+<h2>The Simple Setup<a class="headerlink" href="#the-simple-setup" title="Permalink to this headline">¶</a></h2>
+<p>The fastest way to get up and running with REST is to add a few
+lines to your routes.php file, found in app/Config. The Router
+object features a method called <tt class="docutils literal"><span class="pre">mapResources()</span></tt>, that is used to set
+up a number of default routes for REST access to your controllers.
+Make sure <tt class="docutils literal"><span class="pre">mapResources()</span></tt> comes before <tt class="docutils literal"><span class="pre">require</span> <span class="pre">CAKE</span> <span class="pre">.</span> <span class="pre">'Config'</span> <span class="pre">.</span> <span class="pre">DS</span> <span class="pre">.</span> <span class="pre">'routes.php';</span></tt>
+and other routes which would override the routes.
+If we wanted to allow REST access to a recipe database, we&#8217;d do
+something like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//In app/Config/routes.php...</span>
+
+<span class="nx">Router</span><span class="o">::</span><span class="na">mapResources</span><span class="p">(</span><span class="s1">&#39;recipes&#39;</span><span class="p">);</span>
+<span class="nx">Router</span><span class="o">::</span><span class="na">parseExtensions</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The first line sets up a number of default routes for easy REST access while
+<tt class="docutils literal"><span class="pre">parseExtensions()</span></tt> method specifies the desired result format (e.g. xml,
+json, rss). These routes are HTTP Request Method sensitive.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="34%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">HTTP format</th>
+<th class="head">URL format</th>
+<th class="head">Controller action invoked</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GET</td>
+<td>/recipes.format</td>
+<td>RecipesController::index()</td>
+</tr>
+<tr class="row-odd"><td>GET</td>
+<td>/recipes/123.format</td>
+<td>RecipesController::view(123)</td>
+</tr>
+<tr class="row-even"><td>POST</td>
+<td>/recipes.format</td>
+<td>RecipesController::add()</td>
+</tr>
+<tr class="row-odd"><td>POST</td>
+<td>/recipes/123.format</td>
+<td>RecipesController::edit(123)</td>
+</tr>
+<tr class="row-even"><td>PUT</td>
+<td>/recipes/123.format</td>
+<td>RecipesController::edit(123)</td>
+</tr>
+<tr class="row-odd"><td>DELETE</td>
+<td>/recipes/123.format</td>
+<td>RecipesController::delete(123)</td>
+</tr>
+</tbody>
+</table>
+<p>CakePHP&#8217;s Router class uses a number of different indicators to
+detect the HTTP method being used. Here they are in order of
+preference:</p>
+<ol class="arabic simple">
+<li>The <em>_method</em> POST variable</li>
+<li>The X_HTTP_METHOD_OVERRIDE</li>
+<li>The REQUEST_METHOD header</li>
+</ol>
+<p>The <em>_method</em> POST variable is helpful in using a browser as a
+REST client (or anything else that can do POST easily). Just set
+the value of _method to the name of the HTTP request method you
+wish to emulate.</p>
+<p>Once the router has been set up to map REST requests to certain
+controller actions, we can move on to creating the logic in our
+controller actions. A basic controller might look something like
+this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Controller/RecipesController.php</span>
+<span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;RequestHandler&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$recipes</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;recipes&#39;</span> <span class="o">=&gt;</span> <span class="nv">$recipes</span><span class="p">,</span>
+            <span class="s1">&#39;_serialize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;recipes&#39;</span><span class="p">)</span>
+        <span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$recipe</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">findById</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;recipe&#39;</span> <span class="o">=&gt;</span> <span class="nv">$recipe</span><span class="p">,</span>
+            <span class="s1">&#39;_serialize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;recipe&#39;</span><span class="p">)</span>
+        <span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;Saved&#39;</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;Error&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="nv">$message</span><span class="p">,</span>
+            <span class="s1">&#39;_serialize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">)</span>
+        <span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">edit</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="nv">$id</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;Saved&#39;</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;Error&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="nv">$message</span><span class="p">,</span>
+            <span class="s1">&#39;_serialize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">)</span>
+        <span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;Deleted&#39;</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;Error&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="nv">$message</span><span class="p">,</span>
+            <span class="s1">&#39;_serialize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">)</span>
+        <span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Since we&#8217;ve added a call to <a class="reference internal" href="routing.html#Router::parseExtensions" title="Router::parseExtensions"><tt class="xref php php-meth docutils literal"><span class="pre">Router::parseExtensions()</span></tt></a>,
+the CakePHP router is already primed to serve up different views based on
+different kinds of requests. Since we&#8217;re dealing with REST
+requests, we&#8217;ll be making XML views. You can also easily make JSON views using
+CakePHP&#8217;s built-in <a class="reference internal" href="../views/json-and-xml-views.html"><em>JSON and XML views</em></a>. By using the built in
+<a class="reference internal" href="../views/json-and-xml-views.html#XmlView" title="XmlView"><tt class="xref php php-class docutils literal"><span class="pre">XmlView</span></tt></a> we can define a <tt class="docutils literal"><span class="pre">_serialize</span></tt> view variable. This special
+view variable is used to define which view variables <tt class="docutils literal"><span class="pre">XmlView</span></tt> should
+serialize into XML.</p>
+<p>If we wanted to modify the data before it is converted into XML we should not
+define the <tt class="docutils literal"><span class="pre">_serialize</span></tt> view variable, and instead use view files. We place
+the REST views for our RecipesController inside <tt class="docutils literal"><span class="pre">app/View/recipes/xml</span></tt>. We can also use
+the <a class="reference internal" href="../core-utility-libraries/xml.html#Xml" title="Xml"><tt class="xref php php-class docutils literal"><span class="pre">Xml</span></tt></a> for quick-and-easy XML output in those views. Here&#8217;s what
+our index view might look like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/View/Recipes/xml/index.ctp</span>
+<span class="c1">// Do some formatting and manipulation on</span>
+<span class="c1">// the $recipes array.</span>
+<span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">fromArray</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;response&#39;</span> <span class="o">=&gt;</span> <span class="nv">$recipes</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$xml</span><span class="o">-&gt;</span><span class="na">asXML</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>When serving up a specific content type using parseExtensions(),
+CakePHP automatically looks for a view helper that matches the type.
+Since we&#8217;re using XML as the content type, there is no built-in helper,
+however if you were to create one it would automatically be loaded
+for our use in those views.</p>
+<p>The rendered XML will end up looking something like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">recipes</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">recipe</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;234&quot;</span> <span class="nx">created</span><span class="o">=</span><span class="s2">&quot;2008-06-13&quot;</span> <span class="nx">modified</span><span class="o">=</span><span class="s2">&quot;2008-06-14&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">author</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;23423&quot;</span> <span class="nx">first_name</span><span class="o">=</span><span class="s2">&quot;Billy&quot;</span> <span class="nx">last_name</span><span class="o">=</span><span class="s2">&quot;Bob&quot;</span><span class="o">&gt;&lt;/</span><span class="nx">author</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">comment</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;245&quot;</span> <span class="nx">body</span><span class="o">=</span><span class="s2">&quot;Yummy yummmy&quot;</span><span class="o">&gt;&lt;/</span><span class="nx">comment</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="nx">recipe</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">recipe</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;3247&quot;</span> <span class="nx">created</span><span class="o">=</span><span class="s2">&quot;2008-06-15&quot;</span> <span class="nx">modified</span><span class="o">=</span><span class="s2">&quot;2008-06-15&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">author</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;625&quot;</span> <span class="nx">first_name</span><span class="o">=</span><span class="s2">&quot;Nate&quot;</span> <span class="nx">last_name</span><span class="o">=</span><span class="s2">&quot;Johnson&quot;</span><span class="o">&gt;&lt;/</span><span class="nx">author</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">comment</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;654&quot;</span> <span class="nx">body</span><span class="o">=</span><span class="s2">&quot;This is a comment for this tasty dish.&quot;</span><span class="o">&gt;&lt;/</span><span class="nx">comment</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="nx">recipe</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="nx">recipes</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Creating the logic for the edit action is a bit trickier, but not
+by much. Since you&#8217;re providing an API that outputs XML, it&#8217;s a
+natural choice to receive XML as input. Not to worry, the
+<tt class="xref php php-class docutils literal"><span class="pre">RequestHandler</span></tt> and <a class="reference internal" href="routing.html#Router" title="Router"><tt class="xref php php-class docutils literal"><span class="pre">Router</span></tt></a> classes make
+things much easier. If a POST or PUT request has an XML content-type,
+then the input is run through  CakePHP&#8217;s <a class="reference internal" href="../core-utility-libraries/xml.html#Xml" title="Xml"><tt class="xref php php-class docutils literal"><span class="pre">Xml</span></tt></a> class, and the
+array representation of the data is assigned to <cite>$this-&gt;request-&gt;data</cite>.
+Because of this feature, handling XML and POST data in parallel
+is seamless: no changes are required to the controller or model code.
+Everything you need should end up in <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt>.</p>
+</div>
+<div class="section" id="accepting-input-in-other-formats">
+<h2>Accepting Input in Other Formats<a class="headerlink" href="#accepting-input-in-other-formats" title="Permalink to this headline">¶</a></h2>
+<p>Typically REST applications not only output content in alternate data formats,
+but also accept data in different formats. In CakePHP, the
+<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a> helps facilitate this. By default,
+it will decode any incoming JSON/XML input data for POST/PUT requests
+and supply the array version of that data in <cite>$this-&gt;request-&gt;data</cite>.
+You can also wire in additional deserializers for alternate formats if you
+need them, using <tt class="xref php php-meth docutils literal"><span class="pre">RequestHandler::addInputType()</span></tt>.</p>
+</div>
+<div class="section" id="modifying-the-default-rest-routes">
+<h2>Modifying the default REST routes<a class="headerlink" href="#modifying-the-default-rest-routes" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.1.</span></p>
+</div>
+<p>If the default REST routes don&#8217;t work for your application, you can modify them
+using <tt class="xref php php-meth docutils literal"><span class="pre">Router::resourceMap()</span></tt>. This method allows you to set the
+default routes that get set with <a class="reference internal" href="routing.html#Router::mapResources" title="Router::mapResources"><tt class="xref php php-meth docutils literal"><span class="pre">Router::mapResources()</span></tt></a>. When using
+this method you need to set <em>all</em> the defaults you want to use:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">resourceMap</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;PUT&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;DELETE&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>By overwriting the default resource map, future calls to <tt class="docutils literal"><span class="pre">mapResources()</span></tt> will
+use the new values.</p>
+</div>
+<div class="section" id="custom-rest-routing">
+<span id="id1"></span><h2>Custom REST Routing<a class="headerlink" href="#custom-rest-routing" title="Permalink to this headline">¶</a></h2>
+<p>If the default routes created by <a class="reference internal" href="routing.html#Router::mapResources" title="Router::mapResources"><tt class="xref php php-meth docutils literal"><span class="pre">Router::mapResources()</span></tt></a> don&#8217;t work
+for you, use the <a class="reference internal" href="routing.html#Router::connect" title="Router::connect"><tt class="xref php php-meth docutils literal"><span class="pre">Router::connect()</span></tt></a> method to define a custom set of
+REST routes. The <tt class="docutils literal"><span class="pre">connect()</span></tt> method allows you to define a number of different
+options for a given URL. See the section on <a class="reference internal" href="routing.html#route-conditions"><em>Using Additional Conditions When Matching Routes</em></a> for more information.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.5.</span></p>
+</div>
+<p>You can provide <tt class="docutils literal"><span class="pre">connectOptions</span></tt> key in the <tt class="docutils literal"><span class="pre">$options</span></tt> array for
+<a class="reference internal" href="routing.html#Router::mapResources" title="Router::mapResources"><tt class="xref php php-meth docutils literal"><span class="pre">Router::mapResources()</span></tt></a> to provide custom setting used by
+<a class="reference internal" href="routing.html#Router::connect" title="Router::connect"><tt class="xref php php-meth docutils literal"><span class="pre">Router::connect()</span></tt></a>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">mapResources</span><span class="p">(</span><span class="s1">&#39;books&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;connectOptions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;routeClass&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ApiRoute&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sessions.html">Sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">REST</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dispatch-filters.html">Dispatcher Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">REST</a><ul>
+<li><a class="reference internal" href="#the-simple-setup">The Simple Setup</a></li>
+<li><a class="reference internal" href="#accepting-input-in-other-formats">Accepting Input in Other Formats</a></li>
+<li><a class="reference internal" href="#modifying-the-default-rest-routes">Modifying the default REST routes</a></li>
+<li><a class="reference internal" href="#custom-rest-routing">Custom REST Routing</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="dispatch-filters.html" title="Dispatcher Filters" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="testing.html" title="Testing" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

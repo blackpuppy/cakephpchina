@@ -1,0 +1,692 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.3 Migration Guide &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Appendices" href="../appendices.html" />
+    <link rel="next" title="2.2 Migration Guide" href="2-2-migration-guide.html" />
+    <link rel="prev" title="2.4 Migration Guide" href="2-4-migration-guide.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/appendices/2-3-migration-guide.html" /><link rel="alternate" hreflang="es" href="../../es/appendices/2-3-migration-guide.html" /><link rel="alternate" hreflang="ja" href="../../ja/appendices/2-3-migration-guide.html" /><link rel="alternate" hreflang="fr" href="../../fr/appendices/2-3-migration-guide.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/appendices/2-3-migration-guide.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../appendices.html" accesskey="U" itemprop="url"><span itemprop="title">Appendices</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/appendices/2-3-migration-guide.html">pt</a></li>
+				
+					<li><a href="../../es/appendices/2-3-migration-guide.html">es</a></li>
+				
+					<li><a href="../../ja/appendices/2-3-migration-guide.html">ja</a></li>
+				
+					<li><a href="../../fr/appendices/2-3-migration-guide.html">fr</a></li>
+				
+					<li><a href="../../zh/appendices/2-3-migration-guide.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/appendices/2-3-migration-guide.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="migration-guide">
+<h1>2.3 Migration Guide<a class="headerlink" href="#migration-guide" title="Permalink to this headline">¶</a></h1>
+<p>CakePHP 2.3 is a fully API compatible upgrade from 2.2. This page outlines
+the changes and improvements made in 2.3.</p>
+<div class="section" id="constants">
+<h2>Constants<a class="headerlink" href="#constants" title="Permalink to this headline">¶</a></h2>
+<p>An application can now easily define <a class="reference internal" href="../core-libraries/global-constants-and-functions.html#CACHE" title="CACHE"><tt class="xref php php-const docutils literal"><span class="pre">CACHE</span></tt></a> and <a class="reference internal" href="../core-libraries/global-constants-and-functions.html#LOGS" title="LOGS"><tt class="xref php php-const docutils literal"><span class="pre">LOGS</span></tt></a>,
+as they are conditionally defined by CakePHP now.</p>
+</div>
+<div class="section" id="caching">
+<h2>Caching<a class="headerlink" href="#caching" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>FileEngine is always the default cache engine. In the past a number of people
+had difficulty setting up and deploying APC correctly both in cli + web.
+Using files should make setting up CakePHP simpler for new developers.</li>
+<li><cite>Configure::write(&#8216;Cache.viewPrefix&#8217;, &#8216;YOURPREFIX&#8217;);</cite> has been added to <cite>core.php</cite>
+to allow multiple domains/languages per setup.</li>
+</ul>
+</div>
+<div class="section" id="component">
+<h2>Component<a class="headerlink" href="#component" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="authcomponent">
+<h3>AuthComponent<a class="headerlink" href="#authcomponent" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>A new property <tt class="docutils literal"><span class="pre">AuthComponent::$unauthorizedRedirect</span></tt> has been added.<ul>
+<li>For default <tt class="docutils literal"><span class="pre">true</span></tt> value user is redirected to referrer URL upon authorization failure.</li>
+<li>If set to a string or array user is redirected to that URL.</li>
+<li>If set to false a ForbiddenException exception is thrown instead of redirecting.</li>
+</ul>
+</li>
+<li>A new authenticate adapter has been added to support blowfish/bcrypt hashed
+passwords. You can now use <tt class="docutils literal"><span class="pre">Blowfish</span></tt> in your <tt class="docutils literal"><span class="pre">$authenticate</span></tt> array to
+allow bcrypt passwords to be used.</li>
+<li><a class="reference internal" href="../core-libraries/components/authentication.html#AuthComponent::redirect" title="AuthComponent::redirect"><tt class="xref php php-meth docutils literal"><span class="pre">AuthComponent::redirect()</span></tt></a> has been deprecated.
+Use <a class="reference internal" href="../core-libraries/components/authentication.html#AuthComponent::redirectUrl" title="AuthComponent::redirectUrl"><tt class="xref php php-meth docutils literal"><span class="pre">AuthComponent::redirectUrl()</span></tt></a> instead.</li>
+</ul>
+</div>
+<div class="section" id="paginatorcomponent">
+<h3>PaginatorComponent<a class="headerlink" href="#paginatorcomponent" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>PaginatorComponent now supports the <tt class="docutils literal"><span class="pre">findType</span></tt> option. This can be used to
+specify what find method you want used for pagination. This is a bit easier
+to manage and set than the 0&#8217;th index.</li>
+<li>PaginatorComponent now throws a <cite>NotFoundException</cite> when trying to access a page
+which is out of range (i.e. requested page is greater than total page count).</li>
+</ul>
+</div>
+<div class="section" id="securitycomponent">
+<h3>SecurityComponent<a class="headerlink" href="#securitycomponent" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>SecurityComponent now supports the <tt class="docutils literal"><span class="pre">unlockedActions</span></tt> option. This can be used to
+disable all security checks for any actions listed in this option.</li>
+</ul>
+</div>
+<div class="section" id="requesthandlercomponent">
+<h3>RequestHandlerComponent<a class="headerlink" href="#requesthandlercomponent" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent::viewClassMap" title="RequestHandlerComponent::viewClassMap"><tt class="xref php php-meth docutils literal"><span class="pre">RequestHandlerComponent::viewClassMap()</span></tt></a> has been added, which is used to map a type
+to view class name. You can add <tt class="docutils literal"><span class="pre">$settings['viewClassMap']</span></tt> for automatically setting
+the correct viewClass based on extension/content type.</li>
+</ul>
+</div>
+<div class="section" id="cookiecomponent">
+<h3>CookieComponent<a class="headerlink" href="#cookiecomponent" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../core-libraries/components/cookie.html#CookieComponent::check" title="CookieComponent::check"><tt class="xref php php-meth docutils literal"><span class="pre">CookieComponent::check()</span></tt></a> was added. This method works the same as
+<tt class="xref php php-meth docutils literal"><span class="pre">CakeSession::check()</span></tt> does.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="console">
+<h2>Console<a class="headerlink" href="#console" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The <tt class="docutils literal"><span class="pre">server</span></tt> shell was added. You can use this to start the PHP5.4
+webserver for your CakePHP application.</li>
+<li>Baking a new project now sets the application&#8217;s cache prefix to the name of
+the application.</li>
+</ul>
+</div>
+<div class="section" id="i18n">
+<h2>I18n<a class="headerlink" href="#i18n" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="l10n">
+<h3>L10n<a class="headerlink" href="#l10n" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">nld</span></tt> is now the default locale for Dutch as specified by ISO 639-3 and <tt class="docutils literal"><span class="pre">dut</span></tt> its alias.
+The locale folders have to be adjusted accordingly (from <cite>/Locale/dut/</cite> to <cite>/Locale/nld/</cite>).</li>
+<li>Albanian is now <tt class="docutils literal"><span class="pre">sqi</span></tt>, Basque is now <tt class="docutils literal"><span class="pre">eus</span></tt>, Chinese is now <tt class="docutils literal"><span class="pre">zho</span></tt>, Tibetan is now <tt class="docutils literal"><span class="pre">bod</span></tt>,
+Czech is now <tt class="docutils literal"><span class="pre">ces</span></tt>, Farsi is now <tt class="docutils literal"><span class="pre">fas</span></tt>, French is now <tt class="docutils literal"><span class="pre">fra</span></tt>, Icelandic is now <tt class="docutils literal"><span class="pre">isl</span></tt>,
+Macedonian is now <tt class="docutils literal"><span class="pre">mkd</span></tt>, Malaysian is now <tt class="docutils literal"><span class="pre">msa</span></tt>, Romanian is now <tt class="docutils literal"><span class="pre">ron</span></tt>, Serbian is now <tt class="docutils literal"><span class="pre">srp</span></tt>
+and Slovak is now <tt class="docutils literal"><span class="pre">slk</span></tt>. The corresponding locale folders have to be adjusted, as well.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="core">
+<h2>Core<a class="headerlink" href="#core" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cakeplugin">
+<h3>CakePlugin<a class="headerlink" href="#cakeplugin" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><tt class="xref php php-meth docutils literal"><span class="pre">CakePlugin::load()</span></tt> can now take a new <tt class="docutils literal"><span class="pre">ignoreMissing</span></tt> option. Setting it to true will
+prevent file include errors when you try to load routes or bootstrap but they don&#8217;t exist for a plugin.
+So essentially you can now use the following statement which will load all plugins and their routes and
+bootstrap for whatever plugin it can find::
+<tt class="docutils literal"><span class="pre">CakePlugin::loadAll(array(array('routes'</span> <span class="pre">=&gt;</span> <span class="pre">true,</span> <span class="pre">'bootstrap'</span> <span class="pre">=&gt;</span> <span class="pre">true,</span> <span class="pre">'ignoreMissing'</span> <span class="pre">=&gt;</span> <span class="pre">true)))</span></tt></li>
+</ul>
+</div>
+<div class="section" id="configure">
+<h3>Configure<a class="headerlink" href="#configure" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../development/configuration.html#Configure::check" title="Configure::check"><tt class="xref php php-meth docutils literal"><span class="pre">Configure::check()</span></tt></a> was added. This method works the same as
+<tt class="xref php php-meth docutils literal"><span class="pre">CakeSession::check()</span></tt> does.</li>
+<li><a class="reference internal" href="../development/configuration.html#ConfigReaderInterface::dump" title="ConfigReaderInterface::dump"><tt class="xref php php-meth docutils literal"><span class="pre">ConfigReaderInterface::dump()</span></tt></a> was added. Please ensure any custom readers you have now
+implement a <tt class="docutils literal"><span class="pre">dump()</span></tt> method.</li>
+<li>The <tt class="docutils literal"><span class="pre">$key</span></tt> parameter of <tt class="xref php php-meth docutils literal"><span class="pre">IniReader::dump()</span></tt> now supports keys like <cite>PluginName.keyname</cite>
+similar to <tt class="docutils literal"><span class="pre">PhpReader::dump()</span></tt>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="error">
+<h2>Error<a class="headerlink" href="#error" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="exceptions">
+<h3>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>CakeBaseException was added, which all core Exceptions now extend. The base exception
+class also introduces the <tt class="docutils literal"><span class="pre">responseHeader()</span></tt> method which can be called on created Exception instances
+to add headers for the response, as Exceptions don&#8217;t reuse any response instance.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Support for the biginteger type was added to all core datasources, and
+fixtures.</li>
+<li>Support for <tt class="docutils literal"><span class="pre">FULLTEXT</span></tt> indexes was added for the MySQL driver.</li>
+</ul>
+<div class="section" id="models">
+<h3>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">Model::find('list')</span></tt> now sets the <tt class="docutils literal"><span class="pre">recursive</span></tt> based on the max
+containment depth or recursive value. When list is used with
+ContainableBehavior.</li>
+<li><tt class="docutils literal"><span class="pre">Model::find('first')</span></tt> will now return an empty array when no records are found.</li>
+</ul>
+</div>
+<div class="section" id="validation">
+<h3>Validation<a class="headerlink" href="#validation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Missing validation methods will <strong>always</strong> trigger errors now instead of
+only in development mode.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="network">
+<h2>Network<a class="headerlink" href="#network" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="smtptransport">
+<h3>SmtpTransport<a class="headerlink" href="#smtptransport" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>TLS/SSL support was added for SMTP connections.</li>
+</ul>
+</div>
+<div class="section" id="cakerequest">
+<h3>CakeRequest<a class="headerlink" href="#cakerequest" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../controllers/request-response.html#CakeRequest::onlyAllow" title="CakeRequest::onlyAllow"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::onlyAllow()</span></tt></a> was added.</li>
+<li><a class="reference internal" href="../controllers/request-response.html#CakeRequest::query" title="CakeRequest::query"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::query()</span></tt></a> was added.</li>
+</ul>
+</div>
+<div class="section" id="cakeresponse">
+<h3>CakeResponse<a class="headerlink" href="#cakeresponse" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../controllers/request-response.html#CakeResponse::file" title="CakeResponse::file"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::file()</span></tt></a> was added.</li>
+<li>The content types <cite>application/javascript</cite>, <cite>application/xml</cite>,
+<cite>application/rss+xml</cite> now also send the application charset.</li>
+</ul>
+</div>
+<div class="section" id="cakeemail">
+<h3>CakeEmail<a class="headerlink" href="#cakeemail" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The <tt class="docutils literal"><span class="pre">contentDisposition</span></tt> option was added to
+<a class="reference internal" href="../core-utility-libraries/email.html#CakeEmail::attachments" title="CakeEmail::attachments"><tt class="xref php php-meth docutils literal"><span class="pre">CakeEmail::attachments()</span></tt></a>. This allows you to disable the
+Content-Disposition header added to attached files.</li>
+</ul>
+</div>
+<div class="section" id="httpsocket">
+<h3>HttpSocket<a class="headerlink" href="#httpsocket" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../core-utility-libraries/httpsocket.html#HttpSocket" title="HttpSocket"><tt class="xref php php-class docutils literal"><span class="pre">HttpSocket</span></tt></a> now verifies SSL certificates by default. If you are
+using self-signed certificates or connecting through proxies you may need to
+use some of the new options to augment this behavior. See
+<a class="reference internal" href="../core-utility-libraries/httpsocket.html#http-socket-ssl-options"><em>Handling SSL certificates</em></a> for more information.</li>
+<li><tt class="docutils literal"><span class="pre">HttpResponse</span></tt> was renamed to <tt class="docutils literal"><span class="pre">HttpSocketResponse</span></tt>. This
+avoids a common issue with the HTTP PECL extension. There is an
+<tt class="docutils literal"><span class="pre">HttpResponse</span></tt> class provided as well for compatibility reasons.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="routing">
+<h2>Routing<a class="headerlink" href="#routing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="router">
+<h3>Router<a class="headerlink" href="#router" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Support for <tt class="docutils literal"><span class="pre">tel:</span></tt>, <tt class="docutils literal"><span class="pre">sms:</span></tt> were added to <a class="reference internal" href="../development/routing.html#Router::url" title="Router::url"><tt class="xref php php-meth docutils literal"><span class="pre">Router::url()</span></tt></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="view">
+<h2>View<a class="headerlink" href="#view" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>MediaView is deprecated, and you can use new features in
+<a class="reference internal" href="../controllers/request-response.html#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> to achieve the same results.</li>
+<li>Serialization in Json and Xml views has been moved to <tt class="docutils literal"><span class="pre">_serialize()</span></tt></li>
+<li>beforeRender and afterRender callbacks are now being called in Json and Xml
+views when using view templates.</li>
+<li><a class="reference internal" href="../views.html#View::fetch" title="View::fetch"><tt class="xref php php-meth docutils literal"><span class="pre">View::fetch()</span></tt></a> now has a <tt class="docutils literal"><span class="pre">$default</span></tt> argument. This argument can
+be used to provide a default value should a block be empty.</li>
+<li><a class="reference internal" href="../views.html#View::prepend" title="View::prepend"><tt class="xref php php-meth docutils literal"><span class="pre">View::prepend()</span></tt></a> has been added to allow prepending content to
+existing block.</li>
+<li><a class="reference internal" href="../views/json-and-xml-views.html#XmlView" title="XmlView"><tt class="xref php php-class docutils literal"><span class="pre">XmlView</span></tt></a> now uses the <tt class="docutils literal"><span class="pre">_rootNode</span></tt> view variable to customize the
+top level XML node.</li>
+<li><tt class="xref php php-meth docutils literal"><span class="pre">View::elementExists()</span></tt> was added. You can use this method to check
+if elements exist before using them.</li>
+<li><a class="reference internal" href="../views.html#View::element" title="View::element"><tt class="xref php php-meth docutils literal"><span class="pre">View::element()</span></tt></a> had the <tt class="docutils literal"><span class="pre">ignoreMissing</span></tt> option added. You can
+use this to suppress the errors triggered by missing view elements.</li>
+<li><a class="reference internal" href="../views.html#View::startIfEmpty" title="View::startIfEmpty"><tt class="xref php php-meth docutils literal"><span class="pre">View::startIfEmpty()</span></tt></a> was added.</li>
+</ul>
+<div class="section" id="layout">
+<h3>Layout<a class="headerlink" href="#layout" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The doctype for layout files in the app folder and the bake templates in the
+cake package has been changed from XHTML to HTML5.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="helpers">
+<h2>Helpers<a class="headerlink" href="#helpers" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>New property <tt class="docutils literal"><span class="pre">Helper::$settings</span></tt> has been added for your helper setting. The
+<tt class="docutils literal"><span class="pre">$settings</span></tt> parameter of <tt class="docutils literal"><span class="pre">Helper::__construct()</span></tt> is merged with
+<tt class="docutils literal"><span class="pre">Helper::$settings</span></tt>.</li>
+</ul>
+<div class="section" id="formhelper">
+<h3>FormHelper<a class="headerlink" href="#formhelper" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../core-libraries/helpers/form.html#FormHelper::select" title="FormHelper::select"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::select()</span></tt></a> now accepts a list of values in the disabled
+attribute. Combined with <tt class="docutils literal"><span class="pre">'multiple'</span> <span class="pre">=&gt;</span> <span class="pre">'checkbox'</span></tt>, this allows you to
+provide a list of values you want disabled.</li>
+<li><a class="reference internal" href="../core-libraries/helpers/form.html#FormHelper::postLink" title="FormHelper::postLink"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::postLink()</span></tt></a> now accepts a <tt class="docutils literal"><span class="pre">method</span></tt> key. This allows
+you to create link forms using HTTP methods other than POST.</li>
+<li>When creating inputs with <a class="reference internal" href="../core-libraries/helpers/form.html#FormHelper::input" title="FormHelper::input"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::input()</span></tt></a> you can now set the
+<tt class="docutils literal"><span class="pre">errorMessage</span></tt> option to false. This will disable the error message display,
+but leave the error class names intact.</li>
+<li>The FormHelper now also adds the HTML5 <tt class="docutils literal"><span class="pre">required</span></tt> attribute to your input
+elements based on validation rules for a field. If you have a &#8220;Cancel&#8221; button
+in your form which submits the form then you should add <tt class="docutils literal"><span class="pre">'formnovalidate'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt>
+to your button options to prevent the triggering of validation in HTML. You
+can also prevent the validation triggering for the whole form by adding
+<tt class="docutils literal"><span class="pre">'novalidate'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt> in your FormHelper::create() options.</li>
+<li><a class="reference internal" href="../core-libraries/helpers/form.html#FormHelper::input" title="FormHelper::input"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::input()</span></tt></a> now generates input elements of type <tt class="docutils literal"><span class="pre">tel</span></tt>
+and <tt class="docutils literal"><span class="pre">email</span></tt> based on field names if <tt class="docutils literal"><span class="pre">type</span></tt> option is not specified.</li>
+</ul>
+</div>
+<div class="section" id="htmlhelper">
+<h3>HtmlHelper<a class="headerlink" href="#htmlhelper" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../core-libraries/helpers/html.html#HtmlHelper::getCrumbList" title="HtmlHelper::getCrumbList"><tt class="xref php php-meth docutils literal"><span class="pre">HtmlHelper::getCrumbList()</span></tt></a> now has the <tt class="docutils literal"><span class="pre">separator</span></tt>,
+<tt class="docutils literal"><span class="pre">firstClass</span></tt> and <tt class="docutils literal"><span class="pre">lastClass</span></tt> options. These allow you to better control
+the HTML this method generates.</li>
+</ul>
+</div>
+<div class="section" id="texthelper">
+<h3>TextHelper<a class="headerlink" href="#texthelper" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../core-libraries/helpers/text.html#TextHelper::tail" title="TextHelper::tail"><tt class="xref php php-meth docutils literal"><span class="pre">TextHelper::tail()</span></tt></a> was added to truncate text starting from the end.</li>
+<li><cite>ending</cite> in <a class="reference internal" href="../core-libraries/helpers/text.html#TextHelper::truncate" title="TextHelper::truncate"><tt class="xref php php-meth docutils literal"><span class="pre">TextHelper::truncate()</span></tt></a> is deprecated in favor of <cite>ellipsis</cite></li>
+</ul>
+</div>
+<div class="section" id="paginatorhelper">
+<h3>PaginatorHelper<a class="headerlink" href="#paginatorhelper" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../core-libraries/helpers/paginator.html#PaginatorHelper::numbers" title="PaginatorHelper::numbers"><tt class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::numbers()</span></tt></a> now has a new option <tt class="docutils literal"><span class="pre">currentTag</span></tt> to
+allow specifying extra tag for wrapping current page number.</li>
+<li>For methods: <a class="reference internal" href="../core-libraries/helpers/paginator.html#PaginatorHelper::prev" title="PaginatorHelper::prev"><tt class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::prev()</span></tt></a> and <a class="reference internal" href="../core-libraries/helpers/paginator.html#PaginatorHelper::next" title="PaginatorHelper::next"><tt class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::next()</span></tt></a> it
+is now possible to set the <tt class="docutils literal"><span class="pre">tag</span></tt> option to <tt class="docutils literal"><span class="pre">false</span></tt> to disable the wrapper.
+Also a new option <cite>disabledTag</cite> has been added for these two methods.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>A core fixture for the default <tt class="docutils literal"><span class="pre">cake_sessions</span></tt> table was added. You can use
+it by adding <tt class="docutils literal"><span class="pre">core.cake_sessions</span></tt> to your fixture list.</li>
+<li><tt class="xref php php-meth docutils literal"><span class="pre">CakeTestCase::getMockForModel()</span></tt> was added. This simplifies getting
+mock objects for models.</li>
+</ul>
+</div>
+<div class="section" id="utility">
+<h2>Utility<a class="headerlink" href="#utility" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cakenumber">
+<h3>CakeNumber<a class="headerlink" href="#cakenumber" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../core-utility-libraries/number.html#CakeNumber::fromReadableSize" title="CakeNumber::fromReadableSize"><tt class="xref php php-meth docutils literal"><span class="pre">CakeNumber::fromReadableSize()</span></tt></a> was added.</li>
+<li><a class="reference internal" href="../core-utility-libraries/number.html#CakeNumber::formatDelta" title="CakeNumber::formatDelta"><tt class="xref php php-meth docutils literal"><span class="pre">CakeNumber::formatDelta()</span></tt></a> was added.</li>
+<li><a class="reference internal" href="../core-utility-libraries/number.html#CakeNumber::defaultCurrency" title="CakeNumber::defaultCurrency"><tt class="xref php php-meth docutils literal"><span class="pre">CakeNumber::defaultCurrency()</span></tt></a> was added.</li>
+</ul>
+</div>
+<div class="section" id="folder">
+<h3>Folder<a class="headerlink" href="#folder" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../core-utility-libraries/file-folder.html#Folder::copy" title="Folder::copy"><tt class="xref php php-meth docutils literal"><span class="pre">Folder::copy()</span></tt></a> and <a class="reference internal" href="../core-utility-libraries/file-folder.html#Folder::move" title="Folder::move"><tt class="xref php php-meth docutils literal"><span class="pre">Folder::move()</span></tt></a> now support the
+ability to merge the target and source directories in addition to
+skip/overwrite.</li>
+</ul>
+</div>
+<div class="section" id="string">
+<h3>String<a class="headerlink" href="#string" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../core-utility-libraries/string.html#String::tail" title="String::tail"><tt class="xref php php-meth docutils literal"><span class="pre">String::tail()</span></tt></a> was added to truncate text starting from the end.</li>
+<li><cite>ending</cite> in <a class="reference internal" href="../core-utility-libraries/string.html#String::truncate" title="String::truncate"><tt class="xref php php-meth docutils literal"><span class="pre">String::truncate()</span></tt></a> is deprecated in favor of <cite>ellipsis</cite></li>
+</ul>
+</div>
+<div class="section" id="debugger">
+<h3>Debugger<a class="headerlink" href="#debugger" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../development/debugging.html#Debugger::exportVar" title="Debugger::exportVar"><tt class="xref php php-meth docutils literal"><span class="pre">Debugger::exportVar()</span></tt></a> now outputs private and protected properties
+in PHP &gt;= 5.3.0.</li>
+</ul>
+</div>
+<div class="section" id="security">
+<h3>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Support for <a class="reference external" href="http://codahale.com/how-to-safely-store-a-password/">bcrypt</a>
+was added. See the <a class="reference internal" href="../core-utility-libraries/security.html#Security::hash" title="Security::hash"><tt class="xref php php-class docutils literal"><span class="pre">Security::hash()</span></tt></a> documentation for more
+information on how to use bcrypt.</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h3>Validation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../models/data-validation.html#Validation::fileSize" title="Validation::fileSize"><tt class="xref php php-meth docutils literal"><span class="pre">Validation::fileSize()</span></tt></a> was added.</li>
+</ul>
+</div>
+<div class="section" id="objectcollection">
+<h3>ObjectCollection<a class="headerlink" href="#objectcollection" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><tt class="xref php php-meth docutils literal"><span class="pre">ObjectCollection::attached()</span></tt> was deprecated in favor of the new
+method <tt class="xref php php-meth docutils literal"><span class="pre">ObjectCollection::loaded()</span></tt>. This unifies the access to the
+ObjectCollection as load()/unload() already replaced attach()/detach().</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../appendices.html">Appendices</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2-7-migration-guide.html">2.7 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-6-migration-guide.html">2.6 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-5-migration-guide.html">2.5 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-4-migration-guide.html">2.4 Migration Guide</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">2.3 Migration Guide</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2-2-migration-guide.html">2.2 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-1-migration-guide.html">2.1 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new-features-in-cakephp-2-1.html">New Features in CakePHP 2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-0-migration-guide.html">2.0 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new-features-in-cakephp-2-0.html">New Features in CakePHP 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phpunit-migration-hints.html">PHPUnit Migration Hints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migrating-from-cakephp-1-2-to-1-3.html">Migrating from CakePHP 1.2 to 1.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new-features-in-cakephp-1-3.html">New features in CakePHP 1.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">2.3 Migration Guide</a><ul>
+<li><a class="reference internal" href="#constants">Constants</a></li>
+<li><a class="reference internal" href="#caching">Caching</a></li>
+<li><a class="reference internal" href="#component">Component</a><ul>
+<li><a class="reference internal" href="#authcomponent">AuthComponent</a></li>
+<li><a class="reference internal" href="#paginatorcomponent">PaginatorComponent</a></li>
+<li><a class="reference internal" href="#securitycomponent">SecurityComponent</a></li>
+<li><a class="reference internal" href="#requesthandlercomponent">RequestHandlerComponent</a></li>
+<li><a class="reference internal" href="#cookiecomponent">CookieComponent</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#console">Console</a></li>
+<li><a class="reference internal" href="#i18n">I18n</a><ul>
+<li><a class="reference internal" href="#l10n">L10n</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#core">Core</a><ul>
+<li><a class="reference internal" href="#cakeplugin">CakePlugin</a></li>
+<li><a class="reference internal" href="#configure">Configure</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#error">Error</a><ul>
+<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#model">Model</a><ul>
+<li><a class="reference internal" href="#models">Models</a></li>
+<li><a class="reference internal" href="#validation">Validation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#network">Network</a><ul>
+<li><a class="reference internal" href="#smtptransport">SmtpTransport</a></li>
+<li><a class="reference internal" href="#cakerequest">CakeRequest</a></li>
+<li><a class="reference internal" href="#cakeresponse">CakeResponse</a></li>
+<li><a class="reference internal" href="#cakeemail">CakeEmail</a></li>
+<li><a class="reference internal" href="#httpsocket">HttpSocket</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#routing">Routing</a><ul>
+<li><a class="reference internal" href="#router">Router</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#view">View</a><ul>
+<li><a class="reference internal" href="#layout">Layout</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#helpers">Helpers</a><ul>
+<li><a class="reference internal" href="#formhelper">FormHelper</a></li>
+<li><a class="reference internal" href="#htmlhelper">HtmlHelper</a></li>
+<li><a class="reference internal" href="#texthelper">TextHelper</a></li>
+<li><a class="reference internal" href="#paginatorhelper">PaginatorHelper</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testing">Testing</a></li>
+<li><a class="reference internal" href="#utility">Utility</a><ul>
+<li><a class="reference internal" href="#cakenumber">CakeNumber</a></li>
+<li><a class="reference internal" href="#folder">Folder</a></li>
+<li><a class="reference internal" href="#string">String</a></li>
+<li><a class="reference internal" href="#debugger">Debugger</a></li>
+<li><a class="reference internal" href="#security">Security</a></li>
+<li><a class="reference internal" href="#id1">Validation</a></li>
+<li><a class="reference internal" href="#objectcollection">ObjectCollection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="2-2-migration-guide.html" title="2.2 Migration Guide" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="2-4-migration-guide.html" title="2.4 Migration Guide" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

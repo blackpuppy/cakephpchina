@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Simple Authentication and Authorization Application" lang="zh_CN" name="title" />
+<meta content="auto increment,authorization application,model user,array,conventions,authentication,urls,cakephp,delete,doc,columns" lang="zh_CN" name="keywords" />
+
+    <title>简单的身份验证和授权应用 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="教程 &amp; 实例" href="../../tutorials-and-examples.html" />
+    <link rel="next" title="简单的 Acl 控制的应用" href="../simple-acl-controlled-application/simple-acl-controlled-application.html" />
+    <link rel="prev" title="博客教程——添加一个层" href="../blog/part-two.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/tutorials-and-examples/blog-auth-example/auth.html" /><link rel="alternate" hreflang="pt" href="../../../pt/tutorials-and-examples/blog-auth-example/auth.html" /><link rel="alternate" hreflang="es" href="../../../es/tutorials-and-examples/blog-auth-example/auth.html" /><link rel="alternate" hreflang="ja" href="../../../ja/tutorials-and-examples/blog-auth-example/auth.html" /><link rel="alternate" hreflang="fr" href="../../../fr/tutorials-and-examples/blog-auth-example/auth.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../tutorials-and-examples.html" accesskey="U" itemprop="url"><span itemprop="title">教程 &amp; 实例</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/tutorials-and-examples/blog-auth-example/auth.html">en</a></li>
+				
+					<li><a href="../../../pt/tutorials-and-examples/blog-auth-example/auth.html">pt</a></li>
+				
+					<li><a href="../../../es/tutorials-and-examples/blog-auth-example/auth.html">es</a></li>
+				
+					<li><a href="../../../ja/tutorials-and-examples/blog-auth-example/auth.html">ja</a></li>
+				
+					<li><a href="../../../fr/tutorials-and-examples/blog-auth-example/auth.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/tutorials-and-examples/blog-auth-example/auth.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>简单的身份验证和授权应用<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>接着我们的 <a class="reference internal" href="../blog/blog.html"><em>博客教程</em></a> 的例子，设想一下我们想要根据
+登录的用户来保护某些网址。我们还有另外一个要求，允许我们的博客应用有多个作者，每
+一位作者都可以创作他们自己的文章(<em>posts</em>)，随意编辑和删除它们，而不允许其他作者
+对自己的文章做任何改动。</p>
+<div class="section" id="id2">
+<h2>创建所有用户的相关代码<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>首先，让我们在博客数据库中新建一个表来保存用户的数据:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">users</span> <span class="p">(</span>
+    <span class="nx">id</span> <span class="nx">INT</span> <span class="nx">UNSIGNED</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
+    <span class="nx">username</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+    <span class="nx">password</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+    <span class="nx">role</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+    <span class="nx">created</span> <span class="nx">DATETIME</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">modified</span> <span class="nx">DATETIME</span> <span class="k">DEFAULT</span> <span class="k">NULL</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>我们遵循 CakePHP 的约定来给表命名，同时我们也利用了另一个约定：在表 users 表中
+使用 username 和 password 列，CakePHP 能够自动配置好实现用户登录的大部分工作。</p>
+<p>下一步是创建 User 模型，负责查询、保存和验证任何用户数据:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Model/User.php</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppModel&#39;</span><span class="p">,</span> <span class="s1">&#39;Model&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;rule&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;notBlank&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;A username is required&#39;</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;rule&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;notBlank&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;A password is required&#39;</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;valid&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;rule&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;inList&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="s1">&#39;author&#39;</span><span class="p">)),</span>
+                <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Please enter a valid role&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;allowEmpty&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>让我们也创建 UsersController 控制器，下面的代码是使用 CakePHP 捆绑的代码生成工具
+生成的基本的 UsersController 类:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/UsersController.php</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppController&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">UsersController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">recursive</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid user&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">findById</span><span class="p">(</span><span class="nv">$id</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;The user has been saved&#39;</span><span class="p">));</span>
+                <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
+            <span class="p">}</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span>
+                <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;The user could not be saved. Please, try again.&#39;</span><span class="p">)</span>
+            <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">edit</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="nv">$id</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid user&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;put&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;The user has been saved&#39;</span><span class="p">));</span>
+                <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
+            <span class="p">}</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span>
+                <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;The user could not be saved. Please, try again.&#39;</span><span class="p">)</span>
+            <span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">findById</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+            <span class="nb">unset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">][</span><span class="s1">&#39;password&#39;</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Prior to 2.5 use</span>
+        <span class="c1">// $this-&gt;request-&gt;onlyAllow(&#39;post&#39;);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">allowMethod</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="nv">$id</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid user&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;User deleted&#39;</span><span class="p">));</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;User was not deleted&#39;</span><span class="p">));</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.5 版更改: </span>自从 2.5 版本起，请使用 <tt class="docutils literal"><span class="pre">CakeRequest::allowMethod()</span></tt> 而不是
+<tt class="docutils literal"><span class="pre">CakeRequest::onlyAllow()</span></tt> (已作废)。</p>
+</div>
+<p>以我们创建博客文章的视图同样的方式，或者使用代码生成工具，我们来实现视图。出于
+这个教程的目的，这里仅展示 add.ctp 视图：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;!-- app/View/Users/add.ctp --&gt;</span>
+<span class="x">&lt;div class=&quot;users form&quot;&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;fieldset&gt;</span>
+<span class="x">        &lt;legend&gt;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Add User&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x">&lt;/legend&gt;</span>
+<span class="x">        </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">);</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;role&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Admin&#39;</span><span class="p">,</span> <span class="s1">&#39;author&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Author&#39;</span><span class="p">)</span>
+        <span class="p">));</span>
+    <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;/fieldset&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Submit&#39;</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>身份验证 (登录和登出)<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>我们现在已经准备好添加我们的认证层了。在 CakePHP 中，这是由
+<a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><tt class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></tt></a> 组件处理的，这个类负责为某些动作要求用户登录，处理
+用户登录和登出，并且授权登录的用户访问他们有权限到达的的动作。</p>
+<p>要添加这个组件到应用程序中，打开 <tt class="docutils literal"><span class="pre">app/Controller/AppController.php</span></tt> 文件，添加
+如下代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/AppController.php</span>
+<span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Session&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;loginRedirect&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span>
+            <span class="p">),</span>
+            <span class="s1">&#39;logoutRedirect&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pages&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;display&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;home&#39;</span>
+            <span class="p">),</span>
+            <span class="s1">&#39;authenticate&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;Form&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                    <span class="s1">&#39;passwordHasher&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Blowfish&#39;</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;view&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">//...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这里没有多少需要配置的，因为我们的 users 表遵循了命名约定。我们只设置了在登录和登出的动作完成之后要加载的网址，在我们的
+例子中，分别是 <tt class="docutils literal"><span class="pre">/posts/</span></tt> 和 <tt class="docutils literal"><span class="pre">/</span></tt> 。</p>
+<p>我们在 <tt class="docutils literal"><span class="pre">beforeFilter</span></tt> 回调函数中所做的是告诉 AuthComponent 组件，在每个控制器
+中所有的 <tt class="docutils literal"><span class="pre">index</span></tt> 和 <tt class="docutils literal"><span class="pre">view</span></tt> 动作中都不需要登录。我们希望我们的访问者不需要在
+网站中注册就能够读取并列出文章。</p>
+<p>现在，我们需要能够注册新用户，保存它们的用户名和密码，而且，更重要的是，哈希
+(<em>hash</em>)他们的密码，这样在我们的数据库中就不是用普通文本形式保存用户的密码了。让
+我们告诉 AuthComponent 组件让未验证的用户访问添加用户函数，并实现登录和登出动作:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/UsersController.php</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
+    <span class="c1">// Allow users to register and logout.</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="s1">&#39;logout&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">login</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">redirectUrl</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid username or password, try again&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">logout</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">logout</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>密码的哈希还没有做，打开 <tt class="docutils literal"><span class="pre">app/Model/User.php</span></tt> 模型文件，添加如下代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Model/User.php</span>
+
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppModel&#39;</span><span class="p">,</span> <span class="s1">&#39;Model&#39;</span><span class="p">);</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;BlowfishPasswordHasher&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller/Component/Auth&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+
+<span class="c1">// ...</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">beforeSave</span><span class="p">(</span><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">alias</span><span class="p">][</span><span class="s1">&#39;password&#39;</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="nv">$passwordHasher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BlowfishPasswordHasher</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">alias</span><span class="p">][</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$passwordHasher</span><span class="o">-&gt;</span><span class="na">hash</span><span class="p">(</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">alias</span><span class="p">][</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ...</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">BlowfishPasswordHasher 类使用更强的哈希算法(bcrypt)，而不是
+SimplePasswordHasher (sha1)，提供用户级的 salt。SimplePasswordHasher 类会在
+CakePHP 3.0 版本中去掉。</p>
+</div>
+<p>所以，现在每次保存用户的时候，都会使用 BlowfishPasswordHasher 类进行哈希。我们还
+缺 login 函数的模板视图文件。打开文件 <tt class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></tt>，添加如下这些
+行：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">//app/View/Users/login.ctp</span>
+
+<span class="x">&lt;div class=&quot;users form&quot;&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">flash</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;fieldset&gt;</span>
+<span class="x">        &lt;legend&gt;</span>
+<span class="x">            </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Please enter your username and password&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">        &lt;/legend&gt;</span>
+<span class="x">        </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">);</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
+    <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;/fieldset&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Login&#39;</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>现在你可以访问 <tt class="docutils literal"><span class="pre">/users/add</span></tt> 网址来注册新用户，并在 <tt class="docutils literal"><span class="pre">/users/login</span></tt> 网址使用新
+创建的凭证登录。也可以试试访问任何其它没有明确允许访问的网址，比如
+<tt class="docutils literal"><span class="pre">/posts/add</span></tt>，你会看到应用程序会自动转向到登录页面。</p>
+<p>就是这样！简单到不可思议。让我们回过头来解释一下发生的事情。<tt class="docutils literal"><span class="pre">beforeFilter</span></tt>
+回调函数告诉 AuthComponent 组件，除了在 AppController 的 <tt class="docutils literal"><span class="pre">beforeFilter</span></tt> 函数中
+已经允许访问的 <tt class="docutils literal"><span class="pre">index</span></tt> 和 <tt class="docutils literal"><span class="pre">view</span></tt> 动作，对 <tt class="docutils literal"><span class="pre">add</span></tt> 动作也不要求登录。</p>
+<p><tt class="docutils literal"><span class="pre">login</span></tt> 动作调用 AuthComponent 组件的 <tt class="docutils literal"><span class="pre">$this-&gt;Auth-&gt;login()</span></tt> 函数，这不需要任何更多的设置，因为，正如之前提到的，我们遵循了约定。即，User
+模型有 username 和 password 列，使用表单提交用户的数据到控制器。这个函数返回登录
+是否成功，如果成功，就重定向用户到在我们把 AuthComponent 组件添加到应用程序中时
+所设置的跳转网址。</p>
+<p>要登出，只需要访问网址 <tt class="docutils literal"><span class="pre">/users/logout</span></tt>，就会重定向用户到先前描述的配置好了的
+logoutUrl。这个网址就是 <tt class="docutils literal"><span class="pre">AuthComponent::logout()</span></tt> 函数成功时返回的结果。</p>
+</div>
+<div class="section" id="id4">
+<h2>权限(谁可以访问什么)<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>前面已经说了，我们要把这个博客应用改成多用户的创作工具，为此，我们需要稍微修改
+posts 表，添加对 User 模型的引用:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">ALTER</span> <span class="nx">TABLE</span> <span class="nx">posts</span> <span class="nx">ADD</span> <span class="nx">COLUMN</span> <span class="nx">user_id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>另外，必须对 PostsController 做一个小改动，在新增的文章中要把当前登录的用户作为
+引用保存:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/PostsController.php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">//Added this line</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;user_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Your post has been saved.&#39;</span><span class="p">));</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>由组件提供的 <tt class="docutils literal"><span class="pre">user()</span></tt> 函数，返回当前登录用户的任何列。我们使用这个方法将数据
+加入请求信息中，来保存。</p>
+<p>让我们增强应用程序的安全性，避免一些作者编辑或删除其他作者的文章。应用的基本规则
+是，管理用户可以访问任何网址，而普通用户(作者角色)只能访问允许的动作。再次打开
+AppController 类，在 Auth 的配置中再添加一些选项:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/AppController.php</span>
+
+<span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Session&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;loginRedirect&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;logoutRedirect&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pages&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;display&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;home&#39;</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;authorize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Controller&#39;</span><span class="p">)</span> <span class="c1">// Added this line</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">isAuthorized</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Admin 可以访问每个动作</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">]</span> <span class="o">===</span> <span class="s1">&#39;admin&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 默认不允许访问</span>
+    <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们只创建了一个非常简单的权限机制。在这个例子中，<tt class="docutils literal"><span class="pre">admin</span></tt> 角色的用户在登录后
+可以访问网站的任何网址，而其余的用户(即角色 <tt class="docutils literal"><span class="pre">author</span></tt>)不能够做任何与未登录的
+用户不同的事情。</p>
+<p>这并不是我们所想要的，所以我们需要为 <tt class="docutils literal"><span class="pre">isAuthorized()</span></tt> 方法提供更多的规则。但
+不是在 AppController 中设置，而是在每个控制器提供这些额外的规则。我们要在
+PostsController 中增加的规则，应当允许作者创建文章，但在作者不匹配时要防止对其
+文章的编辑。打开  <tt class="docutils literal"><span class="pre">PostsController.php</span></tt> 文件，添加如下内容:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/PostsController.php</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">isAuthorized</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 所有注册的用户都能够添加文章</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">action</span> <span class="o">===</span> <span class="s1">&#39;add&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 文章的所有者能够编辑和删除它</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">action</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="s1">&#39;delete&#39;</span><span class="p">)))</span> <span class="p">{</span>
+        <span class="nv">$postId</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">isOwnedBy</span><span class="p">(</span><span class="nv">$postId</span><span class="p">,</span> <span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="k">parent</span><span class="o">::</span><span class="na">isAuthorized</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>现在，如果在父类中已授权该用户，我们就重载 AppController 的 <tt class="docutils literal"><span class="pre">isAuthorized()</span></tt> 方法的调用和内部的检查。如果用户未被授权，则只允许他访问 add 动作，并有条件地
+访问 edit 和 delete 动作。最后要实现的是判断用户是否有权限编辑文章，为此调用
+Post 模型的 <tt class="docutils literal"><span class="pre">isOwnedBy()</span></tt> 方法。通常，最佳实践是尽量把逻辑挪到模型中。下面让
+我们来实现这个函数:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Model/Post.php</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">isOwnedBy</span><span class="p">(</span><span class="nv">$post</span><span class="p">,</span> <span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$post</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="p">))</span> <span class="o">!==</span> <span class="k">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>简单的身份验证和授权教程到这里就结束了。要保护 UsersController 控制器，可以采用
+我们在 PostsController 控制器中的做法。你也可以更有造作性，根据你自己的规则在
+AppController 控制器中添加更普遍的规则。</p>
+<p>如果你需要更多的控制，我们建议你阅读完整的 Auth 组件的指南
+<a class="reference internal" href="../../core-libraries/components/authentication.html"><em>Authentication 认证</em></a>，你可以看到更多该组件的配置，
+创建自定义的 Authorization 类，以及更多信息。</p>
+<div class="section" id="id5">
+<h3>后续阅读的建议<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference internal" href="../../console-and-shells/code-generation-with-bake.html"><em>使用 Bake 来生成代码</em></a> 生成基本的 CRUD 代码</li>
+<li><a class="reference internal" href="../../core-libraries/components/authentication.html"><em>Authentication 认证</em></a>: 用户注册和登录</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../blog/blog.html">博客教程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../blog/part-two.html">博客教程——添加一个层</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">简单的身份验证和授权应用</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../simple-acl-controlled-application/simple-acl-controlled-application.html">简单的 Acl 控制的应用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simple-acl-controlled-application/part-two.html">简单的 Acl 控制的应用 - 第 2 部分</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">简单的身份验证和授权应用</a><ul>
+<li><a class="reference internal" href="#id2">创建所有用户的相关代码</a></li>
+<li><a class="reference internal" href="#id3">身份验证 (登录和登出)</a></li>
+<li><a class="reference internal" href="#id4">权限(谁可以访问什么)</a><ul>
+<li><a class="reference internal" href="#id5">后续阅读的建议</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="../simple-acl-controlled-application/simple-acl-controlled-application.html" title="简单的 Acl 控制的应用" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="../blog/part-two.html" title="博客教程——添加一个层" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

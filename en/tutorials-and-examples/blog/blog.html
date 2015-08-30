@@ -1,0 +1,463 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Blog Tutorial" lang="en" name="title" />
+<meta content="model view controller,object oriented programming,application logic,directory setup,basic knowledge,database server,server configuration,reins,documentroot,readme,repository,web server,productivity,lib,sql,aim,cakephp,servers,apache,downloads" lang="en" name="keywords" />
+
+    <title>Blog Tutorial &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../../index.html" />
+    <link rel="up" title="Tutorials &amp; Examples" href="../../tutorials-and-examples.html" />
+    <link rel="next" title="URL Rewriting" href="../../installation/url-rewriting.html" />
+    <link rel="prev" title="Tutorials &amp; Examples" href="../../tutorials-and-examples.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../../pt/tutorials-and-examples/blog/blog.html" /><link rel="alternate" hreflang="es" href="../../../es/tutorials-and-examples/blog/blog.html" /><link rel="alternate" hreflang="ja" href="../../../ja/tutorials-and-examples/blog/blog.html" /><link rel="alternate" hreflang="fr" href="../../../fr/tutorials-and-examples/blog/blog.html" /><link rel="alternate" hreflang="zh_CN" href="../../../zh/tutorials-and-examples/blog/blog.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../tutorials-and-examples.html" accesskey="U" itemprop="url"><span itemprop="title">Tutorials &amp; Examples</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../../pt/tutorials-and-examples/blog/blog.html">pt</a></li>
+				
+					<li><a href="../../../es/tutorials-and-examples/blog/blog.html">es</a></li>
+				
+					<li><a href="../../../ja/tutorials-and-examples/blog/blog.html">ja</a></li>
+				
+					<li><a href="../../../fr/tutorials-and-examples/blog/blog.html">fr</a></li>
+				
+					<li><a href="../../../zh/tutorials-and-examples/blog/blog.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/tutorials-and-examples/blog/blog.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="blog-tutorial">
+<h1>Blog Tutorial<a class="headerlink" href="#blog-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to CakePHP. You&#8217;re probably checking out this tutorial
+because you want to learn more about how CakePHP works. It&#8217;s our
+aim to increase productivity and make coding more enjoyable: we
+hope you&#8217;ll see this as you dive into the code.</p>
+<p>This tutorial will walk you through the creation of a simple blog
+application. We&#8217;ll be getting and installing CakePHP, creating and
+configuring a database, and creating enough application logic to
+list, add, edit, and delete blog posts.</p>
+<p>Here&#8217;s what you&#8217;ll need:</p>
+<ol class="arabic simple">
+<li>A running web server. We&#8217;re going to assume you&#8217;re using Apache,
+though the instructions for using other servers should be very
+similar. We might have to play a little with the server
+configuration, but most folks can get CakePHP up and running without
+any configuration at all. Make sure you have PHP 5.2.8 or greater.</li>
+<li>A database server. We&#8217;re going to be using MySQL server in this
+tutorial. You&#8217;ll need to know enough about SQL in order to create a
+database: CakePHP will be taking the reins from there. Since we&#8217;re using MySQL,
+also make sure that you have <tt class="docutils literal"><span class="pre">pdo_mysql</span></tt> enabled in PHP.</li>
+<li>Basic PHP knowledge. The more object-oriented programming you&#8217;ve
+done, the better: but fear not if you&#8217;re a procedural fan.</li>
+<li>Finally, you&#8217;ll need a basic knowledge of the MVC programming pattern.
+A quick overview can be found in
+<a class="reference internal" href="../../cakephp-overview/understanding-model-view-controller.html"><em>Understanding Model-View-Controller</em></a>.  Don&#8217;t worry,
+it&#8217;s only half a page or so.</li>
+</ol>
+<p>Let&#8217;s get started!</p>
+<div class="section" id="getting-cakephp">
+<h2>Getting CakePHP<a class="headerlink" href="#getting-cakephp" title="Permalink to this headline">¶</a></h2>
+<p>First, let&#8217;s get a copy of fresh CakePHP code.</p>
+<p>To get a fresh download, visit the CakePHP project on GitHub:
+<a class="reference external" href="https://github.com/cakephp/cakephp/tags">https://github.com/cakephp/cakephp/tags</a>
+and download the latest release of 2.0</p>
+<p>You can also clone the repository using
+<a class="reference external" href="http://git-scm.com/">git</a>.
+<tt class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">git://github.com/cakephp/cakephp.git</span></tt></p>
+<p>Regardless of how you downloaded it, place the code inside of your
+DocumentRoot. Once finished, your directory setup should look
+something like the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">/</span><span class="nx">path_to_document_root</span>
+    <span class="o">/</span><span class="nx">app</span>
+    <span class="o">/</span><span class="nx">lib</span>
+    <span class="o">/</span><span class="nx">plugins</span>
+    <span class="o">/</span><span class="nx">vendors</span>
+    <span class="o">.</span><span class="nx">htaccess</span>
+    <span class="nx">index</span><span class="o">.</span><span class="nx">php</span>
+    <span class="nx">README</span>
+</pre></div>
+</div>
+<p>Now might be a good time to learn a bit about how CakePHP&#8217;s directory
+structure works: check out the
+<a class="reference internal" href="../../getting-started/cakephp-folder-structure.html"><em>CakePHP Folder Structure</em></a> section.</p>
+<div class="section" id="tmp-directory-permissions">
+<h3>Tmp directory permissions<a class="headerlink" href="#tmp-directory-permissions" title="Permalink to this headline">¶</a></h3>
+<p>Next we&#8217;ll need to make the <tt class="docutils literal"><span class="pre">app/tmp</span></tt> directory writable by the webserver.
+The best way to do this is to find out what user your webserver
+runs as. You can run <tt class="docutils literal"><span class="pre">&lt;?php</span> <span class="pre">echo</span> <span class="pre">exec('whoami');</span> <span class="pre">?&gt;</span></tt> inside any PHP file your
+webserver can execute. You should see a username printed. Change the ownership of
+the <tt class="docutils literal"><span class="pre">app/tmp</span></tt> directory to that user. The final command you run
+(in *nix) might look something like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nb">chown</span> <span class="o">-</span><span class="nx">R</span> <span class="nx">www</span><span class="o">-</span><span class="nx">data</span> <span class="nx">app</span><span class="o">/</span><span class="nx">tmp</span>
+</pre></div>
+</div>
+<p>If for some reason CakePHP can&#8217;t write to that directory, you&#8217;ll see
+warnings and uncaught exceptions that cache data cannot be written.</p>
+</div>
+</div>
+<div class="section" id="creating-the-blog-database">
+<h2>Creating the Blog Database<a class="headerlink" href="#creating-the-blog-database" title="Permalink to this headline">¶</a></h2>
+<p>Next, let&#8217;s set up the underlying database for our blog. If you
+haven&#8217;t already done so, create an empty database for use in this
+tutorial, with a name of your choice. Right now, we&#8217;ll just create
+a single table to store our posts. We&#8217;ll also throw in a few posts
+right now to use for testing purposes. Execute the following SQL
+statements into your database:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="cm">/* First, create our posts table: */</span>
+<span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">posts</span> <span class="p">(</span>
+    <span class="nx">id</span> <span class="nx">INT</span> <span class="nx">UNSIGNED</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
+    <span class="nx">title</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+    <span class="nx">body</span> <span class="nx">TEXT</span><span class="p">,</span>
+    <span class="nx">created</span> <span class="nx">DATETIME</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">modified</span> <span class="nx">DATETIME</span> <span class="k">DEFAULT</span> <span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="cm">/* Then insert some posts for testing: */</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="nx">posts</span> <span class="p">(</span><span class="nx">title</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">created</span><span class="p">)</span>
+    <span class="nx">VALUES</span> <span class="p">(</span><span class="s1">&#39;The title&#39;</span><span class="p">,</span> <span class="s1">&#39;This is the post body.&#39;</span><span class="p">,</span> <span class="nx">NOW</span><span class="p">());</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="nx">posts</span> <span class="p">(</span><span class="nx">title</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">created</span><span class="p">)</span>
+    <span class="nx">VALUES</span> <span class="p">(</span><span class="s1">&#39;A title once again&#39;</span><span class="p">,</span> <span class="s1">&#39;And the post body follows.&#39;</span><span class="p">,</span> <span class="nx">NOW</span><span class="p">());</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="nx">posts</span> <span class="p">(</span><span class="nx">title</span><span class="p">,</span> <span class="nx">body</span><span class="p">,</span> <span class="nx">created</span><span class="p">)</span>
+    <span class="nx">VALUES</span> <span class="p">(</span><span class="s1">&#39;Title strikes back&#39;</span><span class="p">,</span> <span class="s1">&#39;This is really exciting! Not.&#39;</span><span class="p">,</span> <span class="nx">NOW</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>The choices on table and column names are not arbitrary. If you
+follow CakePHP&#8217;s database naming conventions, and CakePHP&#8217;s class naming
+conventions (both outlined in
+<a class="reference internal" href="../../getting-started/cakephp-conventions.html"><em>CakePHP Conventions</em></a>), you&#8217;ll be able to take
+advantage of a lot of free functionality and avoid configuration.
+CakePHP is flexible enough to accommodate even the worst legacy
+database schema, but adhering to convention will save you time.</p>
+<p>Check out <a class="reference internal" href="../../getting-started/cakephp-conventions.html"><em>CakePHP Conventions</em></a> for more
+information, but suffice it to say that naming our table &#8216;posts&#8217;
+automatically hooks it to our Post model, and having fields called
+&#8216;modified&#8217; and &#8216;created&#8217; will be automagically managed by CakePHP.</p>
+</div>
+<div class="section" id="cakephp-database-configuration">
+<h2>CakePHP Database Configuration<a class="headerlink" href="#cakephp-database-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Onward and upward: let&#8217;s tell CakePHP where our database is and how to
+connect to it. For many, this is the first and last time you
+configure anything.</p>
+<p>A copy of CakePHP&#8217;s database configuration file is found in
+<tt class="docutils literal"><span class="pre">/app/Config/database.php.default</span></tt>. Make a copy of this file in
+the same directory, but name it <tt class="docutils literal"><span class="pre">database.php</span></tt>.</p>
+<p>The config file should be pretty straightforward: just replace the
+values in the <tt class="docutils literal"><span class="pre">$default</span></tt> array with those that apply to your
+setup. A sample completed configuration array might look something
+like the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$default</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;datasource&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Database/Mysql&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;persistent&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;port&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;login&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cakeBlog&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;c4k3-rUl3Z&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;database&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cake_blog_tutorial&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;schema&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;prefix&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;encoding&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;utf8&#39;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Once you&#8217;ve saved your new <tt class="docutils literal"><span class="pre">database.php</span></tt> file, you should be
+able to open your browser and see the CakePHP welcome page. It should
+also tell you that your database connection file was found, and
+that CakePHP can successfully connect to the database.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Remember that you&#8217;ll need to have PDO, and pdo_mysql enabled in
+your php.ini.</p>
+</div>
+</div>
+<div class="section" id="optional-configuration">
+<h2>Optional Configuration<a class="headerlink" href="#optional-configuration" title="Permalink to this headline">¶</a></h2>
+<p>There are a few other items that can be configured. Most developers
+complete these laundry-list items, but they&#8217;re not required for
+this tutorial. One is defining a custom string (or &#8220;salt&#8221;) for use
+in security hashes. The second is defining a custom number (or
+&#8220;seed&#8221;) for use in encryption.</p>
+<p>The security salt is used for generating hashes. Change the default
+<tt class="docutils literal"><span class="pre">Security.salt</span></tt> value in <tt class="docutils literal"><span class="pre">/app/Config/core.php</span></tt>. The replacement value
+should be long, hard to guess and be as random as you can make it:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="sd">/**</span>
+<span class="sd"> * A random string used in security hashing methods.</span>
+<span class="sd"> */</span>
+<span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Security.salt&#39;</span><span class="p">,</span> <span class="s1">&#39;pl345e-P45s_7h3*S@l7!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The cipher seed is used for encrypt/decrypt strings. Change the default
+<tt class="docutils literal"><span class="pre">Security.cipherSeed</span></tt> value by editing <tt class="docutils literal"><span class="pre">/app/Config/core.php</span></tt>. The
+replacement value should be a large random integer:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="sd">/**</span>
+<span class="sd"> * A random numeric string (digits only) used to encrypt/decrypt strings.</span>
+<span class="sd"> */</span>
+<span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Security.cipherSeed&#39;</span><span class="p">,</span> <span class="s1">&#39;7485712659625147843639846751&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-note-on-mod-rewrite">
+<h2>A Note on mod_rewrite<a class="headerlink" href="#a-note-on-mod-rewrite" title="Permalink to this headline">¶</a></h2>
+<p>Occasionally new users will run into mod_rewrite issues. For example
+if the CakePHP welcome page looks a little funny (no images or CSS styles),
+it probably means mod_rewrite is not functioning on your system. Please refer
+to one of the sections below about URL rewriting for your webserver to get
+you up and running:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/url-rewriting.html">URL Rewriting</a></li>
+</ul>
+</div>
+<p>Now continue to <a class="reference internal" href="part-two.html"><em>Blog Tutorial - Adding a layer</em></a> to start building your first CakePHP application.</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../tutorials-and-examples.html">Tutorials &amp; Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Blog Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/url-rewriting.html">URL Rewriting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="part-two.html">Blog Tutorial - Adding a layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../blog-auth-example/auth.html">Simple Authentication and Authorization Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simple-acl-controlled-application/simple-acl-controlled-application.html">Simple Acl controlled Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simple-acl-controlled-application/part-two.html">Simple Acl controlled Application - part 2</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Blog Tutorial</a><ul>
+<li><a class="reference internal" href="#getting-cakephp">Getting CakePHP</a><ul>
+<li><a class="reference internal" href="#tmp-directory-permissions">Tmp directory permissions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-the-blog-database">Creating the Blog Database</a></li>
+<li><a class="reference internal" href="#cakephp-database-configuration">CakePHP Database Configuration</a></li>
+<li><a class="reference internal" href="#optional-configuration">Optional Configuration</a></li>
+<li><a class="reference internal" href="#a-note-on-mod-rewrite">A Note on mod_rewrite</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="../../installation/url-rewriting.html" title="URL Rewriting" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="../../tutorials-and-examples.html" title="Tutorials &amp; Examples" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

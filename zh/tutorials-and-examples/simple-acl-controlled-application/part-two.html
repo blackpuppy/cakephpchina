@@ -1,0 +1,436 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Simple Acl controlled Application - part 2" lang="zh_CN" name="title" />
+<meta content="shell interface,magic solution,aco,unzipped,config,sync,syntax,cakephp,php,running,acl" lang="zh_CN" name="keywords" />
+
+    <title>简单的 Acl 控制的应用 - 第 2 部分 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="教程 &amp; 实例" href="../../tutorials-and-examples.html" />
+    <link rel="next" title="贡献" href="../../contributing.html" />
+    <link rel="prev" title="简单的 Acl 控制的应用" href="simple-acl-controlled-application.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/tutorials-and-examples/simple-acl-controlled-application/part-two.html" /><link rel="alternate" hreflang="pt" href="../../../pt/tutorials-and-examples/simple-acl-controlled-application/part-two.html" /><link rel="alternate" hreflang="es" href="../../../es/tutorials-and-examples/simple-acl-controlled-application/part-two.html" /><link rel="alternate" hreflang="ja" href="../../../ja/tutorials-and-examples/simple-acl-controlled-application/part-two.html" /><link rel="alternate" hreflang="fr" href="../../../fr/tutorials-and-examples/simple-acl-controlled-application/part-two.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../tutorials-and-examples.html" accesskey="U" itemprop="url"><span itemprop="title">教程 &amp; 实例</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/tutorials-and-examples/simple-acl-controlled-application/part-two.html">en</a></li>
+				
+					<li><a href="../../../pt/tutorials-and-examples/simple-acl-controlled-application/part-two.html">pt</a></li>
+				
+					<li><a href="../../../es/tutorials-and-examples/simple-acl-controlled-application/part-two.html">es</a></li>
+				
+					<li><a href="../../../ja/tutorials-and-examples/simple-acl-controlled-application/part-two.html">ja</a></li>
+				
+					<li><a href="../../../fr/tutorials-and-examples/simple-acl-controlled-application/part-two.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/tutorials-and-examples/simple-acl-controlled-application/part-two.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="acl-2">
+<h1>简单的 Acl 控制的应用 - 第 2 部分<a class="headerlink" href="#acl-2" title="永久链接至标题">¶</a></h1>
+<div class="section" id="aco">
+<h2>创建 ACO 的自动化工具<a class="headerlink" href="#aco" title="永久链接至标题">¶</a></h2>
+<p>正如前面提到的，没有预建的方法把所有的控制器和动作都输入到 Acl 中。然而，我们都
+痛恨重复的工作，比如键入一个大型应用程序中的上百个动作。</p>
+<p>为此，在 Github 中有一个很方便的插件，叫做
+<a class="reference external" href="https://github.com/markstory/acl_extras/">AclExtras</a>，可以在
+<a class="reference external" href="https://github.com/markstory/acl_extras/zipball/master">Github 下载页面</a>
+下载。我们会简要介绍如何使用它来生成所有的 ACO。</p>
+<p>首先，获取一份该插件的拷贝并解压，或者用 git 克隆，放入目录
+<cite>app/Plugin/AclExtras</cite>。然后在 <cite>app/Config/boostrap.php</cite> 文件中启用该插件，如下
+所示:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//app/Config/boostrap.php</span>
+<span class="c1">// ...</span>
+<span class="nx">CakePlugin</span><span class="o">::</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;AclExtras&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>最后，在 CakePHP 终端中执行如下命令:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="nx">aco_sync</span>
+</pre></div>
+</div>
+<p>这样可以获得所有可用命令的完整说明:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="o">-</span><span class="nx">h</span>
+<span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="nx">aco_sync</span> <span class="o">-</span><span class="nx">h</span>
+</pre></div>
+</div>
+<p>一旦填充完 <cite>acos</cite> 表之后，继续创建应用的权限。</p>
+</div>
+<div class="section" id="id1">
+<h2>设置权限<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>创建权限很像创建 ACO，没有什么神奇的办法，我也没什么好办法。要允许 ARO 访问 ACO，
+从外壳(<em>shell</em>)接口使用 AclShell。欲知如何使用，可以运行下面的命令来查看 AclShell
+的帮助:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">acl</span> <span class="o">--</span><span class="nx">help</span>
+</pre></div>
+</div>
+<p>注意 : * 需要被引号包起来 (&#8216;*&#8217;)</p>
+<p>为了用 <tt class="docutils literal"><span class="pre">AclComponent</span></tt> 给予(权限)，要在自定义的方法中使用如下的代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$aroAlias</span><span class="p">,</span> <span class="nv">$acoAlias</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>现在要添加一些允许/拒绝的语句。在 <tt class="docutils literal"><span class="pre">UsersController</span></tt> 中添加下面的代码到一个临时
+的函数中，然后从浏览器中访问该网址(例如 <a class="reference external" href="http://localhost/cake/app/users/initdb">http://localhost/cake/app/users/initdb</a>)来
+运行。如果运行 <tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">aros_acos</span></tt> 应当看到很多 1 和 -1。一旦确认权限设置
+好了，就可以删除这个函数:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;initDB&#39;</span><span class="p">);</span> <span class="c1">// 用完之后就可以删除这一行</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">initDB</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$group</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">Group</span><span class="p">;</span>
+
+    <span class="c1">// 允许 admins 访问一切</span>
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers&#39;</span><span class="p">);</span>
+
+    <span class="c1">// 允许 managers 访问 posts 和 widgets</span>
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">deny</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers/Posts&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers/Widgets&#39;</span><span class="p">);</span>
+
+    <span class="c1">// 只允许 users 添加和编辑 posts 和 widgets</span>
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">deny</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers/Posts/add&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers/Posts/edit&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers/Widgets/add&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers/Widgets/edit&#39;</span><span class="p">);</span>
+
+    <span class="c1">// 允许基本用户登出</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers/users/logout&#39;</span><span class="p">);</span>
+
+    <span class="c1">// 加上 exit，避免糟糕的 &quot;missing views&quot; 错误消息</span>
+    <span class="k">echo</span> <span class="s2">&quot;all done&quot;</span><span class="p">;</span>
+    <span class="k">exit</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>现在我们建立了一些基本的访问规则。我们允许 administrators 访问所有的资源。
+Managers 可以访问 posts 和 widgets 中的任何动作。而 users 只能访问 posts 和
+widgets 的 add 和 edit 动作。</p>
+<p>我们需要获得 <tt class="docutils literal"><span class="pre">Group</span></tt> 模型的引用，并且修改它的 id，才能指定需要的 ARO，这是由于
+<tt class="docutils literal"><span class="pre">AclBehavior</span></tt> 行为的工作方式。<tt class="docutils literal"><span class="pre">AclBehavior</span></tt> 行为并不设置 <tt class="docutils literal"><span class="pre">aros</span></tt> 表中的
+alias 字段，所以我们必须使用对象引用或者数组，来指定我们需要的 ARO。</p>
+<p>你可能已经注意到我故意在 Acl 的权限中省略了 index 和 view 动作。我们要让
+<tt class="docutils literal"><span class="pre">PostsController</span></tt> 和 <tt class="docutils literal"><span class="pre">WidgetsController</span></tt> 控制器的 view 和 index 动作是公开
+动作，这允许未经身份验证的用户来查看这些页面，那么这些页面就是公开页面了。然而，
+你也可以随时从 <tt class="docutils literal"><span class="pre">AuthComponent::allowedActions</span></tt> 方法中删除这些动作，index 和
+view 动作的权限就会恢复到在 Acl 中的设置。</p>
+<p>现在我们要拿掉 users 和 groups 控制器中 <tt class="docutils literal"><span class="pre">Auth-&gt;allowedActions</span></tt> 的引用。然后在
+posts 和 widgets 控制器中添加如下代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;view&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这些去掉了我们前面的在 users 和 groups 控制器中加入的 &#8216;关闭开关&#8217;，并允许对 posts
+和 widgets 控制器的 index 和 view 动作的公开访问。在
+<tt class="docutils literal"><span class="pre">AppController::beforeFilter()</span></tt> 中添加:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;display&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>这让 &#8216;display&#8217; 动作公开。让我们的 PagesController::display() 公开，这是重要的，
+因为通常默认路由会将这一行动视为访问应用程序的主页。</p>
+</div>
+<div class="section" id="id2">
+<h2>登录<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>我们的应用现在有了访问控制，并且任何企图查看非公开页面的尝试都会重定向到登录页面。
+不过，我们需要创建登录视图，这样用户才能够登录。如果你还没有这么做，请在
+<tt class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></tt> 中添加如下代码:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;h2&gt;Login&lt;/h2&gt;</span>
+<span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.username&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.password&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">&#39;Login&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果一个用户已经登录了，添加这个方法到 UsersController 来重定向:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;Auth.User&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;You are logged in!&#39;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>你应该已经能够登录了，一切都应该自动工作了。如果你添加了
+<tt class="docutils literal"><span class="pre">echo</span> <span class="pre">$this-&gt;Session-&gt;flash('auth')</span></tt> ，当被拒绝访问的时候就会看到 Auth 组件的
+消息。</p>
+</div>
+<div class="section" id="id3">
+<h2>登出<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>现在轮到登出了。之前我们让这个方法为空，现在是时候实现它了。在
+<tt class="docutils literal"><span class="pre">UsersController::logout()</span></tt> 中添加如下代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;Good-Bye&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">logout</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>这设置了会话闪现提示消息，并且使用 Auth 组件的 logout 方法登出用户。Auth 组件的
+logout 方法基本上是删除 Auth 的会话键(<em>Session Key</em>)，并且返回可用于重定向的网址。
+如果有其它的会话数据也需要删除，也要在这里添加代码。</p>
+</div>
+<div class="section" id="id4">
+<h2>全部完成<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>现在你应该已经有一个使用 Auth 和 Acl 组件控制的应用程序了。用户的权限在组(<em>group</em>
+)一级设置，但是也可以同时在用户(<em>user</em>)一级进行设置。你也可以按全局、按控制器和按
+动作来设置权限。此外，你有一组可重用的代码块，可以随着你的应用程序的成长，容易地
+扩展 ACO 表。</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../blog/blog.html">博客教程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../blog/part-two.html">博客教程——添加一个层</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../blog-auth-example/auth.html">简单的身份验证和授权应用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simple-acl-controlled-application.html">简单的 Acl 控制的应用</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">简单的 Acl 控制的应用 - 第 2 部分</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">简单的 Acl 控制的应用 - 第 2 部分</a><ul>
+<li><a class="reference internal" href="#aco">创建 ACO 的自动化工具</a></li>
+<li><a class="reference internal" href="#id1">设置权限</a></li>
+<li><a class="reference internal" href="#id2">登录</a></li>
+<li><a class="reference internal" href="#id3">登出</a></li>
+<li><a class="reference internal" href="#id4">全部完成</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="../../contributing.html" title="贡献" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="simple-acl-controlled-application.html" title="简单的 Acl 控制的应用" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Additional Methods and Properties" lang="zh_CN" name="title" />
+<meta content="model classes,model functions,model class,interval,array" lang="zh_CN" name="keywords" />
+
+    <title>其它方法和属性 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="模型" href="../models.html" />
+    <link rel="next" title="虚字段" href="virtual-fields.html" />
+    <link rel="prev" title="模型属性" href="model-attributes.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/models/additional-methods-and-properties.html" /><link rel="alternate" hreflang="pt" href="../../pt/models/additional-methods-and-properties.html" /><link rel="alternate" hreflang="es" href="../../es/models/additional-methods-and-properties.html" /><link rel="alternate" hreflang="ja" href="../../ja/models/additional-methods-and-properties.html" /><link rel="alternate" hreflang="fr" href="../../fr/models/additional-methods-and-properties.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../models.html" accesskey="U" itemprop="url"><span itemprop="title">模型</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/models/additional-methods-and-properties.html">en</a></li>
+				
+					<li><a href="../../pt/models/additional-methods-and-properties.html">pt</a></li>
+				
+					<li><a href="../../es/models/additional-methods-and-properties.html">es</a></li>
+				
+					<li><a href="../../ja/models/additional-methods-and-properties.html">ja</a></li>
+				
+					<li><a href="../../fr/models/additional-methods-and-properties.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/models/additional-methods-and-properties.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>其它方法和属性<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>虽然 CakePHP 的模型函数能够满足你的需要，但不要忘记模型类只是：类，让你可以定义
+自己的方法，或者定义自己的属性。</p>
+<p>任何处理保存或读取数据的操作最好都写在模型类中。这个概念通常被称为胖模型。</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Example</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getRecent</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$conditions</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;created BETWEEN (curdate() - interval 7 day)&#39;</span> <span class="o">.</span>
+            <span class="s1">&#39; and (curdate() - interval 0 day))&#39;</span>
+        <span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="nb">compact</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这个 <tt class="docutils literal"><span class="pre">getRecent()</span></tt> 方法现在可以在控制器中使用 。</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$recent</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Example</span><span class="o">-&gt;</span><span class="na">getRecent</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="section" id="model-associations">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::associations()</span></tt><a class="headerlink" href="#model-associations" title="永久链接至标题">¶</a></h2>
+<p>获得关联:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Example</span><span class="o">-&gt;</span><span class="na">associations</span><span class="p">();</span>
+<span class="c1">// $result 等于 array(&#39;belongsTo&#39;, &#39;hasOne&#39;, &#39;hasMany&#39;, &#39;hasAndBelongsToMany&#39;)</span>
+<span class="c1">// $result equals array(&#39;belongsTo&#39;, &#39;hasOne&#39;, &#39;hasMany&#39;, &#39;hasAndBelongsToMany&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model-buildquery-string-type-first-array-query-array">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::buildQuery(string</span> <span class="pre">$type</span> <span class="pre">=</span> <span class="pre">'first',</span> <span class="pre">array</span> <span class="pre">$query</span> <span class="pre">=</span> <span class="pre">array())</span></tt><a class="headerlink" href="#model-buildquery-string-type-first-array-query-array" title="永久链接至标题">¶</a></h2>
+<p>构建查询数组，用于数据源生成查询来获取数据。</p>
+</div>
+<div class="section" id="model-deconstruct-string-field-mixed-data">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::deconstruct(string</span> <span class="pre">$field,</span> <span class="pre">mixed</span> <span class="pre">$data)</span></tt><a class="headerlink" href="#model-deconstruct-string-field-mixed-data" title="永久链接至标题">¶</a></h2>
+<p>把复杂的数据类型(数组或对象)拆分成单个字段值。</p>
+</div>
+<div class="section" id="model-escapefield-string-field-null-string-alias-null">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::escapeField(string</span> <span class="pre">$field</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">string</span> <span class="pre">$alias</span> <span class="pre">=</span> <span class="pre">null)</span></tt><a class="headerlink" href="#model-escapefield-string-field-null-string-alias-null" title="永久链接至标题">¶</a></h2>
+<p>转义字段名，并加上模型名作为前缀。转义遵循当前数据库驱动的规则。</p>
+</div>
+<div class="section" id="model-exists-id">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::exists($id)</span></tt><a class="headerlink" href="#model-exists-id" title="永久链接至标题">¶</a></h2>
+<p>如果有特定 ID 的记录存在，则返回 true。</p>
+<p>若没有提供 ID，会调用 <tt class="xref php php-meth docutils literal"><span class="pre">Model::getID()</span></tt> 方法获得当前记录的 ID 来确认，
+然后在当前配置的数据源上执行 <tt class="docutils literal"><span class="pre">Model::find('count')</span></tt>，以确定该记录在持久存储中
+是否存在。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">$id 参数是 2.1 版本中新增的。在此之前该方法不带任何参数。</p>
+</div>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Example</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Example</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="nv">$exists</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Foo</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model-getaffectedrows">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::getAffectedRows()</span></tt><a class="headerlink" href="#model-getaffectedrows" title="永久链接至标题">¶</a></h2>
+<p>返回上次查询所影响的行数。</p>
+</div>
+<div class="section" id="model-getassociated-string-type-null">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::getAssociated(string</span> <span class="pre">$type</span> <span class="pre">=</span> <span class="pre">null)</span></tt><a class="headerlink" href="#model-getassociated-string-type-null" title="永久链接至标题">¶</a></h2>
+<p>获取与此模型关联的所有模型。</p>
+</div>
+<div class="section" id="model-getcolumntype-string-column">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::getColumnType(string</span> <span class="pre">$column)</span></tt><a class="headerlink" href="#model-getcolumntype-string-column" title="永久链接至标题">¶</a></h2>
+<p>返回模型中的列的列类型。</p>
+</div>
+<div class="section" id="model-getcolumntypes">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::getColumnTypes()</span></tt><a class="headerlink" href="#model-getcolumntypes" title="永久链接至标题">¶</a></h2>
+<p>返回(模型中)字段名和列类型的关联数组。</p>
+</div>
+<div class="section" id="model-getid-integer-list-0">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::getID(integer</span> <span class="pre">$list</span> <span class="pre">=</span> <span class="pre">0)</span></tt><a class="headerlink" href="#model-getid-integer-list-0" title="永久链接至标题">¶</a></h2>
+<p>返回当前记录的 ID。</p>
+</div>
+<div class="section" id="model-getinsertid">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::getInsertID()</span></tt><a class="headerlink" href="#model-getinsertid" title="永久链接至标题">¶</a></h2>
+<p>返回此模型插入的最后一条记录的 ID。</p>
+</div>
+<div class="section" id="model-getlastinsertid">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::getLastInsertID()</span></tt><a class="headerlink" href="#model-getlastinsertid" title="永久链接至标题">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">getInsertID()</span></tt> 的别名。</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../models.html">模型</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="associations-linking-models-together.html">关联：将模型连接在一起</a></li>
+<li class="toctree-l2"><a class="reference internal" href="retrieving-your-data.html">检索数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saving-your-data.html">保存数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deleting-data.html">删除数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-validation.html">数据验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callback-methods.html">回调方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasources.html">数据源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model-attributes.html">模型属性</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">其它方法和属性</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="virtual-fields.html">虚字段</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transactions.html">事务</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">其它方法和属性</a><ul>
+<li><a class="reference internal" href="#model-associations"><tt class="docutils literal"><span class="pre">Model::associations()</span></tt></a></li>
+<li><a class="reference internal" href="#model-buildquery-string-type-first-array-query-array"><tt class="docutils literal"><span class="pre">Model::buildQuery(string</span> <span class="pre">$type</span> <span class="pre">=</span> <span class="pre">'first',</span> <span class="pre">array</span> <span class="pre">$query</span> <span class="pre">=</span> <span class="pre">array())</span></tt></a></li>
+<li><a class="reference internal" href="#model-deconstruct-string-field-mixed-data"><tt class="docutils literal"><span class="pre">Model::deconstruct(string</span> <span class="pre">$field,</span> <span class="pre">mixed</span> <span class="pre">$data)</span></tt></a></li>
+<li><a class="reference internal" href="#model-escapefield-string-field-null-string-alias-null"><tt class="docutils literal"><span class="pre">Model::escapeField(string</span> <span class="pre">$field</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">string</span> <span class="pre">$alias</span> <span class="pre">=</span> <span class="pre">null)</span></tt></a></li>
+<li><a class="reference internal" href="#model-exists-id"><tt class="docutils literal"><span class="pre">Model::exists($id)</span></tt></a></li>
+<li><a class="reference internal" href="#model-getaffectedrows"><tt class="docutils literal"><span class="pre">Model::getAffectedRows()</span></tt></a></li>
+<li><a class="reference internal" href="#model-getassociated-string-type-null"><tt class="docutils literal"><span class="pre">Model::getAssociated(string</span> <span class="pre">$type</span> <span class="pre">=</span> <span class="pre">null)</span></tt></a></li>
+<li><a class="reference internal" href="#model-getcolumntype-string-column"><tt class="docutils literal"><span class="pre">Model::getColumnType(string</span> <span class="pre">$column)</span></tt></a></li>
+<li><a class="reference internal" href="#model-getcolumntypes"><tt class="docutils literal"><span class="pre">Model::getColumnTypes()</span></tt></a></li>
+<li><a class="reference internal" href="#model-getid-integer-list-0"><tt class="docutils literal"><span class="pre">Model::getID(integer</span> <span class="pre">$list</span> <span class="pre">=</span> <span class="pre">0)</span></tt></a></li>
+<li><a class="reference internal" href="#model-getinsertid"><tt class="docutils literal"><span class="pre">Model::getInsertID()</span></tt></a></li>
+<li><a class="reference internal" href="#model-getlastinsertid"><tt class="docutils literal"><span class="pre">Model::getLastInsertID()</span></tt></a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="virtual-fields.html" title="虚字段" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="model-attributes.html" title="模型属性" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

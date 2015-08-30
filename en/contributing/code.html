@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Code" lang="en" name="title" />
+<meta content="cakephp source code,code patches,test ref,descriptive name,bob barker,initial setup,global user,database connection,clone,repository,user information,enhancement,back patches,checkout" lang="en" name="keywords" />
+
+    <title>Code &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Contributing" href="../contributing.html" />
+    <link rel="next" title="Coding Standards" href="cakephp-coding-conventions.html" />
+    <link rel="prev" title="Tickets" href="tickets.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/contributing/code.html" /><link rel="alternate" hreflang="es" href="../../es/contributing/code.html" /><link rel="alternate" hreflang="ja" href="../../ja/contributing/code.html" /><link rel="alternate" hreflang="fr" href="../../fr/contributing/code.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/contributing/code.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../contributing.html" accesskey="U" itemprop="url"><span itemprop="title">Contributing</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/contributing/code.html">pt</a></li>
+				
+					<li><a href="../../es/contributing/code.html">es</a></li>
+				
+					<li><a href="../../ja/contributing/code.html">ja</a></li>
+				
+					<li><a href="../../fr/contributing/code.html">fr</a></li>
+				
+					<li><a href="../../zh/contributing/code.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/contributing/code.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="code">
+<h1>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h1>
+<p>Patches and pull requests are a great way to contribute code back to CakePHP.
+Pull requests can be created in GitHub, and are prefered over patch files in
+ticket comments.</p>
+<div class="section" id="initial-setup">
+<h2>Initial setup<a class="headerlink" href="#initial-setup" title="Permalink to this headline">¶</a></h2>
+<p>Before working on patches for CakePHP, it&#8217;s a good idea to get your environment
+setup. You&#8217;ll need the following software:</p>
+<ul class="simple">
+<li>Git</li>
+<li>PHP 5.2.8 or greater</li>
+<li>PHPUnit 3.5.10 or greater</li>
+</ul>
+<p>Set up your user information with your name/handle and working email address:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">git</span> <span class="nx">config</span> <span class="o">--</span><span class="k">global</span> <span class="nx">user</span><span class="o">.</span><span class="nx">name</span> <span class="s1">&#39;Bob Barker&#39;</span>
+<span class="nx">git</span> <span class="nx">config</span> <span class="o">--</span><span class="k">global</span> <span class="nx">user</span><span class="o">.</span><span class="nx">email</span> <span class="s1">&#39;bob.barker@example.com&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are new to Git, we highly recommend you to read the excellent and free
+<a class="reference external" href="http://git-scm.com/book/">ProGit</a> book.</p>
+</div>
+<p>Get a clone of the CakePHP source code from GitHub:</p>
+<ul class="simple">
+<li>If you don&#8217;t have a <a class="reference external" href="http://github.com">GitHub</a> account, create one.</li>
+<li>Fork the <a class="reference external" href="http://github.com/cakephp/cakephp">CakePHP repository</a> by clicking
+the <strong>Fork</strong> button.</li>
+</ul>
+<p>After your fork is made, clone your fork to your local machine:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">git</span> <span class="k">clone</span> <span class="nx">git</span><span class="o">@</span><span class="nx">github</span><span class="o">.</span><span class="nx">com</span><span class="o">:</span><span class="nx">YOURNAME</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">.</span><span class="nx">git</span>
+</pre></div>
+</div>
+<p>Add the original CakePHP repository as a remote repository. You&#8217;ll use this
+later to fetch changes from the CakePHP repository. This will let you stay up
+to date with CakePHP:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">cd</span> <span class="nx">cakephp</span>
+<span class="nx">git</span> <span class="nx">remote</span> <span class="nx">add</span> <span class="nx">upstream</span> <span class="nx">git</span><span class="o">://</span><span class="nx">github</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">.</span><span class="nx">git</span>
+</pre></div>
+</div>
+<p>Now that you have CakePHP setup you should be able to define a <tt class="docutils literal"><span class="pre">$test</span></tt>
+<a class="reference internal" href="../development/configuration.html#database-configuration"><em>database connection</em></a>, and
+<a class="reference internal" href="../development/testing.html#running-tests"><em>run all the tests</em></a>.</p>
+</div>
+<div class="section" id="working-on-a-patch">
+<h2>Working on a patch<a class="headerlink" href="#working-on-a-patch" title="Permalink to this headline">¶</a></h2>
+<p>Each time you want to work on a bug, feature or enhancement create a topic
+branch.</p>
+<p>The branch you create should be based on the version that your fix/enhancement
+is for. For example if you are fixing a bug in <tt class="docutils literal"><span class="pre">2.3</span></tt> you would want to use
+the <tt class="docutils literal"><span class="pre">2.3</span></tt> branch as the base for your branch. If your change is a bug fix
+for the current stable release, you should use the <tt class="docutils literal"><span class="pre">master</span></tt> branch. This
+makes merging your changes in later much simpler:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1"># fixing a bug on 2.3</span>
+<span class="nx">git</span> <span class="nx">fetch</span> <span class="nx">upstream</span>
+<span class="nx">git</span> <span class="nx">checkout</span> <span class="o">-</span><span class="nx">b</span> <span class="nx">ticket</span><span class="o">-</span><span class="mi">1234</span> <span class="nx">upstream</span><span class="o">/</span><span class="mf">2.3</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Use a descriptive name for your branch, referencing the ticket or feature
+name is a good convention. e.g. ticket-1234, feature-awesome</p>
+</div>
+<p>The above will create a local branch based on the upstream (CakePHP) 2.3 branch.
+Work on your fix, and make as many commits as you need; but keep in mind the
+following:</p>
+<ul class="simple">
+<li>Follow the <a class="reference internal" href="cakephp-coding-conventions.html"><em>Coding Standards</em></a>.</li>
+<li>Add a test case to show the bug is fixed, or that the new feature works.</li>
+<li>Keep your commits logical, and write good clear and concise commit messages.</li>
+</ul>
+</div>
+<div class="section" id="submitting-a-pull-request">
+<h2>Submitting a pull request<a class="headerlink" href="#submitting-a-pull-request" title="Permalink to this headline">¶</a></h2>
+<p>Once your changes are done and you&#8217;re ready for them to be merged into CakePHP,
+you&#8217;ll want to update your branch:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">git</span> <span class="nx">checkout</span> <span class="mf">2.3</span>
+<span class="nx">git</span> <span class="nx">fetch</span> <span class="nx">upstream</span>
+<span class="nx">git</span> <span class="nx">merge</span> <span class="nx">upstream</span><span class="o">/</span><span class="mf">2.3</span>
+<span class="nx">git</span> <span class="nx">checkout</span> <span class="o">&lt;</span><span class="nx">branch_name</span><span class="o">&gt;</span>
+<span class="nx">git</span> <span class="nx">rebase</span> <span class="mf">2.3</span>
+</pre></div>
+</div>
+<p>This will fetch + merge in any changes that have happened in CakePHP since you
+started. It will then rebase - or replay your changes on top of the current
+code. You might encounter a conflict during the <tt class="docutils literal"><span class="pre">rebase</span></tt>. If the rebase
+quits early you can see which files are conflicted/un-merged with <tt class="docutils literal"><span class="pre">git</span> <span class="pre">status</span></tt>.
+Resolve each conflict, and then continue the rebase:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">git</span> <span class="nx">add</span> <span class="o">&lt;</span><span class="nx">filename</span><span class="o">&gt;</span> <span class="c1"># do this for each conflicted file.</span>
+<span class="nx">git</span> <span class="nx">rebase</span> <span class="o">--</span><span class="k">continue</span>
+</pre></div>
+</div>
+<p>Check that all your tests continue to pass. Then push your branch to your
+fork:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">git</span> <span class="nx">push</span> <span class="nx">origin</span> <span class="o">&lt;</span><span class="nx">branch</span><span class="o">-</span><span class="nx">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Once your branch is on GitHub, you can discuss it on the
+<a class="reference external" href="http://groups.google.com/group/cakephp-core">cakephp-core</a> mailing list or
+submit a pull request on GitHub.</p>
+<div class="section" id="choosing-where-your-changes-will-be-merged-into">
+<h3>Choosing where your changes will be merged into<a class="headerlink" href="#choosing-where-your-changes-will-be-merged-into" title="Permalink to this headline">¶</a></h3>
+<p>When making pull requests you should make sure you select the correct base
+branch, as you cannot edit it once the pull request is created.</p>
+<ul class="simple">
+<li>If your change is a <strong>bugfix</strong> and doesn&#8217;t introduce new functionality and only
+corrects existing behavior that is present in the current release. Then
+choose <strong>master</strong> as your merge target.</li>
+<li>If your change is a <strong>new feature</strong> or an addition to the framework, then you
+should choose the branch with the next version number. For example if the
+current stable release is <tt class="docutils literal"><span class="pre">2.2.2</span></tt>, the branch accepting new features will be
+<tt class="docutils literal"><span class="pre">2.3</span></tt></li>
+<li>If your change is a breaks existing functionality, or API&#8217;s then you&#8217;ll have
+to choose then next major release. For example, if the current release is
+<tt class="docutils literal"><span class="pre">2.2.2</span></tt> then the next time existing behavior can be broken will be in
+<tt class="docutils literal"><span class="pre">3.0</span></tt> so you should target that branch.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Remember that all code you contribute to CakePHP will be licensed under the
+MIT License, and the <a class="reference external" href="http://cakefoundation.org/pages/about">Cake Software Foundation</a>
+will become the owner of any contributed code. Contributors should follow the
+<a class="reference external" href="http://community.cakephp.org/guidelines">CakePHP Community Guidelines</a>.</p>
+</div>
+<p>All bug fixes merged into a maintenance branch will also be merged into upcoming
+releases periodically by the core team.</p>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../contributing.html">Contributing</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="documentation.html">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tickets.html">Tickets</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Code</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cakephp-coding-conventions.html">Coding Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backwards-compatibility.html">Backwards Compatibility Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cakephp-development-process.html">CakePHP Development Process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Code</a><ul>
+<li><a class="reference internal" href="#initial-setup">Initial setup</a></li>
+<li><a class="reference internal" href="#working-on-a-patch">Working on a patch</a></li>
+<li><a class="reference internal" href="#submitting-a-pull-request">Submitting a pull request</a><ul>
+<li><a class="reference internal" href="#choosing-where-your-changes-will-be-merged-into">Choosing where your changes will be merged into</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="cakephp-coding-conventions.html" title="Coding Standards" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="tickets.html" title="Tickets" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

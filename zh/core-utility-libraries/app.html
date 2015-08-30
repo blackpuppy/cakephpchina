@@ -1,0 +1,821 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="App Class" lang="zh_CN" name="title" />
+<meta content="compatible implementation,model behaviors,path management,loading files,php class,class loading,model behavior,class location,component model,management class,autoloader,classname,directory location,override,conventions,lib,textile,cakephp,php classes,loaded" lang="zh_CN" name="keywords" />
+
+    <title>App Class &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="通用" href="../core-libraries/toc-general-purpose.html" />
+    <link rel="next" title="Events System" href="../core-libraries/events.html" />
+    <link rel="prev" title="全局常量和函数" href="../core-libraries/global-constants-and-functions.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/core-utility-libraries/app.html" /><link rel="alternate" hreflang="pt" href="../../pt/core-utility-libraries/app.html" /><link rel="alternate" hreflang="es" href="../../es/core-utility-libraries/app.html" /><link rel="alternate" hreflang="ja" href="../../ja/core-utility-libraries/app.html" /><link rel="alternate" hreflang="fr" href="../../fr/core-utility-libraries/app.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries/toc-general-purpose.html" accesskey="U" itemprop="url"><span itemprop="title">通用</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/core-utility-libraries/app.html">en</a></li>
+				
+					<li><a href="../../pt/core-utility-libraries/app.html">pt</a></li>
+				
+					<li><a href="../../es/core-utility-libraries/app.html">es</a></li>
+				
+					<li><a href="../../ja/core-utility-libraries/app.html">ja</a></li>
+				
+					<li><a href="../../fr/core-utility-libraries/app.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-utility-libraries/app.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="app-class">
+<h1>App Class<a class="headerlink" href="#app-class" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="App">
+<em class="property">class </em><tt class="descname">App</tt><a class="headerlink" href="#App" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>app类负责路径管理，类定位和类加载。请确保遵循 <a class="reference internal" href="../getting-started/cakephp-conventions.html#file-and-classname-conventions"><em>文件和类名的约定</em></a>。
+The app class is responsible for path management, class location and class loading.
+Make sure you follow the <a class="reference internal" href="../getting-started/cakephp-conventions.html#file-and-classname-conventions"><em>文件和类名的约定</em></a>.</p>
+<div class="section" id="packages">
+<h2>Packages 包<a class="headerlink" href="#packages" title="永久链接至标题">¶</a></h2>
+<p>CakePHP围绕包进行组织，每个类属于一个包或目录。可以使用 <tt class="docutils literal"><span class="pre">App::build('APackage/SubPackage',</span> <span class="pre">$paths)</span></tt>
+配置应用程序中每个包的位置，通知该框架应该加载每一个类。CakePHP框架中的几乎每一个类
+都可以换做你自己的兼容性的实现。如果你想用你自己的类而不是框架提供的，仅需添加类到你的
+类库目录并效仿CakePHP中预计查找的位置。</p>
+<p>CakePHP is organized around the idea of packages, each class belongs to a
+package or folder where other classes reside. You can configure each package
+location in your application using <tt class="docutils literal"><span class="pre">App::build('APackage/SubPackage',</span> <span class="pre">$paths)</span></tt>
+to inform the framework where should each class be loaded. Almost every class in
+the CakePHP framework can be swapped with your own compatible implementation. If
+you wish to use you own class instead of the classes the framework provides,
+just add the class to your libs folder emulating the directory location of where
+CakePHP expects to find it.</p>
+<p>举例，如果你想使用自己的HttpSocket类，把他放到::
+For instance if you&#8217;d like to use your own HttpSocket class, put it under:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">app</span><span class="o">/</span><span class="nx">Lib</span><span class="o">/</span><span class="nx">Network</span><span class="o">/</span><span class="nx">Http</span><span class="o">/</span><span class="nx">HttpSocket</span><span class="o">.</span><span class="nx">php</span>
+</pre></div>
+</div>
+<p>一旦这么做程序运行时会加载覆盖的文件而不是CakePHP的内部文件。
+Once you&#8217;ve done this App will load your override file instead of the file
+inside CakePHP.</p>
+</div>
+<div class="section" id="loading-classes">
+<h2>Loading Classes 加载类<a class="headerlink" href="#loading-classes" title="永久链接至标题">¶</a></h2>
+<dl class="staticmethod">
+<dt id="App::uses">
+<em class="property">static </em><tt class="descclassname">App::</tt><tt class="descname">uses</tt><big>(</big><em>string $class</em>, <em>string $package</em><big>)</big><a class="headerlink" href="#App::uses" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>在CakePHP中，类会被延迟加载。然而在autoloader执行前，需要告诉应用程序，
+在哪里可以找到你的类文件。通过告诉应用程序，一个类在哪个包中可以找到，使得能够
+正确地定位文件和加载第一次使用一个类。</p>
+<p>Classes are lazily loaded in CakePHP, however before the autoloader
+can find your classes you need to tell App, where it can find the files.
+By telling App which package a class can be found in, it can properly locate
+the file and load it the first time a class is used.</p>
+<p>几个公共类型类的例子:
+Some examples for common types of classes are:</p>
+<dl class="docutils">
+<dt>Controller</dt>
+<dd><tt class="docutils literal"><span class="pre">App::uses('PostsController',</span> <span class="pre">'Controller');</span></tt></dd>
+<dt>Component</dt>
+<dd><tt class="docutils literal"><span class="pre">App::uses('AuthComponent',</span> <span class="pre">'Controller/Component');</span></tt></dd>
+<dt>Model</dt>
+<dd><tt class="docutils literal"><span class="pre">App::uses('MyModel',</span> <span class="pre">'Model');</span></tt></dd>
+<dt>Behaviors</dt>
+<dd><tt class="docutils literal"><span class="pre">App::uses('TreeBehavior',</span> <span class="pre">'Model/Behavior');</span></tt></dd>
+<dt>Views</dt>
+<dd><tt class="docutils literal"><span class="pre">App::uses('ThemeView',</span> <span class="pre">'View');</span></tt></dd>
+<dt>Helpers</dt>
+<dd><tt class="docutils literal"><span class="pre">App::uses('HtmlHelper',</span> <span class="pre">'View/Helper');</span></tt></dd>
+<dt>Libs</dt>
+<dd><tt class="docutils literal"><span class="pre">App::uses('PaymentProcessor',</span> <span class="pre">'Lib');</span></tt></dd>
+<dt>Vendors</dt>
+<dd><tt class="docutils literal"><span class="pre">App::uses('Textile',</span> <span class="pre">'Vendor');</span></tt></dd>
+<dt>Utility</dt>
+<dd><tt class="docutils literal"><span class="pre">App::uses('String',</span> <span class="pre">'Utility');</span></tt></dd>
+</dl>
+<p>所以基本上第二个参数应该匹配类文件的目录在核心或应用程序的路径。
+So basically the second param should simply match the folder path of the class file in core or app.</p>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<blockquote>
+<div>加载vendors(第三方)的类库通常不遵循命名约定。推荐使用 <tt class="docutils literal"><span class="pre">App::import()</span></tt> 。</div></blockquote>
+<p class="last">Loading vendors usually means you are loading packages that do not follow
+conventions. For most vendor packages using <tt class="docutils literal"><span class="pre">App::import()</span></tt> is
+recommended.</p>
+</div>
+<p>Loading files from plugins
+从插件内加载文件
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
+<p>加载插件内的类库与加载应用内的核心类库方法一样，除了一些特别的插件。
+Loading classes in plugins works much the same as loading app and
+core classes except you must specify the plugin you are loading
+from:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre>    <span class="c1">// 加载 app/Plugin/PluginName/Model/Comment.php 中的Comment类文件</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Comment&#39;</span><span class="p">,</span> <span class="s1">&#39;PluginName.Model&#39;</span><span class="p">);</span>
+
+<span class="c1">// 加载 app/Plugin/PluginName/Controller/Component/CommentComponent.php 中的CommentComponent类</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CommentComponent&#39;</span><span class="p">,</span> <span class="s1">&#39;PluginName.Controller/Component&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Finding paths to packages using App::path()
+使用App::path()查找包路径
+===========================================</p>
+<dl class="staticmethod">
+<dt id="App::path">
+<em class="property">static </em><tt class="descclassname">App::</tt><tt class="descname">path</tt><big>(</big><em>string $package</em>, <em>string $plugin = null</em><big>)</big><a class="headerlink" href="#App::path" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Used to read information stored path:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 返回应用程序中的模型路径</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">path</span><span class="p">(</span><span class="s1">&#39;Model&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>这可以针对所有的包分开你的应用程序。还可以为一个插件获取路径::
+This can be done for all packages that are apart of your application. You
+can also fetch paths for a plugin:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// return the component paths in DebugKit</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">path</span><span class="p">(</span><span class="s1">&#39;Component&#39;</span><span class="p">,</span> <span class="s1">&#39;DebugKit&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="App::paths">
+<em class="property">static </em><tt class="descclassname">App::</tt><tt class="descname">paths</tt><big>(</big><big>)</big><a class="headerlink" href="#App::paths" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>// 从App中得到所有当前加载的路径。用于检查或存储App已知的所有路径。
+Get all the currently loaded paths from App. Useful for inspecting or
+storing all paths App knows about. For a paths to a specific package
+use <a class="reference internal" href="#App::path" title="App::path"><tt class="xref php php-meth docutils literal"><span class="pre">App::path()</span></tt></a></p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="App::core">
+<em class="property">static </em><tt class="descclassname">App::</tt><tt class="descname">core</tt><big>(</big><em>string $package</em><big>)</big><a class="headerlink" href="#App::core" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>查询CakePHP内包中的路径。
+Used for finding the path to a package inside CakePHP:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 获取缓存引擎的路径</span>
+<span class="c1">// Get the path to Cache engines.</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">core</span><span class="p">(</span><span class="s1">&#39;Cache/Engine&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="App::location">
+<em class="property">static </em><tt class="descclassname">App::</tt><tt class="descname">location</tt><big>(</big><em>string $className</em><big>)</big><a class="headerlink" href="#App::location" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>//返回类所在位置的包名
+Returns the package name where a class was defined to be located at.</p>
+</dd></dl>
+
+<p>为App添加查询包路径
+Adding paths for App to find packages in
+========================================</p>
+<dl class="staticmethod">
+<dt id="App::build">
+<em class="property">static </em><tt class="descclassname">App::</tt><tt class="descname">build</tt><big>(</big><em>array $paths = array()</em>, <em>mixed $mode = App::PREPEND</em><big>)</big><a class="headerlink" href="#App::build" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>Sets up each package location on the file system. You can configure multiple
+search paths for each package, those will be used to look for files one
+folder at a time in the specified order. All paths should be terminated
+with a directory separator.</p>
+<p>Adding additional controller paths for example would alter where CakePHP
+looks for controllers. This allows you to split your application up across
+the filesystem.</p>
+<p>Usage:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//will setup a new search path for the Model package</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Model&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/a/full/path/to/models/&#39;</span><span class="p">)));</span>
+
+<span class="c1">//will setup the path as the only valid path for searching models</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Model&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/path/to/models/&#39;</span><span class="p">)),</span> <span class="nx">App</span><span class="o">::</span><span class="na">RESET</span><span class="p">);</span>
+
+<span class="c1">//will setup multiple search paths for helpers</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;View/Helper&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/path/to/helpers/&#39;</span><span class="p">,</span> <span class="s1">&#39;/another/path/&#39;</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p>If reset is set to true, all loaded plugins will be forgotten and they will
+be needed to be loaded again.</p>
+<p>Examples:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;controllers&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/controllers&#39;</span><span class="p">)));</span>
+<span class="c1">//becomes</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Controller&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/Controller&#39;</span><span class="p">)));</span>
+
+<span class="nx">App</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;helpers&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/views/helpers&#39;</span><span class="p">)));</span>
+<span class="c1">//becomes</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;View/Helper&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/View/Helper&#39;</span><span class="p">)));</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.0 版更改: </span><tt class="docutils literal"><span class="pre">App::build()</span></tt> will not merge app paths with core paths anymore.</p>
+</div>
+</dd></dl>
+
+<div class="section" id="add-new-packages-to-an-application">
+<span id="app-build-register"></span><h3>Add new packages to an application<a class="headerlink" href="#add-new-packages-to-an-application" title="永久链接至标题">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">App::build()</span></tt> can be used to add new package locations.  This is useful
+when you want to add new top level packages or, sub-packages to your
+application:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Service&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;%s&#39;</span> <span class="o">.</span> <span class="s1">&#39;Service&#39;</span> <span class="o">.</span> <span class="nx">DS</span><span class="p">)</span>
+<span class="p">),</span> <span class="nx">App</span><span class="o">::</span><span class="na">REGISTER</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">%s</span></tt> in newly registered packages will be replaced with the
+<a class="reference internal" href="../core-libraries/global-constants-and-functions.html#APP" title="APP"><tt class="xref php php-const docutils literal"><span class="pre">APP</span></tt></a> path.  You must include a trailing <tt class="docutils literal"><span class="pre">/</span></tt> in registered
+packages.  Once packages are registered, you can use <tt class="docutils literal"><span class="pre">App::build()</span></tt> to
+append/prepend/reset paths like any other package.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>Registering packages was added in 2.1</p>
+</div>
+<p>Finding which objects CakePHP knows about
+查询CakePHP已知的对象
+=========================================</p>
+<dl class="staticmethod">
+<dt id="App::objects">
+<em class="property">static </em><tt class="descclassname">App::</tt><tt class="descname">objects</tt><big>(</big><em>string $type</em>, <em>mixed $path = null</em>, <em>boolean $cache = true</em><big>)</big><a class="headerlink" href="#App::objects" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">mixed Returns an array of objects of the given type or false if incorrect.</td>
+</tr>
+</tbody>
+</table>
+<p>查询已知的对象，举例可以使用``App::objects(&#8216;Controller&#8217;)``获得程序中所有的控制器
+You can find out which objects App knows about using
+<tt class="docutils literal"><span class="pre">App::objects('Controller')</span></tt> for example to find which application controllers
+App knows about.</p>
+<p>Example usage:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//returns array(&#39;DebugKit&#39;, &#39;Blog&#39;, &#39;User&#39;);</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">objects</span><span class="p">(</span><span class="s1">&#39;plugin&#39;</span><span class="p">);</span>
+
+<span class="c1">//returns array(&#39;PagesController&#39;, &#39;BlogController&#39;);</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">objects</span><span class="p">(</span><span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>使用插件点语法搜索插件中的对象。
+You can also search only within a plugin&#8217;s objects by using the plugin dot syntax.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// returns array(&#39;MyPluginPost&#39;, &#39;MyPluginComment&#39;);</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">objects</span><span class="p">(</span><span class="s1">&#39;MyPlugin.Model&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.0 版更改.</span></p>
+</div>
+<ol class="arabic simple">
+<li>当空值或非法类型返回``array()``而不是false</li>
+<li>不在返回核心对象，<tt class="docutils literal"><span class="pre">App::objects('core')``将返回``array()</span></tt></li>
+<li>返回完成的类名</li>
+</ol>
+<ol class="arabic simple">
+<li>Returns <tt class="docutils literal"><span class="pre">array()</span></tt> instead of false for empty results or invalid types</li>
+<li>Does not return core objects anymore, <tt class="docutils literal"><span class="pre">App::objects('core')</span></tt> will
+return <tt class="docutils literal"><span class="pre">array()</span></tt>.</li>
+<li>Returns the complete class name</li>
+</ol>
+</dd></dl>
+
+<p>Locating plugins
+定位插件
+================</p>
+<dl class="staticmethod">
+<dt id="App::pluginPath">
+<em class="property">static </em><tt class="descclassname">App::</tt><tt class="descname">pluginPath</tt><big>(</big><em>string $plugin</em><big>)</big><a class="headerlink" href="#App::pluginPath" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>插件同样可以使用App定位。使用``App::pluginPath(&#8216;DebugKit&#8217;);``。举例，获得DebugKit的全路径。
+Plugins can be located with App as well. Using <tt class="docutils literal"><span class="pre">App::pluginPath('DebugKit');</span></tt>
+for example, will give you the full path to the DebugKit plugin:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$path</span> <span class="o">=</span> <span class="nx">App</span><span class="o">::</span><span class="na">pluginPath</span><span class="p">(</span><span class="s1">&#39;DebugKit&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Locating themes
+定位主题
+===============</p>
+<dl class="staticmethod">
+<dt id="App::themePath">
+<em class="property">static </em><tt class="descclassname">App::</tt><tt class="descname">themePath</tt><big>(</big><em>string $theme</em><big>)</big><a class="headerlink" href="#App::themePath" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p><tt class="docutils literal"><span class="pre">App::themePath('purple');``查询主题，会返回名字为`purple`主题的全路径。</span>
+<span class="pre">Themes</span> <span class="pre">can</span> <span class="pre">be</span> <span class="pre">found</span> <span class="pre">``App::themePath('purple');</span></tt>, would give the full path to the
+<cite>purple</cite> theme.</p>
+</dd></dl>
+
+<p id="app-import">Including files with App::import()
+使用App::import()包含文件
+==================================</p>
+<dl class="staticmethod">
+<dt id="App::import">
+<em class="property">static </em><tt class="descclassname">App::</tt><tt class="descname">import</tt><big>(</big><em>mixed $type = null</em>, <em>string $name = null</em>, <em>mixed $parent = true</em>, <em>array $search = array()</em>, <em>string $file = null</em>, <em>boolean $return = false</em><big>)</big><a class="headerlink" href="#App::import" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">boolean<p>乍一看``App::import``看起来复杂,但是在大多数情况下只需两个参数。</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>At first glance <tt class="docutils literal"><span class="pre">App::import</span></tt> seems complex, however in most use
+cases only 2 arguments are required.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">这个方法等价于``require``加载文件。
+重要的是要意识到类随后需要被初始化。
+This method is equivalent to <tt class="docutils literal"><span class="pre">require</span></tt>&#8216;ing the file.
+It is important to realize that the class subsequently needs to be initialized.</p>
+</div>
+<div class="highlight-phpinline"><div class="highlight"><pre>   <span class="c1">// 等价于require(&#39;Controller/UsersController.php&#39;);</span>
+   <span class="c1">// The same as require(&#39;Controller/UsersController.php&#39;);</span>
+   <span class="nx">App</span><span class="o">::</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;Controller&#39;</span><span class="p">,</span> <span class="s1">&#39;Users&#39;</span><span class="p">);</span>
+
+   <span class="c1">// 需要加载这个类</span>
+   <span class="c1">// We need to load the class</span>
+   <span class="nv">$Users</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UsersController</span><span class="p">();</span>
+
+   <span class="c1">// 如果我们需要模型关联，组件，等</span>
+   <span class="c1">// If we want the model associations, components, etc to be loaded</span>
+   <span class="nv">$Users</span><span class="o">-&gt;</span><span class="na">constructClasses</span><span class="p">();</span>
+
+<span class="o">**</span><span class="nx">过去使用App</span><span class="o">::</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;Core&#39;</span><span class="p">,</span> <span class="nv">$class</span><span class="p">)</span><span class="nx">加载所有的类，现在可以使用App</span><span class="o">::</span><span class="na">uses</span><span class="p">()</span><span class="nx">。这个改变可以</span>
+<span class="nx">使框架性能提升。</span><span class="o">**</span>
+</pre></div>
+</div>
+<p><strong>All classes that were loaded in the past using App::import(&#8216;Core&#8217;, $class) will need to be
+loaded using App::uses() referring to the correct package. This change has provided large
+performance gains to the framework.</strong></p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.0 版更改.</span></p>
+</div>
+<ul class="simple">
+<li>该方法不再递归寻找类，要严格使用:php:meth:<a href="#id1"><span class="problematic" id="id2">`</span></a>App::build()`中指定的路径值。</li>
+<li>使用 <tt class="docutils literal"><span class="pre">App::import('Component',</span> <span class="pre">'Component')</span></tt> 不在生效，要使用
+<tt class="docutils literal"><span class="pre">App::uses('Component',</span> <span class="pre">'Controller');</span></tt> 。</li>
+<li>不能再使用 <tt class="docutils literal"><span class="pre">App::import('Lib',</span> <span class="pre">'CoreClass');</span></tt> 去加载核心类了。</li>
+<li>引入一个不存在的文件，传入 <tt class="docutils literal"><span class="pre">$name`</span> <span class="pre">或</span> <span class="pre">``$file</span></tt> 一个错误的类型或包名，或空值。会返回false。</li>
+<li><tt class="docutils literal"><span class="pre">App::import('Core',</span> <span class="pre">'CoreClass')</span></tt> 不再支持, 而换成
+<a class="reference internal" href="#App::uses" title="App::uses"><tt class="xref php php-meth docutils literal"><span class="pre">App::uses()</span></tt></a>。</li>
+<li>加载Vendor文件不再递归查询vendors目录，不会像之前那样将文件名转成下划线的格式。</li>
+<li>The method no longer looks for classes recursively, it strictly uses the values for the
+paths defined in <a class="reference internal" href="#App::build" title="App::build"><tt class="xref php php-meth docutils literal"><span class="pre">App::build()</span></tt></a></li>
+<li>It will not be able to load <tt class="docutils literal"><span class="pre">App::import('Component',</span> <span class="pre">'Component')</span></tt> use
+<tt class="docutils literal"><span class="pre">App::uses('Component',</span> <span class="pre">'Controller');</span></tt>.</li>
+<li>Using <tt class="docutils literal"><span class="pre">App::import('Lib',</span> <span class="pre">'CoreClass');</span></tt> to load core classes is no longer possible.</li>
+<li>Importing a non-existent file, supplying a wrong type or package name, or
+null values for <tt class="docutils literal"><span class="pre">$name</span></tt> and <tt class="docutils literal"><span class="pre">$file</span></tt> parameters will result in a false return
+value.</li>
+<li><tt class="docutils literal"><span class="pre">App::import('Core',</span> <span class="pre">'CoreClass')</span></tt> is no longer supported, use
+<a class="reference internal" href="#App::uses" title="App::uses"><tt class="xref php php-meth docutils literal"><span class="pre">App::uses()</span></tt></a> instead and let the class autoloading do the rest.</li>
+<li>Loading Vendor files does not look recursively in the vendors folder, it
+will also not convert the file to underscored anymore as it did in the
+past.</li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="overriding-classes-in-cakephp">
+<h2>Overriding classes in CakePHP 重载类<a class="headerlink" href="#overriding-classes-in-cakephp" title="永久链接至标题">¶</a></h2>
+<p>可以重载框架内的几乎每一个类，除了 <a class="reference internal" href="#App" title="App"><tt class="xref php php-class docutils literal"><span class="pre">App</span></tt></a> 和 <a class="reference internal" href="../development/configuration.html#Configure" title="Configure"><tt class="xref php php-class docutils literal"><span class="pre">Configure</span></tt></a> 类。
+只需添加你自己的类到你的app/Lib目录，效仿框架内部的目录结构。下面有几个例子。</p>
+<p>You can override almost every class in the framework, exceptions are the
+<a class="reference internal" href="#App" title="App"><tt class="xref php php-class docutils literal"><span class="pre">App</span></tt></a> and <a class="reference internal" href="../development/configuration.html#Configure" title="Configure"><tt class="xref php php-class docutils literal"><span class="pre">Configure</span></tt></a> classes. Whenever you like to
+perform such overriding, just add your class to your app/Lib folder mimicking
+the internal structure of the framework.  Some examples to follow</p>
+<ul class="simple">
+<li>To override the <tt class="xref php php-class docutils literal"><span class="pre">Dispatcher</span></tt> class, create <tt class="docutils literal"><span class="pre">app/Lib/Routing/Dispatcher.php</span></tt></li>
+<li>To override the <a class="reference internal" href="../development/routing.html#CakeRoute" title="CakeRoute"><tt class="xref php php-class docutils literal"><span class="pre">CakeRoute</span></tt></a> class, create <tt class="docutils literal"><span class="pre">app/Lib/Routing/Route/CakeRoute.php</span></tt></li>
+<li>To override the <tt class="xref php php-class docutils literal"><span class="pre">Model</span></tt> class, create <tt class="docutils literal"><span class="pre">app/Lib/Model/Model.php</span></tt></li>
+</ul>
+<p>When you load the replaced files, the app/Lib files will be loaded instead of
+the built-in core classes.</p>
+</div>
+<div class="section" id="loading-vendor-files-vendor">
+<h2>Loading Vendor Files  加载Vendor文件<a class="headerlink" href="#loading-vendor-files-vendor" title="永久链接至标题">¶</a></h2>
+<p>可以使用``App::uses()``加载vendors目录中的类文件。遵循加载其他文件同样的规则::
+You can use <tt class="docutils literal"><span class="pre">App::uses()</span></tt> to load classes in vendors directories. It follows
+the same conventions as loading other files:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre>    <span class="c1">// 加载app/Vendor/Geshi.php</span>
+<span class="c1">// Load the class Geshi in app/Vendor/Geshi.php</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Geshi&#39;</span><span class="p">,</span> <span class="s1">&#39;Vendor&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>加载子目录中的类，需要使用 <tt class="docutils literal"><span class="pre">App::build()</span></tt> 添加这些路径::
+To load classes in subdirectories, you&#8217;ll need to add those paths
+with <tt class="docutils literal"><span class="pre">App::build()</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre>    <span class="c1">// 加载app/Vendor/SomePackage/ClassInSomePackage.php</span>
+<span class="c1">// Load the class ClassInSomePackage in app/Vendor/SomePackage/ClassInSomePackage.php</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Vendor&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="nx">APP</span> <span class="o">.</span> <span class="s1">&#39;Vendor&#39;</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="s1">&#39;SomePackage&#39;</span><span class="p">)));</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;ClassInSomePackage&#39;</span><span class="p">,</span> <span class="s1">&#39;Vendor&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>vendor文件不必遵循命名规则，一个类可以不同于文件名或不包含其他类。
+可以使用 <tt class="docutils literal"><span class="pre">App::import()</span></tt> 加载这些文件。下面的例子演示了如何从路径结构中加载vendor
+文件。这些vendor文件可能位于vendor目录中的任何位置。</p>
+<p>Your vendor files may not follow conventions, have a class that differs from
+the file name or does not contain classes. You can load those files using
+<tt class="docutils literal"><span class="pre">App::import()</span></tt>. The following examples illustrate how to load vendor
+files from a number of path structures. These vendor files could be located in
+any of the vendor folders.</p>
+<p>To load <strong>app/Vendor/geshi.php</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;Vendor&#39;</span><span class="p">,</span> <span class="s1">&#39;geshi&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<blockquote>
+<div>//切记geshi文件名必须是小写否则Cake找不到。</div></blockquote>
+<p class="last">The geshi file must be a lower-case file name as Cake will not
+find it otherwise.</p>
+</div>
+<p>To load <strong>app/Vendor/flickr/flickr.php</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;Vendor&#39;</span><span class="p">,</span> <span class="s1">&#39;flickr/flickr&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To load <strong>app/Vendor/some.name.php</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;Vendor&#39;</span><span class="p">,</span> <span class="s1">&#39;SomeName&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;file&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;some.name.php&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>To load <strong>app/Vendor/services/well.named.php</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;Vendor&#39;</span><span class="p">,</span> <span class="s1">&#39;WellNamed&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;file&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;services&#39;</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="s1">&#39;well.named.php&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>如果你的vendor文件在/vendors目录内，不会有什么差别。Cake会自动找到它。
+It wouldn&#8217;t make a difference if your vendor files are inside your /vendors
+directory. Cake will automatically find it.</p>
+<p>To load <strong>vendors/vendorName/libFile.php</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;Vendor&#39;</span><span class="p">,</span> <span class="s1">&#39;aUniqueIdentifier&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;file&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;vendorName&#39;</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="s1">&#39;libFile.php&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="app-init-load-shutdown-methods">
+<h2>App Init/Load/Shutdown Methods<a class="headerlink" href="#app-init-load-shutdown-methods" title="永久链接至标题">¶</a></h2>
+<dl class="staticmethod">
+<dt id="App::init">
+<em class="property">static </em><tt class="descclassname">App::</tt><tt class="descname">init</tt><big>(</big><big>)</big><a class="headerlink" href="#App::init" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>初始化缓存，注册关闭函数。
+Initializes the cache for App, registers a shutdown function.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="App::load">
+<em class="property">static </em><tt class="descclassname">App::</tt><tt class="descname">load</tt><big>(</big><em>string $className</em><big>)</big><a class="headerlink" href="#App::load" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+<p>Method to handle the automatic class loading. It will look for each class&#8217;
+package defined using <a class="reference internal" href="#App::uses" title="App::uses"><tt class="xref php php-meth docutils literal"><span class="pre">App::uses()</span></tt></a> and with this information it
+will resolve the package name to a full path to load the class from. File
+name for each class should follow the class name. For instance, if a class
+is name <tt class="docutils literal"><span class="pre">MyCustomClass</span></tt> the file name should be <tt class="docutils literal"><span class="pre">MyCustomClass.php</span></tt></p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="App::shutdown">
+<em class="property">static </em><tt class="descclassname">App::</tt><tt class="descname">shutdown</tt><big>(</big><big>)</big><a class="headerlink" href="#App::shutdown" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>Object destructor. Writes cache file if changes have been made to the
+<tt class="docutils literal"><span class="pre">$_map</span></tt>.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../core-libraries/toc-general-purpose.html">通用</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/global-constants-and-functions.html">全局常量和函数</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">App Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/events.html">Events System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/collections.html">Collections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-components.html">组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-helpers.html">助件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-utilities.html">工具</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">App Class</a><ul>
+<li><a class="reference internal" href="#packages">Packages 包</a></li>
+<li><a class="reference internal" href="#loading-classes">Loading Classes 加载类</a><ul>
+<li><a class="reference internal" href="#add-new-packages-to-an-application">Add new packages to an application</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#overriding-classes-in-cakephp">Overriding classes in CakePHP 重载类</a></li>
+<li><a class="reference internal" href="#loading-vendor-files-vendor">Loading Vendor Files  加载Vendor文件</a></li>
+<li><a class="reference internal" href="#app-init-load-shutdown-methods">App Init/Load/Shutdown Methods</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="../core-libraries/events.html" title="Events System" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="../core-libraries/global-constants-and-functions.html" title="全局常量和函数" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

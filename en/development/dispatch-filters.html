@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Dispatcher Filters" lang="en" name="title" />
+<meta content="Dispatcher filters are a middleware layer for CakePHP allowing to alter the request or response before it is sent" lang="en" name="description" />
+<meta content="middleware, filters, dispatcher, request, response, rack, application stack, events, beforeDispatch, afterDispatch, router" lang="en" name="keywords" />
+
+    <title>Dispatcher Filters &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Development" href="../development.html" />
+    <link rel="next" title="Deployment" href="../deployment.html" />
+    <link rel="prev" title="REST" href="rest.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/development/dispatch-filters.html" /><link rel="alternate" hreflang="es" href="../../es/development/dispatch-filters.html" /><link rel="alternate" hreflang="ja" href="../../ja/development/dispatch-filters.html" /><link rel="alternate" hreflang="fr" href="../../fr/development/dispatch-filters.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/development/dispatch-filters.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../development.html" accesskey="U" itemprop="url"><span itemprop="title">Development</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/development/dispatch-filters.html">pt</a></li>
+				
+					<li><a href="../../es/development/dispatch-filters.html">es</a></li>
+				
+					<li><a href="../../ja/development/dispatch-filters.html">ja</a></li>
+				
+					<li><a href="../../fr/development/dispatch-filters.html">fr</a></li>
+				
+					<li><a href="../../zh/development/dispatch-filters.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/development/dispatch-filters.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="dispatcher-filters">
+<h1>Dispatcher Filters<a class="headerlink" href="#dispatcher-filters" title="Permalink to this headline">¶</a></h1>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.2.</span></p>
+</div>
+<p>There are several reasons to want a piece of code to be run before any
+controller code is executed or right before the response is sent to the client,
+such as response caching, header tuning, special authentication or just to
+provide access to a mission-critical
+API response in lesser time than a complete
+request dispatching cycle would take.</p>
+<p>CakePHP provides for such cases a clean and extensible interface for attaching
+filters to this dispatching cycle, similar to a middleware layer thought to
+provide stackable services or routines for every request. We call them
+<cite>Dispatcher Filters</cite></p>
+<div class="section" id="configuring-filters">
+<h2>Configuring Filters<a class="headerlink" href="#configuring-filters" title="Permalink to this headline">¶</a></h2>
+<p>Filters are usually configured in the <tt class="docutils literal"><span class="pre">bootstrap.php</span></tt> file, but you could easily
+load them from any other configuration file before the request is dispatched.
+Adding and removing filters is done through the <cite>Configure</cite> class, using the
+special key <tt class="docutils literal"><span class="pre">Dispatcher.filters</span></tt>. By default CakePHP comes with a couple filter
+classes already enabled for all requests, let&#8217;s take a look at how they are
+added:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;AssetDispatcher&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CacheDispatcher&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Each of those array values are class names that will be instantiated and added
+as listeners for the events generated at dispatcher level. The first one,
+<tt class="docutils literal"><span class="pre">AssetDispatcher</span></tt> is meant to check whether the request is referring to a theme
+or plugin asset file, such as a CSS, JavaScript or image stored on either a
+plugin&#8217;s webroot folder or the corresponding one for a Theme. It will serve the
+file accordingly if found, stopping the rest of the dispatching cycle. The <tt class="docutils literal"><span class="pre">CacheDispatcher</span></tt>
+filter, when <tt class="docutils literal"><span class="pre">Cache.check</span></tt> config variable is enabled, will check if the
+response was already cached in the file system for a similar request and serve
+the cached code immediately.</p>
+<p>As you can see, both provided filters have the responsibility of stopping any
+further code and send the response right away to the client. But filters are not
+limited to this role, as we will show shortly in this section.</p>
+<p>You can add your own class names to the list of filters, and they will get
+executed in the order they were defined. There is also an alternative way for
+attaching filters that do not involve the special <tt class="docutils literal"><span class="pre">DispatcherFilter</span></tt> classes:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;my-filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;callable&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="nv">$classInstance</span><span class="p">,</span> <span class="s1">&#39;methodName&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;on&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;after&#39;</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>As shown above, you can pass any valid PHP <a class="reference external" href="http://php.net/callback">callback</a>
+type, as you may remember, a <cite>callback</cite> is anything that PHP can execute with
+<tt class="docutils literal"><span class="pre">call_user_func</span></tt>. We do make a little exception, if a string is provided it will
+be treated as a class name, not as a possible function name. This of course
+gives the ability to PHP 5.3 users to attach anonymous functions as filters:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+   <span class="s1">&#39;my-filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;callable&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="s1">&#39;on&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;before&#39;</span><span class="p">),</span>
+   <span class="c1">//more filters here</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">on</span></tt> key only takes <tt class="docutils literal"><span class="pre">before</span></tt> and <tt class="docutils literal"><span class="pre">after</span></tt> as valid values, and evidently
+means whether the filter should run before or after any controller code is
+executed. Additionally to defining filters with the <tt class="docutils literal"><span class="pre">callable</span></tt> key, you also
+get the chance to define a priority for your filters, if none is specified then
+a default of <tt class="docutils literal"><span class="pre">10</span></tt> is selected for you</p>
+<p>As all filters will have default priority <tt class="docutils literal"><span class="pre">10</span></tt>, should you want to run a filter before
+any other in the list, select lower priority numbers as needed:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+   <span class="s1">&#39;my-filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;callable&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span>
+        <span class="s1">&#39;on&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;before&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;priority&#39;</span> <span class="o">=&gt;</span> <span class="mi">5</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;other-filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;callable&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="nv">$class</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;on&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;after&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;priority&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+    <span class="p">),</span>
+   <span class="c1">//more filters here</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Obviously, when defining priorities the order in which filters are declared does
+not matter but for those having the same. When defining filters as class names
+there is no option to define priority in-line, we will get into that soon.
+Finally, CakePHP&#8217;s plugin notation can be used to define filters located in
+plugins:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;MyPlugin.MyFilter&#39;</span><span class="p">,</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Feel free to remove the default attached filters if you choose to use a more
+advanced/faster way of serving theme and plugin assets or if you do not wish to
+use built-in full page caching, or just implement your own.</p>
+<p>If you need to pass constructor parameters or settings to you dispatch filter
+classes you can do that by providing an array of settings:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;MyAssetFilter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;service&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;google.com&#39;</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>When the filter key is a valid classname, the value can be an array of
+parameters that are passed to the dispatch filter. By default the base class
+will assign these settings to the <tt class="docutils literal"><span class="pre">$settings</span></tt> property after merging them with
+the defaults in the class.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.5: </span>You can now provide constructor settings to dispatch filters in 2.5.</p>
+</div>
+</div>
+<div class="section" id="filter-classes">
+<h2>Filter Classes<a class="headerlink" href="#filter-classes" title="Permalink to this headline">¶</a></h2>
+<p>Dispatcher filters, when defined as class names in configuration, should extend
+the class <tt class="docutils literal"><span class="pre">DispatcherFilter</span></tt> provided in the <cite>Routing</cite> CakePHP&#8217;s directory.
+Let&#8217;s create a simple filter to respond to a specific URL with a &#8216;Hello World&#8217;
+text:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;DispatcherFilter&#39;</span><span class="p">,</span> <span class="s1">&#39;Routing&#39;</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">HelloWorldFilter</span> <span class="k">extends</span> <span class="nx">DispatcherFilter</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="nv">$priority</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeDispatch</span><span class="p">(</span><span class="nx">CakeEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">];</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">];</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">url</span> <span class="o">===</span> <span class="s1">&#39;hello-world&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">body</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">);</span>
+            <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">stopPropagation</span><span class="p">();</span>
+            <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This class should be saved in a file in <tt class="docutils literal"><span class="pre">app/Routing/Filter/HelloWorldFilter.php</span></tt>
+and configured in the bootstrap file according to how it was explained in the
+previous section. There is plenty to explain here, let&#8217;s begin with the
+<tt class="docutils literal"><span class="pre">$priority</span></tt> value.</p>
+<p>As mentioned before, when using filter classes you can only define the order in
+which they are run using the <tt class="docutils literal"><span class="pre">$priority</span></tt> property in the class, default value is
+10 if the property is declared, this means that it will get executed _after_ the
+Router class has parsed the request. We do not want this to happen in our
+previous example, because most probably you do not have any controller set up
+for answering to that URL, hence we chose 9 as our priority.</p>
+<p><tt class="docutils literal"><span class="pre">DispatcherFilter</span></tt> exposes two methods that can be overridden in subclasses,
+they are <tt class="docutils literal"><span class="pre">beforeDispatch</span></tt> and <tt class="docutils literal"><span class="pre">afterDispatch</span></tt>, and are executed before or after
+any controller is executed respectively. Both methods receive a  <tt class="xref php php-class docutils literal"><span class="pre">CakeEvent</span></tt>
+object containing the <tt class="docutils literal"><span class="pre">request</span></tt> and <tt class="docutils literal"><span class="pre">response</span></tt> objects
+(<a class="reference internal" href="../controllers/request-response.html#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> and <a class="reference internal" href="../controllers/request-response.html#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> instances) along with an
+<tt class="docutils literal"><span class="pre">additionalParams</span></tt> array inside the <tt class="docutils literal"><span class="pre">data</span></tt> property. The latter contains
+information used for internal dispatching when calling <tt class="docutils literal"><span class="pre">requestAction</span></tt>.</p>
+<p>In our example we conditionally returned the <tt class="docutils literal"><span class="pre">$response</span></tt> object as a result,
+this will tell the Dispatcher to not instantiate any controller and return such
+object as response immediately to the client. We also added
+<tt class="docutils literal"><span class="pre">$event-&gt;stopPropagation()</span></tt> to prevent other filters from being executed after
+this one.</p>
+<p>Let&#8217;s now create another filter for altering response headers in any public
+page, in our case it would be anything served from the <tt class="docutils literal"><span class="pre">PagesController</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;DispatcherFilter&#39;</span><span class="p">,</span> <span class="s1">&#39;Routing&#39;</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">HttpCacheFilter</span> <span class="k">extends</span> <span class="nx">DispatcherFilter</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">afterDispatch</span><span class="p">(</span><span class="nx">CakeEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">];</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">];</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">]</span> <span class="o">!==</span> <span class="s1">&#39;pages&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">statusCode</span><span class="p">()</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">sharable</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+            <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">expires</span><span class="p">(</span><span class="nb">strtotime</span><span class="p">(</span><span class="s1">&#39;+1 day&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This filter will send a expiration header to 1 day in the future for
+all responses produced by the pages controller. You could of course do the same
+in the controller, this is just an example of what could be done with filters.
+For instance, instead of altering the response you could cache it using the
+<a class="reference internal" href="../core-libraries/caching.html#Cache" title="Cache"><tt class="xref php php-class docutils literal"><span class="pre">Cache</span></tt></a> class and serve the response from the <tt class="docutils literal"><span class="pre">beforeDispatch</span></tt>
+callback.</p>
+</div>
+<div class="section" id="inline-filters">
+<h2>Inline Filters<a class="headerlink" href="#inline-filters" title="Permalink to this headline">¶</a></h2>
+<p>Our last example will use an anonymous function (only available on PHP 5.3+) to
+serve a list of posts in JSON format, we encourage you to do so using
+controllers and the <a class="reference internal" href="../views/json-and-xml-views.html#JsonView" title="JsonView"><tt class="xref php php-class docutils literal"><span class="pre">JsonView</span></tt></a> class, but let&#8217;s imagine you need to save a
+few milliseconds for this mission-critical API endpoint:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$postsList</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">url</span> <span class="o">!==</span> <span class="s1">&#39;posts/recent.json&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;ClassRegistry&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+    <span class="nv">$postModel</span> <span class="o">=</span> <span class="nx">ClassRegistry</span><span class="o">::</span><span class="na">init</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span><span class="p">);</span>
+    <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">body</span><span class="p">(</span><span class="nb">json_encode</span><span class="p">(</span><span class="nv">$postModel</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;recent&#39;</span><span class="p">)));</span>
+    <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">stopPropagation</span><span class="p">();</span>
+    <span class="k">return</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;AssetDispatcher&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CacheDispatcher&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;recent-posts&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;callable&#39;</span> <span class="o">=&gt;</span> <span class="nv">$postsList</span><span class="p">,</span>
+        <span class="s1">&#39;priority&#39;</span> <span class="o">=&gt;</span> <span class="mi">9</span><span class="p">,</span>
+        <span class="s1">&#39;on&#39;</span><span class="o">=&gt;</span> <span class="s1">&#39;before&#39;</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>In previous example we have selected a priority of <tt class="docutils literal"><span class="pre">9</span></tt> for our filter, so to skip
+any other logic either placed in custom or core filters such as CakePHP internal
+routing system. Although it is not required, it shows how to make your important
+code run first in case you need to trim as much fat as possible from some requests.</p>
+<p>For obvious reasons this has the potential of making your app very difficult
+to maintain. Filters are an extremely powerful tool when used wisely, adding
+response handlers for each URL in your app is not a good use for it. But if you
+got a valid reason to do so, then you have a clean solution at hand. Keep in
+mind that not everything needs to be a filter, <cite>Controllers</cite> and <cite>Components</cite> are
+usually a more accurate choice for adding any request handling code to your app.</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sessions.html">Sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rest.html">REST</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Dispatcher Filters</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Dispatcher Filters</a><ul>
+<li><a class="reference internal" href="#configuring-filters">Configuring Filters</a></li>
+<li><a class="reference internal" href="#filter-classes">Filter Classes</a></li>
+<li><a class="reference internal" href="#inline-filters">Inline Filters</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="../deployment.html" title="Deployment" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="rest.html" title="REST" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

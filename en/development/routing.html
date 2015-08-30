@@ -1,0 +1,1409 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Routing" lang="en" name="title" />
+<meta content="controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router" lang="en" name="keywords" />
+
+    <title>Routing &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Development" href="../development.html" />
+    <link rel="next" title="Sessions" href="sessions.html" />
+    <link rel="prev" title="Configuration" href="configuration.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/development/routing.html" /><link rel="alternate" hreflang="es" href="../../es/development/routing.html" /><link rel="alternate" hreflang="ja" href="../../ja/development/routing.html" /><link rel="alternate" hreflang="fr" href="../../fr/development/routing.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/development/routing.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../development.html" accesskey="U" itemprop="url"><span itemprop="title">Development</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/development/routing.html">pt</a></li>
+				
+					<li><a href="../../es/development/routing.html">es</a></li>
+				
+					<li><a href="../../ja/development/routing.html">ja</a></li>
+				
+					<li><a href="../../fr/development/routing.html">fr</a></li>
+				
+					<li><a href="../../zh/development/routing.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/development/routing.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="routing">
+<h1>Routing<a class="headerlink" href="#routing" title="Permalink to this headline">¶</a></h1>
+<p>Routing is a feature that maps URLs to controller actions. It was
+added to CakePHP to make pretty URLs more configurable and
+flexible. Using Apache&#8217;s mod_rewrite is not required for using
+routes, but it will make your address bar look much more tidy.</p>
+<p>Routing in CakePHP also encompasses the idea of reverse routing,
+where an array of parameters can be reversed into a string URL.
+By using reverse routing, you can easily re-factor your application&#8217;s
+URL structure without having to update all your code.</p>
+<div class="section" id="routes-configuration">
+<span id="index-0"></span><span id="id1"></span><h2>Routes Configuration<a class="headerlink" href="#routes-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Routes in an application are configured in <tt class="docutils literal"><span class="pre">app/Config/routes.php</span></tt>.
+This file is included by the <tt class="xref php php-class docutils literal"><span class="pre">Dispatcher</span></tt> when handling routes
+and allows you to define application specific routes you want used. Routes
+declared in this file are processed top to bottom when incoming requests
+are matched. This means that the order you place routes can affect how
+routes are parsed. It&#8217;s generally a good idea to place most frequently
+visited routes at the top of the routes file if possible. This will
+save having to check a number of routes that won&#8217;t match on each request.</p>
+<p>Routes are parsed and matched, in the order they are connected in.
+If you define two similar routes, the first defined route will
+have higher priority over the one defined latter. After connecting routes you
+can manipulate the order of routes using <a class="reference internal" href="#Router::promote" title="Router::promote"><tt class="xref php php-meth docutils literal"><span class="pre">Router::promote()</span></tt></a>.</p>
+<p>CakePHP also comes with a few default routes to get you started. These
+can be disabled later on once you are sure you don&#8217;t need them.
+See <a class="reference internal" href="#disabling-default-routes"><em>Disabling the Default Routes</em></a> on how to disable the default routing.</p>
+</div>
+<div class="section" id="default-routing">
+<h2>Default Routing<a class="headerlink" href="#default-routing" title="Permalink to this headline">¶</a></h2>
+<p>Before you learn about configuring your own routes, you should know
+that CakePHP comes configured with a default set of routes.
+CakePHP&#8217;s default routing will get you pretty far in any
+application. You can access an action directly via the URL by
+putting its name in the request. You can also pass parameters to
+your controller actions using the URL.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">URL</span> <span class="nx">pattern</span> <span class="k">default</span> <span class="nx">routes</span><span class="o">:</span>
+<span class="nx">http</span><span class="o">://</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">controller</span><span class="o">/</span><span class="nx">action</span><span class="o">/</span><span class="nx">param1</span><span class="o">/</span><span class="nx">param2</span><span class="o">/</span><span class="nx">param3</span>
+</pre></div>
+</div>
+<p>The URL /posts/view maps to the view() action of the
+PostsController, and /products/view_clearance maps to the
+view_clearance() action of the ProductsController. If no action is
+specified in the URL, the index() method is assumed.</p>
+<p>The default routing setup also allows you to pass parameters to
+your actions using the URL. A request for /posts/view/25 would be
+equivalent to calling view(25) on the PostsController, for
+example. The default routing also provides routes for plugins,
+and prefix routes should you choose to use those features.</p>
+<p>The built-in routes live in <tt class="docutils literal"><span class="pre">Cake/Config/routes.php</span></tt>. You can
+disable the default routing by removing them from your application&#8217;s
+<a class="reference internal" href="../appendices/glossary.html#term-routes-php"><em class="xref std std-term">routes.php</em></a> file.</p>
+</div>
+<div class="section" id="connecting-routes">
+<span id="index-1"></span><span id="id2"></span><h2>Connecting Routes<a class="headerlink" href="#connecting-routes" title="Permalink to this headline">¶</a></h2>
+<p>Defining your own routes allows you to define how your application
+will respond to a given URL. Define your own routes in the
+<tt class="docutils literal"><span class="pre">app/Config/routes.php</span></tt> file using the <a class="reference internal" href="#Router::connect" title="Router::connect"><tt class="xref php php-meth docutils literal"><span class="pre">Router::connect()</span></tt></a>
+method.</p>
+<p>The <tt class="docutils literal"><span class="pre">connect()</span></tt> method takes up to three parameters: the URL you
+wish to match, the default values for your route elements, and
+regular expression rules to help the router match elements in the
+URL.</p>
+<p>The basic format for a route definition is:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s1">&#39;URL&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;defaultValue&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;option&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;matchingRegex&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>The first parameter is used to tell the router what sort of URL
+you&#8217;re trying to control. The URL is a normal slash delimited
+string, but can also contain a wildcard (*) or <a class="reference internal" href="#route-elements"><em>Route Elements</em></a>.
+Using a wildcard tells the router that you are willing to accept
+any additional arguments supplied. Routes without a * only match
+the exact template pattern supplied.</p>
+<p>Once you&#8217;ve specified a URL, you use the last two parameters of
+<tt class="docutils literal"><span class="pre">connect()</span></tt> to tell CakePHP what to do with a request once it has
+been matched. The second parameter is an associative array. The
+keys of the array should be named after the route elements in the
+URL, or the default elements: <tt class="docutils literal"><span class="pre">:controller</span></tt>, <tt class="docutils literal"><span class="pre">:action</span></tt>, and <tt class="docutils literal"><span class="pre">:plugin</span></tt>.
+The values in the array are the default values for those keys.
+Let&#8217;s look at some basic examples before we start using the third
+parameter of connect():</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s1">&#39;/pages/*&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pages&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;display&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This route is found in the routes.php file distributed with CakePHP.
+This route matches any URL starting with <tt class="docutils literal"><span class="pre">/pages/</span></tt> and
+hands it to the <tt class="docutils literal"><span class="pre">display()</span></tt> action of the <tt class="docutils literal"><span class="pre">PagesController();</span></tt>
+The request /pages/products would be mapped to
+<tt class="docutils literal"><span class="pre">PagesController-&gt;display('products')</span></tt>.</p>
+<p>In addition to the greedy star <tt class="docutils literal"><span class="pre">/*</span></tt> there is also the <tt class="docutils literal"><span class="pre">/**</span></tt> trailing star
+syntax. Using a trailing double star, will capture the remainder of a URL as a
+single passed argument. This is useful when you want to use an argument that
+included a <tt class="docutils literal"><span class="pre">/</span></tt> in it:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s1">&#39;/pages/**&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pages&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;show&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>The incoming URL of <tt class="docutils literal"><span class="pre">/pages/the-example-/-and-proof</span></tt> would result in a single
+passed argument of <tt class="docutils literal"><span class="pre">the-example-/-and-proof</span></tt>.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.1: </span>The trailing double star was added in 2.1.</p>
+</div>
+<p>You can use the second parameter of <a class="reference internal" href="#Router::connect" title="Router::connect"><tt class="xref php php-meth docutils literal"><span class="pre">Router::connect()</span></tt></a>
+to provide any routing parameters that are composed of the default values
+of the route:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s1">&#39;/government&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pages&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;display&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This example shows how you can use the second parameter of
+<tt class="docutils literal"><span class="pre">connect()</span></tt> to define default parameters. If you built a site
+that features products for different categories of customers, you
+might consider creating a route. This allows you link to
+<tt class="docutils literal"><span class="pre">/government</span></tt> rather than <tt class="docutils literal"><span class="pre">/pages/display/5</span></tt>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Although you can connect alternate routes, the default routes
+will continue to work. In this setting, you can access a single piece of
+content from 2 different URLs. See <a class="reference internal" href="#disabling-default-routes"><em>Disabling the Default Routes</em></a> to
+disable default routes, and only provide the URLs you define.</p>
+</div>
+<p>Another common use for the Router is to define an &#8220;alias&#8221; for a
+controller. Let&#8217;s say that instead of accessing our regular URL at
+<tt class="docutils literal"><span class="pre">/users/some_action/5</span></tt>, we&#8217;d like to be able to access it by
+<tt class="docutils literal"><span class="pre">/cooks/some_action/5</span></tt>. The following route easily takes care of
+that:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s1">&#39;/cooks/:action/*&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This is telling the Router that any url beginning with <tt class="docutils literal"><span class="pre">/cooks/</span></tt>
+should be sent to the users controller. The action called will
+depend on the value of the <tt class="docutils literal"><span class="pre">:action</span></tt> parameter. By using
+<a class="reference internal" href="#route-elements"><em>Route Elements</em></a>, you can create variable routes, that accept
+user input or variables. The above route also uses the greedy star.
+The greedy star indicates to <a class="reference internal" href="#Router" title="Router"><tt class="xref php php-class docutils literal"><span class="pre">Router</span></tt></a> that this route
+should accept any additional positional arguments given. These
+arguments will be made available in the <a class="reference internal" href="#passed-arguments"><em>Passed Arguments</em></a>
+array.</p>
+<p>When generating URLs, routes are used too. Using
+<tt class="docutils literal"><span class="pre">array('controller'</span> <span class="pre">=&gt;</span> <span class="pre">'users',</span> <span class="pre">'action'</span> <span class="pre">=&gt;</span> <span class="pre">'some_action',</span> <span class="pre">5)</span></tt> as
+a url will output /cooks/some_action/5 if the above route is the
+first match found.</p>
+<p>By default all named and passed arguments are extracted from URLs matching
+greedy templates. However, you can configure how and which named arguments are
+parsed using <a class="reference internal" href="#Router::connectNamed" title="Router::connectNamed"><tt class="xref php php-meth docutils literal"><span class="pre">Router::connectNamed()</span></tt></a> if you need to.</p>
+<div class="section" id="route-elements">
+<span id="id3"></span><h3>Route Elements<a class="headerlink" href="#route-elements" title="Permalink to this headline">¶</a></h3>
+<p>You can specify your own route elements and doing so gives you the
+power to define places in the URL where parameters for controller
+actions should lie. When a request is made, the values for these
+route elements are found in <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;params</span></tt> on the controller.
+This is different than how named parameters are handled, so note the
+difference: named parameters (/controller/action/name:value) are
+found in <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;params['named']</span></tt>, whereas custom route
+element data is found in <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;params</span></tt>. When you define
+a custom route element, you can optionally specify a regular
+expression - this tells CakePHP how to know if the URL is correctly formed or not.
+If you choose to not provide a regular expression, any non <tt class="docutils literal"><span class="pre">/</span></tt> will be
+treated as part of the parameter:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s1">&#39;/:controller/:id&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;[0-9]+&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This simple example illustrates how to create a quick way to view
+models from any controller by crafting a URL that looks like
+<tt class="docutils literal"><span class="pre">/controllername/:id</span></tt>. The URL provided to connect() specifies two
+route elements: <tt class="docutils literal"><span class="pre">:controller</span></tt> and <tt class="docutils literal"><span class="pre">:id</span></tt>. The <tt class="docutils literal"><span class="pre">:controller</span></tt> element
+is a CakePHP default route element, so the router knows how to match and
+identify controller names in URLs. The <tt class="docutils literal"><span class="pre">:id</span></tt> element is a custom
+route element, and must be further clarified by specifying a
+matching regular expression in the third parameter of connect().</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Patterns used for route elements must not contain any capturing
+groups. If they do, Router will not function correctly.</p>
+</div>
+<p>Once this route has been defined, requesting <tt class="docutils literal"><span class="pre">/apples/5</span></tt> is the same
+as requesting <tt class="docutils literal"><span class="pre">/apples/view/5</span></tt>. Both would call the view() method of
+the ApplesController. Inside the view() method, you would need to
+access the passed ID at <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;params['id']</span></tt>.</p>
+<p>If you have a single controller in your application and you do not want
+the controller name to appear in the URL, you can map all URLs to actions
+in your controller. For example, to map all URLs to actions of the
+<tt class="docutils literal"><span class="pre">home</span></tt> controller, e.g have URLs like <tt class="docutils literal"><span class="pre">/demo</span></tt> instead of
+<tt class="docutils literal"><span class="pre">/home/demo</span></tt>, you can do the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span><span class="s1">&#39;/:action&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;home&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>If you would like to provide a case insensitive URL, you can use regular
+expression inline modifiers:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s1">&#39;/:userShortcut&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;teachers&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;profile&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;userShortcut&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;(?i:principal)&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>One more example, and you&#8217;ll be a routing pro:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s1">&#39;/:controller/:year/:month/:day&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;year&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;[12][0-9]{3}&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;month&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;0[1-9]|1[012]&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;day&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;0[1-9]|[12][0-9]|3[01]&#39;</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This is rather involved, but shows how powerful routes can really
+become. The URL supplied has four route elements. The first is
+familiar to us: it&#8217;s a default route element that tells CakePHP to
+expect a controller name.</p>
+<p>Next, we specify some default values. Regardless of the controller,
+we want the index() action to be called.</p>
+<p>Finally, we specify some regular expressions that will match years,
+months and days in numerical form. Note that parenthesis (grouping)
+are not supported in the regular expressions. You can still specify
+alternates, as above, but not grouped with parenthesis.</p>
+<p>Once defined, this route will match <tt class="docutils literal"><span class="pre">/articles/2007/02/01</span></tt>,
+<tt class="docutils literal"><span class="pre">/posts/2004/11/16</span></tt>, handing the requests to
+the index() actions of their respective controllers, with the date
+parameters in <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;params</span></tt>.</p>
+<p>There are several route elements that have special meaning in
+CakePHP, and should not be used unless you want the special meaning</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">controller</span></tt> Used to name the controller for a route.</li>
+<li><tt class="docutils literal"><span class="pre">action</span></tt> Used to name the controller action for a route.</li>
+<li><tt class="docutils literal"><span class="pre">plugin</span></tt> Used to name the plugin a controller is located in.</li>
+<li><tt class="docutils literal"><span class="pre">prefix</span></tt> Used for <a class="reference internal" href="#prefix-routing"><em>Prefix Routing</em></a></li>
+<li><tt class="docutils literal"><span class="pre">ext</span></tt> Used for <a class="reference internal" href="#file-extensions"><em>File Extensions</em></a> routing.</li>
+</ul>
+</div>
+<div class="section" id="passing-parameters-to-action">
+<h3>Passing Parameters to Action<a class="headerlink" href="#passing-parameters-to-action" title="Permalink to this headline">¶</a></h3>
+<p>When connecting routes using <a class="reference internal" href="#route-elements"><em>Route Elements</em></a> you may want
+to have routed elements be passed arguments instead. By using the 3rd
+argument of <a class="reference internal" href="#Router::connect" title="Router::connect"><tt class="xref php php-meth docutils literal"><span class="pre">Router::connect()</span></tt></a> you can define which route
+elements should also be made available as passed arguments:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// SomeController.php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$articleId</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$slug</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// some code here...</span>
+<span class="p">}</span>
+
+<span class="c1">// routes.php</span>
+<span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s1">&#39;/blog/:id-:slug&#39;</span><span class="p">,</span> <span class="c1">// E.g. /blog/3-CakePHP_Rocks</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;blog&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="c1">// order matters since this will simply map &quot;:id&quot; to</span>
+        <span class="c1">// $articleId in your action</span>
+        <span class="s1">&#39;pass&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;slug&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;[0-9]+&#39;</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>And now, thanks to the reverse routing capabilities, you can pass
+in the url array like below and CakePHP will know how to form the URL
+as defined in the routes:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// view.ctp</span>
+<span class="c1">// this will return a link to /blog/3-CakePHP_Rocks</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span><span class="s1">&#39;CakePHP Rocks&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;blog&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;slug&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CakePHP_Rocks&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="per-route-named-parameters">
+<h3>Per-Route Named Parameters<a class="headerlink" href="#per-route-named-parameters" title="Permalink to this headline">¶</a></h3>
+<p>While you can control named parameters on a global scale using
+<a class="reference internal" href="#Router::connectNamed" title="Router::connectNamed"><tt class="xref php php-meth docutils literal"><span class="pre">Router::connectNamed()</span></tt></a> you can also control named parameter
+behavior at the route level using the 3rd argument of <tt class="docutils literal"><span class="pre">Router::connect()</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s1">&#39;/:controller/:action/*&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;named&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;wibble&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;fish&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;fizz&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;comments&#39;</span><span class="p">,</span> <span class="s1">&#39;other&#39;</span><span class="p">)),</span>
+            <span class="s1">&#39;buzz&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;val-[\d]+&#39;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>The above route definition uses the <tt class="docutils literal"><span class="pre">named</span></tt> key to define how several named
+parameters should be treated. Lets go through each of the various rules
+one-by-one:</p>
+<ul class="simple">
+<li>&#8216;wibble&#8217; has no additional information. This means it will always parse if
+found in a URL matching this route.</li>
+<li>&#8216;fish&#8217; has an array of conditions, containing the &#8216;action&#8217; key. This means
+that fish will only be parsed as a named parameter if the action is also index.</li>
+<li>&#8216;fizz&#8217; also has an array of conditions. However, it contains two controllers,
+this means that &#8216;fizz&#8217; will only be parsed if the controller matches one of the
+names in the array.</li>
+<li>&#8216;buzz&#8217; has a string condition. String conditions are treated as
+regular expression fragments. Only values for buzz matching the pattern will
+be parsed.</li>
+</ul>
+<p>If a named parameter is used and it does not match the provided criteria, it will
+be treated as a passed argument instead of a named parameter.</p>
+</div>
+<div class="section" id="prefix-routing">
+<span id="index-2"></span><span id="id4"></span><h3>Prefix Routing<a class="headerlink" href="#prefix-routing" title="Permalink to this headline">¶</a></h3>
+<p>Many applications require an administration section where
+privileged users can make changes. This is often done through a
+special URL such as <tt class="docutils literal"><span class="pre">/admin/users/edit/5</span></tt>. In CakePHP, prefix routing
+can be enabled from within the core configuration file by setting
+the prefixes with Routing.prefixes. Note that prefixes, although
+related to the router, are to be configured in
+<tt class="docutils literal"><span class="pre">app/Config/core.php</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Routing.prefixes&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>In your controller, any action with an <tt class="docutils literal"><span class="pre">admin_</span></tt> prefix will be
+called. Using our users example, accessing the URL
+<tt class="docutils literal"><span class="pre">/admin/users/edit/5</span></tt> would call the method <tt class="docutils literal"><span class="pre">admin_edit</span></tt> of our
+<tt class="docutils literal"><span class="pre">UsersController</span></tt> passing 5 as the first parameter. The view file
+used would be <tt class="docutils literal"><span class="pre">app/View/Users/admin_edit.ctp</span></tt></p>
+<p>You can map the URL /admin to your <tt class="docutils literal"><span class="pre">admin_index</span></tt> action of pages
+controller using following route:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s1">&#39;/admin&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pages&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>You can configure the Router to use multiple prefixes too. By
+adding additional values to <tt class="docutils literal"><span class="pre">Routing.prefixes</span></tt>. If you set:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Routing.prefixes&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="s1">&#39;manager&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>CakePHP will automatically generate routes for both the admin and
+manager prefixes. Each configured prefix will have the following
+routes generated for it:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s2">&quot;/</span><span class="si">{</span><span class="nv">$prefix</span><span class="si">}</span><span class="s2">/:plugin/:controller&quot;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;prefix&#39;</span> <span class="o">=&gt;</span> <span class="nv">$prefix</span><span class="p">,</span> <span class="nv">$prefix</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s2">&quot;/</span><span class="si">{</span><span class="nv">$prefix</span><span class="si">}</span><span class="s2">/:plugin/:controller/:action/*&quot;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;prefix&#39;</span> <span class="o">=&gt;</span> <span class="nv">$prefix</span><span class="p">,</span> <span class="nv">$prefix</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s2">&quot;/</span><span class="si">{</span><span class="nv">$prefix</span><span class="si">}</span><span class="s2">/:controller&quot;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;prefix&#39;</span> <span class="o">=&gt;</span> <span class="nv">$prefix</span><span class="p">,</span> <span class="nv">$prefix</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s2">&quot;/</span><span class="si">{</span><span class="nv">$prefix</span><span class="si">}</span><span class="s2">/:controller/:action/*&quot;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;prefix&#39;</span> <span class="o">=&gt;</span> <span class="nv">$prefix</span><span class="p">,</span> <span class="nv">$prefix</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Much like admin routing all prefix actions should be prefixed with
+the prefix name. So <tt class="docutils literal"><span class="pre">/manager/posts/add</span></tt> would map to
+<tt class="docutils literal"><span class="pre">PostsController::manager_add()</span></tt>.</p>
+<p>Additionally, the current prefix will be available from the controller methods through <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;prefix</span></tt></p>
+<p>When using prefix routes it&#8217;s important to remember, using the HTML
+helper to build your links will help maintain the prefix calls.
+Here&#8217;s how to build this link using the HTML helper:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Go into a prefixed route.</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+    <span class="s1">&#39;Manage posts&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;manager&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// leave a prefix</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+    <span class="s1">&#39;View Post&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;manager&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="plugin-routing">
+<span id="index-3"></span><h3>Plugin Routing<a class="headerlink" href="#plugin-routing" title="Permalink to this headline">¶</a></h3>
+<p>Plugin routing uses the <strong>plugin</strong> key. You can create links that
+point to a plugin, but adding the plugin key to your URL array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+    <span class="s1">&#39;New todo&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;plugin&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;todo&#39;</span><span class="p">,</span> <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;todo_items&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;create&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Conversely if the active request is a plugin request and you want
+to create a link that has no plugin you can do the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+    <span class="s1">&#39;New todo&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;plugin&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span> <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;profile&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>By setting <tt class="docutils literal"><span class="pre">plugin</span> <span class="pre">=&gt;</span> <span class="pre">null</span></tt> you tell the Router that you want to
+create a link that is not part of a plugin.</p>
+</div>
+<div class="section" id="file-extensions">
+<span id="index-4"></span><span id="id5"></span><h3>File Extensions<a class="headerlink" href="#file-extensions" title="Permalink to this headline">¶</a></h3>
+<p>To handle different file extensions with your routes, you need one
+extra line in your routes config file:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">parseExtensions</span><span class="p">(</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39;rss&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This will tell the router to remove any matching file extensions,
+and then parse what remains.</p>
+<p>If you want to create a URL such as /page/title-of-page.html you
+would create your route as illustrated below:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s1">&#39;/page/:title&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pages&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;pass&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Then to create links which map back to the routes simply use:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+    <span class="s1">&#39;Link title&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pages&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;super-article&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ext&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;html&#39;</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>File extensions are used by <a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a> to do automatic
+view switching based on content types. See the RequestHandlerComponent for
+more information.</p>
+</div>
+<div class="section" id="using-additional-conditions-when-matching-routes">
+<span id="route-conditions"></span><h3>Using Additional Conditions When Matching Routes<a class="headerlink" href="#using-additional-conditions-when-matching-routes" title="Permalink to this headline">¶</a></h3>
+<p>When creating routes you might want to restrict certain URL&#8217;s based on specific
+request/environment settings. A good example of this is <a class="reference internal" href="rest.html"><em>REST</em></a>
+routing. You can specify additional conditions in the <tt class="docutils literal"><span class="pre">$defaults</span></tt> argument for
+<a class="reference internal" href="#Router::connect" title="Router::connect"><tt class="xref php php-meth docutils literal"><span class="pre">Router::connect()</span></tt></a>. By default CakePHP exposes 3 environment
+conditions, but you can add more using <a class="reference internal" href="#custom-route-classes"><em>Custom Route Classes</em></a>. The built-in
+options are:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">[type]</span></tt> Only match requests for specific content types.</li>
+<li><tt class="docutils literal"><span class="pre">[method]</span></tt> Only match requests with specific HTTP verbs.</li>
+<li><tt class="docutils literal"><span class="pre">[server]</span></tt> Only match when $_SERVER[&#8216;SERVER_NAME&#8217;] matches the given value.</li>
+</ul>
+<p>We&#8217;ll provide a simple example here of how you can use the <tt class="docutils literal"><span class="pre">[method]</span></tt>
+option to create a custom RESTful route:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s2">&quot;/:controller/:id&quot;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s2">&quot;action&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;edit&quot;</span><span class="p">,</span> <span class="s2">&quot;[method]&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;PUT&quot;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s2">&quot;id&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;[0-9]+&quot;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>The above route will only match for <tt class="docutils literal"><span class="pre">PUT</span></tt> requests. Using these conditions,
+you can create custom REST routing, or other request data dependent information.</p>
+</div>
+</div>
+<div class="section" id="passed-arguments">
+<span id="index-5"></span><span id="id6"></span><h2>Passed Arguments<a class="headerlink" href="#passed-arguments" title="Permalink to this headline">¶</a></h2>
+<p>Passed arguments are additional arguments or path segments that are
+used when making a request. They are often used to pass parameters
+to your controller methods.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">http</span><span class="o">://</span><span class="nx">localhost</span><span class="o">/</span><span class="nx">calendars</span><span class="o">/</span><span class="nx">view</span><span class="o">/</span><span class="nx">recent</span><span class="o">/</span><span class="nx">mark</span>
+</pre></div>
+</div>
+<p>In the above example, both <tt class="docutils literal"><span class="pre">recent</span></tt> and <tt class="docutils literal"><span class="pre">mark</span></tt> are passed
+arguments to <tt class="docutils literal"><span class="pre">CalendarsController::view()</span></tt>. Passed arguments are
+given to your controllers in three ways. First as arguments to the
+action method called, and secondly they are available in
+<tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;params['pass']</span></tt> as a numerically indexed array. Lastly
+there is <tt class="docutils literal"><span class="pre">$this-&gt;passedArgs</span></tt> available in the same way as the
+second one. When using custom routes you can force particular
+parameters to go into the passed arguments as well.</p>
+<p>If you were to visit the previously mentioned URL, and you
+had a controller action that looked like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CalendarsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$arg1</span><span class="p">,</span> <span class="nv">$arg2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">debug</span><span class="p">(</span><span class="nb">func_get_args</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You would get the following output:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">recent</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">mark</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This same data is also available at <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;params['pass']</span></tt>
+and <tt class="docutils literal"><span class="pre">$this-&gt;passedArgs</span></tt> in your controllers, views, and helpers.
+The values in the pass array are numerically indexed based on the
+order they appear in the called URL:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">debug</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">]);</span>
+<span class="nx">debug</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">passedArgs</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Either of the above would output:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">recent</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">mark</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">$this-&gt;passedArgs may also contain named parameters as a named
+array mixed with Passed arguments.</p>
+</div>
+<p>When generating URLs, using a <a class="reference internal" href="../appendices/glossary.html#term-routing-array"><em class="xref std std-term">routing array</em></a> you add passed
+arguments as values without string keys in the array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Since <tt class="docutils literal"><span class="pre">5</span></tt> has a numeric key, it is treated as a passed argument.</p>
+</div>
+<div class="section" id="named-parameters">
+<span id="index-6"></span><span id="id7"></span><h2>Named Parameters<a class="headerlink" href="#named-parameters" title="Permalink to this headline">¶</a></h2>
+<p>You can name parameters and send their values using the URL. A
+request for <tt class="docutils literal"><span class="pre">/posts/view/title:first/category:general</span></tt> would result
+in a call to the view() action of the PostsController. In that
+action, you&#8217;d find the values of the title and category parameters
+inside <tt class="docutils literal"><span class="pre">$this-&gt;params['named']</span></tt>. They are also available inside
+<tt class="docutils literal"><span class="pre">$this-&gt;passedArgs</span></tt>. In both cases you can access named parameters using their
+name as an index. If named parameters are omitted, they will not be set.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">What is parsed as a named parameter is controlled by
+<a class="reference internal" href="#Router::connectNamed" title="Router::connectNamed"><tt class="xref php php-meth docutils literal"><span class="pre">Router::connectNamed()</span></tt></a>. If your named parameters are not
+reverse routing, or parsing correctly, you will need to inform
+<a class="reference internal" href="#Router" title="Router"><tt class="xref php php-class docutils literal"><span class="pre">Router</span></tt></a> about them.</p>
+</div>
+<p>Some summarizing examples for default routes might prove helpful:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">URL</span> <span class="nx">to</span> <span class="nx">controller</span> <span class="nx">action</span> <span class="nx">mapping</span> <span class="nx">using</span> <span class="k">default</span> <span class="nx">routes</span><span class="o">:</span>
+
+<span class="nx">URL</span><span class="o">:</span> <span class="o">/</span><span class="nx">monkeys</span><span class="o">/</span><span class="nx">jump</span>
+<span class="nx">Mapping</span><span class="o">:</span> <span class="nx">MonkeysController</span><span class="o">-&gt;</span><span class="na">jump</span><span class="p">();</span>
+
+<span class="nx">URL</span><span class="o">:</span> <span class="o">/</span><span class="nx">products</span>
+<span class="nx">Mapping</span><span class="o">:</span> <span class="nx">ProductsController</span><span class="o">-&gt;</span><span class="na">index</span><span class="p">();</span>
+
+<span class="nx">URL</span><span class="o">:</span> <span class="o">/</span><span class="nx">tasks</span><span class="o">/</span><span class="nx">view</span><span class="o">/</span><span class="mi">45</span>
+<span class="nx">Mapping</span><span class="o">:</span> <span class="nx">TasksController</span><span class="o">-&gt;</span><span class="na">view</span><span class="p">(</span><span class="mi">45</span><span class="p">);</span>
+
+<span class="nx">URL</span><span class="o">:</span> <span class="o">/</span><span class="nx">donations</span><span class="o">/</span><span class="nx">view</span><span class="o">/</span><span class="nx">recent</span><span class="o">/</span><span class="mi">2001</span>
+<span class="nx">Mapping</span><span class="o">:</span> <span class="nx">DonationsController</span><span class="o">-&gt;</span><span class="na">view</span><span class="p">(</span><span class="s1">&#39;recent&#39;</span><span class="p">,</span> <span class="s1">&#39;2001&#39;</span><span class="p">);</span>
+
+<span class="nx">URL</span><span class="o">:</span> <span class="o">/</span><span class="nx">contents</span><span class="o">/</span><span class="nx">view</span><span class="o">/</span><span class="nx">chapter</span><span class="o">:</span><span class="nx">models</span><span class="o">/</span><span class="nx">section</span><span class="o">:</span><span class="nx">associations</span>
+<span class="nx">Mapping</span><span class="o">:</span> <span class="nx">ContentsController</span><span class="o">-&gt;</span><span class="na">view</span><span class="p">();</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">passedArgs</span><span class="p">[</span><span class="s1">&#39;chapter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;models&#39;</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">passedArgs</span><span class="p">[</span><span class="s1">&#39;section&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;associations&#39;</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;named&#39;</span><span class="p">][</span><span class="s1">&#39;chapter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;models&#39;</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;named&#39;</span><span class="p">][</span><span class="s1">&#39;section&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;associations&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>When making custom routes, a common pitfall is that using named
+parameters will break your custom routes. In order to solve this
+you should inform the Router about which parameters are intended to
+be named parameters. Without this knowledge the Router is unable to
+determine whether named parameters are intended to actually be
+named parameters or routed parameters, and defaults to assuming you
+intended them to be routed parameters. To connect named parameters
+in the router use <a class="reference internal" href="#Router::connectNamed" title="Router::connectNamed"><tt class="xref php php-meth docutils literal"><span class="pre">Router::connectNamed()</span></tt></a>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connectNamed</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;chapter&#39;</span><span class="p">,</span> <span class="s1">&#39;section&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Will ensure that your chapter and section parameters reverse route
+correctly.</p>
+<p>When generating URLs, using a <a class="reference internal" href="../appendices/glossary.html#term-routing-array"><em class="xref std std-term">routing array</em></a> you add named
+parameters as values with string keys matching the name:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;chapter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;association&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Since &#8216;chapter&#8217; doesn&#8217;t match any defined route elements, it&#8217;s treated
+as a named parameter.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Both named parameters and route elements share the same key-space.
+It&#8217;s best to avoid re-using a key for both a route element and a named
+parameter.</p>
+</div>
+<p>Named parameters also support using arrays to generate and parse
+URLs. The syntax works very similar to the array syntax used
+for GET parameters. When generating URLs you can use the following
+syntax:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$url</span> <span class="o">=</span> <span class="nx">Router</span><span class="o">::</span><span class="na">url</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">&#39;frontpage&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>The above would generate the URL <tt class="docutils literal"><span class="pre">/posts/index/filter[published]:1/filter[frontpage]:1</span></tt>.
+The parameters are then parsed and stored in your controller&#8217;s passedArgs variable
+as an array, just as you sent them to <a class="reference internal" href="#Router::url" title="Router::url"><tt class="xref php php-meth docutils literal"><span class="pre">Router::url</span></tt></a>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">passedArgs</span><span class="p">[</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;frontpage&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Arrays can be deeply nested as well, allowing you even more flexibility in
+passing arguments:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$url</span> <span class="o">=</span> <span class="nx">Router</span><span class="o">::</span><span class="na">url</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;search&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;models&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;post&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;asc&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;comment&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;desc&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;spam&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;users&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>You would end up with a pretty long url like this (wrapped for easy reading):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">posts</span><span class="o">/</span><span class="nx">search</span>
+  <span class="o">/</span><span class="nx">models</span><span class="p">[</span><span class="nx">post</span><span class="p">][</span><span class="nx">order</span><span class="p">]</span><span class="o">:</span><span class="nx">asc</span><span class="o">/</span><span class="nx">models</span><span class="p">[</span><span class="nx">post</span><span class="p">][</span><span class="nx">filter</span><span class="p">][</span><span class="nx">published</span><span class="p">]</span><span class="o">:</span><span class="mi">1</span>
+  <span class="o">/</span><span class="nx">models</span><span class="p">[</span><span class="nx">comment</span><span class="p">][</span><span class="nx">order</span><span class="p">]</span><span class="o">:</span><span class="nx">desc</span><span class="o">/</span><span class="nx">models</span><span class="p">[</span><span class="nx">comment</span><span class="p">][</span><span class="nx">filter</span><span class="p">][</span><span class="nx">spam</span><span class="p">]</span><span class="o">:</span><span class="mi">0</span>
+  <span class="o">/</span><span class="nx">users</span><span class="p">[]</span><span class="o">:</span><span class="mi">1</span><span class="o">/</span><span class="nx">users</span><span class="p">[]</span><span class="o">:</span><span class="mi">2</span><span class="o">/</span><span class="nx">users</span><span class="p">[]</span><span class="o">:</span><span class="mi">3</span>
+</pre></div>
+</div>
+<p>And the resulting array that would be passed to the controller would match that
+which you passed to the router:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">passedArgs</span><span class="p">[</span><span class="s1">&#39;models&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;post&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;asc&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+        <span class="p">)</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;comment&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;desc&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;spam&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+        <span class="p">)</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="controlling-named-parameters">
+<span id="id8"></span><h3>Controlling Named Parameters<a class="headerlink" href="#controlling-named-parameters" title="Permalink to this headline">¶</a></h3>
+<p>You can control named parameter configuration at the per-route-level
+or control them globally. Global control is done through <tt class="docutils literal"><span class="pre">Router::connectNamed()</span></tt>
+The following gives some examples of how you can control named parameter parsing
+with connectNamed().</p>
+<p>Do not parse any named parameters:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connectNamed</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Parse only default parameters used for CakePHP&#8217;s pagination:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connectNamed</span><span class="p">(</span><span class="k">false</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Parse only the page parameter if its value is a number:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connectNamed</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;page&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;[\d]+&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;greedy&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Parse only the page parameter no matter what:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connectNamed</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;greedy&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Parse only the page parameter if the current action is &#8216;index&#8217;:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connectNamed</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;page&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;greedy&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Parse only the page parameter if the current action is &#8216;index&#8217; and the controller is &#8216;pages&#8217;:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connectNamed</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;page&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pages&#39;</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;greedy&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>connectNamed() supports a number of options:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">greedy</span></tt> Setting this to true will make Router parse all named params.
+Setting it to false will parse only the connected named params.</li>
+<li><tt class="docutils literal"><span class="pre">default</span></tt> Set this to true to merge in the default set of named parameters.</li>
+<li><tt class="docutils literal"><span class="pre">reset</span></tt> Set to true to clear existing rules and start fresh.</li>
+<li><tt class="docutils literal"><span class="pre">separator</span></tt> Change the string used to separate the key &amp; value in a named
+parameter. Defaults to <cite>:</cite></li>
+</ul>
+</div>
+</div>
+<div class="section" id="reverse-routing">
+<h2>Reverse Routing<a class="headerlink" href="#reverse-routing" title="Permalink to this headline">¶</a></h2>
+<p>Reverse routing is a feature in CakePHP that is used to allow you to
+easily change your URL structure without having to modify all your code.
+By using <a class="reference internal" href="../appendices/glossary.html#term-routing-array"><em class="xref std std-term">routing arrays</em></a> to define your URLs, you can
+later configure routes and the generated URLs will automatically update.</p>
+<p>If you create URLs using strings like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span><span class="s1">&#39;View&#39;</span><span class="p">,</span> <span class="s1">&#39;/posts/view/&#39;</span> <span class="o">.</span> <span class="nv">$id</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>And then later decide that <tt class="docutils literal"><span class="pre">/posts</span></tt> should really be called
+&#8216;articles&#8217; instead, you would have to go through your entire
+application renaming URLs. However, if you defined your link like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+    <span class="s1">&#39;View&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Then when you decided to change your URLs, you could do so by defining a
+route. This would change both the incoming URL mapping, as well as the
+generated URLs.</p>
+<p>When using array URLs, you can define both query string parameters and
+document fragments using special keys:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">url</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;?&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;page&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;#&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;top&#39;</span>
+<span class="p">));</span>
+
+<span class="c1">// will generate a URL like.</span>
+<span class="o">/</span><span class="nx">posts</span><span class="o">/</span><span class="nx">index</span><span class="o">?</span><span class="nx">page</span><span class="o">=</span><span class="mi">1</span><span class="c1">#top</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="redirect-routing">
+<span id="id9"></span><h2>Redirect Routing<a class="headerlink" href="#redirect-routing" title="Permalink to this headline">¶</a></h2>
+<p>Redirect routing allows you to issue HTTP status 30x redirects for
+incoming routes, and point them at different URLs. This is useful
+when you want to inform client applications that a resource has moved
+and you don&#8217;t want to expose two URLs for the same content</p>
+<p>Redirection routes are different from normal routes as they perform an actual
+header redirection if a match is found. The redirection can occur to
+a destination within your application or an outside location:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">redirect</span><span class="p">(</span>
+    <span class="s1">&#39;/home/*&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">),</span>
+    <span class="c1">// or array(&#39;persist&#39;=&gt;array(&#39;id&#39;)) for default routing where the</span>
+    <span class="c1">// view action expects $id as an argument</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;persist&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Redirects <tt class="docutils literal"><span class="pre">/home/*</span></tt> to <tt class="docutils literal"><span class="pre">/posts/view</span></tt> and passes the parameters to
+<tt class="docutils literal"><span class="pre">/posts/view</span></tt>. Using an array as the redirect destination allows
+you to use other routes to define where a URL string should be
+redirected to. You can redirect to external locations using
+string URLs as the destination:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">redirect</span><span class="p">(</span><span class="s1">&#39;/posts/*&#39;</span><span class="p">,</span> <span class="s1">&#39;http://google.com&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;status&#39;</span> <span class="o">=&gt;</span> <span class="mi">302</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>This would redirect <tt class="docutils literal"><span class="pre">/posts/*</span></tt> to <tt class="docutils literal"><span class="pre">http://google.com</span></tt> with a
+HTTP status of 302.</p>
+</div>
+<div class="section" id="disabling-the-default-routes">
+<span id="disabling-default-routes"></span><h2>Disabling the Default Routes<a class="headerlink" href="#disabling-the-default-routes" title="Permalink to this headline">¶</a></h2>
+<p>If you have fully customized all your routes, and want to avoid any
+possible duplicate content penalties from search engines, you can
+remove the default routes that CakePHP offers by deleting them from your
+application&#8217;s routes.php file.</p>
+<p>This will cause CakePHP to serve errors, when users try to visit
+URLs that would normally be provided by CakePHP but have not
+been connected explicitly.</p>
+</div>
+<div class="section" id="custom-route-classes">
+<span id="id10"></span><h2>Custom Route Classes<a class="headerlink" href="#custom-route-classes" title="Permalink to this headline">¶</a></h2>
+<p>Custom route classes allow you to extend and change how individual
+routes parse requests and handle reverse routing. A custom route class
+should be created in <tt class="docutils literal"><span class="pre">app/Routing/Route</span></tt> and should extend
+<a class="reference internal" href="#CakeRoute" title="CakeRoute"><tt class="xref php php-class docutils literal"><span class="pre">CakeRoute</span></tt></a> and implement one or both of <tt class="docutils literal"><span class="pre">match()</span></tt>
+and/or <tt class="docutils literal"><span class="pre">parse()</span></tt>. <tt class="docutils literal"><span class="pre">parse()</span></tt> is used to parse requests and
+<tt class="docutils literal"><span class="pre">match()</span></tt> is used to handle reverse routing.</p>
+<p>You can use a custom route class when making a route by using the
+<tt class="docutils literal"><span class="pre">routeClass</span></tt> option, and loading the file containing your route
+before trying to use it:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;SlugRoute&#39;</span><span class="p">,</span> <span class="s1">&#39;Routing/Route&#39;</span><span class="p">);</span>
+
+<span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+     <span class="s1">&#39;/:slug&#39;</span><span class="p">,</span>
+     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">),</span>
+     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;routeClass&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;SlugRoute&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This route would create an instance of <tt class="docutils literal"><span class="pre">SlugRoute</span></tt> and allow you
+to implement custom parameter handling.</p>
+</div>
+<div class="section" id="router-api">
+<h2>Router API<a class="headerlink" href="#router-api" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Router">
+<em class="property">class </em><tt class="descname">Router</tt><a class="headerlink" href="#Router" title="Permalink to this definition">¶</a></dt>
+<dd><p>Router manages generation of outgoing URLs, and parsing of incoming
+request uri&#8217;s into parameter sets that CakePHP can dispatch.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Router::connect">
+<em class="property">static </em><tt class="descclassname">Router::</tt><tt class="descname">connect</tt><big>(</big><em>$route</em>, <em>$defaults = array()</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#Router::connect" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$route</strong> (<em>string</em>) &#8211; A string describing the template of the route</li>
+<li><strong>$defaults</strong> (<em>array</em>) &#8211; An array describing the default route parameters.
+These parameters will be used by default
+and can supply routing parameters that are not dynamic.</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; An array matching the named elements in the route
+to regular expressions which that element should match. Also contains
+additional parameters such as which routed parameters should be
+shifted into the passed arguments, supplying patterns for routing
+parameters and supplying the name of a custom routing class.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Routes are a way of connecting request URLs to objects in your application.
+At their core routes are a set of regular expressions that are used to
+match requests to destinations.</p>
+<p>Examples:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span><span class="s1">&#39;/:controller/:action/*&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The first parameter will be used as a controller name while the second is
+used as the action name. The &#8216;/*&#8217; syntax makes this route greedy in that
+it will match requests like <tt class="docutils literal"><span class="pre">/posts/index</span></tt> as well as requests like
+<tt class="docutils literal"><span class="pre">/posts/edit/1/foo/bar</span></tt> .</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s1">&#39;/home-page&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pages&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;display&#39;</span><span class="p">,</span> <span class="s1">&#39;home&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>The above shows the use of route parameter defaults. And providing routing
+parameters for a static route.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+    <span class="s1">&#39;/:lang/:controller/:action/:id&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;[0-9]+&#39;</span><span class="p">,</span> <span class="s1">&#39;lang&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;[a-z]{3}&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Shows connecting a route with custom route parameters as well as providing
+patterns for those parameters. Patterns for routing parameters do not need
+capturing groups, as one will be added for each route params.</p>
+<p>$options offers three &#8216;special&#8217; keys. <tt class="docutils literal"><span class="pre">pass</span></tt>, <tt class="docutils literal"><span class="pre">persist</span></tt> and <tt class="docutils literal"><span class="pre">routeClass</span></tt>
+have special meaning in the $options array.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">pass</span></tt> is used to define which of the routed parameters should be
+shifted into the pass array. Adding a parameter to pass will remove
+it from the regular route array. Ex. <tt class="docutils literal"><span class="pre">'pass'</span> <span class="pre">=&gt;</span> <span class="pre">array('slug')</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">persist</span></tt> is used to define which route parameters should be automatically
+included when generating new URLs. You can override persistent parameters
+by redefining them in a URL or remove them by setting the parameter to
+<tt class="docutils literal"><span class="pre">false</span></tt>. Ex. <tt class="docutils literal"><span class="pre">'persist'</span> <span class="pre">=&gt;</span> <span class="pre">array('lang')</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">routeClass</span></tt> is used to extend and change how individual routes parse
+requests and handle reverse routing, via a custom routing class.
+Ex. <tt class="docutils literal"><span class="pre">'routeClass'</span> <span class="pre">=&gt;</span> <span class="pre">'SlugRoute'</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">named</span></tt> is used to configure named parameters at the route level.
+This key uses the same options as <a class="reference internal" href="#Router::connectNamed" title="Router::connectNamed"><tt class="xref php php-meth docutils literal"><span class="pre">Router::connectNamed()</span></tt></a></li>
+</ul>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Router::redirect">
+<em class="property">static </em><tt class="descclassname">Router::</tt><tt class="descname">redirect</tt><big>(</big><em>$route</em>, <em>$url</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#Router::redirect" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$route</strong> (<em>string</em>) &#8211; A route template that dictates which URLs should
+be redirected.</li>
+<li><strong>$url</strong> (<em>mixed</em>) &#8211; Either a <a class="reference internal" href="../appendices/glossary.html#term-routing-array"><em class="xref std std-term">routing array</em></a> or a string url
+for the destination of the redirect.</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; An array of options for the redirect.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Connects a new redirection Route in the router.
+See <a class="reference internal" href="#redirect-routing"><em>Redirect Routing</em></a> for more information.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Router::connectNamed">
+<em class="property">static </em><tt class="descclassname">Router::</tt><tt class="descname">connectNamed</tt><big>(</big><em>$named</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#Router::connectNamed" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$named</strong> (<em>array</em>) &#8211; A list of named parameters. Key value pairs are accepted where
+values are either regex strings to match, or arrays.</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; Allows control of all settings:
+separator, greedy, reset, default</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Specifies what named parameters CakePHP should be parsing out of
+incoming URLs. By default CakePHP will parse every named parameter
+out of incoming URLs. See <a class="reference internal" href="#controlling-named-parameters"><em>Controlling Named Parameters</em></a> for
+more information.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Router::promote">
+<em class="property">static </em><tt class="descclassname">Router::</tt><tt class="descname">promote</tt><big>(</big><em>$which = null</em><big>)</big><a class="headerlink" href="#Router::promote" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$which</strong> (<em>integer</em>) &#8211; A zero-based array index representing the route to move.
+For example, if 3 routes have been added, the last route would be 2.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Promote a route (by default, the last one added) to the beginning of the list.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Router::url">
+<em class="property">static </em><tt class="descclassname">Router::</tt><tt class="descname">url</tt><big>(</big><em>$url = null</em>, <em>$full = false</em><big>)</big><a class="headerlink" href="#Router::url" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$url</strong> (<em>mixed</em>) &#8211; Cake-relative URL, like &#8220;/products/edit/92&#8221; or
+&#8220;/presidents/elect/4&#8221; or a <a class="reference internal" href="../appendices/glossary.html#term-routing-array"><em class="xref std std-term">routing array</em></a></li>
+<li><strong>$full</strong> (<em>mixed</em>) &#8211; <p>If (boolean) true, the full base URL will be prepended
+to the result. If an array accepts the following keys</p>
+<blockquote>
+<div><ul>
+<li>escape - used when making URLs embedded in HTML escapes query
+string &#8216;&amp;&#8217;</li>
+<li>full - if true the full base URL will be prepended.</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Generate a URL for the specified action. Returns a URL pointing
+to a combination of controller and action. $url can be:</p>
+<ul class="simple">
+<li>Empty - the method will find the address to the actual controller/action.</li>
+<li>&#8216;/&#8217; - the method will find the base URL of application.</li>
+<li>A combination of controller/action - the method will find the URL for it.</li>
+</ul>
+<p>There are a few &#8216;special&#8217; parameters that can change the final URL string that is generated:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">base</span></tt> - Set to false to remove the base path from the generated URL.
+If your application is not in the root directory, this can be used to
+generate URLs that are &#8216;CakePHP relative&#8217;. CakePHP relative URLs are
+required when using requestAction.</li>
+<li><tt class="docutils literal"><span class="pre">?</span></tt> - Takes an array of query string parameters</li>
+<li><tt class="docutils literal"><span class="pre">#</span></tt> - Allows you to set URL hash fragments.</li>
+<li><tt class="docutils literal"><span class="pre">full_base</span></tt> - If true the value of <a class="reference internal" href="#Router::fullBaseUrl" title="Router::fullBaseUrl"><tt class="xref php php-meth docutils literal"><span class="pre">Router::fullBaseUrl()</span></tt></a> will
+be prepended to generated URLs.</li>
+</ul>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Router::mapResources">
+<em class="property">static </em><tt class="descclassname">Router::</tt><tt class="descname">mapResources</tt><big>(</big><em>$controller</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#Router::mapResources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates REST resource routes for the given controller(s). See
+the <a class="reference internal" href="rest.html"><em>REST</em></a> section for more information.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Router::parseExtensions">
+<em class="property">static </em><tt class="descclassname">Router::</tt><tt class="descname">parseExtensions</tt><big>(</big><em>$types</em><big>)</big><a class="headerlink" href="#Router::parseExtensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used in routes.php to declare which <a class="reference internal" href="#file-extensions"><em>File Extensions</em></a> your application
+supports. By providing no arguments, all file extensions will be supported.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Router::setExtensions">
+<em class="property">static </em><tt class="descclassname">Router::</tt><tt class="descname">setExtensions</tt><big>(</big><em>$extensions</em>, <em>$merge = true</em><big>)</big><a class="headerlink" href="#Router::setExtensions" title="Permalink to this definition">¶</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified">New in version 2.2.</span></p>
+</div>
+<p>Set or add valid extensions. To have the extensions parsed, you are still
+required to call <a class="reference internal" href="#Router::parseExtensions" title="Router::parseExtensions"><tt class="xref php php-meth docutils literal"><span class="pre">Router::parseExtensions()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Router::defaultRouteClass">
+<em class="property">static </em><tt class="descclassname">Router::</tt><tt class="descname">defaultRouteClass</tt><big>(</big><em>$classname</em><big>)</big><a class="headerlink" href="#Router::defaultRouteClass" title="Permalink to this definition">¶</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified">New in version 2.1.</span></p>
+</div>
+<p>Set the default route to be used when connecting routes in the future.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Router::fullBaseUrl">
+<em class="property">static </em><tt class="descclassname">Router::</tt><tt class="descname">fullBaseUrl</tt><big>(</big><em>$url = null</em><big>)</big><a class="headerlink" href="#Router::fullBaseUrl" title="Permalink to this definition">¶</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified">New in version 2.4.</span></p>
+</div>
+<p>Get or set the baseURL used for generating URL&#8217;s. When setting this value
+you should be sure to include the fully qualified domain name including
+protocol.</p>
+<p>Setting values with this method will also update <tt class="docutils literal"><span class="pre">App.fullBaseUrl</span></tt> in
+<a class="reference internal" href="configuration.html#Configure" title="Configure"><tt class="xref php php-class docutils literal"><span class="pre">Configure</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="CakeRoute">
+<em class="property">class </em><tt class="descname">CakeRoute</tt><a class="headerlink" href="#CakeRoute" title="Permalink to this definition">¶</a></dt>
+<dd><p>The base class for custom routes to be based on.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRoute::parse">
+<tt class="descclassname">CakeRoute::</tt><tt class="descname">parse</tt><big>(</big><em>$url</em><big>)</big><a class="headerlink" href="#CakeRoute::parse" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$url</strong> (<em>string</em>) &#8211; The string URL to parse.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Parses an incoming URL, and generates an array of request parameters
+that Dispatcher can act upon. Extending this method allows you to customize
+how incoming URLs are converted into an array. Return <tt class="docutils literal"><span class="pre">false</span></tt> from
+URL to indicate a match failure.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRoute::match">
+<tt class="descclassname">CakeRoute::</tt><tt class="descname">match</tt><big>(</big><em>$url</em><big>)</big><a class="headerlink" href="#CakeRoute::match" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$url</strong> (<em>array</em>) &#8211; The routing array to convert into a string URL.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Attempt to match a URL array. If the URL matches the route parameters
+and settings, then return a generated string URL. If the URL doesn&#8217;t
+match the route parameters, false will be returned. This method handles
+the reverse routing or conversion of URL arrays into string URLs.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRoute::compile">
+<tt class="descclassname">CakeRoute::</tt><tt class="descname">compile</tt><big>(</big><big>)</big><a class="headerlink" href="#CakeRoute::compile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Force a route to compile its regular expression.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Routing</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sessions.html">Sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rest.html">REST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dispatch-filters.html">Dispatcher Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Routing</a><ul>
+<li><a class="reference internal" href="#routes-configuration">Routes Configuration</a></li>
+<li><a class="reference internal" href="#default-routing">Default Routing</a></li>
+<li><a class="reference internal" href="#connecting-routes">Connecting Routes</a><ul>
+<li><a class="reference internal" href="#route-elements">Route Elements</a></li>
+<li><a class="reference internal" href="#passing-parameters-to-action">Passing Parameters to Action</a></li>
+<li><a class="reference internal" href="#per-route-named-parameters">Per-Route Named Parameters</a></li>
+<li><a class="reference internal" href="#prefix-routing">Prefix Routing</a></li>
+<li><a class="reference internal" href="#plugin-routing">Plugin Routing</a></li>
+<li><a class="reference internal" href="#file-extensions">File Extensions</a></li>
+<li><a class="reference internal" href="#using-additional-conditions-when-matching-routes">Using Additional Conditions When Matching Routes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#passed-arguments">Passed Arguments</a></li>
+<li><a class="reference internal" href="#named-parameters">Named Parameters</a><ul>
+<li><a class="reference internal" href="#controlling-named-parameters">Controlling Named Parameters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reverse-routing">Reverse Routing</a></li>
+<li><a class="reference internal" href="#redirect-routing">Redirect Routing</a></li>
+<li><a class="reference internal" href="#disabling-the-default-routes">Disabling the Default Routes</a></li>
+<li><a class="reference internal" href="#custom-route-classes">Custom Route Classes</a></li>
+<li><a class="reference internal" href="#router-api">Router API</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="sessions.html" title="Sessions" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="configuration.html" title="Configuration" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

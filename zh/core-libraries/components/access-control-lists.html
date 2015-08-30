@@ -1,0 +1,1086 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Access Control Lists" lang="zh_CN" name="title" />
+<meta content="fantasy novel,access control list,request objects,online diary,request object,acls,adventurers,gandalf,lingo,web service,computer system,grandma,lord of the rings,entities,assets,logic,cakephp,stuff,control objects,control object" lang="zh_CN" name="keywords" />
+
+    <title>访问控制列表组件 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="组件" href="../toc-components.html" />
+    <link rel="next" title="助件" href="../toc-helpers.html" />
+    <link rel="prev" title="Cookie" href="cookie.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/core-libraries/components/access-control-lists.html" /><link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/components/access-control-lists.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/components/access-control-lists.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/components/access-control-lists.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/components/access-control-lists.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../toc-components.html" accesskey="U" itemprop="url"><span itemprop="title">组件</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/core-libraries/components/access-control-lists.html">en</a></li>
+				
+					<li><a href="../../../pt/core-libraries/components/access-control-lists.html">pt</a></li>
+				
+					<li><a href="../../../es/core-libraries/components/access-control-lists.html">es</a></li>
+				
+					<li><a href="../../../ja/core-libraries/components/access-control-lists.html">ja</a></li>
+				
+					<li><a href="../../../fr/core-libraries/components/access-control-lists.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/components/access-control-lists.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>访问控制列表组件<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="AclComponent">
+<em class="property">class </em><tt class="descname">AclComponent</tt><big>(</big><em>ComponentCollection $collection</em>, <em>array $settings = array()</em><big>)</big><a class="headerlink" href="#AclComponent" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>CakePHP 的访问控制列表是最常被讨论的功能之一，最有可能是因为这是最迫切
+需要的，但也可能是因为它是最令人费解的。如果你在寻找通常开始使用访问控制列表
+(ACL)的好方式，请继续读下去。</p>
+<p>勇敢面对，坚持始终，即使过程并非一帆风顺。一旦你掌握了其中的诀窍，这就会成为你
+手中极为强大的开发工具。</p>
+<div class="section" id="acl">
+<h2>理解 ACL 如何工作<a class="headerlink" href="#acl" title="永久链接至标题">¶</a></h2>
+<p>强大的事物需要权限控制。访问控制列表是一种管理应用程序权限的方式，具有细小颗粒
+度，并且易于维护和管理。</p>
+<p>访问控制列表，或者 ACL，主要管理两种东西: 要求东西的，和被要求的东西。用 ACL
+的术语来说，要使用东西的(多数情况下是用户)被称为访问请求对象(<em>access request
+object</em>)，或者 ARO。系统中被要求的东西(多数情况下是动作或数据)被称为访问控制对象
+(<em>access control object</em>)，或者 ACO。实体被称为“对象”是因为有时请求对象不是人——有时你也许要
+限制某个 Cake 控制器启动应用程序其它部分逻辑的权限。ACO 可以是任何你想控制的
+东西，从控制器行为，到网络服务(web service)，到你奶奶网络日记的某一行。</p>
+<p>回顾一下:</p>
+<ul class="simple">
+<li>ACO —— 访问控制对象(<em>Access Control Object</em>) —— 被要求的东西</li>
+<li>ARO —— 访问请求对象(<em>Access Request Object</em>) —— 要求东西的东西</li>
+</ul>
+<p>基本上，ACL 就是用来决定何时一个 ARO 能够访问一个 ACO。</p>
+<p>为了帮助你理解所有的东西在一起如何工作，让我们使用一个半真半假的例子。花一点儿
+时间，想象一下，魔幻小说*指环王*中的那群熟悉的探险人物们使用的计算机系统。队
+伍的领导者，甘道夫，想要管理团队的资产，同时保持团队其他成员足够的隐私和安全。
+他要做的第一件事就是建立一份涉及的 ARO 的名单:</p>
+<ul class="simple">
+<li>甘道夫(Gandalf)</li>
+<li>阿拉贡(Aragorn)</li>
+<li>毕尔博(Bilbo)</li>
+<li>弗拉多(Frodo)</li>
+<li>咕噜姆(Gollum)</li>
+<li>拉格拉斯(Legolas)</li>
+<li>吉穆利(Gimli)</li>
+<li>皮平(Pippin)</li>
+<li>梅里(Merry)</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">必须认识到，访问控制列表(ACL)与验证(<em>authentication</em>)*不*同。
+访问控制列表(ACL)是在一个用户被验证之后的事情。尽管两者通常联合使用，认识
+到它们的区别很重要，一个是知道某人是谁(验证)，一个是知道他能做什么(ACL)。</p>
+</div>
+<p>甘道夫要做的下一件事就是建立一份系统要管理的物品或访问控制对象(ACO)的初始清单。
+他的清单大概会是这样:</p>
+<ul class="simple">
+<li>武器(Weapons)</li>
+<li>魔戒(The One Ring)</li>
+<li>腌肉(Salted Pork)</li>
+<li>通关文牒(Diplomacy)</li>
+<li>麦芽酒(Ale)</li>
+</ul>
+<p>通常的做法是，系统的管理会使用一种矩阵，显示一组用户和与物品关联的权限。如果这
+些信息保存在一个表格中，也许会是象下面的表格这样:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="14%" />
+<col width="15%" />
+<col width="19%" />
+<col width="21%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">x</th>
+<th class="head">武器(Weapons)</th>
+<th class="head">魔戒(The Ring)</th>
+<th class="head">腌肉(Salted Pork)</th>
+<th class="head">通关文牒(Diplomacy)</th>
+<th class="head">麦芽酒(Ale)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>甘道夫(Gandalf)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>允许</td>
+<td>允许</td>
+<td>允许</td>
+</tr>
+<tr class="row-odd"><td>阿拉贡(Aragorn)</td>
+<td>允许</td>
+<td>&nbsp;</td>
+<td>允许</td>
+<td>允许</td>
+<td>允许</td>
+</tr>
+<tr class="row-even"><td>毕尔博(Bilbo)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>允许</td>
+</tr>
+<tr class="row-odd"><td>弗拉多(Frodo)</td>
+<td>&nbsp;</td>
+<td>允许</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>允许</td>
+</tr>
+<tr class="row-even"><td>咕噜姆(Gollum)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>允许</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>拉格拉斯(Legolas)</td>
+<td>允许</td>
+<td>&nbsp;</td>
+<td>允许</td>
+<td>允许</td>
+<td>允许</td>
+</tr>
+<tr class="row-even"><td>吉穆利(Gimli)</td>
+<td>允许</td>
+<td>&nbsp;</td>
+<td>允许</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>皮平(Pippin)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>允许</td>
+<td>允许</td>
+</tr>
+<tr class="row-even"><td>梅里(Merry)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>允许</td>
+<td>允许</td>
+</tr>
+</tbody>
+</table>
+<p>乍一看，这样似乎不错。通过赋值可以保护安全(只有弗拉多可以触摸魔戒)，又可以防
+止事故(不让霍比特人碰到腌肉和武器)。看起来有足够细小的颗粒度，又容易阅读，不
+是吗？</p>
+<p>对于象这样小的系统，也许矩阵的设置就可以了。但对一个逐渐扩展的系统，或一个有大
+量资源(ACO)和用户(ARO)的系统，一个表格很快就会变得难以管理。想象一下试图去控制
+上百个作战营地的访问权限，并以单个营地来管理。矩阵的另一个缺陷是，你无法逻辑地
+把用户分组，或者基于这样的逻辑分组来对成组的用户做层叠式的权限改动。例如，如果
+在战斗结束后能自动允许霍比特人使用麦芽酒和腌肉，那当然好: 但逐个人地设置权限很
+繁琐，且容易出错。层叠式地修改所有“霍比特人”的权限就容易多了。</p>
+<p>访问控制列表(ACL)最通常以树形结构来实现。通常有一棵访问请求对象(ARO)树和一棵访
+问控制对象(ACO)树。把你的对象组织成树形，权限仍然可以以细微的颗粒处理，同时又
+保持大范围的控制。作为一个英明的领导者，甘道夫在新系统中选择使用访问控制列表
+(ACL)，并按照下面的方式来组织他的对象:</p>
+<ul class="simple">
+<li>魔戒团队(Fellowship of the Ring™)<ul>
+<li>战士(Warriors)<ul>
+<li>阿拉贡(Aragorn)</li>
+<li>拉格拉斯(Legolas)</li>
+<li>吉穆利(Gimli)</li>
+</ul>
+</li>
+<li>术士(Wizards)<ul>
+<li>甘道夫(Gandalf)</li>
+</ul>
+</li>
+<li>霍比特人(Hobbits)<ul>
+<li>弗拉多(Frodo)</li>
+<li>毕尔博(Bilbo)</li>
+<li>梅里(Merry)</li>
+<li>皮平(Pippin)</li>
+</ul>
+</li>
+<li>来访者(Visitors)<ul>
+<li>咕噜姆(Gollum)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>对访问请求对象(ARO)使用树形结构允许甘道夫一次性为整群用户定义权限。所以，用我
+们的访问请求对象(ARO)树，甘道夫可以确定一些群组的权限:</p>
+<ul class="simple">
+<li>魔戒团队(Fellowship of the Ring™)
+(<strong>禁止</strong>: 一切)<ul>
+<li>战士(Warriors)
+(<strong>允许</strong>: 武器, 麦芽酒, 精灵食品(Elven Rations), 腌肉)<ul>
+<li>阿拉贡(Aragorn)</li>
+<li>拉格拉斯(Legolas)</li>
+<li>吉穆利(Gimli)</li>
+</ul>
+</li>
+<li>术士(Wizards)
+(<strong>允许</strong>: 腌肉, 通关文牒, 麦芽酒)<ul>
+<li>甘道夫(Gandalf)</li>
+</ul>
+</li>
+<li>霍比特人(Hobbits)
+(<strong>允许</strong>: 麦芽酒)<ul>
+<li>弗拉多(Frodo)</li>
+<li>毕尔博(Bilbo)</li>
+<li>梅里(Merry)</li>
+<li>皮平(Pippin)</li>
+</ul>
+</li>
+<li>来访者(Visitors)
+(<strong>允许</strong>: 腌肉)<ul>
+<li>咕噜姆(Gollum)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>如果我们要使用访问控制列表(ACL)来查看皮平(Pippin)是否被允许喝麦芽酒，我们需要先
+获得他在树中的路径，即 Fellowship-&gt;Hobbits-&gt;Pippin。然后我们检查在每个节点上的
+不同权限，再使用与皮平(Pippin)和麦芽酒最相关的权限。</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="23%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">ARO 节点</th>
+<th class="head">权限信息</th>
+<th class="head">结果</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>魔戒团队(Fellowship of the Ring)</td>
+<td>禁止一切</td>
+<td>禁止喝麦芽酒。</td>
+</tr>
+<tr class="row-odd"><td>霍比特人(Hobbits)</td>
+<td>允许麦芽酒</td>
+<td>允许喝麦芽酒！</td>
+</tr>
+<tr class="row-even"><td>皮平(Pippin)</td>
+<td>&#8211;</td>
+<td>还是允许喝麦芽酒！</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">由于访问控制列表(ACL)树中的 &#8216;Pippin&#8217; 节点没有明确禁止对麦芽酒访问控制对象
+(ACO)的访问，最后的结果是我们允许对该访问控制对象(ACO)的访问。</p>
+</div>
+<p>树形结构也允许我们为更小颗粒的控制做跟细微的调整——而同时又能保持对成群的访问
+请求对象(ARO)做大范围修改的能力:</p>
+<ul class="simple">
+<li>魔戒团队(Fellowship of the Ring™)
+(<strong>禁止</strong>: 一切)<ul>
+<li>战士(Warriors)
+(<strong>允许</strong>: Weapons, 麦芽酒, 精灵食品(Elven Rations), 腌肉)<ul>
+<li>阿拉贡(Aragorn)
+(Allow: Diplomacy)</li>
+<li>拉格拉斯(Legolas)</li>
+<li>吉穆利(Gimli)</li>
+</ul>
+</li>
+<li>术士(Wizards)
+(<strong>允许</strong>: 腌肉, 通关文牒, 麦芽酒)<ul>
+<li>甘道夫(Gandalf)</li>
+</ul>
+</li>
+<li>霍比特人(Hobbits)
+(<strong>允许</strong>: 麦芽酒)<ul>
+<li>弗拉多(Frodo)
+(Allow: Ring)</li>
+<li>毕尔博(Bilbo)</li>
+<li>梅里(Merry)
+(Deny: 麦芽酒)</li>
+<li>皮平(Pippin)
+(Allow: 通关文牒)</li>
+</ul>
+</li>
+<li>来访者(Visitors)
+(<strong>允许</strong>: 腌肉)<ul>
+<li>咕噜姆(Gollum)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>这种方法允许我们既可以做大范围的权限修改，又可以进行细微的调整。这让我们可以说，
+所有霍比特人都可以喝麦芽酒，只有一个例外——梅里(Merry)。要查看梅里(Merry)是否可以
+喝麦芽酒，我们要找出他在树中的路径: Fellowship-&gt;Hobbits-&gt;Merry，再延路径而下，注
+意与麦芽酒相关的权限:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="23%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">ARO 节点</th>
+<th class="head">权限信息</th>
+<th class="head">结果</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>魔戒团队(Fellowship of the Ring)</td>
+<td>禁止一切</td>
+<td>禁止喝麦芽酒。</td>
+</tr>
+<tr class="row-odd"><td>霍比特人(Hobbits)</td>
+<td>允许麦芽酒</td>
+<td>允许喝麦芽酒！</td>
+</tr>
+<tr class="row-even"><td>梅里(Merry)</td>
+<td>禁止麦芽酒</td>
+<td>禁止喝麦芽酒！</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="cake-ini-acl">
+<h2>定义权限: Cake 基于 INI 的访问控制列表(ACL)<a class="headerlink" href="#cake-ini-acl" title="永久链接至标题">¶</a></h2>
+<p>Cake 的第一个访问控制列表(ACL)实现是基于保存在 Cake 安装目录下的 INI 文件。尽管
+这可用且稳定，我们仍建议你使用基于数据库的 ACL 解决方案，主要因为它能够及时(on
+the fly)创建新的访问控制列表(ACO)和访问请求对象(ARO)。我们是指简单应用程序中的
+使用——而且尤其是那些出于某些原因而可能不使用数据库的情况。</p>
+<p>缺省情况下，CakePHP 的访问控制列表(ACL)是数据库驱动的。要启用基于 INI 的访问控
+制列表(ACL)，你需要告诉CakePHP 你使用什么系统，改变 app/Config/core.php 中的下
+面这几行。</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 改变这几行:</span>
+<span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Acl.classname&#39;</span><span class="p">,</span> <span class="s1">&#39;DbAcl&#39;</span><span class="p">);</span>
+<span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Acl.database&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">);</span>
+
+<span class="c1">// 改成这样:</span>
+<span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Acl.classname&#39;</span><span class="p">,</span> <span class="s1">&#39;IniAcl&#39;</span><span class="p">);</span>
+<span class="c1">//Configure::write(&#39;Acl.database&#39;, &#39;default&#39;);</span>
+</pre></div>
+</div>
+<p>访问请求对象(ARO)/访问控制对象(ACO)权限在**/app/Config/acl.ini.php**中指定。基
+本上访问请求对象(ARO)在一个 INI 段落中，有三个属性: groups，allow，和 deny。</p>
+<ul class="simple">
+<li>groups: 当前访问请求对象(ARO)所属的访问请求对象(ARO)组的名称。</li>
+<li>allow: 当前访问请求对象(ARO)能够访问的访问控制对象(ACO)的名称</li>
+<li>deny: 当前访问请求对象(ARO)应当被拒绝访问的访问控制对象(ACO)的名称</li>
+</ul>
+<p>访问控制对象(ACO)在 INI 段落中只有 allow 和 deny 属性。</p>
+<p>作为一个例子，让我们来看看我们一直在精心打造的魔戒团队访问请求对象(ARO)的结构，
+在 INI 语法中会是什么样子:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="p">;</span><span class="o">-------------------------------------</span>
+<span class="p">;</span> <span class="nx">AROs</span>
+<span class="p">;</span><span class="o">-------------------------------------</span>
+<span class="p">[</span><span class="nx">aragorn</span><span class="p">]</span>
+<span class="nx">groups</span> <span class="o">=</span> <span class="nx">warriors</span>
+<span class="nx">allow</span> <span class="o">=</span> <span class="nx">diplomacy</span>
+
+<span class="p">[</span><span class="nx">legolas</span><span class="p">]</span>
+<span class="nx">groups</span> <span class="o">=</span> <span class="nx">warriors</span>
+
+<span class="p">[</span><span class="nx">gimli</span><span class="p">]</span>
+<span class="nx">groups</span> <span class="o">=</span> <span class="nx">warriors</span>
+
+<span class="p">[</span><span class="nx">gandalf</span><span class="p">]</span>
+<span class="nx">groups</span> <span class="o">=</span> <span class="nx">wizards</span>
+
+<span class="p">[</span><span class="nx">frodo</span><span class="p">]</span>
+<span class="nx">groups</span> <span class="o">=</span> <span class="nx">hobbits</span>
+<span class="nx">allow</span> <span class="o">=</span> <span class="nx">ring</span>
+
+<span class="p">[</span><span class="nx">bilbo</span><span class="p">]</span>
+<span class="nx">groups</span> <span class="o">=</span> <span class="nx">hobbits</span>
+
+<span class="p">[</span><span class="nx">merry</span><span class="p">]</span>
+<span class="nx">groups</span> <span class="o">=</span> <span class="nx">hobbits</span>
+<span class="nx">deny</span> <span class="o">=</span> <span class="nx">ale</span>
+
+<span class="p">[</span><span class="nx">pippin</span><span class="p">]</span>
+<span class="nx">groups</span> <span class="o">=</span> <span class="nx">hobbits</span>
+
+<span class="p">[</span><span class="nx">gollum</span><span class="p">]</span>
+<span class="nx">groups</span> <span class="o">=</span> <span class="nx">visitors</span>
+
+<span class="p">;</span><span class="o">-------------------------------------</span>
+<span class="p">;</span> <span class="nx">ARO</span> <span class="nx">Groups</span>
+<span class="p">;</span><span class="o">-------------------------------------</span>
+<span class="p">[</span><span class="nx">warriors</span><span class="p">]</span>
+<span class="nx">allow</span> <span class="o">=</span> <span class="nx">weapons</span><span class="p">,</span> <span class="nx">ale</span><span class="p">,</span> <span class="nx">salted_pork</span>
+
+<span class="p">[</span><span class="nx">wizards</span><span class="p">]</span>
+<span class="nx">allow</span> <span class="o">=</span> <span class="nx">salted_pork</span><span class="p">,</span> <span class="nx">diplomacy</span><span class="p">,</span> <span class="nx">ale</span>
+
+<span class="p">[</span><span class="nx">hobbits</span><span class="p">]</span>
+<span class="nx">allow</span> <span class="o">=</span> <span class="nx">ale</span>
+
+<span class="p">[</span><span class="nx">visitors</span><span class="p">]</span>
+<span class="nx">allow</span> <span class="o">=</span> <span class="nx">salted_pork</span>
+</pre></div>
+</div>
+<p>现在定义了权限，你可以直接跳到使用访问控制列表(ACL)组件来
+<a class="reference internal" href="#checking-permissions"><em>检查权限一节</em></a>。</p>
+</div>
+<div class="section" id="cake-acl">
+<h2>定义权限: Cake 基于数据库的访问控制列表(ACL)<a class="headerlink" href="#cake-acl" title="永久链接至标题">¶</a></h2>
+<p>至此我们介绍了基于 INI 的访问控制列表(ACL)权限，让我们继续介绍(更常用的)基于数
+据库的访问控制列表(ACL)。</p>
+<div class="section" id="id2">
+<h3>起步<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<p>缺省的访问控制列表(ACL)权限实现是数据库驱动的。Cake 的数据库访问控制列表(ACL)
+包括一组核心模型，以及 Cake 安装自带的一个命令行应用程序。模型是 Cake 用来与
+数据库交互从而保存和读取树形格式的节点。命令行应用程序用来初始化你的数据库以及
+与访问控制对象(ACO)和访问请求对象(ARO)进行交互。</p>
+<p>首先，你要确保``/app/Config/database.php``存在并且正确配置。关于数据库配置的详
+细信息见4.1小节。</p>
+<p>一旦完成，就可以用 CakePHP 的命令行程序来创建访问控制列表(ACL)数据库表:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span> <span class="nx">DbAcl</span>
+</pre></div>
+</div>
+<p>运行该命令会删除(<em>drop</em>)并重建以树形格式保存访问控制对象(ACO)和访问请求对象
+(ARO)信息必需的表。命令行应用程序的输出应该象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">---------------------------------------------------------------</span>
+<span class="nx">Cake</span> <span class="nx">Schema</span> <span class="nx">Shell</span>
+<span class="o">---------------------------------------------------------------</span>
+
+<span class="nx">The</span> <span class="nx">following</span> <span class="nx">tables</span> <span class="nx">will</span> <span class="nx">be</span> <span class="nx">dropped</span><span class="o">.</span>
+<span class="nb">acos</span>
+<span class="nx">aros</span>
+<span class="nx">aros_acos</span>
+
+<span class="nx">Are</span> <span class="nx">you</span> <span class="nx">sure</span> <span class="nx">you</span> <span class="nx">want</span> <span class="nx">to</span> <span class="nx">drop</span> <span class="nx">the</span> <span class="nx">tables</span><span class="o">?</span> <span class="p">(</span><span class="nx">y</span><span class="o">/</span><span class="nx">n</span><span class="p">)</span>
+<span class="p">[</span><span class="nx">n</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">y</span>
+<span class="nx">Dropping</span> <span class="nx">tables</span><span class="o">.</span>
+<span class="nb">acos</span> <span class="nx">updated</span><span class="o">.</span>
+<span class="nx">aros</span> <span class="nx">updated</span><span class="o">.</span>
+<span class="nx">aros_acos</span> <span class="nx">updated</span><span class="o">.</span>
+
+<span class="nx">The</span> <span class="nx">following</span> <span class="nx">tables</span> <span class="nx">will</span> <span class="nx">be</span> <span class="nx">created</span><span class="o">.</span>
+<span class="nb">acos</span>
+<span class="nx">aros</span>
+<span class="nx">aros_acos</span>
+
+<span class="nx">Are</span> <span class="nx">you</span> <span class="nx">sure</span> <span class="nx">you</span> <span class="nx">want</span> <span class="nx">to</span> <span class="nx">create</span> <span class="nx">the</span> <span class="nx">tables</span><span class="o">?</span> <span class="p">(</span><span class="nx">y</span><span class="o">/</span><span class="nx">n</span><span class="p">)</span>
+<span class="p">[</span><span class="nx">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">y</span>
+<span class="nx">Creating</span> <span class="nx">tables</span><span class="o">.</span>
+<span class="nb">acos</span> <span class="nx">updated</span><span class="o">.</span>
+<span class="nx">aros</span> <span class="nx">updated</span><span class="o">.</span>
+<span class="nx">aros_acos</span> <span class="nx">updated</span><span class="o">.</span>
+<span class="nx">End</span> <span class="nx">create</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">这代替了之前的已废弃的命令&#8221;initdb&#8221;。</p>
+</div>
+<p>你也可以使用 SQL 文件``app/Config/Schema/db_acl.sql``，不过那样一点儿也不好玩儿。</p>
+<p>当这完成之后，你的系统中就应该有三个新的数据库表: acos，aros 和 aros_acos (关
+联表，用来创建两个树之间的权限信息)。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">如果你好奇于 Cake 如何在这些表中保存树的数据，请继续往下阅读数据库中树的遍
+历。访问控制列表(ACL)组件用 CakePHP 的:doc:<cite>/core-libraries/behaviors/tree</cite>
+来管理树的继承。访问控制列表(ACL)的模型类文件可在``lib/Cake/Model/<a href="#id3"><span class="problematic" id="id4">``</span></a>目录中
+找到。</p>
+</div>
+<p>现在我们全部设置好了，让我们来着手创建一些访问请求对象(ARO)和访问控制对象(ACO)
+树吧。</p>
+</div>
+<div class="section" id="aro-aco">
+<h3>创建访问请求对象(ARO)和访问控制对象(ACO)<a class="headerlink" href="#aro-aco" title="永久链接至标题">¶</a></h3>
+<p>在创建新的访问控制列表(ACL)对象(访问控制对象(ACO)和访问请求对象(ARO))时，请注
+意有两种主要的方法命名和访问节点。<a href="#id5"><span class="problematic" id="id6">*</span></a>第一种*方法是给出模型名称和外键值来直接把
+一个访问控制列表(ACL)对象和一条数据库记录联系起来。<a href="#id7"><span class="problematic" id="id8">*</span></a>第二种*方法可用于当对象与
+数据库中的记录没有直接联系的情况——你可以为对象提供一个文字性的别名。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">通常，当你创建一个组或者高级别的对象时，请使用别名。如果你管理数据库中某
+一项或某一条记录的权限，请使用模型/外键的方法。</p>
+</div>
+<p>你应当用核心的 CakePHP 访问控制列表(ACL)模型来创建新的访问控制列表(ACL)对象。
+这时，有一些字段你应当用于保存数据: <tt class="docutils literal"><span class="pre">model</span></tt>，<tt class="docutils literal"><span class="pre">foreign_key</span></tt>，<tt class="docutils literal"><span class="pre">alias``和</span>
+<span class="pre">``parent_id</span></tt>。</p>
+<p>访问控制列表(ACL)对象的``model``和``foreign_key``字段让你可以把(ACL)对象和相
+应的模型记录(如果有的话)联系起来。例如，许多访问请求对象(ARO)会在数据库中有
+相应的用户(User)记录。把访问请求对象(ARO)的``foreign_key``设置为用户(User)的
+ID，让你可以用一个用户(User)模型的 find() 调用就把访问请求对象(ARO)和用户
+(User)信息联系在一起，如果你设置了正确的模型关联的话。反过来，如果你要管理某
+个博客帖子或菜谱列表的编辑操作，你可以把访问控制列表(ACO)对象和该模型记录联
+系起来。</p>
+<p>访问控制列表(ACL)对象的``alias``字段只是一个人类可读的标签，让你可以用来标识
+一个与模型记录没有直接关联的访问控制列表(ACL)对象。别名(<em>Alias</em>)通常用于命名
+用户组或者访问控制对象(ACO)集合。</p>
+<p>访问控制列表(ACL)对象的``parent_id``字段让你可以填充树形结构。提供在树中父节
+点的 ID，来创建一个新的子节点。</p>
+<p>在我们能够创建新的访问控制列表(ACL)对象之前，我们需要加载它们相应的类。最容
+易的办法是在你控制器的 $components 数组中包括 Cake 的 访问控制列表(ACL)组件:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>做完这件事之后，让我们来看看一些创建这些对象的例子。下面的代码可以放在控制器动
+作里面的某个地方:</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">尽管这里的例子专注于访问请求对象(ARO)的创建，同样的技术也可用于创建访问控
+制对象(ACO)树。</p>
+</div>
+<p>继续我们魔戒团队的建设，让我们先建立访问请求对象(ARO)组。因为这些组不会真有相
+应的(数据库)记录，我们会用别名来创建这些访问控制列表(ACL)对象。我们这里做的是
+出于控制器动作的角度，但也可以在其它地方进行。我们这里介绍的有点儿不够真实，
+不过运用这些技术来及时创建访问请求对象(ARO)和访问控制对象(ACO)对象，应该对你
+完全不是问题。</p>
+<p>这应该不是完全陌生的——我们只不过象我们一直在做的，用模型来保存数据而已:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">any_action</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$aro</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">Aro</span><span class="p">;</span>
+
+    <span class="c1">// 下面是所有组的信息，放在数组里就可以遍历</span>
+    <span class="nv">$groups</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;warriors&#39;</span>
+        <span class="p">),</span>
+        <span class="mi">1</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;wizards&#39;</span>
+        <span class="p">),</span>
+        <span class="mi">2</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;hobbits&#39;</span>
+        <span class="p">),</span>
+        <span class="mi">3</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;visitors&#39;</span>
+        <span class="p">),</span>
+    <span class="p">);</span>
+
+    <span class="c1">// 遍历并创建访问请求对象(ARO)组</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$groups</span> <span class="k">as</span> <span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 记得在循环中保存时要调用 create()...</span>
+        <span class="nv">$aro</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+
+        <span class="c1">// 保存数据</span>
+        <span class="nv">$aro</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 其它动作逻辑在下面...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>一旦把它们保存好了，就可以用访问控制列表(ACL)命令行程序来验证树的结构。</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">cake</span> <span class="nx">acl</span> <span class="nx">view</span> <span class="nx">aro</span>
+
+<span class="nx">Aro</span> <span class="nx">tree</span><span class="o">:</span>
+<span class="o">---------------------------------------------------------------</span>
+  <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="nx">warriors</span>
+
+  <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="nx">wizards</span>
+
+  <span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="nx">hobbits</span>
+
+  <span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="nx">visitors</span>
+
+<span class="o">---------------------------------------------------------------</span>
+</pre></div>
+</div>
+<p>我想现在这还不象是一棵树，但起码我们证实我们有了四个顶层的节点。让我们为这些访问
+请求对象(ARO)节点加一些子节点，在这些组下面加入用户 访问请求对象(ARO)吧。每个中
+土的良民在我们的新系统中都有一个账号，所以我们会把这些访问请求对象(ARO)记录与我
+们数据库中的模型记录挂钩。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">在向树中增加子节点时，确保使用访问控制列表(ACL)节点的 ID，而不是 foreign_key
+的值。</p>
+</div>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">any_action</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$aro</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Aro</span><span class="p">();</span>
+
+    <span class="c1">// 这里是用户记录，可与新的 ARO 记录挂钩。</span>
+    <span class="c1">// 该数据可来自模型并被修改，不过我们在这里出于演示的目的使用静态数组。</span>
+
+    <span class="nv">$users</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Aragorn&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="mi">2356</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="mi">1</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Legolas&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="mi">6342</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="mi">2</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Gimli&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="mi">1564</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="mi">3</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Gandalf&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="mi">7419</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="mi">4</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Frodo&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="mi">7451</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="mi">5</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bilbo&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="mi">5126</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="mi">6</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Merry&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="mi">5144</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="mi">7</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Pippin&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="mi">1211</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="mi">8</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Gollum&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="mi">1337</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">);</span>
+
+    <span class="c1">// 遍历并创建 ARO 对象(作为子节点)</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$users</span> <span class="k">as</span> <span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 在循环中保存，记得调用 create()...</span>
+        <span class="nv">$aro</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+
+        <span class="c1">// 保存数据 Save data</span>
+        <span class="nv">$aro</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 其它动作逻辑...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">通常你不会既提供别名(alias)又提供模型/外键(foreign_key)，不过我们在这里出
+于演示的目的两者都使用，从而使树的结构更易读。</p>
+</div>
+<p>现在那个命令行应用程序命令的输出更加有趣了。让我们来试一下:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">cake</span> <span class="nx">acl</span> <span class="nx">view</span> <span class="nx">aro</span>
+
+<span class="nx">Aro</span> <span class="nx">tree</span><span class="o">:</span>
+<span class="o">---------------------------------------------------------------</span>
+  <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="nx">warriors</span>
+
+    <span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="nx">Aragorn</span>
+
+    <span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="nx">Legolas</span>
+
+    <span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="nx">Gimli</span>
+
+  <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="nx">wizards</span>
+
+    <span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="nx">Gandalf</span>
+
+  <span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="nx">hobbits</span>
+
+    <span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="nx">Frodo</span>
+
+    <span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="nx">Bilbo</span>
+
+    <span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="nx">Merry</span>
+
+    <span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="nx">Pippin</span>
+
+  <span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="nx">visitors</span>
+
+    <span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="nx">Gollum</span>
+
+<span class="o">---------------------------------------------------------------</span>
+</pre></div>
+</div>
+<p>至此我们正确建立了访问请求对象(ARO)树，让我们来讨论一下构建访问控制对象(ACO)树
+的一种可能的方法。尽管我们能够建立访问控制对象(ACO)的更加抽象的表示方法，(但是)
+经常更加实际的做法是根据 Cake 的控制器/动作的设置来建立访问控制对象(ACO)树的模
+型。在这个魔戒团队的场景中我们要处理五个主要的对象，这在 Cake 应用程序中自然的
+设置是一组模型，而最终是操控它们的控制器。控制器后面，我们想要控制这些控制器的
+特定动作的访问。</p>
+<p>基于这样的想法，让我们仿照 Cake 应用程序的设置，来建立访问控制对象(ACO)树。由
+于我们有五种访问控制对象(ACO)对象，我们要创建的访问控制对象(ACO)树最终看起来
+会象下面这样:</p>
+<ul class="simple">
+<li>武器(Weapons)</li>
+<li>魔戒(Rings)</li>
+<li>肉食(PorkChops)</li>
+<li>外交文件(DiplomaticEfforts)</li>
+<li>麦芽酒(Ales)</li>
+</ul>
+<p>Cake 访问控制列表(ACL)设置的一个好处是，每个访问控制对象(ACO)对象自动带有与
+CRUD 动作(创建，读取，更新和删除)相关的四个属性。你可以在五个主要访问控制对象
+(ACO)之下创建子节点，但使用 Cake 内置的动作管理涵盖了对一个给定对象的基本 CRUD
+操作。记住这一点会使你的访问控制对象(ACO)树更小、更易于维护。以后到我们讨论如
+何分配权限时，就可以看到这些如何使用了。</p>
+<p>既然你现在已经精通于添加访问请求对象(ARO)对象，那就用同样的技术来创建这个访问
+控制对象(ACO)树吧。使用核心的 Aco 模型来创建这些上层的组。</p>
+</div>
+<div class="section" id="id9">
+<h3>分配权限<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<p>创建了访问控制对象(ACO)和访问请求对象(ARO)对象之后，我们终于可以在这两个组之间
+分配权限了。这要使用 Cake 的核心 Acl 组件。让我们继续我们之前的例子。</p>
+<p>下面我们会在一个控制器动作之内进行，这是因为权限是用 Acl 组件管理的。</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SomethingsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="c1">// 你也许会想把它放在 AppController 中，但放在这里也很好。</span>
+
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span><span class="p">);</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>让我们在这个控制器的一个动作中用 AclComponent 来建立一些基本的权限。</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 给战士(warriors)对武器(weapons)完全的权限</span>
+    <span class="c1">// 这两个例子都使用别名的语法</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;warriors&#39;</span><span class="p">,</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">);</span>
+
+    <span class="c1">// 然而国王也许不想给每个人不受控制的权限</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">deny</span><span class="p">(</span><span class="s1">&#39;warriors/Legolas&#39;</span><span class="p">,</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">,</span> <span class="s1">&#39;delete&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">deny</span><span class="p">(</span><span class="s1">&#39;warriors/Gimli&#39;</span><span class="p">,</span>   <span class="s1">&#39;Weapons&#39;</span><span class="p">,</span> <span class="s1">&#39;delete&#39;</span><span class="p">);</span>
+
+    <span class="k">die</span><span class="p">(</span><span class="nb">print_r</span><span class="p">(</span><span class="s1">&#39;done&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们对 AclComponent 组件的第一次调用，允许 &#8216;warriors&#8217; 访问请求对象(ARO)组里面
+的任何用户，对 &#8216;Weapons&#8217; 访问控制对象(ACO)组里面的任何东西，有完全的权限。这
+里我们只是用别名来界定访问控制对象(ACO)和访问请求对象(ARO)对象。</p>
+<p>注意到第三个参数的用法了吗？我们就是这样使用所有 Cake 访问控制对象(ACO)对象内
+置的顺手的动作的。这个参数缺省的选项是``create``，<tt class="docutils literal"><span class="pre">read</span></tt>，<tt class="docutils literal"><span class="pre">update``和</span>
+<span class="pre">``delete</span></tt>，但是你可以在数据库表``aros_acos``中增加一列(前缀用_——例如
+<tt class="docutils literal"><span class="pre">_admin</span></tt>)，然后把它和缺省值一起使用。</p>
+<p>第二组调用试图设置更细微颗粒的权限。我们要保持阿拉贡(Aragorn)完全的权限，但防
+止该组里的其他战士(warriors)删除武器(Weapon)记录。以上我们使用别名的语法来界
+定访问请求对象(ARO)对象，但你也许想要使用模型/外键的语法。我们上面所写的等同
+于这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 6342 = Legolas</span>
+<span class="c1">// 1564 = Gimli</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">deny</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="mi">6342</span><span class="p">),</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">,</span> <span class="s1">&#39;delete&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">deny</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="mi">1564</span><span class="p">),</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">,</span> <span class="s1">&#39;delete&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">用别名的语法来界定一个节点使用斜线分隔的字符串(
+&#8216;/users/employees/developers&#8217;)。使用模型/外键的语法来界定节点使用带有两个
+参数的数组: <tt class="docutils literal"><span class="pre">array('model'</span> <span class="pre">=&gt;</span> <span class="pre">'User',</span> <span class="pre">'foreign_key'</span> <span class="pre">=&gt;</span> <span class="pre">8282)</span></tt>。</p>
+</div>
+<p>下一节会帮助我们验证我们所做的设置，使用 AclComponent 组件来验证我们刚刚建立
+的权限。</p>
+</div>
+<div class="section" id="checking-permissions">
+<span id="id10"></span><h3>检查权限: ACL 组件<a class="headerlink" href="#checking-permissions" title="永久链接至标题">¶</a></h3>
+<p>让我们用 AclComponent 组件来确保矮人(dwarves)和精灵(elves)无法从武器库中去掉任
+何东西。现在我们可以用 AclComponent 组件来检查一下我们创建的访问控制对象(ACO)
+和访问请求对象(ARO)对象了。检查权限的基本语法是:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="nv">$aro</span><span class="p">,</span> <span class="nv">$aco</span><span class="p">,</span> <span class="nv">$action</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>让我们在控制器动作里面试一下:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 这些都返回 true:</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;warriors/Aragorn&#39;</span><span class="p">,</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;warriors/Aragorn&#39;</span><span class="p">,</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">,</span> <span class="s1">&#39;create&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;warriors/Aragorn&#39;</span><span class="p">,</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">,</span> <span class="s1">&#39;read&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;warriors/Aragorn&#39;</span><span class="p">,</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">,</span> <span class="s1">&#39;update&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;warriors/Aragorn&#39;</span><span class="p">,</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">,</span> <span class="s1">&#39;delete&#39;</span><span class="p">);</span>
+
+    <span class="c1">// 记得我们可以对我们的用户 ARO 对象使用模型/id 语法</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;User&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2356</span><span class="p">)),</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">);</span>
+
+    <span class="c1">// 这些也返回 true:</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;warriors/Legolas&#39;</span><span class="p">,</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">,</span> <span class="s1">&#39;create&#39;</span><span class="p">);</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;warriors/Gimli&#39;</span><span class="p">,</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">,</span> <span class="s1">&#39;read&#39;</span><span class="p">);</span>
+
+    <span class="c1">// 但这些返回 false:</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;warriors/Legolas&#39;</span><span class="p">,</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">,</span> <span class="s1">&#39;delete&#39;</span><span class="p">);</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;warriors/Gimli&#39;</span><span class="p">,</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">,</span> <span class="s1">&#39;delete&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这里的用法只是演示性的，不过希望你能明白这样的检查可以用来决定是否允许某事发生、
+显示错误信息、或者使用户跳转到登录页面。</p>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../toc-general-purpose.html">通用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-behaviors.html">行为</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-components.html">组件</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pagination.html">Pagination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sessions.html">Sessions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="authentication.html">Authentication 认证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security-component.html">Form tampering prevention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security-component.html#csrf-protection">CSRF protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="request-handling.html">请求处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cookie.html">Cookie</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">访问控制列表组件</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-helpers.html">助件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-utilities.html">工具</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">访问控制列表组件</a><ul>
+<li><a class="reference internal" href="#acl">理解 ACL 如何工作</a></li>
+<li><a class="reference internal" href="#cake-ini-acl">定义权限: Cake 基于 INI 的访问控制列表(ACL)</a></li>
+<li><a class="reference internal" href="#cake-acl">定义权限: Cake 基于数据库的访问控制列表(ACL)</a><ul>
+<li><a class="reference internal" href="#id2">起步</a></li>
+<li><a class="reference internal" href="#aro-aco">创建访问请求对象(ARO)和访问控制对象(ACO)</a></li>
+<li><a class="reference internal" href="#id9">分配权限</a></li>
+<li><a class="reference internal" href="#checking-permissions">检查权限: ACL 组件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="../toc-helpers.html" title="助件" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="cookie.html" title="Cookie" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

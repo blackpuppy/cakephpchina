@@ -1,0 +1,1142 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Request and Response objects" lang="zh_CN" name="title" />
+<meta content="request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp" lang="zh_CN" name="keywords" />
+
+    <title>请求与响应对象 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="控制器" href="../controllers.html" />
+    <link rel="next" title="脚手架" href="scaffolding.html" />
+    <link rel="prev" title="控制器" href="../controllers.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/controllers/request-response.html" /><link rel="alternate" hreflang="pt" href="../../pt/controllers/request-response.html" /><link rel="alternate" hreflang="es" href="../../es/controllers/request-response.html" /><link rel="alternate" hreflang="ja" href="../../ja/controllers/request-response.html" /><link rel="alternate" hreflang="fr" href="../../fr/controllers/request-response.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../controllers.html" accesskey="U" itemprop="url"><span itemprop="title">控制器</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/controllers/request-response.html">en</a></li>
+				
+					<li><a href="../../pt/controllers/request-response.html">pt</a></li>
+				
+					<li><a href="../../es/controllers/request-response.html">es</a></li>
+				
+					<li><a href="../../ja/controllers/request-response.html">ja</a></li>
+				
+					<li><a href="../../fr/controllers/request-response.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/controllers/request-response.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>请求与响应对象<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>请求与响应对象是在 CakePHP 2.0 新增的。在之前的版本中，这两个对象由数组表示，相关
+的方法是分散在 <a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a>、<a class="reference internal" href="../development/routing.html#Router" title="Router"><tt class="xref php php-class docutils literal"><span class="pre">Router</span></tt></a>、
+<tt class="xref php php-class docutils literal"><span class="pre">Dispatcher</span></tt> 和 <a class="reference internal" href="../controllers.html#Controller" title="Controller"><tt class="xref php php-class docutils literal"><span class="pre">Controller</span></tt></a> 中。之前并没有专门的对象负责请
+求的相关信息。在 2.0 版本中，<a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> 和
+<a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> 用于这个目的。</p>
+</div>
+<div class="section" id="cakerequest">
+<span id="cake-request"></span><span id="index-0"></span><h1>CakeRequest<a class="headerlink" href="#cakerequest" title="永久链接至标题">¶</a></h1>
+<p><a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> 是 CakePHP 中默认的请求对象。它集合许多功能，用来查询请
+求数据以及与请求数据交互。对于每个请求，将创建一个 <a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> 实例，
+然后通过引用的方式，传递给应用程序中使用请求数据的各层。默认情况下，
+<a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> 赋值给 <tt class="docutils literal"><span class="pre">$this-&gt;request</span></tt>，在控制器，视图和助件中都可以
+使用。在组件中，也可以通过控制器引用来访问。<a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> 履行的一些
+职责包括:</p>
+<ul class="simple">
+<li>处理 GET，POST 和 FILES 数组，并放入你所熟悉的数据结构中。</li>
+<li>提供与请求相关的环境信息。比如，传送的头部信息，客户端 IP 地址，以及应用程序在
+服务器上运行的域/子域的信息。</li>
+<li>提供数组索引和对象属性两种方式，来访问请求参数。</li>
+</ul>
+<div class="section" id="id2">
+<h2>获取请求参数<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p><a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> 提供了几种方式获取请求参数。第一种是对象属性，第二种是
+数组索引，第三种是通过 <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;params</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">controller</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">];</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>上面这些都可以得到相同的值。提供多种获取参数的方式是为了便于现有应用程序的移植。
+所有的 <a class="reference internal" href="../development/routing.html#route-elements"><em>路由元素</em></a> 都可以通过这些方式得到。</p>
+<p>除了 <a class="reference internal" href="../development/routing.html#route-elements"><em>路由元素</em></a>，也经常需要获取
+<a class="reference internal" href="../development/routing.html#passed-arguments"><em>传入参数</em></a> 和 <a class="reference internal" href="../development/routing.html#named-parameters"><em>命名参数</em></a>。这些也
+可以通过请求对象获得:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 传入参数</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">pass</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">];</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">];</span>
+
+<span class="c1">// 命名参数</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">named</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">[</span><span class="s1">&#39;named&#39;</span><span class="p">];</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;named&#39;</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>以上这些都可以得到传入参数和命名参数。还有一些在 CakePHP 内部使用重要/有用的参数，
+也可以在请求参数中找到:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">plugin</span></tt> 处理请求的插件，没有插件时为 null。</li>
+<li><tt class="docutils literal"><span class="pre">controller</span></tt> 处理当前请求的控制器。</li>
+<li><tt class="docutils literal"><span class="pre">action</span></tt> 处理当前请求的动作。</li>
+<li><tt class="docutils literal"><span class="pre">prefix</span></tt> 当前动作的前缀。欲知更多信息，请参见
+<a class="reference internal" href="../development/routing.html#prefix-routing"><em>前缀路由</em></a>。</li>
+<li><tt class="docutils literal"><span class="pre">bare</span></tt> 当请求来自于 <a class="reference internal" href="../controllers.html#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> ，并且包括 bare
+选项时就会出现。Bare 请求不会渲染布局(<em>layout</em>)。</li>
+<li><tt class="docutils literal"><span class="pre">requested</span></tt> 当请求来自 <a class="reference internal" href="../controllers.html#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 时出现，并被
+设置为 true。</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>获取查询字符串参数<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>查询字符串(<em>Querystring</em>)参数可以用 <a class="reference internal" href="#CakeRequest::$query" title="CakeRequest::$query"><tt class="xref php php-attr docutils literal"><span class="pre">CakeRequest::$query</span></tt></a> 读取:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 网址为 /posts/index?page=1&amp;sort=title</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">[</span><span class="s1">&#39;page&#39;</span><span class="p">];</span>
+
+<span class="c1">// 也可以通过数组方式获取</span>
+<span class="c1">// 注意：向后兼容访问器，在以后的版本中会被废弃</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">][</span><span class="s1">&#39;page&#39;</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>可以直接访问 <a class="reference internal" href="#CakeRequest::$query" title="CakeRequest::$query"><tt class="xref php php-attr docutils literal"><span class="pre">$query</span></tt></a> 属性，或者可以用
+<a class="reference internal" href="#CakeRequest::query" title="CakeRequest::query"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::query()</span></tt></a> 以不会报错的方式读取网址查询数组。任何不存在的键
+都会返回 <tt class="docutils literal"><span class="pre">null</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s1">&#39;value_that_does_not_exist&#39;</span><span class="p">);</span>
+<span class="c1">// $foo === null</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="post">
+<h2>获取 POST 数据<a class="headerlink" href="#post" title="永久链接至标题">¶</a></h2>
+<p>所有的 POST 数据都可以用 <a class="reference internal" href="#CakeRequest::$data" title="CakeRequest::$data"><tt class="xref php php-attr docutils literal"><span class="pre">CakeRequest::$data</span></tt></a> 得到。任何包含 <tt class="docutils literal"><span class="pre">data</span></tt>
+前缀的表单数据，都会把 data 前缀去掉。例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 一项 name 属性为 &#39;data[MyModel][title]&#39; 的表单数据，可用下面的方式获得</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;MyModel&#39;</span><span class="p">][</span><span class="s1">&#39;title&#39;</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>也可以直接访问 <a class="reference internal" href="#CakeRequest::$data" title="CakeRequest::$data"><tt class="xref php php-attr docutils literal"><span class="pre">$data</span></tt></a> 属性，或者使用
+<a class="reference internal" href="#CakeRequest::data" title="CakeRequest::data"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::data()</span></tt></a> 以不会报错的方式来读取 data 数组。任何不存在的键
+都会返回 <tt class="docutils literal"><span class="pre">null</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">(</span><span class="s1">&#39;Value.that.does.not.exist&#39;</span><span class="p">);</span>
+<span class="c1">// $foo == null</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="put-post">
+<h2>获取 PUT 或者 POST 数据<a class="headerlink" href="#put-post" title="永久链接至标题">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified">2.2 新版功能.</span></p>
+</div>
+<p>当构建 REST 服务时，会经常接受以 <tt class="docutils literal"><span class="pre">PUT</span></tt> 和 <tt class="docutils literal"><span class="pre">DELETE</span></tt> 请求方式提交的数据。自从
+2.2 版本开始，对 <tt class="docutils literal"><span class="pre">PUT</span></tt> 和 <tt class="docutils literal"><span class="pre">DELETE</span></tt> 请求，任何
+<tt class="docutils literal"><span class="pre">application/x-www-form-urlencoded</span></tt> 请求体(<em>request body</em>)中的数据会被自动解析
+并设置为 <tt class="docutils literal"><span class="pre">$this-&gt;data</span></tt>。如果接受的是 JSON 或 XML 数据，下面会解释如何访问这些
+请求体(<em>request body</em>)。</p>
+</div>
+<div class="section" id="xml-json">
+<h2>访问 XML 或 JSON 数据<a class="headerlink" href="#xml-json" title="永久链接至标题">¶</a></h2>
+<p>采用 <a class="reference internal" href="../development/rest.html"><em>REST</em></a> 的应用程序经常以非网址编码(non-URL-encoded)的
+post 文件体(<em>body</em>)的方式交换数据。这时可以用 <a class="reference internal" href="#CakeRequest::input" title="CakeRequest::input"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::input()</span></tt></a>
+读取任何格式的输入数据。通过提供一个解码函数，得到反序列化之后的内容:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 获得提交给 PUT/POST 动作以 JSON 编码的数据</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;json_decode&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>鉴于某些反序列化方法在调用的时候要求额外的参数，例如 <tt class="docutils literal"><span class="pre">json_decode</span></tt> 方法的
+&#8216;as array&#8217; 参数。如果要把 XML 转换成 DOMDocument 对象，
+<a class="reference internal" href="#CakeRequest::input" title="CakeRequest::input"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::input()</span></tt></a> 也支持传入额外的参数:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 获得提交给 PUT/POST 动作的 Xml 编码的数据</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Xml::build&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;return&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;domdocument&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>获取路径信息<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p><a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> 也提供与应用程序中路径相关的有用信息。
+<a class="reference internal" href="#CakeRequest::$base" title="CakeRequest::$base"><tt class="xref php php-attr docutils literal"><span class="pre">CakeRequest::$base</span></tt></a> 和 <a class="reference internal" href="#CakeRequest::$webroot" title="CakeRequest::$webroot"><tt class="xref php php-attr docutils literal"><span class="pre">CakeRequest::$webroot</span></tt></a> 可用于生成网
+址，以及判断你的应用程序是否在某个子目录中。</p>
+</div>
+<div class="section" id="check-the-request">
+<span id="id5"></span><h2>检测请求<a class="headerlink" href="#check-the-request" title="永久链接至标题">¶</a></h2>
+<p>判断各种请求条件，过去需要用到 <a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a>。现在这些方
+法被移到了 <a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> 中，在保持向后兼容用法的同时，提供了新的接口</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">isPost</span><span class="p">();</span> <span class="c1">// 已废弃</span>
+</pre></div>
+</div>
+<p>两种方法调用都会返回相同的值。暂时这些方法仍然在
+<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a> 中可以使用，但已经被废弃，并会在3.0.0版本中
+被去掉。通过使用 <a class="reference internal" href="#CakeRequest::addDetector" title="CakeRequest::addDetector"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::addDetector()</span></tt></a> 创建新的检测器
+(<em>detectors</em>)，可以很容易地扩展现有的请求检测。可以创建四种不同种类的检测器:</p>
+<ul class="simple">
+<li>环境值比较 —— 比较从 <a class="reference internal" href="../core-libraries/global-constants-and-functions.html#env" title="env"><tt class="xref php php-func docutils literal"><span class="pre">env()</span></tt></a> 取得的值与给定值是否相等。</li>
+<li>模式值比较 —— 模式值比较可以把从 <a class="reference internal" href="../core-libraries/global-constants-and-functions.html#env" title="env"><tt class="xref php php-func docutils literal"><span class="pre">env()</span></tt></a> 取得的值和正则表达式进行
+比较。</li>
+<li>基于选项的比较 —— 基于选项的比较使用一组选项来创建一个正则表达式。之后再添加
+已定义的选项检测器就会合并选项。</li>
+<li>回调检测器 —— 回调检测器可以提供一个 &#8216;callback&#8217; 类型来进行检查。这个回调函数
+只接受请求对象作为唯一的参数。</li>
+</ul>
+<p>下面是一些例子:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 添加一个环境检测器。</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">addDetector</span><span class="p">(</span>
+    <span class="s1">&#39;post&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;env&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;REQUEST_METHOD&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;POST&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// 添加一个模式值检测器。</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">addDetector</span><span class="p">(</span>
+    <span class="s1">&#39;iphone&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;env&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HTTP_USER_AGENT&#39;</span><span class="p">,</span> <span class="s1">&#39;pattern&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/iPhone/i&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// 添加一个选项检测器。</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">addDetector</span><span class="p">(</span><span class="s1">&#39;internalIp&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;env&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CLIENT_IP&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;192.168.0.101&#39;</span><span class="p">,</span> <span class="s1">&#39;192.168.0.100&#39;</span><span class="p">)</span>
+<span class="p">));</span>
+
+<span class="c1">// 添加一个回调检测器。可以是一个匿名函数，或者是一个常规的回调函数。</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">addDetector</span><span class="p">(</span>
+    <span class="s1">&#39;awesome&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;callback&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">awesome</span><span class="p">);</span>
+    <span class="p">})</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> 还包含类似 <a class="reference internal" href="#CakeRequest::domain" title="CakeRequest::domain"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::domain()</span></tt></a>、
+<a class="reference internal" href="#CakeRequest::subdomains" title="CakeRequest::subdomains"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::subdomains()</span></tt></a> 和 <a class="reference internal" href="#CakeRequest::host" title="CakeRequest::host"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::host()</span></tt></a> 的方法，
+可以让有子域的应用程序更容易处理。</p>
+<p>以下是几个内置的检测器:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">is('get')</span></tt> 检查当前请求是否是 GET。</li>
+<li><tt class="docutils literal"><span class="pre">is('put')</span></tt> 检查当前请求是否是 PUT。</li>
+<li><tt class="docutils literal"><span class="pre">is('post')</span></tt> 检查当前请求是否是 POST。</li>
+<li><tt class="docutils literal"><span class="pre">is('delete')</span></tt> 检查当前请求是否是 DELETE。</li>
+<li><tt class="docutils literal"><span class="pre">is('head')</span></tt> 检查当前请求是否是 HEAD。</li>
+<li><tt class="docutils literal"><span class="pre">is('options')</span></tt> 检查当前请求是否是 OPTIONS。</li>
+<li><tt class="docutils literal"><span class="pre">is('ajax')</span></tt> 检查当前请求是否带有 X-Requested-with = XmlHttpRequest。</li>
+<li><tt class="docutils literal"><span class="pre">is('ssl')</span></tt> 检查当前请求是否通过 SSL。</li>
+<li><tt class="docutils literal"><span class="pre">is('flash')</span></tt> 检查当前请求是否带有 Flash 的用户代理(<em>User-Agent</em>)。</li>
+<li><tt class="docutils literal"><span class="pre">is('mobile')</span></tt> 检查当前请求是否来自常见移动代理列表。</li>
+</ul>
+</div>
+<div class="section" id="cakerequest-requesthandlercomponent">
+<h2>CakeRequest 和 RequestHandlerComponent<a class="headerlink" href="#cakerequest-requesthandlercomponent" title="永久链接至标题">¶</a></h2>
+<p>由于 <a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> 提供的许多特性以前是
+<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a> 的职责，需要重新思考才能明白它(后者)如何才
+能继续融洽地存在于整个架构中。对 2.0 版本来说，
+<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a> 在 <a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> 提供的工具之上
+提供了一层语法糖，比如根据内容的类型来切换布局和视图。在这两个类中这种工具和语法
+糖的划分，让你更容易地按照需要选择。</p>
+</div>
+<div class="section" id="id6">
+<h2>与请求的其他方面交互<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>你可以用 <a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> 查看(<em>introspect</em>)关于请求的各种信息。除了检测
+器，还可以使用各种属性和方法查看其它信息。</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;webroot</span></tt> 包含 webroot 目录。</li>
+<li><tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;base</span></tt> 包含 base 路径。</li>
+<li><tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;here</span></tt> 包含当前请求的完整地址。</li>
+<li><tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;query</span></tt> 含有查询字符串(<em>query string</em>)参数。</li>
+</ul>
+</div>
+<div class="section" id="cakerequest-api">
+<h2>CakeRequest API<a class="headerlink" href="#cakerequest-api" title="永久链接至标题">¶</a></h2>
+<dl class="class">
+<dt id="CakeRequest">
+<em class="property">class </em><tt class="descname">CakeRequest</tt><a class="headerlink" href="#CakeRequest" title="永久链接至目标">¶</a></dt>
+<dd><p>CakeRequest 封装了请求参数的处理和查询(<em>introspection</em>)。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::domain">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">domain</tt><big>(</big><em>$tldLength = 1</em><big>)</big><a class="headerlink" href="#CakeRequest::domain" title="永久链接至目标">¶</a></dt>
+<dd><p>返回应用程序运行的域名。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::subdomains">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">subdomains</tt><big>(</big><em>$tldLength = 1</em><big>)</big><a class="headerlink" href="#CakeRequest::subdomains" title="永久链接至目标">¶</a></dt>
+<dd><p>以数组的形式返回应用程序运行的子域名。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::host">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">host</tt><big>(</big><big>)</big><a class="headerlink" href="#CakeRequest::host" title="永久链接至目标">¶</a></dt>
+<dd><p>返回应用程序所在的主机名。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::method">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">method</tt><big>(</big><big>)</big><a class="headerlink" href="#CakeRequest::method" title="永久链接至目标">¶</a></dt>
+<dd><p>返回请求所用的 HTTP 方法。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::onlyAllow">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">onlyAllow</tt><big>(</big><em>$methods</em><big>)</big><a class="headerlink" href="#CakeRequest::onlyAllow" title="永久链接至目标">¶</a></dt>
+<dd><p>设置允许的 HTTP 方法，如果不符合就会导致 MethodNotAllowedException。405 响应
+会包括必要的 <tt class="docutils literal"><span class="pre">Allow</span></tt> 头部信息(<em>header</em>)及传入的 HTTP 方法。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.3 新版功能.</span></p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">2.5 版后已移除: </span>不要再使用，而是使用 <a class="reference internal" href="#CakeRequest::allowMethod" title="CakeRequest::allowMethod"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::allowMethod()</span></tt></a>。</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::allowMethod">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">allowMethod</tt><big>(</big><em>$methods</em><big>)</big><a class="headerlink" href="#CakeRequest::allowMethod" title="永久链接至目标">¶</a></dt>
+<dd><p>设置允许的 HTTP 方法，如果不符合就会导致 MethodNotAllowedException。405 响应
+会包括必要的 <tt class="docutils literal"><span class="pre">Allow</span></tt> 头部信息(<em>header</em>)及传入的 HTTP 方法。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.5 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::referer">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">referer</tt><big>(</big><em>$local = false</em><big>)</big><a class="headerlink" href="#CakeRequest::referer" title="永久链接至目标">¶</a></dt>
+<dd><p>返回请求的引用网址(<em>referring address</em>)。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::clientIp">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">clientIp</tt><big>(</big><em>$safe = true</em><big>)</big><a class="headerlink" href="#CakeRequest::clientIp" title="永久链接至目标">¶</a></dt>
+<dd><p>返回当前访问者的 IP 地址。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::header">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">header</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#CakeRequest::header" title="永久链接至目标">¶</a></dt>
+<dd><p>让你获得请求使用的任何 <tt class="docutils literal"><span class="pre">HTTP_*</span></tt> 头部信息(<em>header</em>):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>会返回当前请求使用的用户代理。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::input">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">input</tt><big>(</big><em>$callback</em><span class="optional">[</span>, <em>$options</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#CakeRequest::input" title="永久链接至目标">¶</a></dt>
+<dd><p>获取请求的输入数据，并可选择使其通过一个解码函数。可有助于与 XML 或 JSON 请
+求体(<em>request body</em>)内容交互。给解码函数的其它参数可以作为 input() 的参数传
+入:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;json_decode&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::data">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">data</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#CakeRequest::data" title="永久链接至目标">¶</a></dt>
+<dd><p>提供对象属性(<em>dot notation</em>)的表示方法来访问请求数据。可以用来读取和修改请求
+数据，方法调用也可以链接起来:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 修改一些请求数据，从而可以放到一些表单字段里面。</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">(</span><span class="s1">&#39;Post.title&#39;</span><span class="p">,</span> <span class="s1">&#39;New post&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">data</span><span class="p">(</span><span class="s1">&#39;Comment.1.author&#39;</span><span class="p">,</span> <span class="s1">&#39;Mark&#39;</span><span class="p">);</span>
+
+<span class="c1">// 也可以读出数据。</span>
+<span class="nv">$value</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">(</span><span class="s1">&#39;Post.title&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::query">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">query</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#CakeRequest::query" title="永久链接至目标">¶</a></dt>
+<dd><p>提供对象属性(<em>dot notation</em>)的表示方法来访问网址查询数据:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 网址是 /posts/index?page=1&amp;sort=title</span>
+<span class="nv">$value</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">2.3 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::is">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">is</tt><big>(</big><em>$type</em><big>)</big><a class="headerlink" href="#CakeRequest::is" title="永久链接至目标">¶</a></dt>
+<dd><p>检查请求是否符合某种条件。使用内置检测规则，以及任何用
+<a class="reference internal" href="#CakeRequest::addDetector" title="CakeRequest::addDetector"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::addDetector()</span></tt></a> 方法定义的其它规则。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::addDetector">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">addDetector</tt><big>(</big><em>$name</em>, <em>$options</em><big>)</big><a class="headerlink" href="#CakeRequest::addDetector" title="永久链接至目标">¶</a></dt>
+<dd><p>添加检测器，供 <a class="reference internal" href="#CakeRequest::is" title="CakeRequest::is"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::is()</span></tt></a> 方法使用。欲知详情请见
+<a class="reference internal" href="#check-the-request"><em>检测请求</em></a>。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::accepts">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">accepts</tt><big>(</big><em>$type = null</em><big>)</big><a class="headerlink" href="#CakeRequest::accepts" title="永久链接至目标">¶</a></dt>
+<dd><p>找出客户端接受哪些种类的内容类型(<em>content type</em>)，或者检查客户端是否接受某种
+类型的内容。</p>
+<p>获得所有类型:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">accepts</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>检查一种类型:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">accepts</span><span class="p">(</span><span class="s1">&#39;application/json&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="CakeRequest::acceptLanguage">
+<em class="property">static </em><tt class="descclassname">CakeRequest::</tt><tt class="descname">acceptLanguage</tt><big>(</big><em>$language = null</em><big>)</big><a class="headerlink" href="#CakeRequest::acceptLanguage" title="永久链接至目标">¶</a></dt>
+<dd><p>或者获取客户端接受的所有语言，或者检查是否接受某种语言。</p>
+<p>获得接受的语言列表:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CakeRequest</span><span class="o">::</span><span class="na">acceptLanguage</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>检查是否接受某种语言:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CakeRequest</span><span class="o">::</span><span class="na">acceptLanguage</span><span class="p">(</span><span class="s1">&#39;es-es&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeRequest::param">
+<tt class="descclassname">CakeRequest::</tt><tt class="descname">param</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#CakeRequest::param" title="永久链接至目标">¶</a></dt>
+<dd><p>安全地读取 <tt class="docutils literal"><span class="pre">$request-&gt;params</span></tt> 中的值。这免去了在使用参数值之前要调用
+<tt class="docutils literal"><span class="pre">isset()</span></tt> 或 <tt class="docutils literal"><span class="pre">empty()</span></tt> 的麻烦。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.4 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="attr">
+<dt id="CakeRequest::$data">
+<em class="property">property </em><tt class="descclassname">CakeRequest::$</tt><tt class="descname">data</tt><a class="headerlink" href="#CakeRequest::$data" title="永久链接至目标">¶</a></dt>
+<dd><p>POST 数据的数组。你可以用 <a class="reference internal" href="#CakeRequest::data" title="CakeRequest::data"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::data()</span></tt></a> 来读取该属性，而又
+抑制错误通知。</p>
+</dd></dl>
+
+<dl class="attr">
+<dt id="CakeRequest::$query">
+<em class="property">property </em><tt class="descclassname">CakeRequest::$</tt><tt class="descname">query</tt><a class="headerlink" href="#CakeRequest::$query" title="永久链接至目标">¶</a></dt>
+<dd><p>查询字符串(<em>query string</em>)参数数组。</p>
+</dd></dl>
+
+<dl class="attr">
+<dt id="CakeRequest::$params">
+<em class="property">property </em><tt class="descclassname">CakeRequest::$</tt><tt class="descname">params</tt><a class="headerlink" href="#CakeRequest::$params" title="永久链接至目标">¶</a></dt>
+<dd><p>包含路由元素和请求参数的数组。</p>
+</dd></dl>
+
+<dl class="attr">
+<dt id="CakeRequest::$here">
+<em class="property">property </em><tt class="descclassname">CakeRequest::$</tt><tt class="descname">here</tt><a class="headerlink" href="#CakeRequest::$here" title="永久链接至目标">¶</a></dt>
+<dd><p>返回当前请求的网址。</p>
+</dd></dl>
+
+<dl class="attr">
+<dt id="CakeRequest::$base">
+<em class="property">property </em><tt class="descclassname">CakeRequest::$</tt><tt class="descname">base</tt><a class="headerlink" href="#CakeRequest::$base" title="永久链接至目标">¶</a></dt>
+<dd><p>应用程序的 base 路径，通常是 <tt class="docutils literal"><span class="pre">/</span></tt>，除非应用程序是在一个子目录内。</p>
+</dd></dl>
+
+<dl class="attr">
+<dt id="CakeRequest::$webroot">
+<em class="property">property </em><tt class="descclassname">CakeRequest::$</tt><tt class="descname">webroot</tt><a class="headerlink" href="#CakeRequest::$webroot" title="永久链接至目标">¶</a></dt>
+<dd><p>当前的 webroot。</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="cakeresponse">
+<span id="index-1"></span><h1>CakeResponse<a class="headerlink" href="#cakeresponse" title="永久链接至标题">¶</a></h1>
+<p><a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> 是 CakePHP 的默认响应类。它封装了一系列特性和功能，来
+为应用程序生成 HTTP 响应。它也可以有助于测试，鉴于它能被模拟/替换
+(<em>mocked/stubbed</em>)，从而让你可以检查要发送的头部信息(<em>header</em>)。如同
+<a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a>，<a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> 合并了一些之前在
+<a class="reference internal" href="../controllers.html#Controller" title="Controller"><tt class="xref php php-class docutils literal"><span class="pre">Controller</span></tt></a>、<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a> 和
+<tt class="xref php php-class docutils literal"><span class="pre">Dispatcher</span></tt> 中的方法。这些旧方法已经废弃，请使用
+<a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a>。</p>
+<p><a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> 提供了一个接口，封装了与响应有关的常见任务，比如:</p>
+<ul class="simple">
+<li>为跳转发送头部信息(<em>header</em>)。</li>
+<li>发送内容类型头部信息。</li>
+<li>发送任何头部信息。</li>
+<li>发送响应体(<em>response body</em>)。</li>
+</ul>
+<div class="section" id="id7">
+<h2>改变响应类<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<p>CakePHP 默认使用 <a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a>。<a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> 是灵活透明
+的类。如果需要用应用程序中特定的类来重载它，可以在 <tt class="docutils literal"><span class="pre">app/webroot/index.php</span></tt> 替换
+<a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a>。这会使应用程序中的所有控制器都使用 <tt class="docutils literal"><span class="pre">CustomResponse</span></tt>，
+而不是 <a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a>。也可以在控制器中设置 <tt class="docutils literal"><span class="pre">$this-&gt;response</span></tt> 来替
+换响应实例。在测试中替换响应对象是很方便的，因为这样可以禁止与 <tt class="docutils literal"><span class="pre">header()</span></tt> 交互
+的方法。欲知详情，请参看 <a class="reference internal" href="#cakeresponse-testing"><em>CakeResponse 和测试</em></a>。</p>
+</div>
+<div class="section" id="id8">
+<h2>处理内容类型<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<p>可以用 <a class="reference internal" href="#CakeResponse::type" title="CakeResponse::type"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::type()</span></tt></a> 来控制应用程序响应的内容类型
+(<em>Content-Type</em>)。如果应用程序需要处理不是 <a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> 内置的内容
+类型，也可以用 <a class="reference internal" href="#CakeResponse::type" title="CakeResponse::type"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::type()</span></tt></a> 建立这些类型的映射:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 增加 vCard 类型</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">type</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;vcf&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text/v-card&#39;</span><span class="p">));</span>
+
+<span class="c1">// 设置响应的内容类型(*Content-Type*)为 vcard。</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">type</span><span class="p">(</span><span class="s1">&#39;vcf&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>通常你会在控制器的 <a class="reference internal" href="../controllers.html#Controller::beforeFilter" title="Controller::beforeFilter"><tt class="xref php php-meth docutils literal"><span class="pre">beforeFilter()</span></tt></a> 回调中映射更多的内容
+类型，这样，如果使用 <a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a> 的话，就可以利用它的自
+动切换视图的特性。</p>
+</div>
+<div class="section" id="cake-response-file">
+<span id="id9"></span><h2>发送文件<a class="headerlink" href="#cake-response-file" title="永久链接至标题">¶</a></h2>
+<p>有时候需要发送文件作为对请求的响应。在 2.3 版本之前，可以用
+<a class="reference internal" href="../views/media-view.html#MediaView" title="MediaView"><tt class="xref php php-class docutils literal"><span class="pre">MediaView</span></tt></a> 来实现。在 2.3 版本中，<a class="reference internal" href="../views/media-view.html#MediaView" title="MediaView"><tt class="xref php php-class docutils literal"><span class="pre">MediaView</span></tt></a> 已被废弃，
+不过可以用 <a class="reference internal" href="#CakeResponse::file" title="CakeResponse::file"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::file()</span></tt></a> 来发送文件作为响应:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">sendFile</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$file</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Attachment</span><span class="o">-&gt;</span><span class="na">getFile</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">(</span><span class="nv">$file</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]);</span>
+    <span class="c1">// 返回响应对象，阻止控制器渲染视图</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>如上面的例子所示，必须为该方法提供文件路径。如果是
+<tt class="xref php php-attr docutils literal"><span class="pre">CakeResponse::$_mimeTypes</span></tt> 中列出的已知文件类型，CakePHP 就会发送正确
+的内容类型头部信息。可以在调用 <a class="reference internal" href="#CakeResponse::file" title="CakeResponse::file"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::file()</span></tt></a> 之前用
+<a class="reference internal" href="#CakeResponse::type" title="CakeResponse::type"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::type()</span></tt></a> 方法添加新类型。</p>
+<p>如果需要，也可以通过指定下面的选项来强制文件下载，而不是显示在浏览器中:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">(</span>
+    <span class="nv">$file</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">],</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;download&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>把字符串作为文件发送<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<p>可以发送不在硬盘上的文件作为响应，比如从字符串动态生成的 PDF 文件或者 ICS 日程:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">sendIcs</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$icsString</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Calendar</span><span class="o">-&gt;</span><span class="na">generateIcs</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">body</span><span class="p">(</span><span class="nv">$icsString</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">type</span><span class="p">(</span><span class="s1">&#39;ics&#39;</span><span class="p">);</span>
+
+    <span class="c1">//可选择强制文件下载</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">download</span><span class="p">(</span><span class="s1">&#39;filename_for_download.ics&#39;</span><span class="p">);</span>
+
+    <span class="c1">// 返回相应对象，防止控制器试图渲染视图</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h2>设置头部信息<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<p>设置头部信息可以使用 <a class="reference internal" href="#CakeResponse::header" title="CakeResponse::header"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::header()</span></tt></a> 方法。它可以用几种不同的
+参数配置来调用:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 设置单一头部信息</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;http://example.com&#39;</span><span class="p">);</span>
+
+<span class="c1">// 设置多个头部信息</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Location&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;http://example.com&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;X-Extra&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My header&#39;</span>
+<span class="p">));</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;WWW-Authenticate: Negotiate&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Content-type: application/pdf&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>多次设置相同的 <a class="reference internal" href="#CakeResponse::header" title="CakeResponse::header"><tt class="xref php php-meth docutils literal"><span class="pre">header()</span></tt></a>，会导致覆盖之前的值，就像通常
+的 header 函数调用一样。当调用 <a class="reference internal" href="#CakeResponse::header" title="CakeResponse::header"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::header()</span></tt></a> 时，头部信息不
+会被发送；它们只是被缓存起来，直到真正地发送响应。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.4 新版功能.</span></p>
+</div>
+<p>现在可以用便捷方法 <a class="reference internal" href="#CakeResponse::location" title="CakeResponse::location"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::location()</span></tt></a> 来直接设置或读取重定向位
+置头部信息。</p>
+</div>
+<div class="section" id="id12">
+<h2>与浏览器缓存交互<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h2>
+<p>有时候需要使浏览器不要缓存控制器动作的执行结果。
+<a class="reference internal" href="#CakeResponse::disableCache" title="CakeResponse::disableCache"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::disableCache()</span></tt></a> 方法就是为此目的:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 做一些事情</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">disableCache</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">从 SSL 域下载时使用 disableCache()，并试图向 Internet Explorer 发送文件，会
+导致错误。</p>
+</div>
+<p>也可以使用 <a class="reference internal" href="#CakeResponse::cache" title="CakeResponse::cache"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::cache()</span></tt></a> 方法，告诉客户端要缓存响应:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//做一些事情</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">(</span><span class="s1">&#39;-1 minute&#39;</span><span class="p">,</span> <span class="s1">&#39;+5 days&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>上述代码会告诉客户端把响应结果缓存5天，希望能够加快的访问者的体验。
+<a class="reference internal" href="#CakeResponse::cache" title="CakeResponse::cache"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::cache()</span></tt></a> 方法把 <tt class="docutils literal"><span class="pre">Last-Modified</span></tt> 的值设为传入的第一个
+参数。<tt class="docutils literal"><span class="pre">Expires</span></tt> 头部信息和 <tt class="docutils literal"><span class="pre">max-age</span></tt> 指令会基于第二个参数进行设置。
+Cache-Control 的 <tt class="docutils literal"><span class="pre">public</span></tt> 指令也会被设置。</p>
+</div>
+<div class="section" id="http">
+<span id="cake-response-caching"></span><h2>微调 HTTP 缓存<a class="headerlink" href="#http" title="永久链接至标题">¶</a></h2>
+<p>最好也是最容易的一种加速应用程序的方法是使用 HTTP 缓存。在这种缓存模式下，只需要
+设置若干头部信息，比如，修改时间、响应实体标签(<em>response entity tag</em>)，等等，来
+帮助客户端决定它们是否应当使用响应的缓存拷贝。</p>
+<p>你不必编写缓存的逻辑，以及一旦数据更改就使之无效(从而刷新)它。HTTP 使用两种模式，
+过期和有效性验证，通常使用起来要更加简单。</p>
+<p>除了使用 <a class="reference internal" href="#CakeResponse::cache" title="CakeResponse::cache"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::cache()</span></tt></a>，也可以使用许多其它方法，来微调 HTTP
+缓存头部信息，从而利用浏览器或反向代理的缓存。</p>
+<div class="section" id="cache-control">
+<h3>缓存控制(<em>Cache Control</em>)头部信息<a class="headerlink" href="#cache-control" title="永久链接至标题">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified">2.1 新版功能.</span></p>
+</div>
+<p>应用于过期模式下，该头部信息包括多个指示，可以改变浏览器或代理使用缓存内容的方式。
+一条 <tt class="docutils literal"><span class="pre">Cache-Control</span></tt> 头部信息可以象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">-</span><span class="nx">Control</span><span class="o">:</span> <span class="k">private</span><span class="p">,</span> <span class="nb">max</span><span class="o">-</span><span class="nx">age</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span> <span class="nx">must</span><span class="o">-</span><span class="nx">revalidate</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> 类有一些工具方法来帮助你设置这个头部信息，并最终生成一
+条合法的 <tt class="docutils literal"><span class="pre">Cache-Control</span></tt> 头部信息。它们中的第一个是
+<a class="reference internal" href="#CakeResponse::sharable" title="CakeResponse::sharable"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::sharable()</span></tt></a> 方法，指示一个响应是否被不同的用户或客户端
+共享。这个方法实际控制这个头部信息公有(<tt class="docutils literal"><span class="pre">public</span></tt>)或者私有(<tt class="docutils literal"><span class="pre">private</span></tt>)的部分。
+设置响应为私有，表示它的全部或者部分只适用于单一用户。要利用共享缓存，就必须设置
+控制指令为公有。</p>
+<p>此方法的第二个参数用于指定缓存的 <tt class="docutils literal"><span class="pre">max-age</span></tt> (最大年龄)，以秒为单位，这段时间过
+后缓存就不认为是最新的了:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">()</span> <span class="p">{</span>
+    <span class="o">...</span>
+    <span class="c1">// 设置 Cache-Control 为公有、3600秒</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">sharable</span><span class="p">(</span><span class="k">true</span><span class="p">,</span> <span class="mi">3600</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">my_data</span><span class="p">()</span> <span class="p">{</span>
+    <span class="o">...</span>
+    <span class="c1">// 设置 Cache-Control 为私有、3600秒</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">sharable</span><span class="p">(</span><span class="k">false</span><span class="p">,</span> <span class="mi">3600</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> 提供了单独的方法来设置 <tt class="docutils literal"><span class="pre">Cache-Control</span></tt> 头部信息中的
+每一部分。</p>
+</div>
+<div class="section" id="id13">
+<h3>过期头部信息<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified">2.1 新版功能.</span></p>
+</div>
+<p>可以设置 <tt class="docutils literal"><span class="pre">Expires</span></tt> 头部信息为一个日期及时间，在这之后响应就被认为不是最新的了。
+这个头部信息可以用 <a class="reference internal" href="#CakeResponse::expires" title="CakeResponse::expires"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::expires()</span></tt></a> 方法来设置:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">expires</span><span class="p">(</span><span class="s1">&#39;+5 days&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这个方法也接受 <tt class="xref php php-class docutils literal"><span class="pre">DateTime</span></tt> 实例或者任何可以被 <tt class="xref php php-class docutils literal"><span class="pre">DateTime</span></tt> 解
+析的字符串。</p>
+</div>
+<div class="section" id="etag">
+<h3>Etag 头部信息<a class="headerlink" href="#etag" title="永久链接至标题">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified">2.1 新版功能.</span></p>
+</div>
+<p>在 HTTP 中，当内容总是变化时，缓存验证是经常使用的，并要求应用程序只有当缓存不是
+最新的时候才生成响应内容。在这个模式下，客户端继续在缓存中保存网页，但并不直接使
+用，而是每次询问应用程序资源是否改变。这通常用于静态资源，比如图像和其它资源。</p>
+<p><a class="reference internal" href="#CakeResponse::etag" title="CakeResponse::etag"><tt class="xref php php-meth docutils literal"><span class="pre">etag()</span></tt></a> 方法(叫做实体标签(<em>entity tag</em>))是一个字符串，
+用来唯一标识被请求的资源，就象文件校验码的作用，从而知道是否与缓存的资源匹配。</p>
+<p>要利用这条头部信息，你必须或者手动调用
+<a class="reference internal" href="#CakeResponse::checkNotModified" title="CakeResponse::checkNotModified"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::checkNotModified()</span></tt></a> 方法，或者在控制器中引入
+<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$articles</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">etag</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">generateHash</span><span class="p">(</span><span class="nv">$articles</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">checkNotModified</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="last-modified">
+<h3>Last Modified 头部信息<a class="headerlink" href="#last-modified" title="永久链接至标题">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified">2.1 新版功能.</span></p>
+</div>
+<p>在 HTTP 缓存有效性验证模式下，也可以设置 <tt class="docutils literal"><span class="pre">Last-Modified</span></tt> 头部信息，说明资源最
+后改变的日期和时间。设置这个头部信息可以帮助 CakePHP 回答缓存客户端，基于客户端
+的缓存，响应是否有变化。</p>
+<p>要利用这条头部信息，你必须或者手动调用
+<a class="reference internal" href="#CakeResponse::checkNotModified" title="CakeResponse::checkNotModified"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::checkNotModified()</span></tt></a> 方法，或者在控制器中引入
+<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$article</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">modified</span><span class="p">(</span><span class="nv">$article</span><span class="p">[</span><span class="s1">&#39;Article&#39;</span><span class="p">][</span><span class="s1">&#39;modified&#39;</span><span class="p">]);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">checkNotModified</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="vary">
+<h3>Vary 头部信息<a class="headerlink" href="#vary" title="永久链接至标题">¶</a></h3>
+<p>有些情况下，也许会用同一网址提供不同的内容。这种情况通常是有一个多语言网页，或者
+是根据浏览器提供不同的 HTML。在这些情况下，可以使用 <tt class="docutils literal"><span class="pre">Vary</span></tt> 头部信息:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">vary</span><span class="p">(</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">vary</span><span class="p">(</span><span class="s1">&#39;Accept-Encoding&#39;</span><span class="p">,</span> <span class="s1">&#39;User-Agent&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">vary</span><span class="p">(</span><span class="s1">&#39;Accept-Language&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cakeresponse-testing">
+<span id="id14"></span><h2>CakeResponse 和测试<a class="headerlink" href="#cakeresponse-testing" title="永久链接至标题">¶</a></h2>
+<p>也许 <a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> 最大的好处在于，它使得测试控制器和组件更容易了。
+与其把方法散布于多个对象之中，现在控制器和组件只调用(<em>delegate</em>)
+<a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a>，只需要模拟一个对象就可以了。这让你更加接近于单元测试，
+也使得测试控制器更容易了:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">testSomething</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">controller</span><span class="o">-&gt;</span><span class="na">response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMock</span><span class="p">(</span><span class="s1">&#39;CakeResponse&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">controller</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">once</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">&#39;header&#39;</span><span class="p">);</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>另外，可以更容易地从命令行运行测试，因为可以用模拟(<em>mock</em>)来避免在命令行界面设置
+头部信息时引起的“头部信息已发送(<em>headers sent</em>)”的错误。</p>
+</div>
+<div class="section" id="cakeresponse-api">
+<h2>CakeResponse API<a class="headerlink" href="#cakeresponse-api" title="永久链接至标题">¶</a></h2>
+<dl class="class">
+<dt id="CakeResponse">
+<em class="property">class </em><tt class="descname">CakeResponse</tt><a class="headerlink" href="#CakeResponse" title="永久链接至目标">¶</a></dt>
+<dd><p>CakeResponse 提供了一些有用的方法，来与要发送给客户端的响应交互。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::header">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">header</tt><big>(</big><em>$header = null</em>, <em>$value = null</em><big>)</big><a class="headerlink" href="#CakeResponse::header" title="永久链接至目标">¶</a></dt>
+<dd><p>可以直接设置一个或多个头部信息，与响应一起发送。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::location">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">location</tt><big>(</big><em>$url = null</em><big>)</big><a class="headerlink" href="#CakeResponse::location" title="永久链接至目标">¶</a></dt>
+<dd><p>可以直接设置重定向位置头部信息，与响应一起发送:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 设置重定向位置</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">location</span><span class="p">(</span><span class="s1">&#39;http://example.com&#39;</span><span class="p">);</span>
+
+<span class="c1">// 读取当前重定向位置头部信息</span>
+<span class="nv">$location</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">location</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">2.4 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::charset">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">charset</tt><big>(</big><em>$charset = null</em><big>)</big><a class="headerlink" href="#CakeResponse::charset" title="永久链接至目标">¶</a></dt>
+<dd><p>设置响应使用的字符集。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::type">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">type</tt><big>(</big><em>$contentType = null</em><big>)</big><a class="headerlink" href="#CakeResponse::type" title="永久链接至目标">¶</a></dt>
+<dd><p>设置响应的内容类型(<em>content type</em>)。可以使用一个已知内容类型别名，或完整的内
+容类型名称。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::cache">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">cache</tt><big>(</big><em>$since</em>, <em>$time = '+1 day'</em><big>)</big><a class="headerlink" href="#CakeResponse::cache" title="永久链接至目标">¶</a></dt>
+<dd><p>可以在响应中设置缓存头部信息。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::disableCache">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">disableCache</tt><big>(</big><big>)</big><a class="headerlink" href="#CakeResponse::disableCache" title="永久链接至目标">¶</a></dt>
+<dd><p>设置响应头部信息，禁用客户端缓存。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::sharable">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">sharable</tt><big>(</big><em>$public = null</em>, <em>$time = null</em><big>)</big><a class="headerlink" href="#CakeResponse::sharable" title="永久链接至目标">¶</a></dt>
+<dd><p>设置 <tt class="docutils literal"><span class="pre">Cache-Control</span></tt> 头部信息为公有(<tt class="docutils literal"><span class="pre">public</span></tt>)或私有(<tt class="docutils literal"><span class="pre">private</span></tt>)，并可选
+择设置资源的 <tt class="docutils literal"><span class="pre">max-age</span></tt> 指令。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.1 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::expires">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">expires</tt><big>(</big><em>$time = null</em><big>)</big><a class="headerlink" href="#CakeResponse::expires" title="永久链接至目标">¶</a></dt>
+<dd><p>可以设置过期(<tt class="docutils literal"><span class="pre">Expires</span></tt>)头部信息为特定日期。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.1 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::etag">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">etag</tt><big>(</big><em>$tag = null</em>, <em>$weak = false</em><big>)</big><a class="headerlink" href="#CakeResponse::etag" title="永久链接至目标">¶</a></dt>
+<dd><p>设置 <tt class="docutils literal"><span class="pre">Etag</span></tt> 头部信息，唯一地标识响应资源。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.1 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::modified">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">modified</tt><big>(</big><em>$time = null</em><big>)</big><a class="headerlink" href="#CakeResponse::modified" title="永久链接至目标">¶</a></dt>
+<dd><p>以正确的格式设置 <tt class="docutils literal"><span class="pre">Last-Modified</span></tt> 头部信息为特定的日期和时间。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.1 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::checkNotModified">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">checkNotModified</tt><big>(</big><em>CakeRequest $request</em><big>)</big><a class="headerlink" href="#CakeResponse::checkNotModified" title="永久链接至目标">¶</a></dt>
+<dd><p>比较请求对象的缓存头部信息和响应的缓存头部信息，决定响应是否还是最新的。如果
+是，删除响应内容，发送 <cite>304 Not Modified</cite> 头部信息。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.1 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::compress">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">compress</tt><big>(</big><big>)</big><a class="headerlink" href="#CakeResponse::compress" title="永久链接至目标">¶</a></dt>
+<dd><p>为请求开启 gzip 压缩。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::download">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">download</tt><big>(</big><em>$filename</em><big>)</big><a class="headerlink" href="#CakeResponse::download" title="永久链接至目标">¶</a></dt>
+<dd><p>可以把响应作为附件发送，并设置文件名。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::statusCode">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">statusCode</tt><big>(</big><em>$code = null</em><big>)</big><a class="headerlink" href="#CakeResponse::statusCode" title="永久链接至目标">¶</a></dt>
+<dd><p>可以设置响应的状态编码。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::body">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">body</tt><big>(</big><em>$content = null</em><big>)</big><a class="headerlink" href="#CakeResponse::body" title="永久链接至目标">¶</a></dt>
+<dd><p>设置响应的内容体(<em>body</em>)。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::send">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">send</tt><big>(</big><big>)</big><a class="headerlink" href="#CakeResponse::send" title="永久链接至目标">¶</a></dt>
+<dd><p>一旦完成了响应的创建，调用 <a class="reference internal" href="#CakeResponse::send" title="CakeResponse::send"><tt class="xref php php-meth docutils literal"><span class="pre">send()</span></tt></a> 会发送所有设置
+的头部信息和文件体(<em>body</em>)。这是在每次请求的最后由 <tt class="xref php php-class docutils literal"><span class="pre">Dispatcher</span></tt>
+自动执行的。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeResponse::file">
+<tt class="descclassname">CakeResponse::</tt><tt class="descname">file</tt><big>(</big><em>$path</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#CakeResponse::file" title="永久链接至目标">¶</a></dt>
+<dd><p>允许设置文件的 <tt class="docutils literal"><span class="pre">Content-Disposition</span></tt> 头部信息信息，用于显示或下载。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.3 新版功能.</span></p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../controllers.html">控制器</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">请求与响应对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cakerequest">CakeRequest</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cakeresponse">CakeResponse</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scaffolding.html">脚手架</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages-controller.html">页面控制器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html">组件</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">请求与响应对象</a></li>
+<li><a class="reference internal" href="#cakerequest">CakeRequest</a><ul>
+<li><a class="reference internal" href="#id2">获取请求参数</a></li>
+<li><a class="reference internal" href="#id3">获取查询字符串参数</a></li>
+<li><a class="reference internal" href="#post">获取 POST 数据</a></li>
+<li><a class="reference internal" href="#put-post">获取 PUT 或者 POST 数据</a></li>
+<li><a class="reference internal" href="#xml-json">访问 XML 或 JSON 数据</a></li>
+<li><a class="reference internal" href="#id4">获取路径信息</a></li>
+<li><a class="reference internal" href="#check-the-request">检测请求</a></li>
+<li><a class="reference internal" href="#cakerequest-requesthandlercomponent">CakeRequest 和 RequestHandlerComponent</a></li>
+<li><a class="reference internal" href="#id6">与请求的其他方面交互</a></li>
+<li><a class="reference internal" href="#cakerequest-api">CakeRequest API</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cakeresponse">CakeResponse</a><ul>
+<li><a class="reference internal" href="#id7">改变响应类</a></li>
+<li><a class="reference internal" href="#id8">处理内容类型</a></li>
+<li><a class="reference internal" href="#cake-response-file">发送文件</a></li>
+<li><a class="reference internal" href="#id10">把字符串作为文件发送</a></li>
+<li><a class="reference internal" href="#id11">设置头部信息</a></li>
+<li><a class="reference internal" href="#id12">与浏览器缓存交互</a></li>
+<li><a class="reference internal" href="#http">微调 HTTP 缓存</a><ul>
+<li><a class="reference internal" href="#cache-control">缓存控制(<em>Cache Control</em>)头部信息</a></li>
+<li><a class="reference internal" href="#id13">过期头部信息</a></li>
+<li><a class="reference internal" href="#etag">Etag 头部信息</a></li>
+<li><a class="reference internal" href="#last-modified">Last Modified 头部信息</a></li>
+<li><a class="reference internal" href="#vary">Vary 头部信息</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cakeresponse-testing">CakeResponse 和测试</a></li>
+<li><a class="reference internal" href="#cakeresponse-api">CakeResponse API</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="scaffolding.html" title="脚手架" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="../controllers.html" title="控制器" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

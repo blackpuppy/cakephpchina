@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>工具 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="核心库" href="../core-libraries.html" />
+    <link rel="next" title="缓存" href="caching.html" />
+    <link rel="prev" title="TimeHelper" href="helpers/time.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/core-libraries/toc-utilities.html" /><link rel="alternate" hreflang="pt" href="../../pt/core-libraries/toc-utilities.html" /><link rel="alternate" hreflang="es" href="../../es/core-libraries/toc-utilities.html" /><link rel="alternate" hreflang="ja" href="../../ja/core-libraries/toc-utilities.html" /><link rel="alternate" hreflang="fr" href="../../fr/core-libraries/toc-utilities.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries.html" accesskey="U" itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/core-libraries/toc-utilities.html">en</a></li>
+				
+					<li><a href="../../pt/core-libraries/toc-utilities.html">pt</a></li>
+				
+					<li><a href="../../es/core-libraries/toc-utilities.html">es</a></li>
+				
+					<li><a href="../../ja/core-libraries/toc-utilities.html">ja</a></li>
+				
+					<li><a href="../../fr/core-libraries/toc-utilities.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/toc-utilities.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>工具<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="caching.html">缓存</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="caching.html#cache">配置Cache类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caching.html#id2">为缓存创建存储引擎</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caching.html#id3">用缓存来存储常用的查询结果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caching.html#id4">使用缓存保存计数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caching.html#id5">使用分组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caching.html#api">缓存API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-utility-libraries/email.html">CakeEmail</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/email.html#basic-usage">基本用法 Basic usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/email.html#configuration">配置 Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/email.html#sending-messages-quickly">快速发送邮件 Sending messages quickly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/email.html#cli-sending-emails-from-cli">从CLI发送邮件 Sending emails from CLI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-utility-libraries/file-folder.html">目录和文件 Folder &amp; File</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/file-folder.html#basic-usage">基本用法 Basic usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/file-folder.html#api-folder-api">目录API Folder API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/file-folder.html#api-file-api">文件API File API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-utility-libraries/hash.html">Hash</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/hash.html#hash-path-syntax">Hash path syntax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-utility-libraries/httpsocket.html">HttpSocket</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/httpsocket.html#making-a-request">Making a request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/httpsocket.html#handling-the-response">Handling the response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/httpsocket.html#using-authentication">Using authentication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-utility-libraries/inflector.html">Inflector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internationalization-and-localization.html">Internationalization &amp; Localization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="internationalization-and-localization.html#internationalizing-your-application">Internationalizing Your Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internationalization-and-localization.html#internationalizing-cakephp-plugins">Internationalizing CakePHP Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internationalization-and-localization.html#localization-in-cakephp">Localization in CakePHP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internationalization-and-localization.html#translating-model-validation-errors">Translating model validation errors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">日志记录</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#error-and-exception-logging">Error and Exception logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#interacting-with-log-streams">与日志流交互 Interacting with log streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#filelog-using-the-default-filelog-class">使用默认的FileLog类 Using the default FileLog class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#writing-to-logs">写入日志 Writing to logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#logging-scopes">Logging Scopes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#cakelog-api">CakeLog API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-utility-libraries/number.html">CakeNumber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-utility-libraries/router.html">Router</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-utility-libraries/sanitize.html">数据清理 Data Sanitization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-utility-libraries/security.html">安全</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/security.html#api">安全 API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-utility-libraries/set.html">Set</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/set.html#set-compatible-path-syntax">Set-compatible Path syntax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-utility-libraries/string.html">字符串 String</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-utility-libraries/time.html">CakeTime</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/time.html#formatting">Formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/time.html#testing-time">Testing Time</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-utility-libraries/xml.html">Xml</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/xml.html#importing-data-to-xml-class">Importing data to Xml class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/xml.html#transforming-a-xml-string-in-array">Transforming a XML string in array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/xml.html#transforming-an-array-into-a-string-of-xml">Transforming an array into a string of XML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-utility-libraries/xml.html#xml-api">Xml API</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="toc-general-purpose.html">通用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toc-behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toc-components.html">组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toc-helpers.html">助件</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">工具</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="caching.html">缓存</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/email.html">CakeEmail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/file-folder.html">目录和文件 Folder &amp; File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/hash.html">Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/httpsocket.html">HttpSocket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/inflector.html">Inflector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internationalization-and-localization.html">Internationalization &amp; Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging.html">日志记录</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/number.html">CakeNumber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/router.html">Router</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/sanitize.html">数据清理 Data Sanitization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/security.html">安全</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/set.html">Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/string.html">字符串 String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/time.html">CakeTime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/xml.html">Xml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">工具</a></li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="caching.html" title="缓存" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="helpers/time.html" title="TimeHelper" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

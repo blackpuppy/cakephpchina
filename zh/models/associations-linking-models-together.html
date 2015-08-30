@@ -1,0 +1,1322 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Associations: Linking Models Together" lang="zh_CN" name="title" />
+<meta content="relationship types,relational mapping,recipe database,relational database,this section covers,web applications,recipes,models,cakephp,storage" lang="zh_CN" name="keywords" />
+
+    <title>关联：将模型连接在一起 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="模型" href="../models.html" />
+    <link rel="next" title="检索数据" href="retrieving-your-data.html" />
+    <link rel="prev" title="模型" href="../models.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/models/associations-linking-models-together.html" /><link rel="alternate" hreflang="pt" href="../../pt/models/associations-linking-models-together.html" /><link rel="alternate" hreflang="es" href="../../es/models/associations-linking-models-together.html" /><link rel="alternate" hreflang="ja" href="../../ja/models/associations-linking-models-together.html" /><link rel="alternate" hreflang="fr" href="../../fr/models/associations-linking-models-together.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../models.html" accesskey="U" itemprop="url"><span itemprop="title">模型</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/models/associations-linking-models-together.html">en</a></li>
+				
+					<li><a href="../../pt/models/associations-linking-models-together.html">pt</a></li>
+				
+					<li><a href="../../es/models/associations-linking-models-together.html">es</a></li>
+				
+					<li><a href="../../ja/models/associations-linking-models-together.html">ja</a></li>
+				
+					<li><a href="../../fr/models/associations-linking-models-together.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/models/associations-linking-models-together.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>关联：将模型连接在一起<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>CakePHP 的最强大的特性之一就是由模型提供的连接关系的映射。在 CakePHP 中，模型间
+的连接是通过关联(<em>association</em>)来处理的。</p>
+<p>在应用程序的不同对象间定义关联应当是一个自然的过程。例如：在一个食谱数据库中，一
+份食谱可能有多条评论，每条评论有一位作者，而每位作者又可能有多份食谱。定义这些关
+系运作的方式，使得你能以一种直观且强大的方式访问你的数据。</p>
+<p>本节的目的是展示如何在 CakePHP 中计划、定义以和使用模型之间的关系。</p>
+<p>虽然数据可能有多种来源，但在 web 应用程序中最常见的存储方式是关系型数据库。本节
+介绍的大部分内容将基于这种方式。</p>
+<p>欲知与插件模型的关联，请参见 <a class="reference internal" href="../plugins/how-to-create-plugins.html#plugin-models"><em>Plugin Models</em></a>。</p>
+<div class="section" id="id2">
+<h2>关系类型<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>CakePHP 的四种关联类型是：hasOne、hasMany、belongsTo 和 hasAndBelongsToMany
+(HABTM)。</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="29%" />
+<col width="53%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">关系</th>
+<th class="head">关联类型</th>
+<th class="head">例子</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>一对一</td>
+<td>hasOne</td>
+<td>一个用户只有一份个人资料。</td>
+</tr>
+<tr class="row-odd"><td>一对多</td>
+<td>hasMany</td>
+<td>一个用户可以有多份食谱。</td>
+</tr>
+<tr class="row-even"><td>多对一</td>
+<td>belongsTo</td>
+<td>多份食谱属于同一个用户。</td>
+</tr>
+<tr class="row-odd"><td>多对多</td>
+<td>hasAndBelongsToMany</td>
+<td>多份食谱有且属于多种原料。</td>
+</tr>
+</tbody>
+</table>
+<p>要进一步阐明在模型中关联定义的方式：如果模型的表包含外键(other_model_id)，该模型
+的关系类型 <strong>总是</strong> 模型 <strong>belongsTo</strong> 另一个模型的关系。</p>
+<p>要定义关联，创建一个以要定义的关联命名的类变量。此变量有时候可以简单到只是一个字
+符串，但也可以复杂到是一个多维数组，来定义关联细节。</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasOne</span> <span class="o">=</span> <span class="s1">&#39;Profile&#39;</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Recipe&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Recipe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Recipe.approved&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Recipe.created DESC&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在上面的例子中，第一个 &#8216;Recipe&#8217; 是所谓的 &#8216;别名(<em>Alias</em>)&#8217;。它是关系的标识，可以是
+任何东西。通常选择与它引用的类相同的名字。不过，<strong>每个模型的别名在应用程序中必须
+唯一</strong>。例如，下面是正确的:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;MyRecipe&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Recipe&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+    <span class="k">public</span> <span class="nv">$hasAndBelongsToMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;MemberOf&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Group&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Group</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;MyRecipe&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Recipe&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+    <span class="k">public</span> <span class="nv">$hasAndBelongsToMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Member&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>但是下面的代码在任何情况下都不大行得通:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;MyRecipe&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Recipe&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+    <span class="k">public</span> <span class="nv">$hasAndBelongsToMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Member&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Group&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Group</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;MyRecipe&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Recipe&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+    <span class="k">public</span> <span class="nv">$hasAndBelongsToMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Member&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这是因为在上面的 HABTM 关联中，别名 &#8216;Member&#8217; 既指向了 User 模型(在 Group 模型中)，
+又指向了 Group 模型(在 User 模型中)。在涉及多个模型时，为模型别名起不唯一的名字，
+可能会引起预料不到的行为。</p>
+<p>CakePHP 会自动在关联模型对象之间建立连接。所以，例如，在 <tt class="docutils literal"><span class="pre">User</span></tt> 模型中，可以用
+如下方式访问 <tt class="docutils literal"><span class="pre">Recipe</span></tt> 模型:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">someFunction</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>同样的，在控制器中，也可以简单地循着模型关系访问关联的模型:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">someFunction</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">记住，关联定义是&#8217;单向的&#8217;。如果定义了 User hasMany Recipe(用户有很多菜谱)，这
+对 Recipe 模型没有任何影响。需要定义 Recipe belongsTo User(菜谱属于用户)才能
+从 Recipe 模型访问 User 模型。</p>
+</div>
+</div>
+<div class="section" id="hasone">
+<h2>hasOne<a class="headerlink" href="#hasone" title="永久链接至标题">¶</a></h2>
+<p>让我们设置 User 模型以 hasOne 关系关联到 Profile 模型。</p>
+<p>首先，数据库表需要有正确的键。要使 hasOne 关系运作，一个表必须定义指向另一个表的
+记录的外键。在本例中，profiles 表需要包含一个叫做 user_id 的字段。其基本模式是：</p>
+<p><strong>hasOne:</strong> <em>另一个</em> 模型包含外键。</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="69%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">关系</th>
+<th class="head">数据结构</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Apple hasOne Banana (苹果有一个香蕉)</td>
+<td>bananas.apple_id</td>
+</tr>
+<tr class="row-odd"><td>User hasOne Profile (用户有一份个人资料)</td>
+<td>profiles.user_id</td>
+</tr>
+<tr class="row-even"><td>Doctor hasOne Mentor (博士有一位导师)</td>
+<td>mentors.doctor_id</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">关于这一点，并没有强制要求遵循 CakePHP 的约定。你能够很容易地在关联定义中覆
+盖任何外键的使用。虽然如此，遵守规则仍将减少代码的重复，使其更易于阅读和维护。</p>
+</div>
+<p>User 模型文件会保存为 /app/Model/User.php。为了定义 &#8216;User hasOne Profile (用户有
+一份个人资料)&#8217; 的关联，为模型类添加 $hasOne 属性。记得要在
+/app/Model/Profile.php 文件中定义 Profile 模型，否则关联将无法工作:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasOne</span> <span class="o">=</span> <span class="s1">&#39;Profile&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>有两种方法在模型文件中描述此关系。最简单的方法是设置 $hasOne 属性为一个包含关联
+模型的类名的字符串，就像我们上面做的那样。</p>
+<p>如果需要更多的控制，可以使用数组语法定义关联。例如，你可能想要限制关联只包含某些
+记录。</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasOne</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Profile&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Profile&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Profile.published&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;dependent&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>hasOne 关联数组可以包含的键有:</p>
+<ul class="simple">
+<li><strong>className</strong>: 与当前模型关联的模型的类名。如果你要定义 &#8216;User hasOne Profile
+(用户有一份个人资料)&#8217; 的关系，className 键应当是 &#8216;Profile&#8217;。</li>
+<li><strong>foreignKey</strong>: 另一模型中的外键名。如果需要定义多个 hasOne 关系，这个键非常
+有用。其默认值为当前模型的以下划线分隔的单数模型名称，并后缀以 &#8216;_id&#8217;。在上面
+的例子中，就默认为 &#8216;user_id&#8217;。</li>
+<li><strong>conditions</strong>: 兼容 find() 的条件数组或者是 SQL 字符串，例如
+array(&#8216;Profile.approved&#8217; =&gt; true)。</li>
+<li><strong>fields</strong>: 在读取关联模型数据时，需要读取的字段的列表。默认返回所有的字段。</li>
+<li><strong>order</strong>: 兼容 find() 的排序子句或者 SQL 字符串，例如
+array(&#8216;Profile.last_name&#8217; =&gt; &#8216;ASC&#8217;)。</li>
+<li><strong>dependent</strong>: 当 dependent 键被设置为 true，并且调用模型的 delete() 方法时参
+数 cascade 也被设置为 true，关联模型的记录也会一起被删除。在本例中，我们将其
+设置为 true 将导致删除一个 User 时也会删除她/他关联的 Profile。</li>
+</ul>
+<p>一旦定义了关系，User 模型的 find 操作也会读取关联的 Profile 记录，如果存在的话:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//调用 $this-&gt;User-&gt;find() 的结果示例。</span>
+
+<span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nx">User</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">121</span>
+            <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Gwoo</span> <span class="nx">the</span> <span class="nx">Kungwoo</span>
+            <span class="p">[</span><span class="nx">created</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2007</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mo">01</span> <span class="mi">10</span><span class="o">:</span><span class="mi">31</span><span class="o">:</span><span class="mo">01</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="nx">Profile</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">12</span>
+            <span class="p">[</span><span class="nx">user_id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">121</span>
+            <span class="p">[</span><span class="nx">skill</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Baking</span> <span class="nx">Cakes</span>
+            <span class="p">[</span><span class="nx">created</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2007</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mo">01</span> <span class="mi">10</span><span class="o">:</span><span class="mi">31</span><span class="o">:</span><span class="mo">01</span>
+        <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="belongsto">
+<h2>belongsTo<a class="headerlink" href="#belongsto" title="永久链接至标题">¶</a></h2>
+<p>现在我们可以从 User 模型访问 Profile 的数据，让我们在 Profile 模型中定义
+belongsTo 关联以获取相关的 User 数据。belongsTo 关联是 hasOne 和 hasMany
+关联的自然补充：它让我们可以从另一个方向查看数据。</p>
+<p>在为 belongsTo 关系定义数据库表的键时，请遵循如下约定：</p>
+<p><strong>belongsTo:</strong> <em>当前模型</em> 包含外键。</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="69%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">关系</th>
+<th class="head">数据结构</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Banana belongsTo Apple (香蕉属于苹果)</td>
+<td>bananas.apple_id</td>
+</tr>
+<tr class="row-odd"><td>Profile belongsTo User (个人资料属于用户)</td>
+<td>profiles.user_id</td>
+</tr>
+<tr class="row-even"><td>Mentor belongsTo Doctor (导师属于博士)</td>
+<td>mentors.doctor_id</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="first admonition-title">小技巧</p>
+<p class="last">如果一个模型(表)包含一个外键，它 belongsTo 另一个模型(表)。</p>
+</div>
+<p>在 /app/Model/Profile.php 文件中的 Profile 模型里，我们可以使用如下字符串语法来
+定义 belongsTo 关联:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Profile</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="s1">&#39;User&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们也可以使用数组语法定义更为特定的关系:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Profile</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;User&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreignKey&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user_id&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>belongsTo 关联数组可以包含的键有:</p>
+<ul class="simple">
+<li><strong>className</strong>: 与当前模型关联的模型的类名。如果你要定义 &#8216;Profile belongsTo
+User (个人资料属于用户)&#8217; 的关系，className 键应当是 &#8216;User&#8217;。</li>
+<li><strong>foreignKey</strong>: 当前模型中的外键。如果需要定义多个 belongsTo 关系，这特别方便。
+其默认值为另一模型的以下划线分隔的单数模型名，后缀以 <tt class="docutils literal"><span class="pre">_id</span></tt>。</li>
+<li><strong>conditions</strong>: 兼容 find() 的条件数组或者 SQL 字符串，例如
+<tt class="docutils literal"><span class="pre">array('User.active'</span> <span class="pre">=&gt;</span> <span class="pre">true)</span></tt>。</li>
+<li><strong>type</strong>: SQL 查询使用的 join 类型。默认为 &#8216;LEFT&#8217;，这也许不能在所有情况下都符
+合你的需要。在你想要获取主模型和关联模型的所有记录、或者什么都不要时，&#8217;INNER&#8217;
+(当和某些条件一起使用时)也许会有帮助。</li>
+<li><strong>fields</strong>: 在读取关联模型数据时，需要读取的字段的列表。默认返回所有的字段。</li>
+<li><strong>order</strong>: 兼容 find() 的排序子句或者 SQL 字符串，例如
+<tt class="docutils literal"><span class="pre">array('User.username'</span> <span class="pre">=&gt;</span> <span class="pre">'ASC')</span></tt>。</li>
+<li><strong>counterCache</strong>: 如果此键的值设置为 true，当你在做 <tt class="docutils literal"><span class="pre">save()</span></tt> 或者
+<tt class="docutils literal"><span class="pre">delete()</span></tt> 操作时，关联模型将自动递增或递减外键关联的表的 &#8220;[以下划线分隔的
+单数模型名称]_count&#8221; 列的值。如果它是一个字符串，那这就是要使用的列名。计数
+器列的值表示关联记录的行数。也可以通过使用数组指定多个计数器缓存，详见
+<a class="reference internal" href="#multiple-countercache"><em>多个计数器缓存(counterCache)</em></a>。</li>
+<li><strong>counterScope</strong>: 可选的用于更新计数器缓存字段的条件数组。</li>
+</ul>
+<p>一旦定义了关联，Profile 模型的 find 操作将同时获取相关的 User 记录，如果存在的话:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//调用 $this-&gt;Profile-&gt;find() 的结果示例。</span>
+
+<span class="k">Array</span>
+<span class="p">(</span>
+   <span class="p">[</span><span class="nx">Profile</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">12</span>
+            <span class="p">[</span><span class="nx">user_id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">121</span>
+            <span class="p">[</span><span class="nx">skill</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Baking</span> <span class="nx">Cakes</span>
+            <span class="p">[</span><span class="nx">created</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2007</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mo">01</span> <span class="mi">10</span><span class="o">:</span><span class="mi">31</span><span class="o">:</span><span class="mo">01</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="nx">User</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">121</span>
+            <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Gwoo</span> <span class="nx">the</span> <span class="nx">Kungwoo</span>
+            <span class="p">[</span><span class="nx">created</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2007</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mo">01</span> <span class="mi">10</span><span class="o">:</span><span class="mi">31</span><span class="o">:</span><span class="mo">01</span>
+        <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="countercache-count">
+<h3>计数器缓存(<em>counterCache</em>) - 缓存 count()<a class="headerlink" href="#countercache-count" title="永久链接至标题">¶</a></h3>
+<p>这个功能帮助你缓存相关数据的计数器。避免了手工调用 <tt class="docutils literal"><span class="pre">find('count')</span></tt> 方法计算记
+录的数量，而是让模型自动追踪关联的 <tt class="docutils literal"><span class="pre">$hasMany</span></tt> 模型的任何添加/删除操作，并递增/
+递减父模型表的专用整数字段。</p>
+<p>这个字段的名称由单数模型名称后缀以下划线和单词 &#8220;count&#8221; 构成:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">my_model_count</span>
+</pre></div>
+</div>
+<p>比方说有一个叫 <tt class="docutils literal"><span class="pre">ImageComment</span></tt> 的模型和一个叫 <tt class="docutils literal"><span class="pre">Image</span></tt> 的模型，你就要在
+<tt class="docutils literal"><span class="pre">images</span></tt> 表中添加一个新的整数字段，并命名为 <tt class="docutils literal"><span class="pre">image_comment_count</span></tt>。</p>
+<p>下面是更多的示例：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="31%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">模型</th>
+<th class="head">关联模型</th>
+<th class="head">例子</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>User</td>
+<td>Image</td>
+<td>users.image_count</td>
+</tr>
+<tr class="row-odd"><td>Image</td>
+<td>ImageComment</td>
+<td>images.image_comment_count</td>
+</tr>
+<tr class="row-even"><td>BlogEntry</td>
+<td>BlogEntryComment</td>
+<td>blog_entries.blog_entry_comment_count</td>
+</tr>
+</tbody>
+</table>
+<p>一旦添加了计数器字段，就可以使用它了。要启用计数器缓存，在关联中添加
+<tt class="docutils literal"><span class="pre">counterCache</span></tt> 键并将其值设置为 <tt class="docutils literal"><span class="pre">true</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ImageComment</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Image&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;counterCache&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>自此，你每次添加或删除一个关联到 <tt class="docutils literal"><span class="pre">Image</span></tt> 的 <tt class="docutils literal"><span class="pre">ImageComment</span></tt>，
+<tt class="docutils literal"><span class="pre">image_comment_count</span></tt> 字段的数字都会自动调整。</p>
+</div>
+<div class="section" id="counterscope">
+<h3>计数器范围(<em>counterScope</em>)<a class="headerlink" href="#counterscope" title="永久链接至标题">¶</a></h3>
+<p>你还可以指定 <tt class="docutils literal"><span class="pre">counterScope</span></tt>。这允许你指定一个简单的条件，告诉模型什么情况下更
+新(或者什么情况下不更新，取决于你如何看)计数器的值。</p>
+<p>在我们的 Image 模型示例中，我们可以象下面这样指定:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ImageComment</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Image&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;counterCache&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;active_comment_count&#39;</span><span class="p">,</span> <span class="c1">//custom field name</span>
+            <span class="c1">// 只有当 &quot;ImageComment&quot; 是 active = 1 时，才计数</span>
+            <span class="s1">&#39;counterScope&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+              <span class="s1">&#39;ImageComment.active&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="countercache">
+<span id="multiple-countercache"></span><h3>多个计数器缓存(<em>counterCache</em>)<a class="headerlink" href="#countercache" title="永久链接至标题">¶</a></h3>
+<p>CakePHP 从 2.0 版本起，支持在单个模型关系中有多个 <tt class="docutils literal"><span class="pre">counterCache</span></tt>。也可以为每个
+<tt class="docutils literal"><span class="pre">counterCache</span></tt> 定义 <tt class="docutils literal"><span class="pre">counterScope</span></tt>。假设有 <tt class="docutils literal"><span class="pre">User</span></tt> 模型和 <tt class="docutils literal"><span class="pre">Message</span></tt> 模型，
+要统计每个用户的已读消息和未读消息的数量。</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="30%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">模型</th>
+<th class="head">字段</th>
+<th class="head">说明</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>User</td>
+<td>users.messages_read</td>
+<td>对已读 <tt class="docutils literal"><span class="pre">Message</span></tt> 计数</td>
+</tr>
+<tr class="row-odd"><td>User</td>
+<td>users.messages_unread</td>
+<td>对未读 <tt class="docutils literal"><span class="pre">Message</span></tt> 计数</td>
+</tr>
+<tr class="row-even"><td>Message</td>
+<td>messages.is_read</td>
+<td>判断一条 <tt class="docutils literal"><span class="pre">Message</span></tt> 是已读还是未读。</td>
+</tr>
+</tbody>
+</table>
+<p>基于上面这样的设置，<tt class="docutils literal"><span class="pre">belongsTo</span></tt> 应当像这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Message</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;User&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;counterCache&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;messages_read&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Message.is_read&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="s1">&#39;messages_unread&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Message.is_read&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="hasmany">
+<h2>hasMany<a class="headerlink" href="#hasmany" title="永久链接至标题">¶</a></h2>
+<p>下一步：定义一个 &#8220;User hasMany Comment (用户有多条评论)&#8221; 的关联。hasMany 关联将
+让我们可以在读取用户(<em>User</em>)记录的同时读取用户的评论。</p>
+<p>在为 hasMany 关系定义数据库表的键时，请遵循如下约定:</p>
+<p><strong>hasMany:</strong> <em>其它</em> 模型包含外键</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="69%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">关系</th>
+<th class="head">数据构</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>User hasMany Comment (用户有多条评论)</td>
+<td>Comment.user_id</td>
+</tr>
+<tr class="row-odd"><td>Cake hasMany Virtue (蛋糕有多项优点)</td>
+<td>Virtue.cake_id</td>
+</tr>
+<tr class="row-even"><td>Product hasMany Option (产品有多个选项)</td>
+<td>Option.product_id</td>
+</tr>
+</tbody>
+</table>
+<p>在 /app/Model/User.php 文件的 User 模型中，我们可以使用如下字符串语法定义 hasMany
+关联:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="s1">&#39;Comment&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们也可以使用数组语法定义更特定的关系:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Comment&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Comment&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreignKey&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user_id&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Comment.status&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Comment.created DESC&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dependent&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>hasMany 关联数组可以包含的键有:</p>
+<ul class="simple">
+<li><strong>className</strong>: 与当前模型关联的模型的类名。如果你定义了 &#8216;User hasMany
+Comment (用户有多条评论)&#8217; 关系，className 键的值应当为 &#8216;Comment&#8217;。</li>
+<li><strong>foreignKey</strong>: 另一个模型中的外键名。如果需要定义多个 hasMany 关系，这特别方
+便。其默认值为当前模型以下划线分隔的单数模型名称后缀以 &#8216;_id&#8217;。</li>
+<li><strong>conditions</strong>: 兼容 find() 的条件数组或者 SQL 字符串，例如
+array(&#8216;Comment.visible&#8217; =&gt; true)。</li>
+<li><strong>order</strong>: 兼容 find() 的排序子句或者 SQL 字符串，例如
+array(&#8216;Profile.last_name&#8217; =&gt; &#8216;ASC&#8217;)。</li>
+<li><strong>limit</strong>: 要返回的关联数据的最大行数。</li>
+<li><strong>offset</strong>: 在读取和关联之前，要跳过的关联数据行数(在当前查询条件和排序的情况
+下)。</li>
+<li><strong>dependent</strong>: 当 dependent 设置为 true，就可以进行模型的递归删除。在本例中，
+当关联的  User 记录被删除时，Comment 记录也将被删除。</li>
+<li><strong>exclusive</strong>: 当 exclusive 设置为 true，将调用 deleteAll() 进行模型的递归删
+除，而不是分别删除每条数据。这大大提高了性能，但可能并非在所有情况下都是最好
+的选择。</li>
+<li><strong>finderQuery</strong>: 可供 CakePHP 用于读取关联模型记录的完整 SQL 查询语句。这应当
+用于要求高度定制结果的场合。如果构建的查询语句要求使用关联模型 ID，可以在查询
+语句中使用特殊标记 <tt class="docutils literal"><span class="pre">{$__cakeID__$}</span></tt>。例如，如果 Apple 模型 hasMany Orange，
+查询语句就应当象这样：
+<tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">Orange.*</span> <span class="pre">from</span> <span class="pre">oranges</span> <span class="pre">as</span> <span class="pre">Orange</span> <span class="pre">WHERE</span> <span class="pre">Orange.apple_id</span> <span class="pre">=</span> <span class="pre">{$__cakeID__$};</span></tt> 。</li>
+</ul>
+<p>一旦关联被建立，User 模型的 find 操作也将读取相关的 Comment 数据，如果存在的话:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//调用 $this-&gt;User-&gt;find() 的结果示例。</span>
+
+<span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nx">User</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">121</span>
+            <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Gwoo</span> <span class="nx">the</span> <span class="nx">Kungwoo</span>
+            <span class="p">[</span><span class="nx">created</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2007</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mo">01</span> <span class="mi">10</span><span class="o">:</span><span class="mi">31</span><span class="o">:</span><span class="mo">01</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="nx">Comment</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">123</span>
+                    <span class="p">[</span><span class="nx">user_id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">121</span>
+                    <span class="p">[</span><span class="nx">title</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">On</span> <span class="nx">Gwoo</span> <span class="nx">the</span> <span class="nx">Kungwoo</span>
+                    <span class="p">[</span><span class="nx">body</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">The</span> <span class="nx">Kungwooness</span> <span class="nx">is</span> <span class="k">not</span> <span class="nx">so</span> <span class="nx">Gwooish</span>
+                    <span class="p">[</span><span class="nx">created</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2006</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mo">01</span> <span class="mi">10</span><span class="o">:</span><span class="mi">31</span><span class="o">:</span><span class="mo">01</span>
+                <span class="p">)</span>
+            <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">124</span>
+                    <span class="p">[</span><span class="nx">user_id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">121</span>
+                    <span class="p">[</span><span class="nx">title</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">More</span> <span class="nx">on</span> <span class="nx">Gwoo</span>
+                    <span class="p">[</span><span class="nx">body</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">But</span> <span class="nx">what</span> <span class="nx">of</span> <span class="nx">the</span> <span class="err">&#39;</span><span class="nx">Nut</span><span class="o">?</span>
+                    <span class="p">[</span><span class="nx">created</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2006</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mo">01</span> <span class="mi">10</span><span class="o">:</span><span class="mi">41</span><span class="o">:</span><span class="mo">01</span>
+                <span class="p">)</span>
+        <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>要记住的一点是，还需要互补的 Comment belongsTo User (评论属于用户)关联，才能从两
+个方向获取数据。本节涵盖的内容让你能够从 User 模型获取 Comment 数据。在 Comment
+模型中添加 Comment belongsTo User 关联，使你能够从 Comment 模型中获取 User 数据，
+这样才构成完整的连接，允许信息以任一模型的视角流动。</p>
+</div>
+<div class="section" id="hasandbelongstomany-habtm">
+<h2>hasAndBelongsToMany (HABTM)<a class="headerlink" href="#hasandbelongstomany-habtm" title="永久链接至标题">¶</a></h2>
+<p>好了。现在你已经可以认为自己是 CakePHP 模型关联的专业人士了。你已经深谙对象关系
+中占主要部分的三种关联。</p>
+<p>现在我们来解决最后一种关系类型：hasAndBelongsToMany，或 HABTM。这种关联用于两个
+模型需要以不同方式多次重复连接的场合。</p>
+<p>hasMany 与 HABTM 主要不同点在于，HABTM 中对象间的连接不是排他的。例如，以 HABTM
+方式连接 Recipe 模型和 Ingredient 模型。用西红柿作为我奶奶的意大利面菜谱(Recipe)
+的原料(Ingredient)，并不会&#8221;用光&#8221;这种原料。我也可以把它用于色拉菜谱(Recipe)。</p>
+<p>hasMany 关联对象间的连接是排他的。如果 User hasMnay Comments，一条评论仅连接到一
+个特定的用户，它不能再被用于(其它用户)。</p>
+<p>继续。我们需要在数据库中设置一个额外的表，用来处理 HABTM 关联。这个新连接表的名
+字需要包含涉及的两个模型的名字，按字母顺序并且用下划线( _ )间隔。表的内容应当有
+两个字段，为指向涉及的模型主键的外键(应当是整数类型)。为避免任何问题，不要为这个
+两个字段定义复合主键。如果应用程序要求唯一索引，你可以定义一个。如果你计划在这个
+表中加入任何额外的信息，或者使用 &#8216;with&#8217; 模型，你需要添加一个额外的主键字段(按照
+约定为 &#8216;id&#8217;)。</p>
+<p><strong>HABTM</strong> 要求一个单独的连接表，其表名包含两个 <em>模型</em> 的名字。</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">关系</th>
+<th class="head">HABTM 表的字段</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Recipe HABTM Ingredient</td>
+<td><strong>ingredients_recipes</strong>.id, <strong>ingredients_recipes</strong>.ingredient_id, <strong>ingredients_recipes</strong>.recipe_id</td>
+</tr>
+<tr class="row-odd"><td>Cake HABTM Fan</td>
+<td><strong>cakes_fans</strong>.id, <strong>cakes_fans</strong>.cake_id, <strong>cakes_fans</strong>.fan_id</td>
+</tr>
+<tr class="row-even"><td>Foo HABTM Bar</td>
+<td><strong>bars_foos</strong>.id, <strong>bars_foos</strong>.foo_id, <strong>bars_foos</strong>.bar_id</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">按照约定，(两个模型的)表名是按字母顺序的。也可以在关联定义中使用自定义表名。</p>
+</div>
+<p>按照约定，确保表 <strong>cakes</strong> 和 <strong>recipes</strong> 应当使用 &#8220;id&#8221; 字段作为主键。如果它们与
+约定的不同，那就必须在模型的 <a class="reference internal" href="model-attributes.html#model-primarykey"><em>primaryKey</em></a> 中做(相应的)改变。</p>
+<p>一旦建立了这个新表，我们就可以在模型文件中定义 HABTM 关联了。这次我们将直接跳到
+数组语法:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Recipe</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasAndBelongsToMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Ingredient&#39;</span> <span class="o">=&gt;</span>
+            <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Ingredient&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;joinTable&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ingredients_recipes&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;foreignKey&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;recipe_id&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;associationForeignKey&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ingredient_id&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;unique&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+                <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;offset&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;finderQuery&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;with&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span>
+            <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>HABTM 关联数组可以包含的键有：</p>
+<ul id="ref-habtm-arrays">
+<li><p class="first"><strong>className</strong>: 关联到当前模型的模型类名。如果你定义了 &#8216;Recipe HABTM
+Ingredient (菜谱有许多且属于原料)&#8217; 的关系，这个类名应当是 &#8216;Ingredient&#8217;。</p>
+</li>
+<li><p class="first"><strong>joinTable</strong>: 在本关联中使用的连接表的名字(如果当前表没有遵循 HABTM 连接表的
+命名约定)。</p>
+</li>
+<li><p class="first"><strong>with</strong>: 为连接表定义模型名。默认的情况下，CakePHP 将自动为你建立一个模型。
+上例中，它被称为 IngredientsRecipe。可以使用这个键来覆盖默认的名字。连接表模
+型能够象所有的“常规”模型那样用来直接访问连接表。通过创建带有这样名称和文件名
+的模型类，可以向连接表搜索中加入任何自定义行为，例如加入更多的信息/列。</p>
+</li>
+<li><p class="first"><strong>foreignKey</strong>: 当前模型的外键名称。在需要定义多个 HABTM 关系时，这特别方便。
+该键的默认值为当前模型的以下划线分隔的单数模型名，后缀以 &#8216;_id&#8217;。</p>
+</li>
+<li><p class="first"><strong>associationForeignKey</strong>: 另一个模型中的外键名。在需要定义多个 HABTM 关系，
+这特别方便。该键的默认值为另一模型的以下划线分隔的单数模型名，后缀以 &#8216;_id&#8217;。</p>
+</li>
+<li><dl class="first docutils">
+<dt><strong>unique</strong>: 布尔值或者字符串 <tt class="docutils literal"><span class="pre">keepExisting</span></tt> 。</dt>
+<dd><ul class="first last simple">
+<li>如果为 true (默认值)，CakePHP 将先删除外键表中存在的关系记录，再插入新记录。
+现有的关联在更新时需要再次传递。</li>
+<li>如果为 false，CakePHP 将插入指定的新关系记录，并且保留现有关系记录，这可能
+导致重复的关系记录。</li>
+<li>如果设置为 <tt class="docutils literal"><span class="pre">keepExisting</span></tt>，其行为与 <cite>true</cite> 类似，但是有一项额外的检查，
+如果要添加的任何记录与现有的关系记录重复，现有关系记录不被删除，而重复记录
+则被忽略。这可用于，例如，当连接表中有其它数据需要保留时。</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><strong>conditions</strong>: 兼容 find() 的条件数组或者 SQL 字符串。如果关联表有条件，应当
+使用 &#8216;with&#8217; 模型，并且在关联表定义必要的 belongsTo 关联。</p>
+</li>
+<li><p class="first"><strong>fields</strong>: 在读取关联模型数据时要读取的字段的列表。默认返回所有的字段。</p>
+</li>
+<li><p class="first"><strong>order</strong>: 兼容 find() 的排序子句或者 SQL 字符串。</p>
+</li>
+<li><p class="first"><strong>limit</strong>: 要返回的关联行的最大行数。</p>
+</li>
+<li><p class="first"><strong>offset</strong>: 在读取和关联前要跳过的关联行的行数(给定当前的条件和排序)</p>
+</li>
+<li><p class="first"><strong>finderQuery</strong>: CakePHP 用来读取关联模型记录的完整 SQL 查询语句。这应当用在
+要求高度定制结果的场合。</p>
+</li>
+</ul>
+<p>一旦定义了关联，Recipe 模型的 find 操作也会读取相关的 Ingredient 记录，如果存在
+的话:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//调用 $this-&gt;Recipe-&gt;find() 的结果示例。</span>
+
+<span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nx">Recipe</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2745</span>
+            <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Chocolate</span> <span class="nx">Frosted</span> <span class="nx">Sugar</span> <span class="nx">Bombs</span>
+            <span class="p">[</span><span class="nx">created</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2007</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mo">01</span> <span class="mi">10</span><span class="o">:</span><span class="mi">31</span><span class="o">:</span><span class="mo">01</span>
+            <span class="p">[</span><span class="nx">user_id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2346</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="nx">Ingredient</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">123</span>
+                    <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Chocolate</span>
+                <span class="p">)</span>
+           <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">124</span>
+                    <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Sugar</span>
+                <span class="p">)</span>
+           <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">125</span>
+                    <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Bombs</span>
+                <span class="p">)</span>
+        <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>如果要想在使用 Ingredient 模型时获取 Recipe 数据，记得在 Ingredient 模型中定义
+HABTM 关联。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">HABTM 数据被视为完整的集合。每次添加新的数据关联，数据库中关联行的整个集合会
+被删除并重新创建，所以应当总是传入整个数据集来保存。欲知使用 HABTM 的其它方法，
+请参见 <a class="reference internal" href="#hasmany-through"><em>通过(连接模型)的 hasMany</em></a>。</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">小技巧</p>
+<p class="last">欲知关于保存 HABTM 对象的更多信息，请参见 <a class="reference internal" href="saving-your-data.html#saving-habtm"><em>保存相关模型数据 (HABTM)</em></a>。</p>
+</div>
+</div>
+<div class="section" id="hasmany-through">
+<span id="id3"></span><h2>通过(连接模型)的 hasMany<a class="headerlink" href="#hasmany-through" title="永久链接至标题">¶</a></h2>
+<p>有时候需要在多对多关联中保存附加数据。考虑以下情况</p>
+<p><cite>Student hasAndBelongsToMany Course</cite></p>
+<p><cite>Course hasAndBelongsToMany Student</cite></p>
+<p>换句话说，一名学生(<em>Student</em>)可以选修多门课程(<em>Course</em>)，而一门课程(<em>Course</em>)也
+可以被多名学生(<em>Student</em>)选修。 这个简单的多对多关联需要一个类似于如下结构的表:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">id</span> <span class="o">|</span> <span class="nx">student_id</span> <span class="o">|</span> <span class="nx">course_id</span>
+</pre></div>
+</div>
+<p>现在，如果我们要保存学生在这门课程中出勤的天数以及他们的最终分数呢？需要的这张表
+将变成:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">id</span> <span class="o">|</span> <span class="nx">student_id</span> <span class="o">|</span> <span class="nx">course_id</span> <span class="o">|</span> <span class="nx">days_attended</span> <span class="o">|</span> <span class="nx">grade</span>
+</pre></div>
+</div>
+<p>问题是，hasAndBelongsToMany 不支持这类情况，因为 hasAndBelongsToMany 关联保存时，
+先要删除这个关联。这些列中的额外数据会丢失，因为新插入的数据中没有这些数据。</p>
+<blockquote>
+<div><div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改.</span></p>
+</div>
+<p>你可以将 <tt class="docutils literal"><span class="pre">unique</span></tt> 设置为 <tt class="docutils literal"><span class="pre">keepExisting</span></tt> 来防止在保存操作中丢失额外的数据。
+请参阅 <a class="reference internal" href="#ref-habtm-arrays"><em>HABTM association arrays</em></a>。</p>
+</div></blockquote>
+<p>实现需求的方法是使用 <strong>连接模型</strong>，或者也称为 <strong>hasMany through</strong> 关联。即，关联
+自身也是一个模型。现在我们建立一个新的模型 CourseMembership。请看下面的模型。</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Student.php</span>
+<span class="k">class</span> <span class="nc">Student</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;CourseMembership&#39;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Course.php</span>
+
+<span class="k">class</span> <span class="nc">Course</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;CourseMembership&#39;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// CourseMembership.php</span>
+
+<span class="k">class</span> <span class="nc">CourseMembership</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Student&#39;</span><span class="p">,</span> <span class="s1">&#39;Course&#39;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>CourseMembership 连接模型除了保存额外的元信息(即关联信息)，还唯一地标识了一名给
+定学生对一门课程的参与(即出勤天数及分数)。</p>
+<p>连接模型是非常有用的功能，借助于内置的 hasMany 和 belongsTo 关联及 saveAll 特性，
+CakePHP 让使用它非常容易。</p>
+</div>
+<div class="section" id="dynamic-associations">
+<span id="id4"></span><h2>动态创建和销毁关联<a class="headerlink" href="#dynamic-associations" title="永久链接至标题">¶</a></h2>
+<p>有时候必须在运行时动态建立和销毁模型关联。这也许是因为以下任何几种原因:</p>
+<ul class="simple">
+<li>想减少获取的关联数据的数据量，但是所有的关联都是在关联的第一级。</li>
+<li>想要改变定义关联的方式以便排序或者过滤关联数据。</li>
+</ul>
+<p>这种关联的建立与取消由 CakePHP 模型的 bindModel() 和 unbindModel() 方法来完成。
+(还有一个非常有用的行为叫 &#8220;Containable&#8221;。欲知更多信息，请参阅手册中内置行为一节。)
+让我们来设置几个模型，看看 bindModel() 和 unbindModel() 方法如何工作。我们从两个
+模型开始:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Leader</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Follower&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Follower&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Follower.rank&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Follower</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$name</span> <span class="o">=</span> <span class="s1">&#39;Follower&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>现在，在 LeaderController 控制器中，我们能够使用 Leader 模型的 find() 方法获取一
+个 Leader 和与它关联的追随者(followers)。就像你上面看到的那样，Leader 模型的关联
+数组定义了 &#8220;Leader hasMany Followers&#8221; 关系。出于演示的目的，让我们在控制器动作中
+使用 unbindModel() 方法删除该关联:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_action</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 这会获取 Leader 及其相关的 Followers</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Leader</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+
+    <span class="c1">// 让我们删除 hasMany 关联……</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Leader</span><span class="o">-&gt;</span><span class="na">unbindModel</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;hasMany&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Follower&#39;</span><span class="p">))</span>
+    <span class="p">);</span>
+
+    <span class="c1">// 现在使用 find 函数将只返回 Leaders，而没有 Followers</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Leader</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+
+    <span class="c1">// 注：unbindModel 方法只影响紧随其后的 find 方法。再往后调用 find 方法</span>
+    <span class="c1">// 时仍将使用配置的关联信息。</span>
+
+    <span class="c1">// 我们已经在 unbindModel() 之后调用了 find(&#39;all&#39;)，所以这次又会获取</span>
+    <span class="c1">// Leaders 及相关的 Followers……</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Leader</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">使用 bindModel() 和 unbindModel() 方法来添加和删除关联，仅在 <em>紧随其后</em> 的
+find 操作中有效，除非第二个参数设置为 false。如果第二个参数被设置为 <em>false</em>，
+在请求的余下阶段仍将保持这种(动态绑定的)效果。</p>
+</div>
+<p>以下是 unbindModel() 的基本用法模式:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Model</span><span class="o">-&gt;</span><span class="na">unbindModel</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;关联类型&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;关联模型类名&#39;</span><span class="p">))</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>现在我们成功地动态删除了一个关联。让我们来添加一个。我们至今尚没有 Principle 的
+Leader 模型需要一些关联的 Principle。我们的 Principle 模型文件几乎是空的，只有
+public $name 声明语句。让我们动态给我们的 Leader 关联一些 Principle (但记得，这
+仅在紧随其后的 find 操作中有效)。在 LeadersController 控制器中有如下函数:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">another_action</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 在 leader.php 模型文件中没有 Leader hasMany Principles 关联，所以这里</span>
+    <span class="c1">// 的 find 只读取了 Leaders。</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Leader</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+
+    <span class="c1">// 让我们用 bindModel() 方法为 Leader 模型添加一个新的关联：</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Leader</span><span class="o">-&gt;</span><span class="na">bindModel</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;hasMany&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;Principle&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                    <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Principle&#39;</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="c1">// 现在我们已经正确地设置了关联，我们可以调用一次 find 函数来获取 Leader</span>
+    <span class="c1">// 及其相关的 principle：</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Leader</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>就是这样。bindModel() 方法的基本用法是封装在数组中的常规关联数组，该数组的键为要
+建立的关联的类型:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Model</span><span class="o">-&gt;</span><span class="na">bindModel</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;关联名称&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;关联模型类名&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="c1">// 这里是常规的关联的键……</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>虽然新绑定的模型在它的模型文件中不需要定义任何关联，但是要使新的关联正常工作，仍
+然需要为其设置正确的(数据库表的)键。</p>
+</div>
+<div class="section" id="id5">
+<h2>与同一模型的多个关系<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>有些情况下，一个模型与另一个模型有多种关系。例如，消息(Message)模型与用户(User)
+模型有两种关系：一种是与发送消息的用户的关系，第二种是与接收消息的用户的关系。
+messages 表有一个 user_id 字段，还有一个 recipient_id 字段。这样的话消息
+(Message)模型看起来就象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Message</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Sender&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreignKey&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user_id&#39;</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;Recipient&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreignKey&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;recipient_id&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Recipient 是 User 模型的别名。现在来瞧瞧 User 模型是什么样的:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;MessageSent&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Message&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreignKey&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user_id&#39;</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;MessageReceived&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Message&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreignKey&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;recipient_id&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>也可以建立自我关联，如下所示:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Parent&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Post&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreignKey&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;parent_id&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Children&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Post&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreignKey&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;parent_id&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>获取关联记录的嵌套数组:</strong></p>
+<p>如果表里有 <tt class="docutils literal"><span class="pre">parent_id</span></tt> 字段，可以调用 <a class="reference internal" href="retrieving-your-data.html#model-find-threaded"><em>find(&#8216;threaded&#8217;)</em></a> 使用单个查询
+来获取记录的嵌套数组，而不用设置任何关联。</p>
+</div>
+<div class="section" id="joining-tables">
+<span id="id6"></span><h2>连接表<a class="headerlink" href="#joining-tables" title="永久链接至标题">¶</a></h2>
+<p>在 SQL 中，你可以使用 JOIN 语句连接相关的表。这让你可以运行涉及多个表的复杂查询(
+例如，按给定的几个标签(<em>tag</em>)搜索文章(<em>post</em>))。</p>
+<p>在 CakePHP 中某些关联(belongsTo 和 hasOne)会自动进行连接(<em>join</em>)来读取数据，所以
+可以执行基于相关模型的数据的查询来读取模型数据。</p>
+<p>但是这不适用于 hasMany 和 hasAndBelongsToMany 关联。这就需要强制进行连接(<em>join</em>)。
+只需要定义必要的连接(<em>join</em>)，就可以把表联合在一起，并获得期望的查询结果。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">谨记，你需要将递归(<em>recursion</em>)设置为 -1，才能正常工作：
+$this-&gt;Channel-&gt;recursive = -1;</p>
+</div>
+<p>在表间强制进行连接(<em>join</em>)时，需要使用 Model::find() 的&#8221;现代&#8221;语法，在 $options
+数组中添加 &#8216;joins&#8217; 键。例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;joins&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;channels&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Channel&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;LEFT&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;Channel.id = Item.channel_id&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nv">$Item</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">注意 &#8216;join&#8217; 数组没有键。</p>
+</div>
+<p>在上面的例子中，名为 Item 的模型左连接(<em>left-join</em>)到 channels 表。可以用模型名
+作为表的别名，以使读取的数据符合 CakePHP 的数据结构。</p>
+<p>定义连接(<em>join</em>)所用的键如下:</p>
+<ul class="simple">
+<li><strong>table</strong>: 要连接的表。</li>
+<li><strong>alias</strong>: 表的别名。与表关联的模型名是最好的选择。</li>
+<li><strong>type</strong>: 连接(<em>join</em>)的类型： inner、left 或者 right。</li>
+<li><strong>conditions</strong>: 执行连接(<em>join</em>)的条件。</li>
+</ul>
+<p>使用 joins 选项，可以添加基于关联模型字段的条件:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;joins&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;channels&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Channel&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;LEFT&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;Channel.id = Item.channel_id&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;conditions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Channel.private&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+<span class="p">);</span>
+
+<span class="nv">$privateItems</span> <span class="o">=</span> <span class="nv">$Item</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>可以根据需要在 hasAndBelongsToMany 关联中运行若干个连接(<em>join</em>)：</p>
+<p>假设有 Book hasAndBelongsToMany Tag (书籍有且属于多个标签)的关联。该关系使用
+books_tags 表作为连接表，所以需要把 books 表连接(<em>join</em>)到 books_tags 表，再把
+它与 tags 表连接(<em>join</em>):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;joins&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;books_tags&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;BooksTag&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;inner&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;Book.id = BooksTag.book_id&#39;</span>
+        <span class="p">)</span>
+    <span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tags&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Tag&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;inner&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;BooksTag.tag_id = Tag.id&#39;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;conditions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Tag.tag&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Novel&#39;</span>
+<span class="p">);</span>
+
+<span class="nv">$books</span> <span class="o">=</span> <span class="nv">$Book</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>使用连接(<em>join</em>)让你可以以最大的灵活性来控制 CakePHP 如何处理关联并获取数据。不
+过，在大多数情况下，你可以使用其它方式达到同样的目的，比如正确地定义关联，动态绑
+定模型，以及使用 Containable 行为。使用连接(<em>join</em>)这种特性应当很小心，因为如果
+和任何之前描述的关联模型的技术一起使用，在一些情况下，它可能会导致错误的 SQL 查
+询语句。</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../models.html">模型</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">关联：将模型连接在一起</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="retrieving-your-data.html">检索数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saving-your-data.html">保存数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deleting-data.html">删除数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-validation.html">数据验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callback-methods.html">回调方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasources.html">数据源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model-attributes.html">模型属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="additional-methods-and-properties.html">其它方法和属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtual-fields.html">虚字段</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transactions.html">事务</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">关联：将模型连接在一起</a><ul>
+<li><a class="reference internal" href="#id2">关系类型</a></li>
+<li><a class="reference internal" href="#hasone">hasOne</a></li>
+<li><a class="reference internal" href="#belongsto">belongsTo</a><ul>
+<li><a class="reference internal" href="#countercache-count">计数器缓存(<em>counterCache</em>) - 缓存 count()</a></li>
+<li><a class="reference internal" href="#counterscope">计数器范围(<em>counterScope</em>)</a></li>
+<li><a class="reference internal" href="#countercache">多个计数器缓存(<em>counterCache</em>)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hasmany">hasMany</a></li>
+<li><a class="reference internal" href="#hasandbelongstomany-habtm">hasAndBelongsToMany (HABTM)</a></li>
+<li><a class="reference internal" href="#hasmany-through">通过(连接模型)的 hasMany</a></li>
+<li><a class="reference internal" href="#dynamic-associations">动态创建和销毁关联</a></li>
+<li><a class="reference internal" href="#id5">与同一模型的多个关系</a></li>
+<li><a class="reference internal" href="#joining-tables">连接表</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="retrieving-your-data.html" title="检索数据" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="../models.html" title="模型" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

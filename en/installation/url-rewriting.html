@@ -1,0 +1,564 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="URL Rewriting" lang="en" name="title" />
+<meta content="url rewriting, mod_rewrite, apache, iis, plugin assets, nginx" lang="en" name="keywords" />
+
+    <title>URL Rewriting &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Blog Tutorial" href="../tutorials-and-examples/blog/blog.html" />
+    <link rel="next" title="Blog Tutorial - Adding a layer" href="../tutorials-and-examples/blog/part-two.html" />
+    <link rel="prev" title="Blog Tutorial" href="../tutorials-and-examples/blog/blog.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/installation/url-rewriting.html" /><link rel="alternate" hreflang="es" href="../../es/installation/url-rewriting.html" /><link rel="alternate" hreflang="ja" href="../../ja/installation/url-rewriting.html" /><link rel="alternate" hreflang="fr" href="../../fr/installation/url-rewriting.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/installation/url-rewriting.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../tutorials-and-examples.html"  itemprop="url"><span itemprop="title">Tutorials &amp; Examples</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../tutorials-and-examples/blog/blog.html" accesskey="U" itemprop="url"><span itemprop="title">Blog Tutorial</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/installation/url-rewriting.html">pt</a></li>
+				
+					<li><a href="../../es/installation/url-rewriting.html">es</a></li>
+				
+					<li><a href="../../ja/installation/url-rewriting.html">ja</a></li>
+				
+					<li><a href="../../fr/installation/url-rewriting.html">fr</a></li>
+				
+					<li><a href="../../zh/installation/url-rewriting.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/installation/url-rewriting.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="url-rewriting">
+<h1>URL Rewriting<a class="headerlink" href="#url-rewriting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="apache-and-mod-rewrite-and-htaccess">
+<h2>Apache and mod_rewrite (and .htaccess)<a class="headerlink" href="#apache-and-mod-rewrite-and-htaccess" title="Permalink to this headline">¶</a></h2>
+<p>While CakePHP is built to work with mod_rewrite out of the box–and
+usually does–we&#8217;ve noticed that a few users struggle with getting
+everything to play nicely on their systems.</p>
+<p>Here are a few things you might try to get it running correctly.
+First look at your httpd.conf. (Make sure you are editing the system
+httpd.conf rather than a user- or site-specific httpd.conf.)</p>
+<p>These files can vary between different distributions and Apache versions.
+You may also take a look at <a class="reference external" href="http://wiki.apache.org/httpd/DistrosDefaultLayout">http://wiki.apache.org/httpd/DistrosDefaultLayout</a> for further information.</p>
+<ol class="arabic">
+<li><p class="first">Make sure that an .htaccess override is allowed and that
+AllowOverride is set to All for the correct DocumentRoot. You
+should see something similar to:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1"># Each directory to which Apache has access can be configured with respect</span>
+<span class="c1"># to which services and features are allowed and/or disabled in that</span>
+<span class="c1"># directory (and its subdirectories).</span>
+<span class="c1">#</span>
+<span class="c1"># First, we configure the &quot;default&quot; to be a very restrictive set of</span>
+<span class="c1"># features.</span>
+<span class="c1">#</span>
+<span class="o">&lt;</span><span class="nx">Directory</span> <span class="o">/&gt;</span>
+    <span class="nx">Options</span> <span class="nx">FollowSymLinks</span>
+    <span class="nx">AllowOverride</span> <span class="nx">All</span>
+<span class="c1">#    Order deny,allow</span>
+<span class="c1">#    Deny from all</span>
+<span class="o">&lt;/</span><span class="nx">Directory</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Make sure you are loading mod_rewrite correctly. You should
+see something like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">LoadModule</span> <span class="nx">rewrite_module</span> <span class="nx">libexec</span><span class="o">/</span><span class="nx">apache2</span><span class="o">/</span><span class="nx">mod_rewrite</span><span class="o">.</span><span class="nx">so</span>
+</pre></div>
+</div>
+<p>In many systems these will be commented out by default, so you may
+just need to remove the leading # symbols.</p>
+<p>After you make changes, restart Apache to make sure the settings
+are active.</p>
+<p>Verify that your .htaccess files are actually in the right
+directories. Some operating systems treat files that start
+with &#8216;.&#8217; as hidden and therefore won&#8217;t copy them.</p>
+</li>
+<li><p class="first">Make sure your copy of CakePHP comes from the downloads section of
+the site or our Git repository, and has been unpacked correctly, by
+checking for .htaccess files.</p>
+<p>CakePHP root directory (must be copied to your document;
+redirects everything to your CakePHP app):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">IfModule</span> <span class="nx">mod_rewrite</span><span class="o">.</span><span class="nx">c</span><span class="o">&gt;</span>
+   <span class="nx">RewriteEngine</span> <span class="nx">on</span>
+   <span class="nx">RewriteRule</span>    <span class="o">^</span><span class="err">$</span> <span class="nx">app</span><span class="o">/</span><span class="nx">webroot</span><span class="o">/</span>    <span class="p">[</span><span class="nx">L</span><span class="p">]</span>
+   <span class="nx">RewriteRule</span>    <span class="p">(</span><span class="o">.*</span><span class="p">)</span> <span class="nx">app</span><span class="o">/</span><span class="nx">webroot</span><span class="o">/</span><span class="err">$</span><span class="mi">1</span> <span class="p">[</span><span class="nx">L</span><span class="p">]</span>
+<span class="o">&lt;/</span><span class="nx">IfModule</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>CakePHP app directory (will be copied to the top directory of your
+application by bake):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">IfModule</span> <span class="nx">mod_rewrite</span><span class="o">.</span><span class="nx">c</span><span class="o">&gt;</span>
+   <span class="nx">RewriteEngine</span> <span class="nx">on</span>
+   <span class="nx">RewriteRule</span>    <span class="o">^</span><span class="err">$</span>    <span class="nx">webroot</span><span class="o">/</span>    <span class="p">[</span><span class="nx">L</span><span class="p">]</span>
+   <span class="nx">RewriteRule</span>    <span class="p">(</span><span class="o">.*</span><span class="p">)</span> <span class="nx">webroot</span><span class="o">/</span><span class="err">$</span><span class="mi">1</span>    <span class="p">[</span><span class="nx">L</span><span class="p">]</span>
+<span class="o">&lt;/</span><span class="nx">IfModule</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>CakePHP webroot directory (will be copied to your application&#8217;s web
+root by bake):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">IfModule</span> <span class="nx">mod_rewrite</span><span class="o">.</span><span class="nx">c</span><span class="o">&gt;</span>
+    <span class="nx">RewriteEngine</span> <span class="nx">On</span>
+    <span class="nx">RewriteCond</span> <span class="o">%</span><span class="p">{</span><span class="nx">REQUEST_FILENAME</span><span class="p">}</span> <span class="o">!-</span><span class="nx">d</span>
+    <span class="nx">RewriteCond</span> <span class="o">%</span><span class="p">{</span><span class="nx">REQUEST_FILENAME</span><span class="p">}</span> <span class="o">!-</span><span class="nx">f</span>
+    <span class="nx">RewriteRule</span> <span class="o">^</span><span class="p">(</span><span class="o">.*</span><span class="p">)</span><span class="err">$</span> <span class="nx">index</span><span class="o">.</span><span class="nx">php</span> <span class="p">[</span><span class="nx">QSA</span><span class="p">,</span><span class="nx">L</span><span class="p">]</span>
+<span class="o">&lt;/</span><span class="nx">IfModule</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If your CakePHP site still has problems with mod_rewrite, you might
+want to try modifying settings for Virtual Hosts. On Ubuntu,
+edit the file /etc/apache2/sites-available/default (location is
+distribution-dependent). In this file, ensure that
+<tt class="docutils literal"><span class="pre">AllowOverride</span> <span class="pre">None</span></tt> is changed to <tt class="docutils literal"><span class="pre">AllowOverride</span> <span class="pre">All</span></tt>, so you have:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">Directory</span> <span class="o">/&gt;</span>
+    <span class="nx">Options</span> <span class="nx">FollowSymLinks</span>
+    <span class="nx">AllowOverride</span> <span class="nx">All</span>
+<span class="o">&lt;/</span><span class="nx">Directory</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">Directory</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nx">www</span><span class="o">&gt;</span>
+    <span class="nx">Options</span> <span class="nx">Indexes</span> <span class="nx">FollowSymLinks</span> <span class="nx">MultiViews</span>
+    <span class="nx">AllowOverride</span> <span class="nx">All</span>
+    <span class="nx">Order</span> <span class="nx">Allow</span><span class="p">,</span><span class="nx">Deny</span>
+    <span class="nx">Allow</span> <span class="nx">from</span> <span class="nx">all</span>
+<span class="o">&lt;/</span><span class="nx">Directory</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>On Mac OSX, another solution is to use the tool
+<a class="reference external" href="http://clickontyler.com/virtualhostx/">virtualhostx</a>
+to make a Virtual Host to point to your folder.</p>
+<p>For many hosting services (GoDaddy, 1and1), your web server is
+actually being served from a user directory that already uses
+mod_rewrite. If you are installing CakePHP into a user directory
+(<a class="reference external" href="http://example.com/~username/cakephp/">http://example.com/~username/cakephp/</a>), or any other URL structure
+that already utilizes mod_rewrite, you&#8217;ll need to add RewriteBase
+statements to the .htaccess files CakePHP uses (/.htaccess,
+/app/.htaccess, /app/webroot/.htaccess).</p>
+<p>This can be added to the same section with the RewriteEngine
+directive, so for example, your webroot .htaccess file would look
+like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">IfModule</span> <span class="nx">mod_rewrite</span><span class="o">.</span><span class="nx">c</span><span class="o">&gt;</span>
+    <span class="nx">RewriteEngine</span> <span class="nx">On</span>
+    <span class="nx">RewriteBase</span> <span class="o">/</span><span class="nx">path</span><span class="o">/</span><span class="nx">to</span><span class="o">/</span><span class="nx">cake</span><span class="o">/</span><span class="nx">app</span>
+    <span class="nx">RewriteCond</span> <span class="o">%</span><span class="p">{</span><span class="nx">REQUEST_FILENAME</span><span class="p">}</span> <span class="o">!-</span><span class="nx">d</span>
+    <span class="nx">RewriteCond</span> <span class="o">%</span><span class="p">{</span><span class="nx">REQUEST_FILENAME</span><span class="p">}</span> <span class="o">!-</span><span class="nx">f</span>
+    <span class="nx">RewriteRule</span> <span class="o">^</span><span class="p">(</span><span class="o">.*</span><span class="p">)</span><span class="err">$</span> <span class="nx">index</span><span class="o">.</span><span class="nx">php</span> <span class="p">[</span><span class="nx">QSA</span><span class="p">,</span><span class="nx">L</span><span class="p">]</span>
+<span class="o">&lt;/</span><span class="nx">IfModule</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The details of those changes will depend on your setup, and can
+include additional things that are not related to CakePHP. Please refer
+to Apache&#8217;s online documentation for more information.</p>
+</li>
+<li><p class="first">(Optional) To improve production setup, you should prevent invalid assets
+from being parsed by CakePHP. Modify your webroot .htaccess to something like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">IfModule</span> <span class="nx">mod_rewrite</span><span class="o">.</span><span class="nx">c</span><span class="o">&gt;</span>
+    <span class="nx">RewriteEngine</span> <span class="nx">On</span>
+    <span class="nx">RewriteBase</span> <span class="o">/</span><span class="nx">path</span><span class="o">/</span><span class="nx">to</span><span class="o">/</span><span class="nx">cake</span><span class="o">/</span><span class="nx">app</span>
+    <span class="nx">RewriteCond</span> <span class="o">%</span><span class="p">{</span><span class="nx">REQUEST_FILENAME</span><span class="p">}</span> <span class="o">!-</span><span class="nx">d</span>
+    <span class="nx">RewriteCond</span> <span class="o">%</span><span class="p">{</span><span class="nx">REQUEST_FILENAME</span><span class="p">}</span> <span class="o">!-</span><span class="nx">f</span>
+    <span class="nx">RewriteCond</span> <span class="o">%</span><span class="p">{</span><span class="nx">REQUEST_URI</span><span class="p">}</span> <span class="o">!^/</span><span class="p">(</span><span class="nx">app</span><span class="o">/</span><span class="nx">webroot</span><span class="o">/</span><span class="p">)</span><span class="o">?</span><span class="p">(</span><span class="nx">img</span><span class="o">|</span><span class="nx">css</span><span class="o">|</span><span class="nx">js</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="o">.*</span><span class="p">)</span><span class="err">$</span>
+    <span class="nx">RewriteRule</span> <span class="o">^</span><span class="p">(</span><span class="o">.*</span><span class="p">)</span><span class="err">$</span> <span class="nx">index</span><span class="o">.</span><span class="nx">php</span> <span class="p">[</span><span class="nx">QSA</span><span class="p">,</span><span class="nx">L</span><span class="p">]</span>
+<span class="o">&lt;/</span><span class="nx">IfModule</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The above will simply prevent incorrect assets from being sent to index.php
+and instead display your webserver&#8217;s 404 page.</p>
+<p>Additionally you can create a matching HTML 404 page, or use the default
+built-in CakePHP 404 by adding an <tt class="docutils literal"><span class="pre">ErrorDocument</span></tt> directive:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">ErrorDocument</span> <span class="mi">404</span> <span class="o">/</span><span class="mi">404</span><span class="o">-</span><span class="k">not</span><span class="o">-</span><span class="nx">found</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="pretty-urls-on-nginx">
+<h2>Pretty URLs on nginx<a class="headerlink" href="#pretty-urls-on-nginx" title="Permalink to this headline">¶</a></h2>
+<p>nginx does not make use of .htaccess files like Apache, so it is necessary to
+create those rewritten URLs in the site-available configuration. Depending upon
+your setup, you will have to modify this, but at the very least,
+you will need PHP running as a FastCGI instance.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">server</span> <span class="p">{</span>
+    <span class="nx">listen</span>   <span class="mi">80</span><span class="p">;</span>
+    <span class="nx">server_name</span> <span class="nx">www</span><span class="o">.</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="p">;</span>
+    <span class="nx">rewrite</span> <span class="o">^</span><span class="p">(</span><span class="o">.*</span><span class="p">)</span> <span class="nx">http</span><span class="o">://</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="err">$</span><span class="mi">1</span> <span class="nx">permanent</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">server</span> <span class="p">{</span>
+    <span class="nx">listen</span>   <span class="mi">80</span><span class="p">;</span>
+    <span class="nx">server_name</span> <span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="p">;</span>
+
+    <span class="c1"># root directive should be global</span>
+    <span class="nx">root</span>   <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nx">www</span><span class="o">/</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="k">public</span><span class="o">/</span><span class="nx">app</span><span class="o">/</span><span class="nx">webroot</span><span class="o">/</span><span class="p">;</span>
+    <span class="nx">index</span>  <span class="nx">index</span><span class="o">.</span><span class="nx">php</span><span class="p">;</span>
+
+    <span class="nx">access_log</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nx">www</span><span class="o">/</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="nx">access</span><span class="o">.</span><span class="nb">log</span><span class="p">;</span>
+    <span class="nb">error_log</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nx">www</span><span class="o">/</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="nx">error</span><span class="o">.</span><span class="nb">log</span><span class="p">;</span>
+
+    <span class="nx">location</span> <span class="o">/</span> <span class="p">{</span>
+        <span class="nx">try_files</span> <span class="nv">$uri</span> <span class="nv">$uri</span><span class="o">/</span> <span class="o">/</span><span class="nx">index</span><span class="o">.</span><span class="nx">php</span><span class="o">?</span><span class="nv">$args</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">location</span> <span class="o">~</span> <span class="nx">\</span><span class="o">.</span><span class="nx">php</span><span class="err">$</span> <span class="p">{</span>
+        <span class="nx">try_files</span> <span class="nv">$uri</span> <span class="o">=</span><span class="mi">404</span><span class="p">;</span>
+        <span class="k">include</span> <span class="o">/</span><span class="nx">etc</span><span class="o">/</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">fastcgi_params</span><span class="p">;</span>
+        <span class="nx">fastcgi_pass</span>    <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">:</span><span class="mi">9000</span><span class="p">;</span>
+        <span class="nx">fastcgi_index</span>   <span class="nx">index</span><span class="o">.</span><span class="nx">php</span><span class="p">;</span>
+        <span class="nx">fastcgi_param</span> <span class="nx">SCRIPT_FILENAME</span> <span class="nv">$document_root$fastcgi_script_name</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If for some exotic reason you cannot change your root directory and need to run
+your project from a subfolder like example.com/subfolder/, you will have to
+inject &#8220;/webroot&#8221; in each request.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">location</span> <span class="o">~</span> <span class="o">^/</span><span class="p">(</span><span class="nx">subfolder</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="o">.*</span><span class="p">)</span><span class="o">?</span> <span class="p">{</span>
+   <span class="nx">index</span>  <span class="nx">index</span><span class="o">.</span><span class="nx">php</span><span class="p">;</span>
+
+   <span class="nx">set</span> <span class="nv">$new_uri</span> <span class="o">/</span><span class="err">$</span><span class="mi">1</span><span class="o">/</span><span class="nx">webroot</span><span class="o">/</span><span class="err">$</span><span class="mi">2</span><span class="p">;</span>
+   <span class="nx">try_files</span> <span class="nv">$new_uri</span> <span class="nv">$new_uri</span><span class="o">/</span> <span class="o">/</span><span class="err">$</span><span class="mi">1</span><span class="o">/</span><span class="nx">index</span><span class="o">.</span><span class="nx">php</span><span class="o">?</span><span class="nv">$args</span><span class="p">;</span>
+
+   <span class="o">...</span> <span class="nx">php</span> <span class="nx">handling</span> <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="url-rewrites-on-iis7-windows-hosts">
+<h2>URL Rewrites on IIS7 (Windows hosts)<a class="headerlink" href="#url-rewrites-on-iis7-windows-hosts" title="Permalink to this headline">¶</a></h2>
+<p>IIS7 does not natively support .htaccess files. While there are
+add-ons that can add this support, you can also import htaccess
+rules into IIS to use CakePHP&#8217;s native rewrites. To do this, follow
+these steps:</p>
+<ol class="arabic simple">
+<li>Use <a class="reference external" href="http://www.microsoft.com/web/downloads/platform.aspx">Microsoft&#8217;s Web Platform Installer</a> to install the URL
+<a class="reference external" href="http://www.iis.net/downloads/microsoft/url-rewrite">Rewrite Module 2.0</a> or download it directly (<a class="reference external" href="http://www.microsoft.com/en-us/download/details.aspx?id=5747">32-bit</a> / <a class="reference external" href="http://www.microsoft.com/en-us/download/details.aspx?id=7435">64-bit</a>).</li>
+<li>Create a new file called web.config in your CakePHP root folder.</li>
+<li>Using Notepad or any XML-safe editor, copy the following
+code into your new web.config file...</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;configuration&gt;</span>
+    <span class="nt">&lt;system.webServer&gt;</span>
+        <span class="nt">&lt;rewrite&gt;</span>
+            <span class="nt">&lt;rules&gt;</span>
+                <span class="nt">&lt;rule</span> <span class="na">name=</span><span class="s">&quot;Rewrite requests to test.php&quot;</span>
+                  <span class="na">stopProcessing=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;match</span> <span class="na">url=</span><span class="s">&quot;^test.php(.*)$&quot;</span> <span class="na">ignoreCase=</span><span class="s">&quot;false&quot;</span> <span class="nt">/&gt;</span>
+                    <span class="nt">&lt;action</span> <span class="na">type=</span><span class="s">&quot;Rewrite&quot;</span> <span class="na">url=</span><span class="s">&quot;app/webroot/test.php{R:1}&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;/rule&gt;</span>
+                <span class="nt">&lt;rule</span> <span class="na">name=</span><span class="s">&quot;Exclude direct access to app/webroot/*&quot;</span>
+                  <span class="na">stopProcessing=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;match</span> <span class="na">url=</span><span class="s">&quot;^app/webroot/(.*)$&quot;</span> <span class="na">ignoreCase=</span><span class="s">&quot;false&quot;</span> <span class="nt">/&gt;</span>
+                    <span class="nt">&lt;action</span> <span class="na">type=</span><span class="s">&quot;None&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;/rule&gt;</span>
+                <span class="nt">&lt;rule</span> <span class="na">name=</span><span class="s">&quot;Rewrite routed access to assets(img, css, files, js, favicon)&quot;</span>
+                  <span class="na">stopProcessing=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;match</span> <span class="na">url=</span><span class="s">&quot;^(img|css|files|js|favicon.ico)(.*)$&quot;</span> <span class="nt">/&gt;</span>
+                    <span class="nt">&lt;action</span> <span class="na">type=</span><span class="s">&quot;Rewrite&quot;</span> <span class="na">url=</span><span class="s">&quot;app/webroot/{R:1}{R:2}&quot;</span>
+                      <span class="na">appendQueryString=</span><span class="s">&quot;false&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;/rule&gt;</span>
+                <span class="nt">&lt;rule</span> <span class="na">name=</span><span class="s">&quot;Rewrite requested file/folder to index.php&quot;</span>
+                  <span class="na">stopProcessing=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;match</span> <span class="na">url=</span><span class="s">&quot;^(.*)$&quot;</span> <span class="na">ignoreCase=</span><span class="s">&quot;false&quot;</span> <span class="nt">/&gt;</span>
+                    <span class="nt">&lt;action</span> <span class="na">type=</span><span class="s">&quot;Rewrite&quot;</span> <span class="na">url=</span><span class="s">&quot;index.php&quot;</span>
+                      <span class="na">appendQueryString=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+                <span class="nt">&lt;/rule&gt;</span>
+            <span class="nt">&lt;/rules&gt;</span>
+        <span class="nt">&lt;/rewrite&gt;</span>
+    <span class="nt">&lt;/system.webServer&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</pre></div>
+</div>
+<p>Once the web.config file is created with the correct IIS-friendly
+rewrite rules, CakePHP&#8217;s links, CSS, JavaScipt, and rerouting should work
+correctly.</p>
+</div>
+<div class="section" id="url-rewriting-on-lighttpd">
+<h2>URL-Rewriting on lighttpd<a class="headerlink" href="#url-rewriting-on-lighttpd" title="Permalink to this headline">¶</a></h2>
+<p>Lighttpd does not support .htaccess functions, so you can remove all .htaccess files.
+In the lighttpd configuration, make sure you&#8217;ve activated &#8220;mod_rewrite&#8221;. Add a line:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">url</span><span class="o">.</span><span class="nx">rewrite</span><span class="o">-</span><span class="k">if</span><span class="o">-</span><span class="k">not</span><span class="o">-</span><span class="nb">file</span> <span class="o">=</span><span class="p">(</span>
+    <span class="s2">&quot;^([^\?]*)(\?(.+))?$&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;/index.php?url=$1&amp;$3&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="url-rewrite-rules-for-hiawatha">
+<h2>URL rewrite rules for Hiawatha<a class="headerlink" href="#url-rewrite-rules-for-hiawatha" title="Permalink to this headline">¶</a></h2>
+<p>The required UrlToolkit rule (for URL rewriting) to use CakePHP with Hiawatha is:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">UrlToolkit</span> <span class="p">{</span>
+   <span class="nx">ToolkitID</span> <span class="o">=</span> <span class="nx">cakephp</span>
+   <span class="nx">RequestURI</span> <span class="nx">exists</span> <span class="k">Return</span>
+   <span class="nx">Match</span> <span class="o">.*</span> <span class="nx">Rewrite</span> <span class="o">/</span><span class="nx">index</span><span class="o">.</span><span class="nx">php</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="i-don-t-can-t-use-url-rewriting">
+<h2>I don&#8217;t / can&#8217;t use URL rewriting<a class="headerlink" href="#i-don-t-can-t-use-url-rewriting" title="Permalink to this headline">¶</a></h2>
+<p>If you don&#8217;t want to or can&#8217;t use URL rewriting on your webserver,
+refer to the <a class="reference internal" href="../development/configuration.html#core-configuration-baseurl"><em>core configuration</em></a>.</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../installation.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="advanced-installation.html">Advanced Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">URL Rewriting</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../getting-started.html">Getting Started</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">URL Rewriting</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/a-typical-cakephp-request.html">A Typical CakePHP Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/cakephp-conventions.html">CakePHP Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/cakephp-folder-structure.html">CakePHP Folder Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting-started/cakephp-structure.html">CakePHP Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorials-and-examples/blog/blog.html">Blog Tutorial</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">URL Rewriting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials-and-examples/blog/part-two.html">Blog Tutorial - Adding a layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials-and-examples/blog-auth-example/auth.html">Simple Authentication and Authorization Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">Simple Acl controlled Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials-and-examples/simple-acl-controlled-application/part-two.html">Simple Acl controlled Application - part 2</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">URL Rewriting</a><ul>
+<li><a class="reference internal" href="#apache-and-mod-rewrite-and-htaccess">Apache and mod_rewrite (and .htaccess)</a></li>
+<li><a class="reference internal" href="#pretty-urls-on-nginx">Pretty URLs on nginx</a></li>
+<li><a class="reference internal" href="#url-rewrites-on-iis7-windows-hosts">URL Rewrites on IIS7 (Windows hosts)</a></li>
+<li><a class="reference internal" href="#url-rewriting-on-lighttpd">URL-Rewriting on lighttpd</a></li>
+<li><a class="reference internal" href="#url-rewrite-rules-for-hiawatha">URL rewrite rules for Hiawatha</a></li>
+<li><a class="reference internal" href="#i-don-t-can-t-use-url-rewriting">I don&#8217;t / can&#8217;t use URL rewriting</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="../tutorials-and-examples/blog/part-two.html" title="Blog Tutorial - Adding a layer" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="../tutorials-and-examples/blog/blog.html" title="Blog Tutorial" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

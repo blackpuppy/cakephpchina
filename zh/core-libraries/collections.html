@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Collections" lang="zh_CN" name="title" />
+<meta content="array name,loading components,several different kinds,unified api,loading objects,component names,special key,core components,callbacks,prg,callback,alias,fatal error,collections,memory,priority,priorities" lang="zh_CN" name="keywords" />
+
+    <title>Collections &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="通用" href="toc-general-purpose.html" />
+    <link rel="next" title="行为" href="toc-behaviors.html" />
+    <link rel="prev" title="TimeHelper" href="helpers/time.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/core-libraries/collections.html" /><link rel="alternate" hreflang="pt" href="../../pt/core-libraries/collections.html" /><link rel="alternate" hreflang="es" href="../../es/core-libraries/collections.html" /><link rel="alternate" hreflang="ja" href="../../ja/core-libraries/collections.html" /><link rel="alternate" hreflang="fr" href="../../fr/core-libraries/collections.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="toc-general-purpose.html" accesskey="U" itemprop="url"><span itemprop="title">通用</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/core-libraries/collections.html">en</a></li>
+				
+					<li><a href="../../pt/core-libraries/collections.html">pt</a></li>
+				
+					<li><a href="../../es/core-libraries/collections.html">es</a></li>
+				
+					<li><a href="../../ja/core-libraries/collections.html">ja</a></li>
+				
+					<li><a href="../../fr/core-libraries/collections.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/collections.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="collections">
+<h1>Collections<a class="headerlink" href="#collections" title="永久链接至标题">¶</a></h1>
+<p>Components, Helpers, Behaviors and Tasks all share a similar structure and set
+of behaviors.  For 2.0, they were given a unified API for interacting with
+collections of similar objects.  The collection objects in CakePHP, give you
+a uniform way to interact with several different kinds of objects in your
+application.</p>
+<p>While the examples below, will use Components, the same behavior can be expected
+for Helpers, Behaviors, and Tasks in addition to Components.</p>
+<div class="section" id="loading-and-unloading-objects">
+<h2>Loading and unloading objects<a class="headerlink" href="#loading-and-unloading-objects" title="永久链接至标题">¶</a></h2>
+<p>Loading objects on every kind of collection can be done using the <tt class="docutils literal"><span class="pre">load()</span></tt>
+method:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Prg</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Components</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;Prg&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Prg</span><span class="o">-&gt;</span><span class="na">process</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>When loading a component, if the component is not currently loaded into the
+collection, a new instance will be created.  If the component is already loaded,
+another instance will not be created.  When loading components, you can also
+provide additional configuration for them:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Components</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;Cookie&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;sweet&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Any keys &amp; values provided will be passed to the Component&#8217;s constructor.  The
+one exception to this rule is <tt class="docutils literal"><span class="pre">className</span></tt>.  ClassName is a special key that is
+used to alias objects in a collection.  This allows you to have component names
+that do not reflect the classnames, which can be helpful when extending core
+components:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Components</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;Auth&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;MyCustomAuth&#39;</span><span class="p">));</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">();</span> <span class="c1">// Actually using MyCustomAuth::user();</span>
+</pre></div>
+</div>
+<p>The inverse of loading an object, is unloading it.  Unloaded objects are removed
+from memory, and will not have additional callbacks triggered on them:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Components</span><span class="o">-&gt;</span><span class="na">unload</span><span class="p">(</span><span class="s1">&#39;Cookie&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">();</span> <span class="c1">// Fatal error.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="triggering-callbacks">
+<h2>Triggering callbacks<a class="headerlink" href="#triggering-callbacks" title="永久链接至标题">¶</a></h2>
+<p>Callbacks are supported by collection objects.  When a collection has a callback
+triggered, that method will be called on all enabled objects in the collection.
+You can pass parameters to the callback loop as well:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="s1">&#39;afterFind&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="nv">$results</span><span class="p">,</span> <span class="nv">$primary</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>In the above <tt class="docutils literal"><span class="pre">$viewFile</span></tt> would be passed as the first argument to every
+helper&#8217;s beforeRender method. There are several options that can be used to
+control how callbacks are fired:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">breakOn</span></tt> Set to the value or values you want the callback propagation to stop on.
+Can either be a scalar value, or an array of values to break on. Defaults to <tt class="docutils literal"><span class="pre">false</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">break</span></tt> Set to true to enabled breaking. When a trigger is broken, the last returned value
+will be returned.  If used in combination with <tt class="docutils literal"><span class="pre">collectReturn</span></tt> the collected results will be returned.
+Defaults to <tt class="docutils literal"><span class="pre">false</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">collectReturn</span></tt> Set to true to collect the return of each object into an array.
+This array of return values will be returned from the trigger() call. Defaults to <tt class="docutils literal"><span class="pre">false</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">triggerDisabled</span></tt> Will trigger the callback on all objects in the collection even the non-enabled
+objects. Defaults to false.</li>
+<li><tt class="docutils literal"><span class="pre">modParams</span></tt> Allows each object the callback gets called on to modify the parameters to the next object.
+Setting modParams to an integer value will allow you to modify the parameter with that index.
+Any non-null value will modify the parameter index indicated.
+Defaults to false.</li>
+</ul>
+<div class="section" id="canceling-a-callback-loop">
+<h3>Canceling a callback loop<a class="headerlink" href="#canceling-a-callback-loop" title="永久链接至标题">¶</a></h3>
+<p>Using the <tt class="docutils literal"><span class="pre">break</span></tt> and <tt class="docutils literal"><span class="pre">breakOn</span></tt> options you can cancel a callback loop
+midway similar to stopping event propagation in JavaScript:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span>
+    <span class="s1">&#39;beforeFind&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="nv">$query</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;break&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;breakOn&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>In the above example, if any behavior returns <tt class="docutils literal"><span class="pre">false</span></tt> from its beforeFind
+method, no further callbacks will be called. In addition, the return of
+<tt class="docutils literal"><span class="pre">trigger()</span></tt> will be false.</p>
+</div>
+</div>
+<div class="section" id="enabling-and-disabling-objects">
+<h2>Enabling and disabling objects<a class="headerlink" href="#enabling-and-disabling-objects" title="永久链接至标题">¶</a></h2>
+<p>Once an object is loaded into a collection you may need to disable it.
+Disabling an object in a collection prevents future callbacks from being fired
+on that object unless the <tt class="docutils literal"><span class="pre">triggerDisabled</span></tt> option is used:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Disable the HtmlHelper</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Helpers</span><span class="o">-&gt;</span><span class="na">disable</span><span class="p">(</span><span class="s1">&#39;Html&#39;</span><span class="p">);</span>
+
+<span class="c1">// Re-enable the helper later on</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Helpers</span><span class="o">-&gt;</span><span class="na">enable</span><span class="p">(</span><span class="s1">&#39;Html&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Disabled objects can still have their normal methods and properties used. The
+primary difference between an enabled and disabled object is with regards to
+callbacks. You can interrogate a collection about the enabled objects, or check
+if a specific object is still enabled using <tt class="docutils literal"><span class="pre">enabled()</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Check whether or not a specific helper is enabled.</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Helpers</span><span class="o">-&gt;</span><span class="na">enabled</span><span class="p">(</span><span class="s1">&#39;Html&#39;</span><span class="p">);</span>
+
+<span class="c1">// $enabled will contain an array of helper currently enabled.</span>
+<span class="nv">$enabled</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Helpers</span><span class="o">-&gt;</span><span class="na">enabled</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="object-callback-priorities">
+<h2>Object callback priorities<a class="headerlink" href="#object-callback-priorities" title="永久链接至标题">¶</a></h2>
+<p>You can prioritize the triggering object callbacks similar to event callbacks.
+The handling of priority values and order of triggering is the same as
+explained <a class="reference internal" href="events.html#event-priorities"><em>here</em></a>.
+Here&#8217;s how you can specify priority at declaration time:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SomeController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="c1">//Foo gets default priority 10</span>
+        <span class="s1">&#39;Bar&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;priority&#39;</span> <span class="o">=&gt;</span> <span class="mi">9</span><span class="p">)</span> <span class="c1">//Bar&#39;s callbacks are triggered before Foo&#39;s</span>
+    <span class="p">);</span>
+
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Cache&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;priority&#39;</span> <span class="o">=&gt;</span> <span class="mi">12</span><span class="p">),</span> <span class="c1">//Cache&#39;s callbacks will be triggered last</span>
+        <span class="s1">&#39;Asset&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Utility&#39;</span> <span class="c1">//Utility has priority 10 same as Asset and its callbacks are trigger</span>
+                  <span class="c1">//after Asset&#39;s</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="k">class</span> <span class="nc">Post</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;DoFirst&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;priority&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="s1">&#39;Media&#39;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When dynamically loading objects to a collection you can specify the priority like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">MyComponent</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Components</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;MyComponent&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;priority&#39;</span> <span class="o">=&gt;</span> <span class="mi">9</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>You can also change priorities at run time using the <tt class="docutils literal"><span class="pre">ObjectCollection::setPriority()</span></tt> function:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//For a single object</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Components</span><span class="o">-&gt;</span><span class="na">setPriority</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+
+<span class="c1">//For multiple objects</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">setPriority</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Object1&#39;</span> <span class="o">=&gt;</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;Object2&#39;</span> <span class="o">=&gt;</span> <span class="mi">9</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="toc-general-purpose.html">通用</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="global-constants-and-functions.html">全局常量和函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/app.html">App Class</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="events.html">Events System</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Collections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="toc-behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toc-components.html">组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toc-helpers.html">助件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toc-utilities.html">工具</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Collections</a><ul>
+<li><a class="reference internal" href="#loading-and-unloading-objects">Loading and unloading objects</a></li>
+<li><a class="reference internal" href="#triggering-callbacks">Triggering callbacks</a><ul>
+<li><a class="reference internal" href="#canceling-a-callback-loop">Canceling a callback loop</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#enabling-and-disabling-objects">Enabling and disabling objects</a></li>
+<li><a class="reference internal" href="#object-callback-priorities">Object callback priorities</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="toc-behaviors.html" title="行为" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="helpers/time.html" title="TimeHelper" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Themes" lang="en" name="title" />
+<meta content="production environments,theme folder,layout files,development requests,callback functions,folder structure,default view,dispatcher,symlink,case basis,layouts,assets,cakephp,themes,advantage" lang="en" name="keywords" />
+
+    <title>Themes &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Views" href="../views.html" />
+    <link rel="next" title="Media Views" href="media-view.html" />
+    <link rel="prev" title="Views" href="../views.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/views/themes.html" /><link rel="alternate" hreflang="es" href="../../es/views/themes.html" /><link rel="alternate" hreflang="ja" href="../../ja/views/themes.html" /><link rel="alternate" hreflang="fr" href="../../fr/views/themes.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/views/themes.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../views.html" accesskey="U" itemprop="url"><span itemprop="title">Views</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/views/themes.html">pt</a></li>
+				
+					<li><a href="../../es/views/themes.html">es</a></li>
+				
+					<li><a href="../../ja/views/themes.html">ja</a></li>
+				
+					<li><a href="../../fr/views/themes.html">fr</a></li>
+				
+					<li><a href="../../zh/views/themes.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/views/themes.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="themes">
+<h1>Themes<a class="headerlink" href="#themes" title="Permalink to this headline">¶</a></h1>
+<p>You can take advantage of themes, making it easy to switch the look and feel of
+your page quickly and easily.</p>
+<p>To use themes, specify the theme name in your
+controller:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ExampleController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$theme</span> <span class="o">=</span> <span class="s1">&#39;Example&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.1: </span>Versions previous to 2.1 required setting the <tt class="docutils literal"><span class="pre">$this-&gt;viewClass</span> <span class="pre">=</span> <span class="pre">'Theme'</span></tt>.
+2.1 removes this requirement as the normal <tt class="docutils literal"><span class="pre">View</span></tt> class supports themes</p>
+</div>
+<p>You can also set or change the theme name within an action or within the
+<tt class="docutils literal"><span class="pre">beforeFilter</span></tt> or <tt class="docutils literal"><span class="pre">beforeRender</span></tt> callback functions:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">theme</span> <span class="o">=</span> <span class="s1">&#39;AnotherExample&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Theme view files need to be within the <tt class="docutils literal"><span class="pre">/app/View/Themed/</span></tt> folder. Within the
+themed folder, create a folder using the same name as your theme name. For
+example, the above theme would be found in <tt class="docutils literal"><span class="pre">/app/View/Themed/AnotherExample</span></tt>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is important to remember that CakePHP expects CamelCase theme names.</p>
+</div>
+<p>Beyond that, the folder structure within the <tt class="docutils literal"><span class="pre">/app/View/Themed/Example/</span></tt> folder is
+exactly the same as <tt class="docutils literal"><span class="pre">/app/View/</span></tt>.</p>
+<p>For example, the view file for an edit action of a Posts controller would reside
+at <tt class="docutils literal"><span class="pre">/app/View/Themed/Example/Posts/edit.ctp</span></tt>. Layout files would reside in
+<tt class="docutils literal"><span class="pre">/app/View/Themed/Example/Layouts/</span></tt>.</p>
+<p>If a view file can&#8217;t be found in the theme, CakePHP will try to locate the view
+file in the <tt class="docutils literal"><span class="pre">/app/View/</span></tt> folder. This way, you can create master view files
+and simply override them on a case-by-case basis within your theme folder.</p>
+<div class="section" id="theme-assets">
+<h2>Theme assets<a class="headerlink" href="#theme-assets" title="Permalink to this headline">¶</a></h2>
+<p>Themes can contain static assets as well as view files. A theme can include any
+necessary assets in its webroot directory. This allows for easy packaging and
+distribution of themes. While in development, requests for theme assets will be
+handled by <tt class="xref php php-class docutils literal"><span class="pre">Dispatcher</span></tt>. To improve performance for production
+environments, it&#8217;s recommended that you either symlink or copy theme assets into
+the application&#8217;s webroot. See below for more information.</p>
+<p>To use the new theme webroot create directories like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">app</span><span class="o">/</span><span class="nx">View</span><span class="o">/</span><span class="nx">Themed</span><span class="o">/&lt;</span><span class="nx">themeName</span><span class="o">&gt;/</span><span class="nx">webroot</span><span class="o">&lt;</span><span class="nx">path_to_file</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>in your theme. The Dispatcher will handle finding the correct theme assets in
+your view paths.</p>
+<p>All of CakePHP&#8217;s built-in helpers are aware of themes and will create the
+correct paths automatically. Like view files, if a file isn&#8217;t in the theme
+folder, it will default to the main webroot folder:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//When in a theme with the name of &#39;purple_cupcake&#39;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">css</span><span class="p">(</span><span class="s1">&#39;main.css&#39;</span><span class="p">);</span>
+
+<span class="c1">//creates a path like</span>
+<span class="o">/</span><span class="nx">theme</span><span class="o">/</span><span class="nx">purple_cupcake</span><span class="o">/</span><span class="nx">css</span><span class="o">/</span><span class="nx">main</span><span class="o">.</span><span class="nx">css</span>
+
+<span class="c1">//and links to</span>
+<span class="nx">app</span><span class="o">/</span><span class="nx">View</span><span class="o">/</span><span class="nx">Themed</span><span class="o">/</span><span class="nx">PurpleCupcake</span><span class="o">/</span><span class="nx">webroot</span><span class="o">/</span><span class="nx">css</span><span class="o">/</span><span class="nx">main</span><span class="o">.</span><span class="nx">css</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="increasing-performance-of-plugin-and-theme-assets">
+<h2>Increasing performance of plugin and theme assets<a class="headerlink" href="#increasing-performance-of-plugin-and-theme-assets" title="Permalink to this headline">¶</a></h2>
+<p>It&#8217;s a well known fact that serving assets through PHP is guaranteed to be slower
+than serving those assets without invoking PHP. And while the core team has
+taken steps to make plugin and theme asset serving as fast as possible, there
+may be situations where more performance is required. In these situations it&#8217;s
+recommended that you either symlink or copy out plugin/theme assets to
+directories in <tt class="docutils literal"><span class="pre">app/webroot</span></tt> with paths matching those used by CakePHP.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">app/Plugin/DebugKit/webroot/js/my_file.js</span></tt> becomes
+<tt class="docutils literal"><span class="pre">app/webroot/debug_kit/js/my_file.js</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">app/View/Themed/Navy/webroot/css/navy.css</span></tt> becomes
+<tt class="docutils literal"><span class="pre">app/webroot/theme/Navy/css/navy.css</span></tt></li>
+</ul>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../views.html">Views</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Themes</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="media-view.html">Media Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json-and-xml-views.html">JSON and XML views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html">Helpers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Themes</a><ul>
+<li><a class="reference internal" href="#theme-assets">Theme assets</a></li>
+<li><a class="reference internal" href="#increasing-performance-of-plugin-and-theme-assets">Increasing performance of plugin and theme assets</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="media-view.html" title="Media Views" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="../views.html" title="Views" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

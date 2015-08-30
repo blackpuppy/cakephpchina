@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Debugging" lang="en" name="title" />
+<meta content="Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin." lang="en" name="description" />
+<meta content="code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options" lang="en" name="keywords" />
+
+    <title>Debugging &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Development" href="../development.html" />
+    <link rel="next" title="Testing" href="testing.html" />
+    <link rel="prev" title="Error Handling" href="errors.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/development/debugging.html" /><link rel="alternate" hreflang="es" href="../../es/development/debugging.html" /><link rel="alternate" hreflang="ja" href="../../ja/development/debugging.html" /><link rel="alternate" hreflang="fr" href="../../fr/development/debugging.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/development/debugging.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../development.html" accesskey="U" itemprop="url"><span itemprop="title">Development</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/development/debugging.html">pt</a></li>
+				
+					<li><a href="../../es/development/debugging.html">es</a></li>
+				
+					<li><a href="../../ja/development/debugging.html">ja</a></li>
+				
+					<li><a href="../../fr/development/debugging.html">fr</a></li>
+				
+					<li><a href="../../zh/development/debugging.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/development/debugging.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="debugging">
+<h1>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h1>
+<p>Debugging is an inevitable and necessary part of any development
+cycle. While CakePHP doesn&#8217;t offer any tools that directly connect
+with any IDE or editor, CakePHP does provide several tools to
+assist in debugging and exposing what is running under the hood of
+your application.</p>
+<div class="section" id="basic-debugging">
+<h2>Basic Debugging<a class="headerlink" href="#basic-debugging" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="debug">
+<tt class="descname">debug</tt><big>(</big><em>mixed $var</em>, <em>boolean $showHtml = null</em>, <em>$showFrom = true</em><big>)</big><a class="headerlink" href="#debug" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$var</strong> (<em>mixed</em>) &#8211; The contents to print out. Arrays and objects work well.</li>
+<li><strong>$showHTML</strong> (<em>boolean</em>) &#8211; Set to true, to enable escaping. Escaping is enabled
+by default in 2.0 when serving web requests.</li>
+<li><strong>$showFrom</strong> (<em>boolean</em>) &#8211; Show the line and file the debug() occurred on.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>The debug() function is a globally available function that works
+similarly to the PHP function print_r(). The debug() function
+allows you to show the contents of a variable in a number of
+different ways. First, if you&#8217;d like data to be shown in an
+HTML-friendly way, set the second parameter to true. The function
+also prints out the line and file it is originating from by
+default.</p>
+<p>Output from this function is only shown if the core debug variable
+has been set to a value greater than 0.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.1: </span>The output of <tt class="docutils literal"><span class="pre">debug()</span></tt> more resembles <tt class="docutils literal"><span class="pre">var_dump()</span></tt>, and uses
+<a class="reference internal" href="#Debugger" title="Debugger"><tt class="xref php php-class docutils literal"><span class="pre">Debugger</span></tt></a> internally.</p>
+</div>
+</div>
+<div class="section" id="debugger-class">
+<h2>Debugger Class<a class="headerlink" href="#debugger-class" title="Permalink to this headline">¶</a></h2>
+<p>The debugger class was introduced with CakePHP 1.2 and offers even
+more options for obtaining debugging information. It has several
+functions which are invoked statically, and provide dumping,
+logging, and error handling functions.</p>
+<p>The Debugger Class overrides PHP&#8217;s default error handling,
+replacing it with far more useful error reports. The Debugger&#8217;s
+error handling is used by default in CakePHP. As with all debugging
+functions, <tt class="docutils literal"><span class="pre">Configure::debug</span></tt> must be set to a value higher than 0.</p>
+<p>When an error is raised, Debugger both outputs information to the
+page and makes an entry in the error.log file. The error report
+that is generated has both a stack trace and a code excerpt from
+where the error was raised. Click on the &#8220;Error&#8221; link to
+reveal the stack trace, and on the &#8220;Code&#8221; link to reveal the
+error-causing lines.</p>
+</div>
+<div class="section" id="using-the-debugger-class">
+<h2>Using the Debugger Class<a class="headerlink" href="#using-the-debugger-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Debugger">
+<em class="property">class </em><tt class="descname">Debugger</tt><a class="headerlink" href="#Debugger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>To use the debugger, first ensure that Configure::read(&#8216;debug&#8217;) is
+set to a value greater than 0.</p>
+<dl class="staticmethod">
+<dt id="Debugger::dump">
+<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">dump</tt><big>(</big><em>$var</em>, <em>$depth = 3</em><big>)</big><a class="headerlink" href="#Debugger::dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dump prints out the contents of a variable. It will print out all
+properties and methods (if any) of the supplied variable:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$foo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="nx">Debugger</span><span class="o">::</span><span class="na">dump</span><span class="p">(</span><span class="nv">$foo</span><span class="p">);</span>
+
+<span class="c1">// outputs</span>
+<span class="k">array</span><span class="p">(</span>
+    <span class="mi">1</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">,</span>
+    <span class="mi">3</span>
+<span class="p">)</span>
+
+<span class="c1">// simple object</span>
+<span class="nv">$car</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+
+<span class="nx">Debugger</span><span class="o">::</span><span class="na">dump</span><span class="p">(</span><span class="nv">$car</span><span class="p">);</span>
+
+<span class="c1">// outputs</span>
+<span class="nx">Car</span>
+<span class="nx">Car</span><span class="o">::</span><span class="na">colour</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span>
+<span class="nx">Car</span><span class="o">::</span><span class="na">make</span> <span class="o">=</span> <span class="s1">&#39;Toyota&#39;</span>
+<span class="nx">Car</span><span class="o">::</span><span class="na">model</span> <span class="o">=</span> <span class="s1">&#39;Camry&#39;</span>
+<span class="nx">Car</span><span class="o">::</span><span class="na">mileage</span> <span class="o">=</span> <span class="s1">&#39;15000&#39;</span>
+<span class="nx">Car</span><span class="o">::</span><span class="na">accelerate</span><span class="p">()</span>
+<span class="nx">Car</span><span class="o">::</span><span class="na">decelerate</span><span class="p">()</span>
+<span class="nx">Car</span><span class="o">::</span><span class="na">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.1: </span>In 2.1 forward the output was updated for readability. See
+<a class="reference internal" href="#Debugger::exportVar" title="Debugger::exportVar"><tt class="xref php php-func docutils literal"><span class="pre">Debugger::exportVar()</span></tt></a></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.5.0: </span>The <tt class="docutils literal"><span class="pre">depth</span></tt> parameter was added.</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Debugger::log">
+<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">log</tt><big>(</big><em>$var</em>, <em>$level = 7</em>, <em>$depth = 3</em><big>)</big><a class="headerlink" href="#Debugger::log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a detailed stack trace log at the time of invocation. The
+log() method prints out data similar to that done by
+Debugger::dump(), but to the debug.log instead of the output
+buffer. Note your app/tmp directory (and its contents) must be
+writable by the web server for log() to work correctly.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.5.0: </span>The <tt class="docutils literal"><span class="pre">depth</span></tt> parameter was added.</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Debugger::trace">
+<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">trace</tt><big>(</big><em>$options</em><big>)</big><a class="headerlink" href="#Debugger::trace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current stack trace. Each line of the trace includes
+the calling method, including which file and line the call
+originated from.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//In PostsController::index()</span>
+<span class="nx">pr</span><span class="p">(</span><span class="nx">Debugger</span><span class="o">::</span><span class="na">trace</span><span class="p">());</span>
+
+<span class="c1">//outputs</span>
+<span class="nx">PostsController</span><span class="o">::</span><span class="na">index</span><span class="p">()</span> <span class="o">-</span> <span class="nx">APP</span><span class="o">/</span><span class="nx">Controller</span><span class="o">/</span><span class="nx">DownloadsController</span><span class="o">.</span><span class="nx">php</span><span class="p">,</span> <span class="nx">line</span> <span class="mi">48</span>
+<span class="nx">Dispatcher</span><span class="o">::</span><span class="na">_invoke</span><span class="p">()</span> <span class="o">-</span> <span class="nx">CORE</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">Cake</span><span class="o">/</span><span class="nx">Routing</span><span class="o">/</span><span class="nx">Dispatcher</span><span class="o">.</span><span class="nx">php</span><span class="p">,</span> <span class="nx">line</span> <span class="mi">265</span>
+<span class="nx">Dispatcher</span><span class="o">::</span><span class="na">dispatch</span><span class="p">()</span> <span class="o">-</span> <span class="nx">CORE</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">Cake</span><span class="o">/</span><span class="nx">Routing</span><span class="o">/</span><span class="nx">Dispatcher</span><span class="o">.</span><span class="nx">php</span><span class="p">,</span> <span class="nx">line</span> <span class="mi">237</span>
+<span class="p">[</span><span class="nx">main</span><span class="p">]</span> <span class="o">-</span> <span class="nx">APP</span><span class="o">/</span><span class="nx">webroot</span><span class="o">/</span><span class="nx">index</span><span class="o">.</span><span class="nx">php</span><span class="p">,</span> <span class="nx">line</span> <span class="mi">84</span>
+</pre></div>
+</div>
+<p>Above is the stack trace generated by calling Debugger::trace() in
+a controller action. Reading the stack trace bottom to top shows
+the order of currently running functions (stack frames). In the
+above example, index.php called Dispatcher::dispatch(), which
+in-turn called Dispatcher::_invoke(). The _invoke() method then
+called PostsController::index(). This information is useful when
+working with recursive operations or deep stacks, as it identifies
+which functions are currently running at the time of the trace().</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Debugger::excerpt">
+<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">excerpt</tt><big>(</big><em>$file</em>, <em>$line</em>, <em>$context</em><big>)</big><a class="headerlink" href="#Debugger::excerpt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grab an excerpt from the file at $path (which is an absolute
+filepath), highlights line number $line with $context number of
+lines around it.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">pr</span><span class="p">(</span><span class="nx">Debugger</span><span class="o">::</span><span class="na">excerpt</span><span class="p">(</span><span class="nx">ROOT</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="nx">LIBS</span> <span class="o">.</span> <span class="s1">&#39;debugger.php&#39;</span><span class="p">,</span> <span class="mi">321</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span>
+
+<span class="c1">//will output the following.</span>
+<span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;color: #000000&quot;</span><span class="o">&gt;</span> <span class="o">*</span> <span class="o">@</span><span class="nx">access</span> <span class="k">public</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;&lt;/</span><span class="nx">code</span><span class="o">&gt;</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;color: #000000&quot;</span><span class="o">&gt;</span> <span class="o">*/&lt;/</span><span class="nx">span</span><span class="o">&gt;&lt;/</span><span class="nx">code</span><span class="o">&gt;</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;color: #000000&quot;</span><span class="o">&gt;</span>    <span class="k">function</span> <span class="nf">excerpt</span><span class="p">(</span><span class="nv">$file</span><span class="p">,</span> <span class="nv">$line</span><span class="p">,</span> <span class="nv">$context</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;&lt;/</span><span class="nx">code</span><span class="o">&gt;</span>
+
+    <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">&quot;code-highlight&quot;</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;color: #000000&quot;</span><span class="o">&gt;</span>        <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$lines</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;color: #000000&quot;</span><span class="o">&gt;</span>        <span class="nv">$data</span> <span class="o">=</span> <span class="o">@</span><span class="nb">explode</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">file_get_contents</span><span class="p">(</span><span class="nv">$file</span><span class="p">));</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;&lt;/</span><span class="nx">code</span><span class="o">&gt;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Although this method is used internally, it can be handy if you&#8217;re
+creating your own error messages or log entries for custom
+situations.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Debugger::exportVar">
+<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">exportVar</tt><big>(</big><em>$var</em>, <em>$recursion = 0</em><big>)</big><a class="headerlink" href="#Debugger::exportVar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a variable of any type to a string for use in debug
+output. This method is also used by most of Debugger for internal
+variable conversions, and can be used in your own Debuggers as
+well.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.1: </span>This function generates different output in 2.1 forward.</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Debugger::invoke">
+<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">invoke</tt><big>(</big><em>$debugger</em><big>)</big><a class="headerlink" href="#Debugger::invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace the CakePHP Debugger with a new instance.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Debugger::getType">
+<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">getType</tt><big>(</big><em>$var</em><big>)</big><a class="headerlink" href="#Debugger::getType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the type of a variable. Objects will return their class name</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.1.</span></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="using-logging-to-debug">
+<h2>Using Logging to debug<a class="headerlink" href="#using-logging-to-debug" title="Permalink to this headline">¶</a></h2>
+<p>Logging messages is another good way to debug applications, and you can use
+<a class="reference internal" href="../core-libraries/logging.html#CakeLog" title="CakeLog"><tt class="xref php php-class docutils literal"><span class="pre">CakeLog</span></tt></a> to do logging in your application. All objects that
+extend <tt class="xref php php-class docutils literal"><span class="pre">Object</span></tt> have an instance method <cite>log()</cite> which can be used
+to log messages:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">(</span><span class="s1">&#39;Got here&#39;</span><span class="p">,</span> <span class="s1">&#39;debug&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The above would write <tt class="docutils literal"><span class="pre">Got</span> <span class="pre">here</span></tt> into the debug log. You can use log entries
+to help debug methods that involve redirects or complicated loops. You can also
+use <a class="reference internal" href="../core-libraries/logging.html#CakeLog::write" title="CakeLog::write"><tt class="xref php php-meth docutils literal"><span class="pre">CakeLog::write()</span></tt></a> to write log messages. This method can be called
+statically anywhere in your application anywhere CakeLog has been loaded:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// In app/Config/bootstrap.php</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeLog&#39;</span><span class="p">,</span> <span class="s1">&#39;Log&#39;</span><span class="p">);</span>
+
+<span class="c1">// Anywhere in your application</span>
+<span class="nx">CakeLog</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="s1">&#39;Got here&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="debug-kit">
+<h2>Debug Kit<a class="headerlink" href="#debug-kit" title="Permalink to this headline">¶</a></h2>
+<p>DebugKit is a plugin that provides a number of good debugging tools. It
+primarily provides a toolbar in the rendered HTML, that provides a plethora of
+information about your application and the current request. You can download
+<a class="reference external" href="https://github.com/cakephp/debug_kit">DebugKit</a> from GitHub.</p>
+</div>
+<div class="section" id="xdebug">
+<h2>Xdebug<a class="headerlink" href="#xdebug" title="Permalink to this headline">¶</a></h2>
+<p>If your environment supplies the Xdebug PHP extension, fatal errors will show
+additional Xdebug stack trace details. Details about Xdebug can be found at
+<a class="reference external" href="http://xdebug.org">Xdebug</a> .</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sessions.html">Sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Error Handling</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Debugging</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rest.html">REST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dispatch-filters.html">Dispatcher Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Debugging</a><ul>
+<li><a class="reference internal" href="#basic-debugging">Basic Debugging</a></li>
+<li><a class="reference internal" href="#debugger-class">Debugger Class</a></li>
+<li><a class="reference internal" href="#using-the-debugger-class">Using the Debugger Class</a></li>
+<li><a class="reference internal" href="#using-logging-to-debug">Using Logging to debug</a></li>
+<li><a class="reference internal" href="#debug-kit">Debug Kit</a></li>
+<li><a class="reference internal" href="#xdebug">Xdebug</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="testing.html" title="Testing" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="errors.html" title="Error Handling" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

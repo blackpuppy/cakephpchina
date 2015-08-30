@@ -1,0 +1,1369 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Retrieving Your Data" lang="en" name="title" />
+<meta content="upper case character,array model,order array,controller code,retrieval functions,model layer,model methods,model class,model data,data retrieval,field names,workhorse,desc,neighbors,parameters,storage,models" lang="en" name="keywords" />
+
+    <title>Retrieving Your Data &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Models" href="../models.html" />
+    <link rel="next" title="Saving Your Data" href="saving-your-data.html" />
+    <link rel="prev" title="Associations: Linking Models Together" href="associations-linking-models-together.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/models/retrieving-your-data.html" /><link rel="alternate" hreflang="es" href="../../es/models/retrieving-your-data.html" /><link rel="alternate" hreflang="ja" href="../../ja/models/retrieving-your-data.html" /><link rel="alternate" hreflang="fr" href="../../fr/models/retrieving-your-data.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/models/retrieving-your-data.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../models.html" accesskey="U" itemprop="url"><span itemprop="title">Models</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/models/retrieving-your-data.html">pt</a></li>
+				
+					<li><a href="../../es/models/retrieving-your-data.html">es</a></li>
+				
+					<li><a href="../../ja/models/retrieving-your-data.html">ja</a></li>
+				
+					<li><a href="../../fr/models/retrieving-your-data.html">fr</a></li>
+				
+					<li><a href="../../zh/models/retrieving-your-data.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/models/retrieving-your-data.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="retrieving-your-data">
+<h1>Retrieving Your Data<a class="headerlink" href="#retrieving-your-data" title="Permalink to this headline">¶</a></h1>
+<p>As stated before, one of the roles of the Model layer is to get data from multiple types of storage.
+The CakePHP Model class comes with some functions that will help you search for this data, sort it,
+paginate it, and filter it. The most common function you will use in models is <tt class="xref php php-meth docutils literal"><span class="pre">Model::find()</span></tt></p>
+<div class="section" id="find">
+<span id="model-find"></span><h2>find<a class="headerlink" href="#find" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">find(string</span> <span class="pre">$type</span> <span class="pre">=</span> <span class="pre">'first',</span> <span class="pre">array</span> <span class="pre">$params</span> <span class="pre">=</span> <span class="pre">array())</span></tt></p>
+<p>Find is the multifunctional workhorse of all model data-retrieval functions.
+<tt class="docutils literal"><span class="pre">$type</span></tt> can be <tt class="docutils literal"><span class="pre">'all'</span></tt>, <tt class="docutils literal"><span class="pre">'first'</span></tt>, <tt class="docutils literal"><span class="pre">'count'</span></tt>, <tt class="docutils literal"><span class="pre">'list'</span></tt>,
+<tt class="docutils literal"><span class="pre">'neighbors'</span></tt> or <tt class="docutils literal"><span class="pre">'threaded'</span></tt>, or any custom finder you can define.
+Keep in mind that <tt class="docutils literal"><span class="pre">$type</span></tt> is case-sensitive. Using an upper case character
+(for example, <tt class="docutils literal"><span class="pre">All</span></tt>) will not produce the expected results.</p>
+<p><tt class="docutils literal"><span class="pre">$params</span></tt> is used to pass all parameters to the various types of find(),
+and has the following possible keys by default, all of which are
+optional:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span> <span class="o">=&gt;</span> <span class="nv">$thisValue</span><span class="p">),</span> <span class="c1">//array of conditions</span>
+    <span class="s1">&#39;recursive&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="c1">//int</span>
+    <span class="c1">//array of field names</span>
+    <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Model.field1&#39;</span><span class="p">,</span> <span class="s1">&#39;DISTINCT Model.field2&#39;</span><span class="p">),</span>
+    <span class="c1">//string or array defining order</span>
+    <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Model.created&#39;</span><span class="p">,</span> <span class="s1">&#39;Model.field3 DESC&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;group&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">),</span> <span class="c1">//fields to GROUP BY</span>
+    <span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="nx">n</span><span class="p">,</span> <span class="c1">//int</span>
+    <span class="s1">&#39;page&#39;</span> <span class="o">=&gt;</span> <span class="nx">n</span><span class="p">,</span> <span class="c1">//int</span>
+    <span class="s1">&#39;offset&#39;</span> <span class="o">=&gt;</span> <span class="nx">n</span><span class="p">,</span> <span class="c1">//int</span>
+    <span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span> <span class="c1">//other possible values are false, &#39;before&#39;, &#39;after&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>It&#8217;s also possible to add and use other parameters. Some types of find()
+and behaviors make use of this ability, and your own model methods can, too.</p>
+<p>If your find() operation fails to match any records, you will get an empty array.</p>
+</div>
+<div class="section" id="find-first">
+<span id="model-find-first"></span><h2>find(&#8216;first&#8217;)<a class="headerlink" href="#find-first" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">find('first',</span> <span class="pre">$params)</span></tt> will return one result. You&#8217;d use this for any case
+where you expect only one result. Below are a couple of simple (controller code)
+examples:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nv">$semiRandomArticle</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
+    <span class="nv">$lastCreated</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article.created&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;desc&#39;</span><span class="p">)</span>
+    <span class="p">));</span>
+    <span class="nv">$specificallyThisOne</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article.id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">));</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the first example, no parameters at all are passed to find, so
+no conditions or sort order will be used. The format
+returned from <tt class="docutils literal"><span class="pre">find('first')</span></tt> call is of the form:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nx">ModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">83</span>
+            <span class="p">[</span><span class="nx">field1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value1</span>
+            <span class="p">[</span><span class="nx">field2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value2</span>
+            <span class="p">[</span><span class="nx">field3</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value3</span>
+        <span class="p">)</span>
+
+    <span class="p">[</span><span class="nx">AssociatedModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+            <span class="p">[</span><span class="nx">field1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value1</span>
+            <span class="p">[</span><span class="nx">field2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value2</span>
+            <span class="p">[</span><span class="nx">field3</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value3</span>
+        <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="find-count">
+<span id="model-find-count"></span><h2>find(&#8216;count&#8217;)<a class="headerlink" href="#find-count" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">find('count',</span> <span class="pre">$params)</span></tt> returns an integer value. Below are a
+couple of simple (controller code) examples:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nv">$total</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">);</span>
+    <span class="nv">$pending</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article.status&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pending&#39;</span><span class="p">)</span>
+    <span class="p">));</span>
+    <span class="nv">$authors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">);</span>
+    <span class="nv">$publishedAuthors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+       <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;DISTINCT Article.user_id&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article.status !=&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pending&#39;</span><span class="p">)</span>
+    <span class="p">));</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Don&#8217;t pass <tt class="docutils literal"><span class="pre">fields</span></tt> as an array to <tt class="docutils literal"><span class="pre">find('count')</span></tt>. You would
+only need to specify fields for a DISTINCT count (since otherwise,
+the count is always the same, dictated by the conditions).</p>
+</div>
+</div>
+<div class="section" id="find-all">
+<span id="model-find-all"></span><h2>find(&#8216;all&#8217;)<a class="headerlink" href="#find-all" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">find('all',</span> <span class="pre">$params)</span></tt> returns an array of potentially multiple results.
+It is, in fact, the mechanism used by all <tt class="docutils literal"><span class="pre">find()</span></tt> variants, as
+well as <tt class="docutils literal"><span class="pre">paginate</span></tt>. Below are a couple of simple (controller
+code) examples:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nv">$allArticles</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+    <span class="nv">$pending</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article.status&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pending&#39;</span><span class="p">)</span>
+    <span class="p">));</span>
+    <span class="nv">$allAuthors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+    <span class="nv">$allPublishedAuthors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article.status !=&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pending&#39;</span><span class="p">)</span>
+    <span class="p">));</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the above example, <tt class="docutils literal"><span class="pre">$allAuthors</span></tt> will contain every user in the
+users table. There will be no condition applied to the find, since none
+were passed.</p>
+</div>
+<p>The results of a call to <tt class="docutils literal"><span class="pre">find('all')</span></tt> will be of the following
+form:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">ModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">83</span>
+                    <span class="p">[</span><span class="nx">field1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value1</span>
+                    <span class="p">[</span><span class="nx">field2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value2</span>
+                    <span class="p">[</span><span class="nx">field3</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value3</span>
+                <span class="p">)</span>
+
+            <span class="p">[</span><span class="nx">AssociatedModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+                    <span class="p">[</span><span class="nx">field1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value1</span>
+                    <span class="p">[</span><span class="nx">field2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value2</span>
+                    <span class="p">[</span><span class="nx">field3</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value3</span>
+                <span class="p">)</span>
+
+        <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="find-list">
+<span id="model-find-list"></span><h2>find(&#8216;list&#8217;)<a class="headerlink" href="#find-list" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">find('list',</span> <span class="pre">$params)</span></tt> returns an indexed array, useful for any
+place where you would want a list, such as for populating input select
+boxes. Below are a couple of simple (controller code) examples:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nv">$allArticles</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">);</span>
+    <span class="nv">$pending</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article.status&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pending&#39;</span><span class="p">)</span>
+    <span class="p">));</span>
+    <span class="nv">$allAuthors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">);</span>
+    <span class="nv">$allPublishedAuthors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;User.id&#39;</span><span class="p">,</span> <span class="s1">&#39;User.name&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article.status !=&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pending&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;recursive&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+    <span class="p">));</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the above example, <tt class="docutils literal"><span class="pre">$allAuthors</span></tt> will contain every user in the
+users table. There will be no condition applied to the find, since none
+were passed.</p>
+</div>
+<p>The results of a call to <tt class="docutils literal"><span class="pre">find('list')</span></tt> will be in the following
+form:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="c1">//[id] =&gt; &#39;displayValue&#39;,</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;displayValue1&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;displayValue2&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;displayValue4&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;displayValue5&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;displayValue6&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;displayValue3&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>When calling <tt class="docutils literal"><span class="pre">find('list')</span></tt>, the <tt class="docutils literal"><span class="pre">fields</span></tt> passed are used to
+determine what should be used as the array key and value, and
+optionally what to group the results by. By default, the primary key
+for the model is used for the key, and the display field (which can
+be configured using the model attribute
+<a class="reference internal" href="model-attributes.html#model-displayfield"><em>displayField</em></a>) is used for the value.
+Some further examples to clarify:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nv">$justusernames</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;User.username&#39;</span><span class="p">)</span>
+    <span class="p">));</span>
+    <span class="nv">$usernameMap</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;User.username&#39;</span><span class="p">,</span> <span class="s1">&#39;User.first_name&#39;</span><span class="p">)</span>
+    <span class="p">));</span>
+    <span class="nv">$usernameGroups</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;User.username&#39;</span><span class="p">,</span> <span class="s1">&#39;User.first_name&#39;</span><span class="p">,</span> <span class="s1">&#39;User.group&#39;</span><span class="p">)</span>
+    <span class="p">));</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With the above code example, the resultant vars would look
+something like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$justusernames</span> <span class="o">=</span> <span class="k">Array</span>
+<span class="p">(</span>
+    <span class="c1">//[id] =&gt; &#39;username&#39;,</span>
+    <span class="p">[</span><span class="mi">213</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;AD7six&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">25</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;_psychic_&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;PHPNut&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;gwoo&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">400</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;jperras&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nv">$usernameMap</span> <span class="o">=</span> <span class="k">Array</span>
+<span class="p">(</span>
+    <span class="c1">//[username] =&gt; &#39;firstname&#39;,</span>
+    <span class="p">[</span><span class="s1">&#39;AD7six&#39;</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;Andy&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;_psychic_&#39;</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;John&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;PHPNut&#39;</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;Larry&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;gwoo&#39;</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;Gwoo&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;jperras&#39;</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;Joël&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nv">$usernameGroups</span> <span class="o">=</span> <span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="s1">&#39;PHPNut&#39;</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;Larry&#39;</span><span class="p">,</span>
+        <span class="p">[</span><span class="s1">&#39;gwoo&#39;</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;Gwoo&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="p">[</span><span class="s1">&#39;Admin&#39;</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="s1">&#39;_psychic_&#39;</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;John&#39;</span><span class="p">,</span>
+        <span class="p">[</span><span class="s1">&#39;AD7six&#39;</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;Andy&#39;</span><span class="p">,</span>
+        <span class="p">[</span><span class="s1">&#39;jperras&#39;</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;Joël&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="find-threaded">
+<span id="model-find-threaded"></span><h2>find(&#8216;threaded&#8217;)<a class="headerlink" href="#find-threaded" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">find('threaded',</span> <span class="pre">$params)</span></tt> returns a nested array, and is
+appropriate if you want to use the <tt class="docutils literal"><span class="pre">parent_id</span></tt> field of your
+model data to build nested results. Below are a couple of simple
+(controller code) examples:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nv">$allCategories</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;threaded&#39;</span><span class="p">);</span>
+    <span class="nv">$comments</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Comment</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;threaded&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;article_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="p">));</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">A better way to deal with nested data is using the <a class="reference internal" href="../core-libraries/behaviors/tree.html"><em>Tree</em></a>
+behavior</p>
+</div>
+<p>In the above code example, <tt class="docutils literal"><span class="pre">$allCategories</span></tt> will contain a nested
+array representing the whole category structure. The results of a
+call to <tt class="docutils literal"><span class="pre">find('threaded')</span></tt> will be of the following form:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">ModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">83</span>
+            <span class="p">[</span><span class="nx">parent_id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">null</span>
+            <span class="p">[</span><span class="nx">field1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value1</span>
+            <span class="p">[</span><span class="nx">field2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value2</span>
+            <span class="p">[</span><span class="nx">field3</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value3</span>
+        <span class="p">)</span>
+
+        <span class="p">[</span><span class="nx">AssociatedModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+            <span class="p">[</span><span class="nx">field1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value1</span>
+            <span class="p">[</span><span class="nx">field2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value2</span>
+            <span class="p">[</span><span class="nx">field3</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value3</span>
+        <span class="p">)</span>
+
+        <span class="p">[</span><span class="nx">children</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+            <span class="p">(</span>
+                <span class="p">[</span><span class="nx">ModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">42</span>
+                    <span class="p">[</span><span class="nx">parent_id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">83</span>
+                    <span class="p">[</span><span class="nx">field1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value1</span>
+                    <span class="p">[</span><span class="nx">field2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value2</span>
+                    <span class="p">[</span><span class="nx">field3</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value3</span>
+                <span class="p">)</span>
+
+                <span class="p">[</span><span class="nx">AssociatedModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+                    <span class="p">[</span><span class="nx">field1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value1</span>
+                    <span class="p">[</span><span class="nx">field2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value2</span>
+                    <span class="p">[</span><span class="nx">field3</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value3</span>
+                <span class="p">)</span>
+
+                <span class="p">[</span><span class="nx">children</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="o">...</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The order in which results appear can be changed, as it is influenced by the
+order of processing. For example, if <tt class="docutils literal"><span class="pre">'order'</span> <span class="pre">=&gt;</span> <span class="pre">'name</span> <span class="pre">ASC'</span></tt> is
+passed in the params to <tt class="docutils literal"><span class="pre">find('threaded')</span></tt>, the results will
+appear in name order. Any order can be used; there is no
+built-in requirement of this method for the top result to be
+returned first.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>If you specify <tt class="docutils literal"><span class="pre">fields</span></tt>, you need to always include the
+id and parent_id (or their current aliases):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$categories</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;threaded&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;parent_id&#39;</span><span class="p">)</span>
+    <span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="last">Otherwise, the returned array will not be of the expected nested structure from above.</p>
+</div>
+</div>
+<div class="section" id="find-neighbors">
+<span id="model-find-neighbors"></span><h2>find(&#8216;neighbors&#8217;)<a class="headerlink" href="#find-neighbors" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">find('neighbors',</span> <span class="pre">$params)</span></tt> will perform a find similar to &#8216;first&#8217;, but will
+return the row before and after the one you request. Below is a simple
+(controller code) example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$neighbors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span>
+        <span class="s1">&#39;neighbors&#39;</span><span class="p">,</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;field&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can see in this example the two required elements of the
+<tt class="docutils literal"><span class="pre">$params</span></tt> array: field and value. Other elements are still
+allowed as with any other find. (For example: If your model acts as
+containable, then you can specify &#8216;contain&#8217; in <tt class="docutils literal"><span class="pre">$params</span></tt>.) The
+result returned from a <tt class="docutils literal"><span class="pre">find('neighbors')</span></tt> call is in the form:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nb">prev</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">ModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+            <span class="p">[</span><span class="nx">field1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value1</span>
+            <span class="p">[</span><span class="nx">field2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value2</span>
+            <span class="o">...</span>
+        <span class="p">)</span>
+        <span class="p">[</span><span class="nx">AssociatedModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">151</span>
+            <span class="p">[</span><span class="nx">field1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value1</span>
+            <span class="p">[</span><span class="nx">field2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value2</span>
+            <span class="o">...</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="p">[</span><span class="nb">next</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">ModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">4</span>
+            <span class="p">[</span><span class="nx">field1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value1</span>
+            <span class="p">[</span><span class="nx">field2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value2</span>
+            <span class="o">...</span>
+        <span class="p">)</span>
+        <span class="p">[</span><span class="nx">AssociatedModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">122</span>
+            <span class="p">[</span><span class="nx">field1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value1</span>
+            <span class="p">[</span><span class="nx">field2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">value2</span>
+            <span class="o">...</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note how the result always contains only two root elements: prev
+and next. This function does not honor a model&#8217;s default recursive
+var. The recursive setting must be passed in the parameters on each
+call.</p>
+</div>
+</div>
+<div class="section" id="creating-custom-find-types">
+<span id="model-custom-find"></span><h2>Creating custom find types<a class="headerlink" href="#creating-custom-find-types" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">find</span></tt> method is flexible enough to accept your custom finders. This is
+done by declaring your own types in a model variable and by implementing a special
+function in your model class.</p>
+<p>A Model Find Type is a shortcut to find() options. For example, the following two finds are equivalent</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>The following are core find types:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">first</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">all</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">count</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">list</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">threaded</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">neighbors</span></tt></li>
+</ul>
+<p>But what about other types? Let&#8217;s say you want a finder for all published articles in your database. The first
+change you need to do is add your type to the <tt class="xref php php-attr docutils literal"><span class="pre">Model::$findMethods</span></tt> variable in the model</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Article</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$findMethods</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;available&#39;</span> <span class="o">=&gt;</span>  <span class="k">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Basically this is just telling CakePHP to accept the value <tt class="docutils literal"><span class="pre">available</span></tt> as the first
+argument of the <tt class="docutils literal"><span class="pre">find</span></tt> function. The next step is to implement the function <tt class="docutils literal"><span class="pre">_findAvailable</span></tt>.
+This is done by convention. If you wanted to implement a finder called <tt class="docutils literal"><span class="pre">myFancySearch</span></tt>, then
+the method to implement would be named <tt class="docutils literal"><span class="pre">_findMyFancySearch</span></tt>.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Article</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$findMethods</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;available&#39;</span> <span class="o">=&gt;</span>  <span class="k">true</span><span class="p">);</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">_findAvailable</span><span class="p">(</span><span class="nv">$state</span><span class="p">,</span> <span class="nv">$query</span><span class="p">,</span> <span class="nv">$results</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$state</span> <span class="o">===</span> <span class="s1">&#39;before&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;conditions&#39;</span><span class="p">][</span><span class="s1">&#39;Article.published&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nv">$query</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nv">$results</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This all comes together in the following example (controller code):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+
+    <span class="c1">// Will find all published articles and order them by the created column</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$articles</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;available&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;created&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;desc&#39;</span><span class="p">)</span>
+        <span class="p">));</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The special <tt class="docutils literal"><span class="pre">_find[Type]</span></tt> methods receive three arguments as shown above. The first one
+means the state of the query execution, which could be either <tt class="docutils literal"><span class="pre">before</span></tt> or <tt class="docutils literal"><span class="pre">after</span></tt>. It
+is done this way because this function is just a sort of callback function that has the
+ability to modify the query before it is done, or to modify the results after they are fetched.</p>
+<p>Typically the first thing to check in our custom find function is the state of the query.
+The <tt class="docutils literal"><span class="pre">before</span></tt> state is the moment to modify the query, bind new associations, apply more
+behaviors, and interpret any special key that is passed in the second argument of <tt class="docutils literal"><span class="pre">find</span></tt>. This
+state requires you to return the $query argument (modified or not).</p>
+<p>The <tt class="docutils literal"><span class="pre">after</span></tt> state is the perfect place to inspect the results, inject new data, process it in order
+to return it in another format, or do whatever you like to the recently fetched data. This state
+requires you to return the $results array (modified or not).</p>
+<p>You can create as many custom finders as you like, and they are a great way of reusing code in
+your application across models.</p>
+<p>It is also possible to paginate via a custom find type using the &#8216;findType&#8217; option as follows:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+
+    <span class="c1">// Will paginate all published articles</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;findType&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;available&#39;</span><span class="p">);</span>
+        <span class="nv">$articles</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nb">compact</span><span class="p">(</span><span class="s1">&#39;articles&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Setting the <tt class="docutils literal"><span class="pre">$this-&gt;paginate</span></tt> property as above on the controller will result in the <tt class="docutils literal"><span class="pre">type</span></tt>
+of the find becoming <tt class="docutils literal"><span class="pre">available</span></tt>, and will also allow you to continue to modify the find results.</p>
+<p>To simply return the count of a custom find type, call <tt class="docutils literal"><span class="pre">count</span></tt> like you normally would, but pass in the
+find type in an array for the second argument.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+
+    <span class="c1">// Will find the count of all published articles (using the available find defined above)</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$count</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;available&#39;</span>
+        <span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If your pagination page count is becoming corrupt, it may be necessary to add the following code to
+your <tt class="docutils literal"><span class="pre">AppModel</span></tt>, which should fix the pagination count:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppModel</span> <span class="k">extends</span> <span class="nx">Model</span> <span class="p">{</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * Removes &#39;fields&#39; key from count query on custom finds when it is an array,</span>
+<span class="sd"> * as it will completely break the Model::_findCount() call</span>
+<span class="sd"> *</span>
+<span class="sd"> * @param string $state Either &quot;before&quot; or &quot;after&quot;</span>
+<span class="sd"> * @param array $query</span>
+<span class="sd"> * @param array $results</span>
+<span class="sd"> * @return int The number of records found, or false</span>
+<span class="sd"> * @access protected</span>
+<span class="sd"> * @see Model::find()</span>
+<span class="sd"> */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">_findCount</span><span class="p">(</span><span class="nv">$state</span><span class="p">,</span> <span class="nv">$query</span><span class="p">,</span> <span class="nv">$results</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$state</span> <span class="o">===</span> <span class="s1">&#39;before&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span>
+                <span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">findMethods</span><span class="p">[</span><span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]]))</span> <span class="p">{</span>
+                <span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="p">{</span>
+                    <span class="s1">&#39;_find&#39;</span> <span class="o">.</span> <span class="nb">ucfirst</span><span class="p">(</span><span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">])</span>
+                <span class="p">}(</span><span class="s1">&#39;before&#39;</span><span class="p">,</span> <span class="nv">$query</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;fields&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nb">is_array</span><span class="p">(</span><span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;fields&#39;</span><span class="p">]))</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">preg_match</span><span class="p">(</span><span class="s1">&#39;/^count/i&#39;</span><span class="p">,</span> <span class="nb">current</span><span class="p">(</span><span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;fields&#39;</span><span class="p">])))</span> <span class="p">{</span>
+                        <span class="nb">unset</span><span class="p">(</span><span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;fields&#39;</span><span class="p">]);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="k">parent</span><span class="o">::</span><span class="na">_findCount</span><span class="p">(</span><span class="nv">$state</span><span class="p">,</span> <span class="nv">$query</span><span class="p">,</span> <span class="nv">$results</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.2.</span></p>
+</div>
+<p>You no longer need to override _findCount for fixing incorrect count results.
+The <tt class="docutils literal"><span class="pre">'before'</span></tt> state of your custom finder will now be called again with
+$query[&#8216;operation&#8217;] = &#8216;count&#8217;. The returned $query will be used in <tt class="docutils literal"><span class="pre">_findCount()</span></tt>
+If necessary, you can distinguish by checking the <tt class="docutils literal"><span class="pre">'operation'</span></tt> key
+and return a different <tt class="docutils literal"><span class="pre">$query</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">protected</span> <span class="k">function</span> <span class="nf">_findAvailable</span><span class="p">(</span><span class="nv">$state</span><span class="p">,</span> <span class="nv">$query</span><span class="p">,</span> <span class="nv">$results</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$state</span> <span class="o">===</span> <span class="s1">&#39;before&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;conditions&#39;</span><span class="p">][</span><span class="s1">&#39;Article.published&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;operation&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;operation&#39;</span><span class="p">]</span> <span class="o">===</span> <span class="s1">&#39;count&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$query</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;joins&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+            <span class="c1">//array of required joins</span>
+        <span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$query</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nv">$results</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="magic-find-types">
+<h2>Magic Find Types<a class="headerlink" href="#magic-find-types" title="Permalink to this headline">¶</a></h2>
+<p>These magic functions can be used as a shortcut to search your
+tables by a certain field. Just add the name of the field (in
+CamelCase format) to the end of these functions, and supply the
+criteria for that field as the first parameter.</p>
+<p>findAllBy() functions will return results in a format like <tt class="docutils literal"><span class="pre">find('all')</span></tt>,
+while findBy() return in the same format as <tt class="docutils literal"><span class="pre">find('first')</span></tt></p>
+<div class="section" id="findallby">
+<h3>findAllBy<a class="headerlink" href="#findallby" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">findAllBy&lt;fieldName&gt;(string</span> <span class="pre">$value,</span> <span class="pre">array</span> <span class="pre">$fields,</span> <span class="pre">array</span> <span class="pre">$order,</span> <span class="pre">int</span> <span class="pre">$limit,</span> <span class="pre">int</span> <span class="pre">$page,</span> <span class="pre">int</span> <span class="pre">$recursive)</span></tt></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="60%" />
+<col width="40%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">findAllBy&lt;x&gt; Example</th>
+<th class="head">Corresponding SQL Fragment</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$this-&gt;Product-&gt;findAllByOrderStatus('3');</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">Product.order_status</span> <span class="pre">=</span> <span class="pre">3</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$this-&gt;Recipe-&gt;findAllByType('Cookie');</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">Recipe.type</span> <span class="pre">=</span> <span class="pre">'Cookie'</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$this-&gt;User-&gt;findAllByLastName('Anderson');</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">User.last_name</span> <span class="pre">=</span> <span class="pre">'Anderson'</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$this-&gt;Cake-&gt;findAllById(7);</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">Cake.id</span> <span class="pre">=</span> <span class="pre">7</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$this-&gt;User-&gt;findAllByEmailOrUsername('jhon',</span> <span class="pre">'jhon');</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">User.email</span> <span class="pre">=</span> <span class="pre">'jhon'</span> <span class="pre">OR</span> <span class="pre">User.username</span> <span class="pre">=</span> <span class="pre">'jhon';</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$this-&gt;User-&gt;findAllByUsernameAndPassword('jhon',</span> <span class="pre">'123');</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">User.username</span> <span class="pre">=</span> <span class="pre">'jhon'</span> <span class="pre">AND</span> <span class="pre">User.password</span> <span class="pre">=</span> <span class="pre">'123';</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$this-&gt;User-&gt;findAllByLastName('psychic',</span> <span class="pre">array(),</span> <span class="pre">array('User.user_name</span> <span class="pre">=&gt;</span> <span class="pre">'asc'));</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">User.last_name</span> <span class="pre">=</span> <span class="pre">'psychic'</span> <span class="pre">ORDER</span> <span class="pre">BY</span> <span class="pre">User.user_name</span> <span class="pre">ASC</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>The returned result is an array formatted just as it would be from <tt class="docutils literal"><span class="pre">find('all')</span></tt>.</p>
+</div>
+<div class="section" id="findby">
+<h3>findBy<a class="headerlink" href="#findby" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">findBy&lt;fieldName&gt;(string</span> <span class="pre">$value);</span></tt></p>
+<p>The findBy magic functions also accept some optional parameters:</p>
+<p><tt class="docutils literal"><span class="pre">findBy&lt;fieldName&gt;(string</span> <span class="pre">$value[,</span> <span class="pre">mixed</span> <span class="pre">$fields[,</span> <span class="pre">mixed</span> <span class="pre">$order]]);</span></tt></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="52%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">findBy&lt;x&gt; Example</th>
+<th class="head">Corresponding SQL Fragment</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$this-&gt;Product-&gt;findByOrderStatus('3');</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">Product.order_status</span> <span class="pre">=</span> <span class="pre">3</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$this-&gt;Recipe-&gt;findByType('Cookie');</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">Recipe.type</span> <span class="pre">=</span> <span class="pre">'Cookie'</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$this-&gt;User-&gt;findByLastName('Anderson');</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">User.last_name</span> <span class="pre">=</span> <span class="pre">'Anderson';</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$this-&gt;User-&gt;findByEmailOrUsername('jhon',</span> <span class="pre">'jhon');</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">User.email</span> <span class="pre">=</span> <span class="pre">'jhon'</span> <span class="pre">OR</span> <span class="pre">User.username</span> <span class="pre">=</span> <span class="pre">'jhon';</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$this-&gt;User-&gt;findByUsernameAndPassword('jhon',</span> <span class="pre">'123');</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">User.username</span> <span class="pre">=</span> <span class="pre">'jhon'</span> <span class="pre">AND</span> <span class="pre">User.password</span> <span class="pre">=</span> <span class="pre">'123';</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$this-&gt;Cake-&gt;findById(7);</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">Cake.id</span> <span class="pre">=</span> <span class="pre">7</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>findBy() functions return results like <tt class="docutils literal"><span class="pre">find('first')</span></tt></p>
+</div>
+</div>
+<div class="section" id="model-query">
+<span id="id1"></span><h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::query()</span></tt><a class="headerlink" href="#model-query" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">query(string</span> <span class="pre">$query)</span></tt></p>
+<p>SQL calls that you can&#8217;t or don&#8217;t want to make via other model
+methods can be made using the model&#8217;s <tt class="docutils literal"><span class="pre">query()</span></tt> method
+(though this should only rarely be necessary).</p>
+<p>If you use this method, be sure to properly escape all parameters using the
+<tt class="docutils literal"><span class="pre">value()</span></tt> method on the database driver. Failing to escape parameters
+will create SQL injection vulnerabilities.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><tt class="docutils literal"><span class="pre">query()</span></tt> does not honor $Model-&gt;cacheQueries as its
+functionality is inherently disjoint from that of the calling
+model. To avoid caching calls to query, supply a second argument of
+false, ie: <tt class="docutils literal"><span class="pre">query($query,</span> <span class="pre">$cachequeries</span> <span class="pre">=</span> <span class="pre">false)</span></tt></p>
+</div>
+<p><tt class="docutils literal"><span class="pre">query()</span></tt> uses the table name in the query as the array key for
+the returned data, rather than the model name. For example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Picture</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM pictures LIMIT 2;&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>might return:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">pictures</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1304</span>
+            <span class="p">[</span><span class="nx">user_id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">759</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">pictures</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1305</span>
+            <span class="p">[</span><span class="nx">user_id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">759</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To use the model name as the array key, and get a result consistent
+with that returned by the Find methods, the query can be
+rewritten:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Picture</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM pictures AS Picture LIMIT 2;&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>which returns:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">Picture</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1304</span>
+            <span class="p">[</span><span class="nx">user_id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">759</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">Picture</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1305</span>
+            <span class="p">[</span><span class="nx">user_id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">759</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This syntax and the corresponding array structure is valid for
+MySQL only. CakePHP does not provide any data abstraction when running
+queries manually, so exact results will vary between databases.</p>
+</div>
+</div>
+<div class="section" id="model-field">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::field()</span></tt><a class="headerlink" href="#model-field" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">field(string</span> <span class="pre">$name,</span> <span class="pre">array</span> <span class="pre">$conditions</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">string</span> <span class="pre">$order</span> <span class="pre">=</span> <span class="pre">null)</span></tt></p>
+<p>Returns the value of a single field, specified as <tt class="docutils literal"><span class="pre">$name</span></tt>, from
+the first record matched by $conditions as ordered by $order. If no
+conditions are passed and the model id is set, it will return the
+field value for the current model result. If no matching record is
+found, it returns false.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span> <span class="c1">// echo the name for row id 22</span>
+
+<span class="c1">// echo the name of the last created instance</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;created &lt;&#39;</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d H:i:s&#39;</span><span class="p">)),</span>
+    <span class="s1">&#39;created DESC&#39;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model-read">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::read()</span></tt><a class="headerlink" href="#model-read" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">read($fields,</span> <span class="pre">$id)</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">read()</span></tt> is a method used to set the current model data
+(<tt class="docutils literal"><span class="pre">Model::$data</span></tt>)&#8211;such as during edits&#8211;but it can also be used
+in other circumstances to retrieve a single record from the
+database.</p>
+<p><tt class="docutils literal"><span class="pre">$fields</span></tt> is used to pass a single field name, as a string, or an
+array of field names; if left empty, all fields will be fetched.</p>
+<p><tt class="docutils literal"><span class="pre">$id</span></tt> specifies the ID of the record to be read. By default, the
+currently selected record, as specified by <tt class="docutils literal"><span class="pre">Model::$id</span></tt>, is used.
+Passing a different value to <tt class="docutils literal"><span class="pre">$id</span></tt> will cause that record to be
+selected.</p>
+<p><tt class="docutils literal"><span class="pre">read()</span></tt> always returns an array (even if only a single field
+name is requested). Use <tt class="docutils literal"><span class="pre">field</span></tt> to retrieve the value of a single
+field.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">As the <tt class="docutils literal"><span class="pre">read</span></tt> method overwrites any information stored in the <tt class="docutils literal"><span class="pre">data</span></tt> and <tt class="docutils literal"><span class="pre">id</span></tt>
+property of the model, you should be very careful when using this function in general,
+especially using it in the model callback functions such as <tt class="docutils literal"><span class="pre">beforeValidate</span></tt> and
+<tt class="docutils literal"><span class="pre">beforeSave</span></tt>. Generally the <tt class="docutils literal"><span class="pre">find</span></tt> function provides a more robust and easy to work
+with API than the <tt class="docutils literal"><span class="pre">read</span></tt> method.</p>
+</div>
+</div>
+<div class="section" id="complex-find-conditions">
+<h2>Complex Find Conditions<a class="headerlink" href="#complex-find-conditions" title="Permalink to this headline">¶</a></h2>
+<p>Most of the model&#8217;s find calls involve passing sets of conditions
+in one way or another. In general, CakePHP prefers using arrays for
+expressing any conditions that need to be put after the WHERE clause
+in any SQL query.</p>
+<p>Using arrays is clearer and easier to read, and also makes it very
+easy to build queries. This syntax also breaks out the elements of
+your query (fields, values, operators, etc.) into discrete,
+manipulatable parts. This allows CakePHP to generate the most
+efficient query possible, ensure proper SQL syntax, and properly
+escape each individual part of the query. Using the array syntax
+also enables CakePHP to secure your queries against any SQL injection attack.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">CakePHP only escapes the array values. You should <strong>never</strong> put user data
+into the keys. Doing so will make you vulnerable to SQL injections.</p>
+</div>
+<p>At its most basic, an array-based query looks like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$conditions</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;This is a post&quot;</span><span class="p">,</span> <span class="s2">&quot;Post.author_id&quot;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">);</span>
+<span class="c1">// Example usage with a model:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="nv">$conditions</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>The structure here is fairly self-explanatory: it will find any
+post where the title equals &#8220;This is a post&#8221; and the author id is equal to 1. Note
+that we could have used just &#8220;title&#8221; as the field name, but when building
+queries, it is good practice to always specify the model name, as
+it improves the clarity of the code, and helps prevent collisions
+in the future, should you choose to change your schema.</p>
+<p>What about other types of matches? These are equally simple. Let&#8217;s
+say we wanted to find all the posts where the title is not &#8220;This is
+a post&#8221;:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s2">&quot;Post.title !=&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;This is a post&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice the &#8216;!=&#8217; that follows the field name. CakePHP can parse out
+any valid SQL comparison operator, including match expressions
+using <tt class="docutils literal"><span class="pre">LIKE</span></tt>, <tt class="docutils literal"><span class="pre">BETWEEN</span></tt>, or <tt class="docutils literal"><span class="pre">REGEX</span></tt>, as long as you leave a space between
+field name and the operator. The one exception here is <tt class="docutils literal"><span class="pre">IN</span></tt>
+(...)-style matches. Let&#8217;s say you wanted to find posts where the
+title was in a given set of values:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;First post&quot;</span><span class="p">,</span> <span class="s2">&quot;Second post&quot;</span><span class="p">,</span> <span class="s2">&quot;Third post&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To do a NOT IN(...) match to find posts where the title is not in
+the given set of values, do the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;NOT&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;First post&quot;</span><span class="p">,</span> <span class="s2">&quot;Second post&quot;</span><span class="p">,</span> <span class="s2">&quot;Third post&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Adding additional filters to the conditions is as simple as adding
+additional key/value pairs to the array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span> <span class="p">(</span>
+    <span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;First post&quot;</span><span class="p">,</span> <span class="s2">&quot;Second post&quot;</span><span class="p">,</span> <span class="s2">&quot;Third post&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Post.created &gt;&quot;</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d&#39;</span><span class="p">,</span> <span class="nb">strtotime</span><span class="p">(</span><span class="s2">&quot;-2 weeks&quot;</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also create finds that compare two fields in the database:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s2">&quot;Post.created = Post.modified&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above example will return posts where the created date is
+equal to the modified date (that is, it will return posts that have never
+been modified).</p>
+<p>Remember that if you find yourself unable to form a <tt class="docutils literal"><span class="pre">WHERE</span></tt> clause in
+this method (for example, boolean operations), you can always specify it as
+a string like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Model.field &amp; 8 = 1&#39;</span><span class="p">,</span>
+    <span class="c1">// other conditions as usual</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>By default, CakePHP joins multiple conditions with boolean <tt class="docutils literal"><span class="pre">AND</span></tt>.
+This means the snippet below would only match posts that have
+been created in the past two weeks, and have a title that matches
+one in the given set. However, we could just as easily find posts
+that match either condition:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s2">&quot;OR&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;First post&quot;</span><span class="p">,</span> <span class="s2">&quot;Second post&quot;</span><span class="p">,</span> <span class="s2">&quot;Third post&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Post.created &gt;&quot;</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d&#39;</span><span class="p">,</span> <span class="nb">strtotime</span><span class="p">(</span><span class="s2">&quot;-2 weeks&quot;</span><span class="p">))</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+<p>CakePHP accepts all valid SQL boolean operations, including <tt class="docutils literal"><span class="pre">AND</span></tt>, <tt class="docutils literal"><span class="pre">OR</span></tt>,
+<tt class="docutils literal"><span class="pre">NOT</span></tt>, <tt class="docutils literal"><span class="pre">XOR</span></tt>, etc., and they can be upper or lower case, whichever you
+prefer. These conditions are also infinitely nestable. Let&#8217;s say
+you had a belongsTo relationship between Posts and Authors. Let&#8217;s
+say you wanted to find all the posts that contained a certain
+keyword (&#8220;magic&#8221;) or were created in the past two weeks, but you
+wanted to restrict your search to posts written by Bob:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;Author.name&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OR&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;Post.title LIKE&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;%magic%&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Post.created &gt;&quot;</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d&#39;</span><span class="p">,</span> <span class="nb">strtotime</span><span class="p">(</span><span class="s2">&quot;-2 weeks&quot;</span><span class="p">))</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>If you need to set multiple conditions on the same field, like when
+you want to do a <tt class="docutils literal"><span class="pre">LIKE</span></tt> search with multiple terms, you can do so by
+using conditions similar to:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s1">&#39;OR&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Post.title LIKE&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%one%&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Post.title LIKE&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%two%&#39;</span><span class="p">)</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+<p>The wildcard operators <tt class="docutils literal"><span class="pre">ILIKE</span></tt> and <tt class="docutils literal"><span class="pre">RLIKE</span></tt> (RLIKE since version 2.6) are
+also available.</p>
+<p>CakePHP can also check for null fields. In this example, the query
+will return records where the post title is not null:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s2">&quot;NOT&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="k">null</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To handle <tt class="docutils literal"><span class="pre">BETWEEN</span></tt> queries, you can use the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Post.read_count BETWEEN ? AND ?&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">CakePHP will quote the numeric values depending on the field
+type in your DB.</p>
+</div>
+<p>How about GROUP BY?:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Product.type&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MIN(Product.price) as price&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;group&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Product.type&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The data returned for this would be in the following format:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">Product</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">type</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Clothing</span>
+        <span class="p">)</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">price</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">32</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>A quick example of doing a <tt class="docutils literal"><span class="pre">DISTINCT</span></tt> query. You can use other
+operators, such as <tt class="docutils literal"><span class="pre">MIN()</span></tt>, <tt class="docutils literal"><span class="pre">MAX()</span></tt>, etc., in a similar fashion:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;DISTINCT (User.name) AS my_column_name&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;User.id DESC&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>You can create very complex conditions by nesting multiple
+condition arrays:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;OR&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Company.name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Future Holdings&#39;</span><span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Company.city&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CA&#39;</span><span class="p">)</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;AND&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;OR&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Company.status&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;active&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;NOT&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Company.status&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;inactive&#39;</span><span class="p">,</span> <span class="s1">&#39;suspended&#39;</span><span class="p">))</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>which produces the following SQL:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">SELECT</span> <span class="sb">`Company`</span><span class="o">.</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`Company`</span><span class="o">.</span><span class="sb">`name`</span><span class="p">,</span>
+<span class="sb">`Company`</span><span class="o">.</span><span class="sb">`description`</span><span class="p">,</span> <span class="sb">`Company`</span><span class="o">.</span><span class="sb">`location`</span><span class="p">,</span>
+<span class="sb">`Company`</span><span class="o">.</span><span class="sb">`created`</span><span class="p">,</span> <span class="sb">`Company`</span><span class="o">.</span><span class="sb">`status`</span><span class="p">,</span> <span class="sb">`Company`</span><span class="o">.</span><span class="sb">`size`</span>
+
+<span class="nx">FROM</span>
+   <span class="sb">`companies`</span> <span class="k">AS</span> <span class="sb">`Company`</span>
+<span class="nx">WHERE</span>
+   <span class="p">((</span><span class="sb">`Company`</span><span class="o">.</span><span class="sb">`name`</span> <span class="o">=</span> <span class="s1">&#39;Future Holdings&#39;</span><span class="p">)</span>
+   <span class="k">OR</span>
+   <span class="p">(</span><span class="sb">`Company`</span><span class="o">.</span><span class="sb">`city`</span> <span class="o">=</span> <span class="s1">&#39;CA&#39;</span><span class="p">))</span>
+<span class="k">AND</span>
+   <span class="p">((</span><span class="sb">`Company`</span><span class="o">.</span><span class="sb">`status`</span> <span class="o">=</span> <span class="s1">&#39;active&#39;</span><span class="p">)</span>
+   <span class="k">OR</span> <span class="p">(</span><span class="k">NOT</span> <span class="p">(</span><span class="sb">`Company`</span><span class="o">.</span><span class="sb">`status`</span> <span class="nx">IN</span> <span class="p">(</span><span class="s1">&#39;inactive&#39;</span><span class="p">,</span> <span class="s1">&#39;suspended&#39;</span><span class="p">))))</span>
+</pre></div>
+</div>
+<div class="section" id="sub-queries">
+<h3>Sub-queries<a class="headerlink" href="#sub-queries" title="Permalink to this headline">¶</a></h3>
+<p>For this example, imagine that we have a &#8220;users&#8221; table with &#8220;id&#8221;, &#8220;name&#8221;
+and &#8220;status&#8221;. The status can be &#8220;A&#8221;, &#8220;B&#8221; or &#8220;C&#8221;. We want to retrieve
+all the users that have status other than &#8220;B&#8221; using a sub-query.</p>
+<p>In order to achieve that, we are going to get the model data source
+and ask it to build the query as if we were calling a find() method,
+but it will just return the SQL statement. After that we make an
+expression and add it to the conditions array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$conditionsSubQuery</span><span class="p">[</span><span class="s1">&#39;&quot;User2&quot;.&quot;status&quot;&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;B&#39;</span><span class="p">;</span>
+
+<span class="nv">$db</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">getDataSource</span><span class="p">();</span>
+<span class="nv">$subQuery</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">buildStatement</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;fields&#39;</span>     <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;&quot;User2&quot;.&quot;id&quot;&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;table&#39;</span>      <span class="o">=&gt;</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">fullTableName</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="p">),</span>
+        <span class="s1">&#39;alias&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;User2&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;limit&#39;</span>      <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+        <span class="s1">&#39;offset&#39;</span>     <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+        <span class="s1">&#39;joins&#39;</span>      <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(),</span>
+        <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="nv">$conditionsSubQuery</span><span class="p">,</span>
+        <span class="s1">&#39;order&#39;</span>      <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+        <span class="s1">&#39;group&#39;</span>      <span class="o">=&gt;</span> <span class="k">null</span>
+    <span class="p">),</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span>
+<span class="p">);</span>
+<span class="nv">$subQuery</span> <span class="o">=</span> <span class="s1">&#39; &quot;User&quot;.&quot;id&quot; NOT IN (&#39;</span> <span class="o">.</span> <span class="nv">$subQuery</span> <span class="o">.</span> <span class="s1">&#39;) &#39;</span><span class="p">;</span>
+<span class="nv">$subQueryExpression</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">expression</span><span class="p">(</span><span class="nv">$subQuery</span><span class="p">);</span>
+
+<span class="nv">$conditions</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$subQueryExpression</span><span class="p">;</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="nb">compact</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>This should generate the following SQL:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">SELECT</span>
+    <span class="s2">&quot;User&quot;</span><span class="o">.</span><span class="s2">&quot;id&quot;</span> <span class="k">AS</span> <span class="s2">&quot;User__id&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;User&quot;</span><span class="o">.</span><span class="s2">&quot;name&quot;</span> <span class="k">AS</span> <span class="s2">&quot;User__name&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;User&quot;</span><span class="o">.</span><span class="s2">&quot;status&quot;</span> <span class="k">AS</span> <span class="s2">&quot;User__status&quot;</span>
+<span class="nx">FROM</span>
+    <span class="s2">&quot;users&quot;</span> <span class="k">AS</span> <span class="s2">&quot;User&quot;</span>
+<span class="nx">WHERE</span>
+    <span class="s2">&quot;User&quot;</span><span class="o">.</span><span class="s2">&quot;id&quot;</span> <span class="k">NOT</span> <span class="nx">IN</span> <span class="p">(</span>
+        <span class="nx">SELECT</span>
+            <span class="s2">&quot;User2&quot;</span><span class="o">.</span><span class="s2">&quot;id&quot;</span>
+        <span class="nx">FROM</span>
+            <span class="s2">&quot;users&quot;</span> <span class="k">AS</span> <span class="s2">&quot;User2&quot;</span>
+        <span class="nx">WHERE</span>
+            <span class="s2">&quot;User2&quot;</span><span class="o">.</span><span class="s2">&quot;status&quot;</span> <span class="o">=</span> <span class="s1">&#39;B&#39;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>Also, if you need to pass just part of your query as raw SQL as
+above, datasource <strong>expressions</strong> with raw SQL work for any part of
+the find query.</p>
+</div>
+<div class="section" id="prepared-statements">
+<span id="id2"></span><h3>Prepared Statements<a class="headerlink" href="#prepared-statements" title="Permalink to this headline">¶</a></h3>
+<p>Should you need even more control over your queries, you can make use of prepared
+statements. This allows you to talk directly to the database driver and send any
+custom query you like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$db</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDataSource</span><span class="p">();</span>
+<span class="nv">$db</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span>
+    <span class="s1">&#39;SELECT * from users where username = ? AND password = ?&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;jhon&#39;</span><span class="p">,</span> <span class="s1">&#39;12345&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$db</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span>
+    <span class="s1">&#39;SELECT * from users where username = :username AND password = :password&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;jhon&#39;</span><span class="p">,</span><span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;12345&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../models.html">Models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="associations-linking-models-together.html">Associations: Linking Models Together</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Retrieving Your Data</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="saving-your-data.html">Saving Your Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deleting-data.html">Deleting Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-validation.html">Data Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callback-methods.html">Callback Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasources.html">DataSources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model-attributes.html">Model Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="additional-methods-and-properties.html">Additional Methods and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtual-fields.html">Virtual fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transactions.html">Transactions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Retrieving Your Data</a><ul>
+<li><a class="reference internal" href="#find">find</a></li>
+<li><a class="reference internal" href="#find-first">find(&#8216;first&#8217;)</a></li>
+<li><a class="reference internal" href="#find-count">find(&#8216;count&#8217;)</a></li>
+<li><a class="reference internal" href="#find-all">find(&#8216;all&#8217;)</a></li>
+<li><a class="reference internal" href="#find-list">find(&#8216;list&#8217;)</a></li>
+<li><a class="reference internal" href="#find-threaded">find(&#8216;threaded&#8217;)</a></li>
+<li><a class="reference internal" href="#find-neighbors">find(&#8216;neighbors&#8217;)</a></li>
+<li><a class="reference internal" href="#creating-custom-find-types">Creating custom find types</a></li>
+<li><a class="reference internal" href="#magic-find-types">Magic Find Types</a><ul>
+<li><a class="reference internal" href="#findallby">findAllBy</a></li>
+<li><a class="reference internal" href="#findby">findBy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#model-query"><tt class="docutils literal"><span class="pre">Model::query()</span></tt></a></li>
+<li><a class="reference internal" href="#model-field"><tt class="docutils literal"><span class="pre">Model::field()</span></tt></a></li>
+<li><a class="reference internal" href="#model-read"><tt class="docutils literal"><span class="pre">Model::read()</span></tt></a></li>
+<li><a class="reference internal" href="#complex-find-conditions">Complex Find Conditions</a><ul>
+<li><a class="reference internal" href="#sub-queries">Sub-queries</a></li>
+<li><a class="reference internal" href="#prepared-statements">Prepared Statements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="saving-your-data.html" title="Saving Your Data" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="associations-linking-models-together.html" title="Associations: Linking Models Together" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

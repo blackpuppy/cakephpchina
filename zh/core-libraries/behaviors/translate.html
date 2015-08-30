@@ -1,0 +1,618 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Translate" lang="zh_CN" name="title" />
+<meta content="invalid sql,correct layout,translation table,layout changes,database tables,array,queries,cakephp,models,translate,public name" lang="zh_CN" name="keywords" />
+
+    <title>翻译行为 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="行为" href="../toc-behaviors.html" />
+    <link rel="next" title="树行为" href="tree.html" />
+    <link rel="prev" title="Containable" href="containable.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/core-libraries/behaviors/translate.html" /><link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/behaviors/translate.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/behaviors/translate.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/behaviors/translate.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/behaviors/translate.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../toc-behaviors.html" accesskey="U" itemprop="url"><span itemprop="title">行为</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/core-libraries/behaviors/translate.html">en</a></li>
+				
+					<li><a href="../../../pt/core-libraries/behaviors/translate.html">pt</a></li>
+				
+					<li><a href="../../../es/core-libraries/behaviors/translate.html">es</a></li>
+				
+					<li><a href="../../../ja/core-libraries/behaviors/translate.html">ja</a></li>
+				
+					<li><a href="../../../fr/core-libraries/behaviors/translate.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/behaviors/translate.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>翻译行为<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="TranslateBehavior">
+<em class="property">class </em><tt class="descname">TranslateBehavior</tt><a class="headerlink" href="#TranslateBehavior" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>TranslateBehavior 行为其实很容易设置，并且只需很少配置即可工作。在本节中，你将看
+到如何在任意模型中添加和设置该行为。</p>
+<p>如果你在使用 TranslateBehavior 行为的过程中同时有 containable 的问题(译注: 不
+太确定这句话的意思)，确保为你的查询设置了 &#8216;fields&#8217; 键。否则你可能会碰到生成非法
+SQL 的错误。</p>
+<div class="section" id="i18n">
+<h2>初始化 i18n 数据库表<a class="headerlink" href="#i18n" title="永久链接至标题">¶</a></h2>
+<p>你可以使用 CakePHP 命令行，或者你也可以手动创建。建议使用命令行，因为布局在将来的
+版本中可能会发生变化。始终使用命令行可以保证你有正确的布局。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">cake</span> <span class="nx">i18n</span>
+</pre></div>
+</div>
+<p>选择 <tt class="docutils literal"><span class="pre">[I]</span></tt>，就会执行 i18n 数据库初始化脚本。你会被询问是否要删除现存的数据库表，
+以及你是否要再创建它。如果你确定没有 i18n 表，回答 yes，然后再回答 yes 来创建该表。</p>
+</div>
+<div class="section" id="translate">
+<h2>把 Translate 行为附加到你的模型上<a class="headerlink" href="#translate" title="永久链接至标题">¶</a></h2>
+<p>使用 <tt class="docutils literal"><span class="pre">$actsAs</span></tt> 属性把它(Translate 行为)附加到你的模型上，象下面的例子这样。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Translate&#39;</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这样还是什么也不会发生，因为它还需要几个选项才可以开始生效。你要定义当前模型的哪
+些字段要在我们第一步创建的翻译表中进行跟踪。</p>
+</div>
+<div class="section" id="id2">
+<h2>定义字段<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>你只需用另一个数组来扩展``&#8217;Translate&#8217;<a href="#id3"><span class="problematic" id="id4">``</span></a>的值，就可以设置字段，象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Translate&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;fieldOne&#39;</span><span class="p">,</span> <span class="s1">&#39;fieldTwo&#39;</span><span class="p">,</span> <span class="s1">&#39;and_so_on&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>做完这之后(例如把 &#8220;title&#8221; 放入作为其中一个字段)，你就完成了基本的设置。很好！根
+据我们现在的例子，模型应当象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Translate&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;title&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>当为 TranslateBehavior 行为定义要翻译的字段时，一定要省略那些翻译了的模型中的字段。
+如果你把这样的字段也包括了，当使用后备地区(<em>fallback locale</em>)读取数据时就有可能发
+生问题。</p>
+</div>
+<div class="section" id="id5">
+<h2>结论<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>自此，每次记录被更新/创建，TranslateBehavior 就会把 &#8220;title&#8221; 的值以及当前的地区拷
+贝到翻译表(缺省: i18n)中。地区(<em>locale</em>)，这么说吧，就是语言的标识。</p>
+</div>
+<div class="section" id="id6">
+<h2>读取翻译的内容<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>缺省情况下 TranslateBehavior 行为会自动根据当前地区读取和添加数据。当前地区是从
+<a href="#id7"><span class="problematic" id="id8">``</span></a>Configure::read(&#8216;Config.language&#8217;)``读取的，而这又是由:php:class:<a href="#id9"><span class="problematic" id="id10">`</span></a>L10n`这个类赋
+值的。你可以用``$Model-&gt;locale``即时(on the fly)覆盖这个缺省值。</p>
+<div class="section" id="id11">
+<h3>读取翻译的字段在指定地区(的内容)<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h3>
+<p>设置了 <tt class="docutils literal"><span class="pre">$Model-&gt;locale</span></tt>，就可以读取指定地区的翻译:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 读取西班牙地区的数据。</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">locale</span> <span class="o">=</span> <span class="s1">&#39;es&#39;</span><span class="p">;</span>
+<span class="nv">$results</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Post.id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">)</span>
+<span class="p">));</span>
+<span class="c1">// $results 就会含有西班牙文的翻译。</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id12">
+<h3>获取某一字段的所有翻译记录<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
+<p>如果你要所有的翻译记录附加到当前模型记录，你只需象下面这样扩展行为设置中的**字段
+数组**。命名完全由你决定。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Translate&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;titleTranslation&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>有了这样的设置，<a href="#id13"><span class="problematic" id="id14">``</span></a>$this-&gt;Post-&gt;find()``的结果应当象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+     <span class="p">[</span><span class="nx">Post</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+         <span class="p">(</span>
+             <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+             <span class="p">[</span><span class="nx">title</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Beispiel</span> <span class="nx">Eintrag</span>
+             <span class="p">[</span><span class="nx">body</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">lorem</span> <span class="nx">ipsum</span><span class="o">...</span>
+             <span class="p">[</span><span class="nx">locale</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">de_de</span>
+         <span class="p">)</span>
+
+     <span class="p">[</span><span class="nx">titleTranslation</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+         <span class="p">(</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                 <span class="p">(</span>
+                     <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+                     <span class="p">[</span><span class="nx">locale</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">en_us</span>
+                     <span class="p">[</span><span class="nx">model</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Post</span>
+                     <span class="p">[</span><span class="nx">foreign_key</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+                     <span class="p">[</span><span class="nx">field</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">title</span>
+                     <span class="p">[</span><span class="nx">content</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Example</span> <span class="nx">entry</span>
+                 <span class="p">)</span>
+
+             <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                 <span class="p">(</span>
+                     <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+                     <span class="p">[</span><span class="nx">locale</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">de_de</span>
+                     <span class="p">[</span><span class="nx">model</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Post</span>
+                     <span class="p">[</span><span class="nx">foreign_key</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+                     <span class="p">[</span><span class="nx">field</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">title</span>
+                     <span class="p">[</span><span class="nx">content</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Beispiel</span> <span class="nx">Eintrag</span>
+                 <span class="p">)</span>
+
+         <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">模型记录包括一个叫做&#8221;locale&#8221;的*虚拟*字段。这说明在此结果中使用的是哪个地区。</p>
+</div>
+<p>注意，只有你直接进行`find`操作的模型字段才会被翻译。通过关联而附加的模型不会被
+翻译，因为现在还不支持触发关联模型的回调。</p>
+</div>
+<div class="section" id="bindtranslation">
+<h3>使用 bindTranslation 方法<a class="headerlink" href="#bindtranslation" title="永久链接至标题">¶</a></h3>
+<p>你也可以用 bindTranslation 方法，只在你需要的时候，读取所有的翻译。</p>
+<dl class="method">
+<dt id="TranslateBehavior::bindTranslation">
+<tt class="descclassname">TranslateBehavior::</tt><tt class="descname">bindTranslation</tt><big>(</big><em>$fields</em>, <em>$reset</em><big>)</big><a class="headerlink" href="#TranslateBehavior::bindTranslation" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p><a href="#id15"><span class="problematic" id="id16">``</span></a>$fields``是一个字段和关联名称的命名键数组(译注: 原文 named-key array，估计是
+指关联数组 associative array)，其中键是翻译的字段，而值是虚关联名称。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">bindTranslation</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;titleTranslation&#39;</span><span class="p">));</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;recursive&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span> <span class="c1">// 需要 recursive 至少为1才行。</span>
+</pre></div>
+</div>
+<p>有了这样的设置，find()的结果就应该象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+     <span class="p">[</span><span class="nx">Post</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+         <span class="p">(</span>
+             <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+             <span class="p">[</span><span class="nx">title</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Beispiel</span> <span class="nx">Eintrag</span>
+             <span class="p">[</span><span class="nx">body</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">lorem</span> <span class="nx">ipsum</span><span class="o">...</span>
+             <span class="p">[</span><span class="nx">locale</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">de_de</span>
+         <span class="p">)</span>
+
+     <span class="p">[</span><span class="nx">titleTranslation</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+         <span class="p">(</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                 <span class="p">(</span>
+                     <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+                     <span class="p">[</span><span class="nx">locale</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">en_us</span>
+                     <span class="p">[</span><span class="nx">model</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Post</span>
+                     <span class="p">[</span><span class="nx">foreign_key</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+                     <span class="p">[</span><span class="nx">field</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">title</span>
+                     <span class="p">[</span><span class="nx">content</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Example</span> <span class="nx">entry</span>
+                 <span class="p">)</span>
+
+             <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                 <span class="p">(</span>
+                     <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+                     <span class="p">[</span><span class="nx">locale</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">de_de</span>
+                     <span class="p">[</span><span class="nx">model</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Post</span>
+                     <span class="p">[</span><span class="nx">foreign_key</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+                     <span class="p">[</span><span class="nx">field</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">title</span>
+                     <span class="p">[</span><span class="nx">content</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Beispiel</span> <span class="nx">Eintrag</span>
+                 <span class="p">)</span>
+
+         <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id17">
+<h2>用另一种语言保存<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h2>
+<p>你可以强迫让使用 TranslateBehavior 行为的模型用不同于检测到的语言的另外一种语言来
+保存。</p>
+<p>要告诉模型内容将使用何种语言，只需在保存数据到数据库前改变模型的 <tt class="docutils literal"><span class="pre">$locale</span></tt> 属性。
+你可以在控制器中这么做，也可以直接在模型中定义。</p>
+<p><strong>例子 A:</strong> 在控制器中:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">locale</span> <span class="o">=</span> <span class="s1">&#39;de_de&#39;</span><span class="p">;</span> <span class="c1">// 我们要保存德文版</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>例子 B:</strong> 在模型中:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Translate&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;title&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="c1">// 选项 1) 直接定义属性</span>
+    <span class="k">public</span> <span class="nv">$locale</span> <span class="o">=</span> <span class="s1">&#39;en_us&#39;</span><span class="p">;</span>
+
+    <span class="c1">// 选项 2) 创建简单方法</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setLanguage</span><span class="p">(</span><span class="nv">$locale</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">locale</span> <span class="o">=</span> <span class="nv">$locale</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id18">
+<h2>多个翻译表<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h2>
+<p>如果你预计有很多输入项，也许你会问如何应对快速增长的数据库表。TranslateBehavior
+行为引入了两个属性，可以指定绑定哪个“模型”，来作为包含翻译的模型。</p>
+<p>(这样的属性)是 <strong>$translateModel</strong> 和 <strong>$translateTable</strong>。</p>
+<p>比如说我们要把所有帖子的翻译存入表 &#8220;post_i18ns&#8221;，而不是缺省的 &#8220;i18n&#8221; 表。为此，
+你需要这样设置你的模型:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Translate&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;title&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="c1">// 使用不同的模型(和表)</span>
+    <span class="k">public</span> <span class="nv">$translateModel</span> <span class="o">=</span> <span class="s1">&#39;PostI18n&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">重用的是你要对表名使用单词的复数形式。现在这就是普通的模型，并且可以这样对待，
+所以就有相关的约定。表的定义必须与 CakePHP 命令行生成的一样。为确保其正确，可以先
+用命令行初始化一个空的 i18n 表，然后再把表改名。</p>
+</div>
+<div class="section" id="translatemodel">
+<h3>创建 TranslateModel<a class="headerlink" href="#translatemodel" title="永久链接至标题">¶</a></h3>
+<p>为使其工作，你需要在 models 目录中创建实际的模型文件。原因在于，在使用该行为的模
+型中，还没有属性可以直接设置 displayField。</p>
+<p>确保你把 <tt class="docutils literal"><span class="pre">$displayField</span></tt> 改为 <tt class="docutils literal"><span class="pre">'field'</span></tt>。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostI18n</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$displayField</span> <span class="o">=</span> <span class="s1">&#39;field&#39;</span><span class="p">;</span> <span class="c1">// 重要</span>
+<span class="p">}</span>
+<span class="c1">// 文件名: PostI18n.php</span>
+</pre></div>
+</div>
+<p>这就行了。你也可以在这里添加模型的其它东西，比如 $useTable。但为了更好的一致性我
+们可以在实际使用翻译模型的模型中这样做。这就是可选项``$translateTable``发挥作用的
+地方。</p>
+</div>
+<div class="section" id="id19">
+<h3>改变使用的数据库表<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h3>
+<p>如果你要改变数据库表的名字，只需在模型中这样定义 $translateTable:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Translate&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;title&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="c1">// 使用不同的模型</span>
+    <span class="k">public</span> <span class="nv">$translateModel</span> <span class="o">=</span> <span class="s1">&#39;PostI18n&#39;</span><span class="p">;</span>
+
+    <span class="c1">// 对 translateModel 使用不同的数据库表</span>
+    <span class="k">public</span> <span class="nv">$translateTable</span> <span class="o">=</span> <span class="s1">&#39;post_translations&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>请注意**你不能单独使用 $translateTable**。如果你不想使用定制的
+<tt class="docutils literal"><span class="pre">$translateModel</span></tt>，就别碰这个属性。这是因为，(改了的话)那样会破坏你的设置，并
+针对运行时创建的缺省 I18n 模型显示一条&#8221;Missing Table&#8221;(表未找到)的信息。</p>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">视图</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../models.html">模型</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../models/associations-linking-models-together.html">关联：将模型连接在一起</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/retrieving-your-data.html">检索数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/saving-your-data.html">保存数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/deleting-data.html">删除数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/data-validation.html">数据验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/callback-methods.html">回调方法</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../models/behaviors.html">行为</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="acl.html">访问控制列表(<em>ACL</em>)助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="containable.html">Containable</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">翻译行为</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tree.html">树行为</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/datasources.html">数据源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/model-attributes.html">模型属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/additional-methods-and-properties.html">其它方法和属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/virtual-fields.html">虚字段</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/transactions.html">事务</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-general-purpose.html">通用</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../global-constants-and-functions.html">全局常量和函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core-utility-libraries/app.html">App Class</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../events.html">Events System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collections.html">Collections</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-behaviors.html">行为</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="acl.html">访问控制列表(<em>ACL</em>)助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="containable.html">Containable</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">翻译行为</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tree.html">树行为</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-components.html">组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-helpers.html">助件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-utilities.html">工具</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">翻译行为</a><ul>
+<li><a class="reference internal" href="#i18n">初始化 i18n 数据库表</a></li>
+<li><a class="reference internal" href="#translate">把 Translate 行为附加到你的模型上</a></li>
+<li><a class="reference internal" href="#id2">定义字段</a></li>
+<li><a class="reference internal" href="#id5">结论</a></li>
+<li><a class="reference internal" href="#id6">读取翻译的内容</a><ul>
+<li><a class="reference internal" href="#id11">读取翻译的字段在指定地区(的内容)</a></li>
+<li><a class="reference internal" href="#id12">获取某一字段的所有翻译记录</a></li>
+<li><a class="reference internal" href="#bindtranslation">使用 bindTranslation 方法</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id17">用另一种语言保存</a></li>
+<li><a class="reference internal" href="#id18">多个翻译表</a><ul>
+<li><a class="reference internal" href="#translatemodel">创建 TranslateModel</a></li>
+<li><a class="reference internal" href="#id19">改变使用的数据库表</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="tree.html" title="树行为" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="containable.html" title="Containable" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

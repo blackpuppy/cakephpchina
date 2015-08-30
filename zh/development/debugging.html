@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Debugging" lang="zh_CN" name="title" />
+<meta content="Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin." lang="zh_CN" name="description" />
+<meta content="code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options" lang="zh_CN" name="keywords" />
+
+    <title>调试 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="开发" href="../development.html" />
+    <link rel="next" title="测试" href="testing.html" />
+    <link rel="prev" title="错误处理" href="errors.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/development/debugging.html" /><link rel="alternate" hreflang="pt" href="../../pt/development/debugging.html" /><link rel="alternate" hreflang="es" href="../../es/development/debugging.html" /><link rel="alternate" hreflang="ja" href="../../ja/development/debugging.html" /><link rel="alternate" hreflang="fr" href="../../fr/development/debugging.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../development.html" accesskey="U" itemprop="url"><span itemprop="title">开发</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/development/debugging.html">en</a></li>
+				
+					<li><a href="../../pt/development/debugging.html">pt</a></li>
+				
+					<li><a href="../../es/development/debugging.html">es</a></li>
+				
+					<li><a href="../../ja/development/debugging.html">ja</a></li>
+				
+					<li><a href="../../fr/development/debugging.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/development/debugging.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>调试<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>调试在任何开发流程中都是不可避免和必要的组成部分。尽管 CakePHP 没有提供任何工具直接
+连接到任何 IDE 或者编辑器，但还是提供了一些工具来协助调试和暴露在应用程序中运行的部分。</p>
+<div class="section" id="id2">
+<h2>基本的调试<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<dl class="function">
+<dt id="debug">
+<tt class="descname">debug</tt><big>(</big><em>mixed $var</em>, <em>boolean $showHtml = null</em>, <em>$showFrom = true</em><big>)</big><a class="headerlink" href="#debug" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$var</strong> (<em>mixed</em>) &#8211; 要打印的内容，可以是数组或对象类型。</li>
+<li><strong>$showHTML</strong> (<em>boolean</em>) &#8211; 设置为 true 来启用转义。在 2.0 版本中，在提供对 web
+请求的服务时，默认会启用转义。</li>
+<li><strong>$showFrom</strong> (<em>boolean</em>) &#8211; 显示执行 debug() 的行号和文件。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>debug() 函数是一个全局函数，工作方式和 PHP 的 print_r() 函数类似。debug() 函数让你
+可以用不同的方式显示变量的内容。首先，如果要让数据以适用于 HTML 的方式输出，可以设置
+第二个参数为 true。默认情况下会输出调用该函数的行号和文件。</p>
+<p>只有(在配置文件中)把核心的 debug 变量设置为大于 0 的值，该函数的输出才会显示。</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span><tt class="docutils literal"><span class="pre">debug()</span></tt> 的输出内容和 <tt class="docutils literal"><span class="pre">var_dump()</span></tt> 很相似，在内部使用 <a class="reference internal" href="#Debugger" title="Debugger"><tt class="xref php php-class docutils literal"><span class="pre">Debugger</span></tt></a>
+类。</p>
+</div>
+</div>
+<div class="section" id="debugger">
+<h2>Debugger 类<a class="headerlink" href="#debugger" title="永久链接至标题">¶</a></h2>
+<p>Debugger 类是随着 CakePHP 1.2 引入的，提供了更多获得调试信息的手段。其中包含了一些
+静态调用的、提供输出内容、日志和错误处理的函数。</p>
+<p>Debugger 类重载了 PHP 默认的错误处理，替换为更加实用的错误报告功能。在 CakePHP 中，
+默认使用 Debugger 类的错误处理。对所有的调试函数来说，<tt class="docutils literal"><span class="pre">Configure::debug</span></tt> 的值必须
+设置为大于 0 的值才会生效。</p>
+<p>当一个错误发生时，Debugger 既会在页面上输出信息，并且也会将信息写入 error.log 错误
+日志中。生成的错误报告会包含堆栈追踪记录和发生错误之处的代码摘要。点击 &#8220;Error&#8221; 链接，
+显示堆栈跟踪，点击 &#8220;Code&#8221; 链接显示引起错误的代码行。</p>
+</div>
+<div class="section" id="id3">
+<h2>使用 Debugger 调试类<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<dl class="class">
+<dt id="Debugger">
+<em class="property">class </em><tt class="descname">Debugger</tt><a class="headerlink" href="#Debugger" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>为了使用 Debugger，首先要确保 Configure::read(&#8216;debug&#8217;) 设置为大于 0 的值。</p>
+<dl class="staticmethod">
+<dt id="Debugger::dump">
+<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">dump</tt><big>(</big><em>$var</em>, <em>$depth = 3</em><big>)</big><a class="headerlink" href="#Debugger::dump" title="永久链接至目标">¶</a></dt>
+<dd><p>将变量的内容全部输出，包含所有的属性和方法(如果存在任何方法):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$foo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="nx">Debugger</span><span class="o">::</span><span class="na">dump</span><span class="p">(</span><span class="nv">$foo</span><span class="p">);</span>
+
+<span class="c1">// 输出</span>
+<span class="k">array</span><span class="p">(</span>
+    <span class="mi">1</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">,</span>
+    <span class="mi">3</span>
+<span class="p">)</span>
+
+<span class="c1">// 简单的对象</span>
+<span class="nv">$car</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+
+<span class="nx">Debugger</span><span class="o">::</span><span class="na">dump</span><span class="p">(</span><span class="nv">$car</span><span class="p">);</span>
+
+<span class="c1">// 输出</span>
+<span class="nx">Car</span>
+<span class="nx">Car</span><span class="o">::</span><span class="na">colour</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span>
+<span class="nx">Car</span><span class="o">::</span><span class="na">make</span> <span class="o">=</span> <span class="s1">&#39;Toyota&#39;</span>
+<span class="nx">Car</span><span class="o">::</span><span class="na">model</span> <span class="o">=</span> <span class="s1">&#39;Camry&#39;</span>
+<span class="nx">Car</span><span class="o">::</span><span class="na">mileage</span> <span class="o">=</span> <span class="s1">&#39;15000&#39;</span>
+<span class="nx">Car</span><span class="o">::</span><span class="na">accelerate</span><span class="p">()</span>
+<span class="nx">Car</span><span class="o">::</span><span class="na">decelerate</span><span class="p">()</span>
+<span class="nx">Car</span><span class="o">::</span><span class="na">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>在 2.1 及以后版本中，为提高内容的可读性，输出进行了改变，详见
+<a class="reference internal" href="#Debugger::exportVar" title="Debugger::exportVar"><tt class="xref php php-func docutils literal"><span class="pre">Debugger::exportVar()</span></tt></a>。</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.5.0 版更改: </span>增加了 <tt class="docutils literal"><span class="pre">depth</span></tt> 参数。</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Debugger::log">
+<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">log</tt><big>(</big><em>$var</em>, <em>$level = 7</em>, <em>$depth = 3</em><big>)</big><a class="headerlink" href="#Debugger::log" title="永久链接至目标">¶</a></dt>
+<dd><p>创建调用时的详细堆栈追踪记录的日志。log() 方法的输出内容和 Debugger::dump()
+方法相似，但是它不是写入输出缓冲，而是写入 debug.log 日志中。注意要使 web 服务器
+对 app/tmp 目录(及其内容)可以写入，log() 方法才能正确运作。</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.5.0 版更改: </span>增加了 <tt class="docutils literal"><span class="pre">depth</span></tt> 参数。</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Debugger::trace">
+<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">trace</tt><big>(</big><em>$options</em><big>)</big><a class="headerlink" href="#Debugger::trace" title="永久链接至目标">¶</a></dt>
+<dd><p>返回当前的堆栈追踪记录，每行显示调用的方法，包含调用所在的文件及行号。</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//在 PostsController::index() 中</span>
+<span class="nx">pr</span><span class="p">(</span><span class="nx">Debugger</span><span class="o">::</span><span class="na">trace</span><span class="p">());</span>
+
+<span class="c1">//输出</span>
+<span class="nx">PostsController</span><span class="o">::</span><span class="na">index</span><span class="p">()</span> <span class="o">-</span> <span class="nx">APP</span><span class="o">/</span><span class="nx">Controller</span><span class="o">/</span><span class="nx">DownloadsController</span><span class="o">.</span><span class="nx">php</span><span class="p">,</span> <span class="nx">line</span> <span class="mi">48</span>
+<span class="nx">Dispatcher</span><span class="o">::</span><span class="na">_invoke</span><span class="p">()</span> <span class="o">-</span> <span class="nx">CORE</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">Cake</span><span class="o">/</span><span class="nx">Routing</span><span class="o">/</span><span class="nx">Dispatcher</span><span class="o">.</span><span class="nx">php</span><span class="p">,</span> <span class="nx">line</span> <span class="mi">265</span>
+<span class="nx">Dispatcher</span><span class="o">::</span><span class="na">dispatch</span><span class="p">()</span> <span class="o">-</span> <span class="nx">CORE</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">Cake</span><span class="o">/</span><span class="nx">Routing</span><span class="o">/</span><span class="nx">Dispatcher</span><span class="o">.</span><span class="nx">php</span><span class="p">,</span> <span class="nx">line</span> <span class="mi">237</span>
+<span class="p">[</span><span class="nx">main</span><span class="p">]</span> <span class="o">-</span> <span class="nx">APP</span><span class="o">/</span><span class="nx">webroot</span><span class="o">/</span><span class="nx">index</span><span class="o">.</span><span class="nx">php</span><span class="p">,</span> <span class="nx">line</span> <span class="mi">84</span>
+</pre></div>
+</div>
+<p>上面的堆栈追踪记录是在控制器的动作中调用 Debugger::trace() 产生的。从下向上阅读
+堆栈追踪记录，就可以知道当前运行的函数的执行顺序。在上面的例子中，index.php 调用
+了 Dispatcher::dispatch()，它又依次调用了Dispatcher::_invoke()，然后
+_invoke() 方法又调用了 PostsController::index() 方法。这样的信息在处理递归操作
+或者深层堆栈的情况下很有用，因为这能够确定在调用 trace() 时有哪些函数正在运行。</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Debugger::excerpt">
+<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">excerpt</tt><big>(</big><em>$file</em>, <em>$line</em>, <em>$context</em><big>)</big><a class="headerlink" href="#Debugger::excerpt" title="永久链接至目标">¶</a></dt>
+<dd><p>获得 $path (绝对路径)所指向的文件的摘要，并高亮凸显位于第 $line 行前后 $context
+行的内容。</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">pr</span><span class="p">(</span><span class="nx">Debugger</span><span class="o">::</span><span class="na">excerpt</span><span class="p">(</span><span class="nx">ROOT</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="nx">LIBS</span> <span class="o">.</span> <span class="s1">&#39;debugger.php&#39;</span><span class="p">,</span> <span class="mi">321</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span>
+
+<span class="c1">//因为 $context 参数为 2，会输出 debugger.php 文件中第 319-323 行的内容</span>
+<span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;color: #000000&quot;</span><span class="o">&gt;</span> <span class="o">*</span> <span class="o">@</span><span class="nx">access</span> <span class="k">public</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;&lt;/</span><span class="nx">code</span><span class="o">&gt;</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;color: #000000&quot;</span><span class="o">&gt;</span> <span class="o">*/&lt;/</span><span class="nx">span</span><span class="o">&gt;&lt;/</span><span class="nx">code</span><span class="o">&gt;</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;color: #000000&quot;</span><span class="o">&gt;</span>    <span class="k">function</span> <span class="nf">excerpt</span><span class="p">(</span><span class="nv">$file</span><span class="p">,</span> <span class="nv">$line</span><span class="p">,</span> <span class="nv">$context</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;&lt;/</span><span class="nx">code</span><span class="o">&gt;</span>
+
+    <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">&quot;code-highlight&quot;</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;color: #000000&quot;</span><span class="o">&gt;</span>        <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$lines</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;&lt;/</span><span class="nx">code</span><span class="o">&gt;&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;color: #000000&quot;</span><span class="o">&gt;</span>        <span class="nv">$data</span> <span class="o">=</span> <span class="o">@</span><span class="nb">explode</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">file_get_contents</span><span class="p">(</span><span class="nv">$file</span><span class="p">));</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;&lt;/</span><span class="nx">code</span><span class="o">&gt;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>虽然该方法在内部使用，如果你要在特定情况下创建自己的错误消息或日志条目，也很方便。</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Debugger::exportVar">
+<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">exportVar</tt><big>(</big><em>$var</em>, <em>$recursion = 0</em><big>)</big><a class="headerlink" href="#Debugger::exportVar" title="永久链接至目标">¶</a></dt>
+<dd><p>将任何类型的变量转换成字符串，用于调试输出。这个方法同样也主要被调试器用于内部的
+变量转换，也可以在你自己的调试器中使用。</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>该函数在 2.1 以上的版本中生成不同的输出。</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Debugger::invoke">
+<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">invoke</tt><big>(</big><em>$debugger</em><big>)</big><a class="headerlink" href="#Debugger::invoke" title="永久链接至目标">¶</a></dt>
+<dd><p>用新的实例替换 CakePHP 的 Debugger。</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Debugger::getType">
+<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">getType</tt><big>(</big><em>$var</em><big>)</big><a class="headerlink" href="#Debugger::getType" title="永久链接至目标">¶</a></dt>
+<dd><p>返回变量的类型，对象将返回他们的类名。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.1 新版功能.</span></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="id4">
+<h2>使用日志进行调试<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>日志消息是另一个调试应用程序的好方法，你可以使用 <a class="reference internal" href="../core-libraries/logging.html#CakeLog" title="CakeLog"><tt class="xref php php-class docutils literal"><span class="pre">CakeLog</span></tt></a> 在应用程序中
+记录日志。所有扩展 <tt class="xref php php-class docutils literal"><span class="pre">Object</span></tt> 的对象都有一个实例方法 <cite>log()</cite>，可以用来记录
+日志消息:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">(</span><span class="s1">&#39;Got here&#39;</span><span class="p">,</span> <span class="s1">&#39;debug&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>上面的代码会把 <tt class="docutils literal"><span class="pre">Got</span> <span class="pre">here</span></tt> 写入 debug 日志中，你可以使用日志来帮助调试涉及重定向或
+复杂循环的方法。也可以使用 <a class="reference internal" href="../core-libraries/logging.html#CakeLog::write" title="CakeLog::write"><tt class="xref php php-meth docutils literal"><span class="pre">CakeLog::write()</span></tt></a> 来写入日志信息。这个方法
+可以在程序中任何加载了 CakeLog 类的地方以静态方式调用:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 在 app/Config/bootstrap.php 中</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeLog&#39;</span><span class="p">,</span> <span class="s1">&#39;Log&#39;</span><span class="p">);</span>
+
+<span class="c1">// 应用程序的任何地方</span>
+<span class="nx">CakeLog</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="s1">&#39;Got here&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="debug-kit">
+<h2>Debug Kit<a class="headerlink" href="#debug-kit" title="永久链接至标题">¶</a></h2>
+<p>DebugKit 是一个插件，提供了一些很好的调试工具。它主要在渲染的 HTML 中提供了一个
+工具栏，用来显示应用程序和当前请求的大量信息。你可以从 Github 下载
+<a class="reference external" href="https://github.com/cakephp/debug_kit">DebugKit</a> 。</p>
+</div>
+<div class="section" id="xdebug">
+<h2>Xdebug<a class="headerlink" href="#xdebug" title="永久链接至标题">¶</a></h2>
+<p>如果你的环境提供了 Xdebug PHP 扩展，严重错误(<em>fatal error</em>)就会显示额外的 Xdebug
+堆栈追踪明细。关于 Xdebug 的详情可见 <a class="reference external" href="http://xdebug.org">Xdebug</a> 。</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development.html">开发</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">路由</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sessions.html">会话</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">异常</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">错误处理</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">调试</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">测试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rest.html">REST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dispatch-filters.html">调度器过滤器</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">调试</a><ul>
+<li><a class="reference internal" href="#id2">基本的调试</a></li>
+<li><a class="reference internal" href="#debugger">Debugger 类</a></li>
+<li><a class="reference internal" href="#id3">使用 Debugger 调试类</a></li>
+<li><a class="reference internal" href="#id4">使用日志进行调试</a></li>
+<li><a class="reference internal" href="#debug-kit">Debug Kit</a></li>
+<li><a class="reference internal" href="#xdebug">Xdebug</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="testing.html" title="测试" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="errors.html" title="错误处理" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

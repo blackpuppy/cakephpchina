@@ -1,0 +1,410 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Inflector" lang="zh_CN" name="title" />
+<meta content="apple orange,word variations,apple pie,person man,latin versions,profile settings,php class,initial state,puree,slug,apples,oranges,user profile,underscore" lang="zh_CN" name="keywords" />
+
+    <title>Inflector &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="工具" href="../core-libraries/toc-utilities.html" />
+    <link rel="next" title="Internationalization &amp; Localization" href="../core-libraries/internationalization-and-localization.html" />
+    <link rel="prev" title="HttpSocket" href="httpsocket.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/core-utility-libraries/inflector.html" /><link rel="alternate" hreflang="pt" href="../../pt/core-utility-libraries/inflector.html" /><link rel="alternate" hreflang="es" href="../../es/core-utility-libraries/inflector.html" /><link rel="alternate" hreflang="ja" href="../../ja/core-utility-libraries/inflector.html" /><link rel="alternate" hreflang="fr" href="../../fr/core-utility-libraries/inflector.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries/toc-utilities.html" accesskey="U" itemprop="url"><span itemprop="title">工具</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/core-utility-libraries/inflector.html">en</a></li>
+				
+					<li><a href="../../pt/core-utility-libraries/inflector.html">pt</a></li>
+				
+					<li><a href="../../es/core-utility-libraries/inflector.html">es</a></li>
+				
+					<li><a href="../../ja/core-utility-libraries/inflector.html">ja</a></li>
+				
+					<li><a href="../../fr/core-utility-libraries/inflector.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-utility-libraries/inflector.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="inflector">
+<h1>Inflector<a class="headerlink" href="#inflector" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="Inflector">
+<em class="property">class </em><tt class="descname">Inflector</tt><a class="headerlink" href="#Inflector" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>Inflector类提供的方法可以接收一个字符串，将其单词变量转变为复数形式或驼峰
+形式的写法。所有方法都是静态方法。举例
+<tt class="docutils literal"><span class="pre">Inflector::pluralize('example')</span></tt> 返回 &#8220;examples&#8221;.</p>
+<p>The Inflector class takes a string and can manipulate it to handle
+word variations such as pluralizations or camelizing and is
+normally accessed statically. Example:
+<tt class="docutils literal"><span class="pre">Inflector::pluralize('example')</span></tt> returns &#8220;examples&#8221;.</p>
+<dl class="staticmethod">
+<dt id="Inflector::pluralize">
+<em class="property">static </em><tt class="descclassname">Inflector::</tt><tt class="descname">pluralize</tt><big>(</big><em>$singular</em><big>)</big><a class="headerlink" href="#Inflector::pluralize" title="永久链接至目标">¶</a></dt>
+<dd><ul class="simple">
+<li><strong>输入:</strong> Apple, Orange, Person, Man</li>
+<li><strong>输出:</strong> Apples, Oranges, People, Men</li>
+</ul>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Inflector::singularize">
+<em class="property">static </em><tt class="descclassname">Inflector::</tt><tt class="descname">singularize</tt><big>(</big><em>$plural</em><big>)</big><a class="headerlink" href="#Inflector::singularize" title="永久链接至目标">¶</a></dt>
+<dd><p><strong>输入:</strong> Apples, Oranges, People, Men
+<strong>输出:</strong> Apple, Orange, Person, Man</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Inflector::camelize">
+<em class="property">static </em><tt class="descclassname">Inflector::</tt><tt class="descname">camelize</tt><big>(</big><em>$underscored</em><big>)</big><a class="headerlink" href="#Inflector::camelize" title="永久链接至目标">¶</a></dt>
+<dd><ul class="simple">
+<li><strong>输入:</strong> Apple_pie, some_thing, people_person</li>
+<li><strong>输出:</strong> ApplePie, SomeThing, PeoplePerson</li>
+</ul>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Inflector::underscore">
+<em class="property">static </em><tt class="descclassname">Inflector::</tt><tt class="descname">underscore</tt><big>(</big><em>$camelCase</em><big>)</big><a class="headerlink" href="#Inflector::underscore" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>应当注意underscore()方法只转换驼峰格式的单词，单词包含的空格将小写化，
+并不会带上下划线。</div></blockquote>
+<p>It should be noted that underscore will only convert camelCase
+formatted words. Words that contains spaces will be lower-cased,
+but will not contain an underscore.</p>
+<ul class="simple">
+<li><strong>输入:</strong> applePie, someThing</li>
+<li><strong>输出:</strong> apple_pie, some_thing</li>
+</ul>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Inflector::humanize">
+<em class="property">static </em><tt class="descclassname">Inflector::</tt><tt class="descname">humanize</tt><big>(</big><em>$underscored</em><big>)</big><a class="headerlink" href="#Inflector::humanize" title="永久链接至目标">¶</a></dt>
+<dd><ul class="simple">
+<li><strong>输入:</strong> apple_pie, some_thing, people_person</li>
+<li><strong>输出:</strong> Apple Pie, Some Thing, People Person</li>
+</ul>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Inflector::tableize">
+<em class="property">static </em><tt class="descclassname">Inflector::</tt><tt class="descname">tableize</tt><big>(</big><em>$camelCase</em><big>)</big><a class="headerlink" href="#Inflector::tableize" title="永久链接至目标">¶</a></dt>
+<dd><ul class="simple">
+<li><strong>输入:</strong> Apple, UserProfileSetting, Person</li>
+<li><strong>输出:</strong> apples, user_profile_settings, people</li>
+</ul>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Inflector::classify">
+<em class="property">static </em><tt class="descclassname">Inflector::</tt><tt class="descname">classify</tt><big>(</big><em>$underscored</em><big>)</big><a class="headerlink" href="#Inflector::classify" title="永久链接至目标">¶</a></dt>
+<dd><ul class="simple">
+<li><strong>输入:</strong> apples, user_profile_settings, people</li>
+<li><strong>输出:</strong> Apple, UserProfileSetting, Person</li>
+</ul>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Inflector::variable">
+<em class="property">static </em><tt class="descclassname">Inflector::</tt><tt class="descname">variable</tt><big>(</big><em>$underscored</em><big>)</big><a class="headerlink" href="#Inflector::variable" title="永久链接至目标">¶</a></dt>
+<dd><ul class="simple">
+<li><strong>输入:</strong> apples, user_result, people_people</li>
+<li><strong>输出:</strong> apples, userResult, peoplePeople</li>
+</ul>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Inflector::slug">
+<em class="property">static </em><tt class="descclassname">Inflector::</tt><tt class="descname">slug</tt><big>(</big><em>$word</em>, <em>$replacement = '_'</em><big>)</big><a class="headerlink" href="#Inflector::slug" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>slug()方法将特殊的字符转换为拉丁版本，并且将空格转换为下划线。</div></blockquote>
+<p>Slug converts special characters into latin versions and converting
+unmatched characters and spaces to underscores. The slug method
+expects UTF-8 encoding.</p>
+<ul class="simple">
+<li><strong>输入:</strong> apple purée</li>
+<li><strong>输出:</strong> apple_puree</li>
+</ul>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Inflector::reset">
+<em class="property">static </em><tt class="descclassname">Inflector::</tt><tt class="descname">reset</tt><a class="headerlink" href="#Inflector::reset" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>重置Inflector退回到初始的状态，用于测试。</div></blockquote>
+<p>Resets Inflector back to its initial state, useful in testing.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Inflector::rules">
+<em class="property">static </em><tt class="descclassname">Inflector::</tt><tt class="descname">rules</tt><big>(</big><em>$type</em>, <em>$rules</em>, <em>$reset = false</em><big>)</big><a class="headerlink" href="#Inflector::rules" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>定义一个新的规则供Inflector类使用。参见 <a class="reference internal" href="../development/configuration.html#inflection-configuration"><em>词形变化配置</em></a>。</div></blockquote>
+<p>Define new inflection and transliteration rules for Inflector to use.
+See <a class="reference internal" href="../development/configuration.html#inflection-configuration"><em>词形变化配置</em></a> for more information.</p>
+</dd></dl>
+
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-general-purpose.html">通用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-components.html">组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-helpers.html">助件</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../core-libraries/toc-utilities.html">工具</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/caching.html">缓存</a></li>
+<li class="toctree-l3"><a class="reference internal" href="email.html">CakeEmail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file-folder.html">目录和文件 Folder &amp; File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hash.html">Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="httpsocket.html">HttpSocket</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Inflector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/internationalization-and-localization.html">Internationalization &amp; Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/logging.html">日志记录</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">CakeNumber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="router.html">Router</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sanitize.html">数据清理 Data Sanitization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html">安全</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set.html">Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="string.html">字符串 String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">CakeTime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xml.html">Xml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Inflector</a></li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="../core-libraries/internationalization-and-localization.html" title="Internationalization &amp; Localization" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="httpsocket.html" title="HttpSocket" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

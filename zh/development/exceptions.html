@@ -1,0 +1,706 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Exceptions" lang="zh_CN" name="title" />
+<meta content="uncaught exceptions,stack traces,logic errors,anonymous functions,renderer,html page,error messages,flexibility,lib,array,cakephp,php" lang="zh_CN" name="keywords" />
+
+    <title>异常 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="开发" href="../development.html" />
+    <link rel="next" title="错误处理" href="errors.html" />
+    <link rel="prev" title="会话" href="sessions.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/development/exceptions.html" /><link rel="alternate" hreflang="pt" href="../../pt/development/exceptions.html" /><link rel="alternate" hreflang="es" href="../../es/development/exceptions.html" /><link rel="alternate" hreflang="ja" href="../../ja/development/exceptions.html" /><link rel="alternate" hreflang="fr" href="../../fr/development/exceptions.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../development.html" accesskey="U" itemprop="url"><span itemprop="title">开发</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/development/exceptions.html">en</a></li>
+				
+					<li><a href="../../pt/development/exceptions.html">pt</a></li>
+				
+					<li><a href="../../es/development/exceptions.html">es</a></li>
+				
+					<li><a href="../../ja/development/exceptions.html">ja</a></li>
+				
+					<li><a href="../../fr/development/exceptions.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/development/exceptions.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>异常<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>异常在应用程序中可以用作不同的用途。CakePHP 在内部使用异常来表示逻辑错误或用法
+错误。所有 CakePHP 抛出的异常都扩展了 <a class="reference internal" href="#CakeException" title="CakeException"><tt class="xref php php-exc docutils literal"><span class="pre">CakeException</span></tt></a>，类/任务相关的
+异常扩展了这个基类。</p>
+<p>CakePHP 也提供了一些异常类，可用于 HTTP 错误。欲知更多信息，可参看
+<a class="reference internal" href="#built-in-exceptions"><em>CakePHP 的内置异常</em></a> 一节。</p>
+<div class="section" id="id2">
+<h2>异常的配置<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>有一些键可用于配置异常:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Exception&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;handler&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ErrorHandler::handleException&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;renderer&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ExceptionRenderer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;log&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">handler</span></tt> - callback - 处理异常的回调函数。可以设置它为任何回调类型，包括
+匿名函数。</li>
+<li><tt class="docutils literal"><span class="pre">renderer</span></tt> - string - 负责渲染未捕获异常的类。如果选择自定义类，应当把这个类
+的文件放入 app/Lib/Error 目录中。这个类需要实现 <tt class="docutils literal"><span class="pre">render()</span></tt> 方法。</li>
+<li><tt class="docutils literal"><span class="pre">log</span></tt> - boolean - 为 true 时，异常 + 它们的堆栈跟踪会被记录到 CakeLog 中。</li>
+<li><tt class="docutils literal"><span class="pre">consoleHandler</span></tt> - callback - 在控制台的环境中，用来处理异常的回调函数。如果
+没有定义，就会使用 CakePHP 默认的处理器。</li>
+</ul>
+<p>异常的渲染在默认情况下会显示一个 HTML 页面，你可以通过改变设置来自定义处理器或者
+渲染器。改变处理器，让你可以完全控制异常的处理过程，而改变渲染器让你容易地改变
+输出类型和内容，以及加进应用程序相关的异常处理。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.2 新版功能: </span>在 2.2 版本中加入了 <tt class="docutils literal"><span class="pre">Exception.consoleHandler</span></tt> 选项。</p>
+</div>
+</div>
+<div class="section" id="exception">
+<h2>Exception 类<a class="headerlink" href="#exception" title="永久链接至标题">¶</a></h2>
+<p>CakePHP 中有一些异常类。每个异常取代了过去的一个 <tt class="docutils literal"><span class="pre">cakeError()</span></tt> 错误消息。异常
+提供了更多的灵活性，因为它们可以扩展，也可以包含一些逻辑。内置的异常处理会捕获
+任何未捕获的异常，渲染一个有所帮助的页面。没有特意使用 400 范围的代码的异常，会
+被当作内部服务器错误(<em>Internal Server Error</em>)。</p>
+</div>
+<div class="section" id="cakephp">
+<span id="built-in-exceptions"></span><h2>CakePHP 的内置异常<a class="headerlink" href="#cakephp" title="永久链接至标题">¶</a></h2>
+<p>在 CakePHP 中，除了框架内部的异常，有一些内置的异常，有几个专门针对 HTTP 方法
+(<em>method</em>)的异常</p>
+<dl class="exception">
+<dt id="BadRequestException">
+<em class="property">exception </em><tt class="descname">BadRequestException</tt><a class="headerlink" href="#BadRequestException" title="永久链接至目标">¶</a></dt>
+<dd><p>用于处理 400 错误的请求(<em>Bad Request</em>)错误。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="UnauthorizedException">
+<em class="property">exception </em><tt class="descname">UnauthorizedException</tt><a class="headerlink" href="#UnauthorizedException" title="永久链接至目标">¶</a></dt>
+<dd><p>用于处理 401 未授权(<em>Unauthorized</em>)错误。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ForbiddenException">
+<em class="property">exception </em><tt class="descname">ForbiddenException</tt><a class="headerlink" href="#ForbiddenException" title="永久链接至目标">¶</a></dt>
+<dd><p>用于处理 403 禁止访问(<em>Forbidden</em>)错误。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="NotFoundException">
+<em class="property">exception </em><tt class="descname">NotFoundException</tt><a class="headerlink" href="#NotFoundException" title="永久链接至目标">¶</a></dt>
+<dd><p>用于处理 404 未找到(<em>Not found</em>)错误。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="MethodNotAllowedException">
+<em class="property">exception </em><tt class="descname">MethodNotAllowedException</tt><a class="headerlink" href="#MethodNotAllowedException" title="永久链接至目标">¶</a></dt>
+<dd><p>用于处理 405 方法不被允许(<em>Method Not Allowed</em>)错误。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="InternalErrorException">
+<em class="property">exception </em><tt class="descname">InternalErrorException</tt><a class="headerlink" href="#InternalErrorException" title="永久链接至目标">¶</a></dt>
+<dd><p>用于处理 500 内部服务器错误(<em>Internal Server Error</em>)。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="NotImplementedException">
+<em class="property">exception </em><tt class="descname">NotImplementedException</tt><a class="headerlink" href="#NotImplementedException" title="永久链接至目标">¶</a></dt>
+<dd><p>用于处理 501 未实现(<em>Not Implemented</em>)错误。</p>
+</dd></dl>
+
+<p>你可以从控制器抛出这些异常，表示错误状态或 HTTP 错误。使用 HTTP 异常的一个例子
+可以是，对未找到的数据渲染 404 页面:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">findById</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$post</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="s1">&#39;Could not find that post&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>通过对 HTTP 错误使用异常，你可以在保持代码整洁的同时，对客户端应用程序和用户提供
+RESTful 响应。</p>
+<p>另外，还有以下框架层的异常，会从 CakePHP 的一些核心组件抛出：</p>
+<dl class="exception">
+<dt id="MissingViewException">
+<em class="property">exception </em><tt class="descname">MissingViewException</tt><a class="headerlink" href="#MissingViewException" title="永久链接至目标">¶</a></dt>
+<dd><p>无法找到选中的视图(<em>view</em>)文件。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="MissingLayoutException">
+<em class="property">exception </em><tt class="descname">MissingLayoutException</tt><a class="headerlink" href="#MissingLayoutException" title="永久链接至目标">¶</a></dt>
+<dd><p>无法找到选中的布局(<em>layout</em>)。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="MissingHelperException">
+<em class="property">exception </em><tt class="descname">MissingHelperException</tt><a class="headerlink" href="#MissingHelperException" title="永久链接至目标">¶</a></dt>
+<dd><p>无法找到助件(<em>helper</em>)。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="MissingBehaviorException">
+<em class="property">exception </em><tt class="descname">MissingBehaviorException</tt><a class="headerlink" href="#MissingBehaviorException" title="永久链接至目标">¶</a></dt>
+<dd><p>无法找到配置的行为(<em>behavior</em>)。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="MissingComponentException">
+<em class="property">exception </em><tt class="descname">MissingComponentException</tt><a class="headerlink" href="#MissingComponentException" title="永久链接至目标">¶</a></dt>
+<dd><p>无法找到配置的组件(<em>component</em>)。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="MissingTaskException">
+<em class="property">exception </em><tt class="descname">MissingTaskException</tt><a class="headerlink" href="#MissingTaskException" title="永久链接至目标">¶</a></dt>
+<dd><p>无法找到配置的任务。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="MissingShellException">
+<em class="property">exception </em><tt class="descname">MissingShellException</tt><a class="headerlink" href="#MissingShellException" title="永久链接至目标">¶</a></dt>
+<dd><p>无法找到外壳类(<em>shelll class</em>)。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="MissingShellMethodException">
+<em class="property">exception </em><tt class="descname">MissingShellMethodException</tt><a class="headerlink" href="#MissingShellMethodException" title="永久链接至目标">¶</a></dt>
+<dd><p>选中的外壳类(<em>shelll class</em>)没有该命名的方法。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="MissingDatabaseException">
+<em class="property">exception </em><tt class="descname">MissingDatabaseException</tt><a class="headerlink" href="#MissingDatabaseException" title="永久链接至目标">¶</a></dt>
+<dd><p>无法找到配置的数据库。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="MissingConnectionException">
+<em class="property">exception </em><tt class="descname">MissingConnectionException</tt><a class="headerlink" href="#MissingConnectionException" title="永久链接至目标">¶</a></dt>
+<dd><p>模型的连接缺失。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="MissingTableException">
+<em class="property">exception </em><tt class="descname">MissingTableException</tt><a class="headerlink" href="#MissingTableException" title="永久链接至目标">¶</a></dt>
+<dd><p>模型的表无法在 CakePHP 的缓存或数据源中找到。在向数据源添加一个新表之后，
+模型缓存(默认在 tmp/cache/models 目录中)必须清除。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="MissingActionException">
+<em class="property">exception </em><tt class="descname">MissingActionException</tt><a class="headerlink" href="#MissingActionException" title="永久链接至目标">¶</a></dt>
+<dd><p>无法找到请求的控制器动作。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="MissingControllerException">
+<em class="property">exception </em><tt class="descname">MissingControllerException</tt><a class="headerlink" href="#MissingControllerException" title="永久链接至目标">¶</a></dt>
+<dd><p>无法找到请求的控制器。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="PrivateActionException">
+<em class="property">exception </em><tt class="descname">PrivateActionException</tt><a class="headerlink" href="#PrivateActionException" title="永久链接至目标">¶</a></dt>
+<dd><p>访问私有动作。或者是试图访问 private/protected/前缀为 _ 的动作，或者是试图
+不正确地访问前缀路由。</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="CakeException">
+<em class="property">exception </em><tt class="descname">CakeException</tt><a class="headerlink" href="#CakeException" title="永久链接至目标">¶</a></dt>
+<dd><p>CakePHP 的异常基类。CakePHP 抛出的所有框架层基类都要扩展这个类。</p>
+</dd></dl>
+
+<p>这些异常类都扩展 <a class="reference internal" href="#CakeException" title="CakeException"><tt class="xref php php-exc docutils literal"><span class="pre">CakeException</span></tt></a>。通过扩展 CakeException，你可以创建
+自己的&#8217;框架&#8217;错误。CakePHP 会抛出的所有标准异常都扩展了 CakeException。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.3 新版功能: </span>添加了 CakeBaseException。</p>
+</div>
+<dl class="exception">
+<dt id="CakeBaseException">
+<em class="property">exception </em><tt class="descname">CakeBaseException</tt><a class="headerlink" href="#CakeBaseException" title="永久链接至目标">¶</a></dt>
+<dd><p>CakePHP 的异常基类。
+所有上面的 CakeExceptions 和 HttpException 扩展这个类。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CakeBaseException::responseHeader">
+<tt class="descclassname">CakeBaseException::</tt><tt class="descname">responseHeader</tt><big>(</big><em>$header = null</em>, <em>$value = null</em><big>)</big><a class="headerlink" href="#CakeBaseException::responseHeader" title="永久链接至目标">¶</a></dt>
+<dd><p>参看 <a class="reference internal" href="../controllers/request-response.html#CakeResponse::header" title="CakeResponse::header"><tt class="xref php php-func docutils literal"><span class="pre">CakeResponse::header()</span></tt></a>。</p>
+</dd></dl>
+
+<p>所有 Http 和 CakePHP 异常扩展 CakeBaseException 类，该类有一个方法添加头部信息到
+响应。例如在抛出 405 MethodNotAllowedException 时，rfc2616 指出：
+&#8220;响应必须包括一个 Allow 头部信息，包含一个对请求的资源的合法方法的列表。&#8221;</p>
+</div>
+<div class="section" id="http">
+<h2>在控制器中使用 HTTP 异常<a class="headerlink" href="#http" title="永久链接至标题">¶</a></h2>
+<p>你可以从控制器动作中抛出任何 HTTP 相关的异常来表示错误状态。例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">findById</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$post</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nb">compact</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>上述代码会使配置的 <tt class="docutils literal"><span class="pre">Exception.handler</span></tt> 捕获和处理 <a class="reference internal" href="#NotFoundException" title="NotFoundException"><tt class="xref php php-exc docutils literal"><span class="pre">NotFoundException</span></tt></a>。
+默认情况下，这会导致一个错误页面，并记录该异常。</p>
+</div>
+<div class="section" id="error-views">
+<span id="id3"></span><h2>异常的渲染器<a class="headerlink" href="#error-views" title="永久链接至标题">¶</a></h2>
+<dl class="class">
+<dt id="ExceptionRenderer">
+<em class="property">class </em><tt class="descname">ExceptionRenderer</tt><big>(</big><em>Exception $exception</em><big>)</big><a class="headerlink" href="#ExceptionRenderer" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>在 <tt class="docutils literal"><span class="pre">CakeErrorController</span></tt> 的协助下，ExceptionRenderer 类负责为所有应用程序抛出
+的异常渲染错误页面。</p>
+<p>错误页面的视图在 <tt class="docutils literal"><span class="pre">app/View/Errors/</span></tt> 目录中。对所有 4xx 和 5xx 错误，分别使用
+视图文件 <tt class="docutils literal"><span class="pre">error400.ctp</span></tt> 和 <tt class="docutils literal"><span class="pre">error500.ctp</span></tt>。你可以根据需要定制这些视图。默认
+情况下，错误页面也使用布局 <tt class="docutils literal"><span class="pre">app/Layouts/default.ctp</span></tt>。如果想要对错误页面使用
+另一个布局，例如 <tt class="docutils literal"><span class="pre">app/Layouts/my_error.ctp</span></tt>，那么只需编辑错误视图，添加语句
+<tt class="docutils literal"><span class="pre">$this-&gt;layout</span> <span class="pre">=</span> <span class="pre">'my_error';</span></tt> 到 <tt class="docutils literal"><span class="pre">error400.ctp</span></tt> 和 <tt class="docutils literal"><span class="pre">error500.ctp</span></tt>。</p>
+<p>每个框架层异常都有自己位于核心模板中的视图文件，但你真的不必定制它们，因为它们只
+在开发过程中使用。在关闭调试后，所有框架层异常都会转变为
+<tt class="docutils literal"><span class="pre">InternalErrorException</span></tt>。</p>
+</div>
+<div class="section" id="index-0">
+<span id="id4"></span><h2>创建你自己的应用程序的异常<a class="headerlink" href="#index-0" title="永久链接至标题">¶</a></h2>
+<p>你可以使用任何内置的
+<a class="reference external" href="http://php.net/manual/en/spl.exceptions.php">SPL exceptions</a> 、 <tt class="docutils literal"><span class="pre">Exception</span></tt>
+本身或 <a class="reference internal" href="#CakeException" title="CakeException"><tt class="xref php php-exc docutils literal"><span class="pre">CakeException</span></tt></a> 来创建你自己的应用程序的异常。扩展 Exception 类
+或者 SPL 异常的应用程序异常在生产模式下会被当作 500 错误对待。
+<a class="reference internal" href="#CakeException" title="CakeException"><tt class="xref php php-exc docutils literal"><span class="pre">CakeException</span></tt></a> 比较特别，所有 <a class="reference internal" href="#CakeException" title="CakeException"><tt class="xref php php-exc docutils literal"><span class="pre">CakeException</span></tt></a>  对象会根据它们
+使用的编码被强制转换为 500 或 404 错误。在开发模式下，<a class="reference internal" href="#CakeException" title="CakeException"><tt class="xref php php-exc docutils literal"><span class="pre">CakeException</span></tt></a>
+对象只需新增一个匹配类名的新模板就能提供有用的信息。如果应用程序包含如下异常:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MissingWidgetException</span> <span class="k">extends</span> <span class="nx">CakeException</span> <span class="p">{};</span>
+</pre></div>
+</div>
+<p>你可以创建 <tt class="docutils literal"><span class="pre">app/View/Errors/missing_widget.ctp</span></tt>，就能提供良好的开发错误提示。
+在生产模式下，上述错误会被当作 500 错误。<a class="reference internal" href="#CakeException" title="CakeException"><tt class="xref php php-exc docutils literal"><span class="pre">CakeException</span></tt></a> 的构造函数被
+扩展了，让你可以传入数据数组。该数组会被嵌入 messageTemplate 模板、以及在开发
+模式下表示错误的视图中。这让你可以通过为错误提供更多的上下文，来创建富含数据的
+异常。你也可以提供消息模板，让原生的 <tt class="docutils literal"><span class="pre">__toString()</span></tt> 方法可以正常工作:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MissingWidgetException</span> <span class="k">extends</span> <span class="nx">CakeException</span> <span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$_messageTemplate</span> <span class="o">=</span> <span class="s1">&#39;Seems that %s is missing.&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">throw</span> <span class="k">new</span> <span class="nx">MissingWidgetException</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;widget&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Pointy&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>当被内置的异常处理器捕获时，在错误视图模板中会得到一个 <tt class="docutils literal"><span class="pre">$widget</span></tt> 变量。而且，
+如果把异常转换(<em>cast</em>)为字符串，或者调用它的 <tt class="docutils literal"><span class="pre">getMessage()</span></tt> 方法，就会得到
+<tt class="docutils literal"><span class="pre">Seems</span> <span class="pre">that</span> <span class="pre">Pointy</span> <span class="pre">is</span> <span class="pre">missing.</span></tt>。这让你可以轻松快速地创建你自己富含(信息)的
+开发错误，就像 CakePHP 内部使用的一样。</p>
+<div class="section" id="id5">
+<h3>创建自定义状态编码<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>在创建异常时改变编码，就能创建自定义的 HTTP 状态编码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">throw</span> <span class="k">new</span> <span class="nx">MissingWidgetHelperException</span><span class="p">(</span><span class="s1">&#39;Its not here&#39;</span><span class="p">,</span> <span class="mi">501</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>就会创建一个 <tt class="docutils literal"><span class="pre">501</span></tt> 响应编码，你可以使用任何 HTTP 状态编码。在开发中，如果你的
+异常没有一个特定的模板，而你使用了大于等于 <tt class="docutils literal"><span class="pre">500</span></tt> 的编码，你就会看到
+<tt class="docutils literal"><span class="pre">error500</span></tt> 模板。对于任何其它错误编码，就会得到 <tt class="docutils literal"><span class="pre">error400</span></tt> 模板。如果你为
+自定义异常定义了错误模板，在开发模式下就会使用该模板。如果你甚至在生产环境中也要
+使用自己的异常处理逻辑，请看下一节。</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>扩展和实现你自己的异常处理器<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>你有几种方式实现应用程序相关的异常处理。每种方式给你提供对异常处理过程的不同控制。</p>
+<ul class="simple">
+<li>设置 <tt class="docutils literal"><span class="pre">Configure::write('Exception.handler',</span> <span class="pre">'YourClass::yourMethod');</span></tt></li>
+<li>创建 <tt class="docutils literal"><span class="pre">AppController::appError();</span></tt></li>
+<li>设置 <tt class="docutils literal"><span class="pre">Configure::write('Exception.renderer',</span> <span class="pre">'YourClass');</span></tt></li>
+</ul>
+<p>在下面几节中，我们会详细描述每种方式不同的方法和好处。</p>
+</div>
+<div class="section" id="exception-handler">
+<h2>用 <cite>Exception.handler</cite> 创建你自己的异常处理器<a class="headerlink" href="#exception-handler" title="永久链接至标题">¶</a></h2>
+<p>创建你自己的异常处理器，给你提供了对异常处理过程的完全控制。你选择的类应当在
+<tt class="docutils literal"><span class="pre">app/Config/bootstrap.php</span></tt> 文件中加载，这样它才能够用于处理任何异常。你可以把
+处理器定义为任何回调类型。设置了 <tt class="docutils literal"><span class="pre">Exception.handler</span></tt>，CakePHP 就会忽略所有其它
+的异常设置。下面就是一个自定义异常处理设置的例子:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// in app/Config/core.php</span>
+<span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Exception.handler&#39;</span><span class="p">,</span> <span class="s1">&#39;AppExceptionHandler::handle&#39;</span><span class="p">);</span>
+
+<span class="c1">// in app/Config/bootstrap.php</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppExceptionHandler&#39;</span><span class="p">,</span> <span class="s1">&#39;Lib&#39;</span><span class="p">);</span>
+
+<span class="c1">// in app/Lib/AppExceptionHandler.php</span>
+<span class="k">class</span> <span class="nc">AppExceptionHandler</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nv">$error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;Oh noes! &#39;</span> <span class="o">.</span> <span class="nv">$error</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>你可以在 <tt class="docutils literal"><span class="pre">handleException</span></tt> 方法中运行任何你想要运行的代码。上面的代码会输出
+&#8216;Oh noes! &#8216; 加上异常消息。你可以定义处理器为任何类型的回调，如果使用 PHP 5.3
+甚至可以是匿名函数:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Exception.handler&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">&#39;Ruh roh &#39;</span> <span class="o">.</span> <span class="nv">$error</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>通过创建自定义异常处理器，你可以为应用程序的异常提供自定义错误处理。在提供作为
+异常处理器的方法中，你可以这么做:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// in app/Lib/AppErrorHandler.php</span>
+<span class="k">class</span> <span class="nc">AppErrorHandler</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">handleException</span><span class="p">(</span><span class="nv">$error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$error</span> <span class="nx">instanceof</span> <span class="nx">MissingWidgetException</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">handleMissingWidget</span><span class="p">(</span><span class="nv">$error</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">// 做其它事情。</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="appcontroller-apperror">
+<span id="index-1"></span><h2>使用 AppController::appError()<a class="headerlink" href="#appcontroller-apperror" title="永久链接至标题">¶</a></h2>
+<p>实现该方法是实现自定义异常处理器的另一种方法。这主要是为向后兼容而提供的，新的
+应用程序不建议使用。会调用这个控制器方法，而不会调用默认的异常渲染过程。这只接受
+抛出的异常作为其唯一的参数。应当在这个方法中实现错误处理:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">appError</span><span class="p">(</span><span class="nv">$error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 这里是自定义逻辑。</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exception-renderer">
+<h2>在 Exception.renderer 使用自定义渲染器来处理应用程序异常<a class="headerlink" href="#exception-renderer" title="永久链接至标题">¶</a></h2>
+<p>如果你不想控制异常处理，但要改变如何渲染异常，你可以用 <tt class="docutils literal"><span class="pre">Configure::write(</span>
+<span class="pre">'Exception.renderer',</span> <span class="pre">'AppExceptionRenderer');</span></tt> 选择一个类来渲染异常页面。默认
+情况下会使用 :php:class`ExceptionRenderer`。你的自定义异常渲染类应当放在
+<tt class="docutils literal"><span class="pre">app/Lib/Error</span></tt> 目录中，或者在一个启动加载的 Lib 路径内的 <tt class="docutils literal"><span class="pre">Error</span></tt> 目录内。
+在自定义异常渲染类中，你可以为应用程序相关的错误提供特殊的处理:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// in app/Lib/Error/AppExceptionRenderer.php</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;ExceptionRenderer&#39;</span><span class="p">,</span> <span class="s1">&#39;Error&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">AppExceptionRenderer</span> <span class="k">extends</span> <span class="nx">ExceptionRenderer</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">missingWidget</span><span class="p">(</span><span class="nv">$error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;Oops that widget is missing!&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>上述代码会处理任何 <tt class="docutils literal"><span class="pre">MissingWidgetException</span></tt> 类型的异常，让你可以为这些应用程序
+异常提供自定义的显示/处理逻辑。异常处理方法接受被处理的异常为它们的参数。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">你的自定义渲染器在构造函数中期待一个异常，并要实现 render 方法。不这么做会引起额外的错误。</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">如果你使用自定义 <tt class="docutils literal"><span class="pre">Exception.handler</span></tt>，该设置就会无效，除非在你的实现中引用它。</p>
+</div>
+<div class="section" id="id7">
+<h3>创建自定义控制器来处理异常<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>在你的 ExceptionRenderer 子类中，你可以用 <tt class="docutils literal"><span class="pre">_getController</span></tt> 方法来返回自定义
+控制器来处理错误。默认情况下，CakePHP 使用 <tt class="docutils literal"><span class="pre">CakeErrorController</span></tt>，这会省略一些
+正常的回调，以帮助确保总能显示错误。不过，你可能在应用程序中需要一个更加定制化的
+错误处理控制器。在你的 <tt class="docutils literal"><span class="pre">AppExceptionRenderer</span></tt> 类中实现 <tt class="docutils literal"><span class="pre">_getController</span></tt> 方法，
+你就能使用任何你想用的控制器:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppExceptionRenderer</span> <span class="k">extends</span> <span class="nx">ExceptionRenderer</span> <span class="p">{</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">_getController</span><span class="p">(</span><span class="nv">$exception</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;SuperCustomError&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">SuperCustomErrorController</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>或者，你可以在 <tt class="docutils literal"><span class="pre">app/Controller</span></tt> 目录中引入核心的 CakeErrorController，来重载它。
+如果你使用自定义控制器来进行错误处理，确保在构造函数或 render 方法中进行了所有
+需要的设置，因为这些是内置的 <tt class="docutils literal"><span class="pre">ErrorHandler</span></tt> 类唯一直接调用的方法。</p>
+</div>
+<div class="section" id="id8">
+<h3>在日志中记录异常<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<p>用内置的异常处理，你只要在 core.php 文件中设置 <tt class="docutils literal"><span class="pre">Exception.log</span></tt> 为 true，就可以
+在日志中记录所有由 ErrorHandler 处理的异常。启用之后，就会把每个异常记录到
+<a class="reference internal" href="../core-libraries/logging.html#CakeLog" title="CakeLog"><tt class="xref php php-class docutils literal"><span class="pre">CakeLog</span></tt></a> 和配置的日志中。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">如果你使用自定义的 <tt class="docutils literal"><span class="pre">Exception.handler</span></tt>，这个设置就不起作用，除非在你的实现
+中引用它。</p>
+</div>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development.html">开发</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">路由</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sessions.html">会话</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">异常</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">错误处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">调试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">测试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rest.html">REST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dispatch-filters.html">调度器过滤器</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">异常</a><ul>
+<li><a class="reference internal" href="#id2">异常的配置</a></li>
+<li><a class="reference internal" href="#exception">Exception 类</a></li>
+<li><a class="reference internal" href="#cakephp">CakePHP 的内置异常</a></li>
+<li><a class="reference internal" href="#http">在控制器中使用 HTTP 异常</a></li>
+<li><a class="reference internal" href="#error-views">异常的渲染器</a></li>
+<li><a class="reference internal" href="#index-0">创建你自己的应用程序的异常</a><ul>
+<li><a class="reference internal" href="#id5">创建自定义状态编码</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">扩展和实现你自己的异常处理器</a></li>
+<li><a class="reference internal" href="#exception-handler">用 <cite>Exception.handler</cite> 创建你自己的异常处理器</a></li>
+<li><a class="reference internal" href="#appcontroller-apperror">使用 AppController::appError()</a></li>
+<li><a class="reference internal" href="#exception-renderer">在 Exception.renderer 使用自定义渲染器来处理应用程序异常</a><ul>
+<li><a class="reference internal" href="#id7">创建自定义控制器来处理异常</a></li>
+<li><a class="reference internal" href="#id8">在日志中记录异常</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="errors.html" title="错误处理" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="sessions.html" title="会话" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

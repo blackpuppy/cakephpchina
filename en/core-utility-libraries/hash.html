@@ -1,0 +1,1383 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Hash" lang="en" name="title" />
+<meta content="array array,path array,array name,numeric key,regular expression,result set,person name,brackets,syntax,cakephp,elements,php,set path" lang="en" name="keywords" />
+
+    <title>Hash &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Utilities" href="../core-libraries/toc-utilities.html" />
+    <link rel="next" title="HttpSocket" href="httpsocket.html" />
+    <link rel="prev" title="Folder &amp; File" href="file-folder.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/core-utility-libraries/hash.html" /><link rel="alternate" hreflang="es" href="../../es/core-utility-libraries/hash.html" /><link rel="alternate" hreflang="ja" href="../../ja/core-utility-libraries/hash.html" /><link rel="alternate" hreflang="fr" href="../../fr/core-utility-libraries/hash.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/core-utility-libraries/hash.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries.html"  itemprop="url"><span itemprop="title">Core Libraries</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries/toc-utilities.html" accesskey="U" itemprop="url"><span itemprop="title">Utilities</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/core-utility-libraries/hash.html">pt</a></li>
+				
+					<li><a href="../../es/core-utility-libraries/hash.html">es</a></li>
+				
+					<li><a href="../../ja/core-utility-libraries/hash.html">ja</a></li>
+				
+					<li><a href="../../fr/core-utility-libraries/hash.html">fr</a></li>
+				
+					<li><a href="../../zh/core-utility-libraries/hash.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/core-utility-libraries/hash.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="hash">
+<h1>Hash<a class="headerlink" href="#hash" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="Hash">
+<em class="property">class </em><tt class="descname">Hash</tt><a class="headerlink" href="#Hash" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.2.</span></p>
+</div>
+<p>Array management, if done right, can be a very powerful and useful
+tool for building smarter, more optimized code. CakePHP offers a
+very useful set of static utilities in the Hash class that allow you
+to do just that.</p>
+<p>CakePHP&#8217;s Hash class can be called from any model or controller in
+the same way Inflector is called. Example: <a class="reference internal" href="#Hash::combine" title="Hash::combine"><tt class="xref php php-meth docutils literal"><span class="pre">Hash::combine()</span></tt></a>.</p>
+<div class="section" id="hash-path-syntax">
+<span id="id1"></span><h2>Hash path syntax<a class="headerlink" href="#hash-path-syntax" title="Permalink to this headline">¶</a></h2>
+<p>The path syntax described below is used by all the methods in <tt class="docutils literal"><span class="pre">Hash</span></tt>. Not all
+parts of the path syntax are available in all methods. A path expression is
+made of any number of tokens. Tokens are composed of two groups. Expressions,
+are used to traverse the array data, while matchers are used to qualify
+elements. You apply matchers to expression elements.</p>
+<div class="section" id="expression-types">
+<h3>Expression Types<a class="headerlink" href="#expression-types" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Expression</th>
+<th class="head">Definition</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">{n}</span></tt></td>
+<td>Represents a numeric key. Will match
+any string or numeric key.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">{s}</span></tt></td>
+<td>Represents a string. Will match any
+string value including numeric string
+values.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">Foo</span></tt></td>
+<td>Matches keys with the exact same value.</td>
+</tr>
+</tbody>
+</table>
+<p>All expression elements are supported by all methods. In addition to expression
+elements, you can use attribute matching with certain methods. They are <tt class="docutils literal"><span class="pre">extract()</span></tt>,
+<tt class="docutils literal"><span class="pre">combine()</span></tt>, <tt class="docutils literal"><span class="pre">format()</span></tt>, <tt class="docutils literal"><span class="pre">check()</span></tt>, <tt class="docutils literal"><span class="pre">map()</span></tt>, <tt class="docutils literal"><span class="pre">reduce()</span></tt>,
+<tt class="docutils literal"><span class="pre">apply()</span></tt>, <tt class="docutils literal"><span class="pre">sort()</span></tt>, <tt class="docutils literal"><span class="pre">insert()</span></tt>, <tt class="docutils literal"><span class="pre">remove()</span></tt> and <tt class="docutils literal"><span class="pre">nest()</span></tt>.</p>
+</div>
+<div class="section" id="attribute-matching-types">
+<h3>Attribute Matching Types<a class="headerlink" href="#attribute-matching-types" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Matcher</th>
+<th class="head">Definition</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">[id]</span></tt></td>
+<td>Match elements with a given array key.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">[id=2]</span></tt></td>
+<td>Match elements with id equal to 2.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">[id!=2]</span></tt></td>
+<td>Match elements with id not equal to 2.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">[id&gt;2]</span></tt></td>
+<td>Match elements with id greater than 2.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">[id&gt;=2]</span></tt></td>
+<td>Match elements with id greater than
+or equal to 2.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">[id&lt;2]</span></tt></td>
+<td>Match elements with id less than 2</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">[id&lt;=2]</span></tt></td>
+<td>Match elements with id less than
+or equal to 2.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">[text=/.../]</span></tt></td>
+<td>Match elements that have values matching
+the regular expression inside <tt class="docutils literal"><span class="pre">...</span></tt>.</td>
+</tr>
+</tbody>
+</table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.5: </span>Matcher support was added to <tt class="docutils literal"><span class="pre">insert()</span></tt> and <tt class="docutils literal"><span class="pre">remove()</span></tt>.</p>
+</div>
+<dl class="staticmethod">
+<dt id="Hash::get">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">get</tt><big>(</big><em>array $data</em>, <em>$path</em>, <em>$default = null</em><big>)</big><a class="headerlink" href="#Hash::get" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mixed</td>
+</tr>
+</tbody>
+</table>
+<p><tt class="docutils literal"><span class="pre">get()</span></tt> is a simplified version of <tt class="docutils literal"><span class="pre">extract()</span></tt>, it only supports direct
+path expressions. Paths with <tt class="docutils literal"><span class="pre">{n}</span></tt>, <tt class="docutils literal"><span class="pre">{s}</span></tt> or matchers are not
+supported. Use <tt class="docutils literal"><span class="pre">get()</span></tt> when you want exactly one value out of an array.
+The optional third argument will be returned if the requested path is not
+found in the array.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.5: </span>The optional third argument <tt class="docutils literal"><span class="pre">$default</span> <span class="pre">=</span> <span class="pre">null</span></tt> was added.</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::extract">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">extract</tt><big>(</big><em>array $data</em>, <em>$path</em><big>)</big><a class="headerlink" href="#Hash::extract" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p><tt class="docutils literal"><span class="pre">Hash::extract()</span></tt> supports all expression, and matcher components of
+<a class="reference internal" href="#hash-path-syntax"><em>Hash path syntax</em></a>. You can use extract to retrieve data from arrays,
+along arbitrary paths quickly without having to loop through the data
+structures. Instead you use path expressions to qualify which elements you
+want returned</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Common Usage:</span>
+<span class="nv">$users</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">);</span>
+<span class="nv">$results</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">extract</span><span class="p">(</span><span class="nv">$users</span><span class="p">,</span> <span class="s1">&#39;{n}.User.id&#39;</span><span class="p">);</span>
+<span class="c1">// $results equals:</span>
+<span class="c1">// array(1,2,3,4,5,...);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::insert">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">insert</tt><big>(</big><em>array $data</em>, <em>$path</em>, <em>$values = null</em><big>)</big><a class="headerlink" href="#Hash::insert" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Inserts $data into an array as defined by <tt class="docutils literal"><span class="pre">$path</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$a</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;pages&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;page&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">insert</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="s1">&#39;files&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;files&#39;</span><span class="p">));</span>
+<span class="c1">// $result now looks like:</span>
+<span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nx">pages</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">page</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="nx">files</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">files</span>
+        <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>You can use paths using <tt class="docutils literal"><span class="pre">{n}</span></tt> and <tt class="docutils literal"><span class="pre">{s}</span></tt> to insert data into multiple
+points:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$users</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+<span class="nv">$users</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">insert</span><span class="p">(</span><span class="nv">$users</span><span class="p">,</span> <span class="s1">&#39;{n}.User.new&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.5: </span>As of 2.5.0 attribute matching expressions work with insert().</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::remove">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">remove</tt><big>(</big><em>array $data</em>, <em>$path</em><big>)</big><a class="headerlink" href="#Hash::remove" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Removes all elements from an array that match $path.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$a</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;pages&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;page&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;files&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;files&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">remove</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="s1">&#39;files&#39;</span><span class="p">);</span>
+<span class="cm">/* $result now looks like:</span>
+<span class="cm">    Array</span>
+<span class="cm">    (</span>
+<span class="cm">        [pages] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [name] =&gt; page</span>
+<span class="cm">            )</span>
+
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<p>Using <tt class="docutils literal"><span class="pre">{n}</span></tt> and <tt class="docutils literal"><span class="pre">{s}</span></tt> will allow you to remove multiple values at once.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.5: </span>As of 2.5.0 attribute matching expressions work with remove()</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::combine">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">combine</tt><big>(</big><em>array $data</em>, <em>$keyPath</em>, <em>$valuePath = null</em>, <em>$groupPath = null</em><big>)</big><a class="headerlink" href="#Hash::combine" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Creates an associative array using a $keyPath as the path to build its keys,
+and optionally $valuePath as path to get the values. If $valuePath is not
+specified, or doesn&#8217;t match anything, values will be initialized to null.
+You can optionally group the values by what is obtained when following the
+path specified in $groupPath.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$a</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;User&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s1">&#39;group_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;Data&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;user&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;mariano.iglesias&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Mariano Iglesias&#39;</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;User&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">14</span><span class="p">,</span>
+            <span class="s1">&#39;group_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s1">&#39;Data&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;user&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;phpnut&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Larry E. Masters&#39;</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">combine</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="s1">&#39;{n}.User.id&#39;</span><span class="p">);</span>
+<span class="cm">/* $result now looks like:</span>
+<span class="cm">    Array</span>
+<span class="cm">    (</span>
+<span class="cm">        [2] =&gt;</span>
+<span class="cm">        [14] =&gt;</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">combine</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="s1">&#39;{n}.User.id&#39;</span><span class="p">,</span> <span class="s1">&#39;{n}.User.Data&#39;</span><span class="p">);</span>
+<span class="cm">/* $result now looks like:</span>
+<span class="cm">    Array</span>
+<span class="cm">    (</span>
+<span class="cm">        [2] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [user] =&gt; mariano.iglesias</span>
+<span class="cm">                [name] =&gt; Mariano Iglesias</span>
+<span class="cm">            )</span>
+<span class="cm">        [14] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [user] =&gt; phpnut</span>
+<span class="cm">                [name] =&gt; Larry E. Masters</span>
+<span class="cm">            )</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">combine</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="s1">&#39;{n}.User.id&#39;</span><span class="p">,</span> <span class="s1">&#39;{n}.User.Data.name&#39;</span><span class="p">);</span>
+<span class="cm">/* $result now looks like:</span>
+<span class="cm">    Array</span>
+<span class="cm">    (</span>
+<span class="cm">        [2] =&gt; Mariano Iglesias</span>
+<span class="cm">        [14] =&gt; Larry E. Masters</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">combine</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="s1">&#39;{n}.User.id&#39;</span><span class="p">,</span> <span class="s1">&#39;{n}.User.Data&#39;</span><span class="p">,</span> <span class="s1">&#39;{n}.User.group_id&#39;</span><span class="p">);</span>
+<span class="cm">/* $result now looks like:</span>
+<span class="cm">    Array</span>
+<span class="cm">    (</span>
+<span class="cm">        [1] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [2] =&gt; Array</span>
+<span class="cm">                    (</span>
+<span class="cm">                        [user] =&gt; mariano.iglesias</span>
+<span class="cm">                        [name] =&gt; Mariano Iglesias</span>
+<span class="cm">                    )</span>
+<span class="cm">            )</span>
+<span class="cm">        [2] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [14] =&gt; Array</span>
+<span class="cm">                    (</span>
+<span class="cm">                        [user] =&gt; phpnut</span>
+<span class="cm">                        [name] =&gt; Larry E. Masters</span>
+<span class="cm">                    )</span>
+<span class="cm">            )</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">combine</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="s1">&#39;{n}.User.id&#39;</span><span class="p">,</span> <span class="s1">&#39;{n}.User.Data.name&#39;</span><span class="p">,</span> <span class="s1">&#39;{n}.User.group_id&#39;</span><span class="p">);</span>
+<span class="cm">/* $result now looks like:</span>
+<span class="cm">    Array</span>
+<span class="cm">    (</span>
+<span class="cm">        [1] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [2] =&gt; Mariano Iglesias</span>
+<span class="cm">            )</span>
+<span class="cm">        [2] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [14] =&gt; Larry E. Masters</span>
+<span class="cm">            )</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<p>You can provide array&#8217;s for both $keyPath and $valuePath. If you do this,
+the first value will be used as a format string, for values extracted by the
+other paths:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">combine</span><span class="p">(</span>
+    <span class="nv">$a</span><span class="p">,</span>
+    <span class="s1">&#39;{n}.User.id&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;%s: %s&#39;</span><span class="p">,</span> <span class="s1">&#39;{n}.User.Data.user&#39;</span><span class="p">,</span> <span class="s1">&#39;{n}.User.Data.name&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;{n}.User.group_id&#39;</span>
+<span class="p">);</span>
+<span class="cm">/* $result now looks like:</span>
+<span class="cm">    Array</span>
+<span class="cm">    (</span>
+<span class="cm">        [1] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [2] =&gt; mariano.iglesias: Mariano Iglesias</span>
+<span class="cm">            )</span>
+<span class="cm">        [2] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [14] =&gt; phpnut: Larry E. Masters</span>
+<span class="cm">            )</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">combine</span><span class="p">(</span>
+    <span class="nv">$a</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;%s: %s&#39;</span><span class="p">,</span> <span class="s1">&#39;{n}.User.Data.user&#39;</span><span class="p">,</span> <span class="s1">&#39;{n}.User.Data.name&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;{n}.User.id&#39;</span>
+<span class="p">);</span>
+<span class="cm">/* $result now looks like:</span>
+<span class="cm">    Array</span>
+<span class="cm">    (</span>
+<span class="cm">        [mariano.iglesias: Mariano Iglesias] =&gt; 2</span>
+<span class="cm">        [phpnut: Larry E. Masters] =&gt; 14</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::format">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">format</tt><big>(</big><em>array $data</em>, <em>array $paths</em>, <em>$format</em><big>)</big><a class="headerlink" href="#Hash::format" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a series of values extracted from an array, formatted with a
+format string:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Person&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;first_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Nate&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;last_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Abele&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;city&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Boston&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;state&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;MA&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;something&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;42&#39;</span>
+        <span class="p">)</span>
+    <span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Person&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;first_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Larry&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;last_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Masters&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;city&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Boondock&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;state&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;TN&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;something&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;{0}&#39;</span>
+        <span class="p">)</span>
+    <span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Person&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;first_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Garrett&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;last_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Woodworth&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;city&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Venice Beach&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;state&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CA&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;something&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;{1}&#39;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nv">$res</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">format</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;{n}.Person.first_name&#39;</span><span class="p">,</span> <span class="s1">&#39;{n}.Person.something&#39;</span><span class="p">),</span> <span class="s1">&#39;%2$d, %1$s&#39;</span><span class="p">);</span>
+<span class="cm">/*</span>
+<span class="cm">Array</span>
+<span class="cm">(</span>
+<span class="cm">    [0] =&gt; 42, Nate</span>
+<span class="cm">    [1] =&gt; 0, Larry</span>
+<span class="cm">    [2] =&gt; 0, Garrett</span>
+<span class="cm">)</span>
+<span class="cm">*/</span>
+
+<span class="nv">$res</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">format</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;{n}.Person.first_name&#39;</span><span class="p">,</span> <span class="s1">&#39;{n}.Person.something&#39;</span><span class="p">),</span> <span class="s1">&#39;%1$s, %2$d&#39;</span><span class="p">);</span>
+<span class="cm">/*</span>
+<span class="cm">Array</span>
+<span class="cm">(</span>
+<span class="cm">    [0] =&gt; Nate, 42</span>
+<span class="cm">    [1] =&gt; Larry, 0</span>
+<span class="cm">    [2] =&gt; Garrett, 0</span>
+<span class="cm">)</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::contains">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">contains</tt><big>(</big><em>array $data</em>, <em>array $needle</em><big>)</big><a class="headerlink" href="#Hash::contains" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+<p>Determines if one Hash or array contains the exact keys and values
+of another:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$a</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;main&#39;</span><span class="p">),</span>
+    <span class="mi">1</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;about&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$b</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;main&#39;</span><span class="p">),</span>
+    <span class="mi">1</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;about&#39;</span><span class="p">),</span>
+    <span class="mi">2</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;contact&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;a&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;b&#39;</span>
+<span class="p">);</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">contains</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$a</span><span class="p">);</span>
+<span class="c1">// true</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">contains</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">);</span>
+<span class="c1">// false</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">contains</span><span class="p">(</span><span class="nv">$b</span><span class="p">,</span> <span class="nv">$a</span><span class="p">);</span>
+<span class="c1">// true</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::check">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">check</tt><big>(</big><em>array $data</em>, <em>string $path = null</em><big>)</big><a class="headerlink" href="#Hash::check" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+<p>Checks if a particular path is set in an array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$set</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;My Index 1&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;First&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;The first item&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">check</span><span class="p">(</span><span class="nv">$set</span><span class="p">,</span> <span class="s1">&#39;My Index 1.First&#39;</span><span class="p">);</span>
+<span class="c1">// $result == True</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">check</span><span class="p">(</span><span class="nv">$set</span><span class="p">,</span> <span class="s1">&#39;My Index 1&#39;</span><span class="p">);</span>
+<span class="c1">// $result == True</span>
+
+<span class="nv">$set</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;My Index 1&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;First&#39;</span> <span class="o">=&gt;</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Second&#39;</span> <span class="o">=&gt;</span>
+            <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Third&#39;</span> <span class="o">=&gt;</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Fourth&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Heavy. Nesting.&#39;</span><span class="p">))))</span>
+<span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">check</span><span class="p">(</span><span class="nv">$set</span><span class="p">,</span> <span class="s1">&#39;My Index 1.First.Second&#39;</span><span class="p">);</span>
+<span class="c1">// $result == True</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">check</span><span class="p">(</span><span class="nv">$set</span><span class="p">,</span> <span class="s1">&#39;My Index 1.First.Second.Third&#39;</span><span class="p">);</span>
+<span class="c1">// $result == True</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">check</span><span class="p">(</span><span class="nv">$set</span><span class="p">,</span> <span class="s1">&#39;My Index 1.First.Second.Third.Fourth&#39;</span><span class="p">);</span>
+<span class="c1">// $result == True</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">check</span><span class="p">(</span><span class="nv">$set</span><span class="p">,</span> <span class="s1">&#39;My Index 1.First.Seconds.Third.Fourth&#39;</span><span class="p">);</span>
+<span class="c1">// $result == False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::filter">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">filter</tt><big>(</big><em>array $data</em>, <em>$callback = array('Hash'</em>, <em>'filter')</em><big>)</big><a class="headerlink" href="#Hash::filter" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Filters empty elements out of array, excluding &#8216;0&#8217;. You can also supply a
+custom $callback to filter the array elements. Your callback should return
+<tt class="docutils literal"><span class="pre">false</span></tt> to remove elements from the resulting array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="k">false</span><span class="p">,</span>
+    <span class="k">true</span><span class="p">,</span>
+    <span class="mi">0</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;one thing&#39;</span><span class="p">,</span> <span class="s1">&#39;I can tell you&#39;</span><span class="p">,</span> <span class="s1">&#39;is you got to be&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$res</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">filter</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+
+<span class="cm">/* $data now looks like:</span>
+<span class="cm">    Array (</span>
+<span class="cm">        [0] =&gt; 0</span>
+<span class="cm">        [2] =&gt; true</span>
+<span class="cm">        [3] =&gt; 0</span>
+<span class="cm">        [4] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [0] =&gt; one thing</span>
+<span class="cm">                [1] =&gt; I can tell you</span>
+<span class="cm">                [2] =&gt; is you got to be</span>
+<span class="cm">            )</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::flatten">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">flatten</tt><big>(</big><em>array $data</em>, <em>string $separator = '.'</em><big>)</big><a class="headerlink" href="#Hash::flatten" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Collapses a multi-dimensional array into a single dimension:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$arr</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Post&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;First Post&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;Author&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;user&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Kyle&#39;</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Post&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Second Post&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;Author&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;user&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Crystal&#39;</span><span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+<span class="nv">$res</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">flatten</span><span class="p">(</span><span class="nv">$arr</span><span class="p">);</span>
+<span class="cm">/* $res now looks like:</span>
+<span class="cm">    Array (</span>
+<span class="cm">        [0.Post.id] =&gt; 1</span>
+<span class="cm">        [0.Post.title] =&gt; First Post</span>
+<span class="cm">        [0.Author.id] =&gt; 1</span>
+<span class="cm">        [0.Author.user] =&gt; Kyle</span>
+<span class="cm">        [1.Post.id] =&gt; 2</span>
+<span class="cm">        [1.Post.title] =&gt; Second Post</span>
+<span class="cm">        [1.Author.id] =&gt; 3</span>
+<span class="cm">        [1.Author.user] =&gt; Crystal</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::expand">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">expand</tt><big>(</big><em>array $data</em>, <em>string $separator = '.'</em><big>)</big><a class="headerlink" href="#Hash::expand" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Expands an array that was previously flattened with
+<a class="reference internal" href="#Hash::flatten" title="Hash::flatten"><tt class="xref php php-meth docutils literal"><span class="pre">Hash::flatten()</span></tt></a>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;0.Post.id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;0.Post.title&#39;</span> <span class="o">=&gt;</span> <span class="nx">First</span> <span class="nx">Post</span><span class="p">,</span>
+    <span class="s1">&#39;0.Author.id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;0.Author.user&#39;</span> <span class="o">=&gt;</span> <span class="nx">Kyle</span><span class="p">,</span>
+    <span class="s1">&#39;1.Post.id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;1.Post.title&#39;</span> <span class="o">=&gt;</span> <span class="nx">Second</span> <span class="nx">Post</span><span class="p">,</span>
+    <span class="s1">&#39;1.Author.id&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;1.Author.user&#39;</span> <span class="o">=&gt;</span> <span class="nx">Crystal</span><span class="p">,</span>
+<span class="p">);</span>
+<span class="nv">$res</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">expand</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="cm">/* $res now looks like:</span>
+<span class="cm">array(</span>
+<span class="cm">    array(</span>
+<span class="cm">        &#39;Post&#39; =&gt; array(&#39;id&#39; =&gt; &#39;1&#39;, &#39;title&#39; =&gt; &#39;First Post&#39;),</span>
+<span class="cm">        &#39;Author&#39; =&gt; array(&#39;id&#39; =&gt; &#39;1&#39;, &#39;user&#39; =&gt; &#39;Kyle&#39;),</span>
+<span class="cm">    ),</span>
+<span class="cm">    array(</span>
+<span class="cm">        &#39;Post&#39; =&gt; array(&#39;id&#39; =&gt; &#39;2&#39;, &#39;title&#39; =&gt; &#39;Second Post&#39;),</span>
+<span class="cm">        &#39;Author&#39; =&gt; array(&#39;id&#39; =&gt; &#39;3&#39;, &#39;user&#39; =&gt; &#39;Crystal&#39;),</span>
+<span class="cm">    ),</span>
+<span class="cm">);</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::merge">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">merge</tt><big>(</big><em>array $data</em>, <em>array $merge</em><span class="optional">[</span>, <em>array $n</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#Hash::merge" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>This function can be thought of as a hybrid between PHP&#8217;s
+<tt class="docutils literal"><span class="pre">array_merge</span></tt> and <tt class="docutils literal"><span class="pre">array_merge_recursive</span></tt>. The difference to the two
+is that if an array key contains another array then the function
+behaves recursive (unlike <tt class="docutils literal"><span class="pre">array_merge</span></tt>) but does not do if for keys
+containing strings (unlike <tt class="docutils literal"><span class="pre">array_merge_recursive</span></tt>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function will work with an unlimited amount of arguments and
+typecasts non-array parameters into arrays.</p>
+</div>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$array</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;48c2570e-dfa8-4c32-a35e-0d71cbdd56cb&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;mysql raleigh-workshop-08 &lt; 2008-09-05.sql &#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Importing an sql dump&#39;</span>
+    <span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;48c257a8-cf7c-4af2-ac2f-114ecbdd56cb&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pbpaste | grep -i Unpaid | pbcopy&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Remove all lines that say &quot;Unpaid&quot;.&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$arrayB</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="nv">$arrayC</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="mi">0</span> <span class="o">=&gt;</span> <span class="s2">&quot;test array&quot;</span><span class="p">,</span> <span class="s2">&quot;cats&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;dogs&quot;</span><span class="p">,</span> <span class="s2">&quot;people&quot;</span> <span class="o">=&gt;</span> <span class="mi">1267</span><span class="p">);</span>
+<span class="nv">$arrayD</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;cats&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;felines&quot;</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;angry&quot;</span><span class="p">);</span>
+<span class="nv">$res</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">merge</span><span class="p">(</span><span class="nv">$array</span><span class="p">,</span> <span class="nv">$arrayB</span><span class="p">,</span> <span class="nv">$arrayC</span><span class="p">,</span> <span class="nv">$arrayD</span><span class="p">);</span>
+
+<span class="cm">/* $res now looks like:</span>
+<span class="cm">Array</span>
+<span class="cm">(</span>
+<span class="cm">    [0] =&gt; Array</span>
+<span class="cm">        (</span>
+<span class="cm">            [id] =&gt; 48c2570e-dfa8-4c32-a35e-0d71cbdd56cb</span>
+<span class="cm">            [name] =&gt; mysql raleigh-workshop-08 &lt; 2008-09-05.sql</span>
+<span class="cm">            [description] =&gt; Importing an sql dump</span>
+<span class="cm">        )</span>
+<span class="cm">    [1] =&gt; Array</span>
+<span class="cm">        (</span>
+<span class="cm">            [id] =&gt; 48c257a8-cf7c-4af2-ac2f-114ecbdd56cb</span>
+<span class="cm">            [name] =&gt; pbpaste | grep -i Unpaid | pbcopy</span>
+<span class="cm">            [description] =&gt; Remove all lines that say &quot;Unpaid&quot;.</span>
+<span class="cm">        )</span>
+<span class="cm">    [2] =&gt; 4</span>
+<span class="cm">    [3] =&gt; test array</span>
+<span class="cm">    [cats] =&gt; felines</span>
+<span class="cm">    [people] =&gt; 1267</span>
+<span class="cm">    [dog] =&gt; angry</span>
+<span class="cm">)</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::numeric">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">numeric</tt><big>(</big><em>array $data</em><big>)</big><a class="headerlink" href="#Hash::numeric" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+<p>Checks to see if all the values in the array are numeric:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;one&#39;</span><span class="p">);</span>
+<span class="nv">$res</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">numeric</span><span class="p">(</span><span class="nb">array_keys</span><span class="p">(</span><span class="nv">$data</span><span class="p">));</span>
+<span class="c1">// $res is true</span>
+
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span> <span class="o">=&gt;</span> <span class="s1">&#39;one&#39;</span><span class="p">);</span>
+<span class="nv">$res</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">numeric</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="c1">// $res is false</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::dimensions">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">dimensions</tt><big>(</big><em>array $data</em><big>)</big><a class="headerlink" href="#Hash::dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+<p>Counts the dimensions of an array. This method will only
+consider the dimension of the first element in the array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">dimensions</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="c1">// $result == 1</span>
+
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1.1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">dimensions</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="c1">// $result == 1</span>
+
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1.1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1.1.1&#39;</span><span class="p">),</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;3.1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;3.1.1&#39;</span><span class="p">));</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">dimensions</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="c1">// $result == 2</span>
+
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1.1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;3.1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;3.1.1&#39;</span><span class="p">));</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">dimensions</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="c1">// $result == 1</span>
+
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1.1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1.1.1&#39;</span><span class="p">),</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;3.1&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;3.1.1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;3.1.1.1&#39;</span><span class="p">)));</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">dimensions</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="c1">// $result == 2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::maxDimensions">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">maxDimensions</tt><big>(</big><em>array $data</em><big>)</big><a class="headerlink" href="#Hash::maxDimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Similar to <a class="reference internal" href="#Hash::dimensions" title="Hash::dimensions"><tt class="xref php php-meth docutils literal"><span class="pre">dimensions()</span></tt></a>, however this method returns,
+the deepest number of dimensions of any element in the array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1.1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;3.1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;3.1.1&#39;</span><span class="p">));</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">maxDimensions</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="c1">// $result == 2</span>
+
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1.1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1.1.1&#39;</span><span class="p">),</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;3.1&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;3.1.1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;3.1.1.1&#39;</span><span class="p">)));</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">maxDimensions</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="c1">// $result == 3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::map">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">map</tt><big>(</big><em>array $data</em>, <em>$path</em>, <em>$function</em><big>)</big><a class="headerlink" href="#Hash::map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new array, by extracting $path, and mapping $function
+across the results. You can use both expression and matching elements with
+this method:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//call the noop function $this-&gt;noop() on every element of $data</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">map</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="s2">&quot;{n}&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;noop&#39;</span><span class="p">));</span>
+
+<span class="k">function</span> <span class="nf">noop</span><span class="p">(</span><span class="nv">$array</span><span class="p">)</span> <span class="p">{</span>
+ <span class="c1">//do stuff to array and return the result</span>
+ <span class="k">return</span> <span class="nv">$array</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::reduce">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">reduce</tt><big>(</big><em>array $data</em>, <em>$path</em>, <em>$function</em><big>)</big><a class="headerlink" href="#Hash::reduce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a single value, by extracting $path, and reducing the extracted
+results with $function. You can use both expression and matching elements
+with this method.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::apply">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">apply</tt><big>(</big><em>array $data</em>, <em>$path</em>, <em>$function</em><big>)</big><a class="headerlink" href="#Hash::apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a callback to a set of extracted values using $function. The function
+will get the extracted values as the first argument.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::sort">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">sort</tt><big>(</big><em>array $data</em>, <em>$path</em>, <em>$dir</em>, <em>$type = 'regular'</em><big>)</big><a class="headerlink" href="#Hash::sort" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Sorts an array by any value, determined by a <a class="reference internal" href="#hash-path-syntax"><em>Hash path syntax</em></a>
+Only expression elements are supported by this method:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$a</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Person&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Jeff&#39;</span><span class="p">)),</span>
+    <span class="mi">1</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Shirt&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;color&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;black&#39;</span><span class="p">))</span>
+<span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">sort</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="s1">&#39;{n}.Person.name&#39;</span><span class="p">,</span> <span class="s1">&#39;asc&#39;</span><span class="p">);</span>
+<span class="cm">/* $result now looks like:</span>
+<span class="cm">    Array</span>
+<span class="cm">    (</span>
+<span class="cm">        [0] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [Shirt] =&gt; Array</span>
+<span class="cm">                    (</span>
+<span class="cm">                        [color] =&gt; black</span>
+<span class="cm">                    )</span>
+<span class="cm">            )</span>
+<span class="cm">        [1] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [Person] =&gt; Array</span>
+<span class="cm">                    (</span>
+<span class="cm">                        [name] =&gt; Jeff</span>
+<span class="cm">                    )</span>
+<span class="cm">            )</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">$dir</span></tt> can be either <tt class="docutils literal"><span class="pre">asc</span></tt> or <tt class="docutils literal"><span class="pre">desc</span></tt>. <tt class="docutils literal"><span class="pre">$type</span></tt>
+can be one of the following values:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">regular</span></tt> for regular sorting.</li>
+<li><tt class="docutils literal"><span class="pre">numeric</span></tt> for sorting values as their numeric equivalents.</li>
+<li><tt class="docutils literal"><span class="pre">string</span></tt> for sorting values as their string value.</li>
+<li><tt class="docutils literal"><span class="pre">natural</span></tt> for sorting values in a human friendly way. Will
+sort <tt class="docutils literal"><span class="pre">foo10</span></tt> below <tt class="docutils literal"><span class="pre">foo2</span></tt> as an example. Natural sorting
+requires PHP 5.4 or greater.</li>
+</ul>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::diff">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">diff</tt><big>(</big><em>array $data</em>, <em>array $compare</em><big>)</big><a class="headerlink" href="#Hash::diff" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Computes the difference between two arrays:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$a</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;main&#39;</span><span class="p">),</span>
+    <span class="mi">1</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;about&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$b</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;main&#39;</span><span class="p">),</span>
+    <span class="mi">1</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;about&#39;</span><span class="p">),</span>
+    <span class="mi">2</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;contact&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">diff</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">);</span>
+<span class="cm">/* $result now looks like:</span>
+<span class="cm">    Array</span>
+<span class="cm">    (</span>
+<span class="cm">        [2] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [name] =&gt; contact</span>
+<span class="cm">            )</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::mergeDiff">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">mergeDiff</tt><big>(</big><em>array $data</em>, <em>array $compare</em><big>)</big><a class="headerlink" href="#Hash::mergeDiff" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>This function merges two arrays and pushes the differences in
+data to the bottom of the resultant array.</p>
+<p><strong>Example 1</strong></p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$array1</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ModelOne&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1001</span><span class="p">,</span> <span class="s1">&#39;field_one&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;a1.m1.f1&#39;</span><span class="p">,</span> <span class="s1">&#39;field_two&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;a1.m1.f2&#39;</span><span class="p">));</span>
+<span class="nv">$array2</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ModelOne&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1003</span><span class="p">,</span> <span class="s1">&#39;field_one&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;a3.m1.f1&#39;</span><span class="p">,</span> <span class="s1">&#39;field_two&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;a3.m1.f2&#39;</span><span class="p">,</span> <span class="s1">&#39;field_three&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;a3.m1.f3&#39;</span><span class="p">));</span>
+<span class="nv">$res</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">mergeDiff</span><span class="p">(</span><span class="nv">$array1</span><span class="p">,</span> <span class="nv">$array2</span><span class="p">);</span>
+
+<span class="cm">/* $res now looks like:</span>
+<span class="cm">    Array</span>
+<span class="cm">    (</span>
+<span class="cm">        [ModelOne] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [id] =&gt; 1001</span>
+<span class="cm">                [field_one] =&gt; a1.m1.f1</span>
+<span class="cm">                [field_two] =&gt; a1.m1.f2</span>
+<span class="cm">                [field_three] =&gt; a3.m1.f3</span>
+<span class="cm">            )</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<p><strong>Example 2</strong></p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$array1</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;a&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">=&gt;</span> <span class="mi">20938</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;string&quot;</span><span class="p">);</span>
+<span class="nv">$array2</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;b&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">3</span> <span class="o">=&gt;</span> <span class="mi">238</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;extra_field&quot;</span><span class="p">));</span>
+<span class="nv">$res</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">mergeDiff</span><span class="p">(</span><span class="nv">$array1</span><span class="p">,</span> <span class="nv">$array2</span><span class="p">);</span>
+<span class="cm">/* $res now looks like:</span>
+<span class="cm">    Array</span>
+<span class="cm">    (</span>
+<span class="cm">        [a] =&gt; b</span>
+<span class="cm">        [1] =&gt; 20938</span>
+<span class="cm">        [c] =&gt; string</span>
+<span class="cm">        [b] =&gt; b</span>
+<span class="cm">        [3] =&gt; 238</span>
+<span class="cm">        [4] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [0] =&gt; extra_field</span>
+<span class="cm">            )</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::normalize">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">normalize</tt><big>(</big><em>array $data</em>, <em>$assoc = true</em><big>)</big><a class="headerlink" href="#Hash::normalize" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Normalizes an array. If <tt class="docutils literal"><span class="pre">$assoc</span></tt> is true, the resulting array will be
+normalized to be an associative array. Numeric keys with values, will be
+converted to string keys with null values. Normalizing an array, makes using
+the results with <a class="reference internal" href="#Hash::merge" title="Hash::merge"><tt class="xref php php-meth docutils literal"><span class="pre">Hash::merge()</span></tt></a> easier:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$a</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Tree&#39;</span><span class="p">,</span> <span class="s1">&#39;CounterCache&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Upload&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;folder&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;products&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;image_1_id&#39;</span><span class="p">,</span> <span class="s1">&#39;image_2_id&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$a</span><span class="p">);</span>
+<span class="cm">/* $result now looks like:</span>
+<span class="cm">    Array</span>
+<span class="cm">    (</span>
+<span class="cm">        [Tree] =&gt; null</span>
+<span class="cm">        [CounterCache] =&gt; null</span>
+<span class="cm">        [Upload] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [folder] =&gt; products</span>
+<span class="cm">                [fields] =&gt; Array</span>
+<span class="cm">                    (</span>
+<span class="cm">                        [0] =&gt; image_1_id</span>
+<span class="cm">                        [1] =&gt; image_2_id</span>
+<span class="cm">                    )</span>
+<span class="cm">            )</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+
+<span class="nv">$b</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Cacheable&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;enabled&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+    <span class="s1">&#39;Limit&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Bindable&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Validator&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Transactional&#39;</span>
+<span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">normalize</span><span class="p">(</span><span class="nv">$b</span><span class="p">);</span>
+<span class="cm">/* $result now looks like:</span>
+<span class="cm">    Array</span>
+<span class="cm">    (</span>
+<span class="cm">        [Cacheable] =&gt; Array</span>
+<span class="cm">            (</span>
+<span class="cm">                [enabled] =&gt; false</span>
+<span class="cm">            )</span>
+
+<span class="cm">        [Limit] =&gt; null</span>
+<span class="cm">        [Bindable] =&gt; null</span>
+<span class="cm">        [Validator] =&gt; null</span>
+<span class="cm">        [Transactional] =&gt; null</span>
+<span class="cm">    )</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Hash::nest">
+<em class="property">static </em><tt class="descclassname">Hash::</tt><tt class="descname">nest</tt><big>(</big><em>array $data</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#Hash::nest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a flat array set, and creates a nested, or threaded data structure.
+Used by methods like <tt class="docutils literal"><span class="pre">Model::find('threaded')</span></tt>.</p>
+<p><strong>Options:</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">children</span></tt> The key name to use in the result set for children. Defaults
+to &#8216;children&#8217;.</li>
+<li><tt class="docutils literal"><span class="pre">idPath</span></tt> The path to a key that identifies each entry. Should be
+compatible with <a class="reference internal" href="#Hash::extract" title="Hash::extract"><tt class="xref php php-meth docutils literal"><span class="pre">Hash::extract()</span></tt></a>. Defaults to <tt class="docutils literal"><span class="pre">{n}.$alias.id</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">parentPath</span></tt> The path to a key that identifies the parent of each entry.
+Should be compatible with <a class="reference internal" href="#Hash::extract" title="Hash::extract"><tt class="xref php php-meth docutils literal"><span class="pre">Hash::extract()</span></tt></a>. Defaults to <tt class="docutils literal"><span class="pre">{n}.$alias.parent_id</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">root</span></tt> The id of the desired top-most result.</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ModelName&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ModelName&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ModelName&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ModelName&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ModelName&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ModelName&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ModelName&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ModelName&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ModelName&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ModelName&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">))</span>
+<span class="p">);</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">Hash</span><span class="o">::</span><span class="na">nest</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;root&#39;</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">));</span>
+<span class="cm">/* $result now looks like:</span>
+<span class="cm">array(</span>
+<span class="cm">        (int) 0 =&gt; array(</span>
+<span class="cm">            &#39;ModelName&#39; =&gt; array(</span>
+<span class="cm">                &#39;id&#39; =&gt; (int) 6,</span>
+<span class="cm">                &#39;parent_id&#39; =&gt; null</span>
+<span class="cm">            ),</span>
+<span class="cm">            &#39;children&#39; =&gt; array(</span>
+<span class="cm">                (int) 0 =&gt; array(</span>
+<span class="cm">                    &#39;ModelName&#39; =&gt; array(</span>
+<span class="cm">                        &#39;id&#39; =&gt; (int) 7,</span>
+<span class="cm">                        &#39;parent_id&#39; =&gt; (int) 6</span>
+<span class="cm">                    ),</span>
+<span class="cm">                    &#39;children&#39; =&gt; array()</span>
+<span class="cm">                ),</span>
+<span class="cm">                (int) 1 =&gt; array(</span>
+<span class="cm">                    &#39;ModelName&#39; =&gt; array(</span>
+<span class="cm">                        &#39;id&#39; =&gt; (int) 8,</span>
+<span class="cm">                        &#39;parent_id&#39; =&gt; (int) 6</span>
+<span class="cm">                    ),</span>
+<span class="cm">                    &#39;children&#39; =&gt; array()</span>
+<span class="cm">                ),</span>
+<span class="cm">                (int) 2 =&gt; array(</span>
+<span class="cm">                    &#39;ModelName&#39; =&gt; array(</span>
+<span class="cm">                        &#39;id&#39; =&gt; (int) 9,</span>
+<span class="cm">                        &#39;parent_id&#39; =&gt; (int) 6</span>
+<span class="cm">                    ),</span>
+<span class="cm">                    &#39;children&#39; =&gt; array()</span>
+<span class="cm">                ),</span>
+<span class="cm">                (int) 3 =&gt; array(</span>
+<span class="cm">                    &#39;ModelName&#39; =&gt; array(</span>
+<span class="cm">                        &#39;id&#39; =&gt; (int) 10,</span>
+<span class="cm">                        &#39;parent_id&#39; =&gt; (int) 6</span>
+<span class="cm">                    ),</span>
+<span class="cm">                    &#39;children&#39; =&gt; array()</span>
+<span class="cm">                )</span>
+<span class="cm">            )</span>
+<span class="cm">        )</span>
+<span class="cm">    )</span>
+<span class="cm">    */</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../core-libraries.html">Core Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-general-purpose.html">General Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-components.html">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-helpers.html">Helpers</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../core-libraries/toc-utilities.html">Utilities</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/caching.html">Caching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="email.html">CakeEmail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file-folder.html">Folder &amp; File</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="httpsocket.html">HttpSocket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inflector.html">Inflector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/internationalization-and-localization.html">Internationalization &amp; Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/logging.html">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">CakeNumber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="router.html">Router</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sanitize.html">Data Sanitization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set.html">Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="string.html">String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">CakeTime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xml.html">Xml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Hash</a><ul>
+<li><a class="reference internal" href="#hash-path-syntax">Hash path syntax</a><ul>
+<li><a class="reference internal" href="#expression-types">Expression Types</a></li>
+<li><a class="reference internal" href="#attribute-matching-types">Attribute Matching Types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="httpsocket.html" title="HttpSocket" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="file-folder.html" title="Folder &amp; File" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

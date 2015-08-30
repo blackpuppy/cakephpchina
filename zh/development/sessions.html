@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Sessions" lang="zh_CN" name="title" />
+<meta content="session defaults,session classes,utility features,session timeout,session ids,persistent data,session key,session cookie,session data,last session,core database,security level,useragent,security reasons,session id,attr,countdown,regeneration,sessions,config" lang="zh_CN" name="keywords" />
+
+    <title>会话 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="开发" href="../development.html" />
+    <link rel="next" title="异常" href="exceptions.html" />
+    <link rel="prev" title="路由" href="routing.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/development/sessions.html" /><link rel="alternate" hreflang="pt" href="../../pt/development/sessions.html" /><link rel="alternate" hreflang="es" href="../../es/development/sessions.html" /><link rel="alternate" hreflang="ja" href="../../ja/development/sessions.html" /><link rel="alternate" hreflang="fr" href="../../fr/development/sessions.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../development.html" accesskey="U" itemprop="url"><span itemprop="title">开发</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/development/sessions.html">en</a></li>
+				
+					<li><a href="../../pt/development/sessions.html">pt</a></li>
+				
+					<li><a href="../../es/development/sessions.html">es</a></li>
+				
+					<li><a href="../../ja/development/sessions.html">ja</a></li>
+				
+					<li><a href="../../fr/development/sessions.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/development/sessions.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>会话<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>CakePHP 在 PHP 的 <tt class="docutils literal"><span class="pre">session</span></tt> 扩展之上，提供了封装和一套工具。会话(<em>session</em>)让
+你可以跨多个请求辨识用户，为特定用户保存持久数据。跟 Cookies 不同，会话不存在于
+客户端。在 CakePHP 中通常应当避免使用 <tt class="docutils literal"><span class="pre">$_SESSION</span></tt>，而最好使用 Session 类。</p>
+<div class="section" id="id2">
+<h2>会话的配置<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>会话的配置保存在 <tt class="docutils literal"><span class="pre">Configure</span></tt> 中，位于顶级的 <tt class="docutils literal"><span class="pre">Session</span></tt> 键之下，有一些选项可用：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">Session.cookie</span></tt> - 改变 session cookie 的名字。</li>
+<li><tt class="docutils literal"><span class="pre">Session.timeout</span></tt> - <em>分钟</em> 数，之后 CakePHP 的会话处理器(<em>session handler</em>)
+会让会话过期。这会影响到 <tt class="docutils literal"><span class="pre">Session.autoRegenerate</span></tt> (见下)，是由 CakeSession
+类处理的。</li>
+<li><tt class="docutils literal"><span class="pre">Session.cookieTimeout</span></tt> - <em>分钟</em> 数，之后 session cookie 会过期。如果没有定
+义，会使用和 <tt class="docutils literal"><span class="pre">Session.timeout</span></tt> 同样的值。这会影响到 session cookie，是由 PHP
+本身处理的。</li>
+<li><tt class="docutils literal"><span class="pre">Session.checkAgent</span></tt> - 是否应当对每个请求检查用户代理。如果用户代理不匹配，
+会话就会被销毁。</li>
+<li><tt class="docutils literal"><span class="pre">Session.autoRegenerate</span></tt> - 开启该设置，就会打开会话的自动延期，导致频繁变化
+的会话标识(id)。开启该值，会使用会话的 <tt class="docutils literal"><span class="pre">Config.countdown</span></tt> 值来跟踪请求(数量)。
+一旦倒计数达到 0，会话标识(id)就会重新生成。对于由于安全原因而需要频繁改变会话
+标识的应用程序，这是很好的选项。你可以通过改变
+<tt class="xref php php-attr docutils literal"><span class="pre">CakeSession::$requestCountdown</span></tt> 来控制重新生成会话所需要的请求数。</li>
+<li><tt class="docutils literal"><span class="pre">Session.defaults</span></tt> - 让你可以使用内置默认会话配置之一作为会话配置的基础。</li>
+<li><tt class="docutils literal"><span class="pre">Session.handler</span></tt> - 让你定义定制会话处理器。核心的数据库和缓存会话处理器使用
+该选项。这个选项代替了旧版本的 <tt class="docutils literal"><span class="pre">Session.save</span></tt>。后面有会话处理器的更多信息。</li>
+<li><tt class="docutils literal"><span class="pre">Session.ini</span></tt> - 让你可以设置配置中的额外的会话 ini 设置。这和
+<tt class="docutils literal"><span class="pre">Session.handler</span></tt> 一起代替了旧版本的自定义会话处理功能。</li>
+</ul>
+<p>当应用程序使用 SSL协议时，CakePHP 默认设置 <tt class="docutils literal"><span class="pre">session.cookie_secure</span></tt> 为 true。如
+果应用程序同时使用 SSL 和非 SSL 协议，你也许会有会话丢失的问题。如果你要在  SSL
+和非 SSL 域中访问会话，就应该关闭这个:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;defaults&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;php&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ini&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;session.cookie_secure&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>在 2.0 版本中，Session cookie 路径默认是 <tt class="docutils literal"><span class="pre">/</span></tt>，要改变它，可以设置
+<tt class="docutils literal"><span class="pre">session.cookie_path</span></tt> ini 标识为应用程序的目录路径:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;defaults&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;php&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ini&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;session.cookie_path&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/app/dir&#39;</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>如果你使用PHP的默认会话设置，注意session.gc_maxlifetime会覆盖你对超时的设置。
+默认值为24分钟。在ini设置中改变该设置来获得较长时间的会话:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;defaults&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;php&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;timeout&#39;</span> <span class="o">=&gt;</span> <span class="mi">2160</span><span class="p">,</span> <span class="c1">// 36 小时</span>
+    <span class="s1">&#39;ini&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;session.gc_maxlifetime&#39;</span> <span class="o">=&gt;</span> <span class="mi">129600</span> <span class="c1">// 36 小时</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>内置会话处理器和配置<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>CakePHP 自带几个内置的会话配置。你可以用这些作为配置的基础，也可以创建完全自定义
+配置。要使用默认配置，只需把&#8217;defaults&#8217; 键设置为你要使用的默认配置的名称。然后你
+就可以在 Session 配置中声明任何子设置来覆盖它:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;defaults&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;php&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>上面的代码使用内置的 &#8216;php&#8217; 会话配置。你象下面这样增强部分或全部配置:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;defaults&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;php&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;cookie&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;my_app&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;timeout&#39;</span> <span class="o">=&gt;</span> <span class="mi">4320</span> <span class="c1">//3 天</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>上面的代码会覆盖 &#8216;php&#8217; 会话配置的 timeout 和 cookie 名称。内置的配置如下：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">php</span></tt> - 以 php.ini 文件中的标准设置保存会话。</li>
+<li><tt class="docutils literal"><span class="pre">cake</span></tt> - 保存会话为 <tt class="docutils literal"><span class="pre">app/tmp/sessions</span></tt> 目录中的文件。当所在的主机不允许你
+写到你的用户目录之外时，这是很好的选项。</li>
+<li><tt class="docutils literal"><span class="pre">database</span></tt> - 使用内置的数据库会话。欲知详情，请参看后面的部分。</li>
+<li><tt class="docutils literal"><span class="pre">cache</span></tt> - 使用内置的缓存会话。欲知详情，请参看后面的部分。</li>
+</ul>
+<div class="section" id="id4">
+<h3>会话处理器<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>会话处理器也可以定义在会话配置数组中。定义之后，它们让你可以把各种
+<tt class="docutils literal"><span class="pre">session_save_handler</span></tt> 值映射到你要用来保存会话的类或对象。有两种方式使用&#8217;处理
+器&#8217;。第一种是提供含有 5 个 callable 的数组。然后这些 callable 应用于
+<tt class="docutils literal"><span class="pre">session_set_save_handler</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;userAgent&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;cookie&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;my_cookie&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;timeout&#39;</span> <span class="o">=&gt;</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="s1">&#39;handler&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;open&#39;</span><span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;read&#39;</span><span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;write&#39;</span><span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;destroy&#39;</span><span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;gc&#39;</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;ini&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;cookie_secure&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">&#39;use_trans_sid&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>第二种模式是定义一个 &#8216;engine&#8217; 键。该键应当是一个实现了
+<tt class="docutils literal"><span class="pre">CakeSessionHandlerInterface</span></tt> 接口的类的名称。实现该接口让 CakeSession 可以自
+动为处理器映射方法。核心的缓存(<em>Cache</em>)和数据库(<em>Database</em>)会话的处理器都使用这
+种方法来保存会话。处理器的额外设置应当放在处理器数组内。你可以在处理器内读出这些
+值。</p>
+<p>你也可以在插件内使用会话处理器。只需把引擎设置为类似
+<tt class="docutils literal"><span class="pre">MyPlugin.PluginSessionHandler</span></tt> 这样。这会加载和使用应用程序中 MyPlugin 插件内
+的 <tt class="docutils literal"><span class="pre">PluginSessionHandler</span></tt> 类。</p>
+</div>
+<div class="section" id="cakesessionhandlerinterface">
+<h3>CakeSessionHandlerInterface 接口<a class="headerlink" href="#cakesessionhandlerinterface" title="永久链接至标题">¶</a></h3>
+<p>该接口用于 CakePHP 中所有的自定义会话处理器，而且可以用来创建自定义的用户会话处
+理器。只需在类中实现该接口，并设置创建的类名为 <tt class="docutils literal"><span class="pre">Session.handler.engine</span></tt>。
+CakePHP 会尝试从 <tt class="docutils literal"><span class="pre">app/Model/Datasource/Session/$classname.php</span></tt> 内加载处理器。
+所以如果类名为 <tt class="docutils literal"><span class="pre">AppSessionHandler</span></tt>，文件就应当是
+<tt class="docutils literal"><span class="pre">app/Model/Datasource/Session/AppSessionHandler.php</span></tt>。</p>
+</div>
+<div class="section" id="id5">
+<h3>数据库会话<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>会话配置的变化改变了如何定义数据库会话。大多数情况下只需在配置中设置
+<tt class="docutils literal"><span class="pre">Session.handler.model</span></tt>，以及选择数据库默认值:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;defaults&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;database&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;handler&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CustomSession&#39;</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>以上代码会告诉 CakeSession 使用内置的 &#8216;database&#8217; 默认值，并且指定叫做
+<tt class="docutils literal"><span class="pre">CustomSession</span></tt> 的模型负责保存会话信息到数据库中。</p>
+<p>如果你不需要完全自定义的会话处理器，但是仍然要求以数据库为基础保存会话，可以简化
+上述代码为:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;defaults&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;database&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>这样的配置会要求增加一个数据库表，含有至少这些字段:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="sb">`cake_sessions`</span> <span class="p">(</span>
+  <span class="sb">`id`</span> <span class="nx">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+  <span class="sb">`data`</span> <span class="nx">text</span><span class="p">,</span>
+  <span class="sb">`expires`</span> <span class="nx">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="nx">PRIMARY</span> <span class="nx">KEY</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>你也可以使用 schema 命令行用默认应用程序骨架中提供的数据结构文件来创建该表:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span> <span class="nx">sessions</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>缓存会话<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>Cache 类也可以用来保存会话。这让你可以把会话保存在象 APC、memcache 或者 Xcache
+这样的缓存中。使用缓存会话有一些注意事项，如果用光了缓存的容量，随着记录被清理，
+会话就会开始过期。</p>
+<p>要使用基于缓存的会话，可以这样配置会话:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;defaults&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cache&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;handler&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;config&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;session&#39;</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>这会配置 CakeSession 使用 <tt class="docutils literal"><span class="pre">CacheSession</span></tt> 类负责保存会话。可以用 &#8216;config&#8217; 指定
+使用哪个缓存配置。默认的缓存配置为 <tt class="docutils literal"><span class="pre">'default'</span></tt>。</p>
+</div>
+</div>
+<div class="section" id="ini">
+<h2>设置 ini 指令<a class="headerlink" href="#ini" title="永久链接至标题">¶</a></h2>
+<p>内置的默认值试图为会话配置提供共同的基础。你也许还需要调整特定的 ini 设置。
+CakePHP 提供了为默认配置和自定义配置自定义 ini 设置的功能。会话设置中的 <tt class="docutils literal"><span class="pre">ini</span></tt>
+键让你可以指定单个配置的值。例如你可以用它来控制象 <tt class="docutils literal"><span class="pre">session.gc_divisor</span></tt> 这样的
+设置:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;defaults&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;php&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ini&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;session.gc_divisor&#39;</span> <span class="o">=&gt;</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="s1">&#39;session.cookie_httponly&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>创建自定义会话处理器<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<p>在 CakePHP 中创建自定义会话处理器(<em>session handler</em>)是直截了当的。在下面的例子中，
+我们会创建一个会话处理器，把会话保存在缓存(apc)和数据库中。这给我们 apc 的高速
+IO 的好处，而不必担心缓存满了时会话会逐渐丢失。</p>
+<p>首先我们需要创建自定义类，把它放在
+<tt class="docutils literal"><span class="pre">app/Model/Datasource/Session/ComboSession.php</span></tt>。该类应该象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;DatabaseSession&#39;</span><span class="p">,</span> <span class="s1">&#39;Model/Datasource/Session&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">ComboSession</span> <span class="k">extends</span> <span class="nx">DatabaseSession</span> <span class="k">implements</span> <span class="nx">CakeSessionHandlerInterface</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$cacheKey</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cacheKey</span> <span class="o">=</span> <span class="nx">Configure</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;Session.handler.cache&#39;</span><span class="p">);</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 从会话读取数据。</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">read</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cacheKey</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$result</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="k">parent</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 向会话写入数据。</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">write</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Cache</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cacheKey</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">parent</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 销毁一个会话。</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">destroy</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Cache</span><span class="o">::</span><span class="na">delete</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cacheKey</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">parent</span><span class="o">::</span><span class="na">destroy</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 清除过期的会话。</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">gc</span><span class="p">(</span><span class="nv">$expires</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Cache</span><span class="o">::</span><span class="na">gc</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cacheKey</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">parent</span><span class="o">::</span><span class="na">gc</span><span class="p">(</span><span class="nv">$expires</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们的类扩展了内置的 <tt class="docutils literal"><span class="pre">DatabaseSession</span></tt> 类，所以我们不需要重复它全部的逻辑和行
+为。我们用 <a class="reference internal" href="../core-libraries/caching.html#Cache" title="Cache"><tt class="xref php php-class docutils literal"><span class="pre">Cache</span></tt></a> 操作包裹每个操作。这让我们从高速的缓存读取会话，而
+不必担心填充缓存时会怎样。使用这个会话处理器也容易。在 <tt class="docutils literal"><span class="pre">core.php</span></tt> 文件中象下面
+这样修改会话设置块:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;defaults&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;database&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;handler&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ComboSession&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Session&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;cache&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;apc&#39;</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+
+<span class="c1">// 确保添加 apc 缓存配置</span>
+<span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;apc&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Apc&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>现在应用程序会开始使用自定义会话处理器来读写会话数据了。</p>
+<dl class="class">
+<dt id="CakeSession">
+<em class="property">class </em><tt class="descname">CakeSession</tt><a class="headerlink" href="#CakeSession" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="id8">
+<h2>读写会话数据<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<p>取决于所处的上下文，应用程序有不同的类提供对会话的访问。在控制器中，可以使用
+<a class="reference internal" href="../core-libraries/components/sessions.html#SessionComponent" title="SessionComponent"><tt class="xref php php-class docutils literal"><span class="pre">SessionComponent</span></tt></a>。在视图中，可以使用 <a class="reference internal" href="../core-libraries/helpers/session.html#SessionHelper" title="SessionHelper"><tt class="xref php php-class docutils literal"><span class="pre">SessionHelper</span></tt></a>。在
+应用程序的任何部分，也可以使用 <tt class="docutils literal"><span class="pre">CakeSession</span></tt> 来访问会话。就像会话的其它接口，
+<tt class="docutils literal"><span class="pre">CakeSession</span></tt> 提供简单的 CRUD 接口。</p>
+<dl class="staticmethod">
+<dt id="CakeSession::read">
+<em class="property">static </em><tt class="descclassname">CakeSession::</tt><tt class="descname">read</tt><big>(</big><em>$key</em><big>)</big><a class="headerlink" href="#CakeSession::read" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>可以使用与 <a class="reference internal" href="../core-utility-libraries/set.html#Set::classicExtract" title="Set::classicExtract"><tt class="xref php php-meth docutils literal"><span class="pre">Set::classicExtract()</span></tt></a> 兼容的语法从会话读取值:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CakeSession</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;Config.language&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<dl class="staticmethod">
+<dt id="CakeSession::write">
+<em class="property">static </em><tt class="descclassname">CakeSession::</tt><tt class="descname">write</tt><big>(</big><em>$key</em>, <em>$value</em><big>)</big><a class="headerlink" href="#CakeSession::write" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p><tt class="docutils literal"><span class="pre">$key</span></tt> 应当是希望写入 <tt class="docutils literal"><span class="pre">$value</span></tt> 的以点分隔的路径:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CakeSession</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Config.language&#39;</span><span class="p">,</span> <span class="s1">&#39;eng&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<dl class="staticmethod">
+<dt id="CakeSession::delete">
+<em class="property">static </em><tt class="descclassname">CakeSession::</tt><tt class="descname">delete</tt><big>(</big><em>$key</em><big>)</big><a class="headerlink" href="#CakeSession::delete" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>当需要从会话删除数据时，可以使用 delete 方法:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CakeSession</span><span class="o">::</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;Config.language&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>你还应当阅读 <a class="reference internal" href="../core-libraries/components/sessions.html"><em>Sessions</em></a> 和
+<a class="reference internal" href="../core-libraries/helpers/session.html"><em>SessionHelper</em></a>，来了解如何在控制器和视图中访问会话数据。</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development.html">开发</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">路由</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">会话</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">异常</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">错误处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">调试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">测试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rest.html">REST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dispatch-filters.html">调度器过滤器</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">会话</a><ul>
+<li><a class="reference internal" href="#id2">会话的配置</a></li>
+<li><a class="reference internal" href="#id3">内置会话处理器和配置</a><ul>
+<li><a class="reference internal" href="#id4">会话处理器</a></li>
+<li><a class="reference internal" href="#cakesessionhandlerinterface">CakeSessionHandlerInterface 接口</a></li>
+<li><a class="reference internal" href="#id5">数据库会话</a></li>
+<li><a class="reference internal" href="#id6">缓存会话</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ini">设置 ini 指令</a></li>
+<li><a class="reference internal" href="#id7">创建自定义会话处理器</a></li>
+<li><a class="reference internal" href="#id8">读写会话数据</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="exceptions.html" title="异常" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="routing.html" title="路由" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

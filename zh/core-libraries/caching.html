@@ -1,0 +1,781 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Caching" lang="zh_CN" name="title" />
+<meta content="uniform api,xcache,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apc,memcache,queries,cakephp,elements,servers,memory" lang="zh_CN" name="keywords" />
+
+    <title>缓存 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="工具" href="toc-utilities.html" />
+    <link rel="next" title="CakeEmail" href="../core-utility-libraries/email.html" />
+    <link rel="prev" title="工具" href="toc-utilities.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/core-libraries/caching.html" /><link rel="alternate" hreflang="pt" href="../../pt/core-libraries/caching.html" /><link rel="alternate" hreflang="es" href="../../es/core-libraries/caching.html" /><link rel="alternate" hreflang="ja" href="../../ja/core-libraries/caching.html" /><link rel="alternate" hreflang="fr" href="../../fr/core-libraries/caching.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="toc-utilities.html" accesskey="U" itemprop="url"><span itemprop="title">工具</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/core-libraries/caching.html">en</a></li>
+				
+					<li><a href="../../pt/core-libraries/caching.html">pt</a></li>
+				
+					<li><a href="../../es/core-libraries/caching.html">es</a></li>
+				
+					<li><a href="../../ja/core-libraries/caching.html">ja</a></li>
+				
+					<li><a href="../../fr/core-libraries/caching.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/caching.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>缓存<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>缓存经常用来缩短创建或读取其它资源的时间。缓存经常用来使读取昂贵的资源不那么昂贵。
+你可以容易地把不经常变化的昂贵的查询、或者对远程网络服务的访问的结果，保存在缓存
+中。一旦在缓存中，从缓存中重新读取保存的资源就比访问远程资源的代价要小多了。</p>
+<p>CakePHP 中的缓存主要是由 <a class="reference internal" href="#Cache" title="Cache"><tt class="xref php php-class docutils literal"><span class="pre">Cache</span></tt></a> 类来帮助（处理）的。该类有一组静态
+方法，提供了统一的 API 来处理不同类型的缓存实现。CakePHP 带有几个内置的缓存引擎，
+并提供了简单的系统来实现你自己的缓存系统。内置的缓存引擎为:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">FileCache</span></tt> 文件缓存是使用本地文件的简单缓存。这是最慢的缓存引擎，且没有为
+原子化操作提供那么多功能。不过，既然硬盘存储通常都相当便宜，使用文件存储大的
+对象、或者不经常写的元素，很管用。这是2.3+版本的默认缓存引擎。</li>
+<li><tt class="docutils literal"><span class="pre">ApcCache</span></tt> APC 缓存使用 PHP 的 <a class="reference external" href="http://php.net/apc">APC</a> 扩展。这个扩展用
+网站服务器上的共享内存来保存对象。这使它非常快，而且能够提供原子化的读/写功能。
+默认情况下 CakePHP 2.0-2.2 会使用该缓存引擎，如果可用的话。</li>
+<li><tt class="docutils literal"><span class="pre">Wincache</span></tt> Wincache 使用 <a class="reference external" href="http://php.net/wincache">Wincache</a> 扩展。
+Wincache 在功能和性能上类似于 APC，但针对 Windows 和 微软的IIS 做了优化。</li>
+<li><tt class="docutils literal"><span class="pre">XcacheEngine</span></tt> <a class="reference external" href="http://xcache.lighttpd.net/">Xcache</a> 是一个 PHP 扩展，提供
+类似 APC 的功能。</li>
+<li><tt class="docutils literal"><span class="pre">MemcacheEngine</span></tt> 使用 <a class="reference external" href="http://php.net/memcache">Memcache</a> 扩展。Memcache
+提供了非常快速的缓存系统，可以分布于很多台服务器，而且提供原子化操作。</li>
+<li><tt class="docutils literal"><span class="pre">MemcachedEngine</span></tt> 使用 <a class="reference external" href="http://php.net/memcached">Memcached</a> 扩展。它也与
+memcache 接口，但提供更好的性能。</li>
+<li><tt class="docutils literal"><span class="pre">RedisEngine</span></tt> 使用 <a class="reference external" href="https://github.com/nicolasff/phpredis">phpredis</a> 扩展。
+Redis 类似于 memcached，提供了快速和可持久化的缓存系统，也提供原子化操作。</li>
+</ul>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.3 版更改: </span>FileEngine 总是默认的缓存引擎。曾经有些人在 cli + web 两种环境中都遇到困难而
+无法正确设置和部署 APC。使用文件（缓存），应当使得配置 CakePHP 对新的开发人员
+来说更简单了。</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.5 版更改: </span>增加了Memcached引擎，Memcache引擎作废了。</p>
+</div>
+<p>不论你选择使用哪种缓存引擎，你的应用程序都是以一致的方式与 <a class="reference internal" href="#Cache" title="Cache"><tt class="xref php php-class docutils literal"><span class="pre">Cache</span></tt></a> 类
+交互。这意味着你可以随着应用程序的增长而容易地替换缓存引擎。除了
+<a class="reference internal" href="#Cache" title="Cache"><tt class="xref php php-class docutils literal"><span class="pre">Cache</span></tt></a> 类，<a class="reference internal" href="helpers/cache.html"><em>缓存助件</em></a> 允许缓存整个页面，这
+也能极大地改善性能。</p>
+<div class="section" id="cache">
+<h2>配置Cache类<a class="headerlink" href="#cache" title="永久链接至标题">¶</a></h2>
+<p>配置Cache类可以在任何地方进行，但通常你应当在 <tt class="docutils literal"><span class="pre">app/Config/bootstrap.php</span></tt> 中配置
+Cache类。你可以设置任意数量的缓存配置，使用任意缓存引擎的组合。CakePHP在内部使用
+两个缓存配置，这两个配置在 <tt class="docutils literal"><span class="pre">app/Config/core.php</span></tt> 中设置。如果你使用APC或者
+Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应用程序互相覆盖缓存的数据。</p>
+<p>使用多个缓存配置可以帮助减少你需要调用 <a class="reference internal" href="#Cache::set" title="Cache::set"><tt class="xref php php-func docutils literal"><span class="pre">Cache::set()</span></tt></a> 的次数，同时集中
+所有的缓存设置。使用多个配置也让你可以根据需要逐步渐进地改变存储。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">你必须指定使用哪个引擎。<strong>不</strong> 会以文件（缓存）为默认值。</p>
+</div>
+<p>例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;short&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;File&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+1 hours&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;path&#39;</span> <span class="o">=&gt;</span> <span class="nx">CACHE</span><span class="p">,</span>
+    <span class="s1">&#39;prefix&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cake_short_&#39;</span>
+<span class="p">));</span>
+
+<span class="c1">// 长期</span>
+<span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;long&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;File&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+1 week&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;probability&#39;</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s1">&#39;path&#39;</span> <span class="o">=&gt;</span> <span class="nx">CACHE</span> <span class="o">.</span> <span class="s1">&#39;long&#39;</span> <span class="o">.</span> <span class="nx">DS</span><span class="p">,</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>把上面的代码放在 <tt class="docutils literal"><span class="pre">app/Config/bootstrap.php</span></tt> 中，你就多了两个缓存配置。这两个
+配置的名称&#8217;short&#8217;或&#8217;long&#8217;会作为 <a class="reference internal" href="#Cache::write" title="Cache::write"><tt class="xref php php-func docutils literal"><span class="pre">Cache::write()</span></tt></a> 和
+<a class="reference internal" href="#Cache::read" title="Cache::read"><tt class="xref php php-func docutils literal"><span class="pre">Cache::read()</span></tt></a> 方法的 <tt class="docutils literal"><span class="pre">$config</span></tt> 参数。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">当使用文件引擎时，你也许要使用 <tt class="docutils literal"><span class="pre">mask</span></tt> 选项，来保证缓存文件会有正确的权限。</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">2.4 新版功能: </span>在调试模式下，当使用文件引擎时，会自动创建不存在的目录，以避免不必要的错误。</p>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>为缓存创建存储引擎<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>你可以在 <tt class="docutils literal"><span class="pre">app/Lib</span></tt> 目录以及在插件中用 <tt class="docutils literal"><span class="pre">$plugin/Lib</span></tt> 目录中提供自定义的
+<tt class="docutils literal"><span class="pre">Cache</span></tt> 适配器。App/插件的缓存引擎也可以重载核心的引擎。缓存适配器必须在cache
+目录中。如果你有一个叫做 <tt class="docutils literal"><span class="pre">MyCustomCacheEngine</span></tt> 的缓存引擎，它就会被放在
+<tt class="docutils literal"><span class="pre">app/Lib/Cache/Engine/MyCustomCacheEngine.php</span></tt> 作为 app/libs，或者在
+<tt class="docutils literal"><span class="pre">$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php</span></tt> 作为插件的一部分。插件的缓存
+配置需要使用插件的点语法。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;custom&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CachePack.MyCustomCache&#39;</span><span class="p">,</span>
+    <span class="c1">// ...</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">App和插件的缓存引擎应当在 <tt class="docutils literal"><span class="pre">app/Config/bootstrap.php</span></tt> 文件中配置。如果你试图
+在core.php中配置，它们就不会正常工作。</p>
+</div>
+<p>自定义的缓存引擎必须扩展 <a class="reference internal" href="#CacheEngine" title="CacheEngine"><tt class="xref php php-class docutils literal"><span class="pre">CacheEngine</span></tt></a> 类，该类定义了一些抽象的方法，
+也提供了一些初始化方法。</p>
+<p>CacheEngine必需的API为</p>
+<dl class="class">
+<dt id="CacheEngine">
+<em class="property">class </em><tt class="descname">CacheEngine</tt><a class="headerlink" href="#CacheEngine" title="永久链接至目标">¶</a></dt>
+<dd><p>Cache类使用的所有缓存引擎的基类。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CacheEngine::write">
+<tt class="descclassname">CacheEngine::</tt><tt class="descname">write</tt><big>(</big><em>$key</em>, <em>$value</em>, <em>$config = 'default'</em><big>)</big><a class="headerlink" href="#CacheEngine::write" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回:</th><td class="field-body">成功与否的布尔值。</td>
+</tr>
+</tbody>
+</table>
+<p>将一个键的值写入缓存，可选的字符串参数$cofig指定要写入的（缓存）配置的名称。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CacheEngine::read">
+<tt class="descclassname">CacheEngine::</tt><tt class="descname">read</tt><big>(</big><em>$key</em>, <em>$config = 'default'</em><big>)</big><a class="headerlink" href="#CacheEngine::read" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回:</th><td class="field-body">缓存的值，或者在失败时为false。</td>
+</tr>
+</tbody>
+</table>
+<p>从缓存读取一个键，可选的字符串参数$cofig指定要读取的（缓存）配置的名称。
+返回false表明该项已经过期了或者不存在。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CacheEngine::delete">
+<tt class="descclassname">CacheEngine::</tt><tt class="descname">delete</tt><big>(</big><em>$key</em>, <em>$config = 'default'</em><big>)</big><a class="headerlink" href="#CacheEngine::delete" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回:</th><td class="field-body">成功时为布尔值true。</td>
+</tr>
+</tbody>
+</table>
+<p>从缓存中删除一个键，可选的字符串参数$cofig指定要删除的（缓存）配置的名称。
+返回false，表明该项不存在或者无法删除。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CacheEngine::clear">
+<tt class="descclassname">CacheEngine::</tt><tt class="descname">clear</tt><big>(</big><em>$check</em><big>)</big><a class="headerlink" href="#CacheEngine::clear" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回:</th><td class="field-body">成功时为布尔值true。</td>
+</tr>
+</tbody>
+</table>
+<p>从缓存删除所有键。如果$check为true，你应当验证每个值实际上已经过期。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CacheEngine::clearGroup">
+<tt class="descclassname">CacheEngine::</tt><tt class="descname">clearGroup</tt><big>(</big><em>$group</em><big>)</big><a class="headerlink" href="#CacheEngine::clearGroup" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回:</th><td class="field-body">成功时为布尔值true。</td>
+</tr>
+</tbody>
+</table>
+<p>从缓存删除所有属于同一组的键。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CacheEngine::decrement">
+<tt class="descclassname">CacheEngine::</tt><tt class="descname">decrement</tt><big>(</big><em>$key</em>, <em>$offset = 1</em><big>)</big><a class="headerlink" href="#CacheEngine::decrement" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回:</th><td class="field-body">成功时为减一后的值，否则为布尔值false。</td>
+</tr>
+</tbody>
+</table>
+<p>把键对应的数减一，并返回减一后的值。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CacheEngine::increment">
+<tt class="descclassname">CacheEngine::</tt><tt class="descname">increment</tt><big>(</big><em>$key</em>, <em>$offset = 1</em><big>)</big><a class="headerlink" href="#CacheEngine::increment" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回:</th><td class="field-body">成功时为增一后的值，否则为布尔值false。</td>
+</tr>
+</tbody>
+</table>
+<p>把键对应的数增一，并返回增一后的值。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CacheEngine::gc">
+<tt class="descclassname">CacheEngine::</tt><tt class="descname">gc</tt><big>(</big><big>)</big><a class="headerlink" href="#CacheEngine::gc" title="永久链接至目标">¶</a></dt>
+<dd><p>不要求，但在资源过期时用来进行清理。文件引擎用它来删除包含过期内容的文件。</p>
+</dd></dl>
+
+</div>
+<div class="section" id="id3">
+<h2>用缓存来存储常用的查询结果<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>你可以把不经常变化的结果、或者被大量读取的结果放入缓存，从而极大地改善应用程序的
+性能。一个绝佳的例子是从 <tt class="xref php php-meth docutils literal"><span class="pre">Model::find()</span></tt> 返回的结果。一个用缓存保存结果
+的方法可以象下面这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">newest</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;newest_posts&#39;</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$result</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Post.updated DESC&#39;</span><span class="p">,</span> <span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">));</span>
+            <span class="nx">Cache</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;newest_posts&#39;</span><span class="p">,</span> <span class="nv">$result</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>你可以改进上述代码，把读取缓存的逻辑移到一个行为中，从缓存读取，或者运行关联模型
+的方法。不过这可以作为你的一个练习。</p>
+<p>在 2.5 版本中，你可以用 <a class="reference internal" href="#Cache::remember" title="Cache::remember"><tt class="xref php php-meth docutils literal"><span class="pre">Cache::remember()</span></tt></a> 更简单地实现上面的代码。
+假设你使用PHP 5.3或更高版本，使用 <tt class="docutils literal"><span class="pre">remember()</span></tt> 方法就象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">newest</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$model</span> <span class="o">=</span> <span class="nv">$this</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">remember</span><span class="p">(</span><span class="s1">&#39;newest_posts&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$model</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Post.updated DESC&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span>
+            <span class="p">));</span>
+        <span class="p">},</span> <span class="s1">&#39;long&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>使用缓存保存计数<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>各种东西的计数很容易在缓存中保存。例如，一项竞赛中剩余‘空位’的简单倒计数，就
+可以保存在缓存中。Cache类提供了原子化的方式来轻易地增/减计数器的值。原子化操作对
+这些值很重要，因为这减少了竞争的风险，即两个用户同时把值减一，导致不正确的值。</p>
+<p>在设置一个整数值之后，你可以用 <a class="reference internal" href="#Cache::increment" title="Cache::increment"><tt class="xref php php-meth docutils literal"><span class="pre">Cache::increment()</span></tt></a> 和
+<a class="reference internal" href="#Cache::decrement" title="Cache::decrement"><tt class="xref php php-meth docutils literal"><span class="pre">Cache::decrement()</span></tt></a> 方法来对它进行操作:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;initial_count&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+
+<span class="c1">// 然后</span>
+<span class="nx">Cache</span><span class="o">::</span><span class="na">decrement</span><span class="p">(</span><span class="s1">&#39;initial_count&#39;</span><span class="p">);</span>
+
+<span class="c1">// 或者</span>
+<span class="nx">Cache</span><span class="o">::</span><span class="na">increment</span><span class="p">(</span><span class="s1">&#39;initial_count&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">增一和减一无法用于文件引擎。你应当使用APC、Redis或者Memcache。</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>使用分组<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified">2.2 新版功能.</span></p>
+</div>
+<p>有时你想要把多个缓存项标记为属于某个组或者命名空间。这是一个常见的需求，每当同一
+组内的所有项共享的某些信息发生变化时，就使这些键一起无效。这可以通过在缓存配置中
+声明分组实现:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;site_home&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Redis&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+999 days&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;groups&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;comment&#39;</span><span class="p">,</span> <span class="s1">&#39;post&#39;</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>比方说，你要把为主页生成的HTML保存在缓存中，不过每次当一个评论或帖子添加到数据库
+中时，又要自动使该缓存无效。增加了分组 <tt class="docutils literal"><span class="pre">comment</span></tt> 和 <tt class="docutils literal"><span class="pre">post</span></tt> 之后，在效果上我们
+就把存入这个缓存配置的任意键标记上这两个组的名字。</p>
+<p>例如，每添加一个新的帖子，我们可以让缓存引擎删除所有与 <tt class="docutils literal"><span class="pre">post</span></tt> 分组相联系的项:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Model/Post.php</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">afterSave</span><span class="p">(</span><span class="nv">$created</span><span class="p">,</span> <span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$created</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Cache</span><span class="o">::</span><span class="na">clearGroup</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="s1">&#39;site_home&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">2.4 新版功能.</span></p>
+</div>
+<p><a class="reference internal" href="#Cache::groupConfigs" title="Cache::groupConfigs"><tt class="xref php php-func docutils literal"><span class="pre">Cache::groupConfigs()</span></tt></a> 可以用来读取分组和配置之间的映射，即，具有相同
+的组:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Model/Post.php</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * 前一个例子的另一种写法，清除所有具有相同分组的缓存配置</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">afterSave</span><span class="p">(</span><span class="nv">$created</span><span class="p">,</span> <span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$created</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$configs</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">groupConfigs</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">);</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$configs</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$config</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">Cache</span><span class="o">::</span><span class="na">clearGroup</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="nv">$config</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>分组是在使用相同引擎和相同前缀的所有缓存配置之间共享的。如果你使用分组，并想利用
+分组的删除，就为你所有的（缓存）配置选择一个共用的前缀。</p>
+</div>
+<div class="section" id="api">
+<h2>缓存API<a class="headerlink" href="#api" title="永久链接至标题">¶</a></h2>
+<dl class="class">
+<dt id="Cache">
+<em class="property">class </em><tt class="descname">Cache</tt><a class="headerlink" href="#Cache" title="永久链接至目标">¶</a></dt>
+<dd><p>CakePHP中的Cache类为多个后端缓存系统提供了一个通用的前端。不同的缓存配置和
+引擎可以在app/Config/core.php中设置。</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Cache::config">
+<em class="property">static </em><tt class="descclassname">Cache::</tt><tt class="descname">config</tt><big>(</big><em>$name = null</em>, <em>$settings = array()</em><big>)</big><a class="headerlink" href="#Cache::config" title="永久链接至目标">¶</a></dt>
+<dd><p><tt class="docutils literal"><span class="pre">Cache::config()</span></tt> 方法用来创建额外的缓存配置。这些额外的配置可以有不同于
+默认缓存配置的时间段、引擎、路径或前缀。</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Cache::read">
+<em class="property">static </em><tt class="descclassname">Cache::</tt><tt class="descname">read</tt><big>(</big><em>$key</em>, <em>$config = 'default'</em><big>)</big><a class="headerlink" href="#Cache::read" title="永久链接至目标">¶</a></dt>
+<dd><p><tt class="docutils literal"><span class="pre">Cache::read()</span></tt> 方法用来从 <tt class="docutils literal"><span class="pre">$config</span></tt> 配置读取存储在 <tt class="docutils literal"><span class="pre">$key</span></tt> 键的缓存的值。
+如果$config为null，则会使用默认配置。如果是合法的缓存，<tt class="docutils literal"><span class="pre">Cache::read()</span></tt> 方法
+会返回缓存的值，如果缓存已过期或不存在，就返回 <tt class="docutils literal"><span class="pre">false</span></tt>。缓存的内容的值也许
+会为false，所以一定要使用严格的比较符 <tt class="docutils literal"><span class="pre">===</span></tt> 或者 <tt class="docutils literal"><span class="pre">!==</span></tt>。</p>
+<p>例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$cloud</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;cloud&#39;</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$cloud</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$cloud</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 生成数据 cloud</span>
+<span class="c1">// ...</span>
+
+<span class="c1">// 在缓存中保存数据</span>
+<span class="nx">Cache</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;cloud&#39;</span><span class="p">,</span> <span class="nv">$cloud</span><span class="p">);</span>
+<span class="k">return</span> <span class="nv">$cloud</span><span class="p">;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Cache::write">
+<em class="property">static </em><tt class="descclassname">Cache::</tt><tt class="descname">write</tt><big>(</big><em>$key</em>, <em>$value</em>, <em>$config = 'default'</em><big>)</big><a class="headerlink" href="#Cache::write" title="永久链接至目标">¶</a></dt>
+<dd><p><tt class="docutils literal"><span class="pre">Cache::write()</span></tt> 方法会把$value写入缓存。之后你可以通过 <tt class="docutils literal"><span class="pre">$key</span></tt> 来读取或
+删除它。你也可以指定一个可选的（缓存）配置来保存要缓存的值。如果 <tt class="docutils literal"><span class="pre">$config</span></tt>
+没有指定，默认（配置）就会被使用。<tt class="docutils literal"><span class="pre">Cache::write()</span></tt> 方法可以保存任意类型的
+对象，很适合保存模型 find 方法调用的结果:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">((</span><span class="nv">$posts</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">))</span> <span class="o">===</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$posts</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+    <span class="nx">Cache</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nv">$posts</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>使用 <tt class="docutils literal"><span class="pre">Cache::write()</span></tt> 和 <tt class="docutils literal"><span class="pre">Cache::read()</span></tt> 方法，可以很容易地减少访问数据库
+读取文章的次数。</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Cache::delete">
+<em class="property">static </em><tt class="descclassname">Cache::</tt><tt class="descname">delete</tt><big>(</big><em>$key</em>, <em>$config = 'default'</em><big>)</big><a class="headerlink" href="#Cache::delete" title="永久链接至目标">¶</a></dt>
+<dd><p><tt class="docutils literal"><span class="pre">Cache::delete()</span></tt> 方法让你从缓存的存储中完全删除一个缓存的对象。</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Cache::set">
+<em class="property">static </em><tt class="descclassname">Cache::</tt><tt class="descname">set</tt><big>(</big><em>$settings = array()</em>, <em>$value = null</em>, <em>$config = 'default'</em><big>)</big><a class="headerlink" href="#Cache::set" title="永久链接至目标">¶</a></dt>
+<dd><p><tt class="docutils literal"><span class="pre">Cache::set()</span></tt> 方法让你暂时对一个操作（通常为读或写）改编缓存配置的设置。
+如果你用 <tt class="docutils literal"><span class="pre">Cache::set()</span></tt> 方法为写操作改变了设置，在读取该数据之前你也应当
+使用 <tt class="docutils literal"><span class="pre">Cache::set()</span></tt> 方法。如果你不这么做，读取该缓存键时，就会使用默认
+设置。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+30 days&#39;</span><span class="p">));</span>
+<span class="nx">Cache</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+
+<span class="c1">// 之后</span>
+
+<span class="nx">Cache</span><span class="o">::</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+30 days&#39;</span><span class="p">));</span>
+<span class="nv">$results</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果你发现自己不断地调用 <tt class="docutils literal"><span class="pre">Cache::set()</span></tt> 方法，那么也许你应当创建一个新的
+<a class="reference internal" href="#Cache::config" title="Cache::config"><tt class="xref php php-func docutils literal"><span class="pre">Cache::config()</span></tt></a>。这就不用调用 <tt class="docutils literal"><span class="pre">Cache::set()</span></tt> 方法了。</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Cache::increment">
+<em class="property">static </em><tt class="descclassname">Cache::</tt><tt class="descname">increment</tt><big>(</big><em>$key</em>, <em>$offset = 1</em>, <em>$config = 'default'</em><big>)</big><a class="headerlink" href="#Cache::increment" title="永久链接至目标">¶</a></dt>
+<dd><p>原子化地增大存储在缓存引擎中的值。很适合用于修改计数器或者信号灯（semaphore）
+类型的值。</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Cache::decrement">
+<em class="property">static </em><tt class="descclassname">Cache::</tt><tt class="descname">decrement</tt><big>(</big><em>$key</em>, <em>$offset = 1</em>, <em>$config = 'default'</em><big>)</big><a class="headerlink" href="#Cache::decrement" title="永久链接至目标">¶</a></dt>
+<dd><p>原子化地减小存储在缓存引擎中的值。很适合用于修改计数器或者信号灯（semaphore）
+类型的值。</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Cache::clear">
+<em class="property">static </em><tt class="descclassname">Cache::</tt><tt class="descname">clear</tt><big>(</big><em>$check</em>, <em>$config = 'default'</em><big>)</big><a class="headerlink" href="#Cache::clear" title="永久链接至目标">¶</a></dt>
+<dd><p>将一个缓存配置所有缓存的值删除。对象Apc、Memcache和Wincache这样的引擎，用缓存
+配置的前缀来删除缓存项。请确保不同的引擎配置使用不同的前缀。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Cache::clearGroup">
+<tt class="descclassname">Cache::</tt><tt class="descname">clearGroup</tt><big>(</big><em>$group</em>, <em>$config = 'default'</em><big>)</big><a class="headerlink" href="#Cache::clearGroup" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回:</th><td class="field-body">当成功时为布尔值true。</td>
+</tr>
+</tbody>
+</table>
+<p>从缓存删除属于同一分组的所有键。</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Cache::gc">
+<em class="property">static </em><tt class="descclassname">Cache::</tt><tt class="descname">gc</tt><big>(</big><em>$config</em><big>)</big><a class="headerlink" href="#Cache::gc" title="永久链接至目标">¶</a></dt>
+<dd><p>垃圾回收缓存配置中的项。这主要被FileEngine使用。任何需要手动回收缓存数据的
+缓存引擎都应当实现该方法。</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Cache::groupConfigs">
+<em class="property">static </em><tt class="descclassname">Cache::</tt><tt class="descname">groupConfigs</tt><big>(</big><em>$group = null</em><big>)</big><a class="headerlink" href="#Cache::groupConfigs" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回:</th><td class="field-body">分组及其相关联的配置名称的数组。</td>
+</tr>
+</tbody>
+</table>
+<p>读取分组名称和（缓存）配置的映射。</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Cache::remember">
+<em class="property">static </em><tt class="descclassname">Cache::</tt><tt class="descname">remember</tt><big>(</big><em>$key</em>, <em>$callable</em>, <em>$config = 'default'</em><big>)</big><a class="headerlink" href="#Cache::remember" title="永久链接至目标">¶</a></dt>
+<dd><p>提供简单的方法来实现通读缓存。如果缓存的键存在，就会返回（相应的值）。如果键
+不存在，则回调（callable）会被调用，结果保存在缓存中提供的键上。</p>
+<p>例如，你经常要缓存查询结果。你可以使用 <tt class="docutils literal"><span class="pre">remember()</span></tt> 方法来简化这一过程。
+假设你使用PHP 5.3或更新的版本:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Articles</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">function</span> <span class="nf">all</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$model</span> <span class="o">=</span> <span class="nv">$this</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">remember</span><span class="p">(</span><span class="s1">&#39;all_articles&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$model</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">2.5 新版功能: </span>在2.5版本中增加了remember()方法。</p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="toc-general-purpose.html">通用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toc-behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toc-components.html">组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toc-helpers.html">助件</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="toc-utilities.html">工具</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">缓存</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/email.html">CakeEmail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/file-folder.html">目录和文件 Folder &amp; File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/hash.html">Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/httpsocket.html">HttpSocket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/inflector.html">Inflector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internationalization-and-localization.html">Internationalization &amp; Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging.html">日志记录</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/number.html">CakeNumber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/router.html">Router</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/sanitize.html">数据清理 Data Sanitization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/security.html">安全</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/set.html">Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/string.html">字符串 String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/time.html">CakeTime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/xml.html">Xml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">缓存</a><ul>
+<li><a class="reference internal" href="#cache">配置Cache类</a></li>
+<li><a class="reference internal" href="#id2">为缓存创建存储引擎</a></li>
+<li><a class="reference internal" href="#id3">用缓存来存储常用的查询结果</a></li>
+<li><a class="reference internal" href="#id4">使用缓存保存计数</a></li>
+<li><a class="reference internal" href="#id5">使用分组</a></li>
+<li><a class="reference internal" href="#api">缓存API</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="../core-utility-libraries/email.html" title="CakeEmail" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="toc-utilities.html" title="工具" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

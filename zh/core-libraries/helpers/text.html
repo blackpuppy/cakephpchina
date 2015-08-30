@@ -1,0 +1,647 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="TextHelper" lang="zh_CN" name="title" />
+<meta content="The Text Helper contains methods to make text more usable and friendly in your views." lang="zh_CN" name="description" />
+<meta content="text helper,autoLinkEmails,autoLinkUrls,autoLink,excerpt,highlight,stripLinks,truncate,string text" lang="zh_CN" name="keywords" />
+
+    <title>TextHelper &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="助件" href="../toc-helpers.html" />
+    <link rel="next" title="TimeHelper" href="time.html" />
+    <link rel="prev" title="SessionHelper" href="session.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/core-libraries/helpers/text.html" /><link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/helpers/text.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/helpers/text.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/helpers/text.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/helpers/text.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../toc-helpers.html" accesskey="U" itemprop="url"><span itemprop="title">助件</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/core-libraries/helpers/text.html">en</a></li>
+				
+					<li><a href="../../../pt/core-libraries/helpers/text.html">pt</a></li>
+				
+					<li><a href="../../../es/core-libraries/helpers/text.html">es</a></li>
+				
+					<li><a href="../../../ja/core-libraries/helpers/text.html">ja</a></li>
+				
+					<li><a href="../../../fr/core-libraries/helpers/text.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/helpers/text.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="texthelper">
+<h1>TextHelper<a class="headerlink" href="#texthelper" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="TextHelper">
+<em class="property">class </em><tt class="descname">TextHelper</tt><big>(</big><em>View $view</em>, <em>array $settings = array()</em><big>)</big><a class="headerlink" href="#TextHelper" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>The TextHelper contains methods to make text more usable and
+friendly in your views. It aids in enabling links, formatting urls,
+creating excerpts of text around chosen words or phrases,
+highlighting key words in blocks of text, and to gracefully
+truncating long stretches of text.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>Several of <tt class="docutils literal"><span class="pre">TextHelper</span></tt> methods have been moved into <a class="reference internal" href="../../core-utility-libraries/string.html#String" title="String"><tt class="xref php php-class docutils literal"><span class="pre">String</span></tt></a>
+class to allow easier use outside of the <tt class="docutils literal"><span class="pre">View</span></tt> layer.
+Within a view, these methods are accessible via the <cite>TextHelper</cite>
+class and you can called it as you would call a normal helper method:
+<tt class="docutils literal"><span class="pre">$this-&gt;Text-&gt;method($args);</span></tt>.</p>
+</div>
+<dl class="method">
+<dt id="TextHelper::autoLinkEmails">
+<tt class="descclassname">TextHelper::</tt><tt class="descname">autoLinkEmails</tt><big>(</big><em>string $text</em>, <em>array $options=array()</em><big>)</big><a class="headerlink" href="#TextHelper::autoLinkEmails" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$text</strong> (<em>string</em>) &#8211; The text to convert.</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a> for the generated links.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Adds links to the well-formed email addresses in $text, according
+to any options defined in <tt class="docutils literal"><span class="pre">$htmlOptions</span></tt> (see
+<a class="reference internal" href="html.html#HtmlHelper::link" title="HtmlHelper::link"><tt class="xref php php-meth docutils literal"><span class="pre">HtmlHelper::link()</span></tt></a>).:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$myText</span> <span class="o">=</span> <span class="s1">&#39;For more information regarding our world-famous pastries and desserts, contact info@example.com&#39;</span><span class="p">;</span>
+<span class="nv">$linkedText</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Text</span><span class="o">-&gt;</span><span class="na">autoLinkEmails</span><span class="p">(</span><span class="nv">$myText</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">For</span> <span class="nx">more</span> <span class="nx">information</span> <span class="nx">regarding</span> <span class="nx">our</span> <span class="nx">world</span><span class="o">-</span><span class="nx">famous</span> <span class="nx">pastries</span> <span class="k">and</span> <span class="nx">desserts</span><span class="p">,</span>
+<span class="nx">contact</span> <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&quot;mailto:info@example.com&quot;</span><span class="o">&gt;</span><span class="nx">info</span><span class="o">@</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>In 2.1 this method automatically escapes its input. Use the <tt class="docutils literal"><span class="pre">escape</span></tt>
+option to disable this if necessary.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="TextHelper::autoLinkUrls">
+<tt class="descclassname">TextHelper::</tt><tt class="descname">autoLinkUrls</tt><big>(</big><em>string $text</em>, <em>array $htmlOptions=array()</em><big>)</big><a class="headerlink" href="#TextHelper::autoLinkUrls" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$text</strong> (<em>string</em>) &#8211; The text to convert.</li>
+<li><strong>$htmlOptions</strong> (<em>array</em>) &#8211; An array <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a> for the generated links</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Same as in <tt class="docutils literal"><span class="pre">autoLinkEmails()</span></tt>, only this method searches for
+strings that start with https, http, ftp, or nntp and links them
+appropriately.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>In 2.1 this method automatically escapes its input. Use the <tt class="docutils literal"><span class="pre">escape</span></tt>
+option to disable this if necessary.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="TextHelper::autoLink">
+<tt class="descclassname">TextHelper::</tt><tt class="descname">autoLink</tt><big>(</big><em>string $text</em>, <em>array $htmlOptions=array()</em><big>)</big><a class="headerlink" href="#TextHelper::autoLink" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$text</strong> (<em>string</em>) &#8211; The text to autolink.</li>
+<li><strong>$htmlOptions</strong> (<em>array</em>) &#8211; An array <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a> for the generated links</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Performs the functionality in both <tt class="docutils literal"><span class="pre">autoLinkUrls()</span></tt> and
+<tt class="docutils literal"><span class="pre">autoLinkEmails()</span></tt> on the supplied <tt class="docutils literal"><span class="pre">$text</span></tt>. All URLs and emails
+are linked appropriately given the supplied <tt class="docutils literal"><span class="pre">$htmlOptions</span></tt>.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span>In 2.1 this method automatically escapes its input. Use the <tt class="docutils literal"><span class="pre">escape</span></tt>
+option to disable this if necessary.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="TextHelper::highlight">
+<tt class="descclassname">TextHelper::</tt><tt class="descname">highlight</tt><big>(</big><em>string $haystack</em>, <em>string $needle</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#TextHelper::highlight" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$haystack</strong> (<em>string</em>) &#8211; The string to search.</li>
+<li><strong>$needle</strong> (<em>string</em>) &#8211; The string to find.</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; An array of options, see below.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Highlights <tt class="docutils literal"><span class="pre">$needle</span></tt> in <tt class="docutils literal"><span class="pre">$haystack</span></tt> using the
+<tt class="docutils literal"><span class="pre">$options['format']</span></tt> string specified or a default string.</p>
+<p>Options:</p>
+<ul class="simple">
+<li>&#8216;format&#8217; - string The piece of html with that the phrase will be
+highlighted</li>
+<li>&#8216;html&#8217; - bool If true, will ignore any HTML tags, ensuring that
+only the correct text is highlighted</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as TextHelper</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Text</span><span class="o">-&gt;</span><span class="na">highlight</span><span class="p">(</span><span class="nv">$lastSentence</span><span class="p">,</span> <span class="s1">&#39;using&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;format&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;span class=&quot;highlight&quot;&gt;\1&lt;/span&gt;&#39;</span><span class="p">));</span>
+
+<span class="c1">// called as String</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;String&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">String</span><span class="o">::</span><span class="na">highlight</span><span class="p">(</span><span class="nv">$lastSentence</span><span class="p">,</span> <span class="s1">&#39;using&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;format&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;span class=&quot;highlight&quot;&gt;\1&lt;/span&gt;&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Highlights</span> <span class="nv">$needle</span> <span class="nx">in</span> <span class="nv">$haystack</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">&quot;highlight&quot;</span><span class="o">&gt;</span><span class="nx">using</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
+<span class="nx">the</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;format&#39;</span><span class="p">]</span> <span class="nx">string</span> <span class="nx">specified</span>  <span class="k">or</span> <span class="nx">a</span> <span class="k">default</span> <span class="nx">string</span><span class="o">.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="TextHelper::stripLinks">
+<tt class="descclassname">TextHelper::</tt><tt class="descname">stripLinks</tt><big>(</big><em>$text</em><big>)</big><a class="headerlink" href="#TextHelper::stripLinks" title="永久链接至目标">¶</a></dt>
+<dd><p>Strips the supplied <tt class="docutils literal"><span class="pre">$text</span></tt> of any HTML links.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TextHelper::truncate">
+<tt class="descclassname">TextHelper::</tt><tt class="descname">truncate</tt><big>(</big><em>string $text</em>, <em>int $length=100</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#TextHelper::truncate" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$text</strong> (<em>string</em>) &#8211; The text to truncate.</li>
+<li><strong>$length</strong> (<em>int</em>) &#8211; The length to trim to.</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; An array of options to use.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Cuts a string to the <tt class="docutils literal"><span class="pre">$length</span></tt> and adds a suffix with
+<tt class="docutils literal"><span class="pre">'ellipsis'</span></tt> if the text is longer than <tt class="docutils literal"><span class="pre">$length</span></tt>. If <tt class="docutils literal"><span class="pre">'exact'</span></tt>
+is passed as <tt class="docutils literal"><span class="pre">false</span></tt>, the truncation will occur after the next
+word ending. If <tt class="docutils literal"><span class="pre">'html'</span></tt> is passed as <tt class="docutils literal"><span class="pre">true</span></tt>, html tags will be
+respected and will not be cut off.</p>
+<p><tt class="docutils literal"><span class="pre">$options</span></tt> is used to pass all extra parameters, and has the
+following possible keys by default, all of which are optional:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;ellipsis&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;exact&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="s1">&#39;html&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as TextHelper</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Text</span><span class="o">-&gt;</span><span class="na">truncate</span><span class="p">(</span>
+    <span class="s1">&#39;The killer crept forward and tripped on the rug.&#39;</span><span class="p">,</span>
+    <span class="mi">22</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;ellipsis&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;exact&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// called as String</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;String&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">String</span><span class="o">::</span><span class="na">truncate</span><span class="p">(</span>
+    <span class="s1">&#39;The killer crept forward and tripped on the rug.&#39;</span><span class="p">,</span>
+    <span class="mi">22</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;ellipsis&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;exact&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">The</span> <span class="nx">killer</span> <span class="nx">crept</span><span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.3 版更改: </span><tt class="docutils literal"><span class="pre">ending</span></tt> has been replaced by <tt class="docutils literal"><span class="pre">ellipsis</span></tt>. <tt class="docutils literal"><span class="pre">ending</span></tt> is still used in 2.2.1</p>
+</div>
+<dl class="method">
+<dt id="TextHelper::tail">
+<tt class="descclassname">TextHelper::</tt><tt class="descname">tail</tt><big>(</big><em>string $text</em>, <em>int $length=100</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#TextHelper::tail" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$text</strong> (<em>string</em>) &#8211; The text to truncate.</li>
+<li><strong>$length</strong> (<em>int</em>) &#8211; The length to trim to.</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; An array of options to use.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Cuts a string to the <tt class="docutils literal"><span class="pre">$length</span></tt> and adds a prefix with
+<tt class="docutils literal"><span class="pre">'ellipsis'</span></tt> if the text is longer than <tt class="docutils literal"><span class="pre">$length</span></tt>. If <tt class="docutils literal"><span class="pre">'exact'</span></tt>
+is passed as <tt class="docutils literal"><span class="pre">false</span></tt>, the truncation will occur before the next
+word ending.</p>
+<p><tt class="docutils literal"><span class="pre">$options</span></tt> is used to pass all extra parameters, and has the
+following possible keys by default, all of which are optional:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;ellipsis&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;exact&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">2.3 新版功能.</span></p>
+</div>
+<p>Example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as TextHelper</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Text</span><span class="o">-&gt;</span><span class="na">tail</span><span class="p">(</span>
+    <span class="s1">&#39;I packed my bag and in it I put a PSP, a PS3, a TV, a C# program that can divide by zero, death metal t-shirts&#39;</span><span class="p">,</span>
+    <span class="mi">70</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;ellipsis&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;exact&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// called as String</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;String&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">String</span><span class="o">::</span><span class="na">tail</span><span class="p">(</span>
+    <span class="s1">&#39;I packed my bag and in it I put a PSP, a PS3, a TV, a C# program that can divide by zero, death metal t-shirts&#39;</span><span class="p">,</span>
+    <span class="mi">70</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;ellipsis&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;exact&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">...</span><span class="nx">a</span> <span class="nx">TV</span><span class="p">,</span> <span class="nx">a</span> <span class="nx">C</span><span class="c1"># program that can divide by zero, death metal t-shirts</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="TextHelper::excerpt">
+<tt class="descclassname">TextHelper::</tt><tt class="descname">excerpt</tt><big>(</big><em>string $haystack</em>, <em>string $needle</em>, <em>integer $radius=100</em>, <em>string $ellipsis=&quot;...&quot;</em><big>)</big><a class="headerlink" href="#TextHelper::excerpt" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$haystack</strong> (<em>string</em>) &#8211; The string to search.</li>
+<li><strong>$needle</strong> (<em>string</em>) &#8211; The string to excerpt around.</li>
+<li><strong>$radius</strong> (<em>int</em>) &#8211; The number of characters on either side of $needle you want to include.</li>
+<li><strong>$ellipsis</strong> (<em>string</em>) &#8211; Text to append/prepend to the beginning or end of the result.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Extracts an excerpt from <tt class="docutils literal"><span class="pre">$haystack</span></tt> surrounding the <tt class="docutils literal"><span class="pre">$needle</span></tt>
+with a number of characters on each side determined by <tt class="docutils literal"><span class="pre">$radius</span></tt>,
+and prefix/suffix with <tt class="docutils literal"><span class="pre">$ellipsis</span></tt>. This method is especially handy for
+search results. The query string or keywords can be shown within
+the resulting document.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as TextHelper</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Text</span><span class="o">-&gt;</span><span class="na">excerpt</span><span class="p">(</span><span class="nv">$lastParagraph</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;...&#39;</span><span class="p">);</span>
+
+<span class="c1">// called as String</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;String&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">String</span><span class="o">::</span><span class="na">excerpt</span><span class="p">(</span><span class="nv">$lastParagraph</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;...&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">...</span> <span class="nx">by</span> <span class="nv">$radius</span><span class="p">,</span> <span class="k">and</span> <span class="nx">prefix</span><span class="o">/</span><span class="nx">suffix</span> <span class="nx">with</span> <span class="nv">$ellipsis</span><span class="o">.</span> <span class="k">This</span> <span class="nx">method</span> <span class="nx">is</span>
+<span class="nx">especially</span> <span class="nx">handy</span> <span class="k">for</span> <span class="nx">search</span> <span class="nx">results</span><span class="o">.</span> <span class="nx">The</span> <span class="nx">query</span><span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="TextHelper::toList">
+<tt class="descclassname">TextHelper::</tt><tt class="descname">toList</tt><big>(</big><em>array $list</em>, <em>$and='and'</em><big>)</big><a class="headerlink" href="#TextHelper::toList" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$list</strong> (<em>array</em>) &#8211; Array of elements to combine into a list sentence.</li>
+<li><strong>$and</strong> (<em>string</em>) &#8211; The word used for the last join.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Creates a comma-separated list where the last two items are joined
+with ‘and’.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// called as TextHelper</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Text</span><span class="o">-&gt;</span><span class="na">toList</span><span class="p">(</span><span class="nv">$colors</span><span class="p">);</span>
+
+<span class="c1">// called as String</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;String&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">String</span><span class="o">::</span><span class="na">toList</span><span class="p">(</span><span class="nv">$colors</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">red</span><span class="p">,</span> <span class="nx">orange</span><span class="p">,</span> <span class="nx">yellow</span><span class="p">,</span> <span class="nx">green</span><span class="p">,</span> <span class="nx">blue</span><span class="p">,</span> <span class="nx">indigo</span> <span class="k">and</span> <span class="nx">violet</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../views.html">视图</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../views/themes.html">主题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views/media-view.html">媒体视图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views/json-and-xml-views.html">JSON 和 XML 视图</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../views/helpers.html">助件</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache.html">缓存助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form.html">FormHelper 助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="html.html">HtmlHelper助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.html">JsHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">SessionHelper</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">TimeHelper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-general-purpose.html">通用</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../global-constants-and-functions.html">全局常量和函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core-utility-libraries/app.html">App Class</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../events.html">Events System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collections.html">Collections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-components.html">组件</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-helpers.html">助件</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache.html">缓存助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form.html">FormHelper 助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="html.html">HtmlHelper助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.html">JsHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">SessionHelper</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">TimeHelper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-utilities.html">工具</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">TextHelper</a></li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="time.html" title="TimeHelper" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="session.html" title="SessionHelper" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

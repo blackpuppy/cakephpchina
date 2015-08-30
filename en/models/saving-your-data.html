@@ -1,0 +1,1280 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Saving Your Data" lang="en" name="title" />
+<meta content="doc models,validation rules,data validation,flash message,null model,table php,request data,php class,model data,database table,array,recipes,success,reason,snap,data model" lang="en" name="keywords" />
+
+    <title>Saving Your Data &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Models" href="../models.html" />
+    <link rel="next" title="Deleting Data" href="deleting-data.html" />
+    <link rel="prev" title="Retrieving Your Data" href="retrieving-your-data.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/models/saving-your-data.html" /><link rel="alternate" hreflang="es" href="../../es/models/saving-your-data.html" /><link rel="alternate" hreflang="ja" href="../../ja/models/saving-your-data.html" /><link rel="alternate" hreflang="fr" href="../../fr/models/saving-your-data.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/models/saving-your-data.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../models.html" accesskey="U" itemprop="url"><span itemprop="title">Models</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/models/saving-your-data.html">pt</a></li>
+				
+					<li><a href="../../es/models/saving-your-data.html">es</a></li>
+				
+					<li><a href="../../ja/models/saving-your-data.html">ja</a></li>
+				
+					<li><a href="../../fr/models/saving-your-data.html">fr</a></li>
+				
+					<li><a href="../../zh/models/saving-your-data.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/models/saving-your-data.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="saving-your-data">
+<h1>Saving Your Data<a class="headerlink" href="#saving-your-data" title="Permalink to this headline">¶</a></h1>
+<p>CakePHP makes saving model data a snap. Data ready to be saved
+should be passed to the model&#8217;s <tt class="docutils literal"><span class="pre">save()</span></tt> method using the
+following basic format:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nx">ModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">fieldname1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span>
+        <span class="p">[</span><span class="nx">fieldname2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Most of the time you won&#8217;t even need to worry about this format:
+CakePHP&#8217;s <a class="reference internal" href="../core-libraries/helpers/form.html#FormHelper" title="FormHelper"><tt class="xref php php-class docutils literal"><span class="pre">FormHelper</span></tt></a>, and model find methods all
+package data in this format. If you&#8217;re using <a class="reference internal" href="../core-libraries/helpers/form.html#FormHelper" title="FormHelper"><tt class="xref php php-class docutils literal"><span class="pre">FormHelper</span></tt></a>,
+the data is also conveniently available in <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> for
+quick usage.</p>
+<p>Here&#8217;s a quick example of a controller action that uses a CakePHP
+model to save data to a database table:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">edit</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Has any form data been POSTed?</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">// If the form data can be validated and saved...</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+            <span class="c1">// Set a session flash message and redirect.</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;Recipe Saved!&#39;</span><span class="p">);</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">&#39;/recipes&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// If no form data, find the recipe to be edited</span>
+    <span class="c1">// and hand it to the view.</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;recipe&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">findById</span><span class="p">(</span><span class="nv">$id</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When save is called, the data passed to it in the first parameter is validated
+using CakePHP&#8217;s validation mechanism (see <a class="reference internal" href="data-validation.html"><em>Data Validation</em></a> chapter for more
+information). If for some reason your data isn&#8217;t saving, be sure to check to see
+if some validation rules are being broken. You can debug this situation by
+outputting <tt class="xref php php-attr docutils literal"><span class="pre">Model::$validationErrors</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// handle the success.</span>
+<span class="p">}</span>
+<span class="nx">debug</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">validationErrors</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>There are a few other save-related methods in the model that you&#8217;ll
+find useful:</p>
+<div class="section" id="model-set-one-two-null">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::set($one,</span> <span class="pre">$two</span> <span class="pre">=</span> <span class="pre">null)</span></tt><a class="headerlink" href="#model-set-one-two-null" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">Model::set()</span></tt> can be used to set one or many fields of data to the
+data array inside a model. This is useful when using models with
+the ActiveRecord features offered by Model:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;New title for the article&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Is an example of how you can use <tt class="docutils literal"><span class="pre">set()</span></tt> to update
+single fields, in an ActiveRecord approach. You can also use
+<tt class="docutils literal"><span class="pre">set()</span></tt> to assign new values to multiple fields:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;New title&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;published&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+<span class="p">));</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The above would update the title and published fields and save the
+record to the database.</p>
+</div>
+<div class="section" id="model-clear">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::clear()</span></tt><a class="headerlink" href="#model-clear" title="Permalink to this headline">¶</a></h2>
+<p>This method can be used to reset model state and clear out any unsaved data and
+validation errors.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.4.</span></p>
+</div>
+</div>
+<div class="section" id="model-save-array-data-null-boolean-validate-true-array-fieldlist-array">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::save(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">boolean</span> <span class="pre">$validate</span> <span class="pre">=</span> <span class="pre">true,</span> <span class="pre">array</span> <span class="pre">$fieldList</span> <span class="pre">=</span> <span class="pre">array())</span></tt><a class="headerlink" href="#model-save-array-data-null-boolean-validate-true-array-fieldlist-array" title="Permalink to this headline">¶</a></h2>
+<p>Featured above, this method saves array-formatted data. The second
+parameter allows you to sidestep validation, and the third allows
+you to supply a list of model fields to be saved. For added
+security, you can limit the saved fields to those listed in
+<tt class="docutils literal"><span class="pre">$fieldList</span></tt>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If <tt class="docutils literal"><span class="pre">$fieldList</span></tt> is not supplied, a malicious user can add additional
+fields to the form data (if you are not using
+<a class="reference internal" href="../core-libraries/components/security-component.html#SecurityComponent" title="SecurityComponent"><tt class="xref php php-class docutils literal"><span class="pre">SecurityComponent</span></tt></a>), and by this change fields that were not
+originally intended to be changed.</p>
+</div>
+<p>The save method also has an alternate syntax:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">save</span><span class="p">(</span><span class="k">array</span> <span class="nv">$data</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$params</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">$params</span></tt> array can have any of the following available options
+as keys:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">validate</span></tt> Set to true/false to enable/disable validation.</li>
+<li><tt class="docutils literal"><span class="pre">fieldList</span></tt> An array of fields you want to allow for saving.</li>
+<li><tt class="docutils literal"><span class="pre">callbacks</span></tt> Set to false to disable callbacks. Using &#8216;before&#8217; or &#8216;after&#8217;
+will enable only those callbacks.</li>
+<li><tt class="docutils literal"><span class="pre">counterCache</span></tt> (since 2.4) Boolean to control updating of counter caches (if any)</li>
+<li><tt class="docutils literal"><span class="pre">atomic</span></tt> (since 2.6) Boolean to indicate you want records saved in
+a transaction.</li>
+</ul>
+<p>More information about model callbacks is available
+<a class="reference internal" href="callback-methods.html"><em>here</em></a></p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you don&#8217;t want the <tt class="docutils literal"><span class="pre">modified</span></tt> field to be automatically updated when saving some
+data add <tt class="docutils literal"><span class="pre">'modified'</span> <span class="pre">=&gt;</span> <span class="pre">false</span></tt> to your <tt class="docutils literal"><span class="pre">$data</span></tt> array</p>
+</div>
+<p>Once a save has been completed, the ID for the object can be found
+in the <tt class="docutils literal"><span class="pre">$id</span></tt> attribute of the model object - something especially
+handy when creating new objects.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Ingredient</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$newData</span><span class="p">);</span>
+<span class="nv">$newIngredientId</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Ingredient</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Creating or updating is controlled by the model&#8217;s <tt class="docutils literal"><span class="pre">id</span></tt> field. If
+<tt class="docutils literal"><span class="pre">$Model-&gt;id</span></tt> is set, the record with this primary key is updated.
+Otherwise a new record is created:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Create: id isn&#39;t set or is null</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
+
+<span class="c1">// Update: id is set to a numerical value</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">When calling save in a loop, don&#8217;t forget to call <tt class="docutils literal"><span class="pre">clear()</span></tt>.</p>
+</div>
+<p>If you want to update a value, rather than create a new one, make sure
+you are passing the primary key field into the data array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My new title&#39;</span><span class="p">);</span>
+<span class="c1">// This will update Recipe with id 10</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model-create-array-data-array">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::create(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">array())</span></tt><a class="headerlink" href="#model-create-array-data-array" title="Permalink to this headline">¶</a></h2>
+<p>This method resets the model state for saving new information.
+It does not actually create a record in the database but clears
+Model::$id and sets Model::$data based on your database field defaults. If you have
+not defined defaults for your database fields, Model::$data will be set to an empty array.</p>
+<p>If the <tt class="docutils literal"><span class="pre">$data</span></tt> parameter (using the array format outlined above) is passed, it will be merged with the database
+field defaults and the model instance will be ready to save with that data (accessible at <tt class="docutils literal"><span class="pre">$this-&gt;data</span></tt>).</p>
+<p>If <tt class="docutils literal"><span class="pre">false</span></tt> or <tt class="docutils literal"><span class="pre">null</span></tt> are passed for the <tt class="docutils literal"><span class="pre">$data</span></tt> parameter, Model::data will be set to an empty array.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you want to insert a new row instead of updating an existing one you should always call create() first.
+This avoids conflicts with possible prior save calls in callbacks or other places.</p>
+</div>
+</div>
+<div class="section" id="model-savefield-string-fieldname-string-fieldvalue-validate-false">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::saveField(string</span> <span class="pre">$fieldName,</span> <span class="pre">string</span> <span class="pre">$fieldValue,</span> <span class="pre">$validate</span> <span class="pre">=</span> <span class="pre">false)</span></tt><a class="headerlink" href="#model-savefield-string-fieldname-string-fieldvalue-validate-false" title="Permalink to this headline">¶</a></h2>
+<p>Used to save a single field value. Set the ID of the model
+(<tt class="docutils literal"><span class="pre">$this-&gt;ModelName-&gt;id</span> <span class="pre">=</span> <span class="pre">$id</span></tt>) just before calling
+<tt class="docutils literal"><span class="pre">saveField()</span></tt>. When using this method, <tt class="docutils literal"><span class="pre">$fieldName</span></tt> should only
+contain the name of the field, not the name of the model and
+field.</p>
+<p>For example, to update the title of a blog post, the call to
+<tt class="docutils literal"><span class="pre">saveField</span></tt> from a controller might look something like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">saveField</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;A New Title for a New Day&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">You can&#8217;t stop the <tt class="docutils literal"><span class="pre">modified</span></tt> field being updated with this method, you
+need to use the save() method.</p>
+</div>
+<p>The saveField method also has an alternate syntax:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">saveField</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$fieldName</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$fieldValue</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$params</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">$params</span></tt> array can have any of the following available options
+as keys:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">validate</span></tt> Set to true/false to enable/disable validation.</li>
+<li><tt class="docutils literal"><span class="pre">callbacks</span></tt> Set to false to disable callbacks. Using &#8216;before&#8217; or &#8216;after&#8217;
+will enable only those callbacks.</li>
+<li><tt class="docutils literal"><span class="pre">counterCache</span></tt> (since 2.4) Boolean to control updating of counter caches (if any)</li>
+</ul>
+</div>
+<div class="section" id="model-updateall-array-fields-mixed-conditions">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::updateAll(array</span> <span class="pre">$fields,</span> <span class="pre">mixed</span> <span class="pre">$conditions)</span></tt><a class="headerlink" href="#model-updateall-array-fields-mixed-conditions" title="Permalink to this headline">¶</a></h2>
+<p>Updates one or more records in a single call. Fields to be updated,
+along with their values, are identified by the <tt class="docutils literal"><span class="pre">$fields</span></tt> array.
+Records to be updated are identified by the <tt class="docutils literal"><span class="pre">$conditions</span></tt> array.
+If <tt class="docutils literal"><span class="pre">$conditions</span></tt> argument is not supplied or it is set to <tt class="docutils literal"><span class="pre">true</span></tt>,
+all records will be updated.</p>
+<p>For example, to approve all bakers who have been members for over a
+year, the update call might look something like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$thisYear</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d H:i:s&#39;</span><span class="p">,</span> <span class="nb">strtotime</span><span class="p">(</span><span class="s1">&#39;-1 year&#39;</span><span class="p">));</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Baker</span><span class="o">-&gt;</span><span class="na">updateAll</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Baker.approved&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Baker.created &lt;=&#39;</span> <span class="o">=&gt;</span> <span class="nv">$thisYear</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">$fields</span></tt> array accepts SQL expressions. Literal values should be
+quoted manually using <tt class="xref php php-meth docutils literal"><span class="pre">DboSource::value()</span></tt>. For example if one of your
+model methods was calling <tt class="docutils literal"><span class="pre">updateAll()</span></tt> you would do the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$db</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDataSource</span><span class="p">();</span>
+<span class="nv">$value</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">value</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">updateAll</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Baker.approved&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Baker.created &lt;=&#39;</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Even if the modified field exists for the model being updated, it is
+not going to be updated automatically by the ORM. Just add it
+manually to the array if you need it to be updated.</p>
+</div>
+<p>For example, to close all tickets that belong to a certain
+customer:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Ticket</span><span class="o">-&gt;</span><span class="na">updateAll</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Ticket.status&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;&#39;closed&#39;&quot;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Ticket.customer_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">453</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>By default, updateAll() will automatically join any belongsTo
+association for databases that support joins. To prevent this,
+temporarily unbind the associations.</p>
+</div>
+<div class="section" id="model-savemany-array-data-null-array-options-array">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::saveMany(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></tt><a class="headerlink" href="#model-savemany-array-data-null-array-options-array" title="Permalink to this headline">¶</a></h2>
+<p>Method used to save multiple rows of the same model at once. The following
+options may be used:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">validate</span></tt>: Set to false to disable validation, true to validate each record before saving,
+&#8216;first&#8217; to validate <em>all</em> records before any are saved (default),</li>
+<li><tt class="docutils literal"><span class="pre">atomic</span></tt>: If true (default), will attempt to save all records in a single transaction.
+Should be set to false if database/table does not support transactions.</li>
+<li><tt class="docutils literal"><span class="pre">fieldList</span></tt>: Equivalent to the $fieldList parameter in Model::save()</li>
+<li><tt class="docutils literal"><span class="pre">deep</span></tt>: (since 2.1) If set to true, also associated data is saved; see also <a class="reference internal" href="#model-saveassociated"><em>saveAssociated()</em></a></li>
+<li><tt class="docutils literal"><span class="pre">callbacks</span></tt> Set to false to disable callbacks. Using &#8216;before&#8217; or &#8216;after&#8217;
+will enable only those callbacks.</li>
+<li><tt class="docutils literal"><span class="pre">counterCache</span></tt> (since 2.4) Boolean to control updating of counter caches (if any)</li>
+</ul>
+<p>For saving multiple records of single model, $data needs to be a
+numerically indexed array of records like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;title 1&#39;</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;title 2&#39;</span><span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that we are passing numerical indexes instead of usual
+<tt class="docutils literal"><span class="pre">$data</span></tt> containing the Article key. When saving multiple records
+of same model the records arrays should be just numerically indexed
+without the model key.</p>
+</div>
+<p>It is also acceptable to have the data in the following format:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;title 1&#39;</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;title 2&#39;</span><span class="p">)),</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>To save also associated data with <tt class="docutils literal"><span class="pre">$options['deep']</span> <span class="pre">=</span> <span class="pre">true</span></tt> (since 2.1), the two above examples would look like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;title 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Assoc&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;field&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;title 2&#39;</span><span class="p">),</span>
+<span class="p">);</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Article&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;title 1&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;Assoc&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;field&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span><span class="p">)</span>
+    <span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;title 2&#39;</span><span class="p">)),</span>
+<span class="p">);</span>
+<span class="nv">$Model</span><span class="o">-&gt;</span><span class="na">saveMany</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;deep&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Keep in mind that if you want to update a record instead of creating a new
+one you just need to add the primary key index to the data row:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="c1">// This creates a new row</span>
+        <span class="s1">&#39;Article&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;New article&#39;</span><span class="p">)),</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="c1">// This updates an existing row</span>
+        <span class="s1">&#39;Article&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;title 2&#39;</span><span class="p">)),</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model-saveassociated-array-data-null-array-options-array">
+<span id="model-saveassociated"></span><h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::saveAssociated(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></tt><a class="headerlink" href="#model-saveassociated-array-data-null-array-options-array" title="Permalink to this headline">¶</a></h2>
+<p>Method used to save multiple model associations at once. The following
+options may be used:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">validate</span></tt>: Set to false to disable validation, true to validate each record before saving,
+&#8216;first&#8217; to validate <em>all</em> records before any are saved (default),</li>
+<li><tt class="docutils literal"><span class="pre">atomic</span></tt>: If true (default), will attempt to save all records in a single transaction.
+Should be set to false if database/table does not support transactions.</li>
+<li><tt class="docutils literal"><span class="pre">fieldList</span></tt>: Equivalent to the $fieldList parameter in Model::save()</li>
+<li><tt class="docutils literal"><span class="pre">deep</span></tt>: (since 2.1) If set to true, not only directly associated data is saved,
+but deeper nested associated data as well. Defaults to false.</li>
+<li><tt class="docutils literal"><span class="pre">counterCache</span></tt> (since 2.4) Boolean to control updating of counter caches (if any)</li>
+</ul>
+<p>For saving a record along with its related record having a hasOne
+or belongsTo association, the data array should be like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;User&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;billy&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;Profile&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;sex&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;occupation&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Programmer&#39;</span><span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>For saving a record along with its related records having hasMany
+association, the data array should be like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Article&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My first article&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;Comment&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Comment 1&#39;</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Comment 2&#39;</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">12</span><span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Comment 3&#39;</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">40</span><span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>And for saving a record along with its related records having hasMany with more than two
+levels deep associations, the data array should be as follow:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;User&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;john-doe@cakephp.org&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;Cart&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;payment_status_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s1">&#39;total_cost&#39;</span> <span class="o">=&gt;</span> <span class="mi">250</span><span class="p">,</span>
+            <span class="s1">&#39;CartItem&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="k">array</span><span class="p">(</span>
+                    <span class="s1">&#39;cart_product_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+                    <span class="s1">&#39;quantity&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="s1">&#39;cost&#39;</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="k">array</span><span class="p">(</span>
+                    <span class="s1">&#39;cart_product_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">5</span><span class="p">,</span>
+                    <span class="s1">&#39;quantity&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="s1">&#39;cost&#39;</span> <span class="o">=&gt;</span> <span class="mi">150</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If successful, the foreign key of the main model will be stored in
+the related models&#8217; id field, i.e. <tt class="docutils literal"><span class="pre">$this-&gt;RelatedModel-&gt;id</span></tt>.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Be careful when checking saveAssociated calls with atomic option set to
+false. It returns an array instead of boolean.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.1: </span>You can now save deeper associated data as well with setting <tt class="docutils literal"><span class="pre">$options['deep']</span> <span class="pre">=</span> <span class="pre">true;</span></tt></p>
+</div>
+<p>For saving a record along with its related records having hasMany
+association and deeper associated Comment belongsTo User data as well,
+the data array should be like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Article&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My first article&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;Comment&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Comment 1&#39;</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Save a new user as well&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;User&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;first&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;mad&#39;</span><span class="p">,</span> <span class="s1">&#39;last&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;coder&#39;</span><span class="p">)</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>And save this data with:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$Article</span><span class="o">-&gt;</span><span class="na">saveAssociated</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;deep&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.1: </span><tt class="docutils literal"><span class="pre">Model::saveAll()</span></tt> and friends now support passing the <cite>fieldList</cite> for multiple models.</p>
+</div>
+<p>Example of using <tt class="docutils literal"><span class="pre">fieldList</span></tt> with multiple models:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">SomeModel</span><span class="o">-&gt;</span><span class="na">saveAll</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;fieldList&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;SomeModel&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;field_1&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;AssociatedModel&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;field_2&#39;</span><span class="p">,</span> <span class="s1">&#39;field_3&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>The fieldList will be an array of model aliases as keys and arrays with fields as values.
+The model names are not nested like in the data to be saved.</p>
+</div>
+<div class="section" id="model-saveall-array-data-null-array-options-array">
+<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::saveAll(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></tt><a class="headerlink" href="#model-saveall-array-data-null-array-options-array" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">saveAll</span></tt> function is just a wrapper around the <tt class="docutils literal"><span class="pre">saveMany</span></tt> and <tt class="docutils literal"><span class="pre">saveAssociated</span></tt>
+methods. it will inspect the data and determine what type of save it should perform. If
+data is formatted in a numerical indexed array, <tt class="docutils literal"><span class="pre">saveMany</span></tt> will be called, otherwise
+<tt class="docutils literal"><span class="pre">saveAssociated</span></tt> is used.</p>
+<p>This function receives the same options as the former two, and is generally a backwards
+compatible function. It is recommended using either <tt class="docutils literal"><span class="pre">saveMany</span></tt> or <tt class="docutils literal"><span class="pre">saveAssociated</span></tt>
+depending on the case.</p>
+</div>
+<div class="section" id="saving-related-model-data-hasone-hasmany-belongsto">
+<h2>Saving Related Model Data (hasOne, hasMany, belongsTo)<a class="headerlink" href="#saving-related-model-data-hasone-hasmany-belongsto" title="Permalink to this headline">¶</a></h2>
+<p>When working with associated models, it is important to realize
+that saving model data should always be done by the corresponding
+CakePHP model. If you are saving a new Post and its associated
+Comments, then you would use both Post and Comment models during
+the save operation.</p>
+<p>If neither of the associated model records exists in the system yet
+(for example, you want to save a new User and their related Profile
+records at the same time), you&#8217;ll need to first save the primary,
+or parent model.</p>
+<p>To get an idea of how this works, let&#8217;s imagine that we have an
+action in our UsersController that handles the saving of a new User
+and a related Profile. The example action shown below will assume
+that you&#8217;ve POSTed enough data (using the FormHelper) to create a
+single User and a single Profile:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">// We can save the User data:</span>
+        <span class="c1">// it should be in $this-&gt;request-&gt;data[&#39;User&#39;]</span>
+
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
+
+        <span class="c1">// If the user was saved, Now we add this information to the data</span>
+        <span class="c1">// and save the Profile.</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$user</span><span class="p">))</span> <span class="p">{</span>
+            <span class="c1">// The ID of the newly created user has been set</span>
+            <span class="c1">// as $this-&gt;User-&gt;id.</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;Profile&#39;</span><span class="p">][</span><span class="s1">&#39;user_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">;</span>
+
+            <span class="c1">// Because our User hasOne Profile, we can access</span>
+            <span class="c1">// the Profile model through the User model:</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">Profile</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As a rule, when working with hasOne, hasMany, and belongsTo
+associations, it&#8217;s all about keying. The basic idea is to get the
+key from one model and place it in the foreign key field on the
+other. Sometimes this might involve using the <tt class="docutils literal"><span class="pre">$id</span></tt> attribute of
+the model class after a <tt class="docutils literal"><span class="pre">save()</span></tt>, but other times it might just
+involve gathering the ID from a hidden input on a form that&#8217;s just
+been POSTed to a controller action.</p>
+<p>To supplement the basic approach used above, CakePHP also offers a
+very handy method <tt class="docutils literal"><span class="pre">saveAssociated()</span></tt>, which allows you to validate and
+save multiple models in one shot. In addition, <tt class="docutils literal"><span class="pre">saveAssociated()</span></tt>
+provides transactional support to ensure data integrity in your
+database (i.e. if one model fails to save, the other models will
+not be saved either).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For transactions to work correctly in MySQL your tables must use
+InnoDB engine. Remember that MyISAM tables do not support
+transactions.</p>
+</div>
+<p>Let&#8217;s see how we can use <tt class="docutils literal"><span class="pre">saveAssociated()</span></tt> to save Company and Account
+models at the same time.</p>
+<p>First, you need to build your form for both Company and Account
+models (we&#8217;ll assume that Company hasMany Account):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Company&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Company.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Company name&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Company.description&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Company.location&#39;</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Account.0.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Account name&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Account.0.username&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Account.0.email&#39;</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">&#39;Add&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Take a look at the way we named the form fields for the Account
+model. If Company is our main model, <tt class="docutils literal"><span class="pre">saveAssociated()</span></tt> will expect the
+related model&#8217;s (Account) data to arrive in a specific format. And
+having <tt class="docutils literal"><span class="pre">Account.0.fieldName</span></tt> is exactly what we need.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The above field naming is required for a hasMany association. If
+the association between the models is hasOne, you have to use
+ModelName.fieldName notation for the associated model.</p>
+</div>
+<p>Now, in our CompaniesController we can create an <tt class="docutils literal"><span class="pre">add()</span></tt>
+action:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">// Use the following to avoid validation errors:</span>
+        <span class="nb">unset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Company</span><span class="o">-&gt;</span><span class="na">Account</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">[</span><span class="s1">&#39;company_id&#39;</span><span class="p">]);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Company</span><span class="o">-&gt;</span><span class="na">saveAssociated</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>That&#8217;s all there is to it. Now our Company and Account models will
+be validated and saved all at the same time. By default <tt class="docutils literal"><span class="pre">saveAssociated</span></tt>
+will validate all values passed and then try to perform a save for each.</p>
+</div>
+<div class="section" id="saving-hasmany-through-data">
+<h2>Saving hasMany through data<a class="headerlink" href="#saving-hasmany-through-data" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s see how data stored in a join table for two models is saved. As shown in the <a class="reference internal" href="associations-linking-models-together.html#hasmany-through"><em>hasMany through (The Join Model)</em></a>
+section, the join table is associated to each model using a <cite>hasMany</cite> type of relationship.
+Our example involves the Head of Cake School asking us to write an application that allows
+him to log a student&#8217;s attendance on a course with days attended and grade. Take
+a look at the following code.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Controller/CourseMembershipController.php</span>
+<span class="k">class</span> <span class="nc">CourseMembershipsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$uses</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;CourseMembership&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span>
+             <span class="s1">&#39;courseMembershipsList&#39;</span><span class="p">,</span>
+             <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">CourseMembership</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+         <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">CourseMembership</span><span class="o">-&gt;</span><span class="na">saveAssociated</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// View/CourseMemberships/add.ctp</span>
+
+<span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;CourseMembership&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Student.first_name&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Student.last_name&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Course.name&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;CourseMembership.days_attended&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;CourseMembership.grade&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;button type=&quot;submit&quot;&gt;Save&lt;/button&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">echo</span>  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>The data array will look like this when submitted.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nx">Student</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">first_name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Joe</span>
+        <span class="p">[</span><span class="nx">last_name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Bloggs</span>
+    <span class="p">)</span>
+
+    <span class="p">[</span><span class="nx">Course</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Cake</span>
+    <span class="p">)</span>
+
+    <span class="p">[</span><span class="nx">CourseMembership</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">days_attended</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">5</span>
+        <span class="p">[</span><span class="nx">grade</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">A</span>
+    <span class="p">)</span>
+
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>CakePHP will happily be able to save the lot together and assign
+the foreign keys of the Student and Course into CourseMembership
+with a <cite>saveAssociated</cite> call with this data structure. If we run the index
+action of our CourseMembershipsController the data structure
+received now from a find(&#8216;all&#8217;) is:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">CourseMembership</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+            <span class="p">[</span><span class="nx">student_id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+            <span class="p">[</span><span class="nx">course_id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+            <span class="p">[</span><span class="nx">days_attended</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">5</span>
+            <span class="p">[</span><span class="nx">grade</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">A</span>
+        <span class="p">)</span>
+
+        <span class="p">[</span><span class="nx">Student</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+            <span class="p">[</span><span class="nx">first_name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Joe</span>
+            <span class="p">[</span><span class="nx">last_name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Bloggs</span>
+        <span class="p">)</span>
+
+        <span class="p">[</span><span class="nx">Course</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+            <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Cake</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>There are of course many ways to work with a join model. The
+version above assumes you want to save everything at-once. There
+will be cases where you want to create the Student and Course
+independently and at a later point associate the two together with
+a CourseMembership. So you might have a form that allows selection
+of existing students and courses from pick lists or ID entry and
+then the two meta-fields for the CourseMembership, e.g.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// View/CourseMemberships/add.ctp</span>
+
+<span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;CourseMembership&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?php</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span>
+            <span class="s1">&#39;Student.id&#39;</span><span class="p">,</span>
+            <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Student ID&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+            <span class="p">)</span>
+        <span class="p">);</span>
+    <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?php</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span>
+            <span class="s1">&#39;Course.id&#39;</span><span class="p">,</span>
+            <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Course ID&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+            <span class="p">)</span>
+        <span class="p">);</span>
+    <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;CourseMembership.days_attended&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;CourseMembership.grade&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;button type=&quot;submit&quot;&gt;Save&lt;/button&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>And the resultant POST:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nx">Student</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+    <span class="p">)</span>
+
+    <span class="p">[</span><span class="nx">Course</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+    <span class="p">)</span>
+
+    <span class="p">[</span><span class="nx">CourseMembership</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="nx">days_attended</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">10</span>
+        <span class="p">[</span><span class="nx">grade</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">5</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Again CakePHP is good to us and pulls the Student id and Course id
+into the CourseMembership with the <cite>saveAssociated</cite>.</p>
+<div class="section" id="saving-related-model-data-habtm">
+<span id="saving-habtm"></span><h3>Saving Related Model Data (HABTM)<a class="headerlink" href="#saving-related-model-data-habtm" title="Permalink to this headline">¶</a></h3>
+<p>Saving models that are associated by hasOne, belongsTo, and hasMany
+is pretty simple: you just populate the foreign key field with the
+ID of the associated model. Once that&#8217;s done, you just call the
+<tt class="docutils literal"><span class="pre">save()</span></tt> method on the model, and everything gets linked up
+correctly. An example of the required format for the data array
+passed to <tt class="docutils literal"><span class="pre">save()</span></tt> for the Tag model is shown below:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="nx">Recipe</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">42</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="nx">Tag</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Italian</span>
+        <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also use this format to save several records and their
+HABTM associations with <tt class="docutils literal"><span class="pre">saveAll()</span></tt>, using an array like the
+following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">Recipe</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">42</span>
+                <span class="p">)</span>
+            <span class="p">[</span><span class="nx">Tag</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Italian</span>
+                <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">Recipe</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">43</span>
+                <span class="p">)</span>
+            <span class="p">[</span><span class="nx">Tag</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Pasta</span>
+                <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">Recipe</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">51</span>
+                <span class="p">)</span>
+            <span class="p">[</span><span class="nx">Tag</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Mexican</span>
+                <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">Recipe</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">17</span>
+                <span class="p">)</span>
+            <span class="p">[</span><span class="nx">Tag</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">American</span> <span class="p">(</span><span class="k">new</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Passing the above array to <tt class="docutils literal"><span class="pre">saveAll()</span></tt> will create the contained tags,
+each associated with their respective recipes.</p>
+<p>Another example that is helpful is when you need to save many Tags to a Post.
+You need to pass the associated HABTM data in the following HABTM array format. Note
+you only need to pass in the id&#8217;s of the associated HABTM model however it needs
+to be nested again:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">Post</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">title</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;Saving HABTM arrays&#39;</span>
+                <span class="p">)</span>
+            <span class="p">[</span><span class="nx">Tag</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">Tag</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">Post</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">title</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;Dr Who\&#39;s Name is Revealed&#39;</span>
+                <span class="p">)</span>
+            <span class="p">[</span><span class="nx">Tag</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">Tag</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">19</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">Post</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">title</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;I Came, I Saw and I Conquered&#39;</span>
+                <span class="p">)</span>
+            <span class="p">[</span><span class="nx">Tag</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">Tag</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">19</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">Post</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">title</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;Simplicity is the Ultimate Sophistication&#39;</span>
+                <span class="p">)</span>
+            <span class="p">[</span><span class="nx">Tag</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">Tag</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">29</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Passing the above array to <tt class="docutils literal"><span class="pre">saveAll($data,</span> <span class="pre">array('deep'</span> <span class="pre">=&gt;</span> <span class="pre">true))</span></tt>
+will populate the posts_tags join table with the Tag to Post associations.</p>
+<p>As an example, we&#8217;ll build a form that creates a new tag and
+generates the proper data array to associate it on the fly with
+some recipe.</p>
+<p>The simplest form might look something like this (we&#8217;ll assume that
+<tt class="docutils literal"><span class="pre">$recipe_id</span></tt> is already set to something):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Tag&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span>
+        <span class="s1">&#39;Recipe.id&#39;</span><span class="p">,</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;hidden&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="nv">$recipe_id</span><span class="p">)</span>
+    <span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Tag.name&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">&#39;Add Tag&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>In this example, you can see the <tt class="docutils literal"><span class="pre">Recipe.id</span></tt> hidden field whose
+value is set to the ID of the recipe we want to link the tag to.</p>
+<p>When the <tt class="docutils literal"><span class="pre">save()</span></tt> method is invoked within the controller, it&#8217;ll
+automatically save the HABTM data to the database:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Save the association</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Tag</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">// do something on success</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With the preceding code, our new Tag is created and associated with
+a Recipe, whose ID was set in <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data['Recipe']['id']</span></tt>.</p>
+<p>Other ways we might want to present our associated data can include
+a select drop down list. The data can be pulled from the model
+using the <tt class="docutils literal"><span class="pre">find('list')</span></tt> method and assigned to a view variable
+of the model name. An input with the same name will automatically
+pull in this data into a <tt class="docutils literal"><span class="pre">&lt;select&gt;</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// in the controller:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">Tag</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">));</span>
+
+<span class="c1">// in the view:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>A more likely scenario with a HABTM relationship would include a
+<tt class="docutils literal"><span class="pre">&lt;select&gt;</span></tt> set to allow multiple selections. For example, a
+Recipe can have multiple Tags assigned to it. In this case, the
+data is pulled out of the model the same way, but the form input is
+declared slightly different. The tag name is defined using the
+<tt class="docutils literal"><span class="pre">ModelName</span></tt> convention:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// in the controller:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">Tag</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">));</span>
+
+<span class="c1">// in the view:</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Tag&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Using the preceding code, a multiple select drop down is created,
+allowing for multiple choices to automatically be saved to the
+existing Recipe being added or saved to the database.</p>
+<div class="section" id="self-habtm">
+<h4>Self HABTM<a class="headerlink" href="#self-habtm" title="Permalink to this headline">¶</a></h4>
+<p>Normally HABTM is used to bring 2 models together but it can also
+be used with only 1 model, though it requires some extra attention.</p>
+<p>The key is in the model setup the <tt class="docutils literal"><span class="pre">className</span></tt>. Simply adding a
+<tt class="docutils literal"><span class="pre">Project</span></tt> HABTM <tt class="docutils literal"><span class="pre">Project</span></tt> relation causes issues saving data.
+By setting the <tt class="docutils literal"><span class="pre">className</span></tt> to the models name and use the alias as
+key we avoid those issues.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Project</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hasAndBelongsToMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;RelatedProject&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span>              <span class="o">=&gt;</span> <span class="s1">&#39;Project&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;foreignKey&#39;</span>             <span class="o">=&gt;</span> <span class="s1">&#39;projects_a_id&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;associationForeignKey&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;projects_b_id&#39;</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Creating form elements and saving the data works the same as before but you use the alias instead. This:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;projects&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Project</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">));</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Project&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Becomes this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;relatedProjects&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Project</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">));</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;RelatedProject&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-to-do-when-habtm-becomes-complicated">
+<h4>What to do when HABTM becomes complicated?<a class="headerlink" href="#what-to-do-when-habtm-becomes-complicated" title="Permalink to this headline">¶</a></h4>
+<p>By default when saving a HasAndBelongsToMany relationship, CakePHP
+will delete all rows on the join table before saving new ones. For
+example if you have a Club that has 10 Children associated. You
+then update the Club with 2 children. The Club will only have 2
+Children, not 12.</p>
+<p>Also note that if you want to add more fields to the join (when it
+was created or meta information) this is possible with HABTM join
+tables, but it is important to understand that you have an easy
+option.</p>
+<p>HasAndBelongsToMany between two models is in reality shorthand for
+three models associated through both a hasMany and a belongsTo
+association.</p>
+<p>Consider this example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Child</span> <span class="nx">hasAndBelongsToMany</span> <span class="nx">Club</span>
+</pre></div>
+</div>
+<p>Another way to look at this is adding a Membership model:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Child</span> <span class="nx">hasMany</span> <span class="nx">Membership</span>
+<span class="nx">Membership</span> <span class="nx">belongsTo</span> <span class="nx">Child</span><span class="p">,</span> <span class="nx">Club</span>
+<span class="nx">Club</span> <span class="nx">hasMany</span> <span class="nx">Membership</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>These two examples are almost the exact same. They use the same
+amount of named fields in the database and the same amount of
+models. The important differences are that the &#8220;join&#8221; model is
+named differently and its behavior is more predictable.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">When your join table contains extra fields besides two foreign
+keys, you can prevent losing the extra field values by setting
+<tt class="docutils literal"><span class="pre">'unique'</span></tt> array key to <tt class="docutils literal"><span class="pre">'keepExisting'</span></tt>. You could think of
+this similar to &#8216;unique&#8217; =&gt; true, but without losing data from
+the extra fields during save operation. Additionally, if you used
+bake in order to create the models, this is set automatically.
+See: <a class="reference internal" href="associations-linking-models-together.html#ref-habtm-arrays"><em>HABTM association arrays</em></a>.</p>
+</div>
+<p>However, in most cases it&#8217;s easier to make a model for the join table
+and setup hasMany, belongsTo associations as shown in example above
+instead of using HABTM association.</p>
+</div>
+</div>
+</div>
+<div class="section" id="datatables">
+<h2>Datatables<a class="headerlink" href="#datatables" title="Permalink to this headline">¶</a></h2>
+<p>While CakePHP can have datasources that aren&#8217;t database driven, most of the
+time, they are. CakePHP is designed to be agnostic and will work with MySQL,
+Microsoft SQL Server, PostgreSQL and others. You can create your database tables as you
+normally would. When you create your Model classes, they&#8217;ll automatically map to
+the tables that you&#8217;ve created. Table names are by convention lowercase and
+pluralized with multi-word table names separated by underscores. For example, a
+Model name of Ingredient expects the table name ingredients. A Model name of
+EventRegistration would expect a table name of event_registrations. CakePHP will
+inspect your tables to determine the data type of each field and uses this
+information to automate various features such as outputting form fields in the
+view. Field names are by convention lowercase and separated by underscores.</p>
+<div class="section" id="using-created-and-modified">
+<h3>Using created and modified<a class="headerlink" href="#using-created-and-modified" title="Permalink to this headline">¶</a></h3>
+<p>By defining a <tt class="docutils literal"><span class="pre">created</span></tt> and/or <tt class="docutils literal"><span class="pre">modified</span></tt> field in your database table as datetime
+fields (default null), CakePHP will recognize those fields and populate them automatically
+whenever a record is created or saved to the database (unless the data being
+saved already contains a value for these fields).</p>
+<p>The <tt class="docutils literal"><span class="pre">created</span></tt> and <tt class="docutils literal"><span class="pre">modified</span></tt> fields will be set to the current date and time when
+the record is initially added. The modified field will be updated with the
+current date and time whenever the existing record is saved.</p>
+<p>If you have <tt class="docutils literal"><span class="pre">created</span></tt> or <tt class="docutils literal"><span class="pre">modified</span></tt> data in your $this-&gt;data (e.g. from a
+Model::read or Model::set) before a Model::save() then the values will be taken
+from $this-&gt;data and not automagically updated. If you don&#8217;t want that you can use
+<tt class="docutils literal"><span class="pre">unset($this-&gt;data['Model']['modified'])</span></tt>, etc. Alternatively you can override
+the Model::save() to always do it for you:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppModel</span> <span class="k">extends</span> <span class="nx">Model</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">save</span><span class="p">(</span><span class="nv">$data</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">true</span><span class="p">,</span> <span class="nv">$fieldList</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+        <span class="c1">// Clear modified field value before each save</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">alias</span><span class="p">][</span><span class="s1">&#39;modified&#39;</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nb">unset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">alias</span><span class="p">][</span><span class="s1">&#39;modified&#39;</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="k">parent</span><span class="o">::</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">,</span> <span class="nv">$validate</span><span class="p">,</span> <span class="nv">$fieldList</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../models.html">Models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="associations-linking-models-together.html">Associations: Linking Models Together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="retrieving-your-data.html">Retrieving Your Data</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Saving Your Data</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deleting-data.html">Deleting Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-validation.html">Data Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callback-methods.html">Callback Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasources.html">DataSources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model-attributes.html">Model Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="additional-methods-and-properties.html">Additional Methods and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtual-fields.html">Virtual fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transactions.html">Transactions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Saving Your Data</a><ul>
+<li><a class="reference internal" href="#model-set-one-two-null"><tt class="docutils literal"><span class="pre">Model::set($one,</span> <span class="pre">$two</span> <span class="pre">=</span> <span class="pre">null)</span></tt></a></li>
+<li><a class="reference internal" href="#model-clear"><tt class="docutils literal"><span class="pre">Model::clear()</span></tt></a></li>
+<li><a class="reference internal" href="#model-save-array-data-null-boolean-validate-true-array-fieldlist-array"><tt class="docutils literal"><span class="pre">Model::save(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">boolean</span> <span class="pre">$validate</span> <span class="pre">=</span> <span class="pre">true,</span> <span class="pre">array</span> <span class="pre">$fieldList</span> <span class="pre">=</span> <span class="pre">array())</span></tt></a></li>
+<li><a class="reference internal" href="#model-create-array-data-array"><tt class="docutils literal"><span class="pre">Model::create(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">array())</span></tt></a></li>
+<li><a class="reference internal" href="#model-savefield-string-fieldname-string-fieldvalue-validate-false"><tt class="docutils literal"><span class="pre">Model::saveField(string</span> <span class="pre">$fieldName,</span> <span class="pre">string</span> <span class="pre">$fieldValue,</span> <span class="pre">$validate</span> <span class="pre">=</span> <span class="pre">false)</span></tt></a></li>
+<li><a class="reference internal" href="#model-updateall-array-fields-mixed-conditions"><tt class="docutils literal"><span class="pre">Model::updateAll(array</span> <span class="pre">$fields,</span> <span class="pre">mixed</span> <span class="pre">$conditions)</span></tt></a></li>
+<li><a class="reference internal" href="#model-savemany-array-data-null-array-options-array"><tt class="docutils literal"><span class="pre">Model::saveMany(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></tt></a></li>
+<li><a class="reference internal" href="#model-saveassociated-array-data-null-array-options-array"><tt class="docutils literal"><span class="pre">Model::saveAssociated(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></tt></a></li>
+<li><a class="reference internal" href="#model-saveall-array-data-null-array-options-array"><tt class="docutils literal"><span class="pre">Model::saveAll(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></tt></a></li>
+<li><a class="reference internal" href="#saving-related-model-data-hasone-hasmany-belongsto">Saving Related Model Data (hasOne, hasMany, belongsTo)</a></li>
+<li><a class="reference internal" href="#saving-hasmany-through-data">Saving hasMany through data</a><ul>
+<li><a class="reference internal" href="#saving-related-model-data-habtm">Saving Related Model Data (HABTM)</a><ul>
+<li><a class="reference internal" href="#self-habtm">Self HABTM</a></li>
+<li><a class="reference internal" href="#what-to-do-when-habtm-becomes-complicated">What to do when HABTM becomes complicated?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#datatables">Datatables</a><ul>
+<li><a class="reference internal" href="#using-created-and-modified">Using created and modified</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="deleting-data.html" title="Deleting Data" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="retrieving-your-data.html" title="Retrieving Your Data" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

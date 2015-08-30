@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Deleting Data" lang="zh_CN" name="title" />
+<meta content="doc models,custom logic,callback methods,model class,database model,callbacks,information model,request data,deleteall,fragment,leverage,array,cakephp,failure,recipes,benefit,delete,data model" lang="zh_CN" name="keywords" />
+
+    <title>删除数据 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="模型" href="../models.html" />
+    <link rel="next" title="数据验证" href="data-validation.html" />
+    <link rel="prev" title="保存数据" href="saving-your-data.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/models/deleting-data.html" /><link rel="alternate" hreflang="pt" href="../../pt/models/deleting-data.html" /><link rel="alternate" hreflang="es" href="../../es/models/deleting-data.html" /><link rel="alternate" hreflang="ja" href="../../ja/models/deleting-data.html" /><link rel="alternate" hreflang="fr" href="../../fr/models/deleting-data.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../models.html" accesskey="U" itemprop="url"><span itemprop="title">模型</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/models/deleting-data.html">en</a></li>
+				
+					<li><a href="../../pt/models/deleting-data.html">pt</a></li>
+				
+					<li><a href="../../es/models/deleting-data.html">es</a></li>
+				
+					<li><a href="../../ja/models/deleting-data.html">ja</a></li>
+				
+					<li><a href="../../fr/models/deleting-data.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/models/deleting-data.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>删除数据<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>CakePHP的模型类提供了多种从数据库中删除记录的方法。</p>
+<div class="section" id="delete">
+<span id="model-delete"></span><h2>delete方法<a class="headerlink" href="#delete" title="永久链接至标题">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">delete(int</span> <span class="pre">$id</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">boolean</span> <span class="pre">$cascade</span> <span class="pre">=</span> <span class="pre">true);</span></tt></p>
+<p>删除指定$id的记录。默认情况下，会级联删除依赖于该记录的所有记录。</p>
+<p>例如，当删除一个User，User关联了许多条Recipe记录(使用 &#8216;hasMany&#8217; 或&#8217;hasAndBelongsToMany&#8217; 来关联Recipes)。</p>
+<ul class="simple">
+<li>如果$cascade设置为true,并且被关联的模型中dependent属性值为true,删除User的同时会删除关联的Recipe记录。</li>
+<li>如果$cascade设置为false,删除User不会删除关联的Recipe记录。</li>
+</ul>
+<p>如果你使用的数据库支持外键和级联删除，会比CakePHP自带的级联删除效率更高。
+使用模型中的 <tt class="docutils literal"><span class="pre">Model::delete()</span></tt> 方法好处之一是支持使用行为及回调方法:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Comment</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">(</span><span class="s1">&#39;Comment.id&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>在处理删除操作中，可以在自定义业务逻辑使用 <tt class="docutils literal"><span class="pre">beforeDelete</span></tt> 和 <tt class="docutils literal"><span class="pre">afterDelete</span></tt> 回调方法。
+这些方法位于模型和行为中。更多信息参见
+<a class="reference internal" href="callback-methods.html"><em>回调方法</em></a>。</p>
+</div>
+<div class="section" id="deleteall">
+<span id="model-deleteall"></span><h2>deleteAll<a class="headerlink" href="#deleteall" title="永久链接至标题">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">deleteAll(mixed</span> <span class="pre">$conditions,</span> <span class="pre">$cascade</span> <span class="pre">=</span> <span class="pre">true,</span> <span class="pre">$callbacks</span> <span class="pre">=</span> <span class="pre">false)</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">deleteAll()</span></tt> 与 <tt class="docutils literal"><span class="pre">delete()</span></tt> 类似，将删除匹配条件的所有记录。
+<tt class="docutils literal"><span class="pre">$conditions</span></tt> 作为条件可以是SQL语句片段或数组形式。</p>
+<ul class="simple">
+<li><strong>conditions</strong> 匹配的条件</li>
+<li><strong>cascade</strong> 布尔型，设置true，会导致级联删除</li>
+<li><strong>callbacks</strong> 布尔型, 执行回调函数</li>
+</ul>
+<p>执行成功返回true，失败返回false。</p>
+<p>Example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 与 find() 方法类似，删除满足条件的记录</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Comment</span><span class="o">-&gt;</span><span class="na">deleteAll</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Comment.spam&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span> <span class="k">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果通过回调方法和(或)级联方式删除记录，这往往会导致更多的查询。在deleteAll() 中匹配的记录被删除前，关联会重置。如果是使用bindModel()或unbindModel()来改变关联，应该设置 <strong>reset</strong> 为 <tt class="docutils literal"><span class="pre">false</span></tt>。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">如果删除条件执行正确但没有找到匹配的记录，造成没有任何记录被删除，deleteAll() 也将返回true。</p>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../models.html">模型</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="associations-linking-models-together.html">关联：将模型连接在一起</a></li>
+<li class="toctree-l2"><a class="reference internal" href="retrieving-your-data.html">检索数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saving-your-data.html">保存数据</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">删除数据</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data-validation.html">数据验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callback-methods.html">回调方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasources.html">数据源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model-attributes.html">模型属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="additional-methods-and-properties.html">其它方法和属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtual-fields.html">虚字段</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transactions.html">事务</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">删除数据</a><ul>
+<li><a class="reference internal" href="#delete">delete方法</a></li>
+<li><a class="reference internal" href="#deleteall">deleteAll</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="data-validation.html" title="数据验证" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="saving-your-data.html" title="保存数据" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

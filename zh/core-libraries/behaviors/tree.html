@@ -1,0 +1,1043 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Tree" lang="zh_CN" name="title" />
+<meta content="auto increment,literal representation,parent id,table categories,database table,hierarchical data,null value,menu system,intricacies,access control,hierarchy,logic,elements,trees" lang="zh_CN" name="keywords" />
+
+    <title>树行为 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="行为" href="../toc-behaviors.html" />
+    <link rel="next" title="组件" href="../toc-components.html" />
+    <link rel="prev" title="翻译行为" href="translate.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/core-libraries/behaviors/tree.html" /><link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/behaviors/tree.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/behaviors/tree.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/behaviors/tree.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/behaviors/tree.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../toc-behaviors.html" accesskey="U" itemprop="url"><span itemprop="title">行为</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/core-libraries/behaviors/tree.html">en</a></li>
+				
+					<li><a href="../../../pt/core-libraries/behaviors/tree.html">pt</a></li>
+				
+					<li><a href="../../../es/core-libraries/behaviors/tree.html">es</a></li>
+				
+					<li><a href="../../../ja/core-libraries/behaviors/tree.html">ja</a></li>
+				
+					<li><a href="../../../fr/core-libraries/behaviors/tree.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/behaviors/tree.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>树行为<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="TreeBehavior">
+<em class="property">class </em><tt class="descname">TreeBehavior</tt><a class="headerlink" href="#TreeBehavior" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>把层次结构的数据保存在数据库表中，这是相当常见的需求。这样的例子有含有无限子类的
+分类，多级菜单系统的数据，或者层级的文字表示，比如在访问控制列表中用于保存访问控
+制对象。</p>
+<p>对于小的数据树，或者只有几层深度的数据，只需在你的数据库表中增加一个 parent_id
+字段，用来记录谁是谁的父节点。而和 cake 捆绑在一起的，是一个强大的行为，允许你使
+用`MPTT logic &lt;<a class="reference external" href="http://www.sitepoint.com/hierarchical-data-database-2/">http://www.sitepoint.com/hierarchical-data-database-2/</a>&gt;`_的好处，
+而不用操心该技术的细节——除非你想要这么做 ;)。</p>
+<div class="section" id="id2">
+<h2>要求<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>要使用树行为，你的数据库表需要下面3个字段(都是 int 类型):</p>
+<ul class="simple">
+<li>父节点 - 缺省字段名为 parent_id，来保存父对象的 id。</li>
+<li>左节点 - 缺省字段名为 lft，用来保存当前行的 lft 值。</li>
+<li>右节点 - 缺省字段名为 rght，用来保存当前行的 rght 值。</li>
+</ul>
+<p>如果你熟悉 MPTT 的逻辑，你可能会奇怪为什么要有一个 parent 字段——很简单，
+如果有直接的父节点连接保存在数据库中，一些事情就会容易一些——比如查找直属子节点。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last"><a href="#id3"><span class="problematic" id="id4">``</span></a>parent``字段必须允许 NULL！如果你给顶层节点的 parent 字段赋值零，看起来好像
+可以，但是给树重新排序(可能还有其它操作)就不对了。</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>基本用法<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>树行为有很多功能，不过让我们先从一个简单的例子开始——创建下面的数据库表，并放入
+一些数据:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">categories</span> <span class="p">(</span>
+    <span class="nx">id</span> <span class="nx">INTEGER</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="nx">UNSIGNED</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">AUTO_INCREMENT</span><span class="p">,</span>
+    <span class="nx">parent_id</span> <span class="nx">INTEGER</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">lft</span> <span class="nx">INTEGER</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">rght</span> <span class="nx">INTEGER</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">name</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">PRIMARY</span> <span class="nx">KEY</span>  <span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;My Categories&#39;</span><span class="p">,</span> <span class="k">NULL</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Fun&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Sport&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Surfing&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Extreme knitting&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;Friends&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">);</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;Gerald&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">);</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;Gwendolyn&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">);</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;Work&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">29</span><span class="p">);</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;Reports&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">22</span><span class="p">);</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;Annual&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">);</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;Status&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">);</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="s1">&#39;Trips&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">28</span><span class="p">);</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="s1">&#39;National&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
+<span class="nx">INSERT</span> <span class="nx">INTO</span> <span class="sb">`categories`</span> <span class="p">(</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`parent_id`</span><span class="p">,</span> <span class="sb">`lft`</span><span class="p">,</span> <span class="sb">`rght`</span><span class="p">)</span> <span class="nx">VALUES</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="s1">&#39;International&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">27</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>为了检查这一切设置正确，我们可以添加一个测试方法，输出类别树的内容，就可以看到它
+是什么样了。只需一个简单的控制器:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CategoriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">generateTreeList</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="s1">&#39;&amp;nbsp;&amp;nbsp;&amp;nbsp;&#39;</span><span class="p">);</span>
+        <span class="nx">debug</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span> <span class="k">die</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>以及更简单的模型定义:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Model/Category.php</span>
+<span class="k">class</span> <span class="nc">Category</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Tree&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们访问 /categories，就可以看到我们的类别树数据什么样了。你应当看到类似下面这样
+的:</p>
+<ul class="simple">
+<li>My Categories<ul>
+<li>Fun<ul>
+<li>Sport<ul>
+<li>Surfing</li>
+<li>Extreme knitting</li>
+</ul>
+</li>
+<li>Friends<ul>
+<li>Gerald</li>
+<li>Gwendolyn</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Work<ul>
+<li>Reports<ul>
+<li>Annual</li>
+<li>Status</li>
+</ul>
+</li>
+<li>Trips<ul>
+<li>National</li>
+<li>International</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="id6">
+<h3>添加数据<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>在上一节中，我们使用现存的数据，用``generateTreeList``方法看到这是层级的。然而，
+通常你要以同其它模型完全一样的方式添加数据。例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 控制器伪代码</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">][</span><span class="s1">&#39;parent_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Skating&#39;</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>使用树行为时，应当只需设置 parent_id，而不必做更多的事情，而树行为会处理剩下的事
+情。如果你不设置 parent_id，树行为就会把你新添加的(记录)作为一个新的顶层节点:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 控制器伪代码</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Other People\&#39;s Categories&#39;</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>运行上面两段代码，会把你的树改变成下面的样子:</p>
+<ul class="simple">
+<li>My Categories<ul>
+<li>Fun<ul>
+<li>Sport<ul>
+<li>Surfing</li>
+<li>Extreme knitting</li>
+<li>Skating <strong>New</strong></li>
+</ul>
+</li>
+<li>Friends<ul>
+<li>Gerald</li>
+<li>Gwendolyn</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Work<ul>
+<li>Reports<ul>
+<li>Annual</li>
+<li>Status</li>
+</ul>
+</li>
+<li>Trips<ul>
+<li>National</li>
+<li>International</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Other People&#8217;s Categories <strong>New</strong></li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h3>修改数据<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>修改数据，和添加新数据一样，是透明的。如果你改了一些东西，但是没有改 parent_id
+字段——数据的结构就会保持不变。例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 控制器伪代码</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// Extreme knitting 的 id</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Extreme fishing&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>上面的代码没有改变 parent_id 字段——就算 parent_id 字段也包括在传给 save 方法
+的数组中，只要值不变，结构也不会变化。所以数据树现在应该是这样:</p>
+<ul class="simple">
+<li>My Categories</li>
+<li>Fun</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Sport<ul>
+<li>Surfing</li>
+<li>Extreme fishing <strong>Updated</strong></li>
+<li>Skating</li>
+</ul>
+</li>
+<li>Friends<ul>
+<li>Gerald</li>
+<li>Gwendolyn</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Work</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Reports<ul>
+<li>Annual</li>
+<li>Status</li>
+</ul>
+</li>
+<li>Trips<ul>
+<li>National</li>
+<li>International</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Other People&#8217;s Categories</li>
+</ul>
+<p>在树中移动数据也是一件简单的事情。比如说， Extreme fishing 不属于 Sport 类别之下，
+而是应该在 Other People&#8217;s Categories 之下。用下面的代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 控制器伪代码</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// Extreme fishing 的 id</span>
+<span class="nv">$newParentId</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Other People\&#39;s Categories&#39;</span><span class="p">));</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$newParentId</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>结构就会如愿变为:</p>
+<ul class="simple">
+<li>My Categories</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Fun<ul>
+<li>Sport<ul>
+<li>Surfing</li>
+<li>Skating</li>
+</ul>
+</li>
+<li>Friends<ul>
+<li>Gerald</li>
+<li>Gwendolyn</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Work<ul>
+<li>Reports<ul>
+<li>Annual</li>
+<li>Status</li>
+</ul>
+</li>
+<li>Trips<ul>
+<li>National</li>
+<li>International</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Other People&#8217;s Categories</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Extreme fishing <strong>Moved</strong></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id8">
+<h3>删除数据<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<p>树行为提供了若干种方法来删除数据。从最简单的例子开始；比如说 reports 类别没用了。
+要删除它*以及它所包含的任何子节点*，只需象任何模型一样调用 delete 方法。例如，用
+下面的代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 控制器伪代码</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>类别树会变成下面这样:</p>
+<ul class="simple">
+<li>My Categories</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Fun<ul>
+<li>Sport<ul>
+<li>Surfing</li>
+<li>Skating</li>
+</ul>
+</li>
+<li>Friends<ul>
+<li>Gerald</li>
+<li>Gwendolyn</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Work<ul>
+<li>Trips<ul>
+<li>National</li>
+<li>International</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Other People&#8217;s Categories</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Extreme fishing</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id9">
+<h3>查询及使用你的数据<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<p>使用和操作层次结构的数据，可能是一件棘手的事。除了核心的 find 方法，树行为带来一
+些与树有关的方法，供你使用。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">大部分树行为的方法返回并依赖于以``lft``字段排序的数据。如果你调用``find()``却
+没有用``lft``字段排序，或者调用树行为的方法并传入排列顺序，你可能会得到意想不
+到的结果。</p>
+</div>
+<dl class="class">
+<dt>
+<em class="property">class </em><tt class="descname">TreeBehavior</tt></dt>
+<dd><dl class="method">
+<dt id="TreeBehavior::children">
+<tt class="descname">children</tt><big>(</big><em>$id = null</em>, <em>$direct = false</em>, <em>$fields = null</em>, <em>$order = null</em>, <em>$limit = null</em>, <em>$page = 1</em>, <em>$recursive = null</em><big>)</big><a class="headerlink" href="#TreeBehavior::children" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$id</strong> &#8211; 要查找的记录的 ID 标识</li>
+<li><strong>$direct</strong> &#8211; 设置为 true，返回直接的子节点</li>
+<li><strong>$fields</strong> &#8211; 单个字段名字符串，或者字段名数组，指明返回值中要包括的字段</li>
+<li><strong>$order</strong> &#8211; ORDER BY 条件的 SQL 字符串</li>
+<li><strong>$limit</strong> &#8211; SQL LIMIT 语句</li>
+<li><strong>$page</strong> &#8211; 用于分页结果</li>
+<li><strong>$recursive</strong> &#8211; 关联模型要关联的深度</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#id10"><span class="problematic" id="id11">``</span></a>children``方法接受一条记录行的主键值(id)并返回子节点记录，缺省情况下以它们
+在树中出现的次序排序。第二个可选参数决定是否只返回直属的子节点。用前面例子中
+的数据:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$allChildren</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// 含有11项的一维数组</span>
+<span class="c1">// -- 或者 --</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nv">$allChildren</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">();</span> <span class="c1">// 含有11项的一维数组</span>
+
+<span class="c1">// 只返回直属的子节点</span>
+<span class="nv">$directChildren</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span> <span class="c1">// 含有2项的一维数组</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">如果你要一个嵌套的数组，请用 <tt class="docutils literal"><span class="pre">find('threaded')</span></tt></p>
+</div>
+<dl class="method">
+<dt id="TreeBehavior::childCount">
+<tt class="descname">childCount</tt><big>(</big><em>$id = null</em>, <em>$direct = false</em><big>)</big><a class="headerlink" href="#TreeBehavior::childCount" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>和``children``方法一样，<a href="#id12"><span class="problematic" id="id13">``</span></a>childCount``方法接受一行记录的主键值(id)，返回它的
+子记录数目。
+第二个可选参数决定是否只对直属的子记录计数。使用前面例子中的数据:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$totalChildren</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">childCount</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// 会输出11</span>
+<span class="c1">// -- 或者 --</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nv">$directChildren</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">childCount</span><span class="p">();</span> <span class="c1">// 会输出11</span>
+
+<span class="c1">// 只对这个类别直属的子类进行计数</span>
+<span class="nv">$numChildren</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">childCount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span> <span class="c1">// 会输出2</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="TreeBehavior::generateTreeList">
+<tt class="descname">generateTreeList</tt><big>(</big><em>$conditions=null</em>, <em>$keyPath=null</em>, <em>$valuePath=null</em>, <em>$spacer= '_'</em>, <em>$recursive=null</em><big>)</big><a class="headerlink" href="#TreeBehavior::generateTreeList" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$conditions</strong> &#8211; 使用 find() 与同样的条件选项。</li>
+<li><strong>$keyPath</strong> &#8211; 用作键(key)的字段的路径。</li>
+<li><strong>$valuePath</strong> &#8211; 用作标签(label)的字段的路径。</li>
+<li><strong>$spacer</strong> &#8211; 在每一项之前用来表明深度的字符串。</li>
+<li><strong>$recursive</strong> &#8211; 读取关联记录深度的层数。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>这个返回的数据与方法:ref:<a href="#id14"><span class="problematic" id="id15">`</span></a>model-find-list`类似，有一个缩进的前缀来标明数据的
+结构。下面的例子就是这个方法预料要返回的结果:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$treelist</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">generateTreeList</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="s2">&quot;My Categories&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="s2">&quot;_Fun&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="s2">&quot;__Sport&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="s2">&quot;___Surfing&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s2">&quot;___Skating&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="s2">&quot;__Friends&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="s2">&quot;___Gerald&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="s2">&quot;___Gwendolyn&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="s2">&quot;_Work&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s2">&quot;__Trips&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">14</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s2">&quot;___National&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">15</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s2">&quot;___International&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">17</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s2">&quot;Other People&#39;s Categories&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="s2">&quot;_Extreme fishing&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="TreeBehavior::getParentNode">
+<tt class="descname">getParentNode</tt><big>(</big><big>)</big><a class="headerlink" href="#TreeBehavior::getParentNode" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>这个提供方便的方法，正如名字所说，返回任何节点的父节点，或者如果节点没有父节
+点(就是根节点)就返回*false*。例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$parent</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">getParentNode</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">//&lt;- fun 的 id</span>
+<span class="c1">// $parent 含有 All categories</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="TreeBehavior::getPath">
+<tt class="descname">getPath</tt><big>(</big><em>$id = null</em>, <em>$fields = null</em>, <em>$recursive = null</em><big>)</big><a class="headerlink" href="#TreeBehavior::getPath" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>对于层次结构的数据来说，&#8217;path&#8217;是指从你当前的位置到达顶点的路径。所以类别
+&#8220;International&#8221;的路径是:</p>
+<ul class="simple">
+<li>My Categories</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>...</li>
+<li>Work<ul>
+<li>Trips<ul>
+<li>...</li>
+<li>International</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p>使用&#8221;International&#8221;的 id，getPath 方法会依次返回每一个父节点(从最上面开始)。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$parents</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">getPath</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// $parents 的内容</span>
+<span class="k">array</span><span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Category&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My Categories&#39;</span><span class="p">,</span> <span class="o">..</span><span class="p">)),</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Category&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Work&#39;</span><span class="p">,</span> <span class="o">..</span><span class="p">)),</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Category&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">13</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Trips&#39;</span><span class="p">,</span> <span class="o">..</span><span class="p">)),</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Category&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">15</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;International&#39;</span><span class="p">,</span> <span class="o">..</span><span class="p">)),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="id16">
+<h2>高级用法<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><p>树行为并非只在后台起作用，有些在这个行为中定义的方法，照顾到了你对层次结构数
+据的所有需求，以及可能在此过程中发生的意料之外的问题。</p>
+<dl class="method">
+<dt id="TreeBehavior::moveDown">
+<tt class="descclassname">TreeBehavior::</tt><tt class="descname">moveDown</tt><big>(</big><big>)</big><a class="headerlink" href="#TreeBehavior::moveDown" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>把一个节点在树中向下移动。你需要提供要移动的节点的 ID，以及移动多少个位置的正
+数。给定节点的所有子节点也会一起移动。</p>
+<p>下面是一个控制器动作的例子(在 Categories 控制器中)，在树中向下移动指定节点:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">movedown</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$delta</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="nv">$id</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">())</span> <span class="p">{</span>
+       <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid category&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$delta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">moveDown</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="nv">$delta</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;请提供该节点要下移位置的数目。&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">),</span> <span class="k">null</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>例如，如果你要把类别&#8221;Sport&#8221;(id 为3)向下移动一个位置，你应当请求:
+/categories/movedown/3/1。</p>
+<dl class="method">
+<dt id="TreeBehavior::moveUp">
+<tt class="descclassname">TreeBehavior::</tt><tt class="descname">moveUp</tt><big>(</big><big>)</big><a class="headerlink" href="#TreeBehavior::moveUp" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>把一个节点在树中向上移动。你需要提供要移动~的节点的 ID，以及移动多少个位置的
+正数。给定节点的所有子节点也会一起移动。</p>
+<p>下面是控制器动作的一个例子(在 Categories 控制器中)，在树中向上移动一个节点:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">moveup</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$delta</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="nv">$id</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">())</span> <span class="p">{</span>
+       <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid category&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$delta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">moveUp</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="nv">$delta</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;请提供该节点要上移位置的数目。&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">),</span> <span class="k">null</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>例如，如果你要把类别&#8221;Gwendolyn&#8221;(id 为8)向上移动一个位置，你应当请求
+/categories/moveup/8/1。现在朋友(Friends)的顺序为 Gwendolyn，Gerald。</p>
+<dl class="method">
+<dt id="TreeBehavior::removeFromTree">
+<tt class="descclassname">TreeBehavior::</tt><tt class="descname">removeFromTree</tt><big>(</big><em>$id = null</em>, <em>$delete = false</em><big>)</big><a class="headerlink" href="#TreeBehavior::removeFromTree" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>使用这个方法，会删除或者移动一个节点，但是会保留其子树，并把子树重新定位到上
+一级节点之下。这个方法比:ref:<a href="#id17"><span class="problematic" id="id18">`</span></a>model-delete`方法提供了更多的控制，后者对于使用
+树行为的模型会把指定的节点和所有的子节点都删除。</p>
+<p>以下面的树作为起始状态:</p>
+<ul class="simple">
+<li>My Categories<ul>
+<li>Fun<ul>
+<li>Sport<ul>
+<li>Surfing</li>
+<li>Extreme knitting</li>
+<li>Skating</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>用&#8217;Sport&#8217;的 id 来运行下面的代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Node</span><span class="o">-&gt;</span><span class="na">removeFromTree</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Sport 节点就会变成一个顶层节点:</p>
+<ul class="simple">
+<li>My Categories<ul>
+<li>Fun<ul>
+<li>Surfing</li>
+<li>Extreme knitting</li>
+<li>Skating</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Sport <strong>Moved</strong></li>
+</ul>
+<p>这展示了``removeFromTree``方法的缺省行为，移动节点到没有父节点的位置，并把所
+有子节点重新定位。</p>
+<p>不过，如果用&#8217;Sport&#8217;的 id 来运行下面的代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Node</span><span class="o">-&gt;</span><span class="na">removeFromTree</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>树就会变成</p>
+<ul class="simple">
+<li>My Categories<ul>
+<li>Fun<ul>
+<li>Surfing</li>
+<li>Extreme knitting</li>
+<li>Skating</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>这说明了``removeFromTree``方法的另一种用法，子节点被重新定位，而&#8217;Sport&#8217;被删除
+了。</p>
+<dl class="method">
+<dt id="TreeBehavior::reorder">
+<tt class="descclassname">TreeBehavior::</tt><tt class="descname">reorder</tt><big>(</big><em>array('id' =&gt; null</em>, <em>'field' =&gt; $Model-&gt;displayField</em>, <em>'order' =&gt; 'ASC'</em>, <em>'verify' =&gt; true)</em><big>)</big><a class="headerlink" href="#TreeBehavior::reorder" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>根据参数中指定的字段和方向把树的节点(及子节点)重新排序。这个方法不会改变任何
+节点的父节点。:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>$model-&gt;reorder(array(</dt>
+<dd>&#8216;id&#8217; =&gt; ,    // 作为重新排序的顶层节点记录的id，缺省值: $Model-&gt;id
+&#8216;field&#8217; =&gt; , // 哪个字段用于重新排序，缺省值: $Model-&gt;displayField
+&#8216;order&#8217; =&gt; , // 排序的方向，缺省值: &#8216;ASC&#8217;
+&#8216;verify&#8217; =&gt;  // 在重新排序前是否验证树，缺省值: true</dd>
+</dl>
+<p>));</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">如果你保存了数据或者在模型上做了其它操作，你也许想要在调用 <tt class="docutils literal"><span class="pre">reorder</span></tt> 方
+法前设置``$model-&gt;id = null``。否则只有当前节点和它的子节点会被重新排序。</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="id19">
+<h2>数据一致性<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><p>鉴于象树和链表这样复杂的自引用数据结构的性质，它们偶尔会由于一个不经心的调用
+而受损。别担心，一切都没有丢失！树行为有几个之前没有在文档中说明的特性，设计
+用来从这种情况下恢复。</p>
+<dl class="method">
+<dt id="TreeBehavior::recover">
+<tt class="descclassname">TreeBehavior::</tt><tt class="descname">recover</tt><big>(</big><em>$mode = 'parent'</em>, <em>$missingParentAction = null</em><big>)</big><a class="headerlink" href="#TreeBehavior::recover" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p><a href="#id20"><span class="problematic" id="id21">``</span></a>mode``参数用来指明正确/合法信息的来源。根据信息来源，相反的数据源会被填充。
+例如，如果 MPTT 字段受损或为空，在``$mode &#8216;parent&#8217;<a href="#id22"><span class="problematic" id="id23">``</span></a>时，<a href="#id24"><span class="problematic" id="id25">``</span></a>parent_id``字段的值
+会被用来填充左和右字段。<a href="#id26"><span class="problematic" id="id27">``</span></a>missingParentAction``参数只适用于 mode 为&#8221;parent&#8221;时，
+决定在 parent 字段含有不存在的 id 时该如何处理。</p>
+<p><a href="#id28"><span class="problematic" id="id29">``</span></a>$mode``参数允许的值为:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">'parent'</span></tt> - 用现有的 <tt class="docutils literal"><span class="pre">parent_id</span></tt> 来更新 <tt class="docutils literal"><span class="pre">lft</span></tt> 和 <tt class="docutils literal"><span class="pre">rght</span></tt> 字段</li>
+<li><tt class="docutils literal"><span class="pre">'tree'</span></tt> - 用现有的 <tt class="docutils literal"><span class="pre">lft</span></tt> 和 <tt class="docutils literal"><span class="pre">rght</span></tt> 字段来更新 <tt class="docutils literal"><span class="pre">parent_id</span></tt></li>
+</ul>
+<p>当``mode=&#8217;parent&#8217;<a href="#id30"><span class="problematic" id="id31">``</span></a>时，参数``missingParentActions``允许的值为:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">null</span></tt> - 不做任何事情，继续</li>
+<li><tt class="docutils literal"><span class="pre">'return'</span></tt> - 不做任何事情，返回</li>
+<li><tt class="docutils literal"><span class="pre">'delete'</span></tt> - 删除该节点</li>
+<li><tt class="docutils literal"><span class="pre">int</span></tt> - 设置 parent_id 为这个 id</li>
+</ul>
+<p>例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 基于 parent_id 重建所有左和右字段</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">recover</span><span class="p">();</span>
+<span class="c1">// 或者</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">recover</span><span class="p">(</span><span class="s1">&#39;parent&#39;</span><span class="p">);</span>
+
+<span class="c1">// 基于 lft 和 rght 字段重建所有 parent_id</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">recover</span><span class="p">(</span><span class="s1">&#39;tree&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt>
+<tt class="descclassname">TreeBehavior::</tt><tt class="descname">reorder</tt><big>(</big><em>$options = array()</em><big>)</big></dt>
+<dd></dd></dl>
+
+<p>根据参数中指定的字段和方向把树的节点(及子节点)重新排序。这个方法不会改变
+任何节点的父节点。:</p>
+<p>缺省情况下，重新排序影响树中的所有节点。不过，下面的选项可以影响这个过程:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">'id'</span></tt> - 只把该节点之下的节点重新排序。</li>
+<li><tt class="docutils literal"><span class="pre">'field</span></tt>&#8216; - 用于排序的字段，缺省为模型的``displayField``。</li>
+<li><tt class="docutils literal"><span class="pre">'order'</span></tt> - 升序用``&#8217;ASC&#8217;<tt class="docutils literal"><span class="pre">，降序用</span></tt>&#8216;DESC&#8217;<a href="#id32"><span class="problematic" id="id33">``</span></a>。</li>
+<li><tt class="docutils literal"><span class="pre">'verify'</span></tt> - 在重新排序前是否核实树。</li>
+</ul>
+<p><a href="#id34"><span class="problematic" id="id35">``</span></a>$options``用来传入所有其他参数，缺省可具有如下的键，都是可以省略的:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+    <span class="s1">&#39;field&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">displayField</span><span class="p">,</span>
+    <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ASC&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;verify&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>(译注: 两次提到的reorder方法，签名不同，应该以API或源代码为准。)</p>
+<dl class="method">
+<dt id="TreeBehavior::verify">
+<tt class="descclassname">TreeBehavior::</tt><tt class="descname">verify</tt><big>(</big><big>)</big><a class="headerlink" href="#TreeBehavior::verify" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>如果树是正确的就返回``true``，否则就返回一个错误数组，数组的字段为类型
+(type)，错误的索引和消息。</p>
+<p>输出数组的每条记录是格式为(type, id, message)的数组</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">type``为</span></tt>&#8216;index&#8217;<tt class="docutils literal"><span class="pre">或者</span> <span class="pre">``'node'</span></tt></li>
+<li><a href="#id36"><span class="problematic" id="id37">``</span></a>&#8216;id&#8217;<a href="#id38"><span class="problematic" id="id39">``</span></a>是错误节点的id。</li>
+<li><a href="#id40"><span class="problematic" id="id41">``</span></a>&#8216;message&#8217;<a href="#id42"><span class="problematic" id="id43">``</span></a>取决于错误</li>
+</ul>
+<p>使用示例:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">verify</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>输出示例:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">node</span>
+            <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">3</span>
+            <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">left</span> <span class="k">and</span> <span class="nx">right</span> <span class="nx">values</span> <span class="nx">identical</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">node</span>
+            <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+            <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">The</span> <span class="k">parent</span> <span class="nx">node</span> <span class="mi">999</span> <span class="nx">doesn</span><span class="err">&#39;</span><span class="nx">t</span> <span class="nx">exist</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">index</span>
+            <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">123</span>
+            <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">missing</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="mi">99</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">node</span>
+            <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">163</span>
+            <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">left</span> <span class="nx">greater</span> <span class="nx">than</span> <span class="nx">right</span>
+        <span class="p">)</span>
+
+<span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">视图</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../models.html">模型</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../models/associations-linking-models-together.html">关联：将模型连接在一起</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/retrieving-your-data.html">检索数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/saving-your-data.html">保存数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/deleting-data.html">删除数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/data-validation.html">数据验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/callback-methods.html">回调方法</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../models/behaviors.html">行为</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="acl.html">访问控制列表(<em>ACL</em>)助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="containable.html">Containable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translate.html">翻译行为</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">树行为</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/datasources.html">数据源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/model-attributes.html">模型属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/additional-methods-and-properties.html">其它方法和属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/virtual-fields.html">虚字段</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../models/transactions.html">事务</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-general-purpose.html">通用</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../global-constants-and-functions.html">全局常量和函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core-utility-libraries/app.html">App Class</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../events.html">Events System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collections.html">Collections</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-behaviors.html">行为</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="acl.html">访问控制列表(<em>ACL</em>)助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="containable.html">Containable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translate.html">翻译行为</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">树行为</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-components.html">组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-helpers.html">助件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-utilities.html">工具</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">树行为</a><ul>
+<li><a class="reference internal" href="#id2">要求</a></li>
+<li><a class="reference internal" href="#id5">基本用法</a><ul>
+<li><a class="reference internal" href="#id6">添加数据</a></li>
+<li><a class="reference internal" href="#id7">修改数据</a></li>
+<li><a class="reference internal" href="#id8">删除数据</a></li>
+<li><a class="reference internal" href="#id9">查询及使用你的数据</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id16">高级用法</a></li>
+<li><a class="reference internal" href="#id19">数据一致性</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="../toc-components.html" title="组件" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="translate.html" title="翻译行为" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

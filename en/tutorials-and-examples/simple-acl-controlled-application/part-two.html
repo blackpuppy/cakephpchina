@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Simple Acl controlled Application - part 2" lang="en" name="title" />
+<meta content="shell interface,magic solution,aco,unzipped,config,sync,syntax,cakephp,php,running,acl" lang="en" name="keywords" />
+
+    <title>Simple Acl controlled Application - part 2 &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../../index.html" />
+    <link rel="up" title="Tutorials &amp; Examples" href="../../tutorials-and-examples.html" />
+    <link rel="next" title="Contributing" href="../../contributing.html" />
+    <link rel="prev" title="Simple Acl controlled Application" href="simple-acl-controlled-application.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../../pt/tutorials-and-examples/simple-acl-controlled-application/part-two.html" /><link rel="alternate" hreflang="es" href="../../../es/tutorials-and-examples/simple-acl-controlled-application/part-two.html" /><link rel="alternate" hreflang="ja" href="../../../ja/tutorials-and-examples/simple-acl-controlled-application/part-two.html" /><link rel="alternate" hreflang="fr" href="../../../fr/tutorials-and-examples/simple-acl-controlled-application/part-two.html" /><link rel="alternate" hreflang="zh_CN" href="../../../zh/tutorials-and-examples/simple-acl-controlled-application/part-two.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../tutorials-and-examples.html" accesskey="U" itemprop="url"><span itemprop="title">Tutorials &amp; Examples</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../../pt/tutorials-and-examples/simple-acl-controlled-application/part-two.html">pt</a></li>
+				
+					<li><a href="../../../es/tutorials-and-examples/simple-acl-controlled-application/part-two.html">es</a></li>
+				
+					<li><a href="../../../ja/tutorials-and-examples/simple-acl-controlled-application/part-two.html">ja</a></li>
+				
+					<li><a href="../../../fr/tutorials-and-examples/simple-acl-controlled-application/part-two.html">fr</a></li>
+				
+					<li><a href="../../../zh/tutorials-and-examples/simple-acl-controlled-application/part-two.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/tutorials-and-examples/simple-acl-controlled-application/part-two.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="simple-acl-controlled-application-part-2">
+<h1>Simple Acl controlled Application - part 2<a class="headerlink" href="#simple-acl-controlled-application-part-2" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="an-automated-tool-for-creating-acos">
+<h2>An Automated tool for creating ACOs<a class="headerlink" href="#an-automated-tool-for-creating-acos" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned before, there is no pre-built way to input all of our
+controllers and actions into the Acl. However, we all hate doing
+repetitive things like typing in what could be hundreds of actions
+in a large application.</p>
+<p>For this purpose exists a very handy plugin available on GitHub, called
+<a class="reference external" href="https://github.com/markstory/acl_extras/">AclExtras</a> which can
+be downloaded in <a class="reference external" href="https://github.com/markstory/acl_extras/zipball/master">The GitHub Downloads page</a>.
+We&#8217;re going to briefly describe how to use it to generate all our ACO&#8217;s</p>
+<p>First grab a copy of the plugin and unzipped or clone it using git into
+<cite>app/Plugin/AclExtras</cite>. Then activate the plugin in your <cite>app/Config/boostrap.php</cite>
+file as shown below:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//app/Config/boostrap.php</span>
+<span class="c1">// ...</span>
+<span class="nx">CakePlugin</span><span class="o">::</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;AclExtras&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Finally execute the following command in the CakePHP console:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="nx">aco_sync</span>
+</pre></div>
+</div>
+<p>You can get a complete guide for all available commands like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="o">-</span><span class="nx">h</span>
+<span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="nx">aco_sync</span> <span class="o">-</span><span class="nx">h</span>
+</pre></div>
+</div>
+<p>Once populated your <cite>acos</cite> table proceed to create your application permissions.</p>
+</div>
+<div class="section" id="setting-up-permissions">
+<h2>Setting up permissions<a class="headerlink" href="#setting-up-permissions" title="Permalink to this headline">¶</a></h2>
+<p>Creating permissions much like creating ACO&#8217;s has no magic solution, nor will I
+be providing one. To allow ARO&#8217;s access to ACO&#8217;s from the shell interface use
+the AclShell. For more information on how to use it consult the AclShell help
+which can be accessed by running:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">acl</span> <span class="o">--</span><span class="nx">help</span>
+</pre></div>
+</div>
+<p>Note: * needs to be quoted (&#8216;*&#8217;)</p>
+<p>In order to allow with the <tt class="docutils literal"><span class="pre">AclComponent</span></tt> we would use the
+following code syntax in a custom method:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$aroAlias</span><span class="p">,</span> <span class="nv">$acoAlias</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We are going to add in a few allow/deny statements now. Add the
+following to a temporary function in your <tt class="docutils literal"><span class="pre">UsersController</span></tt> and
+visit the address in your browser to run them (e.g.
+<a class="reference external" href="http://localhost/cake/app/users/initdb">http://localhost/cake/app/users/initdb</a>). If you do a
+<tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">aros_acos</span></tt> you should see a whole pile of 1&#8217;s and
+-1&#8217;s. Once you&#8217;ve confirmed your permissions are set, remove the
+function:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;initDB&#39;</span><span class="p">);</span> <span class="c1">// We can remove this line after we&#39;re finished</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">initDB</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$group</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">Group</span><span class="p">;</span>
+
+    <span class="c1">// Allow admins to everything</span>
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers&#39;</span><span class="p">);</span>
+
+    <span class="c1">// allow managers to posts and widgets</span>
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">deny</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers/Posts&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers/Widgets&#39;</span><span class="p">);</span>
+
+    <span class="c1">// allow users to only add and edit on posts and widgets</span>
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">deny</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers/Posts/add&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers/Posts/edit&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers/Widgets/add&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers/Widgets/edit&#39;</span><span class="p">);</span>
+
+    <span class="c1">// allow basic users to log out</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$group</span><span class="p">,</span> <span class="s1">&#39;controllers/users/logout&#39;</span><span class="p">);</span>
+
+    <span class="c1">// we add an exit to avoid an ugly &quot;missing views&quot; error message</span>
+    <span class="k">echo</span> <span class="s2">&quot;all done&quot;</span><span class="p">;</span>
+    <span class="k">exit</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We now have set up some basic access rules. We&#8217;ve allowed
+administrators to everything. Managers can access everything in
+posts and widgets. While users can only access add and edit in
+posts &amp; widgets.</p>
+<p>We had to get a reference of a <tt class="docutils literal"><span class="pre">Group</span></tt> model and modify its id to
+be able to specify the ARO we wanted, this is due to how
+<tt class="docutils literal"><span class="pre">AclBehavior</span></tt> works. <tt class="docutils literal"><span class="pre">AclBehavior</span></tt> does not set the alias field
+in the <tt class="docutils literal"><span class="pre">aros</span></tt> table so we must use an object reference or an
+array to reference the ARO we want.</p>
+<p>You may have noticed that I deliberately left out index and view
+from my Acl permissions. We are going to make view and index public
+actions in <tt class="docutils literal"><span class="pre">PostsController</span></tt> and <tt class="docutils literal"><span class="pre">WidgetsController</span></tt>. This
+allows non-authorized users to view these pages, making them public
+pages. However, at any time you can remove these actions from
+<tt class="docutils literal"><span class="pre">AuthComponent::allowedActions</span></tt> and the permissions for view and
+edit will revert to those in the Acl.</p>
+<p>Now we want to take out the references to <tt class="docutils literal"><span class="pre">Auth-&gt;allowedActions</span></tt>
+in your users and groups controllers. Then add the following to
+your posts and widgets controllers:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;view&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This removes the &#8216;off switches&#8217; we put in earlier on the users and
+groups controllers, and gives public access on the index and view
+actions in posts and widgets controllers. In
+<tt class="docutils literal"><span class="pre">AppController::beforeFilter()</span></tt> add the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;display&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This makes the &#8216;display&#8217; action public. This will keep our
+PagesController::display() public. This is important as often the
+default routing has this action as the home page for your
+application.</p>
+</div>
+<div class="section" id="logging-in">
+<h2>Logging in<a class="headerlink" href="#logging-in" title="Permalink to this headline">¶</a></h2>
+<p>Our application is now under access control, and any attempt to
+view non-public pages will redirect you to the login page. However,
+we will need to create a login view before anyone can login. Add
+the following to <tt class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></tt> if you haven&#8217;t done
+so already:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;h2&gt;Login&lt;/h2&gt;</span>
+<span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.username&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.password&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">&#39;Login&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If a user is already logged in, redirect him by adding this to your
+UsersController:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;Auth.User&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;You are logged in!&#39;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You should now be able to login and everything should work
+auto-magically. When access is denied Auth messages will be
+displayed if you added the <tt class="docutils literal"><span class="pre">echo</span> <span class="pre">$this-&gt;Session-&gt;flash('auth')</span></tt></p>
+</div>
+<div class="section" id="logout">
+<h2>Logout<a class="headerlink" href="#logout" title="Permalink to this headline">¶</a></h2>
+<p>Now onto the logout. Earlier we left this function blank, now is
+the time to fill it. In <tt class="docutils literal"><span class="pre">UsersController::logout()</span></tt> add the
+following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;Good-Bye&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">logout</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>This sets a Session flash message and logs out the User using
+Auth&#8217;s logout method. Auth&#8217;s logout method basically deletes the
+Auth Session Key and returns a URL that can be used in a redirect.
+If there is other session data that needs to be deleted as well add
+that code here.</p>
+</div>
+<div class="section" id="all-done">
+<h2>All done<a class="headerlink" href="#all-done" title="Permalink to this headline">¶</a></h2>
+<p>You should now have an application controlled by Auth and Acl.
+Users permissions are set at the group level, but you can set them
+by user at the same time. You can also set permissions on a global
+and per-controller and per-action basis. Furthermore, you have a
+reusable block of code to easily expand your ACO table as your app
+grows.</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../tutorials-and-examples.html">Tutorials &amp; Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../blog/blog.html">Blog Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../blog/part-two.html">Blog Tutorial - Adding a layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../blog-auth-example/auth.html">Simple Authentication and Authorization Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simple-acl-controlled-application.html">Simple Acl controlled Application</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Simple Acl controlled Application - part 2</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Simple Acl controlled Application - part 2</a><ul>
+<li><a class="reference internal" href="#an-automated-tool-for-creating-acos">An Automated tool for creating ACOs</a></li>
+<li><a class="reference internal" href="#setting-up-permissions">Setting up permissions</a></li>
+<li><a class="reference internal" href="#logging-in">Logging in</a></li>
+<li><a class="reference internal" href="#logout">Logout</a></li>
+<li><a class="reference internal" href="#all-done">All done</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="../../contributing.html" title="Contributing" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="simple-acl-controlled-application.html" title="Simple Acl controlled Application" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

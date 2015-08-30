@@ -1,0 +1,627 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Xml" lang="zh_CN" name="title" />
+<meta content="array php,xml class,xml objects,post xml,xml object,string url,string data,xml parser,php 5,bakery,constructor,php xml,cakephp,php file,unicorns,meth" lang="zh_CN" name="keywords" />
+
+    <title>Xml &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="工具" href="../core-libraries/toc-utilities.html" />
+    <link rel="next" title="插件" href="../plugins.html" />
+    <link rel="prev" title="CakeTime" href="time.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/core-utility-libraries/xml.html" /><link rel="alternate" hreflang="pt" href="../../pt/core-utility-libraries/xml.html" /><link rel="alternate" hreflang="es" href="../../es/core-utility-libraries/xml.html" /><link rel="alternate" hreflang="ja" href="../../ja/core-utility-libraries/xml.html" /><link rel="alternate" hreflang="fr" href="../../fr/core-utility-libraries/xml.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries/toc-utilities.html" accesskey="U" itemprop="url"><span itemprop="title">工具</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/core-utility-libraries/xml.html">en</a></li>
+				
+					<li><a href="../../pt/core-utility-libraries/xml.html">pt</a></li>
+				
+					<li><a href="../../es/core-utility-libraries/xml.html">es</a></li>
+				
+					<li><a href="../../ja/core-utility-libraries/xml.html">ja</a></li>
+				
+					<li><a href="../../fr/core-utility-libraries/xml.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-utility-libraries/xml.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="xml">
+<h1>Xml<a class="headerlink" href="#xml" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="Xml">
+<em class="property">class </em><tt class="descname">Xml</tt><a class="headerlink" href="#Xml" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>The Xml class was all refactored. As PHP 5 have
+<a class="reference external" href="http://php.net/simplexml">SimpleXML</a> and
+<a class="reference external" href="http://php.net/domdocument">DOMDocument</a>, the CakePHP doesn&#8217;t need to
+re-implement an XML parser. The new XML class will basically transform an array
+into SimpleXMLElement or DOMDocument objects, and vice versa.</p>
+<div class="section" id="importing-data-to-xml-class">
+<h2>Importing data to Xml class<a class="headerlink" href="#importing-data-to-xml-class" title="永久链接至标题">¶</a></h2>
+<p>In CakePHP 1.3 you can pass array, XML as string, URL or file path to the
+constructor of Xml class to import data. In CakePHP 2.0 you can do it using
+<a class="reference internal" href="#Xml::build" title="Xml::build"><tt class="xref php php-meth docutils literal"><span class="pre">Xml::build()</span></tt></a>. Unless the return is an Xml object, it will return a
+SimpleXMLElement or DOMDocument object (depending of your options parameter -
+default is SimpleXMLElement). Below the samples how to import data from URL:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Old method:</span>
+<span class="nv">$xml</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Xml</span><span class="p">(</span><span class="s1">&#39;http://bakery.cakephp.org/articles/rss&#39;</span><span class="p">);</span>
+
+<span class="c1">// New method using SimpleXML</span>
+<span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="s1">&#39;http://bakery.cakephp.org/articles/rss&#39;</span><span class="p">);</span>
+<span class="c1">// $xml now is a instance of SimpleXMLElement</span>
+
+<span class="c1">//or</span>
+<span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="s1">&#39;http://bakery.cakephp.org/articles/rss&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;return&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;simplexml&#39;</span><span class="p">));</span>
+<span class="c1">// $xml now is a instance of SimpleXMLElement</span>
+
+<span class="c1">// New method using DOMDocument</span>
+<span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="s1">&#39;http://bakery.cakephp.org/articles/rss&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;return&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;domdocument&#39;</span><span class="p">));</span>
+<span class="c1">// $xml now is a instance of DOMDocument</span>
+</pre></div>
+</div>
+<p>You can use <a class="reference internal" href="#Xml::build" title="Xml::build"><tt class="xref php php-meth docutils literal"><span class="pre">Xml::build()</span></tt></a> to build XML objects from a variety of sources.  You
+can use XML to build objects from string data:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$text</span> <span class="o">=</span> <span class="s1">&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="s1">&lt;post&gt;</span>
+<span class="s1">    &lt;id&gt;1&lt;/id&gt;</span>
+<span class="s1">    &lt;title&gt;Best post&lt;/title&gt;</span>
+<span class="s1">    &lt;body&gt; ... &lt;/body&gt;</span>
+<span class="s1">&lt;/post&gt;&#39;</span><span class="p">;</span>
+<span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="nv">$text</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You can also build Xml objects from either local files, or remote files.  Remote
+files will be fetched with <a class="reference internal" href="httpsocket.html#HttpSocket" title="HttpSocket"><tt class="xref php php-class docutils literal"><span class="pre">HttpSocket</span></tt></a>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// local file</span>
+<span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="s1">&#39;/home/awesome/unicorns.xml&#39;</span><span class="p">);</span>
+
+<span class="c1">// remote file</span>
+<span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="s1">&#39;http://bakery.cakephp.org/articles/rss&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You can also build Xml objects using an array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;post&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Best post&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39; ... &#39;</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If your input is invalid the Xml class will throw a Exception:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$xmlString</span> <span class="o">=</span> <span class="s1">&#39;What is XML?&#39;</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nv">$xmlObject</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="nv">$xmlString</span><span class="p">);</span> <span class="c1">// Here will throw a Exception</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">XmlException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nx">InternalErrorException</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last"><a class="reference external" href="http://php.net/domdocument">DOMDocument</a> and
+<a class="reference external" href="http://php.net/simplexml">SimpleXML</a> implement different API&#8217;s.
+Be sure to use the correct methods on the object you request from Xml.</p>
+</div>
+</div>
+<div class="section" id="transforming-a-xml-string-in-array">
+<h2>Transforming a XML string in array<a class="headerlink" href="#transforming-a-xml-string-in-array" title="永久链接至标题">¶</a></h2>
+<p>Converting XML strings into arrays is simple with the Xml class as well.  By
+default you&#8217;ll get a SimpleXml object back:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//Old method:</span>
+<span class="nv">$xmlString</span> <span class="o">=</span> <span class="s1">&#39;&lt;?xml version=&quot;1.0&quot;?&gt;&lt;root&gt;&lt;child&gt;value&lt;/child&gt;&lt;/root&gt;&#39;</span><span class="p">;</span>
+<span class="nv">$xmlObject</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Xml</span><span class="p">(</span><span class="nv">$xmlString</span><span class="p">);</span>
+<span class="nv">$xmlArray</span> <span class="o">=</span> <span class="nv">$xmlObject</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
+
+<span class="c1">// New method:</span>
+<span class="nv">$xmlString</span> <span class="o">=</span> <span class="s1">&#39;&lt;?xml version=&quot;1.0&quot;?&gt;&lt;root&gt;&lt;child&gt;value&lt;/child&gt;&lt;/root&gt;&#39;</span><span class="p">;</span>
+<span class="nv">$xmlArray</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">toArray</span><span class="p">(</span><span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="nv">$xmlString</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>If your XML is invalid it will throw a Exception.</p>
+</div>
+<div class="section" id="transforming-an-array-into-a-string-of-xml">
+<h2>Transforming an array into a string of XML<a class="headerlink" href="#transforming-an-array-into-a-string-of-xml" title="永久链接至标题">¶</a></h2>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Old method:</span>
+<span class="nv">$xmlArray</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;root&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;child&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span><span class="p">));</span>
+<span class="nv">$xmlObject</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Xml</span><span class="p">(</span><span class="nv">$xmlArray</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;format&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tags&#39;</span><span class="p">));</span>
+<span class="nv">$xmlString</span> <span class="o">=</span> <span class="nv">$xmlObject</span><span class="o">-&gt;</span><span class="na">toString</span><span class="p">();</span>
+
+<span class="c1">// New method:</span>
+<span class="nv">$xmlArray</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;root&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;child&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span><span class="p">));</span>
+<span class="nv">$xmlObject</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">fromArray</span><span class="p">(</span><span class="nv">$xmlArray</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;format&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tags&#39;</span><span class="p">));</span> <span class="c1">// You can use Xml::build() too</span>
+<span class="nv">$xmlString</span> <span class="o">=</span> <span class="nv">$xmlObject</span><span class="o">-&gt;</span><span class="na">asXML</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Your array must have only one element in the &#8220;top level&#8221; and it can not be
+numeric. If the array is not in this format, Xml will throw a Exception.
+Examples of invalid arrays:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Top level with numeric key</span>
+<span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// Multiple keys in top level</span>
+<span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;key1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;first value&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;key2&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;other value&#39;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">The default format option was changed from <cite>attributes</cite> to <cite>tags</cite>. This was
+done to make the Xml that the Xml class generates more compatible with XML
+in the wild.  Be careful if you depend of this. In the new version you can
+create a mixed array with tags, attributes and value, just use format as
+tags (or do not say anything, because it is the default value) and prefix
+keys that are supposed to be attributes with <cite>&#64;</cite>.  For value text, use <cite>&#64;</cite>
+as the key.</p>
+</div>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$xmlArray</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;project&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;@id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Name of project, as tag&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;@&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Value of project&#39;</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$xmlObject</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">fromArray</span><span class="p">(</span><span class="nv">$xmlArray</span><span class="p">);</span>
+<span class="nv">$xmlString</span> <span class="o">=</span> <span class="nv">$xmlObject</span><span class="o">-&gt;</span><span class="na">asXML</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The content of <tt class="docutils literal"><span class="pre">$xmlString</span></tt> will be:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">xml</span> <span class="nx">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;project id=&quot;1&quot;&gt;Value of project&lt;name&gt;Name of project, as tag&lt;/name&gt;&lt;/project&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">The structure of array was changed. Now the child must have in a sub-tree
+and not in the same tree. Moreover, the strings not will be changed by
+<a class="reference internal" href="inflector.html#Inflector" title="Inflector"><tt class="xref php php-class docutils literal"><span class="pre">Inflector</span></tt></a>. See the sample below:</p>
+</div>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$oldArray</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Projects&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;Project&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Project 1&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;Industry&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Industry 1&#39;</span><span class="p">)</span>
+        <span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;Project&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Project 2&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;Industry&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Industry 2&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nv">$newArray</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;projects&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;project&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Project 1&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;industry&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Industry 1&#39;</span><span class="p">)</span>
+            <span class="p">),</span>
+            <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Project 2&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;industry&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Industry 2&#39;</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>The both will result the below XML:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">xml</span> <span class="nx">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;projects&gt;</span>
+<span class="x">    &lt;project&gt;</span>
+<span class="x">        &lt;id&gt;1&lt;/id&gt;</span>
+<span class="x">        &lt;title&gt;Project 1&lt;/title&gt;</span>
+<span class="x">        &lt;industry&gt;</span>
+<span class="x">            &lt;id&gt;1&lt;/id&gt;</span>
+<span class="x">            &lt;name&gt;Industry 1&lt;/name&gt;</span>
+<span class="x">        &lt;/industry&gt;</span>
+<span class="x">    &lt;/project&gt;</span>
+<span class="x">    &lt;project&gt;</span>
+<span class="x">        &lt;id&gt;2&lt;/id&gt;</span>
+<span class="x">        &lt;title&gt;Project 2&lt;/title&gt;</span>
+<span class="x">        &lt;industry&gt;</span>
+<span class="x">            &lt;id&gt;2&lt;/id&gt;</span>
+<span class="x">            &lt;name&gt;Industry 2&lt;/name&gt;</span>
+<span class="x">        &lt;/industry&gt;</span>
+<span class="x">    &lt;/project&gt;</span>
+<span class="x">&lt;/projects&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="using-namespaces">
+<h3>Using Namespaces<a class="headerlink" href="#using-namespaces" title="永久链接至标题">¶</a></h3>
+<p>To use XML Namespaces, in your array you must create a key with name <tt class="docutils literal"><span class="pre">xmlns:</span></tt> to
+generic namespace or input the prefix <tt class="docutils literal"><span class="pre">xmlns:</span></tt> in a custom namespace. See the
+samples:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$xmlArray</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;root&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;xmlns:&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;http://cakephp.org&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;child&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$xml1</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">fromArray</span><span class="p">(</span><span class="nv">$xmlArray</span><span class="p">);</span>
+
+<span class="nv">$xmlArray</span><span class="p">(</span>
+    <span class="s1">&#39;root&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;tag&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;xmlns:pref&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;http://cakephp.org&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;pref:item&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;item 1&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;item 2&#39;</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$xml2</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">fromArray</span><span class="p">(</span><span class="nv">$xmlArray</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The value of <tt class="docutils literal"><span class="pre">$xml1</span></tt> and <tt class="docutils literal"><span class="pre">$xml2</span></tt> will be, respectively:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">xml</span> <span class="nx">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;root xmlns=&quot;http://cakephp.org&quot;&gt;&lt;child&gt;value&lt;/child&gt;</span>
+
+
+<span class="cp">&lt;?</span><span class="nx">xml</span> <span class="nx">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;root&gt;&lt;tag xmlns:pref=&quot;http://cakephp.org&quot;&gt;&lt;pref:item&gt;item 1&lt;/pref:item&gt;&lt;pref:item&gt;item 2&lt;/pref:item&gt;&lt;/tag&gt;&lt;/root&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-child">
+<h3>Creating a child<a class="headerlink" href="#creating-a-child" title="永久链接至标题">¶</a></h3>
+<p>The Xml class of CakePHP 2.0 doesn&#8217;t provide the manipulation of content, this
+must be made using SimpleXMLElement or DOMDocument. But, how CakePHP is so
+sweet, below has the steps to do for create a child node:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// CakePHP 1.3</span>
+<span class="nv">$myXmlOriginal</span> <span class="o">=</span> <span class="s1">&#39;&lt;?xml version=&quot;1.0&quot;?&gt;&lt;root&gt;&lt;child&gt;value&lt;/child&gt;&lt;/root&gt;&#39;</span><span class="p">;</span>
+<span class="nv">$xml</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Xml</span><span class="p">(</span><span class="nv">$myXmlOriginal</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;format&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tags&#39;</span><span class="p">));</span>
+<span class="nv">$xml</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">createNode</span><span class="p">(</span><span class="s1">&#39;young&#39;</span><span class="p">,</span> <span class="s1">&#39;new value&#39;</span><span class="p">);</span>
+
+<span class="c1">// CakePHP 2.0 - Using SimpleXML</span>
+<span class="nv">$myXmlOriginal</span> <span class="o">=</span> <span class="s1">&#39;&lt;?xml version=&quot;1.0&quot;?&gt;&lt;root&gt;&lt;child&gt;value&lt;/child&gt;&lt;/root&gt;&#39;</span><span class="p">;</span>
+<span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="nv">$myXmlOriginal</span><span class="p">);</span>
+<span class="nv">$xml</span><span class="o">-&gt;</span><span class="na">root</span><span class="o">-&gt;</span><span class="na">addChild</span><span class="p">(</span><span class="s1">&#39;young&#39;</span><span class="p">,</span> <span class="s1">&#39;new value&#39;</span><span class="p">);</span>
+
+<span class="c1">// CakePHP 2.0 - Using DOMDocument</span>
+<span class="nv">$myXmlOriginal</span> <span class="o">=</span> <span class="s1">&#39;&lt;?xml version=&quot;1.0&quot;?&gt;&lt;root&gt;&lt;child&gt;value&lt;/child&gt;&lt;/root&gt;&#39;</span><span class="p">;</span>
+<span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="nv">$myXmlOriginal</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;return&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;domdocument&#39;</span><span class="p">));</span>
+<span class="nv">$child</span> <span class="o">=</span> <span class="nv">$xml</span><span class="o">-&gt;</span><span class="na">createElement</span><span class="p">(</span><span class="s1">&#39;young&#39;</span><span class="p">,</span> <span class="s1">&#39;new value&#39;</span><span class="p">);</span>
+<span class="nv">$xml</span><span class="o">-&gt;</span><span class="na">firstChild</span><span class="o">-&gt;</span><span class="na">appendChild</span><span class="p">(</span><span class="nv">$child</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">小技巧</p>
+<p class="last">After manipulate your XML using SimpleXMLElement or DomDocument you can use
+<a class="reference internal" href="#Xml::toArray" title="Xml::toArray"><tt class="xref php php-meth docutils literal"><span class="pre">Xml::toArray()</span></tt></a> without problem.</p>
+</div>
+</div>
+</div>
+<div class="section" id="xml-api">
+<h2>Xml API<a class="headerlink" href="#xml-api" title="永久链接至标题">¶</a></h2>
+<p>A factory and conversion class for creating SimpleXml or DOMDocument objects
+from a number of sources including strings, arrays and remote urls.</p>
+<dl class="staticmethod">
+<dt id="Xml::build">
+<em class="property">static </em><tt class="descclassname">Xml::</tt><tt class="descname">build</tt><big>(</big><em>$input</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#Xml::build" title="永久链接至目标">¶</a></dt>
+<dd><p>Initialize SimpleXMLElement or DOMDocument from a given XML string, file
+path, URL or array</p>
+<p>Building XML from a string:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="s1">&#39;&lt;example&gt;text&lt;/example&gt;&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Building XML from string (output DOMDocument):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="s1">&#39;&lt;example&gt;text&lt;/example&gt;&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;return&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;domdocument&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Building XML from a file path:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="s1">&#39;/path/to/an/xml/file.xml&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Building from a remote URL:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="s1">&#39;http://example.com/example.xml&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Building from an array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$value</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;tags&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;tag&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;defect&#39;</span>
+            <span class="p">),</span>
+            <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;enhancement&#39;</span>
+        <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="nv">$value</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When building XML from an array ensure that there is only one top level element.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Xml::toArray">
+<em class="property">static </em><tt class="descclassname">Xml::</tt><tt class="descname">toArray</tt><big>(</big><em>$obj</em><big>)</big><a class="headerlink" href="#Xml::toArray" title="永久链接至目标">¶</a></dt>
+<dd><p>Convert either a SimpleXml or DOMDocument object into an array.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-general-purpose.html">通用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-components.html">组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-helpers.html">助件</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../core-libraries/toc-utilities.html">工具</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/caching.html">缓存</a></li>
+<li class="toctree-l3"><a class="reference internal" href="email.html">CakeEmail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file-folder.html">目录和文件 Folder &amp; File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hash.html">Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="httpsocket.html">HttpSocket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inflector.html">Inflector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/internationalization-and-localization.html">Internationalization &amp; Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/logging.html">日志记录</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">CakeNumber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="router.html">Router</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sanitize.html">数据清理 Data Sanitization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html">安全</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set.html">Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="string.html">字符串 String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">CakeTime</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Xml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Xml</a><ul>
+<li><a class="reference internal" href="#importing-data-to-xml-class">Importing data to Xml class</a></li>
+<li><a class="reference internal" href="#transforming-a-xml-string-in-array">Transforming a XML string in array</a></li>
+<li><a class="reference internal" href="#transforming-an-array-into-a-string-of-xml">Transforming an array into a string of XML</a><ul>
+<li><a class="reference internal" href="#using-namespaces">Using Namespaces</a></li>
+<li><a class="reference internal" href="#creating-a-child">Creating a child</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#xml-api">Xml API</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="../plugins.html" title="插件" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="time.html" title="CakeTime" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

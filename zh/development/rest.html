@@ -1,0 +1,500 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="REST" lang="zh_CN" name="title" />
+<meta content="application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api" lang="zh_CN" name="keywords" />
+
+    <title>REST &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="开发" href="../development.html" />
+    <link rel="next" title="调度器过滤器" href="dispatch-filters.html" />
+    <link rel="prev" title="测试" href="testing.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/development/rest.html" /><link rel="alternate" hreflang="pt" href="../../pt/development/rest.html" /><link rel="alternate" hreflang="es" href="../../es/development/rest.html" /><link rel="alternate" hreflang="ja" href="../../ja/development/rest.html" /><link rel="alternate" hreflang="fr" href="../../fr/development/rest.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../development.html" accesskey="U" itemprop="url"><span itemprop="title">开发</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/development/rest.html">en</a></li>
+				
+					<li><a href="../../pt/development/rest.html">pt</a></li>
+				
+					<li><a href="../../es/development/rest.html">es</a></li>
+				
+					<li><a href="../../ja/development/rest.html">ja</a></li>
+				
+					<li><a href="../../fr/development/rest.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/development/rest.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="rest">
+<h1>REST<a class="headerlink" href="#rest" title="永久链接至标题">¶</a></h1>
+<p>许多更新的应用程序开发者意识到需要把他们的核心功能开放给更多的受众。提供对核心
+API 易用、不受限制的访问可以帮助你的平台被接受，允许与其它系统的混搭(<em>mashup</em>)和
+集成。</p>
+<p>尽管还有其它解决方法，REST 是一个很棒的方法，为你在应用程序中创建的逻辑提供容易
+的访问方式。这是简单的、通常基于 XML 的(我们谈论是简单的 XML，完全不象 SOAP 信封
+(<em>envelope</em>)那么复杂)，依赖于 HTTP 标头(<em>headers</em>)信息来提供指令。在 CakePHP 中
+通过 REST 提供 API 很简单。</p>
+<div class="section" id="id1">
+<h2>简单的设置<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>开始使用 REST 最快捷的方法，只需在 app/Config 目录中的 routes.php 文件中添加
+几行。Router 对象带有一个 <tt class="docutils literal"><span class="pre">mapResources()</span></tt> 方法，用来为控制器的 REST 访问设置
+一些默认的路由。确保 <tt class="docutils literal"><span class="pre">mapResources()</span></tt> 方法出现在
+<tt class="docutils literal"><span class="pre">require</span> <span class="pre">CAKE</span> <span class="pre">.</span> <span class="pre">'Config'</span> <span class="pre">.</span> <span class="pre">DS</span> <span class="pre">.</span> <span class="pre">'routes.php';</span></tt> 和其它会改变路由的路由。如果要
+允许以 REST 方式访问菜单(<em>recipe</em>)数据库，就要象下面这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//In app/Config/routes.php...</span>
+
+<span class="nx">Router</span><span class="o">::</span><span class="na">mapResources</span><span class="p">(</span><span class="s1">&#39;recipes&#39;</span><span class="p">);</span>
+<span class="nx">Router</span><span class="o">::</span><span class="na">parseExtensions</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>第一行为简单的 REST 访问建立一些默认路由，而 <tt class="docutils literal"><span class="pre">parseExtensions()</span></tt> 方法指定想要
+的结果格式(例如 xml、json、rss)。这些路由能够辨识 HTTP 请求的方法(<em>Method</em>)。</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="34%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">HTTP format</th>
+<th class="head">URL format</th>
+<th class="head">Controller action invoked</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GET</td>
+<td>/recipes.format</td>
+<td>RecipesController::index()</td>
+</tr>
+<tr class="row-odd"><td>GET</td>
+<td>/recipes/123.format</td>
+<td>RecipesController::view(123)</td>
+</tr>
+<tr class="row-even"><td>POST</td>
+<td>/recipes.format</td>
+<td>RecipesController::add()</td>
+</tr>
+<tr class="row-odd"><td>PUT</td>
+<td>/recipes/123.format</td>
+<td>RecipesController::edit(123)</td>
+</tr>
+<tr class="row-even"><td>DELETE</td>
+<td>/recipes/123.format</td>
+<td>RecipesController::delete(123)</td>
+</tr>
+<tr class="row-odd"><td>POST</td>
+<td>/recipes/123.format</td>
+<td>RecipesController::edit(123)</td>
+</tr>
+</tbody>
+</table>
+<p>CakePHP 的 Router 类使用一些不同的指标来检测使用的 HTTP 方法。下面按优先顺序排列：</p>
+<ol class="arabic simple">
+<li>The <em>_method</em> POST variable</li>
+<li>The X_HTTP_METHOD_OVERRIDE</li>
+<li>The REQUEST_METHOD header</li>
+</ol>
+<p><em>_method</em> POST 变量有助于使用浏览器(或者任何其它可以容易地 POST 的工具)作为
+REST 客户端。只需设置 _method 为要模拟的 HTTP 请求方法的名称。</p>
+<p>一旦路由器设置好，映射 REST 请求到某些控制器动作(<em>controller action</em>)，我们就
+可以继续创建控制器动作内的逻辑。基本的控制器可以象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Controller/RecipesController.php</span>
+<span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;RequestHandler&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$recipes</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;recipes&#39;</span> <span class="o">=&gt;</span> <span class="nv">$recipes</span><span class="p">,</span>
+            <span class="s1">&#39;_serialize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;recipes&#39;</span><span class="p">)</span>
+        <span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$recipe</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">findById</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;recipe&#39;</span> <span class="o">=&gt;</span> <span class="nv">$recipe</span><span class="p">,</span>
+            <span class="s1">&#39;_serialize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;recipe&#39;</span><span class="p">)</span>
+        <span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;Saved&#39;</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;Error&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="nv">$message</span><span class="p">,</span>
+            <span class="s1">&#39;_serialize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">)</span>
+        <span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">edit</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="nv">$id</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;Saved&#39;</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;Error&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="nv">$message</span><span class="p">,</span>
+            <span class="s1">&#39;_serialize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">)</span>
+        <span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;Deleted&#39;</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;Error&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="nv">$message</span><span class="p">,</span>
+            <span class="s1">&#39;_serialize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">)</span>
+        <span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>因为我们添加了对 <a class="reference internal" href="routing.html#Router::parseExtensions" title="Router::parseExtensions"><tt class="xref php php-meth docutils literal"><span class="pre">Router::parseExtensions()</span></tt></a> 的调用，CakePHP 的路由器
+已经配置好，可以根据请求的不同种类提供不同的视图。既然我们在处理 REST 请求，我们
+也会创建 XML 视图。你也可以使用 CakePHP 内置的 <a class="reference internal" href="../views/json-and-xml-views.html"><em>JSON 和 XML 视图</em></a>
+来轻松地创建 JSON 视图。使用内置的 <a class="reference internal" href="../views/json-and-xml-views.html#XmlView" title="XmlView"><tt class="xref php php-class docutils literal"><span class="pre">XmlView</span></tt></a> 我们可以定义一个
+<tt class="docutils literal"><span class="pre">_serialize</span></tt> 视图变量。该特殊的视图变量用于指定 <tt class="docutils literal"><span class="pre">XmlView</span></tt> 应当把哪个视图变量
+序列化到 XML 中。</p>
+<p>如果要在数据转换为 XML 之前对其进行改动，就不要定义 <tt class="docutils literal"><span class="pre">_serialize</span></tt> 视图变量，而
+是使用视图文件。把 RecipesController 控制器的 REST 视图放在
+<tt class="docutils literal"><span class="pre">app/View/recipes/xml</span></tt> 目录中。也可以使用 <a class="reference internal" href="../core-utility-libraries/xml.html#Xml" title="Xml"><tt class="xref php php-class docutils literal"><span class="pre">Xml</span></tt></a> 类，在这些视图中
+进行快捷的 XML 输出。index 视图可以象下面这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/View/Recipes/xml/index.ctp</span>
+<span class="c1">// 对 $recipes 数组进行格式化和处理。</span>
+<span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">fromArray</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;response&#39;</span> <span class="o">=&gt;</span> <span class="nv">$recipes</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$xml</span><span class="o">-&gt;</span><span class="na">asXML</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>当使用 parseExtensions() 方法提供一个特定的内容类型时，CakePHP 会自动寻找匹配
+类型的视图助件。因为使用 XML 为内容类型，没有内置的助件，不过如果你要创建一个，
+就会在这些视图中自动加载以供使用。</p>
+<p>最终渲染的 XML 会象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">recipes</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">recipe</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;234&quot;</span> <span class="nx">created</span><span class="o">=</span><span class="s2">&quot;2008-06-13&quot;</span> <span class="nx">modified</span><span class="o">=</span><span class="s2">&quot;2008-06-14&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">author</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;23423&quot;</span> <span class="nx">first_name</span><span class="o">=</span><span class="s2">&quot;Billy&quot;</span> <span class="nx">last_name</span><span class="o">=</span><span class="s2">&quot;Bob&quot;</span><span class="o">&gt;&lt;/</span><span class="nx">author</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">comment</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;245&quot;</span> <span class="nx">body</span><span class="o">=</span><span class="s2">&quot;Yummy yummmy&quot;</span><span class="o">&gt;&lt;/</span><span class="nx">comment</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="nx">recipe</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">recipe</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;3247&quot;</span> <span class="nx">created</span><span class="o">=</span><span class="s2">&quot;2008-06-15&quot;</span> <span class="nx">modified</span><span class="o">=</span><span class="s2">&quot;2008-06-15&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">author</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;625&quot;</span> <span class="nx">first_name</span><span class="o">=</span><span class="s2">&quot;Nate&quot;</span> <span class="nx">last_name</span><span class="o">=</span><span class="s2">&quot;Johnson&quot;</span><span class="o">&gt;&lt;/</span><span class="nx">author</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">comment</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;654&quot;</span> <span class="nx">body</span><span class="o">=</span><span class="s2">&quot;This is a comment for this tasty dish.&quot;</span><span class="o">&gt;&lt;/</span><span class="nx">comment</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="nx">recipe</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="nx">recipes</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>创建 edit 动作的逻辑有一点复杂，但也不算太复杂。既然是提供输出 XML 的 API，选择
+接受 XML 就很自然。不用担心，<tt class="xref php php-class docutils literal"><span class="pre">RequestHandler</span></tt> 和 <a class="reference internal" href="routing.html#Router" title="Router"><tt class="xref php php-class docutils literal"><span class="pre">Router</span></tt></a>
+类使事情容易得多。如果 POST 或 PUT 请求有 XML 内容类型(content-type)，那么输入就
+会经过 CakePHP 的 <a class="reference internal" href="../core-utility-libraries/xml.html#Xml" title="Xml"><tt class="xref php php-class docutils literal"><span class="pre">Xml</span></tt></a> 类，数据的数组形式就会赋值给
+<cite>$this-&gt;request-&gt;data</cite>。因为这个特性，并行处理 XML 和 POST 数据是无缝的：无需
+改动控制器或模型代码。所有需要的数据都会在 <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> 中。</p>
+</div>
+<div class="section" id="id2">
+<h2>接受其它格式的输入<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>通常 REST 应用程序不但以多种数据格式输出内容，而且也接受不同格式的数据。在
+CakePHP 中，<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a> 有助于实现这一点。默认情况下，
+它会解码任何接收到的任何 POST/PUT 请求的 JSON/XML 输入数据，在
+<cite>$this-&gt;request-&gt;data</cite> 中提供该数据的数组版本。如果需要，也可以用
+<tt class="xref php php-meth docutils literal"><span class="pre">RequestHandler::addInputType()</span></tt> 连入其它格式的反序列化。</p>
+</div>
+<div class="section" id="id3">
+<h2>改变默认的 REST 路由<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified">2.1 新版功能.</span></p>
+</div>
+<p>如果默认的 REST 路由对应用程序不适用，可以用 <tt class="xref php php-meth docutils literal"><span class="pre">Router::resourceMap()</span></tt>
+方法改变。该方法让你可以设置 <a class="reference internal" href="routing.html#Router::mapResources" title="Router::mapResources"><tt class="xref php php-meth docutils literal"><span class="pre">Router::mapResources()</span></tt></a> 方法设置的默认
+路由。在使用该方法时需要设置 <em>所有</em> 要使用的默认值:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">resourceMap</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;PUT&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;DELETE&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>修改了默认的 resource map，以后对 <tt class="docutils literal"><span class="pre">mapResources()</span></tt> 的调用就会使用新值。</p>
+</div>
+<div class="section" id="custom-rest-routing">
+<span id="id4"></span><h2>自定义的 REST 路由<a class="headerlink" href="#custom-rest-routing" title="永久链接至标题">¶</a></h2>
+<p>如果 <a class="reference internal" href="routing.html#Router::mapResources" title="Router::mapResources"><tt class="xref php php-meth docutils literal"><span class="pre">Router::mapResources()</span></tt></a> 创建的默认路由仍然不适用，可以用
+<a class="reference internal" href="routing.html#Router::connect" title="Router::connect"><tt class="xref php php-meth docutils literal"><span class="pre">Router::connect()</span></tt></a> 方法定义一组自定义 REST 路由。<tt class="docutils literal"><span class="pre">connect()</span></tt> 方法让
+你可以为一个给定的网址定义一些不同的选项。欲知详情，请参考
+<a class="reference internal" href="routing.html#route-conditions"><em>使用额外条件匹配路由</em></a> 一节。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.5 新版功能.</span></p>
+</div>
+<p>你可以为 <a class="reference internal" href="routing.html#Router::mapResources" title="Router::mapResources"><tt class="xref php php-meth docutils literal"><span class="pre">Router::mapResources()</span></tt></a> 方法在 <tt class="docutils literal"><span class="pre">$options</span></tt> 数组中指定
+<tt class="docutils literal"><span class="pre">connectOptions</span></tt> 键，来提供 <a class="reference internal" href="routing.html#Router::connect" title="Router::connect"><tt class="xref php php-meth docutils literal"><span class="pre">Router::connect()</span></tt></a> 方法使用的自定义设置:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">mapResources</span><span class="p">(</span><span class="s1">&#39;books&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;connectOptions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;routeClass&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ApiRoute&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development.html">开发</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">路由</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sessions.html">会话</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">异常</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">错误处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">调试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">测试</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">REST</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dispatch-filters.html">调度器过滤器</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">REST</a><ul>
+<li><a class="reference internal" href="#id1">简单的设置</a></li>
+<li><a class="reference internal" href="#id2">接受其它格式的输入</a></li>
+<li><a class="reference internal" href="#id3">改变默认的 REST 路由</a></li>
+<li><a class="reference internal" href="#custom-rest-routing">自定义的 REST 路由</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="dispatch-filters.html" title="调度器过滤器" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="testing.html" title="测试" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

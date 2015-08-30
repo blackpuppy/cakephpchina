@@ -1,0 +1,1256 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="JsHelper" lang="zh_CN" name="title" />
+<meta content="The Js Helper supports the javascript libraries Prototype, jQuery and Mootools and provides methods for manipulating javascript." lang="zh_CN" name="description" />
+<meta content="js helper,javascript,cakephp jquery,cakephp mootools,cakephp prototype,cakephp jquery ui,cakephp scriptaculous,cakephp javascript,javascript engine" lang="zh_CN" name="keywords" />
+
+    <title>JsHelper &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="助件" href="../toc-helpers.html" />
+    <link rel="next" title="NumberHelper" href="number.html" />
+    <link rel="prev" title="HtmlHelper助件" href="html.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/core-libraries/helpers/js.html" /><link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/helpers/js.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/helpers/js.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/helpers/js.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/helpers/js.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../toc-helpers.html" accesskey="U" itemprop="url"><span itemprop="title">助件</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/core-libraries/helpers/js.html">en</a></li>
+				
+					<li><a href="../../../pt/core-libraries/helpers/js.html">pt</a></li>
+				
+					<li><a href="../../../es/core-libraries/helpers/js.html">es</a></li>
+				
+					<li><a href="../../../ja/core-libraries/helpers/js.html">ja</a></li>
+				
+					<li><a href="../../../fr/core-libraries/helpers/js.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/helpers/js.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="jshelper">
+<h1>JsHelper<a class="headerlink" href="#jshelper" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="JsHelper">
+<em class="property">class </em><tt class="descname">JsHelper</tt><big>(</big><em>View $view</em>, <em>array $settings = array()</em><big>)</big><a class="headerlink" href="#JsHelper" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>Since the beginning CakePHP&#8217;s support for Javascript has been with
+Prototype/Scriptaculous. While we still think these are an
+excellent Javascript library, the community has been asking for
+support for other libraries. Rather than drop Prototype in favour
+of another Javascript library. We created an Adapter based helper,
+and included 3 of the most requested libraries.
+Prototype/Scriptaculous, Mootools/Mootools-more, and jQuery/jQuery
+UI. And while the API is not as expansive as the previous
+AjaxHelper we feel that the adapter based solution allows for a
+more extensible solution giving developers the power and
+flexibility they need to address their specific application needs.</p>
+<p>Javascript Engines form the backbone of the new JsHelper. A
+Javascript engine translates an abstract Javascript element into
+concrete Javascript code specific to the Javascript library being
+used. In addition they create an extensible system for others to
+use.</p>
+<p>CakePHP支持三个运用最广泛的JS库，他们是Prototype/Scriptaculous, Mootools/Mootools-more, 和jQuery/jQuery UI</p>
+<div class="section" id="javascript">
+<h2>使用特定的Javascript引擎<a class="headerlink" href="#javascript" title="永久链接至标题">¶</a></h2>
+<p>首先下载你偏好的js库并把他放在app/webroot/js</p>
+<p>然后必须将该库引用在页面中，如果需要在所有页面中使用，在app/View/Layouts/default.ctp文件的header块中添加
+echo $this-&gt;Html-&gt;script(&#8216;jquery&#8217;); // 引入Jquery库，如果没有default.ctp文件，可以从lib/Cake/View/Layouts/default.ctp复制一个过来。
+上面的代码会被自动编译为&lt;script type=&#8221;text/javascript&#8221; src=&#8221;/Mycakephp/js/jquery.js&#8221;&gt;&lt;/script&gt;
+.js会自动添加</p>
+<p>默认js脚本会被缓存，所以我们必须输出缓存，在每个页面的结尾&lt;/body&gt;标签内，执行echo $this-&gt;Js-&gt;writeBuffer();//输出缓存</p>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">You must include the library in your page and print the cache for
+the helper to function.</p>
+</div>
+<p>Javascript engine selection is declared when you include the helper
+in your controller:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Js&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Jquery&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>The above would use the Jquery Engine in the instances of JsHelper
+in your views. If you do not declare a specific engine, the jQuery
+engine will be used as the default. As mentioned before, there are
+three engines implemented in the core, but we encourage the
+community to expand the library compatibility.</p>
+<p>Javascript引擎部分是在控制器的helper部分被引入的，语句是public $helpers = array(&#8216;Js&#8217; =&gt; array(&#8216;Jquery&#8217;));
+默认情况下被引入的就是Jquery引擎，除此之外，共有三个引擎被包含在核心，我们鼓励大家扩展类库的兼容性</p>
+<div class="section" id="using-jquery-with-other-libraries">
+<h3>Using jQuery with other libraries<a class="headerlink" href="#using-jquery-with-other-libraries" title="永久链接至标题">¶</a></h3>
+<p>The jQuery library, and virtually all of its plugins are
+constrained within the jQuery namespace. As a general rule,
+&#8220;global&#8221; objects are stored inside the jQuery namespace as well, so
+you shouldn&#8217;t get a clash between jQuery and any other library
+(like Prototype, MooTools, or YUI).</p>
+<p>That said, there is one caveat:
+<strong>By default, jQuery uses &#8220;$&#8221; as a shortcut for &#8220;jQuery&#8221;</strong></p>
+<p>To override the &#8220;$&#8221; shortcut, use the jQueryObject variable:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">JqueryEngine</span><span class="o">-&gt;</span><span class="na">jQueryObject</span> <span class="o">=</span> <span class="s1">&#39;$j&#39;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">scriptBlock</span><span class="p">(</span>
+    <span class="s1">&#39;var $j = jQuery.noConflict();&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;inline&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="c1">// Tell jQuery to go into noconflict mode</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-the-jshelper-inside-customhelpers">
+<h3>Using the JsHelper inside customHelpers<a class="headerlink" href="#using-the-jshelper-inside-customhelpers" title="永久链接至标题">¶</a></h3>
+<p>Declare the JsHelper in the <tt class="docutils literal"><span class="pre">$helpers</span></tt> array in your
+customHelper:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Js&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">It is not possible to declare a javascript engine inside a custom
+helper. Doing that will have no effect.</p>
+</div>
+<p>If you are willing to use an other javascript engine than the
+default, do the helper setup in your controller as follows:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Js&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Prototype&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;CustomHelper&#39;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">Be sure to declare the JsHelper and its engine <strong>on top</strong> of the
+<tt class="docutils literal"><span class="pre">$helpers</span></tt> array in your controller.</p>
+</div>
+<p>The selected javascript engine may disappear (replaced by the
+default) from the jsHelper object in your helper, if you miss to do
+so and you will get code that does not fit your javascript
+library.</p>
+</div>
+</div>
+<div class="section" id="creating-a-javascript-engine">
+<h2>Creating a Javascript Engine<a class="headerlink" href="#creating-a-javascript-engine" title="永久链接至标题">¶</a></h2>
+<p>Javascript engine helpers follow normal helper conventions, with a
+few additional restrictions. They must have the <tt class="docutils literal"><span class="pre">Engine</span></tt> suffix.
+<tt class="docutils literal"><span class="pre">DojoHelper</span></tt> is not good, <tt class="docutils literal"><span class="pre">DojoEngineHelper</span></tt> is correct.
+Furthermore, they should extend <tt class="docutils literal"><span class="pre">JsBaseEngineHelper</span></tt> in order to
+leverage the most of the new API.</p>
+</div>
+<div class="section" id="javascript-engine-usage">
+<h2>Javascript engine usage<a class="headerlink" href="#javascript-engine-usage" title="永久链接至标题">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">JsHelper</span></tt> provides a few methods, and acts as a facade for
+the the Engine helper. You should not directly access the Engine
+helper except in rare occasions. Using the facade features of the
+<tt class="docutils literal"><span class="pre">JsHelper</span></tt> allows you to leverage the buffering and method
+chaining features built-in; (method chaining only works in PHP5).</p>
+<p>The <tt class="docutils literal"><span class="pre">JsHelper</span></tt> by default buffers almost all script code
+generated, allowing you to collect scripts throughout the view,
+elements and layout, and output it in one place. Outputting
+buffered scripts is done with <tt class="docutils literal"><span class="pre">$this-&gt;Js-&gt;writeBuffer();</span></tt> this
+will return the buffer contents in a script tag. You can disable
+buffering wholesale with the <tt class="docutils literal"><span class="pre">$bufferScripts</span></tt> property or setting
+<tt class="docutils literal"><span class="pre">buffer</span> <span class="pre">=&gt;</span> <span class="pre">false</span></tt> in methods taking <tt class="docutils literal"><span class="pre">$options</span></tt>.</p>
+<p>JsHelper默认会将所有产生的脚本代码缓存起来，收集整个视图，元素和布局的脚本在一个地方输出。
+输出缓存脚本代码是``$this-&gt;Js-&gt;writeBuffer();``，返回包含script标签的脚本内容，你可以禁用缓存，要设置
+<tt class="docutils literal"><span class="pre">$bufferScripts``属性或在``$options``数组选项内设置``buffer</span> <span class="pre">=&gt;</span> <span class="pre">false</span></tt></p>
+<p>Since most methods in Javascript begin with a selection of elements
+in the DOM, <tt class="docutils literal"><span class="pre">$this-&gt;Js-&gt;get()</span></tt> returns a $this, allowing you to
+chain the methods using the selection. Method chaining allows you
+to write shorter, more expressive code:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;#foo&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">event</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nv">$eventCode</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Is an example of method chaining. Method chaining is not possible
+in PHP4 and the above sample would be written like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;#foo&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">event</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nv">$eventCode</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>由于大多数的Javascript代码是从选择DOM元素开始的``$this-&gt;Js-&gt;get()``仍然会返回$this,这样我们可以链式操作
+$this-&gt;Js-&gt;get(&#8216;#foo&#8217;)-&gt;event(&#8216;click&#8217;, $eventCode);它和下面的代码是等价的</p>
+<blockquote>
+<div>$this-&gt;Js-&gt;get(&#8216;#foo&#8217;);
+$this-&gt;Js-&gt;event(&#8216;click&#8217;, $eventCode);</div></blockquote>
+<div class="section" id="common-options">
+<h3>Common options<a class="headerlink" href="#common-options" title="永久链接至标题">¶</a></h3>
+<p>In attempts to simplify development where Js libraries can change,
+a common set of options is supported by <tt class="docutils literal"><span class="pre">JsHelper</span></tt>, these common
+options will be mapped out to the library specific options
+internally. If you are not planning on switching Javascript
+libraries, each library also supports all of its native callbacks
+and options.</p>
+</div>
+<div class="section" id="id1">
+<h3>公共选项<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<p>为了简化开发，<a href="#id2"><span class="problematic" id="id3">``</span></a>JsHelper``支持一系列公共选项，这些常见的选项会被映射到具体的库中，如果你并没有打算换
+Javascript库，每个库同样支持所有的本地回调和选项</p>
+</div>
+<div class="section" id="callback-wrapping">
+<h3>Callback wrapping<a class="headerlink" href="#callback-wrapping" title="永久链接至标题">¶</a></h3>
+<p>By default all callback options are wrapped with the an anonymous
+function with the correct arguments. You can disable this behavior
+by supplying the <tt class="docutils literal"><span class="pre">wrapCallbacks</span> <span class="pre">=</span> <span class="pre">false</span></tt> in your options array.</p>
+</div>
+<div class="section" id="working-with-buffered-scripts">
+<h3>Working with buffered scripts<a class="headerlink" href="#working-with-buffered-scripts" title="永久链接至标题">¶</a></h3>
+<p>One drawback to previous implementation of &#8216;Ajax&#8217; type features was
+the scattering of script tags throughout your document, and the
+inability to buffer scripts added by elements in the layout. The
+new JsHelper if used correctly avoids both of those issues. It is
+recommended that you place <tt class="docutils literal"><span class="pre">$this-&gt;Js-&gt;writeBuffer()</span></tt> at the
+bottom of your layout file above the <tt class="docutils literal"><span class="pre">&lt;/body&gt;</span></tt> tag. This will
+allow all scripts generated in layout elements to be output in one
+place. It should be noted that buffered scripts are handled
+separately from included script files.</p>
+<dl class="method">
+<dt id="JsHelper::writeBuffer">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">writeBuffer</tt><big>(</big><em>$options = array()</em><big>)</big><a class="headerlink" href="#JsHelper::writeBuffer" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>Writes all Javascript generated so far to a code block or caches
+them to a file and returns a linked script.</p>
+<p><strong>Options</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">inline</span></tt> - Set to true to have scripts output as a script
+block inline if <tt class="docutils literal"><span class="pre">cache</span></tt> is also true, a script link tag will be
+generated. (default true)</li>
+<li><tt class="docutils literal"><span class="pre">cache</span></tt> - Set to true to have scripts cached to a file and
+linked in (default false)</li>
+<li><tt class="docutils literal"><span class="pre">clear</span></tt> - Set to false to prevent script cache from being
+cleared (default true)</li>
+<li><tt class="docutils literal"><span class="pre">onDomReady</span></tt> - wrap cached scripts in domready event (default
+true)</li>
+<li><tt class="docutils literal"><span class="pre">safe</span></tt> - if an inline block is generated should it be wrapped
+in &lt;![CDATA[ ... ]]&gt; (default true)</li>
+</ul>
+<p>Creating a cache file with <tt class="docutils literal"><span class="pre">writeBuffer()</span></tt> requires that
+<tt class="docutils literal"><span class="pre">webroot/js</span></tt> be world writable and allows a browser to cache
+generated script resources for any page.</p>
+<dl class="method">
+<dt>
+<tt class="descclassname">JsHelper::</tt><tt class="descname">writeBuffer</tt><big>(</big><em>$options = array()</em><big>)</big></dt>
+<dd></dd></dl>
+
+<p>将所有产生的Javascript写入到代码块中或缓存在文件中，并返回一个带链接的脚本</p>
+<p><strong>选项</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">inline</span></tt>      - (默认为真)若为真，直接在页面内输出缓存内容，若``cache``同样为真，将只产生一个带地址的script标签</li>
+<li><tt class="docutils literal"><span class="pre">cache</span></tt>       - (默认为假)若为真，将缓存内容保存到一个独立的js文件中，并被页面引用(译者:建议缓存内容过多时使用)</li>
+<li><tt class="docutils literal"><span class="pre">clear</span></tt>       - (默认为真)若为假，将阻止缓存内容被清除</li>
+<li><tt class="docutils literal"><span class="pre">onDomReady</span></tt>  - (默认为真)若为真，将缓存内容放到domready事件中(译者:即脚本被自动包含在$(document).ready(function ())中)</li>
+<li><tt class="docutils literal"><span class="pre">safe</span></tt>        - (默认为真)若为真，页面内的缓存内容被&lt;![CDATA[ ... ]]&gt;语句块包裹</li>
+</ul>
+<p>独立出来的js缓存文件在``webroot/js``，要保证该目录可写，并且保证浏览器可以生成任何页面的脚本资源缓存</p>
+<dl class="method">
+<dt id="JsHelper::buffer">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">buffer</tt><big>(</big><em>$content</em><big>)</big><a class="headerlink" href="#JsHelper::buffer" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>Add <tt class="docutils literal"><span class="pre">$content</span></tt> to the internal script buffer.</p>
+<dl class="method">
+<dt>
+<tt class="descclassname">JsHelper::</tt><tt class="descname">buffer</tt><big>(</big><em>$content</em><big>)</big></dt>
+<dd></dd></dl>
+
+<p>添加额外内容 <tt class="docutils literal"><span class="pre">$content</span></tt> 到内部缓存。</p>
+<dl class="method">
+<dt id="JsHelper::getBuffer">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">getBuffer</tt><big>(</big><em>$clear = true</em><big>)</big><a class="headerlink" href="#JsHelper::getBuffer" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>Get the contents of the current buffer. Pass in false to not clear
+the buffer at the same time.</p>
+<dl class="method">
+<dt>
+<tt class="descclassname">JsHelper::</tt><tt class="descname">getBuffer</tt><big>(</big><em>$clear = true</em><big>)</big></dt>
+<dd></dd></dl>
+
+<p>获取当前缓存的内容，传入false不同时删除缓存</p>
+<p><strong>Buffering methods that are not normally buffered</strong></p>
+<p>Some methods in the helpers are buffered by default. The engines
+buffer the following methods by default:</p>
+<ul class="simple">
+<li>event</li>
+<li>sortable</li>
+<li>drag</li>
+<li>drop</li>
+<li>slider</li>
+</ul>
+<p>Additionally you can force any other method in JsHelper to use the
+buffering. By appending an boolean to the end of the arguments you
+can force other methods to go into the buffer. For example the
+<tt class="docutils literal"><span class="pre">each()</span></tt> method does not normally buffer:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">each</span><span class="p">(</span><span class="s1">&#39;alert(&quot;whoa!&quot;);&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The above would force the <tt class="docutils literal"><span class="pre">each()</span></tt> method to use the buffer.
+Conversely if you want a method that does buffer to not buffer, you
+can pass a <tt class="docutils literal"><span class="pre">false</span></tt> in as the last argument:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">event</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="s1">&#39;alert(&quot;whoa!&quot;);&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This would force the event function which normally buffers to
+return its result.</p>
+<p><strong>使用缓存方法并不总是被缓存</strong></p>
+<p>在helpers中有些方法默认不被缓存，JS引擎默认缓存以下方法(译注:好像需要jqueryUI支持)
+-  event    事件
+-  sortable 排序
+-  drag     拖拽
+-  drop     放下
+-  slider   滑动</p>
+<p>此外，你可以强制输出缓存，只需在方法最后追加一个true参数，举例
+<a href="#id4"><span class="problematic" id="id5">``</span></a>each()``方法通常不输出缓存
+$this-&gt;Js-&gt;each(&#8216;alert(&#8220;whoa!&#8221;);&#8217;, true);
+上面的语句强制输出缓存，如果你要明确不输出缓存，只需
+$this-&gt;Js-&gt;event(&#8216;click&#8217;, &#8216;alert(&#8220;whoa!&#8221;);&#8217;, false);
+强制将结果返回</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>其他方法<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>核心的Javascript引擎提供了跨库的相同特性，there is also a subset of common options that are
+translated into library specific options.这些方法包含在cakephp的核心中，每个方法的$options也可以用到其他方法中</p>
+<dl class="method">
+<dt id="JsHelper::object">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">object</tt><big>(</big><em>$data</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#JsHelper::object" title="永久链接至目标">¶</a></dt>
+<dd><p>将 <tt class="docutils literal"><span class="pre">$data``序列化为JSON格式.此方法自动执行``json_encode()</span></tt>，也可以添加$options参数添加额外的特性</p>
+<p><strong>选项:</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">prefix</span></tt>  - String 返回的数据前缀额外内容.</li>
+<li><tt class="docutils literal"><span class="pre">postfix</span></tt> - String 返回的数据追加额外内容.</li>
+</ul>
+<p><strong>举例</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$json</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">object</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="other-methods">
+<h2>Other Methods<a class="headerlink" href="#other-methods" title="永久链接至标题">¶</a></h2>
+<p>The core Javascript Engines provide the same feature set across all
+libraries, there is also a subset of common options that are
+translated into library specific options. This is done to provide
+end developers with as unified an API as possible. The following
+list of methods are supported by all the Engines included in the
+CakePHP core. Whenever you see separate lists for <tt class="docutils literal"><span class="pre">Options</span></tt> and
+<tt class="docutils literal"><span class="pre">Event</span> <span class="pre">Options</span></tt> both sets of parameters are supplied in the
+<tt class="docutils literal"><span class="pre">$options</span></tt> array for the method.</p>
+<dl class="method">
+<dt>
+<tt class="descclassname">JsHelper::</tt><tt class="descname">object</tt><big>(</big><em>$data</em>, <em>$options = array()</em><big>)</big></dt>
+<dd><p>Serializes <tt class="docutils literal"><span class="pre">$data</span></tt> into JSON.  This method is a proxy for <tt class="docutils literal"><span class="pre">json_encode()</span></tt>
+with a few extra features added via the <tt class="docutils literal"><span class="pre">$options</span></tt> parameter.</p>
+<p><strong>Options:</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">prefix</span></tt> - String prepended to the returned data.</li>
+<li><tt class="docutils literal"><span class="pre">postfix</span></tt> - String appended to the returned data.</li>
+</ul>
+<p><strong>Example Use</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$json</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">object</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::sortable">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">sortable</tt><big>(</big><em>$options = array()</em><big>)</big><a class="headerlink" href="#JsHelper::sortable" title="永久链接至目标">¶</a></dt>
+<dd><p>生成js代码片段，对元素(通常是列表)可进行拖拽排序</p>
+<p>通常的可用选项:</p>
+<p><strong>选项</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">containment</span></tt> - Container for move action 移动动作</li>
+<li><tt class="docutils literal"><span class="pre">handle</span></tt> - Selector to handle element. Only this element will
+start sort action.</li>
+<li><tt class="docutils literal"><span class="pre">revert</span></tt> - Whether or not to use an effect to move sortable
+into final position.</li>
+<li><tt class="docutils literal"><span class="pre">opacity</span></tt> - Opacity of the placeholder</li>
+<li><tt class="docutils literal"><span class="pre">distance</span></tt> - Distance a sortable must be dragged before
+sorting starts.</li>
+</ul>
+<p><strong>Event Options</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">start</span></tt> - Event fired when sorting starts</li>
+<li><tt class="docutils literal"><span class="pre">sort</span></tt> - Event fired during sorting</li>
+<li><tt class="docutils literal"><span class="pre">complete</span></tt> - Event fired when sorting completes.</li>
+</ul>
+<p>Other options are supported by each Javascript library, and you
+should check the documentation for your javascript library for more
+detailed information on its options and parameters.</p>
+<p><strong>Example Use</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;#my-list&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">sortable</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;distance&#39;</span> <span class="o">=&gt;</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s1">&#39;containment&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;parent&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;start&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;onStart&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;complete&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;onStop&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;sort&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;onSort&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;wrapCallbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Assuming you were using the jQuery engine, you would get the
+following code in your generated Javascript block</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#myList&quot;</span><span class="p">).</span><span class="nx">sortable</span><span class="p">({</span><span class="nx">containment</span><span class="o">:</span><span class="s2">&quot;parent&quot;</span><span class="p">,</span> <span class="nx">distance</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span> <span class="nx">sort</span><span class="o">:</span><span class="nx">onSort</span><span class="p">,</span> <span class="nx">start</span><span class="o">:</span><span class="nx">onStart</span><span class="p">,</span> <span class="nx">stop</span><span class="o">:</span><span class="nx">onStop</span><span class="p">});</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::request">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">request</tt><big>(</big><em>$url</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#JsHelper::request" title="永久链接至目标">¶</a></dt>
+<dd><p>生成Ajax的JS代码</p>
+<p><strong>事件</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">complete</span></tt> - Callback to fire on complete.</li>
+<li><tt class="docutils literal"><span class="pre">success</span></tt> - Callback to fire on success.</li>
+<li><tt class="docutils literal"><span class="pre">before</span></tt> - Callback to fire on request initialization.</li>
+<li><tt class="docutils literal"><span class="pre">error</span></tt> - Callback to fire on request failure.</li>
+</ul>
+<p><strong>选项</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">method</span></tt> - 默认是GET方法请求</li>
+<li><tt class="docutils literal"><span class="pre">async</span></tt> - Whether or not you want an asynchronous request.</li>
+<li><tt class="docutils literal"><span class="pre">data</span></tt> - 发送的额外数据.</li>
+<li><tt class="docutils literal"><span class="pre">update</span></tt> - Dom id to update with the content of the response.</li>
+<li><tt class="docutils literal"><span class="pre">type</span></tt> - Data type for response. &#8216;json&#8217; and &#8216;html&#8217; are
+supported. Default is html for most libraries.</li>
+<li><tt class="docutils literal"><span class="pre">evalScripts</span></tt> - Whether or not &lt;script&gt; tags should be
+eval&#8217;ed.</li>
+<li><tt class="docutils literal"><span class="pre">dataExpression</span></tt> - Should the <tt class="docutils literal"><span class="pre">data</span></tt> key be treated as a
+callback. Useful for supplying <tt class="docutils literal"><span class="pre">$options['data']</span></tt> as another
+Javascript expression.</li>
+</ul>
+<dl class="docutils">
+<dt><strong>举例</strong>::</dt>
+<dd><p class="first">$this-&gt;Js-&gt;get(&#8216;#s1&#8217;);
+$this-&gt;Js-&gt;event(</p>
+<blockquote>
+<div><p>&#8216;click&#8217;,
+$this-&gt;Js-&gt;request(</p>
+<blockquote>
+<div>array(&#8216;action&#8217; =&gt; &#8216;foo&#8217;, &#8216;param1&#8217;),
+array(&#8216;async&#8217; =&gt; true, &#8216;update&#8217; =&gt; &#8216;#element&#8217;)</div></blockquote>
+<p>)</p>
+</div></blockquote>
+<p class="last">);</p>
+</dd>
+</dl>
+<p>生成:
+&lt;script type = &#8220;text/javascript&#8221; &gt;
+$(document).ready(function() {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>$(&#8220;#element&#8221;).bind(&#8220;click&#8221;, function(event) {</dt>
+<dd><dl class="first docutils">
+<dt>$.ajax({</dt>
+<dd><p class="first">async: true,
+dataType: &#8220;html&#8221;,
+success: function(data, textStatus) {</p>
+<blockquote>
+<div>$(&#8220;#element&#8221;).html(data);</div></blockquote>
+<p class="last">},
+url: &#8220;/Mycakephp/ajaxtest/foo/param1&#8221;</p>
+</dd>
+</dl>
+<p class="last">});
+return false;</p>
+</dd>
+</dl>
+<p>});</p>
+</div></blockquote>
+<p>});
+&lt;/script&gt;</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::get">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">get</tt><big>(</big><em>$selector</em><big>)</big><a class="headerlink" href="#JsHelper::get" title="永久链接至目标">¶</a></dt>
+<dd><p>Set the internal &#8216;selection&#8217; to a CSS selector. The active
+selection is used in subsequent operations until a new selection is
+made:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;#element&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">JsHelper</span></tt> now will reference all other element based methods
+on the selection of <tt class="docutils literal"><span class="pre">#element</span></tt>. To change the active selection,
+call <tt class="docutils literal"><span class="pre">get()</span></tt> again with a new element.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descclassname">JsHelper::</tt><tt class="descname">get</tt><big>(</big><em>$selector</em><big>)</big></dt>
+<dd><p>CSS选择器，选中元素后可以对当前激活的元素进行链式操作，直到再次get()新的元素</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::set">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">set</tt><big>(</big><em>mixed $one</em>, <em>mixed $two = null</em><big>)</big><a class="headerlink" href="#JsHelper::set" title="永久链接至目标">¶</a></dt>
+<dd><p>Pass variables into Javascript. Allows you to set variables that will be
+output when the buffer is fetched with <a class="reference internal" href="#JsHelper::getBuffer" title="JsHelper::getBuffer"><tt class="xref php php-meth docutils literal"><span class="pre">JsHelper::getBuffer()</span></tt></a> or
+<a class="reference internal" href="#JsHelper::writeBuffer" title="JsHelper::writeBuffer"><tt class="xref php php-meth docutils literal"><span class="pre">JsHelper::writeBuffer()</span></tt></a>. The Javascript variable used to output
+set variables can be controlled with <tt class="xref php php-attr docutils literal"><span class="pre">JsHelper::$setVariable</span></tt>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::drag">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">drag</tt><big>(</big><em>$options = array()</em><big>)</big><a class="headerlink" href="#JsHelper::drag" title="永久链接至目标">¶</a></dt>
+<dd><p>Make an element draggable.</p>
+<p><strong>Options</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">handle</span></tt> - selector to the handle element.</li>
+<li><tt class="docutils literal"><span class="pre">snapGrid</span></tt> - The pixel grid that movement snaps to, an
+array(x, y)</li>
+<li><tt class="docutils literal"><span class="pre">container</span></tt> - The element that acts as a bounding box for the
+draggable element.</li>
+</ul>
+<p><strong>Event Options</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">start</span></tt> - Event fired when the drag starts</li>
+<li><tt class="docutils literal"><span class="pre">drag</span></tt> - Event fired on every step of the drag</li>
+<li><tt class="docutils literal"><span class="pre">stop</span></tt> - Event fired when dragging stops (mouse release)</li>
+</ul>
+<p><strong>Example use</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;#element&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">drag</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;container&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;#content&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;start&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;onStart&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;drag&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;onDrag&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;stop&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;onStop&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;snapGrid&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="s1">&#39;wrapCallbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>如果你使用JQuery引擎，会生成下面的代码</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#element&quot;</span><span class="p">).</span><span class="nx">draggable</span><span class="p">({</span><span class="nx">containment</span><span class="o">:</span><span class="s2">&quot;#content&quot;</span><span class="p">,</span> <span class="nx">drag</span><span class="o">:</span><span class="nx">onDrag</span><span class="p">,</span> <span class="nx">grid</span><span class="o">:</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="nx">start</span><span class="o">:</span><span class="nx">onStart</span><span class="p">,</span> <span class="nx">stop</span><span class="o">:</span><span class="nx">onStop</span><span class="p">});</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::drop">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">drop</tt><big>(</big><em>$options = array()</em><big>)</big><a class="headerlink" href="#JsHelper::drop" title="永久链接至目标">¶</a></dt>
+<dd><p>Make an element accept draggable elements and act as a dropzone for
+dragged elements.</p>
+<p><strong>Options</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">accept</span></tt> - Selector for elements this droppable will accept.</li>
+<li><tt class="docutils literal"><span class="pre">hoverclass</span></tt> - Class to add to droppable when a draggable is
+over.</li>
+</ul>
+<p><strong>Event Options</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">drop</span></tt> - Event fired when an element is dropped into the drop
+zone.</li>
+<li><tt class="docutils literal"><span class="pre">hover</span></tt> - Event fired when a drag enters a drop zone.</li>
+<li><tt class="docutils literal"><span class="pre">leave</span></tt> - Event fired when a drag is removed from a drop zone
+without being dropped.</li>
+</ul>
+<p><strong>Example use</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;#element&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">drop</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;accept&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;.items&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;hover&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;onHover&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;leave&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;onExit&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;drop&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;onDrop&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;wrapCallbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>If you were using the jQuery engine the following code would be
+added to the buffer</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#element&quot;</span><span class="p">).</span><span class="nx">droppable</span><span class="p">({</span><span class="nx">accept</span><span class="o">:</span><span class="s2">&quot;.items&quot;</span><span class="p">,</span> <span class="nx">drop</span><span class="o">:</span><span class="nx">onDrop</span><span class="p">,</span> <span class="nx">out</span><span class="o">:</span><span class="nx">onExit</span><span class="p">,</span> <span class="nx">over</span><span class="o">:</span><span class="nx">onHover</span><span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">Droppables in Mootools function differently from other libraries.
+Droppables are implemented as an extension of Drag. So in addition
+to making a get() selection for the droppable element. You must
+also provide a selector rule to the draggable element. Furthermore,
+Mootools droppables inherit all options from Drag.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::slider">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">slider</tt><big>(</big><em>$options = array()</em><big>)</big><a class="headerlink" href="#JsHelper::slider" title="永久链接至目标">¶</a></dt>
+<dd><p>Create snippet of Javascript that converts an element into a slider
+ui widget. See your libraries implementation for additional usage
+and features.</p>
+<p><strong>Options</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">handle</span></tt> - The id of the element used in sliding.</li>
+<li><tt class="docutils literal"><span class="pre">direction</span></tt> - The direction of the slider either &#8216;vertical&#8217; or
+&#8216;horizontal&#8217;</li>
+<li><tt class="docutils literal"><span class="pre">min</span></tt> - The min value for the slider.</li>
+<li><tt class="docutils literal"><span class="pre">max</span></tt> - The max value for the slider.</li>
+<li><tt class="docutils literal"><span class="pre">step</span></tt> - The number of steps or ticks the slider will have.</li>
+<li><tt class="docutils literal"><span class="pre">value</span></tt> - The initial offset of the slider.</li>
+</ul>
+<p><strong>Events</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">change</span></tt> - Fired when the slider&#8217;s value is updated</li>
+<li><tt class="docutils literal"><span class="pre">complete</span></tt> - Fired when the user stops sliding the handle</li>
+</ul>
+<p><strong>Example use</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;#element&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">slider</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;complete&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;onComplete&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;change&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;onChange&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;min&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s1">&#39;max&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;direction&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;vertical&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;wrapCallbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>If you were using the jQuery engine the following code would be
+added to the buffer</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#element&quot;</span><span class="p">).</span><span class="nx">slider</span><span class="p">({</span><span class="nx">change</span><span class="o">:</span><span class="nx">onChange</span><span class="p">,</span> <span class="nx">max</span><span class="o">:</span><span class="mi">10</span><span class="p">,</span> <span class="nx">min</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span> <span class="nx">orientation</span><span class="o">:</span><span class="s2">&quot;vertical&quot;</span><span class="p">,</span> <span class="nx">stop</span><span class="o">:</span><span class="nx">onComplete</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span><span class="mi">2</span><span class="p">});</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::effect">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">effect</tt><big>(</big><em>$name</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#JsHelper::effect" title="永久链接至目标">¶</a></dt>
+<dd><p>Creates a basic effect. By default this method is not buffered and
+returns its result.</p>
+<p><strong>Supported effect names</strong></p>
+<p>The following effects are supported by all JsEngines</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">show</span></tt> - reveal an element.</li>
+<li><tt class="docutils literal"><span class="pre">hide</span></tt> - hide an element.</li>
+<li><tt class="docutils literal"><span class="pre">fadeIn</span></tt> - Fade in an element.</li>
+<li><tt class="docutils literal"><span class="pre">fadeOut</span></tt> - Fade out an element.</li>
+<li><tt class="docutils literal"><span class="pre">slideIn</span></tt> - Slide an element in.</li>
+<li><tt class="docutils literal"><span class="pre">slideOut</span></tt> - Slide an element out.</li>
+</ul>
+<p><strong>Options</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">speed</span></tt> - Speed at which the animation should occur. Accepted
+values are &#8216;slow&#8217;, &#8216;fast&#8217;. Not all effects use the speed option.</li>
+</ul>
+<p><strong>Example use</strong></p>
+<p>If you were using the jQuery engine:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;#element&#39;</span><span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">effect</span><span class="p">(</span><span class="s1">&#39;fadeIn&#39;</span><span class="p">);</span>
+
+<span class="c1">// $result contains $(&quot;#foo&quot;).fadeIn();</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::event">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">event</tt><big>(</big><em>$type</em>, <em>$content</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#JsHelper::event" title="永久链接至目标">¶</a></dt>
+<dd><p>Bind an event to the current selection. <tt class="docutils literal"><span class="pre">$type</span></tt> can be any of the
+normal DOM events or a custom event type if your library supports
+them. <tt class="docutils literal"><span class="pre">$content</span></tt> should contain the function body for the
+callback. Callbacks will be wrapped with
+<tt class="docutils literal"><span class="pre">function</span> <span class="pre">(event)</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></tt> unless disabled with the
+<tt class="docutils literal"><span class="pre">$options</span></tt>.</p>
+<p><strong>Options</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">wrap</span></tt> - Whether you want the callback wrapped in an anonymous
+function. (defaults to true)</li>
+<li><tt class="docutils literal"><span class="pre">stop</span></tt> - Whether you want the event to stop. (defaults to
+true)</li>
+</ul>
+<p><strong>Example use</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;#some-link&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">event</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">alert</span><span class="p">(</span><span class="s1">&#39;hey you!&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>If you were using the jQuery library you would get the following
+Javascript code:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#some-link&#39;</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;hey you!&#39;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>You can remove the <tt class="docutils literal"><span class="pre">return</span> <span class="pre">false;</span></tt> by passing setting the
+<tt class="docutils literal"><span class="pre">stop</span></tt> option to false:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;#some-link&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">event</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">alert</span><span class="p">(</span><span class="s1">&#39;hey you!&#39;</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;stop&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>If you were using the jQuery library you would the following
+Javascript code would be added to the buffer. Note that the default
+browser event is not cancelled:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#some-link&#39;</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;hey you!&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::domReady">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">domReady</tt><big>(</big><em>$callback</em><big>)</big><a class="headerlink" href="#JsHelper::domReady" title="永久链接至目标">¶</a></dt>
+<dd><p>Creates the special &#8216;DOM ready&#8217; event. <a class="reference internal" href="#JsHelper::writeBuffer" title="JsHelper::writeBuffer"><tt class="xref php php-func docutils literal"><span class="pre">JsHelper::writeBuffer()</span></tt></a>
+automatically wraps the buffered scripts in a domReady method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::each">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">each</tt><big>(</big><em>$callback</em><big>)</big><a class="headerlink" href="#JsHelper::each" title="永久链接至目标">¶</a></dt>
+<dd><p><strong>举例</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;div.message&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">each</span><span class="p">(</span><span class="s1">&#39;$(this).css({color: &quot;red&quot;});&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;div.message&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">css</span><span class="p">({</span><span class="nx">color</span><span class="o">:</span> <span class="s2">&quot;red&quot;</span><span class="p">});</span> <span class="p">});</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::alert">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">alert</tt><big>(</big><em>$message</em><big>)</big><a class="headerlink" href="#JsHelper::alert" title="永久链接至目标">¶</a></dt>
+<dd><p>Create a javascript snippet containing an <tt class="docutils literal"><span class="pre">alert()</span></tt> snippet. By
+default, <tt class="docutils literal"><span class="pre">alert</span></tt> does not buffer, and returns the script
+snippet.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$alert</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">alert</span><span class="p">(</span><span class="s1">&#39;Hey there&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::confirm">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">confirm</tt><big>(</big><em>$message</em><big>)</big><a class="headerlink" href="#JsHelper::confirm" title="永久链接至目标">¶</a></dt>
+<dd><p>Create a javascript snippet containing a <tt class="docutils literal"><span class="pre">confirm()</span></tt> snippet. By
+default, <tt class="docutils literal"><span class="pre">confirm</span></tt> does not buffer, and returns the script
+snippet.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$alert</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">confirm</span><span class="p">(</span><span class="s1">&#39;Are you sure?&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::prompt">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">prompt</tt><big>(</big><em>$message</em>, <em>$default</em><big>)</big><a class="headerlink" href="#JsHelper::prompt" title="永久链接至目标">¶</a></dt>
+<dd><p>Create a javascript snippet containing a <tt class="docutils literal"><span class="pre">prompt()</span></tt> snippet. By
+default, <tt class="docutils literal"><span class="pre">prompt</span></tt> does not buffer, and returns the script
+snippet.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$prompt</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">(</span><span class="s1">&#39;What is your favorite color?&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::submit">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">submit</tt><big>(</big><em>$caption = null</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#JsHelper::submit" title="永久链接至目标">¶</a></dt>
+<dd><p>Create a submit input button that enables <tt class="docutils literal"><span class="pre">XmlHttpRequest</span></tt>
+submitted forms. Options can include
+both those for <a class="reference internal" href="form.html#FormHelper::submit" title="FormHelper::submit"><tt class="xref php php-func docutils literal"><span class="pre">FormHelper::submit()</span></tt></a> and JsBaseEngine::request(),
+JsBaseEngine::event();</p>
+<p>Forms submitting with this method, cannot send files. Files do not
+transfer over <tt class="docutils literal"><span class="pre">XmlHttpRequest</span></tt>
+and require an iframe, or other more specialized setups that are
+beyond the scope of this helper.</p>
+<p><strong>Options</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">url</span></tt> - The url you wish the XHR request to submit to.</li>
+<li><tt class="docutils literal"><span class="pre">confirm</span></tt> - Confirm message displayed before sending the
+request. Using confirm, does not replace any <tt class="docutils literal"><span class="pre">before</span></tt> callback
+methods in the generated XmlHttpRequest.</li>
+<li><tt class="docutils literal"><span class="pre">buffer</span></tt> - Disable the buffering and return a script tag in
+addition to the link.</li>
+<li><tt class="docutils literal"><span class="pre">wrapCallbacks</span></tt> - Set to false to disable automatic callback
+wrapping.</li>
+</ul>
+<p><strong>Example use</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">(</span><span class="s1">&#39;Save&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;update&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;#content&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Will create a submit button with an attached onclick event. The
+click event will be buffered by default.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">(</span><span class="s1">&#39;Save&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;update&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;#content&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;async&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Shows how you can combine options that both
+<a class="reference internal" href="form.html#FormHelper::submit" title="FormHelper::submit"><tt class="xref php php-func docutils literal"><span class="pre">FormHelper::submit()</span></tt></a> and <a class="reference internal" href="#JsHelper::request" title="JsHelper::request"><tt class="xref php php-func docutils literal"><span class="pre">JsHelper::request()</span></tt></a> when using submit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::link">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">link</tt><big>(</big><em>$title</em>, <em>$url = null</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#JsHelper::link" title="永久链接至目标">¶</a></dt>
+<dd><p>Create an html anchor element that has a click event bound to it.
+Options can include both those for <a class="reference internal" href="html.html#HtmlHelper::link" title="HtmlHelper::link"><tt class="xref php php-func docutils literal"><span class="pre">HtmlHelper::link()</span></tt></a> and
+<a class="reference internal" href="#JsHelper::request" title="JsHelper::request"><tt class="xref php php-func docutils literal"><span class="pre">JsHelper::request()</span></tt></a>, <a class="reference internal" href="#JsHelper::event" title="JsHelper::event"><tt class="xref php php-func docutils literal"><span class="pre">JsHelper::event()</span></tt></a>, <tt class="docutils literal"><span class="pre">$options</span></tt>
+is a <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a> array that are appended to the generated
+anchor element. If an option is not part of the standard attributes
+or <tt class="docutils literal"><span class="pre">$htmlAttributes</span></tt> it will be passed to <a class="reference internal" href="#JsHelper::request" title="JsHelper::request"><tt class="xref php php-func docutils literal"><span class="pre">JsHelper::request()</span></tt></a>
+as an option. If an id is not supplied, a randomly generated one will be
+created for each link generated.</p>
+<p><strong>Options</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">confirm</span></tt> - Generate a confirm() dialog before sending the
+event.</li>
+<li><tt class="docutils literal"><span class="pre">id</span></tt> - use a custom id.</li>
+<li><tt class="docutils literal"><span class="pre">htmlAttributes</span></tt> - additional non-standard htmlAttributes.
+Standard attributes are class, id, rel, title, escape, onblur and
+onfocus.</li>
+<li><tt class="docutils literal"><span class="pre">buffer</span></tt> - Disable the buffering and return a script tag in
+addition to the link.</li>
+</ul>
+<p><strong>Example use</strong>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span><span class="s1">&#39;Page 2&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;page&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;update&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;#content&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Will create a link pointing to <tt class="docutils literal"><span class="pre">/page:2</span></tt> and updating #content
+with the response.</p>
+<p>You can use the <tt class="docutils literal"><span class="pre">htmlAttributes</span></tt> option to add in additional
+custom attributes.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span><span class="s1">&#39;Page 2&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;page&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;update&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;#content&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;htmlAttributes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;other&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Outputs the following html:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/posts/index/page:2&quot;</span> <span class="na">other=</span><span class="s">&quot;value&quot;</span><span class="nt">&gt;</span>Page 2<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::serializeForm">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">serializeForm</tt><big>(</big><em>$options = array()</em><big>)</big><a class="headerlink" href="#JsHelper::serializeForm" title="永久链接至目标">¶</a></dt>
+<dd><p>Serialize the form attached to $selector. Pass <tt class="docutils literal"><span class="pre">true</span></tt> for $isForm
+if the current selection is a form element. Converts the form or
+the form element attached to the current selection into a
+string/json object (depending on the library implementation) for
+use with XHR operations.</p>
+<p><strong>Options</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">isForm</span></tt> - is the current selection a form, or an input?
+(defaults to false)</li>
+<li><tt class="docutils literal"><span class="pre">inline</span></tt> - is the rendered statement going to be used inside
+another JS statement? (defaults to false)</li>
+</ul>
+<p>Setting inline == false allows you to remove the trailing <tt class="docutils literal"><span class="pre">;</span></tt>.
+This is useful when you need to serialize a form element as part of
+another Javascript operation, or use the serialize method in an
+Object literal.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::redirect">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">redirect</tt><big>(</big><em>$url</em><big>)</big><a class="headerlink" href="#JsHelper::redirect" title="永久链接至目标">¶</a></dt>
+<dd><p>Redirect the page to <tt class="docutils literal"><span class="pre">$url</span></tt> using <tt class="docutils literal"><span class="pre">window.location</span></tt>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JsHelper::value">
+<tt class="descclassname">JsHelper::</tt><tt class="descname">value</tt><big>(</big><em>$value</em><big>)</big><a class="headerlink" href="#JsHelper::value" title="永久链接至目标">¶</a></dt>
+<dd><p>Converts a PHP-native variable of any type to a JSON-equivalent
+representation. Escapes any string values into JSON compatible
+strings. UTF-8 characters will be escaped.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="ajax-pagination">
+<span id="id7"></span><h2>Ajax Pagination<a class="headerlink" href="#ajax-pagination" title="永久链接至标题">¶</a></h2>
+<p>Much like Ajax Pagination in 1.2, you can use the JsHelper to
+handle the creation of Ajax pagination links instead of plain HTML
+links.</p>
+<div class="section" id="making-ajax-links">
+<h3>Making Ajax Links<a class="headerlink" href="#making-ajax-links" title="永久链接至标题">¶</a></h3>
+<p>Before you can create ajax links you must include the Javascript
+library that matches the adapter you are using with <tt class="docutils literal"><span class="pre">JsHelper</span></tt>.
+By default the <tt class="docutils literal"><span class="pre">JsHelper</span></tt> uses jQuery. So in your layout include
+jQuery (or whichever library you are using). Also make sure to
+include <tt class="docutils literal"><span class="pre">RequestHandlerComponent</span></tt> in your components. Add the
+following to your controller:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;RequestHandler&#39;</span><span class="p">);</span>
+<span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Js&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Next link in the javascript library you want to use. For this
+example we&#8217;ll be using jQuery:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">script</span><span class="p">(</span><span class="s1">&#39;jquery&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Similar to 1.2 you need to tell the <tt class="docutils literal"><span class="pre">PaginatorHelper</span></tt> that you
+want to make Javascript enhanced links instead of plain HTML ones.
+To do so you use <tt class="docutils literal"><span class="pre">options()</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;update&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;#content&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;evalScripts&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="paginator.html#PaginatorHelper" title="PaginatorHelper"><tt class="xref php php-class docutils literal"><span class="pre">PaginatorHelper</span></tt></a> now knows to make javascript enhanced
+links, and that those links should update the <tt class="docutils literal"><span class="pre">#content</span></tt> element.
+Of course this element must exist, and often times you want to wrap
+<tt class="docutils literal"><span class="pre">$content_for_layout</span></tt> with a div matching the id used for the
+<tt class="docutils literal"><span class="pre">update</span></tt> option. You also should set <tt class="docutils literal"><span class="pre">evalScripts</span></tt> to true if
+you are using the Mootools or Prototype adapters, without
+<tt class="docutils literal"><span class="pre">evalScripts</span></tt> these libraries will not be able to chain requests
+together. The <tt class="docutils literal"><span class="pre">indicator</span></tt> option is not supported by <tt class="docutils literal"><span class="pre">JsHelper</span></tt>
+and will be ignored.</p>
+<p>You then create all the links as needed for your pagination
+features. Since the <tt class="docutils literal"><span class="pre">JsHelper</span></tt> automatically buffers all
+generated script content to reduce the number of <tt class="docutils literal"><span class="pre">&lt;script&gt;</span></tt> tags
+in your source code you <strong>must</strong> call write the buffer out. At the
+bottom of your view file. Be sure to include:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">writeBuffer</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>If you omit this you will <strong>not</strong> be able to chain ajax pagination
+links. When you write the buffer, it is also cleared, so you don&#8217;t
+have worry about the same Javascript being output twice.</p>
+</div>
+<div class="section" id="adding-effects-and-transitions">
+<h3>Adding effects and transitions<a class="headerlink" href="#adding-effects-and-transitions" title="永久链接至标题">¶</a></h3>
+<p>Since <tt class="docutils literal"><span class="pre">indicator</span></tt> is no longer supported, you must add any
+indicator effects yourself:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;!DOCTYPE html&gt;</span>
+<span class="x">&lt;html&gt;</span>
+<span class="x">    &lt;head&gt;</span>
+<span class="x">        </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">script</span><span class="p">(</span><span class="s1">&#39;jquery&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">        //more stuff here.</span>
+<span class="x">    &lt;/head&gt;</span>
+<span class="x">    &lt;body&gt;</span>
+<span class="x">    &lt;div id=&quot;content&quot;&gt;</span>
+<span class="x">        </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$content_for_layout</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;/div&gt;</span>
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">(</span><span class="s1">&#39;indicator.gif&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;busy-indicator&#39;</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;/body&gt;</span>
+<span class="x">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p>Remember to place the indicator.gif file inside app/webroot/img
+folder. You may see a situation where the indicator.gif displays
+immediately upon the page load. You need to put in this css
+<tt class="docutils literal"><span class="pre">#busy-indicator</span> <span class="pre">{</span> <span class="pre">display:none;</span> <span class="pre">}</span></tt> in your main css file.</p>
+<p>With the above layout, we&#8217;ve included an indicator image file, that
+will display a busy indicator animation that we will show and hide
+with the <tt class="docutils literal"><span class="pre">JsHelper</span></tt>. To do that we need to update our
+<tt class="docutils literal"><span class="pre">options()</span></tt> function:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;update&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;#content&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;evalScripts&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="s1">&#39;before&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;#busy-indicator&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">effect</span><span class="p">(</span><span class="s1">&#39;fadeIn&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;buffer&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">)),</span>
+    <span class="s1">&#39;complete&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Js</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;#busy-indicator&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">effect</span><span class="p">(</span><span class="s1">&#39;fadeOut&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;buffer&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">)),</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>This will show/hide the busy-indicator element before and after the
+<tt class="docutils literal"><span class="pre">#content</span></tt> div is updated. Although <tt class="docutils literal"><span class="pre">indicator</span></tt> has been
+removed, the new features offered by <tt class="docutils literal"><span class="pre">JsHelper</span></tt> allow for more
+control and more complex effects to be created.</p>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../views.html">视图</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../views/themes.html">主题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views/media-view.html">媒体视图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views/json-and-xml-views.html">JSON 和 XML 视图</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../views/helpers.html">助件</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache.html">缓存助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form.html">FormHelper 助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="html.html">HtmlHelper助件</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">JsHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">SessionHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="text.html">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">TimeHelper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-general-purpose.html">通用</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../global-constants-and-functions.html">全局常量和函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core-utility-libraries/app.html">App Class</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../events.html">Events System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collections.html">Collections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-components.html">组件</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-helpers.html">助件</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache.html">缓存助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form.html">FormHelper 助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="html.html">HtmlHelper助件</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">JsHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">SessionHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="text.html">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">TimeHelper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-utilities.html">工具</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">JsHelper</a><ul>
+<li><a class="reference internal" href="#javascript">使用特定的Javascript引擎</a><ul>
+<li><a class="reference internal" href="#using-jquery-with-other-libraries">Using jQuery with other libraries</a></li>
+<li><a class="reference internal" href="#using-the-jshelper-inside-customhelpers">Using the JsHelper inside customHelpers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-a-javascript-engine">Creating a Javascript Engine</a></li>
+<li><a class="reference internal" href="#javascript-engine-usage">Javascript engine usage</a><ul>
+<li><a class="reference internal" href="#common-options">Common options</a></li>
+<li><a class="reference internal" href="#id1">公共选项</a></li>
+<li><a class="reference internal" href="#callback-wrapping">Callback wrapping</a></li>
+<li><a class="reference internal" href="#working-with-buffered-scripts">Working with buffered scripts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">其他方法</a></li>
+<li><a class="reference internal" href="#other-methods">Other Methods</a></li>
+<li><a class="reference internal" href="#ajax-pagination">Ajax Pagination</a><ul>
+<li><a class="reference internal" href="#making-ajax-links">Making Ajax Links</a></li>
+<li><a class="reference internal" href="#adding-effects-and-transitions">Adding effects and transitions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="number.html" title="NumberHelper" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="html.html" title="HtmlHelper助件" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

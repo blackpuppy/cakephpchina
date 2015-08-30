@@ -1,0 +1,742 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="New features in CakePHP 1.3" lang="en" name="title" />
+<meta content="component settings,array name,array controller,private methods,necessary components,core components,share names,collisions,func,message id,new features,clutter,consistency,messageid,email,htmlmessage,variables,doc" lang="en" name="keywords" />
+
+    <title>New features in CakePHP 1.3 &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Appendices" href="../appendices.html" />
+    <link rel="next" title="Glossary" href="glossary.html" />
+    <link rel="prev" title="Migrating from CakePHP 1.2 to 1.3" href="migrating-from-cakephp-1-2-to-1-3.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/appendices/new-features-in-cakephp-1-3.html" /><link rel="alternate" hreflang="es" href="../../es/appendices/new-features-in-cakephp-1-3.html" /><link rel="alternate" hreflang="ja" href="../../ja/appendices/new-features-in-cakephp-1-3.html" /><link rel="alternate" hreflang="fr" href="../../fr/appendices/new-features-in-cakephp-1-3.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/appendices/new-features-in-cakephp-1-3.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../appendices.html" accesskey="U" itemprop="url"><span itemprop="title">Appendices</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/appendices/new-features-in-cakephp-1-3.html">pt</a></li>
+				
+					<li><a href="../../es/appendices/new-features-in-cakephp-1-3.html">es</a></li>
+				
+					<li><a href="../../ja/appendices/new-features-in-cakephp-1-3.html">ja</a></li>
+				
+					<li><a href="../../fr/appendices/new-features-in-cakephp-1-3.html">fr</a></li>
+				
+					<li><a href="../../zh/appendices/new-features-in-cakephp-1-3.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/appendices/new-features-in-cakephp-1-3.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="new-features-in-cakephp-1-3">
+<h1>New features in CakePHP 1.3<a class="headerlink" href="#new-features-in-cakephp-1-3" title="Permalink to this headline">¶</a></h1>
+<p>CakePHP 1.3 introduced a number of new features. This guide
+attempts to summarize those changes and point to expanded
+documentation where necessary.</p>
+<div class="section" id="components">
+<h2>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h2>
+<p><strong>SecurityComponent</strong></p>
+<p>The various requireXX methods like <tt class="docutils literal"><span class="pre">requireGet</span></tt> and
+<tt class="docutils literal"><span class="pre">requirePost</span></tt> now accept a single array as their argument as well
+as a collection of string names.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Security</span><span class="o">-&gt;</span><span class="na">requirePost</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="s1">&#39;update&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p><strong>Component settings</strong></p>
+<p>Component settings for all core components can now be set from the
+<tt class="docutils literal"><span class="pre">$components</span></tt> array. Much like behaviors, you can declare
+settings for components when you declare the component.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">var</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Cookie&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;MyCookie&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;userModel&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;MyUser&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;loginAction&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This should reduce clutter in your Controller&#8217;s <tt class="docutils literal"><span class="pre">beforeFilter()</span></tt>
+methods.</p>
+<p><strong>EmailComponent</strong></p>
+<ul class="simple">
+<li>You can now retrieve the rendered contents of sent Email
+messages, by reading <tt class="docutils literal"><span class="pre">$this-&gt;Email-&gt;htmlMessage</span></tt> and
+<tt class="docutils literal"><span class="pre">$this-&gt;Email-&gt;textMessage</span></tt>. These properties will contain the
+rendered email content matching their name.</li>
+<li>Many of EmailComponent&#8217;s private methods have been made
+protected for easier extension.</li>
+<li>EmailComponent::$to can now be an array. Allowing easier setting
+of multiple recipients, and consistency with other properties.</li>
+<li><tt class="docutils literal"><span class="pre">EmailComponent::$messageId</span></tt> has been added, it allows control
+over the Message-ID header for email messages.</li>
+</ul>
+</div>
+<div class="section" id="view-helpers">
+<h2>View &amp; Helpers<a class="headerlink" href="#view-helpers" title="Permalink to this headline">¶</a></h2>
+<p>Helpers can now be addressed at <tt class="docutils literal"><span class="pre">$this-&gt;Helper-&gt;func()</span></tt> in
+addition to <tt class="docutils literal"><span class="pre">$helper-&gt;func()</span></tt>. This allows view variables and
+helpers to share names and not create collisions.</p>
+<p><strong>New JsHelper and new features in HtmlHelper</strong></p>
+<p>See <a class="reference internal" href="../core-libraries/helpers/js.html"><em>JsHelper documentation</em></a> for more information</p>
+<p><strong>Pagination Helper</strong></p>
+<p>Pagination helper provides additional CSS classes for styling and
+you can set the default sort() direction.
+<tt class="docutils literal"><span class="pre">PaginatorHelper::next()</span></tt> and <tt class="docutils literal"><span class="pre">PaginatorHelper::prev()</span></tt> now
+generate span tags by default, instead of divs.</p>
+<p><strong>Helper</strong></p>
+<p><tt class="docutils literal"><span class="pre">Helper::assetTimestamp()</span></tt> has been added. It will add timestamps
+to any asset under WWW_ROOT. It works with
+<tt class="docutils literal"><span class="pre">Configure::read('Asset.timestamp');</span></tt> just as before, but the
+functionality used in Html and Javascript helpers has been made
+available to all helpers. Assuming <tt class="docutils literal"><span class="pre">Asset.timestamp</span> <span class="pre">==</span> <span class="pre">force</span></tt></p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$path</span> <span class="o">=</span> <span class="s1">&#39;css/cake.generic.css&#39;</span>
+<span class="nv">$stamped</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">assetTimestamp</span><span class="p">(</span><span class="nv">$path</span><span class="p">);</span>
+
+<span class="c1">//$stamped contains &#39;css/cake.generic.css?5632934892&#39;</span>
+</pre></div>
+</div>
+<p>The appended timestamp contains the last modification time of the
+file. Since this method is defined in <tt class="docutils literal"><span class="pre">Helper</span></tt> it is available to
+all subclasses.</p>
+<p><strong>TextHelper</strong></p>
+<p>highlight() now accepts an array of words to highlight.</p>
+<p><strong>NumberHelper</strong></p>
+<p>A new method <tt class="docutils literal"><span class="pre">addFormat()</span></tt> has been added. This method allows you
+to set currency parameter sets, so you don&#8217;t have to retype them:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">addFormat</span><span class="p">(</span><span class="s1">&#39;NOK&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;before&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Kr. &#39;</span><span class="p">));</span>
+<span class="nv">$formatted</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Number</span><span class="o">-&gt;</span><span class="na">currency</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;NOK&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>FormHelper</strong></p>
+<p>The form helper has had a number of improvements and API
+modifications, see
+<a class="reference external" href="http://book.cakephp.org/view/1616/x1-3-improvements">Form Helper improvements</a>
+for more information.</p>
+</div>
+<div class="section" id="logging">
+<h2>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
+<p>Logging and <tt class="docutils literal"><span class="pre">CakeLog</span></tt> have been enhanced considerably, both in
+features and flexibility. See
+<a class="reference external" href="http://book.cakephp.org/view/1194/Logging">New Logging features</a> for more information.</p>
+</div>
+<div class="section" id="caching">
+<h2>Caching<a class="headerlink" href="#caching" title="Permalink to this headline">¶</a></h2>
+<p>Cache engines have been made more flexible in 1.3. You can now
+provide custom <tt class="docutils literal"><span class="pre">Cache</span></tt> adapters in <tt class="docutils literal"><span class="pre">app/libs</span></tt> as well as in
+plugins using <tt class="docutils literal"><span class="pre">$plugin/libs</span></tt>. App/plugin cache engines can also
+override the core engines. Cache adapters must be in a cache
+directory. If you had a cache engine named <tt class="docutils literal"><span class="pre">MyCustomCacheEngine</span></tt>
+it would be placed in either <tt class="docutils literal"><span class="pre">app/libs/cache/my_custom_cache.php</span></tt>
+as an app/libs. Or in <tt class="docutils literal"><span class="pre">$plugin/libs/cache/my_custom_cache.php</span></tt> as
+part of a plugin. Cache configs from plugins need to use the plugin
+dot syntax:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;custom&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CachePack.MyCustomCache&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>App and Plugin cache engines should be configured in
+<tt class="docutils literal"><span class="pre">app/bootstrap.php</span></tt>. If you try to configure them in core.php
+they will not work correctly.</p>
+<p><strong>New Cache methods</strong></p>
+<p>Cache has a few new methods for 1.3 which make introspection and
+testing teardown easier.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">Cache::configured()</span></tt> returns an array of configured Cache
+engine keys.</li>
+<li><tt class="docutils literal"><span class="pre">Cache::drop($config)</span></tt> drops a configured Cache engine. Once
+dropped cache engines are no longer readable or writeable.</li>
+<li><tt class="docutils literal"><span class="pre">Cache::increment()</span></tt> Perform an atomic increment on a numeric
+value. This is not implemented in FileEngine.</li>
+<li><tt class="docutils literal"><span class="pre">Cache::decrement()</span></tt> Perform an atomic decrement on a numeric
+value. This is not implemented in FileEngine.</li>
+</ul>
+</div>
+<div class="section" id="models-behaviors-and-datasource">
+<h2>Models, Behaviors and Datasource<a class="headerlink" href="#models-behaviors-and-datasource" title="Permalink to this headline">¶</a></h2>
+<p><strong>App::import(), datasources &amp; datasources from plugins</strong></p>
+<p>Datasources can now be included loaded with <tt class="docutils literal"><span class="pre">App::import()</span></tt> and
+be included in plugins! To include a datasource in your plugin you
+put it in <tt class="docutils literal"><span class="pre">my_plugin/models/datasources/your_datasource.php</span></tt>. To
+import a Datasource from a plugin use
+<tt class="docutils literal"><span class="pre">App::import('Datasource',</span> <span class="pre">'MyPlugin.YourDatasource');</span></tt></p>
+<p><strong>Using plugin datasources in your database.php</strong></p>
+<p>You can use plugin datasources by setting the datasource key with
+the plugin name. For example if you had a WebservicePack plugin
+with a LastFm datasource
+(plugin/webservice_pack/models/datasources/last_fm.php), you
+could do:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">var</span> <span class="nv">$lastFm</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;datasource&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;WebservicePack.LastFm&#39;</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Model</strong></p>
+<ul class="simple">
+<li>Missing Validation methods now trigger errors, making debugging
+why validation isn&#8217;t working easier.</li>
+<li>Models now support
+<a class="reference external" href="http://book.cakephp.org/view/1608/Virtual-fields">virtual fields</a></li>
+</ul>
+<p><strong>Behaviors</strong></p>
+<p>Using behaviors that do not exist, now triggers a <tt class="docutils literal"><span class="pre">cakeError</span></tt>
+making missing behaviors easier to find and fix.</p>
+<p><strong>CakeSchema</strong></p>
+<p>CakeSchema can now locate, read and write schema files to plugins.
+The SchemaShell also exposes this functionality, see below for
+changes to SchemaShell. CakeSchema also supports
+<tt class="docutils literal"><span class="pre">tableParameters</span></tt>. Table Parameters are non column specific table
+information such as collation, charset, comments, and table engine
+type. Each Dbo implements the tableParameters they support.</p>
+<p><strong>tableParameters in MySQL</strong></p>
+<p>MySQL supports the greatest number of tableParameters; You can use
+tableParameters to set a variety of MySQL specific settings.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">engine</span></tt> Control the storage engine used for your tables.</li>
+<li><tt class="docutils literal"><span class="pre">charset</span></tt> Control the character set used for tables.</li>
+<li><tt class="docutils literal"><span class="pre">encoding</span></tt> Control the encoding used for tables.</li>
+</ul>
+<p>In addition to tableParameters MySQL dbo&#8217;s implement
+<tt class="docutils literal"><span class="pre">fieldParameters</span></tt>. <tt class="docutils literal"><span class="pre">fieldParameters</span></tt> allow you to control MySQL
+specific settings per column.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">charset</span></tt> Set the character set used for a column</li>
+<li><tt class="docutils literal"><span class="pre">encoding</span></tt> Set the encoding used for a column</li>
+</ul>
+<p>See below for examples on how to use table and field parameters in
+your schema files.</p>
+<p><strong>tableParameters in Postgres</strong></p>
+<hr class="docutils" />
+<p><strong>tableParameters in SQLite</strong></p>
+<hr class="docutils" />
+<p><strong>Using tableParameters in schema files</strong></p>
+<p>You use <tt class="docutils literal"><span class="pre">tableParameters</span></tt> just as you would any other key in a
+schema file. Much like <tt class="docutils literal"><span class="pre">indexes</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">var</span> <span class="nv">$comments</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+      <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s1">&#39;key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;primary&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;post_id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;comment&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;indexes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;PRIMARY&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;column&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;unique&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+        <span class="s1">&#39;post_id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;column&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;post_id&#39;</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;tableParameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;InnoDB&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;charset&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;latin1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;collate&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;latin1_general_ci&#39;</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>is an example of a table using <tt class="docutils literal"><span class="pre">tableParameters</span></tt> to set some
+database specific settings. If you use a schema file that contains
+options and features your database does not implement, those
+options will be ignored. For example if you imported the above
+schema to a PostgreSQL server, all of the tableParameters would be
+ignore as PostgreSQL does not support any of the included options.</p>
+</div>
+<div class="section" id="console">
+<h2>Console<a class="headerlink" href="#console" title="Permalink to this headline">¶</a></h2>
+<p><strong>Bake</strong></p>
+<p>Bake has had a number of significant changes made to it. Those
+changes are detailed in
+<a class="reference external" href="http://book.cakephp.org/view/1611/Bake-improvements-in-1-3">the bake updates section</a></p>
+<p><strong>Subclassing</strong></p>
+<p>The ShellDispatcher has been modified to not require shells and
+tasks to have <em>Shell</em> as their immediate parent anymore.</p>
+<p><strong>Output</strong></p>
+<p><tt class="docutils literal"><span class="pre">Shell::nl()</span></tt> has been added. It returns a single or multiple
+linefeed sequences. <tt class="docutils literal"><span class="pre">Shell::out()</span></tt>, <tt class="docutils literal"><span class="pre">err()</span></tt> and <tt class="docutils literal"><span class="pre">hr()</span></tt> now
+accept a <tt class="docutils literal"><span class="pre">$newlines</span></tt> parameter which is passed to <tt class="docutils literal"><span class="pre">nl()</span></tt> and
+allows for controlling how newlines are appended to the output.</p>
+<p><tt class="docutils literal"><span class="pre">Shell::out()</span></tt> and <tt class="docutils literal"><span class="pre">Shell::err()</span></tt> have been modified, allowing
+a parameterless usage. This is especially useful if you&#8217;re often
+using <tt class="docutils literal"><span class="pre">$this-&gt;out('')</span></tt> for outputting just a single newline.</p>
+<p><strong>Acl Shell</strong></p>
+<p>All AclShell commands now take <tt class="docutils literal"><span class="pre">node</span></tt> parameters. <tt class="docutils literal"><span class="pre">node</span></tt>
+parameters can be either an alias path like
+<tt class="docutils literal"><span class="pre">controllers/Posts/view</span></tt> or Model.foreign_key ie. <tt class="docutils literal"><span class="pre">User.1</span></tt>.
+You no longer need to know or use the aco/aro id for commands.</p>
+<p>The Acl shell <tt class="docutils literal"><span class="pre">dataSource</span></tt> switch has been removed. Use the
+Configure settings instead.</p>
+<p><strong>SchemaShell</strong></p>
+<p>The Schema shell can now read and write Schema files and SQL dumps
+to plugins. It expects and will create schema files in
+<tt class="docutils literal"><span class="pre">$plugin/config/schema</span></tt></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="router-and-dispatcher">
+<h2>Router and Dispatcher<a class="headerlink" href="#router-and-dispatcher" title="Permalink to this headline">¶</a></h2>
+<p><strong>Router</strong></p>
+<p>Generating URLs with new style prefixes works exactly the same as
+admin routing did in 1.2. They use the same syntax and
+persist/behave in the same way. Assuming you have
+<tt class="docutils literal"><span class="pre">Configure::write('Routing.prefixes',</span> <span class="pre">array('admin',</span> <span class="pre">'member'));</span></tt>
+in your core.php you will be able to do the following from a
+non-prefixed URL:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+  <span class="s1">&#39;Go&#39;</span><span class="p">,</span>
+  <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;member&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+  <span class="s1">&#39;Go&#39;</span><span class="p">,</span>
+  <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Likewise, if you are in a prefixed URL and want to go to a
+non-prefixed URL, do the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+  <span class="s1">&#39;Go&#39;</span><span class="p">,</span>
+  <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;member&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+  <span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+  <span class="s1">&#39;Go&#39;</span><span class="p">,</span>
+  <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;admin&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+  <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Route classes</strong></p>
+<p>For 1.3 the router has been internally rebuilt, and a new class
+<tt class="docutils literal"><span class="pre">CakeRoute</span></tt> has been created. This class handles the parsing and
+reverse matching of an individual connected route. Also new in 1.3
+is the ability to create and use your own Route classes. You can
+implement any special routing features that may be needed in
+application routing classes. Developer route classes must extend
+<tt class="docutils literal"><span class="pre">CakeRoute</span></tt>, if they do not an error will be triggered. Commonly
+a custom route class will override the <tt class="docutils literal"><span class="pre">parse()</span></tt> and/or
+<tt class="docutils literal"><span class="pre">match()</span></tt> methods found in <tt class="docutils literal"><span class="pre">CakeRoute</span></tt> to provide custom
+handling.</p>
+<p><strong>Dispatcher</strong></p>
+<ul class="simple">
+<li>Accessing filtered asset paths, while having no defined asset
+filter will create 404 status code responses.</li>
+</ul>
+</div>
+<div class="section" id="library-classes">
+<h2>Library classes<a class="headerlink" href="#library-classes" title="Permalink to this headline">¶</a></h2>
+<p><strong>Inflector</strong></p>
+<p>You can now globally customize the default transliteration map used
+in Inflector::slug using Inflector::rules. Example
+<tt class="docutils literal"><span class="pre">Inflector::rules('transliteration',</span> <span class="pre">array('/å/'</span> <span class="pre">=&gt;</span> <span class="pre">'aa',</span> <span class="pre">'/ø/'</span> <span class="pre">=&gt;</span> <span class="pre">'oe'))</span></tt></p>
+<p>The Inflector now also internally caches all data passed to it for
+inflection (except slug method).</p>
+<p><strong>Set</strong></p>
+<p>Set has a new method <tt class="docutils literal"><span class="pre">Set::apply()</span></tt>, which allows you to apply
+<a class="reference external" href="http://ca2.php.net/callback">callbacks</a> to the results of
+<tt class="docutils literal"><span class="pre">Set::extract</span></tt> and do so in either a map or reduce fashion:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Set</span><span class="o">::</span><span class="na">apply</span><span class="p">(</span><span class="s1">&#39;/Movie/rating&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="s1">&#39;array_sum&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Would return the sum of all Movie ratings in <tt class="docutils literal"><span class="pre">$data</span></tt>.</p>
+<p><strong>L10N</strong></p>
+<p>All languages in the catalog now have a direction key. This can be
+used to determine/define the text direction of the locale being
+used.</p>
+<p><strong>File</strong></p>
+<ul class="simple">
+<li>File now has a copy() method. It copies the file represented by
+the file instance, to a new location.</li>
+</ul>
+<p><strong>Configure</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">Configure::load()</span></tt> can now load configuration files from
+plugins. Use <tt class="docutils literal"><span class="pre">Configure::load('plugin.file');</span></tt> to load
+configuration files from plugins. Any configuration files in your
+application that use <tt class="docutils literal"><span class="pre">.</span></tt> in the name should be updated to used
+<tt class="docutils literal"><span class="pre">_</span></tt></li>
+</ul>
+<p><strong>App/libs</strong></p>
+<p>In addition to <tt class="docutils literal"><span class="pre">app/vendors</span></tt> a new <tt class="docutils literal"><span class="pre">app/libs</span></tt> directory has
+been added. This directory can also be part of plugins, located at
+<tt class="docutils literal"><span class="pre">$plugin/libs</span></tt>. Libs directories are intended to contain 1st
+party libraries that do not come from 3rd parties or external
+vendors. This allows you to separate your organization&#8217;s internal
+libraries from vendor libraries. <tt class="docutils literal"><span class="pre">App::import()</span></tt> has also been
+updated to import from libs directories:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;Lib&#39;</span><span class="p">,</span> <span class="s1">&#39;ImageManipulation&#39;</span><span class="p">);</span> <span class="c1">//imports app/libs/image_manipulation.php</span>
+</pre></div>
+</div>
+<p>You can also import libs files from plugins:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">import</span><span class="p">(</span><span class="s1">&#39;Lib&#39;</span><span class="p">,</span> <span class="s1">&#39;Geocoding.Geocode&#39;</span><span class="p">);</span> <span class="c1">//imports app/plugins/geocoding/libs/geocode.php</span>
+</pre></div>
+</div>
+<p>The remainder of lib importing syntax is identical to vendor files.
+So if you know how to import vendor files with unique names, you
+know how to import libs files with unique names.</p>
+<p><strong>Configuration</strong></p>
+<ul class="simple">
+<li>The default <tt class="docutils literal"><span class="pre">Security.level</span></tt> in 1.3 is <strong>medium</strong> instead of
+<strong>high</strong></li>
+<li>There is a new configuration value <tt class="docutils literal"><span class="pre">Security.cipherSeed</span></tt> this
+value should be customized to ensure more secure encrypted cookies,
+and a warning will be generated in development mode when the value
+matches its default value.</li>
+</ul>
+<p><strong>i18n</strong></p>
+<p>Now you can use locale definition files for the LC_TIME category
+to retrieve date and time preferences for a specific language. Just
+use any POSIX compliant locale definition file and store it at
+app/locale/<em>language</em>/ (do not create a folder for the category
+LC_TIME, just put the file in there).</p>
+<p>For example, if you have access to a machine running debian or
+ubuntu you can find a french locale file at:
+/usr/share/i18n/locales/fr_FR. Copy the part corresponding to
+LC_TIME into app/locale/fr_fr/LC_TIME file. You can then access
+the time preferences for French language this way:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Config.language&#39;</span><span class="p">,</span><span class="s1">&#39;fr-fr&#39;</span><span class="p">);</span> <span class="c1">// set the current language</span>
+<span class="nv">$monthNames</span> <span class="o">=</span> <span class="nx">__c</span><span class="p">(</span><span class="s1">&#39;mon&#39;</span><span class="p">,</span><span class="nx">LC_TIME</span><span class="p">,</span><span class="k">true</span><span class="p">);</span> <span class="c1">// returns an array with the month names in French</span>
+<span class="nv">$dateFormat</span> <span class="o">=</span> <span class="nx">__c</span><span class="p">(</span><span class="s1">&#39;d_fmt&#39;</span><span class="p">,</span><span class="nx">LC_TIME</span><span class="p">,</span><span class="k">true</span><span class="p">);</span> <span class="c1">// return the preferred dates format for France</span>
+</pre></div>
+</div>
+<p>You can read a complete guide of possible values in LC_TIME
+definition file in
+<a class="reference external" href="http://sunsson.iptime.org/susv3/basedefs/xbd_chap07.html">this page</a></p>
+</div>
+<div class="section" id="miscellaneous">
+<h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
+<p><strong>Error Handling</strong></p>
+<p>Subclasses of ErrorHandler can more easily implement additional
+error methods. In the past you would need to override
+<tt class="docutils literal"><span class="pre">__construct()</span></tt> and work around ErrorHandler&#8217;s desire to convert
+all error methods into <tt class="docutils literal"><span class="pre">error404</span></tt> when debug = 0. In 1.3, error
+methods that are declared in subclasses are not converted to
+<tt class="docutils literal"><span class="pre">error404</span></tt>. If you want your error methods converted into
+error404, then you will need to do it manually.</p>
+<p><strong>Scaffolding</strong></p>
+<p>With the addition of <tt class="docutils literal"><span class="pre">Routing.prefixes</span></tt> scaffolding has been
+updated to allow the scaffolding of any one prefix:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Routing.prefixes&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="s1">&#39;member&#39;</span><span class="p">));</span>
+
+<span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">$scaffold</span> <span class="o">=</span> <span class="s1">&#39;member&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Would use scaffolding for member prefixed URLs.</p>
+<p><strong>Validation</strong></p>
+<p>After 1.2 was released, there were numerous requests to add
+additional localizations to the <tt class="docutils literal"><span class="pre">phone()</span></tt> and <tt class="docutils literal"><span class="pre">postal()</span></tt>
+methods. Instead of trying to add every locale to Validation
+itself, which would result in large bloated ugly methods, and still
+not afford the flexibility needed for all cases, an alternate path
+was taken. In 1.3, <tt class="docutils literal"><span class="pre">phone()</span></tt> and <tt class="docutils literal"><span class="pre">postal()</span></tt> will pass off any
+country prefix it does not know how to handle to another class with
+the appropriate name. For example if you lived in the Netherlands
+you would create a class like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">NlValidation</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">phone</span><span class="p">(</span><span class="nv">$check</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">postal</span><span class="p">(</span><span class="nv">$check</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This file could be placed anywhere in your application, but must be
+imported before attempting to use it. In your model validation you
+could use your NlValidation class by doing the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;phone_no&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;rule&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;phone&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="s1">&#39;nl&#39;</span><span class="p">)),</span>
+    <span class="s1">&#39;postal_code&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;rule&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;postal&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="s1">&#39;nl&#39;</span><span class="p">))</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>When your model data is validated, Validation will see that it
+cannot handle the &#8216;nl&#8217; locale and will attempt to delegate out to
+<tt class="docutils literal"><span class="pre">NlValidation::postal()</span></tt> and the return of that method will be
+used as the pass/fail for the validation. This approach allows you
+to create classes that handle a subset or group of locales,
+something that a large switch would not have. The usage of the
+individual validation methods has not changed, the ability to pass
+off to another validator has been added.</p>
+<p><strong>IP Address Validation</strong></p>
+<p>Validation of IP Addresses has been extended to allow strict
+validation of a specific IP Version. It will also make use of PHP
+native validation mechanisms if available:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Validation</span><span class="o">::</span><span class="na">ip</span><span class="p">(</span><span class="nv">$someAddress</span><span class="p">);</span>         <span class="c1">// Validates both IPv4 and IPv6</span>
+<span class="nx">Validation</span><span class="o">::</span><span class="na">ip</span><span class="p">(</span><span class="nv">$someAddress</span><span class="p">,</span> <span class="s1">&#39;IPv4&#39;</span><span class="p">);</span> <span class="c1">// Validates IPv4 Addresses only</span>
+<span class="nx">Validation</span><span class="o">::</span><span class="na">ip</span><span class="p">(</span><span class="nv">$someAddress</span><span class="p">,</span> <span class="s1">&#39;IPv6&#39;</span><span class="p">);</span> <span class="c1">// Validates IPv6 Addresses only</span>
+</pre></div>
+</div>
+<p><strong>Validation::uuid()</strong></p>
+<p>A uuid() pattern validation has been added to the <tt class="docutils literal"><span class="pre">Validation</span></tt>
+class. It will check that a given string matches a UUID by pattern
+only. It does not ensure uniqueness of the given UUID.</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../appendices.html">Appendices</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2-7-migration-guide.html">2.7 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-6-migration-guide.html">2.6 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-5-migration-guide.html">2.5 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-4-migration-guide.html">2.4 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-3-migration-guide.html">2.3 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-2-migration-guide.html">2.2 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-1-migration-guide.html">2.1 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new-features-in-cakephp-2-1.html">New Features in CakePHP 2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-0-migration-guide.html">2.0 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new-features-in-cakephp-2-0.html">New Features in CakePHP 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phpunit-migration-hints.html">PHPUnit Migration Hints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migrating-from-cakephp-1-2-to-1-3.html">Migrating from CakePHP 1.2 to 1.3</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">New features in CakePHP 1.3</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">New features in CakePHP 1.3</a><ul>
+<li><a class="reference internal" href="#components">Components</a></li>
+<li><a class="reference internal" href="#view-helpers">View &amp; Helpers</a></li>
+<li><a class="reference internal" href="#logging">Logging</a></li>
+<li><a class="reference internal" href="#caching">Caching</a></li>
+<li><a class="reference internal" href="#models-behaviors-and-datasource">Models, Behaviors and Datasource</a></li>
+<li><a class="reference internal" href="#console">Console</a></li>
+<li><a class="reference internal" href="#router-and-dispatcher">Router and Dispatcher</a></li>
+<li><a class="reference internal" href="#library-classes">Library classes</a></li>
+<li><a class="reference internal" href="#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="glossary.html" title="Glossary" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="migrating-from-cakephp-1-2-to-1-3.html" title="Migrating from CakePHP 1.2 to 1.3" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

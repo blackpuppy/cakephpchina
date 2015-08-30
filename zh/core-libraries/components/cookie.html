@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Cookie" lang="zh_CN" name="title" />
+<meta content="array controller,php setcookie,cookie string,controller setup,string domain,default description,string name,session cookie,integers,variables,domain name,null" lang="zh_CN" name="keywords" />
+
+    <title>Cookie &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="组件" href="../toc-components.html" />
+    <link rel="next" title="访问控制列表组件" href="access-control-lists.html" />
+    <link rel="prev" title="请求处理" href="request-handling.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/core-libraries/components/cookie.html" /><link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/components/cookie.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/components/cookie.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/components/cookie.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/components/cookie.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../toc-components.html" accesskey="U" itemprop="url"><span itemprop="title">组件</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/core-libraries/components/cookie.html">en</a></li>
+				
+					<li><a href="../../../pt/core-libraries/components/cookie.html">pt</a></li>
+				
+					<li><a href="../../../es/core-libraries/components/cookie.html">es</a></li>
+				
+					<li><a href="../../../ja/core-libraries/components/cookie.html">ja</a></li>
+				
+					<li><a href="../../../fr/core-libraries/components/cookie.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/components/cookie.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="cookie">
+<h1>Cookie<a class="headerlink" href="#cookie" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="CookieComponent">
+<em class="property">class </em><tt class="descname">CookieComponent</tt><big>(</big><em>ComponentCollection $collection</em>, <em>array $settings = array()</em><big>)</big><a class="headerlink" href="#CookieComponent" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>CookieComponent(Cookie组件)是对原生php中``setcookie``的封装。它还包括许多有用的
+功能，使得在你的控制器中使用起来很方便。在使用CookieComponent之前,必须确保&#8217;Cookie&#8217;出现在
+控制器的$components变量数组中。</p>
+<p>The CookieComponent is a wrapper around the native PHP <tt class="docutils literal"><span class="pre">setcookie</span></tt>
+method. It also includes a host of delicious icing to make coding
+cookies in your controllers very convenient. Before attempting to
+use the CookieComponent, you must make sure that &#8216;Cookie&#8217; is listed
+in your controllers&#8217; $components array.</p>
+<p>Controller Setup
+控制器设置
+================</p>
+<p>有许多控制器变量的来允许你配置cookies创建和管理。请在控制器的beforeFilter()方法定义这些
+特殊的变量,来使得定义CookieComponent如何工作。</p>
+<p>There are a number of controller variables that allow you to
+configure the way cookies are created and managed. Defining these
+special variables in the beforeFilter() method of your controller
+allows you to define how the CookieComponent works.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="16%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Cookie 变量</th>
+<th class="head">默认值</th>
+<th class="head">描述</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>string $name</td>
+<td>&#8216;CakeCookie&#8217;</td>
+<td>cookie名.</td>
+</tr>
+<tr class="row-odd"><td>string $key</td>
+<td>null</td>
+<td><p class="first">这个字符串用来加密
+值写进cookie.
+这个字符串应该是随机的并且难以去猜。</p>
+<p class="last">当使用rijndael加密方式，值的长度会超过32 bytes。</p>
+</td>
+</tr>
+<tr class="row-even"><td>string $domain</td>
+<td>&#8216;&#8217;</td>
+<td>cookie允许访问的主机名. 例如：
+使用&#8217;.yourdomain.com&#8217; 可以允许所有从你的子域名访问</td>
+</tr>
+<tr class="row-odd"><td>int or string</td>
+<td>&#8216;5 Days&#8217;</td>
+<td>cookie过期时间. 数字类型会被解析为秒，当值为0等价于
+&#8216;session cookie&#8217;: 例如： 浏览器关闭就会过期。
+若为字符型，会被PHP函数strtotime()解析
+可以直接在write()方法中设置。</td>
+</tr>
+<tr class="row-even"><td>string $path</td>
+<td>&#8216;/&#8217;</td>
+<td>cookie采用的服务器路径。
+如果$path设置为&#8217;/foo/&#8217;, cookie仅会在/foo/目录和所有的
+子目录中生效，默认值是整个域名，可以直接在write()方法
+中设置。</td>
+</tr>
+<tr class="row-odd"><td>boolean $secure</td>
+<td>false</td>
+<td>指明cookie只能通过安全的HTTPS连接传输。
+当设为true，为安全连接时，cookie只会被设置，
+也可以直接在write()方法中设置。</td>
+</tr>
+<tr class="row-even"><td>boolean
+$httpOnly</td>
+<td>false</td>
+<td>设置true仅允许HTTP访问cookies. 禁止在Javascript中
+访问。</td>
+</tr>
+</tbody>
+</table>
+<p>下面是控制器中的代码片段。来展示如何引入CookieComponent并且为&#8217;example.com&#8217;域名设置了
+名称为&#8217;baker_id&#8217;的安全链接，路径为‘/bakers/preferences/’
+过期时间一个小时和只允许HTTP访问的cookie:</p>
+<p>The following snippet of controller code shows how to include the
+CookieComponent and set up the controller variables needed to write
+a cookie named &#8216;baker_id&#8217; for the domain &#8216;example.com&#8217; which needs
+a secure connection, is available on the path
+‘/bakers/preferences/’, expires in one hour and is HTTP only:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Cookie&#39;</span><span class="p">);</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="s1">&#39;baker_id&#39;</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">time</span> <span class="o">=</span> <span class="mi">3600</span><span class="p">;</span>  <span class="c1">// or &#39;1 hour&#39;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">path</span> <span class="o">=</span> <span class="s1">&#39;/bakers/preferences/&#39;</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">domain</span> <span class="o">=</span> <span class="s1">&#39;example.com&#39;</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">secure</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>  <span class="c1">// i.e. only sent if using secure HTTPS</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">key</span> <span class="o">=</span> <span class="s1">&#39;qSI232qs*&amp;sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^&#39;</span><span class="p">;</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">httpOnly</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>接下来，让我们看下如何使用Cookie组件中的各种方法。
+Next, let’s look at how to use the different methods of the Cookie
+Component.</p>
+<p>Using the Component
+使用组件
+===================</p>
+<p>CookieComponent提供了一系列处理Cookies的方法。
+The CookieComponent offers a number of methods for working with Cookies.</p>
+<dl class="method">
+<dt id="CookieComponent::write">
+<tt class="descclassname">CookieComponent::</tt><tt class="descname">write</tt><big>(</big><em>mixed $key</em>, <em>mixed $value = null</em>, <em>boolean $encrypt = true</em>, <em>mixed $expires = null</em><big>)</big><a class="headerlink" href="#CookieComponent::write" title="永久链接至目标">¶</a></dt>
+<dd><p>write()方法是cookie组件的核心，$key是cookie的变量名，$value是要存储的信息:</p>
+<p>The write() method is the heart of cookie component, $key is the
+cookie variable name you want, and the $value is the information to
+be stored:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;Larry&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>通过点记法中的键名参数可以对变量进行分组::
+You can also group your variables by supplying dot notation in the
+key parameter:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="s1">&#39;Larry&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;User.role&#39;</span><span class="p">,</span> <span class="s1">&#39;Lead&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果想一次写入多个cookie值，可以传个数组::
+If you want to write more than one value to the cookie at a time,
+you can pass an array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Larry&#39;</span><span class="p">,</span> <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Lead&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>cookie中所有的值默认被加密。如果想以纯文本存储。设置write()方法的第三个
+参数为false。对cookie值执行的是相当简单的加密系统。用到了``Security.salt``
+和配置类中预定义的变量``Security.cipherSeed``。为了更加安全，可以改变
+app/Config/core.php中的``Security.cipherSeed``。</p>
+<p>All values in the cookie are encrypted by default. If you want to
+store the values as plain-text, set the third parameter of the
+write() method to false. The encryption performed on cookie values
+is fairly uncomplicated encryption system. It uses
+<tt class="docutils literal"><span class="pre">Security.salt</span></tt> and a predefined Configure class var
+<tt class="docutils literal"><span class="pre">Security.cipherSeed</span></tt> to encrypt values. To make your cookies
+more secure you should change <tt class="docutils literal"><span class="pre">Security.cipherSeed</span></tt> in
+app/Config/core.php to ensure a better encryption.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;Larry&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>最后一个参数是$expires，cookie过期的秒数。为了方便，也可以传递一个
+php方法strtotime()理解的日期字符串。</p>
+<p>The last parameter to write is $expires – the number of seconds
+before your cookie will expire. For convenience, this parameter can
+also be passed as a string that the php strtotime() function
+understands:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Both cookies expire in one hour.</span>
+<span class="c1">// 两个cookies将在一小时后过期</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;first_name&#39;</span><span class="p">,</span> <span class="s1">&#39;Larry&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="mi">3600</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;last_name&#39;</span><span class="p">,</span> <span class="s1">&#39;Masters&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;1 hour&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CookieComponent::read">
+<tt class="descclassname">CookieComponent::</tt><tt class="descname">read</tt><big>(</big><em>mixed $key = null</em><big>)</big><a class="headerlink" href="#CookieComponent::read" title="永久链接至目标">¶</a></dt>
+<dd><p>读取指定$key的cookie的变量值
+This method is used to read the value of a cookie variable with the
+name specified by $key.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Outputs “Larry”</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+
+<span class="c1">// You can also use the dot notation for read</span>
+<span class="c1">// 也可以使用点记法</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">);</span>
+
+<span class="c1">// To get the variables which you had grouped</span>
+<span class="c1">// using the dot notation as an array use something like</span>
+<span class="c1">// 获取组中的变量集合</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">);</span>
+
+<span class="c1">// this outputs something like array(&#39;name&#39; =&gt; &#39;Larry&#39;, &#39;role&#39; =&gt; &#39;Lead&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CookieComponent::check">
+<tt class="descclassname">CookieComponent::</tt><tt class="descname">check</tt><big>(</big><em>$key</em><big>)</big><a class="headerlink" href="#CookieComponent::check" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$key</strong> (<em>string</em>) &#8211; The key to check.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>// 检测key/path是否存在，并且不是空值。
+Used to check if a key/path exists and has not-null value.</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.3 新版功能: </span><tt class="docutils literal"><span class="pre">CookieComponent::check()</span></tt> was added in 2.3</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CookieComponent::delete">
+<tt class="descclassname">CookieComponent::</tt><tt class="descname">delete</tt><big>(</big><em>mixed $key</em><big>)</big><a class="headerlink" href="#CookieComponent::delete" title="永久链接至目标">¶</a></dt>
+<dd><p>删除指定$key的cookie变量。可用点记法表示:</p>
+<p>Deletes a cookie variable of the name in $key. Works with dot
+notation:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Delete a variable</span>
+<span class="c1">// 删除一个cookie变量</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+
+<span class="c1">// Delete the cookie variable bar, but not all under foo</span>
+<span class="c1">// 删除foo下的cookie变量bar，并不是foo下所有变量。</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;foo.bar&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CookieComponent::destroy">
+<tt class="descclassname">CookieComponent::</tt><tt class="descname">destroy</tt><big>(</big><big>)</big><a class="headerlink" href="#CookieComponent::destroy" title="永久链接至目标">¶</a></dt>
+<dd><p>销毁当前cookie</p>
+<p>Destroys the current cookie.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CookieComponent::type">
+<tt class="descclassname">CookieComponent::</tt><tt class="descname">type</tt><big>(</big><em>$type</em><big>)</big><a class="headerlink" href="#CookieComponent::type" title="永久链接至目标">¶</a></dt>
+<dd><p>改变加密模式。默认使用&#8217;cipher&#8217;模式。可以使用&#8217;rijndael&#8217;模式来提高安全性。</p>
+<p>Allows you to change the encryption scheme.  By default the &#8216;cipher&#8217; scheme
+is used. However, you should use the &#8216;rijndael&#8217; scheme for improved
+security.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.2 版更改: </span>The &#8216;rijndael&#8217; type was added.</p>
+</div>
+</dd></dl>
+
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../toc-general-purpose.html">通用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-behaviors.html">行为</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-components.html">组件</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pagination.html">Pagination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sessions.html">Sessions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="authentication.html">Authentication 认证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security-component.html">Form tampering prevention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security-component.html#csrf-protection">CSRF protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="request-handling.html">请求处理</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Cookie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access-control-lists.html">访问控制列表组件</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-helpers.html">助件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-utilities.html">工具</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Cookie</a></li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="access-control-lists.html" title="访问控制列表组件" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="request-handling.html" title="请求处理" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

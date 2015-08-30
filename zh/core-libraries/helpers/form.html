@@ -1,0 +1,1721 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="FormHelper" lang="zh_CN" name="title" />
+<meta content="The FormHelper focuses on creating forms quickly, in a way that will streamline validation, re-population and layout." lang="zh_CN" name="description" />
+<meta content="html helper,cakephp html,form create,form input,form select,form file field,form label,form text,form password,form checkbox,form radio,form submit,form date time,form error,validate upload,unlock field,form security" lang="zh_CN" name="keywords" />
+
+    <title>FormHelper 助件 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="助件" href="../toc-helpers.html" />
+    <link rel="next" title="HtmlHelper助件" href="html.html" />
+    <link rel="prev" title="Flash" href="flash.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/core-libraries/helpers/form.html" /><link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/helpers/form.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/helpers/form.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/helpers/form.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/helpers/form.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../toc-helpers.html" accesskey="U" itemprop="url"><span itemprop="title">助件</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/core-libraries/helpers/form.html">en</a></li>
+				
+					<li><a href="../../../pt/core-libraries/helpers/form.html">pt</a></li>
+				
+					<li><a href="../../../es/core-libraries/helpers/form.html">es</a></li>
+				
+					<li><a href="../../../ja/core-libraries/helpers/form.html">ja</a></li>
+				
+					<li><a href="../../../fr/core-libraries/helpers/form.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/helpers/form.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="formhelper">
+<h1>FormHelper 助件<a class="headerlink" href="#formhelper" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="FormHelper">
+<em class="property">class </em><tt class="descname">FormHelper</tt><big>(</big><em>View $view</em>, <em>array $settings = array()</em><big>)</big><a class="headerlink" href="#FormHelper" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>FormHelper 助件在表单的创建中做了大部分繁重的工作。FormHelper 助件意在快速创建表
+单，且以能够使验证、重新填充和布局得以简化的方式。FormHelper 助件也是灵活的——它
+几乎做任何事情都使用约定，或者你也可以用特定的方法只得到你需要的。</p>
+<div class="section" id="id1">
+<h2>创建表单<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>为了利用 FormHelper 助件你要使用的第一个方法是``create()``方法。这个特殊的方法输
+出一个开始的 form 标签。</p>
+<dl class="method">
+<dt id="FormHelper::create">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">create</tt><big>(</big><em>string $model = null</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#FormHelper::create" title="永久链接至目标">¶</a></dt>
+<dd><p>所有的参数都是可选的。如果``create()``方法调用时没有参数，就会认为构建的表单
+是通过当前的 URL 提交给当前的控制器。缺省的提交表单的方法是 POST。返回的
+form 元素带有一个 DOM ID。这个 ID 是用模型的名字、控制器动作的名字，按照驼峰
+命名方式(CamelCased)生成的。如果在 UsersController 的视图中调用``create()``方
+法，在渲染得到的视图中会看到下面的输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;UserAddForm&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;/users/add&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">你也可以给``$model``参数传入``false``。这样就会把表单数据放进数组:
+<a href="#id2"><span class="problematic" id="id3">``</span></a>$this-&gt;request-&gt;data``中(而不是次级数组
+<a href="#id4"><span class="problematic" id="id5">``</span></a>$this-&gt;request-&gt;data[&#8216;Model&#8217;]``中)。这对于不代表任何数据库中
+的东西的简短表单，是很方便的。</p>
+</div>
+<p>其实，<a href="#id6"><span class="problematic" id="id7">``</span></a>create()``方法允许我们用参数对表单做很多定制。首先，你可以指定模型名
+字。为表单指定模型，就是创建了表单的*上下文(context)*。所有的字段都属于该模型
+(除非另行说明)，所有引用的模型都与之关联。如果你不指定模型，就认为是使用当前
+控制器的缺省模型:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 如果你在 /recipes/add 页面</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Recipe&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;form id=&quot;RecipeAddForm&quot; method=&quot;post&quot; action=&quot;/recipes/add&quot;&gt;</span>
+</pre></div>
+</div>
+<p>这会把表单数据以 POST 方式提交给 RecipesController 控制器的``add()``动作。当
+然，你也可以用同样的逻辑创建编辑(edit)表单。FormHelper 助件用
+<a href="#id8"><span class="problematic" id="id9">``</span></a>$this-&gt;request-&gt;data``属性来自动探知是否创建新增(add)或编辑(edit)表单。如果
+<a href="#id10"><span class="problematic" id="id11">``</span></a>$this-&gt;request-&gt;data``包含一个以表单的模型命名的数组元素，而且该数组包含模
+型主键的非空值，FormHelper 助件就会为该记录创建一个编辑表单。例如，如果我们浏
+览 <a class="reference external" href="http://site.com/recipes/edit/5">http://site.com/recipes/edit/5</a> 页面，我们会得到下面这些:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Controller/RecipesController.php:</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">edit</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">findById</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// Save logic goes here</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// View/Recipes/edit.ctp:</span>
+<span class="c1">// 因为 $this-&gt;request-&gt;data[&#39;Recipe&#39;][&#39;id&#39;] = 5，我们会得到编辑表单</span>
+<span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Recipe&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;RecipeEditForm&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;/recipes/edit/5&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;_method&quot;</span> <span class="na">value=</span><span class="s">&quot;PUT&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">因为这是一个编辑表单，生成了一个隐藏输入字段来覆盖缺省的 HTTP 方法。</p>
+</div>
+<p>当为插件中的模型创建表单时，你应当总是使用:term:<a href="#id12"><span class="problematic" id="id13">`</span></a>plugin syntax`来创建表单。这
+会确保表单生成正确:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;ContactManager.Contact&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>绝大部分对表单的配置是通过``$options``数组进行的。这个特殊的数组可以包含一系
+列各种键-值对，影响表单标签的生成。</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.0 版更改: </span>所有表单的缺省网址，现在是当前的网址，包括传入(passed)、命名(named)和查询
+字符串(query string)参数。你可以通过给``$this-&gt;Form-&gt;create()``方法的第二
+个参数提供``$options[&#8216;url&#8217;]``来覆盖这个缺省值。</p>
+</div>
+</dd></dl>
+
+<div class="section" id="create">
+<h3>create() 方法的选项<a class="headerlink" href="#create" title="永久链接至标题">¶</a></h3>
+<p>create() 方法有一些选项:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">$options['type']</span></tt> 这个键用来指明要创建的表单的类型。合法的值包括&#8217;post&#8217;，</li>
+</ul>
+<p>&#8216;get&#8217;，&#8217;file&#8217;，&#8217;put&#8217;和&#8217;delete&#8217;。</p>
+<blockquote>
+<div><p>提供&#8217;post&#8217;或者&#8217;get&#8217;会相应地改变表单提交的方法:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;get&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;UserAddForm&quot;</span> <span class="na">method=</span><span class="s">&quot;get&quot;</span> <span class="na">action=</span><span class="s">&quot;/users/add&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>指定&#8217;file&#8217;会把表单提交方法改为&#8217;post&#8217;，并且在表单标签中包括一个为
+&#8220;multipart/form-data&#8221;的 enctype 属性。如果表单中有任何 file 元素，这(个属性)就
+要使用。如果没有正确的 enctype 属性，文件上传就无法工作:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;file&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;UserAddForm&quot;</span> <span class="na">enctype=</span><span class="s">&quot;multipart/form-data&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;/users/add&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>当使用&#8217;put&#8217;或者&#8217;delete&#8217;时，表单功能上等同于&#8217;post&#8217;表单，但在提交时，HTTP 请求方法
+会被相应地改变为&#8217;PUT&#8217;或&#8217;DELETE&#8217;。这让 CakePHP 可以在网络浏览器中模拟正确的
+REST 支持。</p>
+</div></blockquote>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">$options['action']</span></tt> action 键让你可以把表单指向当前控制器中的一个特定动作。</li>
+</ul>
+<p>例如，如果你要把表单指向当前控制器的 login()动作，你可以提供下面这样的 $options
+数组:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre>  <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span><span class="p">));</span>
+
+<span class="nx">输出</span><span class="o">:</span>
+
+<span class="o">..</span> <span class="nx">code</span><span class="o">-</span><span class="nx">block</span><span class="o">::</span> <span class="na">html</span>
+
+   <span class="o">&lt;</span><span class="nx">form</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;UserLoginForm&quot;</span> <span class="nx">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span> <span class="nx">action</span><span class="o">=</span><span class="s2">&quot;/users/login&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">$options['url']</span></tt> 如果想要的表单动作不在当前控制器中，你可以用 $options 数组</li>
+</ul>
+<p>的‘url’键来为表单动作指定一个 URL。提供的 URL 可以是相对于你的 CakePHP 应用程序:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre>  <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/recipes/add&#39;</span><span class="p">));</span>
+  <span class="c1">// 或者</span>
+  <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;recipes&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span><span class="p">)</span>
+  <span class="p">));</span>
+
+<span class="nx">输出</span><span class="o">:</span>
+
+<span class="o">..</span> <span class="nx">code</span><span class="o">-</span><span class="nx">block</span><span class="o">::</span> <span class="na">html</span>
+
+   <span class="o">&lt;</span><span class="nx">form</span> <span class="nx">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span> <span class="nx">action</span><span class="o">=</span><span class="s2">&quot;/recipes/add&quot;</span><span class="o">&gt;</span>
+
+<span class="nx">或者也可以指向外部域名</span><span class="o">::</span>
+
+  <span class="na">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;http://www.google.com/search&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;get&#39;</span>
+  <span class="p">));</span>
+
+<span class="nx">输出</span><span class="o">:</span>
+
+<span class="o">..</span> <span class="nx">code</span><span class="o">-</span><span class="nx">block</span><span class="o">::</span> <span class="na">html</span>
+
+  <span class="o">&lt;</span><span class="nx">form</span> <span class="nx">method</span><span class="o">=</span><span class="s2">&quot;get&quot;</span> <span class="nx">action</span><span class="o">=</span><span class="s2">&quot;http://www.google.com/search&quot;</span><span class="o">&gt;</span>
+
+<span class="nx">也请查看</span><span class="o">:</span><span class="nx">php</span><span class="o">:</span><span class="nx">meth</span><span class="o">:</span><span class="sb">`HtmlHelper::url()`</span><span class="nx">，以了解更多不同类型的网址的例子。</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['default']</span></tt> 如果&#8217;default&#8217;被设为布尔值 false，表单的提交动作就会改成按动提交按键时不会提交表单。如果表单要通过 AJAX 提交，设置&#8217;default&#8217;为 false 阻止了表单缺省的行为，你就可以抓取数据并通过 AJAX 提交。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['inputDefaults']</span></tt> 你可以用``inputDefaults``键为``input()``方法设置一组缺省选项，来定制缺省的输入项(input)创建。</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>echo $this-&gt;Form-&gt;create(&#8216;User&#8217;, array(</dt>
+<dd><dl class="first docutils">
+<dt>&#8216;inputDefaults&#8217; =&gt; array(</dt>
+<dd><p class="first last">&#8216;label&#8217; =&gt; false,
+&#8216;div&#8217; =&gt; false</p>
+</dd>
+</dl>
+<p class="last">)</p>
+</dd>
+</dl>
+<p>));</p>
+</div></blockquote>
+<p>之后所有创建的 input 标签就会继承 inputDefaults 中指定的选项。你可以在对 input()的调用中声明选项来覆盖 defaultOptions:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span> <span class="c1">// 没有 div，没有 label</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Username&#39;</span><span class="p">));</span> <span class="c1">// 有一个 label 元素</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id14">
+<h2>结束表单<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h2>
+<dl class="method">
+<dt id="FormHelper::end">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">end</tt><big>(</big><em>$options = null</em><big>)</big><a class="headerlink" href="#FormHelper::end" title="永久链接至目标">¶</a></dt>
+<dd><p>FormHelper 助件有一个``end()``方法，用来完成表单。<a href="#id15"><span class="problematic" id="id16">``</span></a>end()``经常只输出一个结束表单标签，但使用``end()``方法也可以让 FormHelper 助件插入:php:class:<a href="#id17"><span class="problematic" id="id18">`</span></a>SecurityComponent`组件要求的隐藏表单元素:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">&lt;!-- Form elements go here --&gt;</span>
+
+<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>如果提供一个字符串作为``end()``方法的第一个参数，FormHelper 助件就会在和结束表单标签一起，输出一个相应(以输入参数)命名的提交按键。</p>
+<blockquote>
+<div>&lt;?php echo $this-&gt;Form-&gt;end(&#8216;Finish&#8217;); ?&gt;</div></blockquote>
+<p>就会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Finish&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</div>
+<p>你可以传入一个数组给``end()``方法来指定详细设置:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Update&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;glass-pill&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="nv">$options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>就会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;glass-pill&quot;</span><span class="nt">&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Update&quot;</span> <span class="na">name=</span><span class="s">&quot;Update&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>更多细节请参看&lt;<a class="reference external" href="http://api20.cakephp.org">http://api20.cakephp.org</a>&gt;`_。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">如果你在应用程序中使用:php:class:<a href="#id19"><span class="problematic" id="id20">`</span></a>SecurityComponent`组件，你应当总是用``end()``方法结束表单。</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="automagic-form-elements">
+<span id="id21"></span><h2>创建表单元素<a class="headerlink" href="#automagic-form-elements" title="永久链接至标题">¶</a></h2>
+<p>使用 FormHelper 助件，有多种方法可以创建表单输入元素。我们从``input()``方法开始说起。这个方法会自动检查提供给它的模型字段，从而为那个字段创建适当的输入项元素。在内部``input()``方法调用 FormHelper 助件的其它方法。</p>
+<dl class="method">
+<dt id="FormHelper::input">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">input</tt><big>(</big><em>string $fieldName</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#FormHelper::input" title="永久链接至目标">¶</a></dt>
+<dd><p>根据给定的``Model.field``创建下列元素:</p>
+<ul class="simple">
+<li>包裹的 div 元素。</li>
+<li>Label 元素</li>
+<li>(一个或多个) Input 元素</li>
+<li>如果适用，带有消息的错误元素</li>
+</ul>
+<p>创建的 input 元素的类型取决于列的数据类型:</p>
+<dl class="docutils">
+<dt>列的类型</dt>
+<dd>获得的表单输入字段</dd>
+<dt>string (char, varchar, etc.)</dt>
+<dd>text</dd>
+<dt>boolean, tinyint(1)</dt>
+<dd>checkbox</dd>
+<dt>text</dt>
+<dd>textarea</dd>
+<dt>以 password、passwd 或 psword 命名的 text</dt>
+<dd>password</dd>
+<dt>以 email 命名的 text</dt>
+<dd>email</dd>
+<dt>以 tel、telephone 或 phone 命名的 text</dt>
+<dd>tel</dd>
+<dt>date</dt>
+<dd>日、月和年的 select 输入项</dd>
+<dt>datetime, timestamp</dt>
+<dd>日、月、年、小时、分钟和上下午的 select 输入项</dd>
+<dt>time</dt>
+<dd>小时、分钟和上下午的 select 输入项</dd>
+</dl>
+<p><a href="#id22"><span class="problematic" id="id23">``</span></a>$options``参数让你定制``input()``方法如何工作，并微调生成的内容。</p>
+<p>如果模型字段的验证规则没有指定``allowEmpty =&gt;
+true``，包裹的 div 元素就会带有``required``的(样式)类名。这种行为的一个局限是，字段所在的模型在当前请求(的处理过程)中必须已经加载，或者直接与提供给:php:meth:<a href="#id24"><span class="problematic" id="id25">`</span></a>~FormHelper::create()`方法的模型相关联。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.3 新版功能.</span></p>
+</div>
+<p id="html5-required">自2.3版本起，HTML5 的``required``属性也会根据验证规则被添加到 input 标签上。你可以对字段在 options 数组中显式地设置``required``键，来覆盖这一点。要对整个表单省略浏览器验证的触发，你可以对使用:php:meth:<cite>FormHelper::submit()`方法生成的 input 按键设置选项`</cite>&#8216;formnovalidate&#8217; =&gt; true``，或者在:php:meth:<cite>FormHelper::create()`的选项中设置`</cite>&#8216;novalidate&#8217; =&gt; true``。</p>
+<p>例如，假设 User 模型包括 username (varchar)，password (varchar)，approved (datetime) 和 quote (text) 这些字段。你可以用 FormHelper 助件的 input() 方法为所有这些表单字段创建适当的 input 标签:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">);</span>   <span class="c1">//text</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>   <span class="c1">//password</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;approved&#39;</span><span class="p">);</span>   <span class="c1">//day, month, year, hour, minute, meridian</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;quote&#39;</span><span class="p">);</span>      <span class="c1">//textarea</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">&#39;Add&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>(下面是)一个详细的例子，说明日期字段的一些选项:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;birth_dt&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Date of birth&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dateFormat&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;DMY&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;minYear&#39;</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">70</span><span class="p">,</span>
+    <span class="s1">&#39;maxYear&#39;</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">18</span><span class="p">,</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p><a href="#id26"><span class="problematic" id="id27">``</span></a>input()``方法除了下面这些选项，你可以指定 input 类型的任何选项和任何 html 属性(例如 onfocus)。关于``$options``和``$htmlAttributes``的更多信息，请参看:doc:<cite>/core-libraries/helpers/html</cite>。</p>
+<p>假设 User hasAndBelongsToMany Group。在控制器中，设置一个驼峰命名(camelCase)的复数变量(在这里就是 group -&gt; groups，或者 ExtraFunkyModel -&gt; extraFunkyModels)作为 select 的可选项。在控制器动作中你可以这样写:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;groups&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">Group</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>在视图中可以用这样简单的代码创建多选项:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Group&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果你要在使用 belongsTo 或 hasOne 关系时创建 select 字段，你可以在 Users 控制器中添加下面的代码(假设 User belongsTo Group):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;groups&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">Group</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>然后，在你的表单视图中添加下面的代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;group_id&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果你的模型名称由两个或多个单词组成，例如，&#8221;UserGroup&#8221;，在使用 set() 传递数据时，你应当把数据命名为复数、驼峰命名(camelCase)的格式，象下面这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;userGroups&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">UserGroup</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">));</span>
+<span class="c1">// 或者</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;reallyInappropriateModelNames&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ReallyInappropriateModelName</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">尽量避免使用`FormHelper::input()`方法来创建提交按键。而是使用:php:meth:<a href="#id28"><span class="problematic" id="id29">`</span></a>FormHelper::submit()`方法。</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::inputs">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">inputs</tt><big>(</big><em>mixed $fields = null</em>, <em>array $blacklist = null</em><big>)</big><a class="headerlink" href="#FormHelper::inputs" title="永久链接至目标">¶</a></dt>
+<dd><p>为``$fields``生成一组 input 标签。如果 $fields 是 null，就会使用当前模型。</p>
+<p>除了控制器字段输出，<a href="#id30"><span class="problematic" id="id31">``</span></a>$fields``可以通过``fieldset``及``legend``键来控制 legend 和 fieldset 的渲染。<a href="#id32"><span class="problematic" id="id33">``</span></a>$this-&gt;Form-&gt;inputs(array(&#8216;legend&#8217; =&gt; &#8216;My legend&#8217;));``会输出一个带有定制的 legend 的 input 集合。你也可以通过``$fields``定制单个的 input。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">inputs</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;custom label&#39;</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>除了对字段的控制，inputs()还允许你使用一些其它的选项。</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">fieldset</span></tt> 设置为 false 来禁用 fieldset。如果提供的是字符串，就会被用作 fieldset 元素的(样式)类名(classname)。</li>
+<li><tt class="docutils literal"><span class="pre">legend</span></tt> 设置为 false 来对生成的 input 集合禁用 legend。或者提供一个字符串来定制 legend 的文字。</li>
+</ul>
+</dd></dl>
+
+<div class="section" id="id34">
+<h3>字段命名约定<a class="headerlink" href="#id34" title="永久链接至标题">¶</a></h3>
+<p>Form 助件相当聪明。只要你用表单助件的方法指定一个字段名称，它就会自动使用当前模型名以下面这样的格式来构建一个输入项(input):</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;ModelnameFieldname&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Modelname][fieldname]&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>在针对一个模型创建的表单中，为该模型生成输入项时，你可以省略模型名称。你可以为关联模型或任意模型创建输入项，只需把 Modelname.fieldname 作为第一个参数传入即可:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Modelname.fieldname&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果你要使用同样的字段名称来创建多个输入字段，从而生成一个数组，可以用 saveAll() 方法一起保存，就用下面的约定:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Modelname.0.fieldname&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Modelname.1.fieldname&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;Modelname0Fieldname&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Modelname][0][fieldname]&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;Modelname1Fieldname&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Modelname][1][fieldname]&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>FormHelper 助件对 datetime 输入项的创建，在内部使用几个字段后缀。如果你使用名称带有 <tt class="docutils literal"><span class="pre">year</span></tt>，<tt class="docutils literal"><span class="pre">month</span></tt>，<tt class="docutils literal"><span class="pre">day</span></tt>，<tt class="docutils literal"><span class="pre">hour</span></tt>，<a href="#id35"><span class="problematic" id="id36">``</span></a>minute``或者``meridian``的字段，并无法得到正确的输入项，你可以设置``name``属性来取代缺省的行为:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.year&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;data[Model][year]&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id37">
+<h3>选项<a class="headerlink" href="#id37" title="永久链接至标题">¶</a></h3>
+<p><a href="#id38"><span class="problematic" id="id39">``</span></a>FormHelper::input()``方法支持很多选项。除了它自身的选项，<a href="#id40"><span class="problematic" id="id41">``</span></a>input()``方法也接受生成的输入项类型的选项，以及 html 属性(attribute)。以下列出针对``FormHelper::input()``的选项。</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['type']</span></tt> 你可以提供一个类型，来强制指定输入项的类型，取代对模型的检测。除了在:ref:<a href="#id42"><span class="problematic" id="id43">`</span></a>automagic-form-elements`中介绍的字段类型，你也可以创建&#8217;file&#8217;、&#8217;password&#8217;和任何 HTML5支持的类型:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;file&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;email&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input file&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserField&quot;</span><span class="nt">&gt;</span>Field<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;file&quot;</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input email&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserEmail&quot;</span><span class="nt">&gt;</span>Email<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">name=</span><span class="s">&quot;data[User][email]&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserEmail&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['div']</span></tt> 用这个选项来设置包含输入项的 div 的属性。使用字符串就会设置 div 的(样式)类名。用数组就可以把 div 的属性设为数组的键/值对。或者，你也可以把这个键设置为 false 从而不输出 div。</p>
+<p>设置(样式)类名:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;class_name&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;class_name&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][name]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserName&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>设置多个属性:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;mainDiv&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Div Title&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;style&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;display:block&#39;</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input text&quot;</span> <span class="na">id=</span><span class="s">&quot;mainDiv&quot;</span> <span class="na">title=</span><span class="s">&quot;Div Title&quot;</span> <span class="na">style=</span><span class="s">&quot;display:block&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][name]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserName&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>禁止 div 输出:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][name]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserName&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['label']</span></tt> 把这个键设置为你要显示在通常伴随 input 输入项的 label 标签内的字符串:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;The User Alias&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span><span class="nt">&gt;</span>The User Alias<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][name]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserName&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>或者，设置该键为 false，从而禁止 label 标签的输出:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][name]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserName&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>把它设置为数组来为``label``元素提供额外的选项。如果你这么做，你可以在数组中用``text``键来定制 label 标签的文字:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;thingy&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;text&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;The User Alias&#39;</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span> <span class="na">class=</span><span class="s">&quot;thingy&quot;</span><span class="nt">&gt;</span>The User Alias<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][name]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserName&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['error']</span></tt> 使用这个键让你可以取代缺省的模型错误信息，以及用于，例如，设置 i18n 信息。它有一些子选项，用来控制包裹的元素，包裹元素的(样式)类名，以及错误信息中的 HTML 是否要转义。</p>
+<p>要禁用错误信息输出和字段的(样式)类，设置 error 键为 false:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>要只禁用错误信息，但保持字段的(样式)类，设置 errorMessage 键为 false:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;errorMessage&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>要改变包裹元素的类型和它的(样式)类(class)，使用下面的格式:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;wrap&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bzzz&#39;</span><span class="p">))</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>为防止在错误信息输出中的 HTML 被自动转义，设置 escape 子选项为 false:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;escape&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>要取代模型的错误信息，用键与验证规则名称匹配的数组:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;tooShort&#39;</span> <span class="o">=&gt;</span> <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;This is not long enough&#39;</span><span class="p">))</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>如上所示，你可以为模型中的每个验证规则设置错误信息。而且，你可以为表单提供国际化(i18n)的消息。</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.3 新版功能: </span>在2.3版本中增加了对``errorMessage``的支持。</p>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['before']</span></tt>, <tt class="docutils literal"><span class="pre">$options['between']</span></tt>, <tt class="docutils literal"><span class="pre">$options['separator']</span></tt>,
+和 <tt class="docutils literal"><span class="pre">$options['after']</span></tt></p>
+<p>如果你要在 input() 方法的输出中插入一些标记代码，就可以使用这些键:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;before&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--before--&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;after&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--after--&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;between&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--between---&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input&quot;</span><span class="nt">&gt;</span>
+--before--
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserField&quot;</span><span class="nt">&gt;</span>Field<span class="nt">&lt;/label&gt;</span>
+--between---
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField&quot;</span> <span class="nt">/&gt;</span>
+--after--
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>对 radio 输入项，&#8217;separator&#8217;属性可用来插入标记，来分隔每对 input/label:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;before&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--before--&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;after&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--after--&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;between&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--between---&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;separator&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--separator--&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input&quot;</span><span class="nt">&gt;</span>
+--before--
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField1&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserField1&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/label&gt;</span>
+--separator--
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="na">value=</span><span class="s">&quot;2&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField2&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserField2&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/label&gt;</span>
+--between---
+--after--
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>对于``date``和``datetime``类型的元素，&#8217;separator&#8217;可用来改变 select 元素之间的字符串。缺省为 &#8216;-&#8216;。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['format']</span></tt> FormHelper 助件生成的 html 的顺序也是可以控制的。&#8217;format&#8217;选项支持字符串数组，指明上述元素遵从的模板。支持的数组的键为``array(&#8216;before&#8217;, &#8216;input&#8217;, &#8216;between&#8217;, &#8216;label&#8217;, &#8216;after&#8217;,&#8217;error&#8217;)``。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['inputDefaults']</span></tt> 如果你发现在对 input() 的多个调用在重复相同的选项，你可以使用`inputDefaults``来保持你的代码 dry (译注: Don&#8217;t Repeat Yourself,指不要重复代码。)</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>echo $this-&gt;Form-&gt;create(&#8216;User&#8217;, array(</dt>
+<dd><dl class="first docutils">
+<dt>&#8216;inputDefaults&#8217; =&gt; array(</dt>
+<dd><p class="first last">&#8216;label&#8217; =&gt; false,
+&#8216;div&#8217; =&gt; false</p>
+</dd>
+</dl>
+<p class="last">)</p>
+</dd>
+</dl>
+<p>));</p>
+</div></blockquote>
+<p>以下创建的所有输入项就都会继承 inputDefaults 之中声明的选项。你可以在 input() 调用中声明选项来覆盖缺省的选项:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 没有 div，没有 label</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
+
+<span class="c1">// 有一个 label 元素</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Username&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>如果你以后需要改变缺省(选项)，你可以使用:php:meth:<a href="#id44"><span class="problematic" id="id45">`</span></a>FormHelper::inputDefaults()`方法。</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="input">
+<h2>生成特定类型的输入项(input)<a class="headerlink" href="#input" title="永久链接至标题">¶</a></h2>
+<p>除了通用的``input()``方法，<a href="#id46"><span class="problematic" id="id47">``</span></a>FormHelper``助件有特定的方法来生成一系列不同类型的输入项(input)。这些方法可以用来只是生成输入项部件本身，也可以和其它象:php:meth:<a href="#id48"><span class="problematic" id="id49">`</span></a>~FormHelper::label()`和:php:meth:<a href="#id50"><span class="problematic" id="id51">`</span></a>~FormHelper::error()`这样的方法来生成完全定制的表单布局。</p>
+<div class="section" id="general-input-options">
+<span id="id52"></span><h3>通用选项<a class="headerlink" href="#general-input-options" title="永久链接至标题">¶</a></h3>
+<p>许多不同的输入项(input)元素方法支持一组通用的选项。<a href="#id53"><span class="problematic" id="id54">``</span></a>input()``方法也支持所有这些选项 。为避免重复，所有输入项(input)方法共用的通用选项如下:</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['class']</span></tt> 你可以为一个输入项设置(样式)类名(classname):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;custom-class&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['id']</span></tt> 设置此键来强制指定输入项(inout)的 DOM id 的值。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['default']</span></tt> 用来设置输入项(input)的缺省值。如果传给表单的数据不包含该字段的值(或者根本没有数据传入)，该值就会被使用。</p>
+<p>使用的例子:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;ingredient&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sugar&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>select 字段的例子(尺寸&#8221;Medium&#8221;会作为缺省值被选中):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$sizes</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;s&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Small&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Medium&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Large&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;size&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="nv">$sizes</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;m&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p>你无法使用``default``来勾选 checkbox —— 你可以在控制器中设置``$this-&gt;request-&gt;data``的值，或者把输入项(input)的选项``checked``设为 true。</p>
+<p>Date 和 datetime 字段的缺省值可以用&#8217;selected&#8217;键来设置。</p>
+<p class="last">当心使用 false 来设置缺省值。false 值用来禁用/排除输入项(input)的选项，所以``&#8217;default&#8217; =&gt; false``完全不会设置任何值。而是(应当)使用``&#8217;default&#8217; =&gt; 0``。</p>
+</div>
+</li>
+</ul>
+<p>除了上述的选项之外，你可以混入(mixin)任何你想使用的 html 属性。任何普通的选项名称，会被当作 HTML 属性，并应用于生成的 HTML 输入项(input)元素。</p>
+</div>
+<div class="section" id="select-checkbox-radio-input">
+<h3>select，checkbox 和 radio 输入项(input)的选项<a class="headerlink" href="#select-checkbox-radio-input" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['selected']</span></tt> 与选择类型的输入项(input)(即 select，date，time，datetime 这些类型)结合使用。设置‘selected’为输入项(input)渲染时你要缺省情况下选中的项目的值:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;close_time&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;selected&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;13:30:00&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">date 和 datetime 输入项(input)的 selected 键也可以是 UNIX 时间戳(timestamp)。</p>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['empty']</span></tt> 如果设置为 true，就会强制输入项(input)保持为空。</p>
+<p>当传递给一个 select 列表时，这会在你的下拉列表中创建一个带有空值的空选项(option)。如果你要空值有文字显示，而不是只是空的选项，给 empty 键传入一个字符串:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="s1">&#39;empty&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;(choose one)&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserField&quot;</span><span class="nt">&gt;</span>Field<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>(choose one)<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>3<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>4<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;4&quot;</span><span class="nt">&gt;</span>5<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;/select&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">如果你要设置一个密码(password)字段为空，转而使用&#8217;value&#8217; =&gt; &#8216;&#8217;。</p>
+</div>
+<p>选项也可以以键值对的方式提供。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['hiddenField']</span></tt> 对某些输入项类型(checkboxe、radio)会创建一个隐藏输入项(hidden input)，从而使 $this-&gt;request-&gt;data 中有一个键，即使没有值:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Post][Published]&quot;</span> <span class="na">id=</span><span class="s">&quot;PostPublished_&quot;</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Post][Published]&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span> <span class="na">id=</span><span class="s">&quot;PostPublished&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>这可以通过设置``$options[&#8216;hiddenField&#8217;] = false``来禁用:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">checkbox</span><span class="p">(</span><span class="s1">&#39;published&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;hiddenField&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>这会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Post][Published]&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span> <span class="na">id=</span><span class="s">&quot;PostPublished&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>如果你要在一个表单上中创建组织在一起的多组输入项，你就应该在除了第一个的所有输入项(input)上使用这个参数。如果页面中的隐藏输入项分布在多个地方，只有最后一组输入项(input)的值会被保存。</p>
+<p>在(下面)这个例子中，只有 tertiary colors 会被传递，primary colors 会被覆盖:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;h2&gt;</span>Primary Colors<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Color][Color]&quot;</span> <span class="na">id=</span><span class="s">&quot;Colors_&quot;</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Color][Color][]&quot;</span> <span class="na">value=</span><span class="s">&quot;5&quot;</span> <span class="na">id=</span><span class="s">&quot;ColorsRed&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ColorsRed&quot;</span><span class="nt">&gt;</span>Red<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Color][Color][]&quot;</span> <span class="na">value=</span><span class="s">&quot;5&quot;</span> <span class="na">id=</span><span class="s">&quot;ColorsBlue&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ColorsBlue&quot;</span><span class="nt">&gt;</span>Blue<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Color][Color][]&quot;</span> <span class="na">value=</span><span class="s">&quot;5&quot;</span> <span class="na">id=</span><span class="s">&quot;ColorsYellow&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ColorsYellow&quot;</span><span class="nt">&gt;</span>Yellow<span class="nt">&lt;/label&gt;</span>
+
+<span class="nt">&lt;h2&gt;</span>Tertiary Colors<span class="nt">&lt;/h2&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<dl class="docutils">
+<dt>``    &lt;input type=&#8221;hidden&#8221; name=&#8221;data[Color][Color]&#8221; id=&#8221;<a href="#id87"><span class="problematic" id="id88">Colors_</span></a>&#8221; value=&#8221;0&#8221; /&gt;</dt>
+<dd><blockquote class="first">
+<div>&lt;input type=&#8221;checkbox&#8221; name=&#8221;data[Color][Color][]&#8221; value=&#8221;5&#8221; id=&#8221;ColorsGreen&#8221; /&gt;
+&lt;label for=&#8221;ColorsGreen&#8221;&gt;Green&lt;/label&gt;
+&lt;input type=&#8221;checkbox&#8221; name=&#8221;data[Color][Color][]&#8221; value=&#8221;5&#8221; id=&#8221;ColorsPurple&#8221; /&gt;
+&lt;label for=&#8221;ColorsPurple&#8221;&gt;Purple&lt;/label&gt;
+&lt;input type=&#8221;checkbox&#8221; name=&#8221;data[Addon][Addon][]&#8221; value=&#8221;5&#8221; id=&#8221;ColorsOrange&#8221; /&gt;
+&lt;label for=&#8221;ColorsOrange&#8221;&gt;Orange&lt;/label&gt;</div></blockquote>
+<p>对第二组输入项(input)禁用``&#8217;hiddenField&#8217;<a href="#id55"><span class="problematic" id="id56">``</span></a>，就可以阻止这种行为。</p>
+<p>你可以一个不同于0的隐藏字段值，比如&#8217;N&#8217;:</p>
+<div class="last highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">checkbox</span><span class="p">(</span><span class="s1">&#39;published&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;hiddenField&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="datetime">
+<h3>Datetime 选项<a class="headerlink" href="#datetime" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['timeFormat']</span></tt> 用于指定一组与时间相关的选择输入项(select input)的格式。合法的格式包括 <tt class="docutils literal"><span class="pre">12</span></tt>，<tt class="docutils literal"><span class="pre">24</span></tt> 和 <tt class="docutils literal"><span class="pre">null</span></tt>。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['dateFormat']</span></tt> 用于指定一组与日期相关的选择输入项(select input)的格式。合法的格式包括&#8217;D&#8217;，&#8217;M&#8217;和&#8217;Y&#8217;的任意组合或者``null``。输入项会以 dateFormat 选项定义的顺序来放置。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['minYear'],</span> <span class="pre">$options['maxYear']</span></tt> 与 date/datetime 输入项一起使用。定义在年的选择字段中显示的下限和/或上限的值。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['orderYear']</span></tt> 与 date/datetime 输入项一起使用。定义年的值设置的顺序。有效的值包括 &#8216;asc&#8217;，&#8217;desc&#8217;。缺省值为 &#8216;desc&#8217;。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['interval']</span></tt> 这个选项指定分钟选择框中每个选项之间间隔的分钟数:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.time&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;interval&#39;</span> <span class="o">=&gt;</span> <span class="mi">15</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>会在分钟选择框中创建4个选项，每15分钟一个。</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id57">
+<h2>表单元素相关的方法<a class="headerlink" href="#id57" title="永久链接至标题">¶</a></h2>
+<dl class="method">
+<dt id="FormHelper::label">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">label</tt><big>(</big><em>string $fieldName</em>, <em>string $text</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::label" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个 label 元素。<a href="#id58"><span class="problematic" id="id59">``</span></a>$fieldName``用于生成 DOM id。如果``$text``未定义，<a href="#id60"><span class="problematic" id="id61">``</span></a>$fieldName``会被用来转换(inflect)生成 label 元素的文字:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">label</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">label</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="s1">&#39;Your username&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span><span class="nt">&gt;</span>Your username<span class="nt">&lt;/label&gt;</span>
+</pre></div>
+</div>
+<p><a href="#id62"><span class="problematic" id="id63">``</span></a>$options``可以是一个 html 属性的数组，或者是一个会被用作样式类名的字符串:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">label</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user-label&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">label</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="s1">&#39;Your username&#39;</span><span class="p">,</span> <span class="s1">&#39;highlight&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span> <span class="na">id=</span><span class="s">&quot;user-label&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span> <span class="na">class=</span><span class="s">&quot;highlight&quot;</span><span class="nt">&gt;</span>Your username<span class="nt">&lt;/label&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::text">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">text</tt><big>(</big><em>string $name</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::text" title="永久链接至目标">¶</a></dt>
+<dd><p>FormHelper 助件的其它方法是用来创建特定的表单元素的。这些方法中的许多也用到特殊的 $options 参数。不过，在这种情况下，$options 主要是用来指定 HTML 标签的属性(比如表单中的元素的值或者 DOM id):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][username]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">class=</span><span class="s">&quot;users&quot;</span> <span class="na">id=</span><span class="s">&quot;UserUsername&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::password">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">password</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::password" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个密码字段。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">password</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][password]&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserPassword&quot;</span> <span class="na">type=</span><span class="s">&quot;password&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::hidden">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">hidden</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::hidden" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个隐藏表单输入项。例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">hidden</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][id]&quot;</span> <span class="na">value=</span><span class="s">&quot;10&quot;</span> <span class="na">id=</span><span class="s">&quot;UserId&quot;</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.0 版更改: </span>隐藏字段不再去除(样式的)类属性。这意味着如果隐藏字段有验证错误，错误字段的(样式)类名就会被应用。</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::textarea">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">textarea</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::textarea" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个 textarea 输入字段。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">textarea</span><span class="p">(</span><span class="s1">&#39;notes&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;textarea</span> <span class="na">name=</span><span class="s">&quot;data[User][notes]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserNotes&quot;</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last"><tt class="docutils literal"><span class="pre">textarea``输入项类型允许``$options``属性</span></tt>&#8216;escape&#8217;<tt class="docutils literal"><span class="pre">，这决定</span> <span class="pre">textarea</span> <span class="pre">的内容是否要被转义。缺省值为``true</span></tt>。</p>
+</div>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">textarea</span><span class="p">(</span><span class="s1">&#39;notes&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;escape&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">);</span>
+<span class="c1">// 或者......</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;notes&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="s1">&#39;escape&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>选项</strong></p>
+<p>除了 <a class="reference internal" href="#general-input-options"><em>通用选项</em></a>，textarea()支持一些特定的选项:</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['rows'],</span> <span class="pre">$options['cols']</span></tt> 这两个键指定行和列的数目:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">textarea</span><span class="p">(</span><span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;rows&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;cols&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;5&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+</li>
+</ul>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;textarea</span> <span class="na">name=</span><span class="s">&quot;data[Form][textarea]&quot;</span> <span class="na">cols=</span><span class="s">&quot;5&quot;</span> <span class="na">rows=</span><span class="s">&quot;5&quot;</span> <span class="na">id=</span><span class="s">&quot;FormTextarea&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/textarea&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::checkbox">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">checkbox</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::checkbox" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个 checkbox 表单元素。该方法也会生成一个关联的隐藏表单输入项，强制提交指定字段的数据。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">checkbox</span><span class="p">(</span><span class="s1">&#39;done&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;data[User][done]&quot;</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span> <span class="na">id=</span><span class="s">&quot;UserDone_&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[User][done]&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span> <span class="na">id=</span><span class="s">&quot;UserDone&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>可以用 $options 数组来给出 checkbox 的值:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">checkbox</span><span class="p">(</span><span class="s1">&#39;done&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="mi">555</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;data[User][done]&quot;</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span> <span class="na">id=</span><span class="s">&quot;UserDone_&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[User][done]&quot;</span> <span class="na">value=</span><span class="s">&quot;555&quot;</span> <span class="na">id=</span><span class="s">&quot;UserDone&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>如果你不想让 Form 助件创建隐藏输入项:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">checkbox</span><span class="p">(</span><span class="s1">&#39;done&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;hiddenField&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[User][done]&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span> <span class="na">id=</span><span class="s">&quot;UserDone&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::radio">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">radio</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::radio" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一组 radio 按钮输入项。</p>
+<p><strong>选项</strong></p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['value']</span></tt> 设置哪个值作为缺省值被选中。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['separator']</span></tt> 给出 radio 按钮之间的 HTML(例如 &lt;br /)。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['between']</span></tt> 给出在 legend 和第一个元素之间插入的内容。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['disabled']</span></tt> 设置这个属性为``true``或``&#8217;disabled&#8217;<a href="#id64"><span class="problematic" id="id65">``</span></a>会禁用所有生成的 radio 按钮。</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['legend']</span></tt> 缺省情况下 Radio 元素会包裹在 label 和 fieldset 之中。设置``$attributes[&#8216;legend&#8217;]``为 false 来去掉这些。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;M&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Female&#39;</span><span class="p">);</span>
+<span class="nv">$attributes</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;legend&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">radio</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">,</span> <span class="nv">$attributes</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][gender]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserGender_&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][gender]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserGenderM&quot;</span> <span class="na">value=</span><span class="s">&quot;M&quot;</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserGenderM&quot;</span><span class="nt">&gt;</span>Male<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][gender]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserGenderF&quot;</span> <span class="na">value=</span><span class="s">&quot;F&quot;</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserGenderF&quot;</span><span class="nt">&gt;</span>Female<span class="nt">&lt;/label&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>如果出于某些原因你不想要隐藏输入项，设置``$attributes[&#8216;value&#8217;]``为选中的值或布尔值 false 就可以了。</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span><a href="#id66"><span class="problematic" id="id67">``</span></a>$attributes[&#8216;disabled&#8217;]``选项是在2.1版本中增加的。</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::select">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">select</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::select" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个 select 元素，以``$options``中的项目填充，缺省选中以``$attributes[&#8216;value&#8217;]``指定的选项。设置``$attributes``变量中的&#8217;empty&#8217;键为 false，就可以去掉缺省的空选项:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;M&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Female&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][gender]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserGender&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;M&quot;</span><span class="nt">&gt;</span>Male<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;F&quot;</span><span class="nt">&gt;</span>Female<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">select``输入类型可以有一个特殊的``$option``属性，叫做</span></tt>&#8216;escape&#8217;<a href="#id68"><span class="problematic" id="id69">``</span></a>，它接受布尔值，决定是否对 select 选项的内容进行 HTML 实体编码(HTML entity encode)。缺省为 true:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;M&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Female&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;escape&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['options']</span></tt> 这个键允许你手动指定 select 输入项或 radio 组的选项。除非&#8217;type&#8217;设置为&#8217;radio&#8217;，否则 FormHelper 助件将会认为希望的输出为 select 输入项:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>3<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>4<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;4&quot;</span><span class="nt">&gt;</span>5<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+</div>
+<p>选项也可以用键-值对的方式提供:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Value 1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Value 2&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Value 3&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 3&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;Value 1&quot;</span><span class="nt">&gt;</span>Label 1<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;Value 2&quot;</span><span class="nt">&gt;</span>Label 2<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;Value 3&quot;</span><span class="nt">&gt;</span>Label 3<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+</div>
+<p>如果你想要生成带有 optgroups 的 select，只需传入层级结构的数据。这也适用于多个 checkbox 和 radio 按钮，只是不用  optgroups，而用 fieldsets 来包裹:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+   <span class="s1">&#39;Group 1&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;Value 1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 1&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;Value 2&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 2&#39;</span>
+   <span class="p">),</span>
+   <span class="s1">&#39;Group 2&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;Value 3&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 3&#39;</span>
+   <span class="p">)</span>
+<span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;optgroup</span> <span class="na">label=</span><span class="s">&quot;Group 1&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;Value 1&quot;</span><span class="nt">&gt;</span>Label 1<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;Value 2&quot;</span><span class="nt">&gt;</span>Label 2<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;/optgroup&gt;</span>
+    <span class="nt">&lt;optgroup</span> <span class="na">label=</span><span class="s">&quot;Group 2&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;Value 3&quot;</span><span class="nt">&gt;</span>Label 3<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;/optgroup&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['multiple']</span></tt> 如果对一个输出 select 的输入项设置&#8217;multiple&#8217;为 true，该 select 就会允许多选:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;multiple&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>另外也可以设置&#8217;multiple&#8217;为&#8217;checkbox&#8217;，来输出一组相互关联的 check box:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Value 1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Value 2&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 2&#39;</span>
+<span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;multiple&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;checkbox&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input select&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ModelField&quot;</span><span class="nt">&gt;</span>Field<span class="nt">&lt;/label&gt;</span>
+   <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[Model][field]&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;ModelField&quot;</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[Model][field][]&quot;</span> <span class="na">value=</span><span class="s">&quot;Value 1&quot;</span> <span class="na">id=</span><span class="s">&quot;ModelField1&quot;</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ModelField1&quot;</span><span class="nt">&gt;</span>Label 1<span class="nt">&lt;/label&gt;</span>
+   <span class="nt">&lt;/div&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[Model][field][]&quot;</span> <span class="na">value=</span><span class="s">&quot;Value 2&quot;</span> <span class="na">id=</span><span class="s">&quot;ModelField2&quot;</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ModelField2&quot;</span><span class="nt">&gt;</span>Label 2<span class="nt">&lt;/label&gt;</span>
+   <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['disabled']</span></tt> 当创建 checkbox 时，可以设置这个选项为``true``来禁用全部或者一些 checkbox。要禁用全部 checkbox，设置 disabled 为``true``:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Value 1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Value 2&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 2&#39;</span>
+<span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;multiple&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;checkbox&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;disabled&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Value 1&#39;</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input select&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ModelField&quot;</span><span class="nt">&gt;</span>Field<span class="nt">&lt;/label&gt;</span>
+   <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[Model][field]&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;ModelField&quot;</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[Model][field][]&quot;</span> <span class="na">disabled=</span><span class="s">&quot;disabled&quot;</span> <span class="na">value=</span><span class="s">&quot;Value 1&quot;</span> <span class="na">id=</span><span class="s">&quot;ModelField1&quot;</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ModelField1&quot;</span><span class="nt">&gt;</span>Label 1<span class="nt">&lt;/label&gt;</span>
+   <span class="nt">&lt;/div&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[Model][field][]&quot;</span> <span class="na">value=</span><span class="s">&quot;Value 2&quot;</span> <span class="na">id=</span><span class="s">&quot;ModelField2&quot;</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ModelField2&quot;</span><span class="nt">&gt;</span>Label 2<span class="nt">&lt;/label&gt;</span>
+   <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.3 版更改: </span><a href="#id70"><span class="problematic" id="id71">``</span></a>$attributes[&#8216;disabled&#8217;]``对数组的支持是在2.3版本中增加的。</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::file">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">file</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::file" title="永久链接至目标">¶</a></dt>
+<dd><p>要在表单中增加一个文件上传字段，你必须首先确保表单的 enctype 设置&#8221;multipart/form-data&#8221;，所以以下面这样的 create 函数开始:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Document&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;enctype&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;multipart/form-data&#39;</span><span class="p">));</span>
+<span class="c1">// 或者</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Document&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;file&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>然后添加下面两行之一到表单视图文件中:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Document.submittedfile&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;between&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;br /&gt;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;file&#39;</span>
+<span class="p">));</span>
+
+<span class="c1">// 或者</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">(</span><span class="s1">&#39;Document.submittedfile&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>鉴于 HTML 本身的限制，无法为&#8217;file&#8217;类型的输入项字段设置缺省值。每次表单显示时，其值为空。</p>
+<p>在提交时，文件字段提供一个扩展的数据数组给接受表单数据的脚本(script)。</p>
+<p>对于上面的例子，如果 CakePHP 安装在 Windows 服务器上，在提交的数据数组中的值将有如下结构。在 Unix 环境下&#8217;tmp_name&#8217;会有不同的路径:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;Document&#39;</span><span class="p">][</span><span class="s1">&#39;submittedfile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;conference_schedule.pdf&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/pdf&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;tmp_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;C:/WINDOWS/TEMP/php1EE.tmp&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s1">&#39;size&#39;</span> <span class="o">=&gt;</span> <span class="mi">41737</span><span class="p">,</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>这个数组是 PHP 本身生成的，所以要了解 PHP 如何处理文件字段传递的数据，请`阅读 PHP 手册关于文件上载的章节 &lt;<a class="reference external" href="http://php.net/features.file-upload">http://php.net/features.file-upload</a>&gt;`_。</p>
+</dd></dl>
+
+<div class="section" id="id72">
+<h3>验证(文件)上载<a class="headerlink" href="#id72" title="永久链接至标题">¶</a></h3>
+<p>下面是一个验证方法的例子，定义在模型中来验证文件上载是否成功:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">isUploadedFile</span><span class="p">(</span><span class="nv">$params</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$val</span> <span class="o">=</span> <span class="nb">array_shift</span><span class="p">(</span><span class="nv">$params</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">((</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">||</span>
+        <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span> <span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">)</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">is_uploaded_file</span><span class="p">(</span><span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>创建文件输入项:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;file&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">(</span><span class="s1">&#39;avatar&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">enctype=</span><span class="s">&quot;multipart/form-data&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;/users/add&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][avatar]&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserAvatar&quot;</span> <span class="na">type=</span><span class="s">&quot;file&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">当使用``$this-&gt;Form-&gt;file()``方法时，记得通过在``$this-&gt;Form-&gt;create()``中设置类型选项为&#8217;file&#8217;来设置表单的编码类型。</p>
+</div>
+</div>
+</div>
+<div class="section" id="id73">
+<h2>创建按键和提交元素<a class="headerlink" href="#id73" title="永久链接至标题">¶</a></h2>
+<dl class="method">
+<dt id="FormHelper::submit">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">submit</tt><big>(</big><em>string $caption</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::submit" title="永久链接至目标">¶</a></dt>
+<dd><p>创建带有标题``$caption``的提交按键。如果给出的``$caption``是一个图像的 URL(含有‘.’字符)，提交按键就会渲染为图像。</p>
+<p>缺省情况下它会被包括在``div``标签之间；你可以提供声明``$options[&#8216;div&#8217;] = false``来避免这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;&lt;input</span> <span class="na">value=</span><span class="s">&quot;Submit&quot;</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>你可以为 caption 参数传入一个图像的相对或绝对网址，而不是标题文字。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">(</span><span class="s1">&#39;ok.png&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;image&quot;</span> <span class="na">src=</span><span class="s">&quot;/img/ok.png&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::button">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">button</tt><big>(</big><em>string $title</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#FormHelper::button" title="永久链接至目标">¶</a></dt>
+<dd><p>创建 HTML 按键，带有指定的标题和缺省的类型&#8221;button&#8221;。设置``$options[&#8216;type&#8217;]``可以输出三种可能的按键类型中的一种:</p>
+<ol class="arabic simple">
+<li>submit: 等同于``$this-&gt;Form-&gt;submit``方法——(缺省值)。</li>
+<li>reset: 创建一个表单重置按键。</li>
+<li>button: 创建一个标准的按键。</li>
+</ol>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">button</span><span class="p">(</span><span class="s1">&#39;A Button&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">button</span><span class="p">(</span><span class="s1">&#39;Another Button&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;button&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">button</span><span class="p">(</span><span class="s1">&#39;Reset the Form&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;reset&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">button</span><span class="p">(</span><span class="s1">&#39;Submit Form&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;submit&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>A Button<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span><span class="nt">&gt;</span>Another Button<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;reset&quot;</span><span class="nt">&gt;</span>Reset the Form<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>Submit Form<span class="nt">&lt;/button&gt;</span>
+</pre></div>
+</div>
+<p><a href="#id74"><span class="problematic" id="id75">``</span></a>button``输入项类型支持``escape``选项，该选项接受布尔值，决定是否 HTML 实体编码 (HTML entity encode)按键的 $title。
+缺省值为 false:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">button</span><span class="p">(</span><span class="s1">&#39;Submit Form&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;submit&#39;</span><span class="p">,</span> <span class="s1">&#39;escape&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::postButton">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">postButton</tt><big>(</big><em>string $title</em>, <em>mixed $url</em>, <em>array $options = array ()</em><big>)</big><a class="headerlink" href="#FormHelper::postButton" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个``&lt;button&gt;``标签及包裹的通过 POST 提交的``&lt;form&gt;``标签。</p>
+<p>这个方法创建``&lt;form&gt;``元素。所以不要在开放的表单中使用这个方法，而是应当使用:php:meth:<cite>FormHelper::submit()`或者:php:meth:`FormHelper::button()</cite>。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::postLink">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">postLink</tt><big>(</big><em>string $title</em>, <em>mixed $url = null</em>, <em>array $options = array ()</em>, <em>string $confirmMessage = false</em><big>)</big><a class="headerlink" href="#FormHelper::postLink" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个 HTML 链接，但使用 POST 来访问该链接。要求浏览器启用 javascript。</p>
+<p>该方法创建一个``&lt;form&gt;``元素，故此不要在一个表单中使用该方法，而是应当用:php:meth:<a href="#id76"><span class="problematic" id="id77">`</span></a>FormHelper::submit()`方法来添加提交按键。</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.3 版更改: </span>增加了``method``选项。</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="id78">
+<h2>创建日期和时间输入项<a class="headerlink" href="#id78" title="永久链接至标题">¶</a></h2>
+<dl class="method">
+<dt id="FormHelper::dateTime">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">dateTime</tt><big>(</big><em>$fieldName</em>, <em>$dateFormat = 'DMY'</em>, <em>$timeFormat = '12'</em>, <em>$attributes = array()</em><big>)</big><a class="headerlink" href="#FormHelper::dateTime" title="永久链接至目标">¶</a></dt>
+<dd><p>为日期和时间创建一组 select 输入项。$dateformat 的合法值为‘DMY’，‘MDY’，‘YMD’或者‘NONE’。$timeFormat的合法值为‘12’，‘24’和 null。</p>
+<p>你可以通过在 attributes 参数中设置 &#8220;array(&#8216;empty&#8217; =&gt; false)&#8221;来不显示空值。它也会用当前日期和时间预选(相应的)字段。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::year">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">year</tt><big>(</big><em>string $fieldName</em>, <em>int $minYear</em>, <em>int $maxYear</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::year" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个 select 元素，填充以从``$minYear``到``$maxYear``的年份。HTML 属性可以在 $attributes 参数中提供。如果``$attributes[&#8216;empty&#8217;]``为 false，select 元素就不会包括空选项:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">year</span><span class="p">(</span><span class="s1">&#39;purchased&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][purchased][year]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserPurchasedYear&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2009&quot;</span><span class="nt">&gt;</span>2009<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2008&quot;</span><span class="nt">&gt;</span>2008<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2007&quot;</span><span class="nt">&gt;</span>2007<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2006&quot;</span><span class="nt">&gt;</span>2006<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2005&quot;</span><span class="nt">&gt;</span>2005<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2004&quot;</span><span class="nt">&gt;</span>2004<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2003&quot;</span><span class="nt">&gt;</span>2003<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2002&quot;</span><span class="nt">&gt;</span>2002<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2001&quot;</span><span class="nt">&gt;</span>2001<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2000&quot;</span><span class="nt">&gt;</span>2000<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::month">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">month</tt><big>(</big><em>string $fieldName</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::month" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个 select 元素，填充以月份的名称:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">month</span><span class="p">(</span><span class="s1">&#39;mob&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][mob][month]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserMobMonth&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;01&quot;</span><span class="nt">&gt;</span>January<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;02&quot;</span><span class="nt">&gt;</span>February<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;03&quot;</span><span class="nt">&gt;</span>March<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;04&quot;</span><span class="nt">&gt;</span>April<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;05&quot;</span><span class="nt">&gt;</span>May<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;06&quot;</span><span class="nt">&gt;</span>June<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;07&quot;</span><span class="nt">&gt;</span>July<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;08&quot;</span><span class="nt">&gt;</span>August<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;09&quot;</span><span class="nt">&gt;</span>September<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;10&quot;</span><span class="nt">&gt;</span>October<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;11&quot;</span><span class="nt">&gt;</span>November<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;12&quot;</span><span class="nt">&gt;</span>December<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+</div>
+<p>你可以通过设置&#8217;monthNames&#8217;属性来传入自己要使用的月份数组，或者传入 false 来让月份显示为数字。(注意: 缺省的月份是国际化的，而且可以用本地化来翻译。):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">month</span><span class="p">(</span><span class="s1">&#39;mob&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;monthNames&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::day">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">day</tt><big>(</big><em>string $fieldName</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::day" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个 select 元素，填充以月份的(数字)日子。</p>
+<p>要添加一个带有你选择的提示文字的空选项(例如，第一个选项为&#8217;Day&#8217;)，你可以在最后一个参数中提供该(提示)文字，如下所示:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">day</span><span class="p">(</span><span class="s1">&#39;created&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将会输出:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][created][day]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserCreatedDay&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;01&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;02&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;03&quot;</span><span class="nt">&gt;</span>3<span class="nt">&lt;/option&gt;</span>
+...
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;31&quot;</span><span class="nt">&gt;</span>31<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::hour">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">hour</tt><big>(</big><em>string $fieldName</em>, <em>boolean $format24Hours</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::hour" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个 select 元素，填充以一天中的各个小时。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::minute">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">minute</tt><big>(</big><em>string $fieldName</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::minute" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个 select 元素，填充以一个小时中的各个分钟。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::meridian">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">meridian</tt><big>(</big><em>string $fieldName</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::meridian" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个 select 元素，填充以‘am’和‘pm’。</p>
+</dd></dl>
+
+</div>
+<div class="section" id="id79">
+<h2>显示及检查错误<a class="headerlink" href="#id79" title="永久链接至标题">¶</a></h2>
+<dl class="method">
+<dt id="FormHelper::error">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">error</tt><big>(</big><em>string $fieldName</em>, <em>mixed $text</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::error" title="永久链接至目标">¶</a></dt>
+<dd><p>当验证错误产生时，显示由 $text 指定的针对给定字段的验证错误信息。</p>
+<p>选项:</p>
+<ul class="simple">
+<li>&#8216;escape&#8217; bool 是否 html 转义错误内容。</li>
+<li>&#8216;wrap&#8217; mixed 是否将错误信息包裹在 div 中。如果是字符串，就会作为 HTML 标签使用。</li>
+<li>&#8216;class&#8217; string 错误信息的(样式)类名。</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::isFieldError">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">isFieldError</tt><big>(</big><em>string $fieldName</em><big>)</big><a class="headerlink" href="#FormHelper::isFieldError" title="永久链接至目标">¶</a></dt>
+<dd><p>如果提供的 $fieldName 字段有有效的验证错误，返回 true。:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">isFieldError</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">当使用:php:meth:<a href="#id80"><span class="problematic" id="id81">`</span></a>FormHelper::input()`方法时，缺省情况下错误会被渲染。</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::tagIsInvalid">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">tagIsInvalid</tt><big>(</big><big>)</big><a class="headerlink" href="#FormHelper::tagIsInvalid" title="永久链接至目标">¶</a></dt>
+<dd><p>如果由当前项描述的给定表单字段没有错误，就返回 false，否则就返回验证错误。</p>
+</dd></dl>
+
+</div>
+<div class="section" id="id82">
+<h2>对所有字段设置缺省值<a class="headerlink" href="#id82" title="永久链接至标题">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified">2.2 新版功能.</span></p>
+</div>
+<p>你可以使用:php:meth:<a href="#id83"><span class="problematic" id="id84">`</span></a>FormHelper::inputDefaults()`为``input()``声明一组缺省值。改变缺省选项允许你把重复的选项合并为一个方法调用:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">inputDefaults</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+        <span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+        <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;fancy&#39;</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>从此所有创建的输入项会继承在 inputDefaults 选项中声明的选项。你可以在 input() 调用中声明选项来覆盖缺省的选项:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span> <span class="c1">// 没有 div，没有 label，带有&#39;fancy&#39;样式类</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Username&#39;</span><span class="p">));</span> <span class="c1">// 带有 label 及同样的缺省选项</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="securitycomponent">
+<h2>与 SecurityComponent 组件一起使用<a class="headerlink" href="#securitycomponent" title="永久链接至标题">¶</a></h2>
+<p><tt class="xref php php-meth docutils literal"><span class="pre">SecurityComponent`组件提供了一些特性，使你的表单更加安全可靠。只需在控制器中引用``SecurityComponent`</span></tt>，你就自动获得(针对) CSRF 和表单篡改的特性。</p>
+<p>正如之前所说，当使用 SecurityComponent 组件时，你应当总是使用 <a class="reference internal" href="#FormHelper::end" title="FormHelper::end"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::end()</span></tt></a> 关闭你的表单。这会保证生成特殊的``_Token``输入项。</p>
+<dl class="method">
+<dt id="FormHelper::unlockField">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">unlockField</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#FormHelper::unlockField" title="永久链接至目标">¶</a></dt>
+<dd><p>对一个字段解锁，使得该字段免于``SecurityComponent``的字段哈希(编码)。这也允许这样的字段被 Javascript 操纵。<a href="#id85"><span class="problematic" id="id86">``</span></a>$name``参数应当是输入项的名称:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">unlockField</span><span class="p">(</span><span class="s1">&#39;User.id&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::secure">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">secure</tt><big>(</big><em>array $fields = array()</em><big>)</big><a class="headerlink" href="#FormHelper::secure" title="永久链接至目标">¶</a></dt>
+<dd><p>基于表单中使用的字段，生成带有安全哈希的隐藏字段。</p>
+</dd></dl>
+
+</div>
+<div class="section" id="updates">
+<span id="form-improvements-1-3"></span><h2>2.0 updates<a class="headerlink" href="#updates" title="永久链接至标题">¶</a></h2>
+<p><strong>$selected 参数去掉了</strong></p>
+<p><tt class="docutils literal"><span class="pre">$selected``参数从</span> <span class="pre">FormHelper</span> <span class="pre">助件的几个方法中去掉了。所有的方法现在支持``$attributes['value']``键，应当用它来代替``$selected</span></tt>。这个改变简化了 FormHelper 助件的方法，减少了参数的数量，并减轻了``$selected``导致的重复。受此影响的方法有:</p>
+<blockquote>
+<div><ul class="simple">
+<li>FormHelper::select()</li>
+<li>FormHelper::dateTime()</li>
+<li>FormHelper::year()</li>
+<li>FormHelper::month()</li>
+<li>FormHelper::day()</li>
+<li>FormHelper::hour()</li>
+<li>FormHelper::minute()</li>
+<li>FormHelper::meridian()</li>
+</ul>
+</div></blockquote>
+<p><strong>表单的缺省地址就是当前的动作</strong></p>
+<p>所有表单的缺省地址，现在就是当前地址。包括传入(passed)、命名(named)和查询字符串(querystring)参数。你可以通过在``$this-&gt;Form-&gt;create()``方法的第二个参数中提供``$options[&#8216;url&#8217;]``来覆盖缺省值。</p>
+<p><strong>FormHelper::hidden()</strong></p>
+<p>隐藏字段不再去掉 class 属性。这意味着如果隐藏字段有验证错误，错误字段的(样式)类名就会被使用。</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../views.html">视图</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../views/themes.html">主题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views/media-view.html">媒体视图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views/json-and-xml-views.html">JSON 和 XML 视图</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../views/helpers.html">助件</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache.html">缓存助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">FormHelper 助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="html.html">HtmlHelper助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.html">JsHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">SessionHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="text.html">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">TimeHelper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-general-purpose.html">通用</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../global-constants-and-functions.html">全局常量和函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core-utility-libraries/app.html">App Class</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../events.html">Events System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collections.html">Collections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-components.html">组件</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-helpers.html">助件</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache.html">缓存助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">FormHelper 助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="html.html">HtmlHelper助件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.html">JsHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">SessionHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="text.html">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">TimeHelper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-utilities.html">工具</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">FormHelper 助件</a><ul>
+<li><a class="reference internal" href="#id1">创建表单</a><ul>
+<li><a class="reference internal" href="#create">create() 方法的选项</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id14">结束表单</a></li>
+<li><a class="reference internal" href="#automagic-form-elements">创建表单元素</a><ul>
+<li><a class="reference internal" href="#id34">字段命名约定</a></li>
+<li><a class="reference internal" href="#id37">选项</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#input">生成特定类型的输入项(input)</a><ul>
+<li><a class="reference internal" href="#general-input-options">通用选项</a></li>
+<li><a class="reference internal" href="#select-checkbox-radio-input">select，checkbox 和 radio 输入项(input)的选项</a></li>
+<li><a class="reference internal" href="#datetime">Datetime 选项</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id57">表单元素相关的方法</a><ul>
+<li><a class="reference internal" href="#id72">验证(文件)上载</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id73">创建按键和提交元素</a></li>
+<li><a class="reference internal" href="#id78">创建日期和时间输入项</a></li>
+<li><a class="reference internal" href="#id79">显示及检查错误</a></li>
+<li><a class="reference internal" href="#id82">对所有字段设置缺省值</a></li>
+<li><a class="reference internal" href="#securitycomponent">与 SecurityComponent 组件一起使用</a></li>
+<li><a class="reference internal" href="#updates">2.0 updates</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="html.html" title="HtmlHelper助件" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="flash.html" title="Flash" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

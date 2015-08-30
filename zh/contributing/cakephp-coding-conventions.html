@@ -1,0 +1,827 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Coding Standards" lang="zh_CN" name="title" />
+<meta content="curly brackets,indentation level,logical errors,control structures,control structure,expr,coding standards,parenthesis,foreach,readability,moose,new features,repository,developers" lang="zh_CN" name="keywords" />
+
+    <title>编码规范 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="贡献" href="../contributing.html" />
+    <link rel="next" title="向后兼容性指南" href="backwards-compatibility.html" />
+    <link rel="prev" title="代码" href="code.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/contributing/cakephp-coding-conventions.html" /><link rel="alternate" hreflang="pt" href="../../pt/contributing/cakephp-coding-conventions.html" /><link rel="alternate" hreflang="es" href="../../es/contributing/cakephp-coding-conventions.html" /><link rel="alternate" hreflang="ja" href="../../ja/contributing/cakephp-coding-conventions.html" /><link rel="alternate" hreflang="fr" href="../../fr/contributing/cakephp-coding-conventions.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../contributing.html" accesskey="U" itemprop="url"><span itemprop="title">贡献</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/contributing/cakephp-coding-conventions.html">en</a></li>
+				
+					<li><a href="../../pt/contributing/cakephp-coding-conventions.html">pt</a></li>
+				
+					<li><a href="../../es/contributing/cakephp-coding-conventions.html">es</a></li>
+				
+					<li><a href="../../ja/contributing/cakephp-coding-conventions.html">ja</a></li>
+				
+					<li><a href="../../fr/contributing/cakephp-coding-conventions.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/contributing/cakephp-coding-conventions.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>编码规范<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>CakePHP 开发人员将使用下面的编码规范。</p>
+<p>我们建议其他开发Cake组成部分的人员也应当遵循同样的规范。</p>
+<p>你可以使用
+<a class="reference external" href="https://github.com/cakephp/cakephp-codesniffer">CakePHP Code Sniffer</a> 来检查你
+的代码是否遵循了必要的规范。</p>
+<div class="section" id="id2">
+<h2>语言<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>所有代码和注释应当以英文书写。</p>
+</div>
+<div class="section" id="id3">
+<h2>添加新特性<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>添加新特性，必须伴随相应的测试用例，在提交到代码仓库前，测试用例必须通过。</p>
+</div>
+<div class="section" id="id4">
+<h2>缩进<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>缩进使用一个制表符。</p>
+<p>所以，缩进应当看起来象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 底层</span>
+    <span class="c1">// 第1层</span>
+        <span class="c1">// 第2层</span>
+    <span class="c1">// 第1层</span>
+<span class="c1">// 底层</span>
+</pre></div>
+</div>
+<p>或者:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$booleanVariable</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+<span class="nv">$stringVariable</span> <span class="o">=</span> <span class="s1">&#39;moose&#39;</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$booleanVariable</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">&#39;布尔值为真&#39;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$stringVariable</span> <span class="o">===</span> <span class="s1">&#39;驼鹿&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;我们遇到了一只驼鹿&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>行的长度<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>为了使代码更好的可读性，建议每行保持在大约100个字符的长度。每行不得超过120个字符。</p>
+<p>简而言之:</p>
+<ul class="simple">
+<li>100个字符是建议性的上限。</li>
+<li>120个字符是强制性的上限。</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h2>控制结构<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>控制结构是&#8221;<tt class="docutils literal"><span class="pre">if</span></tt>&#8220;、&#8221;<tt class="docutils literal"><span class="pre">for</span></tt>&#8220;、&#8221;<tt class="docutils literal"><span class="pre">foreach</span></tt>&#8220;、&#8221;<tt class="docutils literal"><span class="pre">while</span></tt>&#8220;、&#8221;<tt class="docutils literal"><span class="pre">switch</span></tt>&#8220;这些。下面
+是使用&#8221;<tt class="docutils literal"><span class="pre">if</span></tt>&#8220;的一个例子:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">((</span><span class="nx">expr_1</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="nx">expr_2</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// action_1;</span>
+<span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">expr_3</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">expr_4</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// action_2;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// default_action;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>在控制结构中，在第一个括号之前应该有一个空格，在最后一个括号和开始的大括号之间
+也应该有一个空格。</li>
+<li>在控制结构中总是使用大括号，即使他们是不必要的。这会提高代码的可读性，也导致较
+少的逻辑错误。</li>
+<li>开始的大括号应与控制结构放在同一行上。结束的大括号应该新起一行，并且与控制结构
+应该有相同的缩进级别。包括在大括号中的语句应该新起一行，其代码也应该再缩进一层。</li>
+<li>在控制结构中不应该使用内嵌赋值(<em>inline assignment</em>)。</li>
+</ul>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 错误 = 没有大括号，语句的位置也不对</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">expr</span><span class="p">)</span> <span class="nx">statement</span><span class="p">;</span>
+
+<span class="c1">// 错误 = 没有大括号</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">expr</span><span class="p">)</span>
+    <span class="nx">statement</span><span class="p">;</span>
+
+<span class="c1">// 正确</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">expr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">statement</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 错误 = 内嵌赋值</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$variable</span> <span class="o">=</span> <span class="nx">Class</span><span class="o">::</span><span class="na">function</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nx">statement</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 正确</span>
+<span class="nv">$variable</span> <span class="o">=</span> <span class="nx">Class</span><span class="o">::</span><span class="na">function</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$variable</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">statement</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="id7">
+<h3>三元运算符<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>当整个三元运算可以放在一行之内时，三元运算符是允许的。更长的三元运算就应该分成
+<tt class="docutils literal"><span class="pre">if</span> <span class="pre">else</span></tt> 语句。三元运算符绝对不允许嵌套。括号虽然不必须，但是可以用在三元运算
+的条件检查之外，使其更清晰:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//很好，简单，易读</span>
+<span class="nv">$variable</span> <span class="o">=</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;variable&#39;</span><span class="p">])</span> <span class="o">?</span> <span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;variable&#39;</span><span class="p">]</span> <span class="o">:</span> <span class="k">true</span><span class="p">;</span>
+
+<span class="c1">//嵌套的三元运算不好</span>
+<span class="nv">$variable</span> <span class="o">=</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;variable&#39;</span><span class="p">])</span> <span class="o">?</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;othervar&#39;</span><span class="p">])</span> <span class="o">?</span> <span class="k">true</span> <span class="o">:</span> <span class="k">false</span> <span class="o">:</span> <span class="k">false</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>视图文件<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<p>在视图文件(.ctp files)中，开发人员使用关键词控制结构。关键词控制结构在复杂的视图
+文件中更容易阅读。控制结构可以放在一段大的 PHP 代码段落中，也可以放在单独的 PHP
+标签中:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$isAdmin</span><span class="p">)</span><span class="o">:</span>
+    <span class="k">echo</span> <span class="s1">&#39;&lt;p&gt;You are the admin user.&lt;/p&gt;&#39;</span><span class="p">;</span>
+<span class="k">endif</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;p&gt;下面也是可以接受的:&lt;/p&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$isAdmin</span><span class="p">)</span><span class="o">:</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;p&gt;You are the admin user.&lt;/p&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">endif</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>比较<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<p>总是尽可能的严格。如果特意要使用一个不严格的比较，也许应当注释说明是这样，以免
+混淆为错误。</p>
+<p>要测试一个变量是否为空，建议使用严格检查:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nv">$value</span> <span class="o">===</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>要检查的值应该放在右边:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 不建议使用</span>
+<span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="o">===</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="c1">// 推荐使用</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">()</span> <span class="o">===</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>函数调用<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<p>在函数调用中，函数名和开始的括号之间不允许有空格，在每个参数之间应当有一个空格:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$var</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">,</span> <span class="nv">$bar2</span><span class="p">,</span> <span class="nv">$bar3</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如上所示，在等号(=)的两边都应该有一个空格。</p>
+</div>
+<div class="section" id="id11">
+<h2>方法的定义<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<p>方法定义的例子:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">function</span> <span class="nf">someFunction</span><span class="p">(</span><span class="nv">$arg1</span><span class="p">,</span> <span class="nv">$arg2</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">expr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">statement</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nv">$var</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>带缺省值的参数应该放在函数定义的最后。尽量让你的函数返回一些东西, 至少是
+<tt class="docutils literal"><span class="pre">true</span></tt> 或者 <tt class="docutils literal"><span class="pre">false</span></tt> ，这样就可以判断函数调用是否成功:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">connection</span><span class="p">(</span><span class="nv">$dns</span><span class="p">,</span> <span class="nv">$persistent</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">is_array</span><span class="p">(</span><span class="nv">$dns</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$dnsInfo</span> <span class="o">=</span> <span class="nv">$dns</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nv">$dnsInfo</span> <span class="o">=</span> <span class="nx">BD</span><span class="o">::</span><span class="na">parseDNS</span><span class="p">(</span><span class="nv">$dns</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nv">$dnsInfo</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="nv">$dnsInfo</span><span class="p">[</span><span class="s1">&#39;phpType&#39;</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addError</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>等号两边都有空格。</p>
+<div class="section" id="id12">
+<h3>类型约束<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
+<p>接受对象或者数组的参数可以使用类型约束:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="sd">/**</span>
+<span class="sd"> * 方法描述。</span>
+<span class="sd"> *</span>
+<span class="sd"> * @param Model $Model 使用的模型。</span>
+<span class="sd"> * @param array $array 数组值。</span>
+<span class="sd"> * @param bool $boolean 布尔值。</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nx">Model</span> <span class="nv">$Model</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$array</span><span class="p">,</span> <span class="nv">$boolean</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这里 <tt class="docutils literal"><span class="pre">$Model</span></tt> 必须是 <tt class="docutils literal"><span class="pre">Model</span></tt> 的实例，<tt class="docutils literal"><span class="pre">$array</span></tt> 必须是数组(<tt class="docutils literal"><span class="pre">array</span></tt>)。</p>
+<p>注意，如果你要允许 <tt class="docutils literal"><span class="pre">$array</span></tt> 也可以是 <tt class="docutils literal"><span class="pre">ArrayObject</span></tt> 的实例，你就不能用类型约束，
+因为 <tt class="docutils literal"><span class="pre">array</span></tt> 只接受基本类型:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="sd">/**</span>
+<span class="sd"> * 方法描述。</span>
+<span class="sd"> *</span>
+<span class="sd"> * @param array|ArrayObject $array 数组值。</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$array</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="method-chaining">
+<h2>方法链接(<em>Method Chaining</em>)<a class="headerlink" href="#method-chaining" title="永久链接至标题">¶</a></h2>
+<p>方法链接时, 多个方法应当在各自的行上, 并且缩进一个制表符:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$email</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;foo@example.com&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">to</span><span class="p">(</span><span class="s1">&#39;bar@example.com&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">subject</span><span class="p">(</span><span class="s1">&#39;A great message&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="docblocks">
+<h2>文档代码块(<em>DocBlocks</em>)<a class="headerlink" href="#docblocks" title="永久链接至标题">¶</a></h2>
+<p>所有的注释代码块，除了文件中的第一个代码块，之前总是应当有一个空行。</p>
+<div class="section" id="id13">
+<h3>文件头文档代码块<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
+<p>所有的 PHP 文件都应当包含一个文件头文档代码块，看起来应当象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="sd">/**</span>
+<span class="sd">* CakePHP(tm) : Rapid Development Framework (http://cakephp.org)</span>
+<span class="sd">* Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)</span>
+<span class="sd">*</span>
+<span class="sd">* Licensed under The MIT License</span>
+<span class="sd">* For full copyright and license information, please see the LICENSE.txt</span>
+<span class="sd">* Redistributions of files must retain the above copyright notice.</span>
+<span class="sd">*</span>
+<span class="sd">* @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)</span>
+<span class="sd">* @link          http://cakephp.org CakePHP(tm) Project</span>
+<span class="sd">* @since         X.Y.Z</span>
+<span class="sd">* @license       http://www.opensource.org/licenses/mit-license.php MIT License</span>
+<span class="sd">*/</span>
+</pre></div>
+</div>
+<p>包含的 <a class="reference external" href="http://phpdoc.org">phpDocumentor</a> 标签为：</p>
+<ul class="simple">
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html">&#64;copyright</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html">&#64;link</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html">&#64;since</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/license.html">&#64;license</a></li>
+</ul>
+</div>
+<div class="section" id="id14">
+<h3>类文档代码块<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h3>
+<p>类文档代码块应当象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="sd">/**</span>
+<span class="sd"> * 类的简短描述。</span>
+<span class="sd"> *</span>
+<span class="sd"> * 类的详细描述。</span>
+<span class="sd"> * 可使用多行。</span>
+<span class="sd"> *</span>
+<span class="sd"> * @deprecated 3.0.0 在 2.6.0 版本中作废。将在 3.0.0 版本中移除。使用 Bar 代替。</span>
+<span class="sd"> * @see Bar</span>
+<span class="sd"> * @link http://book.cakephp.org/2.0/en/foo.html</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>类文档代码块可以包含如下 <a class="reference external" href="http://phpdoc.org">phpDocumentor</a> 标签：</p>
+<ul class="simple">
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html">&#64;deprecated</a>
+使用 <tt class="docutils literal"><span class="pre">&#64;version</span> <span class="pre">&lt;vector&gt;</span> <span class="pre">&lt;description&gt;</span></tt> 格式，其中 <tt class="docutils literal"><span class="pre">version</span></tt> 和
+<tt class="docutils literal"><span class="pre">description</span></tt> 是必须的。</li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html">&#64;internal</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html">&#64;link</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/property.html">&#64;property</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html">&#64;see</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html">&#64;since</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html">&#64;uses</a></li>
+</ul>
+</div>
+<div class="section" id="id18">
+<h3>属性文档代码块<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+<p>属性文档代码块应当象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="sd">/**</span>
+<span class="sd"> * @var string|null 属性的描述。</span>
+<span class="sd"> *</span>
+<span class="sd"> * @deprecated 3.0.0 在 2.5.0 版本中作废。将在 3.0.0 版本中移除。使用 $_bla 代替。</span>
+<span class="sd"> * @see Bar::$_bla</span>
+<span class="sd"> * @link http://book.cakephp.org/2.0/en/foo.html#properties</span>
+<span class="sd"> */</span>
+<span class="k">protected</span> <span class="nv">$_bar</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>属性文档代码块可以包含如下 <a class="reference external" href="http://phpdoc.org">phpDocumentor</a> 标签：</p>
+<ul class="simple">
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html">&#64;deprecated</a>
+使用 <tt class="docutils literal"><span class="pre">&#64;version</span> <span class="pre">&lt;vector&gt;</span> <span class="pre">&lt;description&gt;</span></tt> 格式，其中 <tt class="docutils literal"><span class="pre">version</span></tt> 和
+<tt class="docutils literal"><span class="pre">description</span></tt> 是必须的。</li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html">&#64;internal</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html">&#64;link</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html">&#64;see</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html">&#64;since</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/var.html">&#64;var</a></li>
+</ul>
+</div>
+<div class="section" id="id25">
+<h3>方法/函数文档代码块<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h3>
+<p>方法和函数文档代码块应当象这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="sd">/**</span>
+<span class="sd"> * 方法的简短描述。</span>
+<span class="sd"> *</span>
+<span class="sd"> * 方法的详细描述。</span>
+<span class="sd"> * 可使用多行。</span>
+<span class="sd"> *</span>
+<span class="sd"> * @param string $param2 第一个参数。</span>
+<span class="sd"> * @param array|null $param2 第二个参数。</span>
+<span class="sd"> * @return array cakes 数组。</span>
+<span class="sd"> * @throws Exception 如果出错。</span>
+<span class="sd"> *</span>
+<span class="sd"> * @link http://book.cakephp.org/2.0/en/foo.html#bar</span>
+<span class="sd"> * @deprecated 3.0.0 在 2.5.0 版本中作废。将在 3.0.0 版本中移除。使用 Bar::baz 代替。</span>
+<span class="sd"> * @see Bar::baz</span>
+<span class="sd"> */</span>
+ <span class="k">public</span> <span class="k">function</span> <span class="nf">bar</span><span class="p">(</span><span class="nv">$param1</span><span class="p">,</span> <span class="nv">$param2</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+<p>方法和函数文档代码块可以包含如下 <a class="reference external" href="http://phpdoc.org">phpDocumentor</a> 标签：</p>
+<ul class="simple">
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html">&#64;deprecated</a>
+使用 <tt class="docutils literal"><span class="pre">&#64;version</span> <span class="pre">&lt;vector&gt;</span> <span class="pre">&lt;description&gt;</span></tt> 格式，其中 <tt class="docutils literal"><span class="pre">version</span></tt> 和
+<tt class="docutils literal"><span class="pre">description</span></tt> 是必须的。</li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html">&#64;internal</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html">&#64;link</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/param.html">&#64;param</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/return.html">&#64;return</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/throws.html">&#64;throws</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html">&#64;see</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html">&#64;since</a></li>
+<li><a class="reference external" href="http://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html">&#64;uses</a></li>
+</ul>
+</div>
+<div class="section" id="id33">
+<h3>变量类型<a class="headerlink" href="#id33" title="永久链接至标题">¶</a></h3>
+<p>文档块(<em>DocBlock</em>)中使用的变量类型:</p>
+<dl class="docutils">
+<dt>类型</dt>
+<dd>描述</dd>
+<dt>mixed</dt>
+<dd>有未定义(或多种)类型的变量。</dd>
+<dt>int</dt>
+<dd>整数类型变量(整数)。</dd>
+<dt>float</dt>
+<dd>浮点数类型(浮点数)。</dd>
+<dt>bool</dt>
+<dd>逻辑类型(true或者false)。</dd>
+<dt>string</dt>
+<dd>字符串类型(位于&#8221; &#8220;或&#8217; &#8216;中的任何值)。</dd>
+<dt>null</dt>
+<dd>空类型。通常与另一种类型一起使用。</dd>
+<dt>array</dt>
+<dd>数组类型。</dd>
+<dt>object</dt>
+<dd>对象类型。 如果可能应该使用更明确的类名。</dd>
+<dt>resource</dt>
+<dd>资源类型(例如由mysql_connect()返回的)。
+记住, 如果你指定了混合类型, 则需指明是未知, 或者可以是哪些类型。</dd>
+<dt>callable</dt>
+<dd>可调用的函数。</dd>
+</dl>
+<p>你也可以用竖线(<em>pipe char</em>)组合多个类型:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">int</span><span class="o">|</span><span class="nx">bool</span>
+</pre></div>
+</div>
+<p>对两种以上的类型，通常最好使用 <tt class="docutils literal"><span class="pre">mixed</span></tt> 。</p>
+<p>当返回对象本身时，例如为了实现链式方法，应当使用 <tt class="docutils literal"><span class="pre">$this</span></tt></p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="sd">/**</span>
+<span class="sd"> * Foo function.</span>
+<span class="sd"> *</span>
+<span class="sd"> * @return $this</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id34">
+<h2>包括文件<a class="headerlink" href="#id34" title="永久链接至标题">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">include</span></tt> 、 <tt class="docutils literal"><span class="pre">require</span></tt> 、 <tt class="docutils literal"><span class="pre">include_once</span></tt> 和 <tt class="docutils literal"><span class="pre">require_once</span></tt> 没有括号:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 错误 = 括号</span>
+<span class="k">require_once</span><span class="p">(</span><span class="s1">&#39;ClassFileName.php&#39;</span><span class="p">);</span>
+<span class="k">require_once</span> <span class="p">(</span><span class="nv">$class</span><span class="p">);</span>
+
+<span class="c1">// 正确 = 没有括号</span>
+<span class="k">require_once</span> <span class="s1">&#39;ClassFileName.php&#39;</span><span class="p">;</span>
+<span class="k">require_once</span> <span class="nv">$class</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>当包括类或者库的文件时, 总是只使用
+<a class="reference external" href="http://php.net/require_once">require_once</a> 函数。</p>
+</div>
+<div class="section" id="php">
+<h2>PHP 标签<a class="headerlink" href="#php" title="永久链接至标题">¶</a></h2>
+<p>总是使用长标签(<tt class="docutils literal"><span class="pre">&lt;?php</span> <span class="pre">?&gt;</span></tt>), 而不用短标签(<tt class="docutils literal"><span class="pre">&lt;?</span> <span class="pre">?&gt;</span></tt>)。</p>
+</div>
+<div class="section" id="id35">
+<h2>命名规则<a class="headerlink" href="#id35" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id36">
+<h3>函数<a class="headerlink" href="#id36" title="永久链接至标题">¶</a></h3>
+<p>所有函数名都应为 camelBack 形式:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">function</span> <span class="nf">longFunctionName</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id37">
+<h3>类<a class="headerlink" href="#id37" title="永久链接至标题">¶</a></h3>
+<p>类名应为驼峰命名法(<em>CamelCase</em>), 例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ExampleClass</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id38">
+<h3>变量<a class="headerlink" href="#id38" title="永久链接至标题">¶</a></h3>
+<p>变量名应当尽可能具有描述性, 但同时越短越好。普通变量应当以小写字母开头，如果含
+有多个词, 则应当为 camelBack 形式。引用对象变量的变量名应当以大写字母开头，并且
+与对象所属的类应当以某种方式相关联。例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$user</span> <span class="o">=</span> <span class="s1">&#39;John&#39;</span><span class="p">;</span>
+<span class="nv">$users</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="s1">&#39;Hans&#39;</span><span class="p">,</span> <span class="s1">&#39;Arne&#39;</span><span class="p">);</span>
+
+<span class="nv">$Dispatcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dispatcher</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id39">
+<h3>成员的可见范围<a class="headerlink" href="#id39" title="永久链接至标题">¶</a></h3>
+<p>方法和变量应当使用 PHP5 的 private 和 protected 关键字。另外，protected 的方法和
+变量应当以一个下划线开头(<tt class="docutils literal"><span class="pre">_</span></tt>)。例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$_iAmAProtectedVariable</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">_iAmAProtectedMethod</span><span class="p">()</span> <span class="p">{</span>
+       <span class="cm">/*...*/</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>私有方法和变量应当以双下划线(<tt class="docutils literal"><span class="pre">__</span></tt>)开头。例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$__iAmAPrivateVariable</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="nf">__iAmAPrivateMethod</span><span class="p">()</span> <span class="p">{</span>
+        <span class="cm">/*...*/</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>不过，尽可能避免私有方法或者变量，而使用保护(protected)的(方法或者变量)。后者可以
+被子类访问或者改变，而私有的(方法或者变量)阻止了扩展或重用。私有也使测试更加困难。</p>
+</div>
+<div class="section" id="id40">
+<h3>示例地址<a class="headerlink" href="#id40" title="永久链接至标题">¶</a></h3>
+<p>所有示例用的网址和电子邮箱地址应当使用&#8221;example.com&#8221;、&#8221;example.org&#8221;和&#8221;example.net&#8221;，
+例如:</p>
+<ul class="simple">
+<li>电子邮箱地址: <a class="reference external" href="mailto:someone&#37;&#52;&#48;example&#46;com">someone<span>&#64;</span>example<span>&#46;</span>com</a></li>
+<li>网址: <a class="reference external" href="http://www.example.com">http://www.example.com</a></li>
+<li>FTP: <a class="reference external" href="ftp://ftp.example.com">ftp://ftp.example.com</a></li>
+</ul>
+<p>&#8220;example.com&#8221; 域名已为此目的而保留(参见 <span class="target" id="index-0"></span><a class="rfc reference external" href="http://tools.ietf.org/html/rfc2606.html"><strong>RFC 2606</strong></a> )，建议在文档中或者作为例子使
+用。</p>
+</div>
+<div class="section" id="id41">
+<h3>文件<a class="headerlink" href="#id41" title="永久链接至标题">¶</a></h3>
+<p>不包含类的文件，其文件名应当小写，并且以下划线分隔单词，例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">long_file_name</span><span class="o">.</span><span class="nx">php</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="casting">
+<h3>强制转换(Casting)<a class="headerlink" href="#casting" title="永久链接至标题">¶</a></h3>
+<p>做强制转换，我们使用:</p>
+<dl class="docutils">
+<dt>类型</dt>
+<dd>描述</dd>
+<dt>(bool)</dt>
+<dd>强制转换成布尔类型。</dd>
+<dt>(int)</dt>
+<dd>强制转换成整数类型。</dd>
+<dt>(float)</dt>
+<dd>强制转换成浮点类型。</dd>
+<dt>(string)</dt>
+<dd>强制转换成字符串类型。</dd>
+<dt>(array)</dt>
+<dd>强制转换成数组类型。</dd>
+<dt>(object)</dt>
+<dd>强制转换成对象类型。</dd>
+</dl>
+<p>在适用时，请使用 <tt class="docutils literal"><span class="pre">(int)$var</span></tt>，而不是 <tt class="docutils literal"><span class="pre">intval($var)</span></tt>，使用 <tt class="docutils literal"><span class="pre">(float)$var</span></tt>，而
+不是 <tt class="docutils literal"><span class="pre">floatval($var)</span></tt>。</p>
+</div>
+<div class="section" id="id42">
+<h3>常量<a class="headerlink" href="#id42" title="永久链接至标题">¶</a></h3>
+<p>常量名称应当大写:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nb">define</span><span class="p">(</span><span class="s1">&#39;CONSTANT&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果常量名称由多个单词组成的，则应当用下划线分隔，例如:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nb">define</span><span class="p">(</span><span class="s1">&#39;LONG_NAMED_CONSTANT&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../contributing.html">贡献</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="documentation.html">文档</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tickets.html">问题跟踪系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html">代码</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">编码规范</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="backwards-compatibility.html">向后兼容性指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cakephp-development-process.html">CakePHP Development Process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">编码规范</a><ul>
+<li><a class="reference internal" href="#id2">语言</a></li>
+<li><a class="reference internal" href="#id3">添加新特性</a></li>
+<li><a class="reference internal" href="#id4">缩进</a></li>
+<li><a class="reference internal" href="#id5">行的长度</a></li>
+<li><a class="reference internal" href="#id6">控制结构</a><ul>
+<li><a class="reference internal" href="#id7">三元运算符</a></li>
+<li><a class="reference internal" href="#id8">视图文件</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id9">比较</a></li>
+<li><a class="reference internal" href="#id10">函数调用</a></li>
+<li><a class="reference internal" href="#id11">方法的定义</a><ul>
+<li><a class="reference internal" href="#id12">类型约束</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#method-chaining">方法链接(<em>Method Chaining</em>)</a></li>
+<li><a class="reference internal" href="#docblocks">文档代码块(<em>DocBlocks</em>)</a><ul>
+<li><a class="reference internal" href="#id13">文件头文档代码块</a></li>
+<li><a class="reference internal" href="#id14">类文档代码块</a></li>
+<li><a class="reference internal" href="#id18">属性文档代码块</a></li>
+<li><a class="reference internal" href="#id25">方法/函数文档代码块</a></li>
+<li><a class="reference internal" href="#id33">变量类型</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id34">包括文件</a></li>
+<li><a class="reference internal" href="#php">PHP 标签</a></li>
+<li><a class="reference internal" href="#id35">命名规则</a><ul>
+<li><a class="reference internal" href="#id36">函数</a></li>
+<li><a class="reference internal" href="#id37">类</a></li>
+<li><a class="reference internal" href="#id38">变量</a></li>
+<li><a class="reference internal" href="#id39">成员的可见范围</a></li>
+<li><a class="reference internal" href="#id40">示例地址</a></li>
+<li><a class="reference internal" href="#id41">文件</a></li>
+<li><a class="reference internal" href="#casting">强制转换(Casting)</a></li>
+<li><a class="reference internal" href="#id42">常量</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="backwards-compatibility.html" title="向后兼容性指南" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="code.html" title="代码" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

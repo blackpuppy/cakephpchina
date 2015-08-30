@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Validating Data from the Controller" lang="zh_CN" name="title" />
+<meta content="password rules,validations,subset,array,logs,logic,email,first name last name,models,options,data model" lang="zh_CN" name="keywords" />
+
+    <title>从控制器验证数据 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="数据验证" href="../data-validation.html" />
+    <link rel="next" title="回调方法" href="../callback-methods.html" />
+    <link rel="prev" title="数据验证" href="../data-validation.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/models/data-validation/validating-data-from-the-controller.html" /><link rel="alternate" hreflang="pt" href="../../../pt/models/data-validation/validating-data-from-the-controller.html" /><link rel="alternate" hreflang="es" href="../../../es/models/data-validation/validating-data-from-the-controller.html" /><link rel="alternate" hreflang="ja" href="../../../ja/models/data-validation/validating-data-from-the-controller.html" /><link rel="alternate" hreflang="fr" href="../../../fr/models/data-validation/validating-data-from-the-controller.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../models.html"  itemprop="url"><span itemprop="title">模型</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../data-validation.html" accesskey="U" itemprop="url"><span itemprop="title">数据验证</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/models/data-validation/validating-data-from-the-controller.html">en</a></li>
+				
+					<li><a href="../../../pt/models/data-validation/validating-data-from-the-controller.html">pt</a></li>
+				
+					<li><a href="../../../es/models/data-validation/validating-data-from-the-controller.html">es</a></li>
+				
+					<li><a href="../../../ja/models/data-validation/validating-data-from-the-controller.html">ja</a></li>
+				
+					<li><a href="../../../fr/models/data-validation/validating-data-from-the-controller.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/models/data-validation/validating-data-from-the-controller.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>从控制器验证数据<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>虽然通常只使用模型的 save 方法，但也许有时仅需要验证而不保存数据。例如，也许在真正的把数据
+保存到数据库之前，想要给用户显示一些额外的信息。验证数据的过程与保存数据相比，有细微的差别。</p>
+<p>首先，将数据赋值给模型:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>然后要检查数据是否正确，使用模型的 validates 方法，如果正确就会返回 true，否则就返回 false:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">validates</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// 验证通过的逻辑</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// 验证未通过的逻辑</span>
+    <span class="nv">$errors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">validationErrors</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>也许更乐意用模型中定义的验证规则的子集来验证模型。比方说有一个 User 模型，含有 first_name，
+last_name，email 和 password 字段。在这个例子中，当创建或者编辑一个用户时会验证整个这4个
+字段。然而当用户登录时只想验证电子邮件和密码字段。要做到这点可以传入一个选项数组指定要验证
+的字段:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">validates</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;fieldList&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">))))</span> <span class="p">{</span>
+    <span class="c1">// 有效</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// 无效</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>validates 方法调用 invalidFields 方法，后者填入模型的 validationErrors 属性。
+invalidFields 方法也把这个属性作为结果返回:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$errors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">invalidFields</span><span class="p">();</span> <span class="c1">// 包含 validationErrors 数组</span>
+</pre></div>
+</div>
+<p>在对 <tt class="docutils literal"><span class="pre">invalidFields()</span></tt> 的连续调用之间，验证错误列表不会清除。所以如果是在一个循环内
+验证，并且想要分开每组错误就不要使用 <tt class="docutils literal"><span class="pre">invalidFields()</span></tt> 。而是使用 <tt class="docutils literal"><span class="pre">validates()</span></tt> 方法
+再读取 <tt class="docutils literal"><span class="pre">validationErrors</span></tt> 模型属性。</p>
+<p>重要的是要记住，在验证数据前数据必须赋值给模型。这不同于 save 方法可以允许数据作为参数传入。
+另外，记住调用 save 方法之前并没有必要调用 validates 方法，因为 save 方法在真的保存数据之前会自动
+验证数据。</p>
+<p>要验证多个模型，应当使用下面的方法:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">saveAll</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;validate&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;only&#39;</span><span class="p">)))</span> <span class="p">{</span>
+  <span class="c1">// 验证通过</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="c1">// 验证未通过</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>如果在保存之前验证了数据，那么可以关闭验证以避免第二次验证:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">saveAll</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;validate&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">)))</span> <span class="p">{</span>
+    <span class="c1">// 不验证就保存</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">视图</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../models.html">模型</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../associations-linking-models-together.html">关联：将模型连接在一起</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../retrieving-your-data.html">检索数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../saving-your-data.html">保存数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deleting-data.html">删除数据</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../data-validation.html">数据验证</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">从控制器验证数据</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../callback-methods.html">回调方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasources.html">数据源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../model-attributes.html">模型属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../additional-methods-and-properties.html">其它方法和属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../virtual-fields.html">虚字段</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transactions.html">事务</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">从控制器验证数据</a></li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="../callback-methods.html" title="回调方法" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="../data-validation.html" title="数据验证" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

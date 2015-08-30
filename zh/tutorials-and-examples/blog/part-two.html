@@ -1,0 +1,854 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Blog Tutorial Adding a Layer" lang="zh_CN" name="title" />
+<meta content="doc models,validation check,controller actions,model post,php class,model class,model object,business logic,database table,naming convention,bread and butter,callbacks,prefixes,nutshell,interaction,array,cakephp,interface,applications,delete" lang="zh_CN" name="keywords" />
+
+    <title>博客教程——添加一个层 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="教程 &amp; 实例" href="../../tutorials-and-examples.html" />
+    <link rel="next" title="简单的身份验证和授权应用" href="../blog-auth-example/auth.html" />
+    <link rel="prev" title="网址重写(URL Rewriting)" href="../../installation/url-rewriting.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/tutorials-and-examples/blog/part-two.html" /><link rel="alternate" hreflang="pt" href="../../../pt/tutorials-and-examples/blog/part-two.html" /><link rel="alternate" hreflang="es" href="../../../es/tutorials-and-examples/blog/part-two.html" /><link rel="alternate" hreflang="ja" href="../../../ja/tutorials-and-examples/blog/part-two.html" /><link rel="alternate" hreflang="fr" href="../../../fr/tutorials-and-examples/blog/part-two.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../tutorials-and-examples.html" accesskey="U" itemprop="url"><span itemprop="title">教程 &amp; 实例</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/tutorials-and-examples/blog/part-two.html">en</a></li>
+				
+					<li><a href="../../../pt/tutorials-and-examples/blog/part-two.html">pt</a></li>
+				
+					<li><a href="../../../es/tutorials-and-examples/blog/part-two.html">es</a></li>
+				
+					<li><a href="../../../ja/tutorials-and-examples/blog/part-two.html">ja</a></li>
+				
+					<li><a href="../../../fr/tutorials-and-examples/blog/part-two.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/tutorials-and-examples/blog/part-two.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>博客教程——添加一个层<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="post">
+<h2>创建文章(<em>Post</em>)模型<a class="headerlink" href="#post" title="永久链接至标题">¶</a></h2>
+<p>模型类是 CakePHP 应用程序的基础。通过创建一个能够和数据库交互的 CakePHP 模型，我
+们可以有足够的基础，便于以后进行查看、添加、编辑和删除的操作。</p>
+<p>CakePHP 的模型类文件应该在 <tt class="docutils literal"><span class="pre">/app/Model</span></tt> 目录中，我们要创建的文件将保存为
+<tt class="docutils literal"><span class="pre">/app/Model/Post.php</span></tt>。该文件的完整内容应为:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在 CakePHP 中，命名约定很重要。通过命名我们的模型为 Post，CakePHP 能自动推断出，
+该模型是在 PostsController 中使用的，并且将被连接到数据库中名为 &#8220;posts&#8221; 的表。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">如果 CakePHP 不能在 /app/Model 目录中找到相应的文件，它将自动为你动态创建一个
+模型对象。这也就意味着，如果你碰巧没有正确命名你的文件(比如命名为 post.php 或
+posts.php 而不是 Post.php)，CakePHP 将无法识别你的任何错误命名的模型类对象，
+而使用自动创建的模型对象代替。</p>
+</div>
+<p>关于模型的更多信息，比如表的前缀、回调和验证，请查看手册中的 <a class="reference internal" href="../../models.html"><em>模型</em></a> 一章。</p>
+</div>
+<div class="section" id="id2">
+<h2>创建文章(<em>Post</em>)控制器<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>接下来，为我们的文章(<em>post</em>)创建一个控制器。这个控制器是所有文章的商业逻辑起作用
+的地方。总之，这里是你操纵模型，并完成有关文章的事情的地方。我们将把这个新的控制
+器保存在 <tt class="docutils literal"><span class="pre">/app/Controller</span></tt> 目录下的 <tt class="docutils literal"><span class="pre">PostsController.php</span></tt> 文件中。这是控制器
+的基本内容:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Html&#39;</span><span class="p">,</span> <span class="s1">&#39;Form&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>现在，让我们为控制器添加一个动作。动作通常代表应用中单个函数或者接口。例如，当用
+户请求 www.example.com/posts/index (等同于 www.example.com/posts/)，他们将会期望
+看到一个文章列表。这个动作的代码会是这样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Html&#39;</span><span class="p">,</span> <span class="s1">&#39;Form&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>通过在 PostsController 中定义方法 <tt class="docutils literal"><span class="pre">index()</span></tt>，用户现在可以通过请求
+www.example.com/posts/index 来访问该方法中的商业逻辑。同样的，如果定义一个方法
+<tt class="docutils literal"><span class="pre">foobar()</span></tt> ，用户将可以通过请求 www.example.com/posts/foobar 来访问。</p>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">你也许会忍不住以某种方式来命名控制器和动作去得到一个特定的网址。请抵制住这种
+诱惑。请遵循 CakePHP 的规范(首字母大写，复数名词，等等)，创建易读和易于理解的
+动作名称。你可以使用&#8221;路由(<em>routes</em>)&#8221;将网址与你的代码映射起来，这个后面会讲到。</p>
+</div>
+<p>在该动作中唯一的语句使用 <tt class="docutils literal"><span class="pre">set()</span></tt> 方法从控制器中把数据传递到视图(<em>view</em>)中(我们
+会在下一步创建视图)。该行代码设置名为&#8217;posts&#8217;的视图变量为 Post 模型的
+<tt class="docutils literal"><span class="pre">find('all')</span></tt> 方法的返回值。我们的 Post 模型自动可以通过 <tt class="docutils literal"><span class="pre">$this-&gt;Post</span></tt> 来访问，
+是因为我们遵循了 CakePHP 的命名规范。</p>
+<p>想了解更多的关于 CakePHP 控制器的信息，请查看 <a class="reference internal" href="../../controllers.html"><em>控制器</em></a> 一章。</p>
+</div>
+<div class="section" id="id3">
+<h2>创建文章(<em>Post</em>)视图<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>现在，我们的数据已经流向模型，应用程序的逻辑和流程也在控制器中定义了，让我们为之
+前的 index 动作创建一个视图吧。</p>
+<p>CakePHP 的视图仅仅是嵌入应用程序的布局中的展示层片段。对大多数应用程序而言，他们
+是嵌入 PHP 的 HTML，但它们也可能是 XML，CSV，甚至是二进制数据。</p>
+<p>布局是包裹视图的展示层代码。可以定义多个布局，并且可以在它们之间切换。不过，目前
+就让我们使用缺省的布局吧。</p>
+<p>还记得在上一节中，我们使用了 <tt class="docutils literal"><span class="pre">set()</span></tt> 方法把 &#8216;posts&#8217; 变量赋值给视图吗？这会把如
+下所示的数据传递到视图中:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// print_r($posts) output:</span>
+
+<span class="k">Array</span>
+<span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">Post</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+                    <span class="p">[</span><span class="nx">title</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">The</span> <span class="nx">title</span>
+                    <span class="p">[</span><span class="nx">body</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">This</span> <span class="nx">is</span> <span class="nx">the</span> <span class="nx">post</span> <span class="nx">body</span><span class="o">.</span>
+                    <span class="p">[</span><span class="nx">created</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2008</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">13</span> <span class="mi">18</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">55</span>
+                    <span class="p">[</span><span class="nx">modified</span><span class="p">]</span> <span class="o">=&gt;</span>
+                <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">Post</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+                    <span class="p">[</span><span class="nx">title</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">A</span> <span class="nx">title</span> <span class="nx">once</span> <span class="nx">again</span>
+                    <span class="p">[</span><span class="nx">body</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">And</span> <span class="nx">the</span> <span class="nx">post</span> <span class="nx">body</span> <span class="nx">follows</span><span class="o">.</span>
+                    <span class="p">[</span><span class="nx">created</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2008</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">13</span> <span class="mi">18</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">56</span>
+                    <span class="p">[</span><span class="nx">modified</span><span class="p">]</span> <span class="o">=&gt;</span>
+                <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="nx">Post</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+                <span class="p">(</span>
+                    <span class="p">[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">3</span>
+                    <span class="p">[</span><span class="nx">title</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Title</span> <span class="nx">strikes</span> <span class="nx">back</span>
+                    <span class="p">[</span><span class="nx">body</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">This</span> <span class="nx">is</span> <span class="nx">really</span> <span class="nx">exciting</span><span class="o">!</span> <span class="k">Not</span><span class="o">.</span>
+                    <span class="p">[</span><span class="nx">created</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2008</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">13</span> <span class="mi">18</span><span class="o">:</span><span class="mi">34</span><span class="o">:</span><span class="mi">57</span>
+                    <span class="p">[</span><span class="nx">modified</span><span class="p">]</span> <span class="o">=&gt;</span>
+                <span class="p">)</span>
+        <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>CakePHP 的视图保存在 <tt class="docutils literal"><span class="pre">/app/View</span></tt> 目录中，在一个与相应的控制器对应的目录中。(在
+这里我们需要创建目录 &#8216;Posts&#8217;。)为了把文章(<em>post</em>)的数据显示在一个美观的表格中，我
+们的视图代码会象下面这样。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;!-- File: /app/View/Posts/index.ctp --&gt;</span>
+
+<span class="x">&lt;h1&gt;Blog posts&lt;/h1&gt;</span>
+<span class="x">&lt;table&gt;</span>
+<span class="x">    &lt;tr&gt;</span>
+<span class="x">        &lt;th&gt;Id&lt;/th&gt;</span>
+<span class="x">        &lt;th&gt;Title&lt;/th&gt;</span>
+<span class="x">        &lt;th&gt;Created&lt;/th&gt;</span>
+<span class="x">    &lt;/tr&gt;</span>
+
+<span class="x">    &lt;!-- Here is where we loop through our $posts array, printing out post info --&gt;</span>
+
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$posts</span> <span class="k">as</span> <span class="nv">$post</span><span class="p">)</span><span class="o">:</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;tr&gt;</span>
+<span class="x">        &lt;td&gt;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">];</span> <span class="cp">?&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">        &lt;td&gt;</span>
+<span class="x">            </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span><span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;title&#39;</span><span class="p">],</span>
+<span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]));</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">        &lt;/td&gt;</span>
+<span class="x">        &lt;td&gt;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;created&#39;</span><span class="p">];</span> <span class="cp">?&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">    &lt;/tr&gt;</span>
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">endforeach</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="nb">unset</span><span class="p">(</span><span class="nv">$post</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;/table&gt;</span>
+</pre></div>
+</div>
+<p>你也许已经注意到，我们使用了 <tt class="docutils literal"><span class="pre">$this-&gt;Html</span></tt> 这个对象。这是 CakePHP 的
+<a class="reference internal" href="../../core-libraries/helpers/html.html#HtmlHelper" title="HtmlHelper"><tt class="xref php php-class docutils literal"><span class="pre">HtmlHelper</span></tt></a> 类的一个实例。CakePHP 提供了一组视图助件(<em>view helper</em>)，
+从而使得链接、表单输出、JavaScript 和 AJAX 这些事情易如反掌。你可以在
+<a class="reference internal" href="../../views/helpers.html"><em>助件</em></a> 一章了解到如何使用它们，但在这里值得注意的是，<tt class="docutils literal"><span class="pre">link()</span></tt> 方
+法会产生一个带有标题(第一个参数)和网址(第二个参数)的 HTML 链接。</p>
+<p>在 CakePHP 中指定网址时，推荐使用数组格式。在路由(<em>Routes</em>)一节中我们会详细解释这
+些。使用数组格式来表示网址让你可以利用 CakePHP 的反向路由功能。你也可以定义相对于
+应用程序根目录的路径，像 /controller/action/param1/param2 这样。</p>
+<p>现在，你可以在浏览器中输入地址 <a class="reference external" href="http://www.example.com/posts/index">http://www.example.com/posts/index</a>。你应该可以看到
+你的视图正确地显示，带有标题，以及表格中的文章列表。</p>
+<p>如果你在点击了我们在这个视图中创建的链接(用文章标题指向网址 /posts/view/some_id
+的链接)，CakePHP 将会告诉你这个动作尚未定义。如果你没有看到这个错误，那就是什么地
+方出错了，或者你实际上已经定义了，那你可够贼的。如果还没有，现在就让我们在
+PostsController 中创建这个动作吧:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// File: /app/Controller/PostsController.php</span>
+<span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Html&#39;</span><span class="p">,</span> <span class="s1">&#39;Form&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid post&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+
+        <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">findById</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$post</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid post&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>你对 <tt class="docutils literal"><span class="pre">set()</span></tt> 方法应该已经很熟悉了。请注意我们使用 <tt class="docutils literal"><span class="pre">findById()</span></tt> 方法，而不是
+<tt class="docutils literal"><span class="pre">find('all')</span></tt> 方法，因为我们只想要一篇文章的数据。</p>
+<p>注意到我们的视图动作接受一个参数，我们要查看的文章的 ID。这个参数是通过请求的网址
+来传递给动作的。如果用户请求 <tt class="docutils literal"><span class="pre">/posts/view/3</span></tt>，那么数据 &#8216;3&#8217; 就会作为 <tt class="docutils literal"><span class="pre">$id</span></tt> 传
+入。</p>
+<p>我们也做了些错误检查来确保用户确实是要访问一条记录。如果用户请求
+<tt class="docutils literal"><span class="pre">/posts/view</span></tt> ，我们就抛出一个 <tt class="docutils literal"><span class="pre">NotFoundException</span></tt> 异常，让 CakePHP 的
+ErrorHandler 来处理。我们也作了同样的检查来确保用户访问的记录是存在的。</p>
+<p>现在让我们创建我们的新动作 &#8216;view&#8217; 的视图，并保存为 <tt class="docutils literal"><span class="pre">/app/View/Posts/view.ctp</span></tt>。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;!-- File: /app/View/Posts/view.ctp --&gt;</span>
+
+<span class="x">&lt;h1&gt;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nx">h</span><span class="p">(</span><span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;title&#39;</span><span class="p">]);</span> <span class="cp">?&gt;</span><span class="x">&lt;/h1&gt;</span>
+
+<span class="x">&lt;p&gt;&lt;small&gt;Created: </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;created&#39;</span><span class="p">];</span> <span class="cp">?&gt;</span><span class="x">&lt;/small&gt;&lt;/p&gt;</span>
+
+<span class="x">&lt;p&gt;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nx">h</span><span class="p">(</span><span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;body&#39;</span><span class="p">]);</span> <span class="cp">?&gt;</span><span class="x">&lt;/p&gt;</span>
+</pre></div>
+</div>
+<p>为了验证这是正确的，请打开浏览器访问 <tt class="docutils literal"><span class="pre">/posts/index</span></tt> 页面中的链接，或者手工输入
+查看一篇文章的请求 <tt class="docutils literal"><span class="pre">/posts/view/1</span></tt>。</p>
+</div>
+<div class="section" id="id4">
+<h2>添加文章(<em>Post</em>)<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>从数据库中读出并显示文章是一个好的开始，不过让我们允许添加新的文章。</p>
+<p>首先，从在 PostsController 中创建 <tt class="docutils literal"><span class="pre">add()</span></tt> 动作开始:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Html&#39;</span><span class="p">,</span> <span class="s1">&#39;Form&#39;</span><span class="p">,</span> <span class="s1">&#39;Session&#39;</span><span class="p">);</span>
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid post&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+
+        <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">findById</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$post</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid post&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Your post has been saved.&#39;</span><span class="p">));</span>
+                <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
+            <span class="p">}</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Unable to add your post.&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last"><tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;is()</span></tt> 方法接受一个参数，可以是请求方法(<tt class="docutils literal"><span class="pre">get</span></tt> 、
+<tt class="docutils literal"><span class="pre">put</span></tt> 、 <tt class="docutils literal"><span class="pre">post</span></tt> 、 <tt class="docutils literal"><span class="pre">delete</span></tt>)或者请求标识(<tt class="docutils literal"><span class="pre">ajax</span></tt>)。这 <strong>不</strong> 是检查特定
+提交数据(<em>posted data</em>)的方法。比如，如果提交了书(<em>book</em>)的数据，
+<tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;is('book')</span></tt> 不会返回 true。</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">在会用到 SessionComponent 以及 SessionHelper 的控制器中，你要引入它们。如果必
+要的话，在你的 AppController 中引入。</p>
+</div>
+<p>这是 <tt class="docutils literal"><span class="pre">add()</span></tt> 动作所做的：如果这个请求的 HTTP 方法是 POST，将试图使用 Post (文
+章)模型保存数据。如果因为某些原因没有保存，就渲染视图。这让我们能够给用户显示验证
+错误或者其他警告。</p>
+<p>每个 CakePHP 请求包括一个 <tt class="docutils literal"><span class="pre">CakeRequest</span></tt> 对象，可以通过 <tt class="docutils literal"><span class="pre">$this-&gt;request</span></tt> 来访
+问。该请求对象包含了刚收到的请求的有用信息，并且能够用来控制应用程序的流程。在这
+里，我们使用 <a class="reference internal" href="../../controllers/request-response.html#CakeRequest::is" title="CakeRequest::is"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::is()</span></tt></a> 方法来检查这个请求是否是一个 HTTP POST
+请求。</p>
+<p>当用户在应用程序中使用一个表单提交(<em>POST</em>)数据时，该数据可以通过
+<tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> 访问。如果你想看到这些数据，你可以使用 <a class="reference internal" href="../../core-libraries/global-constants-and-functions.html#pr" title="pr"><tt class="xref php php-func docutils literal"><span class="pre">pr()</span></tt></a>
+或 <a class="reference internal" href="../../core-libraries/global-constants-and-functions.html#debug" title="debug"><tt class="xref php php-func docutils literal"><span class="pre">debug()</span></tt></a> 函数显示出来。</p>
+<p>我们使用 SessionComponent 的 <a class="reference internal" href="../../core-libraries/components/sessions.html#SessionComponent::setFlash" title="SessionComponent::setFlash"><tt class="xref php php-meth docutils literal"><span class="pre">SessionComponent::setFlash()</span></tt></a> 方法在一个
+会话(<em>session</em>)变量中设置一条信息，在重定向后在页面中显示该信息。在布局中我们用
+<a class="reference internal" href="../../core-libraries/helpers/session.html#SessionHelper::flash" title="SessionHelper::flash"><tt class="xref php php-func docutils literal"><span class="pre">SessionHelper::flash</span></tt></a> 方法来显示这条信息并清空相应的会话变量。控制器的
+<a class="reference internal" href="../../controllers.html#Controller::redirect" title="Controller::redirect"><tt class="xref php php-meth docutils literal"><span class="pre">Controller::redirect</span></tt></a> 方法重定向页面到另一个网址。参数
+<tt class="docutils literal"><span class="pre">array('action'</span> <span class="pre">=&gt;</span> <span class="pre">'index')</span></tt> 就是网址 /posts (即 posts 控制器的 index 动作)。你
+可以参阅在 <a class="reference external" href="http://api.cakephp.org">API</a> 中的 <a class="reference internal" href="../../development/routing.html#Router::url" title="Router::url"><tt class="xref php php-func docutils literal"><span class="pre">Router::url()</span></tt></a> 方法，
+来了解可用来为 CakePHP 函数指定网址的各种格式。</p>
+<p>调用 <tt class="docutils literal"><span class="pre">save()</span></tt> 方法将会检查错误验证，如果有任何错误即中断保存。我们将会在接下来
+的小节里讨论如何处理这些错误。</p>
+<p>我们首先调用 <tt class="docutils literal"><span class="pre">create()</span></tt> 方法，来重置模型的状态，以保存新的数据。这不会真的在数
+据库中创建一条记录，而是清空 Model::$id 并根据数据库字段的缺省值来设置
+Model::$data。</p>
+</div>
+<div class="section" id="id5">
+<h2>数据验证<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>CakePHP 经过长期的努力来摆脱验证表单输入的千篇一律。每个人都痛恨编写没完没了的表
+单及其验证。CakePHP 使这些工作更容易、更快。</p>
+<p>要利用验证功能，你将需要在视图中使用 CakePHP 的 FormHelper 助件。缺省情况下，
+<a class="reference internal" href="../../core-libraries/helpers/form.html#FormHelper" title="FormHelper"><tt class="xref php php-class docutils literal"><span class="pre">FormHelper</span></tt></a> 在所有视图中都可以通过 <tt class="docutils literal"><span class="pre">$this-&gt;Form</span></tt> 来访问。</p>
+<p>这是我们的 add 视图：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;!-- File: /app/View/Posts/add.ctp --&gt;</span>
+
+<span class="x">&lt;h1&gt;Add Post&lt;/h1&gt;</span>
+<span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;rows&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;3&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">&#39;Save Post&#39;</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>我们使用 FormHelper 来生成一个 HTML 表单的起始标签。下面是
+<tt class="docutils literal"><span class="pre">$this-&gt;Form-&gt;create()</span></tt> 生成的 HTML：</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;PostAddForm&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;/posts/add&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>如果调用 <tt class="docutils literal"><span class="pre">create()</span></tt> 方法时不带参数，那么就认为你要创建一个表单，用 POST 方法来
+提交到当前控制器的 <tt class="docutils literal"><span class="pre">add()</span></tt> 动作(或者当表单数据中包含 <tt class="docutils literal"><span class="pre">id</span></tt> 时，提交到
+<tt class="docutils literal"><span class="pre">edit()</span></tt> 动作)。</p>
+<p><tt class="docutils literal"><span class="pre">$this-&gt;Form-&gt;input()</span></tt> 方法用于创建同名的(即 input)表单元素。第一个参数告诉
+CakePHP 关联到哪个字段，第二个参数让你定义一系列选项——在这里，我们定义 textarea
+的行数。在这里有一点自省和自动魔法(<em>introspection and automagic</em>)： <tt class="docutils literal"><span class="pre">input()</span></tt> 方法将会根据指定的模型字段输出不同的表单元素。</p>
+<p>对 <tt class="docutils literal"><span class="pre">$this-&gt;Form-&gt;end()</span></tt> 方法的调用生成一个提交按钮并结束表单。如果 <tt class="docutils literal"><span class="pre">end()</span></tt> 方
+法的第一个参数传入一个字符串，那么 FormHelper 输出的提交按钮将以该字符串为提交按钮
+上的文字，并输出表单的结束标签。再次，关于助件(<em>helper</em>)的更多信息请参阅
+<a class="reference internal" href="../../views/helpers.html"><em>助件</em></a>。</p>
+<p>现在让我们回去并更新我们的 <tt class="docutils literal"><span class="pre">/app/View/Posts/index.ctp</span></tt> 视图，添加 &#8220;Add Post&#8221; 链
+接。在 <tt class="docutils literal"><span class="pre">&lt;table&gt;</span></tt> 之前添加如下代码:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+    <span class="s1">&#39;Add Post&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span><span class="p">)</span>
+<span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>你也许会问：怎么告诉 CakePHP 我的验证要求呢？验证规则是在模型中定义的。让我们回去
+看一下 Post 模型，并做一些调整:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;rule&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;notBlank&#39;</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;rule&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;notBlank&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">$validate</span></tt> 数组告诉 CakePHP，当 <tt class="docutils literal"><span class="pre">save()</span></tt> 方法被调用时如何去验证你的数据。这
+里，我定义了 body 和 title 字段都不能为空。CakePHP 的验证引擎很强大，有许多内置的
+验证规则(信用卡、电子邮件，等等)，并且灵活，便于你增加自己的验证规则。更多信息请
+查看 <a class="reference internal" href="../../models/data-validation.html"><em>数据验证</em></a>。</p>
+<p>现在你已经完成了验证规则，使用应用程序来尝试添加一篇文章，空着 title 或者 body，
+看看验证规则如何起作用。因为我们已经使用了 FormHelper 的
+<a class="reference internal" href="../../core-libraries/helpers/form.html#FormHelper::input" title="FormHelper::input"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::input()</span></tt></a> 方法来创建我们的表单元素，我们的验证错误信息将会
+自动显示出来。</p>
+</div>
+<div class="section" id="id6">
+<h2>编辑文章(<em>Post</em>)<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>让我们开始编辑文章吧。你现在已经是个 CakePHP 专家了，所以你现在应该已经习惯于这种
+模式。建立动作，然后添加视图。控制器 PostsController 中的 <tt class="docutils literal"><span class="pre">edit()</span></tt> 动作会是这样</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">edit</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid post&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">findById</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$post</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid post&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="s1">&#39;put&#39;</span><span class="p">)))</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="nv">$id</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Your post has been updated.&#39;</span><span class="p">));</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Unable to update your post.&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span> <span class="o">=</span> <span class="nv">$post</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这个动作首先确保用户访问的是一条现存的记录。如果没有传入 <tt class="docutils literal"><span class="pre">$id</span></tt> 参数，或者该文章
+(<em>post</em>)不存在，就抛出 <tt class="docutils literal"><span class="pre">NotFoundException</span></tt> 异常，让 CakePHP 的 ErrorHandler 来
+处理。</p>
+<p>接着，检查这个请求是否是 POST 请求或者 PUT 请求。如果是，我们就使用提交(<em>POST</em>)的
+数据来更新文章(<em>Post</em>)记录，否则就退回并给用户显示验证错误。</p>
+<p>如果 <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> 中没有数据，我们就简单地把它设置为之前面读取的文章
+(<em>post</em>)。</p>
+<p>edit 视图会是这样:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;!-- File: /app/View/Posts/edit.ctp --&gt;</span>
+
+<span class="x">&lt;h1&gt;Edit Post&lt;/h1&gt;</span>
+<span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;rows&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;3&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;hidden&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">&#39;Save Post&#39;</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>这个视图输出编辑表单(填入了一些值)，以及一些必要的验证错误信息。</p>
+<p>在这里需要注意的是：如果数据数组中有 &#8216;id&#8217; 字段，CakePHP 将认为你在编辑一个模型。
+如果其中没有 &#8216;id&#8217; 字段(可以回去看一下 add 视图)，当调用 <tt class="docutils literal"><span class="pre">save()</span></tt> 时，CakePHP 将
+认为你正在插入一个新的模型。</p>
+<p>现在可以更新你的 index 视图，并添加编辑文章(<em>post</em>)的链接了:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;!-- File: /app/View/Posts/index.ctp  (edit links added) --&gt;</span>
+
+<span class="x">&lt;h1&gt;Blog posts&lt;/h1&gt;</span>
+<span class="x">&lt;p&gt;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span><span class="s2">&quot;Add Post&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x">&lt;/p&gt;</span>
+<span class="x">&lt;table&gt;</span>
+<span class="x">    &lt;tr&gt;</span>
+<span class="x">        &lt;th&gt;Id&lt;/th&gt;</span>
+<span class="x">        &lt;th&gt;Title&lt;/th&gt;</span>
+<span class="x">        &lt;th&gt;Action&lt;/th&gt;</span>
+<span class="x">        &lt;th&gt;Created&lt;/th&gt;</span>
+<span class="x">    &lt;/tr&gt;</span>
+
+<span class="x">&lt;!-- Here&#39;s where we loop through our $posts array, printing out post info --&gt;</span>
+
+<span class="cp">&lt;?php</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$posts</span> <span class="k">as</span> <span class="nv">$post</span><span class="p">)</span><span class="o">:</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;tr&gt;</span>
+<span class="x">        &lt;td&gt;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">];</span> <span class="cp">?&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">        &lt;td&gt;</span>
+<span class="x">            </span><span class="cp">&lt;?php</span>
+                <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+                    <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;title&#39;</span><span class="p">],</span>
+                    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+                <span class="p">);</span>
+            <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">        &lt;/td&gt;</span>
+<span class="x">        &lt;td&gt;</span>
+<span class="x">            </span><span class="cp">&lt;?php</span>
+                <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+                    <span class="s1">&#39;Edit&#39;</span><span class="p">,</span>
+                    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+                <span class="p">);</span>
+            <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">        &lt;/td&gt;</span>
+<span class="x">        &lt;td&gt;</span>
+<span class="x">            </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;created&#39;</span><span class="p">];</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">        &lt;/td&gt;</span>
+<span class="x">    &lt;/tr&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">endforeach</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">&lt;/table&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>删除文章(<em>Post</em>)<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<p>接下来，让我们为用户增加删除文章(<em>post</em>)的功能。先在 PostsController 中添加
+<tt class="docutils literal"><span class="pre">delete()</span></tt> 动作:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;get&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">MethodNotAllowedException</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span>
+            <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;The post with id: %s has been deleted.&#39;</span><span class="p">,</span> <span class="nx">h</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span>
+        <span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span>
+            <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;The post with id: %s could not be deleted.&#39;</span><span class="p">,</span> <span class="nx">h</span><span class="p">(</span><span class="nv">$id</span><span class="p">))</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这个逻辑删除 <cite>$id</cite> 指定的文章(<em>post</em>)，然后使用 <tt class="docutils literal"><span class="pre">$this-&gt;Session-&gt;setFlash()</span></tt>，
+在重定向到 <tt class="docutils literal"><span class="pre">/posts</span></tt> 后，给用户显示确认信息。如果用户尝试通过 GET 请求删除文章
+(<em>post</em>)，我们就抛出异常。未捕获的异常将被 CakePHP 的异常处理捕获，并显示漂亮的错
+误页面。有许多内置的 <a class="reference internal" href="../../development/exceptions.html"><em>异常</em></a>，可以用来表示应用程序需要生成
+的各种 HTTP 错误。</p>
+<p>因为我们仅仅是执行一些逻辑和重定向，所以这个动作没有视图。不过，你可能想要修改
+index 视图，添加让用户删除文章(<em>post</em>)的链接:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;!-- File: /app/View/Posts/index.ctp --&gt;</span>
+
+<span class="x">&lt;h1&gt;Blog posts&lt;/h1&gt;</span>
+<span class="x">&lt;p&gt;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span><span class="s1">&#39;Add Post&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x">&lt;/p&gt;</span>
+<span class="x">&lt;table&gt;</span>
+<span class="x">    &lt;tr&gt;</span>
+<span class="x">        &lt;th&gt;Id&lt;/th&gt;</span>
+<span class="x">        &lt;th&gt;Title&lt;/th&gt;</span>
+<span class="x">        &lt;th&gt;Actions&lt;/th&gt;</span>
+<span class="x">        &lt;th&gt;Created&lt;/th&gt;</span>
+<span class="x">    &lt;/tr&gt;</span>
+
+<span class="x">&lt;!-- Here&#39;s where we loop through our $posts array, printing out post info --&gt;</span>
+
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$posts</span> <span class="k">as</span> <span class="nv">$post</span><span class="p">)</span><span class="o">:</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;tr&gt;</span>
+<span class="x">        &lt;td&gt;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">];</span> <span class="cp">?&gt;</span><span class="x">&lt;/td&gt;</span>
+<span class="x">        &lt;td&gt;</span>
+<span class="x">            </span><span class="cp">&lt;?php</span>
+                <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+                    <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;title&#39;</span><span class="p">],</span>
+                    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+                <span class="p">);</span>
+            <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">        &lt;/td&gt;</span>
+<span class="x">        &lt;td&gt;</span>
+<span class="x">            </span><span class="cp">&lt;?php</span>
+                <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">postLink</span><span class="p">(</span>
+                    <span class="s1">&#39;Delete&#39;</span><span class="p">,</span>
+                    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]),</span>
+                    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;confirm&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Are you sure?&#39;</span><span class="p">)</span>
+                <span class="p">);</span>
+            <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">            </span><span class="cp">&lt;?php</span>
+                <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span>
+                    <span class="s1">&#39;Edit&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+                <span class="p">);</span>
+            <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">        &lt;/td&gt;</span>
+<span class="x">        &lt;td&gt;</span>
+<span class="x">            </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;created&#39;</span><span class="p">];</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">        &lt;/td&gt;</span>
+<span class="x">    &lt;/tr&gt;</span>
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">endforeach</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">&lt;/table&gt;</span>
+</pre></div>
+</div>
+<p>使用 <a class="reference internal" href="../../core-libraries/helpers/form.html#FormHelper::postLink" title="FormHelper::postLink"><tt class="xref php php-meth docutils literal"><span class="pre">postLink()</span></tt></a>，会创建一个链接，该链接使用 Javascrip 来
+提交一个删除文章(<em>post</em>)的 POST 请求。允许使用 GET 请求来删除内容是危险的，因为这
+让网络爬虫有可能意外删除你网站的所有内容.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">这个视图的代码也使用了 FormHelper，当用户试图删除一篇文章(<em>post</em>)时，显示一个
+JavaScript 确认对话框供用户确认。</p>
+</div>
+</div>
+<div class="section" id="route">
+<h2>路由(<em>Route</em>)<a class="headerlink" href="#route" title="永久链接至标题">¶</a></h2>
+<p>对一些人来说，CakePHP 缺省的路由已经足够了。而对用户友好性和通用搜索引擎兼容性敏
+感的开发者，会喜欢 CakePHP 把网址(<em>URL</em>)映射到特定动作(<em>action</em>)的方式。所以，让
+我们在这个教程中对路由做一个小小的改动吧。</p>
+<p>关于高级路由技术的更多信息，请参阅 <a class="reference internal" href="../../development/routing.html#routes-configuration"><em>路由的配置</em></a>。</p>
+<p>缺省情况下，CakePHP 对于网站根目录的请求(例如 <a class="reference external" href="http://www.example.com">http://www.example.com</a>)，使用
+PagesController 来响应，并渲染 &#8220;home&#8221; 视图。这里，我们会增加一条路由规则，将其替
+换为我们的 PostsController。</p>
+<p>CakePHP 的路由设置在 <tt class="docutils literal"><span class="pre">/app/Config/routes.php</span></tt> 文件中。你应当注释掉或者删除掉缺
+省的根目录路由。该代码如下:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">Router::connect(</span>
+<span class="x">    &#39;/&#39;,</span>
+<span class="x">    array(&#39;controller&#39; =&gt; &#39;pages&#39;, &#39;action&#39; =&gt; &#39;display&#39;, &#39;home&#39;)</span>
+<span class="x">);</span>
+</pre></div>
+</div>
+<p>这一行连接网址 &#8216;/&#8217; 到 CakePHP 的缺省首页。我们想要把它连接到我们自己的控制器，所
+以把该行代码替换为:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>这样就把用户对 &#8216;/&#8217; 的请求导向 PostsController 的 index() 动作。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">CakePHP 也支持&#8217;反向路由&#8217;。基于上面定义的路由，如果你给一个接受数组的函数传入
+<tt class="docutils literal"><span class="pre">array('controller'</span> <span class="pre">=&gt;</span> <span class="pre">'posts'，'action'</span> <span class="pre">=&gt;</span> <span class="pre">'index')</span></tt> ，得到的网址就会是
+&#8216;/&#8217;。所以，最好总是使用数组来表示网址，这样就表示你的路由定义了网址指向哪里，
+而且也确保链接指向相同的地方。</p>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>结论<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<p>用这种方法来创建应用程序会为你赢得甚至超出你最疯狂的幻想的平静、荣誉、爱和金钱。
+简单吧？记住，这个教程仅仅是基础。CakePHP 还提供了 <em>更多</em> 的功能，并且很灵活，碍
+于篇幅无法在这里详述。本手册余下的部分，可以指导你创建更加功能丰富的应用程序。</p>
+<p>既然你已经创建了一个基本的 CakePHP 应用程序，那么你已经可以开始真的做点儿东西了。
+启动你自己的项目吧，别忘记阅读 <a class="reference internal" href="../../index.html"><em>Cookbook</em></a> 的其余部分，以及
+<a class="reference external" href="http://api.cakephp.org">API</a> 。</p>
+<p>如果需要，有很多方法可以获得你需要的帮助——请查看
+<a class="reference internal" href="../../cakephp-overview/where-to-get-help.html"><em>获取帮助</em></a> 页面。欢迎加入 CakePHP！</p>
+<div class="section" id="id10">
+<h3>延伸阅读的建议<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<p>这些是学习 CakePHP 的人们接下来通常想去学习的常见任务：</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="../../views.html#view-layouts"><em>布局</em></a>：定制网站的布局</li>
+<li><a class="reference internal" href="../../views.html#view-elements"><em>元素</em></a>：导入和重用视图片段</li>
+<li><a class="reference internal" href="../../controllers/scaffolding.html"><em>脚手架</em></a>：在着手写代码前，先创建原型。</li>
+<li><a class="reference internal" href="../../console-and-shells/code-generation-with-bake.html"><em>使用 Bake 来生成代码</em></a>：生成 CRUD 代码</li>
+<li><a class="reference internal" href="../blog-auth-example/auth.html"><em>简单的身份验证和授权应用</em></a>：用户身份验证和授权的教程</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="blog.html">博客教程</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">博客教程——添加一个层</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../blog-auth-example/auth.html">简单的身份验证和授权应用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simple-acl-controlled-application/simple-acl-controlled-application.html">简单的 Acl 控制的应用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simple-acl-controlled-application/part-two.html">简单的 Acl 控制的应用 - 第 2 部分</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">博客教程——添加一个层</a><ul>
+<li><a class="reference internal" href="#post">创建文章(<em>Post</em>)模型</a></li>
+<li><a class="reference internal" href="#id2">创建文章(<em>Post</em>)控制器</a></li>
+<li><a class="reference internal" href="#id3">创建文章(<em>Post</em>)视图</a></li>
+<li><a class="reference internal" href="#id4">添加文章(<em>Post</em>)</a></li>
+<li><a class="reference internal" href="#id5">数据验证</a></li>
+<li><a class="reference internal" href="#id6">编辑文章(<em>Post</em>)</a></li>
+<li><a class="reference internal" href="#id7">删除文章(<em>Post</em>)</a></li>
+<li><a class="reference internal" href="#route">路由(<em>Route</em>)</a></li>
+<li><a class="reference internal" href="#id8">结论</a><ul>
+<li><a class="reference internal" href="#id10">延伸阅读的建议</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="../blog-auth-example/auth.html" title="简单的身份验证和授权应用" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="../../installation/url-rewriting.html" title="网址重写(URL Rewriting)" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

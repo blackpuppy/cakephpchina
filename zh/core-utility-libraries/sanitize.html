@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Data Sanitization" lang="zh_CN" name="title" />
+<meta content="array notation,sql security,sql function,malicious data,controller class,data options,raw html,core library,carriage returns,database connection,orm,industrial strength,slashes,chars,multi purpose,arrays,cakephp,element,models" lang="zh_CN" name="keywords" />
+
+    <title>数据清理 Data Sanitization &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="工具" href="../core-libraries/toc-utilities.html" />
+    <link rel="next" title="安全" href="security.html" />
+    <link rel="prev" title="Router" href="router.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/core-utility-libraries/sanitize.html" /><link rel="alternate" hreflang="pt" href="../../pt/core-utility-libraries/sanitize.html" /><link rel="alternate" hreflang="es" href="../../es/core-utility-libraries/sanitize.html" /><link rel="alternate" hreflang="ja" href="../../ja/core-utility-libraries/sanitize.html" /><link rel="alternate" hreflang="fr" href="../../fr/core-utility-libraries/sanitize.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries/toc-utilities.html" accesskey="U" itemprop="url"><span itemprop="title">工具</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/core-utility-libraries/sanitize.html">en</a></li>
+				
+					<li><a href="../../pt/core-utility-libraries/sanitize.html">pt</a></li>
+				
+					<li><a href="../../es/core-utility-libraries/sanitize.html">es</a></li>
+				
+					<li><a href="../../ja/core-utility-libraries/sanitize.html">ja</a></li>
+				
+					<li><a href="../../fr/core-utility-libraries/sanitize.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-utility-libraries/sanitize.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="data-sanitization">
+<h1>数据清理 Data Sanitization<a class="headerlink" href="#data-sanitization" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="Sanitize">
+<em class="property">class </em><tt class="descname">Sanitize</tt><a class="headerlink" href="#Sanitize" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>CakePHP的Sanitize类可以避免用户提交有害的和其他不需要的数据，Sanitize属于核心库，
+所以可以在代码的任何地方使用，但最好在控制器和模型中用到它。</p>
+<p><a href="#id1"><span class="problematic" id="id2">**</span></a>如果**你用到了CakePHP中的ORM方法(如：find() and save())和合理的数组写法
+(比如：array(&#8216;field&#8217; =&gt; $value))而不是原生SQL语句,CakePHP已经帮你做了防sql注入处理，
+因为sanitization可以用来抵御XSS，通常最好在未经修改和清理输出展示的时候保存原生的html到数据库
+(For sanitization against XSS it&#8217;s generally better to save raw HTML in
+database without modification and sanitize at the time of
+output/display.)</p>
+<p>你需要做的只是引入Sanitize核心库(你可以在定义控制器的语句之前引入)</p>
+<blockquote>
+<div><p>App::uses(&#8216;Sanitize&#8217;, &#8216;Utility&#8217;);</p>
+<dl class="docutils">
+<dt>class MyController extends AppController {</dt>
+<dd></dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>一旦引用，就可以调用Sanitize中的静态方法。</p>
+<dl class="staticmethod">
+<dt id="Sanitize::clean">
+<em class="property">static </em><tt class="descclassname">Sanitize::</tt><tt class="descname">clean</tt><big>(</big><em>$data</em>, <em>$options</em><big>)</big><a class="headerlink" href="#Sanitize::clean" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$data</strong> (<em>mixed</em>) &#8211; 需要清理的数据</li>
+<li><strong>$options</strong> (<em>mixed</em>) &#8211; 清理时的可用选项, 见下面的说明。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>这是一个强有力的，多功能的清理数据的方法，可以处理整个数组(比如：$this-&gt;data)。该方法接收一个数组或字符串，
+返回经过处理的数据。会对数组中的每一个元素(递归地)进行下面的数据清理工作。
+This function is an industrial-strength, multi-purpose cleaner,
+meant to be used on entire arrays (like $this-&gt;data, for example).
+The function takes an array (or string) and returns the clean
+version. The following cleaning operations are performed on each
+element in the array (recursively):</p>
+<ul class="simple">
+<li>替换奇怪的空格(包含 0xCA) 为正规的空格。</li>
+<li>反复检查特殊字符和删除回车增加SQL安全</li>
+<li>转义sql语句(仅作用于上述的sql函数)</li>
+<li>替换用户输入的反斜杠为可信赖的反斜杠(译者注：本人没看明白)</li>
+<li>Odd spaces (including 0xCA) are replaced with regular spaces.</li>
+<li>Double-checking special chars and removal of carriage returns
+for increased SQL security.</li>
+<li>Adding of slashes for SQL (just calls the sql function outlined
+above).</li>
+<li>Swapping of user-inputted backslashes with trusted backslashes.</li>
+</ul>
+<p>$options参数可以是个字符串或数组，若为字符串需要提供数据库的连接名，若为数组，可以用下面的选项：</p>
+<ul class="simple">
+<li>connection</li>
+<li>odd_spaces</li>
+<li>encode</li>
+<li>dollar</li>
+<li>carriage</li>
+<li>unicode</li>
+<li>escape</li>
+<li>backslash</li>
+<li>remove_html (must be used in conjunction with the encode
+parameter)</li>
+</ul>
+<p>像下面一样使用带选项的clean()方法:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span> <span class="o">=</span> <span class="nx">Sanitize</span><span class="o">::</span><span class="na">clean</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;encode&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Sanitize::escape">
+<em class="property">static </em><tt class="descclassname">Sanitize::</tt><tt class="descname">escape</tt><big>(</big><em>$string</em>, <em>$connection</em><big>)</big><a class="headerlink" href="#Sanitize::escape" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$string</strong> (<em>string</em>) &#8211; 需要清理的字符串。</li>
+<li><strong>$connection</strong> (<em>string</em>) &#8211; The name of the database to quote the string for,
+as named in your app/Config/database.php file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Used to escape SQL statements by adding slashes, depending on the
+system&#8217;s current magic_quotes_gpc setting,</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Sanitize::html">
+<em class="property">static </em><tt class="descclassname">Sanitize::</tt><tt class="descname">html</tt><big>(</big><em>$string</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#Sanitize::html" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$string</strong> (<em>string</em>) &#8211; 需要清理的字符串。</li>
+<li><strong>$options</strong> (<em>array</em>) &#8211; 数组类型，见下面的说明。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This method prepares user-submitted data for display inside HTML.
+This is especially useful if you don&#8217;t want users to be able to
+break your layouts or insert images or scripts inside of your HTML
+pages. If the $remove option is set to true, HTML content detected
+is removed rather than rendered as HTML entities:</p>
+<p>防止用户注入有害代码，如插入图片或脚本造成破坏页面布局等问题， 如果$remove选项设置为true，会删除HTML内容而不是转化为HTML实体:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$badString</span> <span class="o">=</span> <span class="s1">&#39;&lt;font size=&quot;99&quot; color=&quot;#FF0000&quot;&gt;HEY&lt;/font&gt;&lt;script&gt;...&lt;/script&gt;&#39;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nx">Sanitize</span><span class="o">::</span><span class="na">html</span><span class="p">(</span><span class="nv">$badString</span><span class="p">);</span>
+<span class="c1">// output: &amp;lt;font size=&amp;quot;99&amp;quot; color=&amp;quot;#FF0000&amp;quot;&amp;gt;HEY&amp;lt;/font&amp;gt;&amp;lt;script&amp;gt;...&amp;lt;/script&amp;gt;</span>
+<span class="k">echo</span> <span class="nx">Sanitize</span><span class="o">::</span><span class="na">html</span><span class="p">(</span><span class="nv">$badString</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;remove&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
+<span class="c1">// output: HEY...</span>
+</pre></div>
+</div>
+<p>Escaping is often a better strategy than stripping, as it has less room
+for error, and isn&#8217;t vulnerable to new types of attacks, the stripping
+function does not know about.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Sanitize::paranoid">
+<em class="property">static </em><tt class="descclassname">Sanitize::</tt><tt class="descname">paranoid</tt><big>(</big><em>$string</em>, <em>$allowedChars</em><big>)</big><a class="headerlink" href="#Sanitize::paranoid" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$string</strong> (<em>string</em>) &#8211; 需要清理的字符串</li>
+<li><strong>$allowedChars</strong> (<em>array</em>) &#8211; 数组类型，允许保留的字符，不能包含字母数字。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>该函数会清除$string中除字母数字的其他所有字符。若传入第二个参数$allowedChars会保留该数组内的字符
+array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$badString</span> <span class="o">=</span> <span class="s2">&quot;;:&lt;script&gt;&lt;html&gt;&lt;   // &gt;@@#&quot;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nx">Sanitize</span><span class="o">::</span><span class="na">paranoid</span><span class="p">(</span><span class="nv">$badString</span><span class="p">);</span>
+<span class="c1">// 输出: scripthtml</span>
+<span class="k">echo</span> <span class="nx">Sanitize</span><span class="o">::</span><span class="na">paranoid</span><span class="p">(</span><span class="nv">$badString</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;@&#39;</span><span class="p">));</span>
+<span class="c1">// 输出: scripthtml    @@  (译者注:空格和字符被保留了)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-general-purpose.html">通用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-components.html">组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-helpers.html">助件</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../core-libraries/toc-utilities.html">工具</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/caching.html">缓存</a></li>
+<li class="toctree-l3"><a class="reference internal" href="email.html">CakeEmail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file-folder.html">目录和文件 Folder &amp; File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hash.html">Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="httpsocket.html">HttpSocket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inflector.html">Inflector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/internationalization-and-localization.html">Internationalization &amp; Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/logging.html">日志记录</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">CakeNumber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="router.html">Router</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">数据清理 Data Sanitization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html">安全</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set.html">Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="string.html">字符串 String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">CakeTime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xml.html">Xml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">数据清理 Data Sanitization</a></li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="security.html" title="安全" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="router.html" title="Router" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

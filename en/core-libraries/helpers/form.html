@@ -1,0 +1,2055 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="FormHelper" lang="en" name="title" />
+<meta content="The FormHelper focuses on creating forms quickly, in a way that will streamline validation, re-population and layout." lang="en" name="description" />
+<meta content="html helper,cakephp html,form create,form input,form select,form file field,form label,form text,form password,form checkbox,form radio,form submit,form date time,form error,validate upload,unlock field,form security" lang="en" name="keywords" />
+
+    <title>FormHelper &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../../index.html" />
+    <link rel="up" title="Helpers" href="../toc-helpers.html" />
+    <link rel="next" title="HtmlHelper" href="html.html" />
+    <link rel="prev" title="Flash" href="flash.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/helpers/form.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/helpers/form.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/helpers/form.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/helpers/form.html" /><link rel="alternate" hreflang="zh_CN" href="../../../zh/core-libraries/helpers/form.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">Core Libraries</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../toc-helpers.html" accesskey="U" itemprop="url"><span itemprop="title">Helpers</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../../pt/core-libraries/helpers/form.html">pt</a></li>
+				
+					<li><a href="../../../es/core-libraries/helpers/form.html">es</a></li>
+				
+					<li><a href="../../../ja/core-libraries/helpers/form.html">ja</a></li>
+				
+					<li><a href="../../../fr/core-libraries/helpers/form.html">fr</a></li>
+				
+					<li><a href="../../../zh/core-libraries/helpers/form.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/core-libraries/helpers/form.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="formhelper">
+<h1>FormHelper<a class="headerlink" href="#formhelper" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="FormHelper">
+<em class="property">class </em><tt class="descname">FormHelper</tt><big>(</big><em>View $view</em>, <em>array $settings = array()</em><big>)</big><a class="headerlink" href="#FormHelper" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The FormHelper does most of the heavy lifting in form creation.
+The FormHelper focuses on creating forms quickly, in a way that
+will streamline validation, re-population and layout. The
+FormHelper is also flexible - it will do almost everything for
+you using conventions, or you can use specific methods to get
+only what you need.</p>
+<div class="section" id="creating-forms">
+<h2>Creating Forms<a class="headerlink" href="#creating-forms" title="Permalink to this headline">¶</a></h2>
+<p>The first method you&#8217;ll need to use in order to take advantage of
+the FormHelper is <tt class="docutils literal"><span class="pre">create()</span></tt>. This special method outputs an
+opening form tag.</p>
+<dl class="method">
+<dt id="FormHelper::create">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">create</tt><big>(</big><em>string $model = null</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#FormHelper::create" title="Permalink to this definition">¶</a></dt>
+<dd><p>All parameters are optional. If <tt class="docutils literal"><span class="pre">create()</span></tt> is called with no
+parameters supplied, it assumes you are building a form that
+submits to the current controller, via the current URL.
+The default method for form submission is POST.
+The form element is also returned with a DOM ID. The ID is
+generated using the name of the model, and the name of the
+controller action, CamelCased. If I were to call <tt class="docutils literal"><span class="pre">create()</span></tt>
+inside a UsersController view, I&#8217;d see something like the following
+output in the rendered view:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;UserAddForm&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;/users/add&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can also pass <tt class="docutils literal"><span class="pre">false</span></tt> for <tt class="docutils literal"><span class="pre">$model</span></tt>. This will place your
+form data into the array: <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> (instead of in the
+sub-array: <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data['Model']</span></tt>). This can be handy for short
+forms that may not represent anything in your database.</p>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">create()</span></tt> method allows us to customize much more using the
+parameters, however. First, you can specify a model name. By
+specifying a model for a form, you are creating that form&#8217;s
+<em>context</em>. All fields are assumed to belong to this model (unless
+otherwise specified), and all models referenced are assumed to be
+associated with it. If you do not specify a model, then it assumes
+you are using the default model for the current controller:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// If you are on /recipes/add</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Recipe&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;form id=&quot;RecipeAddForm&quot; method=&quot;post&quot; action=&quot;/recipes/add&quot;&gt;</span>
+</pre></div>
+</div>
+<p>This will POST the form data to the <tt class="docutils literal"><span class="pre">add()</span></tt> action of
+RecipesController. However, you can also use the same logic to
+create an edit form. The FormHelper uses the <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt>
+property to automatically detect whether to create an add or edit
+form. If <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> contains an array element named after the
+form&#8217;s model, and that array contains a non-empty value of the
+model&#8217;s primary key, then the FormHelper will create an edit form
+for that record. For example, if we browse to
+<a class="reference external" href="http://site.com/recipes/edit/5">http://site.com/recipes/edit/5</a>, we would get the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Controller/RecipesController.php:</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">edit</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">findById</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// Save logic goes here</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// View/Recipes/edit.ctp:</span>
+<span class="c1">// Since $this-&gt;request-&gt;data[&#39;Recipe&#39;][&#39;id&#39;] = 5,</span>
+<span class="c1">// we will get an edit form</span>
+<span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Recipe&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;RecipeEditForm&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;/recipes/edit/5&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;_method&quot;</span> <span class="na">value=</span><span class="s">&quot;PUT&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since this is an edit form, a hidden input field is generated to
+override the default HTTP method.</p>
+</div>
+<p>When creating forms for models in plugins, you should always use
+<a class="reference internal" href="../../appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a> when creating a form. This will ensure the form is
+correctly generated:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;ContactManager.Contact&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">$options</span></tt> array is where most of the form configuration
+happens. This special array can contain a number of different
+key-value pairs that affect the way the form tag is generated.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.0: </span>The default URL for all forms, is now the current URL including
+passed, named, and querystring parameters. You can override this
+default by supplying <tt class="docutils literal"><span class="pre">$options['url']</span></tt> in the second parameter of
+<tt class="docutils literal"><span class="pre">$this-&gt;Form-&gt;create()</span></tt>.</p>
+</div>
+</dd></dl>
+
+<div class="section" id="options-for-create">
+<h3>Options for create()<a class="headerlink" href="#options-for-create" title="Permalink to this headline">¶</a></h3>
+<p>There are a number of options for create():</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['type']</span></tt> This key is used to specify the type of form to be created. Valid
+values include &#8216;post&#8217;, &#8216;get&#8217;, &#8216;file&#8217;, &#8216;put&#8217; and &#8216;delete&#8217;.</p>
+<p>Supplying either &#8216;post&#8217; or &#8216;get&#8217; changes the form submission method
+accordingly:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;get&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;UserAddForm&quot;</span> <span class="na">method=</span><span class="s">&quot;get&quot;</span> <span class="na">action=</span><span class="s">&quot;/users/add&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>Specifying &#8216;file&#8217; changes the form submission method to &#8216;post&#8217;, and
+includes an enctype of &#8220;multipart/form-data&#8221; on the form tag. This
+is to be used if there are any file elements inside the form. The
+absence of the proper enctype attribute will cause the file uploads
+not to function:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;file&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;UserAddForm&quot;</span> <span class="na">enctype=</span><span class="s">&quot;multipart/form-data&quot;</span>
+   <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;/users/add&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>When using &#8216;put&#8217; or &#8216;delete&#8217;, your form will be functionally
+equivalent to a &#8216;post&#8217; form, but when submitted, the HTTP request
+method will be overridden with &#8216;PUT&#8217; or &#8216;DELETE&#8217;, respectively.
+This allows CakePHP to emulate proper REST support in web
+browsers.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['action']</span></tt> The action key allows you to point the form to a
+specific action in your current controller. For example, if you&#8217;d like to
+point the form to the login() action of the current controller, you would
+supply an $options array like the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;UserLoginForm&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;/users/login&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['url']</span></tt> If the desired form action isn&#8217;t in the current
+controller, you can specify a URL for the form action using the &#8216;url&#8217; key of
+the $options array. The supplied URL can be relative to your CakePHP
+application:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;recipes&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;/recipes/add&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>or can point to an external domain:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;http://www.google.com/search&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;get&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">&quot;get&quot;</span> <span class="na">action=</span><span class="s">&quot;http://www.google.com/search&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>Also check <a class="reference internal" href="html.html#HtmlHelper::url" title="HtmlHelper::url"><tt class="xref php php-meth docutils literal"><span class="pre">HtmlHelper::url()</span></tt></a> method for more examples of
+different types of URLs.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['default']</span></tt> If &#8216;default&#8217; has been set to boolean false, the form&#8217;s
+submit action is changed so that pressing the submit button does not submit
+the form. If the form is meant to be submitted via AJAX, setting &#8216;default&#8217; to
+false suppresses the form&#8217;s default behavior so you can grab the data and
+submit it via AJAX instead.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['inputDefaults']</span></tt> You can declare a set of default options for
+<tt class="docutils literal"><span class="pre">input()</span></tt> with the <tt class="docutils literal"><span class="pre">inputDefaults</span></tt> key to customize your default input
+creation:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;inputDefaults&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+        <span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>All inputs created from that point forward would inherit the
+options declared in inputDefaults. You can override the
+defaultOptions by declaring the option in the input() call:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span> <span class="c1">// No div, no label</span>
+<span class="c1">// has a label element</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span>
+    <span class="s1">&#39;username&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Username&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="closing-the-form">
+<h2>Closing the Form<a class="headerlink" href="#closing-the-form" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="FormHelper::end">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">end</tt><big>(</big><em>$options = null</em>, <em>$secureAttributes = array()</em><big>)</big><a class="headerlink" href="#FormHelper::end" title="Permalink to this definition">¶</a></dt>
+<dd><p>The FormHelper includes an <tt class="docutils literal"><span class="pre">end()</span></tt> method that completes the
+form. Often, <tt class="docutils literal"><span class="pre">end()</span></tt> only outputs a closing form tag, but
+using <tt class="docutils literal"><span class="pre">end()</span></tt> also allows the FormHelper to insert needed hidden
+form elements that <a class="reference internal" href="../components/security-component.html#SecurityComponent" title="SecurityComponent"><tt class="xref php php-class docutils literal"><span class="pre">SecurityComponent</span></tt></a> requires:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">&lt;!-- Form elements go here --&gt;</span>
+
+<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>If a string is supplied as the first parameter to <tt class="docutils literal"><span class="pre">end()</span></tt>, the
+FormHelper outputs a submit button named accordingly along with the
+closing form tag:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">&#39;Finish&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Finish&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</div>
+<p>You can specify detail settings by passing an array to <tt class="docutils literal"><span class="pre">end()</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Update&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;glass-pill&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="nv">$options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;glass-pill&quot;</span><span class="nt">&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Update&quot;</span> <span class="na">name=</span><span class="s">&quot;Update&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>See the <a class="reference external" href="http://api.cakephp.org/2.7/class-FormHelper.html">Form Helper API</a> for further details.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are using <a class="reference internal" href="../components/security-component.html#SecurityComponent" title="SecurityComponent"><tt class="xref php php-class docutils literal"><span class="pre">SecurityComponent</span></tt></a> in your application you
+should always end your forms with <tt class="docutils literal"><span class="pre">end()</span></tt>.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.5: </span>The <tt class="docutils literal"><span class="pre">$secureAttributes</span></tt> parameter was added in 2.5.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="creating-form-elements">
+<span id="automagic-form-elements"></span><h2>Creating form elements<a class="headerlink" href="#creating-form-elements" title="Permalink to this headline">¶</a></h2>
+<p>There are a few ways to create form inputs with the FormHelper. We&#8217;ll start by
+looking at <tt class="docutils literal"><span class="pre">input()</span></tt>. This method will automatically inspect the model field it
+has been supplied in order to create an appropriate input for that
+field. Internally <tt class="docutils literal"><span class="pre">input()</span></tt> delegates to other methods in FormHelper.</p>
+<dl class="method">
+<dt id="FormHelper::input">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">input</tt><big>(</big><em>string $fieldName</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#FormHelper::input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the following elements given a particular <tt class="docutils literal"><span class="pre">Model.field</span></tt>:</p>
+<ul class="simple">
+<li>Wrapping div.</li>
+<li>Label element</li>
+<li>Input element(s)</li>
+<li>Error element with message if applicable.</li>
+</ul>
+<p>The type of input created depends on the column datatype:</p>
+<dl class="docutils">
+<dt>Column Type</dt>
+<dd>Resulting Form Field</dd>
+<dt>string (char, varchar, etc.)</dt>
+<dd>text</dd>
+<dt>boolean, tinyint(1)</dt>
+<dd>checkbox</dd>
+<dt>text</dt>
+<dd>textarea</dd>
+<dt>text, with name of password, passwd, or psword</dt>
+<dd>password</dd>
+<dt>text, with name of email</dt>
+<dd>email</dd>
+<dt>text, with name of tel, telephone, or phone</dt>
+<dd>tel</dd>
+<dt>date</dt>
+<dd>day, month, and year selects</dd>
+<dt>datetime, timestamp</dt>
+<dd>day, month, year, hour, minute, and meridian selects</dd>
+<dt>time</dt>
+<dd>hour, minute, and meridian selects</dd>
+<dt>binary</dt>
+<dd>file</dd>
+</dl>
+<p>The <tt class="docutils literal"><span class="pre">$options</span></tt> parameter allows you to customize how <tt class="docutils literal"><span class="pre">input()</span></tt> works,
+and finely control what is generated.</p>
+<p>The wrapping div will have a <tt class="docutils literal"><span class="pre">required</span></tt> class name appended if the
+validation rules for the Model&#8217;s field do not specify <tt class="docutils literal"><span class="pre">allowEmpty</span> <span class="pre">=&gt;</span>
+<span class="pre">true</span></tt>. One limitation of this behavior is the field&#8217;s model must have
+been loaded during this request. Or be directly associated to the
+model supplied to <a class="reference internal" href="#FormHelper::create" title="FormHelper::create"><tt class="xref php php-meth docutils literal"><span class="pre">create()</span></tt></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.5: </span>The binary type now maps to a file input.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.3.</span></p>
+</div>
+<p id="html5-required">Since 2.3 the HTML5 <tt class="docutils literal"><span class="pre">required</span></tt> attribute will also be added to the input
+based on validation rules. You can explicitly set <tt class="docutils literal"><span class="pre">required</span></tt> key in
+options array to override it for a field. To skip browser validation
+triggering for the whole form you can set option <tt class="docutils literal"><span class="pre">'formnovalidate'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt>
+for the input button you generate using <a class="reference internal" href="#FormHelper::submit" title="FormHelper::submit"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::submit()</span></tt></a> or
+set <tt class="docutils literal"><span class="pre">'novalidate'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt> in options for <a class="reference internal" href="#FormHelper::create" title="FormHelper::create"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::create()</span></tt></a>.</p>
+<p>For example, let&#8217;s assume that your User model includes fields for a
+username (varchar), password (varchar), approved (datetime) and
+quote (text). You can use the input() method of the FormHelper to
+create appropriate inputs for all of these form fields:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">);</span>   <span class="c1">//text</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>   <span class="c1">//password</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;approved&#39;</span><span class="p">);</span>   <span class="c1">//day, month, year, hour, minute,</span>
+                                       <span class="c1">//meridian</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;quote&#39;</span><span class="p">);</span>      <span class="c1">//textarea</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">&#39;Add&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>A more extensive example showing some options for a date field:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;birth_dt&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Date of birth&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;dateFormat&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;DMY&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;minYear&#39;</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">70</span><span class="p">,</span>
+    <span class="s1">&#39;maxYear&#39;</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">18</span><span class="p">,</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Besides the specific options for <tt class="docutils literal"><span class="pre">input()</span></tt> found below, you can specify
+any option for the input type &amp; any HTML attribute (for instance onfocus).
+For more information on <tt class="docutils literal"><span class="pre">$options</span></tt> and <tt class="docutils literal"><span class="pre">$htmlAttributes</span></tt> see
+<a class="reference internal" href="html.html"><em>HtmlHelper</em></a>.</p>
+<p>Assuming that User hasAndBelongsToMany Group. In your controller, set a
+camelCase plural variable (group -&gt; groups in this case, or ExtraFunkyModel
+-&gt; extraFunkyModels) with the select options. In the controller action you
+would put the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;groups&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">Group</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>And in the view a multiple select can be created with this simple
+code:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Group&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If you want to create a select field while using a belongsTo - or
+hasOne - Relation, you can add the following to your Users-controller
+(assuming your User belongsTo Group):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;groups&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">Group</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Afterwards, add the following to your form-view:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;group_id&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If your model name consists of two or more words, e.g.,
+&#8220;UserGroup&#8221;, when passing the data using set() you should name your
+data in a pluralised and camelCased format as follows:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;userGroups&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">UserGroup</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">));</span>
+<span class="c1">// or</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span>
+    <span class="s1">&#39;reallyInappropriateModelNames&#39;</span><span class="p">,</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ReallyInappropriateModelName</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Try to avoid using <cite>FormHelper::input()</cite> to generate submit buttons. Use
+<a class="reference internal" href="#FormHelper::submit" title="FormHelper::submit"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::submit()</span></tt></a> instead.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::inputs">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">inputs</tt><big>(</big><em>mixed $fields = null</em>, <em>array $blacklist = null</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#FormHelper::inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a set of inputs for <tt class="docutils literal"><span class="pre">$fields</span></tt>. If <tt class="docutils literal"><span class="pre">$fields</span></tt> is null all fields,
+except of those defined in <tt class="docutils literal"><span class="pre">$blacklist</span></tt>, of the current model will be used.</p>
+<p>In addition to controller fields output, <tt class="docutils literal"><span class="pre">$fields</span></tt> can be used to control
+legend and fieldset rendering with the <tt class="docutils literal"><span class="pre">fieldset</span></tt> and <tt class="docutils literal"><span class="pre">legend</span></tt> keys.
+<tt class="docutils literal"><span class="pre">$this-&gt;Form-&gt;inputs(array('legend'</span> <span class="pre">=&gt;</span> <span class="pre">'My</span> <span class="pre">legend'));</span></tt>
+Would generate an input set with a custom legend. You can customize
+individual inputs through <tt class="docutils literal"><span class="pre">$fields</span></tt> as well.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">inputs</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;custom label&#39;</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>In addition to fields control, inputs() allows you to use a few additional
+options.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">fieldset</span></tt> Set to false to disable the fieldset. If a string is supplied
+it will be used as the class name for the fieldset element.</li>
+<li><tt class="docutils literal"><span class="pre">legend</span></tt> Set to false to disable the legend for the generated input set.
+Or supply a string to customize the legend text.</li>
+</ul>
+</dd></dl>
+
+<div class="section" id="field-naming-conventions">
+<h3>Field naming conventions<a class="headerlink" href="#field-naming-conventions" title="Permalink to this headline">¶</a></h3>
+<p>The Form helper is pretty smart. Whenever you specify a field name
+with the form helper methods, it&#8217;ll automatically use the current
+model name to build an input with a format like the following:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;ModelnameFieldname&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Modelname][fieldname]&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>This allows you to omit the model name when generating inputs for the model that
+the form was created for. You can create inputs for associated models, or
+arbitrary models by passing in Modelname.fieldname as the first parameter:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Modelname.fieldname&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If you need to specify multiple fields using the same field name,
+thus creating an array that can be saved in one shot with
+saveAll(), use the following convention:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Modelname.0.fieldname&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Modelname.1.fieldname&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;Modelname0Fieldname&quot;</span>
+    <span class="na">name=</span><span class="s">&quot;data[Modelname][0][fieldname]&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;Modelname1Fieldname&quot;</span>
+    <span class="na">name=</span><span class="s">&quot;data[Modelname][1][fieldname]&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>FormHelper uses several field-suffixes internally for datetime input creation.
+If you are using fields named <tt class="docutils literal"><span class="pre">year</span></tt>, <tt class="docutils literal"><span class="pre">month</span></tt>, <tt class="docutils literal"><span class="pre">day</span></tt>, <tt class="docutils literal"><span class="pre">hour</span></tt>,
+<tt class="docutils literal"><span class="pre">minute</span></tt>, or <tt class="docutils literal"><span class="pre">meridian</span></tt> and having issues getting the correct input, you can
+set the <tt class="docutils literal"><span class="pre">name</span></tt> attribute to override the default behavior:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.year&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;data[Model][year]&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="options">
+<h3>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">FormHelper::input()</span></tt> supports a large number of options. In addition to its
+own options <tt class="docutils literal"><span class="pre">input()</span></tt> accepts options for the generated input types, as well as
+HTML attributes. The following will cover the options specific to
+<tt class="docutils literal"><span class="pre">FormHelper::input()</span></tt>.</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['type']</span></tt> You can force the type of an input, overriding model
+introspection, by specifying a type. In addition to the field types found in
+the <a class="reference internal" href="#automagic-form-elements"><em>Creating form elements</em></a>, you can also create &#8216;file&#8217;, &#8216;password&#8217;,
+and any type supported by HTML5:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;file&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;email&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input file&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserField&quot;</span><span class="nt">&gt;</span>Field<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;file&quot;</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input email&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserEmail&quot;</span><span class="nt">&gt;</span>Email<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;email&quot;</span> <span class="na">name=</span><span class="s">&quot;data[User][email]&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserEmail&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['div']</span></tt> Use this option to set attributes of the input&#8217;s
+containing div. Using a string value will set the div&#8217;s class name. An array
+will set the div&#8217;s attributes to those specified by the array&#8217;s keys/values.
+Alternatively, you can set this key to false to disable the output of the div.</p>
+<p>Setting the class name:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;class_name&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;class_name&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][name]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserName&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>Setting multiple attributes:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;mainDiv&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Div Title&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;style&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;display:block&#39;</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input text&quot;</span> <span class="na">id=</span><span class="s">&quot;mainDiv&quot;</span> <span class="na">title=</span><span class="s">&quot;Div Title&quot;</span>
+    <span class="na">style=</span><span class="s">&quot;display:block&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][name]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserName&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>Disabling div output:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][name]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserName&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['label']</span></tt> Set this key to the string you would like to be
+displayed within the label that usually accompanies the input:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;The User Alias&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span><span class="nt">&gt;</span>The User Alias<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][name]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserName&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>Alternatively, set this key to false to disable the output of the
+label:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][name]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserName&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>Set this to an array to provide additional options for the
+<tt class="docutils literal"><span class="pre">label</span></tt> element. If you do this, you can use a <tt class="docutils literal"><span class="pre">text</span></tt> key in
+the array to customize the label text:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;thingy&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;text&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;The User Alias&#39;</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span> <span class="na">class=</span><span class="s">&quot;thingy&quot;</span><span class="nt">&gt;</span>The User Alias<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][name]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserName&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['error']</span></tt> Using this key allows you to override the default model
+error messages and can be used, for example, to set i18n messages. It has a
+number of suboptions which control the wrapping element, wrapping element
+class name, and whether HTML in the error message will be escaped.</p>
+<p>To disable error message output &amp; field classes set the error key to false:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>To disable only the error message, but retain the field classes, set the
+errorMessage key to false:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;errorMessage&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>To modify the wrapping element type and its class, use the
+following format:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;wrap&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bzzz&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>To prevent HTML being automatically escaped in the error message
+output, set the escape suboption to false:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;escape&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>To override the model error messages use an array with
+the keys matching the validation rule names:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;tooShort&#39;</span> <span class="o">=&gt;</span> <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;This is not long enough&#39;</span><span class="p">))</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>As seen above you can set the error message for each validation
+rule you have in your models. In addition you can provide i18n
+messages for your forms.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.3: </span>Support for the <tt class="docutils literal"><span class="pre">errorMessage</span></tt> option was added in 2.3</p>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['before']</span></tt>, <tt class="docutils literal"><span class="pre">$options['between']</span></tt>, <tt class="docutils literal"><span class="pre">$options['separator']</span></tt>,
+and <tt class="docutils literal"><span class="pre">$options['after']</span></tt></p>
+<p>Use these keys if you need to inject some markup inside the output
+of the input() method:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;before&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--before--&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;after&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--after--&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;between&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--between---&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input&quot;</span><span class="nt">&gt;</span>
+--before--
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserField&quot;</span><span class="nt">&gt;</span>Field<span class="nt">&lt;/label&gt;</span>
+--between---
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField&quot;</span> <span class="nt">/&gt;</span>
+--after--
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>For radio inputs the &#8216;separator&#8217; attribute can be used to
+inject markup to separate each input/label pair:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;before&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--before--&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;after&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--after--&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;between&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--between---&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;separator&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--separator--&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input&quot;</span><span class="nt">&gt;</span>
+--before--
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField1&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserField1&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/label&gt;</span>
+--separator--
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="na">value=</span><span class="s">&quot;2&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField2&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserField2&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/label&gt;</span>
+--between---
+--after--
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>For <tt class="docutils literal"><span class="pre">date</span></tt> and <tt class="docutils literal"><span class="pre">datetime</span></tt> type elements the &#8216;separator&#8217;
+attribute can be used to change the string between select elements.
+Defaults to &#8216;-&#8216;.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['format']</span></tt> The ordering of the HTML generated by FormHelper is
+controllable as well. The &#8216;format&#8217; options supports an array of strings
+describing the template you would like said element to follow. The supported
+array keys are:
+<tt class="docutils literal"><span class="pre">array('before',</span> <span class="pre">'input',</span> <span class="pre">'between',</span> <span class="pre">'label',</span> <span class="pre">'after','error')</span></tt>.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['inputDefaults']</span></tt> If you find yourself repeating the same options
+in multiple input() calls, you can use <cite>inputDefaults`</cite> to keep your code dry:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;inputDefaults&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+        <span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+    <span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>All inputs created from that point forward would inherit the
+options declared in inputDefaults. You can override the
+defaultOptions by declaring the option in the input() call:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// No div, no label</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
+
+<span class="c1">// has a label element</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Username&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>If you need to later change the defaults you can use
+<tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::inputDefaults()</span></tt>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="generating-specific-types-of-inputs">
+<h2>Generating specific types of inputs<a class="headerlink" href="#generating-specific-types-of-inputs" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the generic <tt class="docutils literal"><span class="pre">input()</span></tt> method, <tt class="docutils literal"><span class="pre">FormHelper</span></tt> has specific
+methods for generating a number of different types of inputs. These can be used
+to generate just the input widget itself, and combined with other methods like
+<a class="reference internal" href="#FormHelper::label" title="FormHelper::label"><tt class="xref php php-meth docutils literal"><span class="pre">label()</span></tt></a> and <a class="reference internal" href="#FormHelper::error" title="FormHelper::error"><tt class="xref php php-meth docutils literal"><span class="pre">error()</span></tt></a> to
+generate fully custom form layouts.</p>
+<div class="section" id="common-options">
+<span id="general-input-options"></span><h3>Common options<a class="headerlink" href="#common-options" title="Permalink to this headline">¶</a></h3>
+<p>Many of the various input element methods support a common set of options. All
+of these options are also supported by <tt class="docutils literal"><span class="pre">input()</span></tt>. To reduce repetition the
+common options shared by all input methods are as follows:</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['class']</span></tt> You can set the class name for an input:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;custom-class&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['id']</span></tt> Set this key to force the value of the DOM id for the input.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['default']</span></tt> Used to set a default value for the input field. The
+value is used if the data passed to the form does not contain a value for the
+field (or if no data is passed at all).</p>
+<p>Example usage:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;ingredient&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sugar&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Example with select field (Size &#8220;Medium&#8221; will be selected as
+default):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$sizes</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;s&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Small&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Medium&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Large&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span>
+    <span class="s1">&#39;size&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="nv">$sizes</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;m&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>You cannot use <tt class="docutils literal"><span class="pre">default</span></tt> to check a checkbox - instead you might
+set the value in <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> in your controller,
+or set the input option <tt class="docutils literal"><span class="pre">checked</span></tt> to true.</p>
+<p>Date and datetime fields&#8217; default values can be set by using the
+&#8216;selected&#8217; key.</p>
+<p class="last">Beware of using false to assign a default value. A false value is used to
+disable/exclude options of an input field, so <tt class="docutils literal"><span class="pre">'default'</span> <span class="pre">=&gt;</span> <span class="pre">false</span></tt> would
+not set any value at all. Instead use <tt class="docutils literal"><span class="pre">'default'</span> <span class="pre">=&gt;</span> <span class="pre">0</span></tt>.</p>
+</div>
+</li>
+</ul>
+<p>In addition to the above options, you can mixin any HTML attribute you wish to
+use. Any non-special option name will be treated as an HTML attribute, and
+applied to the generated HTML input element.</p>
+</div>
+<div class="section" id="options-for-select-checkbox-and-radio-inputs">
+<h3>Options for select, checkbox and  radio inputs<a class="headerlink" href="#options-for-select-checkbox-and-radio-inputs" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['selected']</span></tt> Used in combination with a select-type input (i.e.
+For types select, date, time, datetime). Set &#8216;selected&#8217; to the value of the
+item you wish to be selected by default when the input is rendered:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;close_time&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;selected&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;13:30:00&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The selected key for date and datetime inputs may also be a UNIX
+timestamp.</p>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['empty']</span></tt> If set to true, forces the input to remain empty.</p>
+<p>When passed to a select list, this creates a blank option with an
+empty value in your drop down list. If you want to have a empty
+value with text displayed instead of just a blank option, pass in a
+string to empty:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="s1">&#39;empty&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;(choose one)&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserField&quot;</span><span class="nt">&gt;</span>Field<span class="nt">&lt;/label&gt;</span>
+    <span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>(choose one)<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>3<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>4<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;4&quot;</span><span class="nt">&gt;</span>5<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;/select&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you need to set the default value in a password field to blank,
+use &#8216;value&#8217; =&gt; &#8216;&#8217; instead.</p>
+</div>
+<p>Options can also supplied as key-value pairs.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['hiddenField']</span></tt> For certain input types (checkboxes, radios) a
+hidden input is created so that the key in $this-&gt;request-&gt;data will exist
+even without a value specified:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Post][Published]&quot;</span> <span class="na">id=</span><span class="s">&quot;PostPublished_&quot;</span>
+    <span class="na">value=</span><span class="s">&quot;0&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Post][Published]&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span>
+    <span class="na">id=</span><span class="s">&quot;PostPublished&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>This can be disabled by setting the <tt class="docutils literal"><span class="pre">$options['hiddenField']</span> <span class="pre">=</span> <span class="pre">false</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">checkbox</span><span class="p">(</span><span class="s1">&#39;published&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;hiddenField&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Which outputs:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Post][Published]&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span>
+    <span class="na">id=</span><span class="s">&quot;PostPublished&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>If you want to create multiple blocks of inputs on a form that are
+all grouped together, you should use this parameter on all inputs
+except the first. If the hidden input is on the page in multiple
+places, only the last group of input&#8217;s values will be saved</p>
+<p>In this example, only the tertiary colors would be passed, and the
+primary colors would be overridden:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;h2&gt;</span>Primary Colors<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Color][Color]&quot;</span> <span class="na">id=</span><span class="s">&quot;Colors_&quot;</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Color][Color][]&quot;</span> <span class="na">value=</span><span class="s">&quot;5&quot;</span>
+    <span class="na">id=</span><span class="s">&quot;ColorsRed&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ColorsRed&quot;</span><span class="nt">&gt;</span>Red<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Color][Color][]&quot;</span> <span class="na">value=</span><span class="s">&quot;5&quot;</span>
+    <span class="na">id=</span><span class="s">&quot;ColorsBlue&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ColorsBlue&quot;</span><span class="nt">&gt;</span>Blue<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Color][Color][]&quot;</span> <span class="na">value=</span><span class="s">&quot;5&quot;</span>
+    <span class="na">id=</span><span class="s">&quot;ColorsYellow&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ColorsYellow&quot;</span><span class="nt">&gt;</span>Yellow<span class="nt">&lt;/label&gt;</span>
+
+<span class="nt">&lt;h2&gt;</span>Tertiary Colors<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Color][Color]&quot;</span> <span class="na">id=</span><span class="s">&quot;Colors_&quot;</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Color][Color][]&quot;</span> <span class="na">value=</span><span class="s">&quot;5&quot;</span>
+    <span class="na">id=</span><span class="s">&quot;ColorsGreen&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ColorsGreen&quot;</span><span class="nt">&gt;</span>Green<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Color][Color][]&quot;</span> <span class="na">value=</span><span class="s">&quot;5&quot;</span>
+    <span class="na">id=</span><span class="s">&quot;ColorsPurple&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ColorsPurple&quot;</span><span class="nt">&gt;</span>Purple<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Addon][Addon][]&quot;</span> <span class="na">value=</span><span class="s">&quot;5&quot;</span>
+    <span class="na">id=</span><span class="s">&quot;ColorsOrange&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ColorsOrange&quot;</span><span class="nt">&gt;</span>Orange<span class="nt">&lt;/label&gt;</span>
+</pre></div>
+</div>
+<p>Disabling the <tt class="docutils literal"><span class="pre">'hiddenField'</span></tt> on the second input group would
+prevent this behavior.</p>
+<p>You can set a different hidden field value other than 0 such as &#8216;N&#8217;:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">checkbox</span><span class="p">(</span><span class="s1">&#39;published&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;hiddenField&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="datetime-options">
+<h3>Datetime options<a class="headerlink" href="#datetime-options" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['timeFormat']</span></tt> Used to specify the format of the select inputs for
+a time-related set of inputs. Valid values include <tt class="docutils literal"><span class="pre">12</span></tt>, <tt class="docutils literal"><span class="pre">24</span></tt>, and <tt class="docutils literal"><span class="pre">null</span></tt>.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['dateFormat']</span></tt> Used to specify the format of the select inputs for
+a date-related set of inputs. Valid values include any combination of &#8216;D&#8217;,
+&#8216;M&#8217; and &#8216;Y&#8217; or <tt class="docutils literal"><span class="pre">null</span></tt>. The inputs will be put in the order defined by the
+dateFormat option.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['minYear'],</span> <span class="pre">$options['maxYear']</span></tt> Used in combination with a
+date/datetime input. Defines the lower and/or upper end of values shown in the
+years select field.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['orderYear']</span></tt> Used in combination with a date/datetime input.
+Defines the order in which the year values will be set. Valid values include
+&#8216;asc&#8217;, &#8216;desc&#8217;. The default value is &#8216;desc&#8217;.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['interval']</span></tt> This option specifies the number of minutes between
+each option in the minutes select box:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.time&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;interval&#39;</span> <span class="o">=&gt;</span> <span class="mi">15</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Would create 4 options in the minute select. One for each 15
+minutes.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['round']</span></tt> Can be set to <cite>up</cite> or <cite>down</cite> to force rounding in either direction.
+Defaults to null which rounds half up according to <cite>interval</cite>.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.4.</span></p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="form-element-specific-methods">
+<h2>Form Element-Specific Methods<a class="headerlink" href="#form-element-specific-methods" title="Permalink to this headline">¶</a></h2>
+<p>All elements are created under a form for the <tt class="docutils literal"><span class="pre">User</span></tt> model as in the examples above.
+For this reason, the HTML code generated will contain attributes that reference to the User model.
+Ex: name=data[User][username], id=UserUsername</p>
+<dl class="method">
+<dt id="FormHelper::label">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">label</tt><big>(</big><em>string $fieldName</em>, <em>string $text</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a label element. <tt class="docutils literal"><span class="pre">$fieldName</span></tt> is used for generating the
+DOM id. If <tt class="docutils literal"><span class="pre">$text</span></tt> is undefined, <tt class="docutils literal"><span class="pre">$fieldName</span></tt> will be used to inflect
+the label&#8217;s text:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">label</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">label</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="s1">&#39;Your username&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span><span class="nt">&gt;</span>Your username<span class="nt">&lt;/label&gt;</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">$options</span></tt> can either be an array of HTML attributes, or a string that
+will be used as a class name:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">label</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user-label&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">label</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="s1">&#39;Your username&#39;</span><span class="p">,</span> <span class="s1">&#39;highlight&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span> <span class="na">id=</span><span class="s">&quot;user-label&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span> <span class="na">class=</span><span class="s">&quot;highlight&quot;</span><span class="nt">&gt;</span>Your username<span class="nt">&lt;/label&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::text">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">text</tt><big>(</big><em>string $name</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::text" title="Permalink to this definition">¶</a></dt>
+<dd><p>The rest of the methods available in the FormHelper are for
+creating specific form elements. Many of these methods also make
+use of a special $options parameter. In this case, however,
+$options is used primarily to specify HTML tag attributes (such as
+the value or DOM id of an element in the form):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">text</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][username]&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">class=</span><span class="s">&quot;users&quot;</span>
+    <span class="na">id=</span><span class="s">&quot;UserUsername&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::password">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">password</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::password" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a password field.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">password</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][password]&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserPassword&quot;</span>
+    <span class="na">type=</span><span class="s">&quot;password&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::hidden">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">hidden</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::hidden" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a hidden form input. Example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">hidden</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][id]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserId&quot;</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>If the form is edited (that is, the array <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> will
+contain the information saved for the <tt class="docutils literal"><span class="pre">User</span></tt> model), the value
+corresponding to <tt class="docutils literal"><span class="pre">id</span></tt> field will automatically be added to the HTML
+generated. Example for data[User][id] = 10:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][id]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserId&quot;</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">value=</span><span class="s">&quot;10&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.0: </span>Hidden fields no longer remove the class attribute. This means
+that if there are validation errors on hidden fields, the
+error-field class name will be applied.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::textarea">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">textarea</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::textarea" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a textarea input field.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">textarea</span><span class="p">(</span><span class="s1">&#39;notes&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;textarea</span> <span class="na">name=</span><span class="s">&quot;data[User][notes]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserNotes&quot;</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+</pre></div>
+</div>
+<p>If the form is edited (that is, the array <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> will
+contain the information saved for the <tt class="docutils literal"><span class="pre">User</span></tt> model), the value
+corresponding to <tt class="docutils literal"><span class="pre">notes</span></tt> field will automatically be added to the HTML
+generated. Example:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;textarea</span> <span class="na">name=</span><span class="s">&quot;data[User][notes]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserNotes&quot;</span><span class="nt">&gt;</span>
+This text is to be edited.
+<span class="nt">&lt;/textarea&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <tt class="docutils literal"><span class="pre">textarea</span></tt> input type allows for the <tt class="docutils literal"><span class="pre">$options</span></tt> attribute
+of <tt class="docutils literal"><span class="pre">'escape'</span></tt> which determines whether or not the contents of the
+textarea should be escaped. Defaults to <tt class="docutils literal"><span class="pre">true</span></tt>.</p>
+</div>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">textarea</span><span class="p">(</span><span class="s1">&#39;notes&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;escape&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">);</span>
+<span class="c1">// OR....</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span>
+    <span class="s1">&#39;notes&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="s1">&#39;escape&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Options</strong></p>
+<p>In addition to the <a class="reference internal" href="#general-input-options"><em>Common options</em></a>, textarea() supports a few
+specific options:</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['rows'],</span> <span class="pre">$options['cols']</span></tt> These two keys specify the number of
+rows and columns:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">textarea</span><span class="p">(</span>
+    <span class="s1">&#39;textarea&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;rows&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;cols&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;5&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;textarea</span> <span class="na">name=</span><span class="s">&quot;data[Form][textarea]&quot;</span> <span class="na">cols=</span><span class="s">&quot;5&quot;</span> <span class="na">rows=</span><span class="s">&quot;5&quot;</span> <span class="na">id=</span><span class="s">&quot;FormTextarea&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/textarea&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::checkbox">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">checkbox</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::checkbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a checkbox form element. This method also generates an
+associated hidden form input to force the submission of data for
+the specified field.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">checkbox</span><span class="p">(</span><span class="s1">&#39;done&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;data[User][done]&quot;</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span> <span class="na">id=</span><span class="s">&quot;UserDone_&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[User][done]&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span> <span class="na">id=</span><span class="s">&quot;UserDone&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>It is possible to specify the value of the checkbox by using the
+$options array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">checkbox</span><span class="p">(</span><span class="s1">&#39;done&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="mi">555</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;data[User][done]&quot;</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span> <span class="na">id=</span><span class="s">&quot;UserDone_&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[User][done]&quot;</span> <span class="na">value=</span><span class="s">&quot;555&quot;</span> <span class="na">id=</span><span class="s">&quot;UserDone&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>If you don&#8217;t want the Form helper to create a hidden input:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">checkbox</span><span class="p">(</span><span class="s1">&#39;done&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;hiddenField&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;data[User][done]&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span> <span class="na">id=</span><span class="s">&quot;UserDone&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::radio">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">radio</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::radio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a set of radio button inputs.</p>
+<p><strong>Options</strong></p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['value']</span></tt> to set which value should be selected default.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['separator']</span></tt> to specify HTML in between radio
+buttons (e.g. &lt;br /&gt;).</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['between']</span></tt> specify some content to be inserted between the
+legend and first element.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['disabled']</span></tt> Setting this to <tt class="docutils literal"><span class="pre">true</span></tt> or <tt class="docutils literal"><span class="pre">'disabled'</span></tt>
+will disable all of the generated radio buttons.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['legend']</span></tt> Radio elements are wrapped with a legend and
+fieldset by default. Set <tt class="docutils literal"><span class="pre">$attributes['legend']</span></tt> to false to remove
+them.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;M&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Female&#39;</span><span class="p">);</span>
+<span class="nv">$attributes</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;legend&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">radio</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">,</span> <span class="nv">$attributes</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][gender]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserGender_&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span>
+    <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][gender]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserGenderM&quot;</span> <span class="na">value=</span><span class="s">&quot;M&quot;</span>
+    <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserGenderM&quot;</span><span class="nt">&gt;</span>Male<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][gender]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserGenderF&quot;</span> <span class="na">value=</span><span class="s">&quot;F&quot;</span>
+    <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserGenderF&quot;</span><span class="nt">&gt;</span>Female<span class="nt">&lt;/label&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>If for some reason you don&#8217;t want the hidden input, setting
+<tt class="docutils literal"><span class="pre">$attributes['value']</span></tt> to a selected value or boolean false will
+do just that.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.1: </span>The <tt class="docutils literal"><span class="pre">$attributes['disabled']</span></tt> option was added in 2.1.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::select">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">select</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::select" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a select element, populated with the items in <tt class="docutils literal"><span class="pre">$options</span></tt>,
+with the option specified by <tt class="docutils literal"><span class="pre">$attributes['value']</span></tt> shown as selected by
+default. Set the &#8216;empty&#8217; key in the <tt class="docutils literal"><span class="pre">$attributes</span></tt> variable to false to
+turn off the default empty option:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;M&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Female&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][gender]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserGender&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;M&quot;</span><span class="nt">&gt;</span>Male<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;F&quot;</span><span class="nt">&gt;</span>Female<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">select</span></tt> input type allows for a special <tt class="docutils literal"><span class="pre">$option</span></tt>
+attribute called <tt class="docutils literal"><span class="pre">'escape'</span></tt> which accepts a bool and determines
+whether to HTML entity encode the contents of the select options.
+Defaults to true:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;M&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Female&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;escape&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['options']</span></tt> This key allows you to manually specify options for a
+select input, or for a radio group. Unless the &#8216;type&#8217; is specified as &#8216;radio&#8217;,
+the FormHelper will assume that the target output is a select input:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>3<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>4<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;4&quot;</span><span class="nt">&gt;</span>5<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+</div>
+<p>Options can also be supplied as key-value pairs:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Value 1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Value 2&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Value 3&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 3&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;Value 1&quot;</span><span class="nt">&gt;</span>Label 1<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;Value 2&quot;</span><span class="nt">&gt;</span>Label 2<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;Value 3&quot;</span><span class="nt">&gt;</span>Label 3<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+</div>
+<p>If you would like to generate a select with optgroups, just pass
+data in hierarchical format. This works on multiple checkboxes and radio
+buttons too, but instead of optgroups wraps elements in fieldsets:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+   <span class="s1">&#39;Group 1&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;Value 1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 1&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;Value 2&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 2&#39;</span>
+   <span class="p">),</span>
+   <span class="s1">&#39;Group 2&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;Value 3&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 3&#39;</span>
+   <span class="p">)</span>
+<span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserField&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;optgroup</span> <span class="na">label=</span><span class="s">&quot;Group 1&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;Value 1&quot;</span><span class="nt">&gt;</span>Label 1<span class="nt">&lt;/option&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;Value 2&quot;</span><span class="nt">&gt;</span>Label 2<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;/optgroup&gt;</span>
+    <span class="nt">&lt;optgroup</span> <span class="na">label=</span><span class="s">&quot;Group 2&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;Value 3&quot;</span><span class="nt">&gt;</span>Label 3<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;/optgroup&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['multiple']</span></tt> If &#8216;multiple&#8217; has been set to true for an input that
+outputs a select, the select will allow multiple selections:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span>
+    <span class="s1">&#39;Model.field&#39;</span><span class="p">,</span>
+    <span class="nv">$options</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;multiple&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Alternatively set &#8216;multiple&#8217; to &#8216;checkbox&#8217; to output a list of
+related check boxes:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Value 1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Value 2&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 2&#39;</span>
+<span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;multiple&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;checkbox&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input select&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ModelField&quot;</span><span class="nt">&gt;</span>Field<span class="nt">&lt;/label&gt;</span>
+   <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[Model][field]&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;ModelField&quot;</span>
+    <span class="na">type=</span><span class="s">&quot;hidden&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[Model][field][]&quot;</span> <span class="na">value=</span><span class="s">&quot;Value 1&quot;</span>
+        <span class="na">id=</span><span class="s">&quot;ModelField1&quot;</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ModelField1&quot;</span><span class="nt">&gt;</span>Label 1<span class="nt">&lt;/label&gt;</span>
+   <span class="nt">&lt;/div&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[Model][field][]&quot;</span> <span class="na">value=</span><span class="s">&quot;Value 2&quot;</span>
+        <span class="na">id=</span><span class="s">&quot;ModelField2&quot;</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ModelField2&quot;</span><span class="nt">&gt;</span>Label 2<span class="nt">&lt;/label&gt;</span>
+   <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['disabled']</span></tt> When creating checkboxes, this option can be set
+to disable all or some checkboxes. To disable all checkboxes set disabled
+to <tt class="docutils literal"><span class="pre">true</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Value 1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Value 2&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Label 2&#39;</span>
+<span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="nv">$options</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;multiple&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;checkbox&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;disabled&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Value 1&#39;</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;input select&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ModelField&quot;</span><span class="nt">&gt;</span>Field<span class="nt">&lt;/label&gt;</span>
+   <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[Model][field]&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;ModelField&quot;</span>
+    <span class="na">type=</span><span class="s">&quot;hidden&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[Model][field][]&quot;</span> <span class="na">disabled=</span><span class="s">&quot;disabled&quot;</span>
+        <span class="na">value=</span><span class="s">&quot;Value 1&quot;</span> <span class="na">id=</span><span class="s">&quot;ModelField1&quot;</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ModelField1&quot;</span><span class="nt">&gt;</span>Label 1<span class="nt">&lt;/label&gt;</span>
+   <span class="nt">&lt;/div&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[Model][field][]&quot;</span> <span class="na">value=</span><span class="s">&quot;Value 2&quot;</span>
+        <span class="na">id=</span><span class="s">&quot;ModelField2&quot;</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ModelField2&quot;</span><span class="nt">&gt;</span>Label 2<span class="nt">&lt;/label&gt;</span>
+   <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.3: </span>Support for arrays in <tt class="docutils literal"><span class="pre">$attributes['disabled']</span></tt> was added in 2.3.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::file">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">file</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::file" title="Permalink to this definition">¶</a></dt>
+<dd><p>To add a file upload field to a form, you must first make sure that
+the form enctype is set to &#8220;multipart/form-data&#8221;, so start off with
+a create function such as the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Document&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;enctype&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;multipart/form-data&#39;</span>
+<span class="p">));</span>
+<span class="c1">// OR</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Document&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;file&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Next add either of the two lines to your form view file:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Document.submittedfile&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;between&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;br /&gt;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;file&#39;</span>
+<span class="p">));</span>
+
+<span class="c1">// OR</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">(</span><span class="s1">&#39;Document.submittedfile&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Due to the limitations of HTML itself, it is not possible to put
+default values into input fields of type &#8216;file&#8217;. Each time the form
+is displayed, the value inside will be empty.</p>
+<p>Upon submission, file fields provide an expanded data array to the
+script receiving the form data.</p>
+<p>For the example above, the values in the submitted data array would
+be organized as follows, if the CakePHP was installed on a Windows
+server. &#8216;tmp_name&#8217; will have a different path in a Unix
+environment:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;Document&#39;</span><span class="p">][</span><span class="s1">&#39;submittedfile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;conference_schedule.pdf&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/pdf&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;tmp_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;C:/WINDOWS/TEMP/php1EE.tmp&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s1">&#39;size&#39;</span> <span class="o">=&gt;</span> <span class="mi">41737</span><span class="p">,</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This array is generated by PHP itself, so for more detail on the
+way PHP handles data passed via file fields
+<a class="reference external" href="http://php.net/features.file-upload">read the PHP manual section on file uploads</a>.</p>
+</dd></dl>
+
+<div class="section" id="validating-uploads">
+<h3>Validating Uploads<a class="headerlink" href="#validating-uploads" title="Permalink to this headline">¶</a></h3>
+<p>Below is an example validation method you could define in your
+model to validate whether a file has been successfully uploaded:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">isUploadedFile</span><span class="p">(</span><span class="nv">$params</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$val</span> <span class="o">=</span> <span class="nb">array_shift</span><span class="p">(</span><span class="nv">$params</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">((</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">||</span>
+        <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span> <span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;none&#39;</span><span class="p">)</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">is_uploaded_file</span><span class="p">(</span><span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Creates a file input:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;file&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">(</span><span class="s1">&#39;avatar&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">enctype=</span><span class="s">&quot;multipart/form-data&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;/users/add&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;data[User][avatar]&quot;</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">id=</span><span class="s">&quot;UserAvatar&quot;</span> <span class="na">type=</span><span class="s">&quot;file&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When using <tt class="docutils literal"><span class="pre">$this-&gt;Form-&gt;file()</span></tt>, remember to set the form
+encoding-type, by setting the type option to &#8216;file&#8217; in
+<tt class="docutils literal"><span class="pre">$this-&gt;Form-&gt;create()</span></tt></p>
+</div>
+</div>
+</div>
+<div class="section" id="creating-buttons-and-submit-elements">
+<h2>Creating buttons and submit elements<a class="headerlink" href="#creating-buttons-and-submit-elements" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="FormHelper::submit">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">submit</tt><big>(</big><em>string $caption</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a submit button with caption <tt class="docutils literal"><span class="pre">$caption</span></tt>. If the supplied
+<tt class="docutils literal"><span class="pre">$caption</span></tt> is a URL to an image (it contains a &#8216;.&#8217; character),
+the submit button will be rendered as an image.</p>
+<p>It is enclosed between <tt class="docutils literal"><span class="pre">div</span></tt> tags by default; you can avoid this
+by declaring <tt class="docutils literal"><span class="pre">$options['div']</span> <span class="pre">=</span> <span class="pre">false</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;&lt;input</span> <span class="na">value=</span><span class="s">&quot;Submit&quot;</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>You can also pass a relative or absolute URL to an image for the
+caption parameter instead of caption text.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">(</span><span class="s1">&#39;ok.png&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;image&quot;</span> <span class="na">src=</span><span class="s">&quot;/img/ok.png&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::button">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">button</tt><big>(</big><em>string $title</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#FormHelper::button" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an HTML button with the specified title and a default type
+of &#8220;button&#8221;. Setting <tt class="docutils literal"><span class="pre">$options['type']</span></tt> will output one of the
+three possible button types:</p>
+<ol class="arabic simple">
+<li>submit: Same as the <tt class="docutils literal"><span class="pre">$this-&gt;Form-&gt;submit</span></tt> method - (the
+default).</li>
+<li>reset: Creates a form reset button.</li>
+<li>button: Creates a standard push button.</li>
+</ol>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">button</span><span class="p">(</span><span class="s1">&#39;A Button&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">button</span><span class="p">(</span><span class="s1">&#39;Another Button&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;button&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">button</span><span class="p">(</span><span class="s1">&#39;Reset the Form&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;reset&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">button</span><span class="p">(</span><span class="s1">&#39;Submit Form&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;submit&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>A Button<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span><span class="nt">&gt;</span>Another Button<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;reset&quot;</span><span class="nt">&gt;</span>Reset the Form<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>Submit Form<span class="nt">&lt;/button&gt;</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">button</span></tt> input type supports the <tt class="docutils literal"><span class="pre">escape</span></tt> option, which accepts a
+bool and determines whether to HTML entity encode the $title of the button.
+Defaults to false:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">button</span><span class="p">(</span><span class="s1">&#39;Submit Form&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;submit&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;escape&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::postButton">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">postButton</tt><big>(</big><em>string $title</em>, <em>mixed $url</em>, <em>array $options = array ()</em><big>)</big><a class="headerlink" href="#FormHelper::postButton" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <tt class="docutils literal"><span class="pre">&lt;button&gt;</span></tt> tag with a surrounding <tt class="docutils literal"><span class="pre">&lt;form&gt;</span></tt> that submits via
+POST.</p>
+<p>This method creates a <tt class="docutils literal"><span class="pre">&lt;form&gt;</span></tt> element. So do not use this method in some
+opened form. Instead use <a class="reference internal" href="#FormHelper::submit" title="FormHelper::submit"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::submit()</span></tt></a> or
+<a class="reference internal" href="#FormHelper::button" title="FormHelper::button"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::button()</span></tt></a> to create buttons inside opened forms.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::postLink">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">postLink</tt><big>(</big><em>string $title</em>, <em>mixed $url = null</em>, <em>array $options = array ()</em><big>)</big><a class="headerlink" href="#FormHelper::postLink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an HTML link, but access the URL using method POST. Requires
+JavaScript to be enabled in browser.</p>
+<p>This method creates a <tt class="docutils literal"><span class="pre">&lt;form&gt;</span></tt> element. So do not use this method inside
+an existing form. Instead you should add a submit button using
+<a class="reference internal" href="#FormHelper::submit" title="FormHelper::submit"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::submit()</span></tt></a></p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.3: </span>The <tt class="docutils literal"><span class="pre">method</span></tt> option was added.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.5: </span>The <tt class="docutils literal"><span class="pre">inline</span></tt> and <tt class="docutils literal"><span class="pre">block</span></tt> options were added. They allow buffering
+the generated form tag, instead of returning with the link. This helps
+avoiding nested form tags. Setting <tt class="docutils literal"><span class="pre">'inline'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt> will add
+the form tag to <tt class="docutils literal"><span class="pre">postLink</span></tt> content block or you can use option <tt class="docutils literal"><span class="pre">block</span></tt>
+to specify a custom block.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.6: </span>The argument <tt class="docutils literal"><span class="pre">$confirmMessage</span></tt> was deprecated. Use <tt class="docutils literal"><span class="pre">confirm</span></tt> key
+in <tt class="docutils literal"><span class="pre">$options</span></tt> instead.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="creating-date-and-time-inputs">
+<h2>Creating date and time inputs<a class="headerlink" href="#creating-date-and-time-inputs" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="FormHelper::dateTime">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">dateTime</tt><big>(</big><em>$fieldName</em>, <em>$dateFormat = 'DMY'</em>, <em>$timeFormat = '12'</em>, <em>$attributes = array()</em><big>)</big><a class="headerlink" href="#FormHelper::dateTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a set of select inputs for date and time. Valid values for
+$dateformat are &#8216;DMY&#8217;, &#8216;MDY&#8217;, &#8216;YMD&#8217; or &#8216;NONE&#8217;. Valid values for
+$timeFormat are &#8216;12&#8217;, &#8216;24&#8217;, and null.</p>
+<p>You can specify not to display empty values by setting
+&#8220;array(&#8216;empty&#8217; =&gt; false)&#8221; in the attributes parameter. It will also
+pre-select the fields with the current datetime.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::year">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">year</tt><big>(</big><em>string $fieldName</em>, <em>int $minYear</em>, <em>int $maxYear</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::year" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a select element populated with the years from <tt class="docutils literal"><span class="pre">$minYear</span></tt>
+to <tt class="docutils literal"><span class="pre">$maxYear</span></tt>. HTML attributes may be supplied in $attributes. If
+<tt class="docutils literal"><span class="pre">$attributes['empty']</span></tt> is false, the select will not include an
+empty option:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">year</span><span class="p">(</span><span class="s1">&#39;purchased&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][purchased][year]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserPurchasedYear&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2009&quot;</span><span class="nt">&gt;</span>2009<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2008&quot;</span><span class="nt">&gt;</span>2008<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2007&quot;</span><span class="nt">&gt;</span>2007<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2006&quot;</span><span class="nt">&gt;</span>2006<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2005&quot;</span><span class="nt">&gt;</span>2005<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2004&quot;</span><span class="nt">&gt;</span>2004<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2003&quot;</span><span class="nt">&gt;</span>2003<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2002&quot;</span><span class="nt">&gt;</span>2002<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2001&quot;</span><span class="nt">&gt;</span>2001<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;2000&quot;</span><span class="nt">&gt;</span>2000<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::month">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">month</tt><big>(</big><em>string $fieldName</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::month" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a select element populated with month names:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">month</span><span class="p">(</span><span class="s1">&#39;mob&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][mob][month]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserMobMonth&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;01&quot;</span><span class="nt">&gt;</span>January<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;02&quot;</span><span class="nt">&gt;</span>February<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;03&quot;</span><span class="nt">&gt;</span>March<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;04&quot;</span><span class="nt">&gt;</span>April<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;05&quot;</span><span class="nt">&gt;</span>May<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;06&quot;</span><span class="nt">&gt;</span>June<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;07&quot;</span><span class="nt">&gt;</span>July<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;08&quot;</span><span class="nt">&gt;</span>August<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;09&quot;</span><span class="nt">&gt;</span>September<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;10&quot;</span><span class="nt">&gt;</span>October<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;11&quot;</span><span class="nt">&gt;</span>November<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;12&quot;</span><span class="nt">&gt;</span>December<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+</div>
+<p>You can pass in your own array of months to be used by setting the
+&#8216;monthNames&#8217; attribute, or have months displayed as numbers by
+passing false. (Note: the default months are internationalized and
+can be translated using localization.):</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">month</span><span class="p">(</span><span class="s1">&#39;mob&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;monthNames&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::day">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">day</tt><big>(</big><em>string $fieldName</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a select element populated with the (numerical) days of the
+month.</p>
+<p>To create an empty option with prompt text of your choosing (e.g.
+the first option is &#8216;Day&#8217;), you can supply the text as the final
+parameter as follows:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">day</span><span class="p">(</span><span class="s1">&#39;created&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Will output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;data[User][created][day]&quot;</span> <span class="na">id=</span><span class="s">&quot;UserCreatedDay&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;01&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;02&quot;</span><span class="nt">&gt;</span>2<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;03&quot;</span><span class="nt">&gt;</span>3<span class="nt">&lt;/option&gt;</span>
+...
+<span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;31&quot;</span><span class="nt">&gt;</span>31<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::hour">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">hour</tt><big>(</big><em>string $fieldName</em>, <em>boolean $format24Hours</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::hour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a select element populated with the hours of the day.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::minute">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">minute</tt><big>(</big><em>string $fieldName</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::minute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a select element populated with the minutes of the hour.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::meridian">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">meridian</tt><big>(</big><em>string $fieldName</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::meridian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a select element populated with &#8216;am&#8217; and &#8216;pm&#8217;.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="displaying-and-checking-errors">
+<h2>Displaying and checking errors<a class="headerlink" href="#displaying-and-checking-errors" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="FormHelper::error">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">error</tt><big>(</big><em>string $fieldName</em>, <em>mixed $text</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows a validation error message, specified by $text, for the given
+field, in the event that a validation error has occurred.</p>
+<p>Options:</p>
+<ul class="simple">
+<li>&#8216;escape&#8217; bool Whether or not to HTML escape the contents of the
+error.</li>
+<li>&#8216;wrap&#8217; mixed Whether or not the error message should be wrapped
+in a div. If a string, will be used as the HTML tag to use.</li>
+<li>&#8216;class&#8217; string The class name for the error message</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::isFieldError">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">isFieldError</tt><big>(</big><em>string $fieldName</em><big>)</big><a class="headerlink" href="#FormHelper::isFieldError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if the supplied $fieldName has an active validation
+error.</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">isFieldError</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When using <a class="reference internal" href="#FormHelper::input" title="FormHelper::input"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::input()</span></tt></a>, errors are rendered by default.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::tagIsInvalid">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">tagIsInvalid</tt><big>(</big><big>)</big><a class="headerlink" href="#FormHelper::tagIsInvalid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns false if given form field described by the current entity has no
+errors. Otherwise it returns the validation message.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="setting-defaults-for-all-fields">
+<h2>Setting Defaults for all fields<a class="headerlink" href="#setting-defaults-for-all-fields" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.2.</span></p>
+</div>
+<p>You can declare a set of default options for <tt class="docutils literal"><span class="pre">input()</span></tt> using
+<tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::inputDefaults()</span></tt>. Changing the default options allows
+you to consolidate repeated options into a single method call:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">inputDefaults</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+        <span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+        <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;fancy&#39;</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>All inputs created from that point forward will inherit the options declared in
+inputDefaults. You can override the default options by declaring the option in the
+input() call:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span> <span class="c1">// No div, no label with class &#39;fancy&#39;</span>
+<span class="c1">// has a label element same defaults</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span>
+    <span class="s1">&#39;username&#39;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Username&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-with-securitycomponent">
+<h2>Working with SecurityComponent<a class="headerlink" href="#working-with-securitycomponent" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../components/security-component.html#SecurityComponent" title="SecurityComponent"><tt class="xref php php-meth docutils literal"><span class="pre">SecurityComponent</span></tt></a> offers several features that make your forms safer
+and more secure. By simply including the <tt class="docutils literal"><span class="pre">SecurityComponent</span></tt> in your
+controller, you&#8217;ll automatically benefit from CSRF and form tampering features.</p>
+<p>As mentioned previously when using SecurityComponent, you should always close
+your forms using <a class="reference internal" href="#FormHelper::end" title="FormHelper::end"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::end()</span></tt></a>. This will ensure that the
+special <tt class="docutils literal"><span class="pre">_Token</span></tt> inputs are generated.</p>
+<dl class="method">
+<dt id="FormHelper::unlockField">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">unlockField</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#FormHelper::unlockField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unlocks a field making it exempt from the <tt class="docutils literal"><span class="pre">SecurityComponent</span></tt> field
+hashing. This also allows the fields to be manipulated by JavaScript.
+The <tt class="docutils literal"><span class="pre">$name</span></tt> parameter should be the entity name for the input:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">unlockField</span><span class="p">(</span><span class="s1">&#39;User.id&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="FormHelper::secure">
+<tt class="descclassname">FormHelper::</tt><tt class="descname">secure</tt><big>(</big><em>array $fields = array()</em><big>)</big><a class="headerlink" href="#FormHelper::secure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a hidden field with a security hash based on the fields used
+in the form.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="updates">
+<span id="form-improvements-1-3"></span><h2>2.0 updates<a class="headerlink" href="#updates" title="Permalink to this headline">¶</a></h2>
+<p><strong>$selected parameter removed</strong></p>
+<p>The <tt class="docutils literal"><span class="pre">$selected</span></tt> parameter was removed from several methods in
+FormHelper. All methods now support a <tt class="docutils literal"><span class="pre">$attributes['value']</span></tt> key
+now which should be used in place of <tt class="docutils literal"><span class="pre">$selected</span></tt>. This change
+simplifies the FormHelper methods, reducing the number of
+arguments, and reduces the duplication that <tt class="docutils literal"><span class="pre">$selected</span></tt> created.
+The effected methods are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>FormHelper::select()</li>
+<li>FormHelper::dateTime()</li>
+<li>FormHelper::year()</li>
+<li>FormHelper::month()</li>
+<li>FormHelper::day()</li>
+<li>FormHelper::hour()</li>
+<li>FormHelper::minute()</li>
+<li>FormHelper::meridian()</li>
+</ul>
+</div></blockquote>
+<p><strong>Default URLs on forms is the current action</strong></p>
+<p>The default URL for all forms, is now the current URL including
+passed, named, and querystring parameters. You can override
+this default by supplying <tt class="docutils literal"><span class="pre">$options['url']</span></tt> in the second
+parameter of <tt class="docutils literal"><span class="pre">$this-&gt;Form-&gt;create()</span></tt></p>
+<p><strong>FormHelper::hidden()</strong></p>
+<p>Hidden fields no longer remove the class attribute. This means
+that if there are validation errors on hidden fields,
+the error-field class name will be applied.</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">Controllers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../views.html">Views</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../views/themes.html">Themes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views/media-view.html">Media Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views/json-and-xml-views.html">JSON and XML views</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../views/helpers.html">Helpers</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache.html">CacheHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">FormHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="html.html">HtmlHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.html">JsHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">SessionHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="text.html">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">TimeHelper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../core-libraries.html">Core Libraries</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-general-purpose.html">General Purpose</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../global-constants-and-functions.html">Global Constants and Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core-utility-libraries/app.html">App Class</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../events.html">Events System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collections.html">Collections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-components.html">Components</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-helpers.html">Helpers</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cache.html">CacheHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">FormHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="html.html">HtmlHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.html">JsHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">SessionHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="text.html">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">TimeHelper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-utilities.html">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">FormHelper</a><ul>
+<li><a class="reference internal" href="#creating-forms">Creating Forms</a><ul>
+<li><a class="reference internal" href="#options-for-create">Options for create()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#closing-the-form">Closing the Form</a></li>
+<li><a class="reference internal" href="#creating-form-elements">Creating form elements</a><ul>
+<li><a class="reference internal" href="#field-naming-conventions">Field naming conventions</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#generating-specific-types-of-inputs">Generating specific types of inputs</a><ul>
+<li><a class="reference internal" href="#common-options">Common options</a></li>
+<li><a class="reference internal" href="#options-for-select-checkbox-and-radio-inputs">Options for select, checkbox and  radio inputs</a></li>
+<li><a class="reference internal" href="#datetime-options">Datetime options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#form-element-specific-methods">Form Element-Specific Methods</a><ul>
+<li><a class="reference internal" href="#validating-uploads">Validating Uploads</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-buttons-and-submit-elements">Creating buttons and submit elements</a></li>
+<li><a class="reference internal" href="#creating-date-and-time-inputs">Creating date and time inputs</a></li>
+<li><a class="reference internal" href="#displaying-and-checking-errors">Displaying and checking errors</a></li>
+<li><a class="reference internal" href="#setting-defaults-for-all-fields">Setting Defaults for all fields</a></li>
+<li><a class="reference internal" href="#working-with-securitycomponent">Working with SecurityComponent</a></li>
+<li><a class="reference internal" href="#updates">2.0 updates</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="html.html" title="HtmlHelper" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="flash.html" title="Flash" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

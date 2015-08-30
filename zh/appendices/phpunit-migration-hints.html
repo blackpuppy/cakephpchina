@@ -1,0 +1,483 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="PHPUnit Migration Hints" lang="zh_CN" name="title" />
+<meta content="free transition,vendor directory,static methods,teardown,test cases,pear,dependencies,test case,replacements,phpunit,migration,simpletest,cakephp,discover channel" lang="zh_CN" name="keywords" />
+
+    <title>PHPUnit Migration Hints &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="Appendices" href="../appendices.html" />
+    <link rel="next" title="Migrating from CakePHP 1.2 to 1.3" href="migrating-from-cakephp-1-2-to-1-3.html" />
+    <link rel="prev" title="New Features in CakePHP 2.0" href="new-features-in-cakephp-2-0.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/appendices/phpunit-migration-hints.html" /><link rel="alternate" hreflang="pt" href="../../pt/appendices/phpunit-migration-hints.html" /><link rel="alternate" hreflang="es" href="../../es/appendices/phpunit-migration-hints.html" /><link rel="alternate" hreflang="ja" href="../../ja/appendices/phpunit-migration-hints.html" /><link rel="alternate" hreflang="fr" href="../../fr/appendices/phpunit-migration-hints.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../appendices.html" accesskey="U" itemprop="url"><span itemprop="title">Appendices</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/appendices/phpunit-migration-hints.html">en</a></li>
+				
+					<li><a href="../../pt/appendices/phpunit-migration-hints.html">pt</a></li>
+				
+					<li><a href="../../es/appendices/phpunit-migration-hints.html">es</a></li>
+				
+					<li><a href="../../ja/appendices/phpunit-migration-hints.html">ja</a></li>
+				
+					<li><a href="../../fr/appendices/phpunit-migration-hints.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/appendices/phpunit-migration-hints.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="phpunit-migration-hints">
+<h1>PHPUnit Migration Hints<a class="headerlink" href="#phpunit-migration-hints" title="永久链接至标题">¶</a></h1>
+<p>Migrating your test cases to <a class="reference external" href="http://www.phpunit.de/manual/current/en/">PHPUnit 3.5</a>
+will hopefully be a fairly pain free transition. However, there are a few known
+differences between test cases under PHPUnit and
+<a class="reference external" href="http://www.simpletest.org/">SimpleTest</a>.</p>
+<div class="section" id="installing-phpunit">
+<h2>Installing PHPUnit<a class="headerlink" href="#installing-phpunit" title="永久链接至标题">¶</a></h2>
+<div class="section" id="installing-from-pear-recommended">
+<h3>Installing from PEAR (Recommended)<a class="headerlink" href="#installing-from-pear-recommended" title="永久链接至标题">¶</a></h3>
+<p>PHPUnit recommends it be installed via the pear installer, to do so run the
+following commands:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">pear</span> <span class="nx">channel</span><span class="o">-</span><span class="nx">discover</span> <span class="nx">pear</span><span class="o">.</span><span class="nx">phpunit</span><span class="o">.</span><span class="nx">de</span>
+<span class="nx">pear</span> <span class="nx">channel</span><span class="o">-</span><span class="nx">discover</span> <span class="nx">components</span><span class="o">.</span><span class="nx">ez</span><span class="o">.</span><span class="nx">no</span>
+<span class="nx">pear</span> <span class="nx">channel</span><span class="o">-</span><span class="nx">discover</span> <span class="nx">pear</span><span class="o">.</span><span class="nx">symfony</span><span class="o">-</span><span class="nx">project</span><span class="o">.</span><span class="nx">com</span>
+</pre></div>
+</div>
+<p>This has to be done only once. Now the <a class="reference external" href="http://pear.php.net/">PEAR Installer</a>
+can be used to install packages from the PHPUnit channel:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">pear</span> <span class="nx">install</span> <span class="nx">phpunit</span><span class="o">/</span><span class="nx">PHPUnit</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-manually">
+<h3>Installing manually<a class="headerlink" href="#installing-manually" title="永久链接至标题">¶</a></h3>
+<p>In addition to pear, CakePHP also supports placing the PHPUnit directory inside
+one of your vendors directories along with all its dependencies.  Doing so is
+generally not recommended as PHPUnit is complicated to install as it is composed
+of many pear packages.  Installing with the pear installer is easier and faster.</p>
+<p>If you do wish to install PHPUnit manually, you&#8217;ll need to place it and all of
+its dependencies inside your applications <tt class="docutils literal"><span class="pre">Vendor</span></tt> directory.</p>
+</div>
+</div>
+<div class="section" id="differences-between-simpletest">
+<h2>Differences between SimpleTest<a class="headerlink" href="#differences-between-simpletest" title="永久链接至标题">¶</a></h2>
+<p>There are a number of differences between SimpleTest and PHPUnit. The following
+is an attempt to list the most frequently encountered differences.</p>
+<div class="section" id="startcase-and-endcase">
+<h3>startCase() and endCase()<a class="headerlink" href="#startcase-and-endcase" title="永久链接至标题">¶</a></h3>
+<p>These methods are no longer supported. Use the static methods PHPUnit provides:
+<tt class="docutils literal"><span class="pre">setupBeforeClass</span></tt> and <tt class="docutils literal"><span class="pre">tearDownAfterClass</span></tt>.</p>
+</div>
+<div class="section" id="start-end-before-and-after">
+<h3>start(), end(), before() and after()<a class="headerlink" href="#start-end-before-and-after" title="永久链接至标题">¶</a></h3>
+<p>These methods were part of SimpleTest&#8217;s test case initialization. <tt class="docutils literal"><span class="pre">start()</span></tt> and
+<tt class="docutils literal"><span class="pre">end()</span></tt> have no replacements. You can use <tt class="docutils literal"><span class="pre">setUp()</span></tt> and <tt class="docutils literal"><span class="pre">tearDown()</span></tt> to
+replace <tt class="docutils literal"><span class="pre">before()</span></tt> and <tt class="docutils literal"><span class="pre">after()</span></tt>.</p>
+</div>
+<div class="section" id="setup-and-teardown">
+<h3>setUp() and tearDown()<a class="headerlink" href="#setup-and-teardown" title="永久链接至标题">¶</a></h3>
+<p>In the past the methods <tt class="docutils literal"><span class="pre">setUp</span></tt>, <tt class="docutils literal"><span class="pre">tearDown</span></tt>, <tt class="docutils literal"><span class="pre">startTest</span></tt> and <tt class="docutils literal"><span class="pre">endTest</span></tt>
+where supported, and caused confusion as they looked almost like the same thing
+but in some cases you should use one or the other.</p>
+<p>In the new CakePHP test suite, it is recommended to use only <tt class="docutils literal"><span class="pre">setUp</span></tt> and
+<tt class="docutils literal"><span class="pre">tearDown</span></tt>. The methods startTest and endTest are still supported but are
+deprecated.</p>
+</div>
+<div class="section" id="gettests">
+<h3>getTests<a class="headerlink" href="#gettests" title="永久链接至标题">¶</a></h3>
+<p>The method <tt class="docutils literal"><span class="pre">getTests</span></tt> is no longer supported. You can use filters instead. The
+web test runner now takes an additional query string parameter that allows you
+to specify a basic regular expression. This regular expression is used to
+restrict the methods that are run:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">e</span><span class="o">.</span><span class="nx">g</span><span class="o">.</span> <span class="nx">filter</span><span class="o">=</span><span class="nx">myMethod</span>
+</pre></div>
+</div>
+<p>Only tests containing the string <tt class="docutils literal"><span class="pre">myMethod</span></tt> will be run on the next refresh.
+The cake test shell also supports a &#8211;filter option to filter methods.</p>
+</div>
+<div class="section" id="assertion-methods">
+<h3>Assertion methods<a class="headerlink" href="#assertion-methods" title="永久链接至标题">¶</a></h3>
+<p>Many of the assertion methods have slightly different names between PHPUnit and
+SimpleTest. Where possible <tt class="xref php php-class docutils literal"><span class="pre">CakeTestCase</span></tt> provides a wrapper for the
+SimpleTest method names. These compatibility wrappers will be removed in 2.1.0.
+The following methods will be affected.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">assertEqual</span></tt> -&gt; <tt class="docutils literal"><span class="pre">assertEquals</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">assertNotEqual</span></tt> -&gt; <tt class="docutils literal"><span class="pre">assertNotEquals</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">assertPattern</span></tt> -&gt; <tt class="docutils literal"><span class="pre">assertRegExp</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">assertIdentical</span></tt> -&gt; <tt class="docutils literal"><span class="pre">assertSame</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">assertNotIdentical</span></tt> -&gt; <tt class="docutils literal"><span class="pre">assertNotSame</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">assertNoPattern</span></tt> -&gt; <tt class="docutils literal"><span class="pre">assertNotRegExp</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">assertNoErrors</span></tt> -&gt; no replacement</li>
+<li><tt class="docutils literal"><span class="pre">expectError</span></tt> -&gt; <tt class="docutils literal"><span class="pre">setExpectedException</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">expectException</span></tt> -&gt; <tt class="docutils literal"><span class="pre">setExpectedException</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">assertReference</span></tt> -&gt; <tt class="docutils literal"><span class="pre">assertSame</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">assertIsA</span></tt> -&gt; <tt class="docutils literal"><span class="pre">assertType</span></tt></li>
+</ul>
+<p>Some methods take their arguments in different orders, be sure to check the
+methods you are using when updating them.</p>
+</div>
+<div class="section" id="mock-expectations">
+<h3>Mock expectations<a class="headerlink" href="#mock-expectations" title="永久链接至标题">¶</a></h3>
+<p>Mock objects are dramatically different between PHPUnit and SimpleTest. There is
+no compatibility wrapper between them. Updating mock object usage can be a
+painful process but we hope the following tips help you in your migration. It&#8217;s
+highly recommended you familiarize yourself with the <a class="reference external" href="http://www.phpunit.de/manual/current/en/test-doubles.html#test-doubles.mock-objects">PHPUnit Mock object</a>
+documentation.</p>
+<div class="section" id="replacing-method-calls">
+<h4>Replacing method calls<a class="headerlink" href="#replacing-method-calls" title="永久链接至标题">¶</a></h4>
+<p>The following regular expressions should help update some of your more
+straightforward mock object expectations.</p>
+<div class="section" id="replace-expectonce-no-params">
+<h5>Replace expectOnce() no params<a class="headerlink" href="#replace-expectonce-no-params" title="永久链接至标题">¶</a></h5>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">expectOnce\</span><span class="p">(([</span><span class="o">^</span><span class="nx">\</span><span class="p">)]</span><span class="o">+</span><span class="p">)</span><span class="nx">\</span><span class="p">);</span>
+<span class="nx">expects</span><span class="p">(</span><span class="nx">\</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">once</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="err">$</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="replace-expectonce-with-params">
+<h5>Replace expectOnce() with params<a class="headerlink" href="#replace-expectonce-with-params" title="永久链接至标题">¶</a></h5>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">expectOnce\</span><span class="p">(([</span><span class="o">^</span><span class="p">,]</span><span class="o">+</span><span class="p">),</span> <span class="k">array</span><span class="nx">\</span><span class="p">((</span><span class="o">.+</span><span class="p">)</span><span class="nx">\</span><span class="p">)</span><span class="nx">\</span><span class="p">);</span>
+<span class="nx">expects</span><span class="p">(</span><span class="nx">\</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">once</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="err">$</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="err">$</span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="replace-expectat">
+<h5>Replace expectAt()<a class="headerlink" href="#replace-expectat" title="永久链接至标题">¶</a></h5>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">expectAt\</span><span class="p">((</span><span class="nx">\d</span><span class="o">+</span><span class="p">),</span> <span class="p">(</span><span class="o">.+</span><span class="p">),</span> <span class="k">array</span><span class="nx">\</span><span class="p">((</span><span class="o">.+</span><span class="p">)</span><span class="nx">\</span><span class="p">)</span><span class="nx">\</span><span class="p">);</span>
+<span class="nx">expects</span><span class="p">(</span><span class="nx">\</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">at</span><span class="p">(</span><span class="err">$</span><span class="mi">1</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="err">$</span><span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="err">$</span><span class="mi">3</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="replace-expectnever">
+<h5>Replace expectNever<a class="headerlink" href="#replace-expectnever" title="永久链接至标题">¶</a></h5>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">expectNever\</span><span class="p">(([</span><span class="o">^</span><span class="nx">\</span><span class="p">)]</span><span class="o">+</span><span class="p">)</span><span class="nx">\</span><span class="p">);</span>
+<span class="nx">expects</span><span class="p">(</span><span class="nx">\</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">never</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="err">$</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="replace-setreturnvalue">
+<h5>Replace setReturnValue<a class="headerlink" href="#replace-setreturnvalue" title="永久链接至标题">¶</a></h5>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">setReturnValue\</span><span class="p">(([</span><span class="o">^</span><span class="p">,]</span><span class="o">+</span><span class="p">),</span> <span class="p">(</span><span class="o">.+</span><span class="p">)</span><span class="nx">\</span><span class="p">);</span>
+<span class="nx">expects</span><span class="p">(</span><span class="nx">\</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">once</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="err">$</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValue</span><span class="p">(</span><span class="err">$</span><span class="mi">2</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="replace-setreturnvalueat">
+<h5>Replace setReturnValueAt<a class="headerlink" href="#replace-setreturnvalueat" title="永久链接至标题">¶</a></h5>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">setReturnValueAt</span><span class="p">((</span><span class="nx">\d</span><span class="o">+</span><span class="p">),</span> <span class="p">([</span><span class="o">^</span><span class="p">,]</span><span class="o">+</span><span class="p">),</span> <span class="p">(</span><span class="o">.+</span><span class="p">));</span>
+<span class="nx">expects</span><span class="p">(</span><span class="nx">\</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">at</span><span class="p">(</span><span class="err">$</span><span class="mi">1</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="err">$</span><span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValue</span><span class="p">(</span><span class="err">$</span><span class="mi">3</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="group-tests">
+<h3>Group tests<a class="headerlink" href="#group-tests" title="永久链接至标题">¶</a></h3>
+<p>Group tests have been removed as PHPUnit treats individual test cases and test
+suites as composable entities in the runner. You can place group tests inside
+the cases directory and use <tt class="docutils literal"><span class="pre">PHPUnit_Framework_TestSuite</span></tt> as a base class. An
+example Testsuite would look like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AllJavascriptHelpersTest</span> <span class="k">extends</span> <span class="nx">PHPUnit_Framework_TestSuite</span> <span class="p">{</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * Suite define the tests for this suite</span>
+<span class="sd"> *</span>
+<span class="sd"> * @return void</span>
+<span class="sd"> */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">suite</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$suite</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PHPUnit_Framework_TestSuite</span><span class="p">(</span><span class="s1">&#39;Js Helper and all Engine Helpers&#39;</span><span class="p">);</span>
+
+        <span class="nv">$helperTestPath</span> <span class="o">=</span> <span class="nx">CORE_TEST_CASES</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="s1">&#39;View&#39;</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="s1">&#39;Helper&#39;</span> <span class="o">.</span> <span class="nx">DS</span><span class="p">;</span>
+        <span class="nv">$suite</span><span class="o">-&gt;</span><span class="na">addTestFile</span><span class="p">(</span><span class="nv">$helperTestPath</span> <span class="o">.</span> <span class="s1">&#39;JsHelperTest.php&#39;</span><span class="p">);</span>
+        <span class="nv">$suite</span><span class="o">-&gt;</span><span class="na">addTestFile</span><span class="p">(</span><span class="nv">$helperTestPath</span> <span class="o">.</span> <span class="s1">&#39;JqueryEngineHelperTest.php&#39;</span><span class="p">);</span>
+        <span class="nv">$suite</span><span class="o">-&gt;</span><span class="na">addTestFile</span><span class="p">(</span><span class="nv">$helperTestPath</span> <span class="o">.</span> <span class="s1">&#39;MootoolsEngineHelperTest.php&#39;</span><span class="p">);</span>
+        <span class="nv">$suite</span><span class="o">-&gt;</span><span class="na">addTestFile</span><span class="p">(</span><span class="nv">$helperTestPath</span> <span class="o">.</span> <span class="s1">&#39;PrototypeEngineHelperTest.php&#39;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$suite</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">TestManger</span></tt> no longer has methods to add tests to group tests either. It is
+recommended that you use the methods PHPUnit offers.</p>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../appendices.html">Appendices</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2-7-migration-guide.html">2.7 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-6-migration-guide.html">2.6 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-5-migration-guide.html">2.5 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-4-migration-guide.html">2.4 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-3-migration-guide.html">2.3 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-2-migration-guide.html">2.2 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-1-migration-guide.html">2.1 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new-features-in-cakephp-2-1.html">New Features in CakePHP 2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-0-migration-guide.html">2.0 Migration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new-features-in-cakephp-2-0.html">New Features in CakePHP 2.0</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">PHPUnit Migration Hints</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="migrating-from-cakephp-1-2-to-1-3.html">Migrating from CakePHP 1.2 to 1.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="new-features-in-cakephp-1-3.html">New features in CakePHP 1.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">PHPUnit Migration Hints</a><ul>
+<li><a class="reference internal" href="#installing-phpunit">Installing PHPUnit</a><ul>
+<li><a class="reference internal" href="#installing-from-pear-recommended">Installing from PEAR (Recommended)</a></li>
+<li><a class="reference internal" href="#installing-manually">Installing manually</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#differences-between-simpletest">Differences between SimpleTest</a><ul>
+<li><a class="reference internal" href="#startcase-and-endcase">startCase() and endCase()</a></li>
+<li><a class="reference internal" href="#start-end-before-and-after">start(), end(), before() and after()</a></li>
+<li><a class="reference internal" href="#setup-and-teardown">setUp() and tearDown()</a></li>
+<li><a class="reference internal" href="#gettests">getTests</a></li>
+<li><a class="reference internal" href="#assertion-methods">Assertion methods</a></li>
+<li><a class="reference internal" href="#mock-expectations">Mock expectations</a><ul>
+<li><a class="reference internal" href="#replacing-method-calls">Replacing method calls</a><ul>
+<li><a class="reference internal" href="#replace-expectonce-no-params">Replace expectOnce() no params</a></li>
+<li><a class="reference internal" href="#replace-expectonce-with-params">Replace expectOnce() with params</a></li>
+<li><a class="reference internal" href="#replace-expectat">Replace expectAt()</a></li>
+<li><a class="reference internal" href="#replace-expectnever">Replace expectNever</a></li>
+<li><a class="reference internal" href="#replace-setreturnvalue">Replace setReturnValue</a></li>
+<li><a class="reference internal" href="#replace-setreturnvalueat">Replace setReturnValueAt</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#group-tests">Group tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="migrating-from-cakephp-1-2-to-1-3.html" title="Migrating from CakePHP 1.2 to 1.3" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="new-features-in-cakephp-2-0.html" title="New Features in CakePHP 2.0" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

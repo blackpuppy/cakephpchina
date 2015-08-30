@@ -1,0 +1,630 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Helpers" lang="en" name="title" />
+<meta content="php class,time function,presentation layer,processing power,ajax,markup,array,functionality,logic,syntax,elements,cakephp,plugins" lang="en" name="keywords" />
+
+    <title>Helpers &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Events System" href="../core-libraries/events.html" />
+    <link rel="next" title="CacheHelper" href="../core-libraries/helpers/cache.html" />
+    <link rel="prev" title="Components" href="../controllers/components.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/views/helpers.html" /><link rel="alternate" hreflang="es" href="../../es/views/helpers.html" /><link rel="alternate" hreflang="ja" href="../../ja/views/helpers.html" /><link rel="alternate" hreflang="fr" href="../../fr/views/helpers.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/views/helpers.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries.html"  itemprop="url"><span itemprop="title">Core Libraries</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries/toc-general-purpose.html"  itemprop="url"><span itemprop="title">General Purpose</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries/events.html" accesskey="U" itemprop="url"><span itemprop="title">Events System</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/views/helpers.html">pt</a></li>
+				
+					<li><a href="../../es/views/helpers.html">es</a></li>
+				
+					<li><a href="../../ja/views/helpers.html">ja</a></li>
+				
+					<li><a href="../../fr/views/helpers.html">fr</a></li>
+				
+					<li><a href="../../zh/views/helpers.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/views/helpers.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="helpers">
+<h1>Helpers<a class="headerlink" href="#helpers" title="Permalink to this headline">¶</a></h1>
+<p>Helpers are the component-like classes for the presentation layer
+of your application. They contain presentational logic that is
+shared between many views, elements, or layouts. This chapter will
+show you how to create your own helpers, and outline the basic
+tasks CakePHP&#8217;s core helpers can help you accomplish.</p>
+<p>CakePHP features a number of helpers that aid in view creation.
+They assist in creating well-formed markup (including forms), aid
+in formatting text, times and numbers, and can even speed up AJAX
+functionality. For more information on the helpers included in CakePHP,
+check out the chapter for each helper:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries/helpers/cache.html">CacheHelper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries/helpers/flash.html">Flash</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries/helpers/form.html">FormHelper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries/helpers/html.html">HtmlHelper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries/helpers/js.html">JsHelper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries/helpers/number.html">NumberHelper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries/helpers/paginator.html">Paginator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries/helpers/rss.html">RSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries/helpers/session.html">SessionHelper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries/helpers/text.html">TextHelper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries/helpers/time.html">TimeHelper</a></li>
+</ul>
+</div>
+<div class="section" id="using-and-configuring-helpers">
+<span id="configuring-helpers"></span><h2>Using and Configuring Helpers<a class="headerlink" href="#using-and-configuring-helpers" title="Permalink to this headline">¶</a></h2>
+<p>You enable helpers in CakePHP by making a controller aware of them. Each
+controller has a <a class="reference internal" href="../controllers.html#Controller::$helpers" title="Controller::$helpers"><tt class="xref php php-attr docutils literal"><span class="pre">$helpers</span></tt></a> property that lists the
+helpers to be made available in the view. To enable a helper in your view, add
+the name of the helper to the controller&#8217;s <tt class="docutils literal"><span class="pre">$helpers</span></tt> array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Form&#39;</span><span class="p">,</span> <span class="s1">&#39;Html&#39;</span><span class="p">,</span> <span class="s1">&#39;Js&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Adding helpers from plugins uses the <a class="reference internal" href="../appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a> used elsewhere in
+CakePHP:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Blog.Comment&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can also add helpers from within an action, so they will only
+be available to that action and not to the other actions in the
+controller. This saves processing power for the other actions that
+do not use the helper and helps keep the controller better
+organized:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">bake</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">helpers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">&#39;Time&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">mix</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// The Time helper is not loaded here and thus not available</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you need to enable a helper for all controllers, add the name of
+the helper to the <tt class="docutils literal"><span class="pre">$helpers</span></tt> array in <tt class="docutils literal"><span class="pre">/app/Controller/AppController.php</span></tt> (or
+create it if not present). Remember to include the default Html and
+Form helpers:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Form&#39;</span><span class="p">,</span> <span class="s1">&#39;Html&#39;</span><span class="p">,</span> <span class="s1">&#39;Js&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can pass options to helpers. These options can be used to set
+attribute values or modify behavior of a helper:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AwesomeHelper</span> <span class="k">extends</span> <span class="nx">AppHelper</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">View</span> <span class="nv">$view</span><span class="p">,</span> <span class="nv">$settings</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="nv">$view</span><span class="p">,</span> <span class="nv">$settings</span><span class="p">);</span>
+        <span class="nx">debug</span><span class="p">(</span><span class="nv">$settings</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">AwesomeController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Awesome&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;option1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value1&#39;</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As of 2.3, the options are merged with the <tt class="docutils literal"><span class="pre">Helper::$settings</span></tt> property of
+the helper.</p>
+<p>One common setting to use is the <tt class="docutils literal"><span class="pre">className</span></tt> option, which allows you to
+create aliased helpers in your views. This feature is useful when you want to
+replace <tt class="docutils literal"><span class="pre">$this-&gt;Html</span></tt> or another common Helper reference with a custom
+implementation:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/PostsController.php</span>
+<span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Html&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;MyHtml&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// app/View/Helper/MyHtmlHelper.php</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;HtmlHelper&#39;</span><span class="p">,</span> <span class="s1">&#39;View/Helper&#39;</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">MyHtmlHelper</span> <span class="k">extends</span> <span class="nx">HtmlHelper</span> <span class="p">{</span>
+    <span class="c1">// Add your code to override the core HtmlHelper</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The above would <em>alias</em> <tt class="docutils literal"><span class="pre">MyHtmlHelper</span></tt> to <tt class="docutils literal"><span class="pre">$this-&gt;Html</span></tt> in your views.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Aliasing a helper replaces that instance anywhere that helper is used,
+including inside other Helpers.</p>
+</div>
+<p>Using helper settings allows you to declaratively configure your helpers and
+keep configuration logic out of your controller actions. If you have
+configuration options that cannot be included as part of a class declaration,
+you can set those in your controller&#8217;s beforeRender callback:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeRender</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">beforeRender</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">helpers</span><span class="p">[</span><span class="s1">&#39;CustomStuff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_getCustomStuffSettings</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-helpers">
+<h2>Using Helpers<a class="headerlink" href="#using-helpers" title="Permalink to this headline">¶</a></h2>
+<p>Once you&#8217;ve configured which helpers you want to use in your controller,
+each helper is exposed as a public property in the view. For example, if you
+were using the <a class="reference internal" href="../core-libraries/helpers/html.html#HtmlHelper" title="HtmlHelper"><tt class="xref php php-class docutils literal"><span class="pre">HtmlHelper</span></tt></a> you would be able to access it by
+doing the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">css</span><span class="p">(</span><span class="s1">&#39;styles&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The above would call the <tt class="docutils literal"><span class="pre">css</span></tt> method on the HtmlHelper. You can
+access any loaded helper using <tt class="docutils literal"><span class="pre">$this-&gt;{$helperName}</span></tt>. There may
+come a time where you need to dynamically load a helper from inside
+a view. You can use the view&#8217;s <tt class="xref php php-class docutils literal"><span class="pre">HelperCollection</span></tt> to
+do this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$mediaHelper</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Helpers</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;Media&#39;</span><span class="p">,</span> <span class="nv">$mediaSettings</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The HelperCollection is a <a class="reference internal" href="../core-libraries/collections.html"><em>collection</em></a> and
+supports the collection API used elsewhere in CakePHP.</p>
+</div>
+<div class="section" id="callback-methods">
+<h2>Callback methods<a class="headerlink" href="#callback-methods" title="Permalink to this headline">¶</a></h2>
+<p>Helpers feature several callbacks that allow you to augment the
+view rendering process. See the <a class="reference internal" href="#helper-api"><em>Helper API</em></a> and the
+<a class="reference internal" href="../core-libraries/collections.html"><em>Collections</em></a> documentation for more information.</p>
+</div>
+<div class="section" id="creating-helpers">
+<h2>Creating Helpers<a class="headerlink" href="#creating-helpers" title="Permalink to this headline">¶</a></h2>
+<p>If a core helper (or one showcased on GitHub or in the Bakery)
+doesn&#8217;t fit your needs, helpers are easy to create.</p>
+<p>Let&#8217;s say we wanted to create a helper that could be used to output
+a specifically crafted CSS-styled link you needed many different
+places in your application. In order to fit your logic into
+CakePHP&#8217;s existing helper structure, you&#8217;ll need to create a new
+class in <tt class="docutils literal"><span class="pre">/app/View/Helper</span></tt>. Let&#8217;s call our helper LinkHelper. The
+actual PHP class file would look something like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="cm">/* /app/View/Helper/LinkHelper.php */</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppHelper&#39;</span><span class="p">,</span> <span class="s1">&#39;View/Helper&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">LinkHelper</span> <span class="k">extends</span> <span class="nx">AppHelper</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">makeEdit</span><span class="p">(</span><span class="nv">$title</span><span class="p">,</span> <span class="nv">$url</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Logic to create specially formatted link goes here...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Helpers must extend either <tt class="docutils literal"><span class="pre">AppHelper</span></tt> or <a class="reference internal" href="#Helper" title="Helper"><tt class="xref php php-class docutils literal"><span class="pre">Helper</span></tt></a> or implement all the callbacks
+in the <a class="reference internal" href="#helper-api"><em>Helper API</em></a>.</p>
+</div>
+<div class="section" id="including-other-helpers">
+<h3>Including other Helpers<a class="headerlink" href="#including-other-helpers" title="Permalink to this headline">¶</a></h3>
+<p>You may wish to use some functionality already existing in another
+helper. To do so, you can specify helpers you wish to use with a
+<tt class="docutils literal"><span class="pre">$helpers</span></tt> array, formatted just as you would in a controller:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="cm">/* /app/View/Helper/LinkHelper.php (using other helpers) */</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppHelper&#39;</span><span class="p">,</span> <span class="s1">&#39;View/Helper&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">LinkHelper</span> <span class="k">extends</span> <span class="nx">AppHelper</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Html&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">makeEdit</span><span class="p">(</span><span class="nv">$title</span><span class="p">,</span> <span class="nv">$url</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Use the HTML helper to output</span>
+        <span class="c1">// formatted data:</span>
+
+        <span class="nv">$link</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span><span class="nv">$title</span><span class="p">,</span> <span class="nv">$url</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;edit&#39;</span><span class="p">));</span>
+
+        <span class="k">return</span> <span class="s1">&#39;&lt;div class=&quot;editOuter&quot;&gt;&#39;</span> <span class="o">.</span> <span class="nv">$link</span> <span class="o">.</span> <span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-your-helper">
+<span id="id1"></span><h3>Using your Helper<a class="headerlink" href="#using-your-helper" title="Permalink to this headline">¶</a></h3>
+<p>Once you&#8217;ve created your helper and placed it in
+<tt class="docutils literal"><span class="pre">/app/View/Helper/</span></tt>, you&#8217;ll be able to include it in your
+controllers using the special variable <a class="reference internal" href="../controllers.html#Controller::$helpers" title="Controller::$helpers"><tt class="xref php php-attr docutils literal"><span class="pre">$helpers</span></tt></a>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Link&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Once your controller has been made aware of this new class, you can
+use it in your views by accessing an object named after the
+helper:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;!--</span> <span class="nx">make</span> <span class="nx">a</span> <span class="nb">link</span> <span class="nx">using</span> <span class="nx">the</span> <span class="k">new</span> <span class="nx">helper</span> <span class="o">--&gt;</span>
+<span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Link</span><span class="o">-&gt;</span><span class="na">makeEdit</span><span class="p">(</span><span class="s1">&#39;Change this Recipe&#39;</span><span class="p">,</span> <span class="s1">&#39;/recipes/edit/5&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-functionality-for-all-helpers">
+<h2>Creating Functionality for All Helpers<a class="headerlink" href="#creating-functionality-for-all-helpers" title="Permalink to this headline">¶</a></h2>
+<p>All helpers extend a special class, AppHelper (just like models
+extend AppModel and controllers extend AppController). To create
+functionality that would be available to all helpers, create
+<tt class="docutils literal"><span class="pre">/app/View/Helper/AppHelper.php</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Helper&#39;</span><span class="p">,</span> <span class="s1">&#39;View&#39;</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">AppHelper</span> <span class="k">extends</span> <span class="nx">Helper</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">customMethod</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="helper-api">
+<span id="id2"></span><h2>Helper API<a class="headerlink" href="#helper-api" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Helper">
+<em class="property">class </em><tt class="descname">Helper</tt><a class="headerlink" href="#Helper" title="Permalink to this definition">¶</a></dt>
+<dd><p>The base class for Helpers. It provides a number of utility methods and
+features for loading other helpers.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Helper::webroot">
+<tt class="descclassname">Helper::</tt><tt class="descname">webroot</tt><big>(</big><em>$file</em><big>)</big><a class="headerlink" href="#Helper::webroot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolve a file name to the webroot of the application. If a theme is active
+and the file exists in the current theme&#8217;s webroot, the path to the themed
+file will be returned.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Helper::url">
+<tt class="descclassname">Helper::</tt><tt class="descname">url</tt><big>(</big><em>$url</em>, <em>$full = false</em><big>)</big><a class="headerlink" href="#Helper::url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates an HTML escaped URL, delegates to <a class="reference internal" href="../development/routing.html#Router::url" title="Router::url"><tt class="xref php php-meth docutils literal"><span class="pre">Router::url()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Helper::value">
+<tt class="descclassname">Helper::</tt><tt class="descname">value</tt><big>(</big><em>$options = array()</em>, <em>$field = null</em>, <em>$key = 'value'</em><big>)</big><a class="headerlink" href="#Helper::value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value for a given input name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Helper::domId">
+<tt class="descclassname">Helper::</tt><tt class="descname">domId</tt><big>(</big><em>$options = null</em>, <em>$id = 'id'</em><big>)</big><a class="headerlink" href="#Helper::domId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a CamelCased id value for the currently selected field.
+Overriding this method in your AppHelper will allow you to change
+how CakePHP generates ID attributes.</p>
+</dd></dl>
+
+<div class="section" id="callbacks">
+<h3>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="Helper::beforeRenderFile">
+<tt class="descclassname">Helper::</tt><tt class="descname">beforeRenderFile</tt><big>(</big><em>$viewFile</em><big>)</big><a class="headerlink" href="#Helper::beforeRenderFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is called before each view file is rendered. This includes elements,
+views, parent views and layouts.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Helper::afterRenderFile">
+<tt class="descclassname">Helper::</tt><tt class="descname">afterRenderFile</tt><big>(</big><em>$viewFile</em>, <em>$content</em><big>)</big><a class="headerlink" href="#Helper::afterRenderFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is called after each view file is rendered. This includes elements, views,
+parent views and layouts. A callback can modify and return <tt class="docutils literal"><span class="pre">$content</span></tt> to
+change how the rendered content will be displayed in the browser.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Helper::beforeRender">
+<tt class="descclassname">Helper::</tt><tt class="descname">beforeRender</tt><big>(</big><em>$viewFile</em><big>)</big><a class="headerlink" href="#Helper::beforeRender" title="Permalink to this definition">¶</a></dt>
+<dd><p>The beforeRender method is called after the controller&#8217;s
+beforeRender method but before the controller renders view and
+layout. Receives the file being rendered as an argument.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Helper::afterRender">
+<tt class="descclassname">Helper::</tt><tt class="descname">afterRender</tt><big>(</big><em>$viewFile</em><big>)</big><a class="headerlink" href="#Helper::afterRender" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is called after the view has been rendered but before layout rendering has
+started.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Helper::beforeLayout">
+<tt class="descclassname">Helper::</tt><tt class="descname">beforeLayout</tt><big>(</big><em>$layoutFile</em><big>)</big><a class="headerlink" href="#Helper::beforeLayout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is called before layout rendering starts. Receives the layout filename as an
+argument.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Helper::afterLayout">
+<tt class="descclassname">Helper::</tt><tt class="descname">afterLayout</tt><big>(</big><em>$layoutFile</em><big>)</big><a class="headerlink" href="#Helper::afterLayout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is called after layout rendering is complete. Receives the layout filename as an
+argument.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../views.html">Views</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="themes.html">Themes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="media-view.html">Media Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json-and-xml-views.html">JSON and XML views</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Helpers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/helpers/cache.html">CacheHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/helpers/flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/helpers/form.html">FormHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/helpers/html.html">HtmlHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/helpers/js.html">JsHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/helpers/number.html">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/helpers/paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/helpers/rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/helpers/session.html">SessionHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/helpers/text.html">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/helpers/time.html">TimeHelper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../core-libraries.html">Core Libraries</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../core-libraries/toc-general-purpose.html">General Purpose</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/global-constants-and-functions.html">Global Constants and Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/app.html">App Class</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../core-libraries/events.html">Events System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/collections.html">Collections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-components.html">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-helpers.html">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-utilities.html">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Helpers</a><ul>
+<li><a class="reference internal" href="#using-and-configuring-helpers">Using and Configuring Helpers</a></li>
+<li><a class="reference internal" href="#using-helpers">Using Helpers</a></li>
+<li><a class="reference internal" href="#callback-methods">Callback methods</a></li>
+<li><a class="reference internal" href="#creating-helpers">Creating Helpers</a><ul>
+<li><a class="reference internal" href="#including-other-helpers">Including other Helpers</a></li>
+<li><a class="reference internal" href="#using-your-helper">Using your Helper</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-functionality-for-all-helpers">Creating Functionality for All Helpers</a></li>
+<li><a class="reference internal" href="#helper-api">Helper API</a><ul>
+<li><a class="reference internal" href="#callbacks">Callbacks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="../core-libraries/helpers/cache.html" title="CacheHelper" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="../controllers/components.html" title="Components" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="CacheHelper" lang="en" name="title" />
+<meta content="The Cache helper assists in caching entire layouts and views, saving time repetitively retrieving data." lang="en" name="description" />
+<meta content="cache helper,view caching,cache action,cakephp cache,nocache,clear cache" lang="en" name="keywords" />
+
+    <title>CacheHelper &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../../index.html" />
+    <link rel="up" title="Helpers" href="../toc-helpers.html" />
+    <link rel="next" title="Flash" href="flash.html" />
+    <link rel="prev" title="Helpers" href="../toc-helpers.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/helpers/cache.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/helpers/cache.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/helpers/cache.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/helpers/cache.html" /><link rel="alternate" hreflang="zh_CN" href="../../../zh/core-libraries/helpers/cache.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">Core Libraries</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../toc-helpers.html" accesskey="U" itemprop="url"><span itemprop="title">Helpers</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../../pt/core-libraries/helpers/cache.html">pt</a></li>
+				
+					<li><a href="../../../es/core-libraries/helpers/cache.html">es</a></li>
+				
+					<li><a href="../../../ja/core-libraries/helpers/cache.html">ja</a></li>
+				
+					<li><a href="../../../fr/core-libraries/helpers/cache.html">fr</a></li>
+				
+					<li><a href="../../../zh/core-libraries/helpers/cache.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/core-libraries/helpers/cache.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="cachehelper">
+<h1>CacheHelper<a class="headerlink" href="#cachehelper" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="CacheHelper">
+<em class="property">class </em><tt class="descname">CacheHelper</tt><big>(</big><em>View $view</em>, <em>array $settings = array()</em><big>)</big><a class="headerlink" href="#CacheHelper" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The Cache helper assists in caching entire layouts and views, saving time
+repetitively retrieving data. View Caching in CakePHP temporarily stores parsed
+layouts and views as simple PHP + HTML files. It should be noted that the Cache
+helper works quite differently than other helpers. It does not have methods that
+are directly called. Instead, a view is marked with cache tags indicating which
+blocks of content should not be cached. The CacheHelper then uses helper
+callbacks to process the file and output to generate the cache file.</p>
+<p>When a URL is requested, CakePHP checks to see if that request string has already
+been cached. If it has, the rest of the URL dispatching process is skipped. Any
+nocache blocks are processed normally and the view is served. This creates a big
+savings in processing time for each request to a cached URL as minimal code is
+executed. If CakePHP doesn&#8217;t find a cached view, or the cache has expired for the
+requested URL it continues to process the request normally.</p>
+<div class="section" id="using-the-helper">
+<h2>Using the Helper<a class="headerlink" href="#using-the-helper" title="Permalink to this headline">¶</a></h2>
+<p>There are two steps you have to take before you can use the CacheHelper. First
+in your <tt class="docutils literal"><span class="pre">APP/Config/core.php</span></tt> uncomment the Configure write call for
+<tt class="docutils literal"><span class="pre">Cache.check</span></tt>. This will tell CakePHP to check for, and generate view cache
+files when handling requests.</p>
+<p>Once you&#8217;ve uncommented the <tt class="docutils literal"><span class="pre">Cache.check</span></tt> line you will need to add the helper
+to your controller&#8217;s <tt class="docutils literal"><span class="pre">$helpers</span></tt> array:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Cache&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You will also need to add the CacheDispatcher to your dispatcher filters in your bootstrap:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;CacheDispatcher&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 2.3: </span>If you have a setup with multiple domains or languages you can use
+<cite>Configure::write(&#8216;Cache.viewPrefix&#8217;, &#8216;YOURPREFIX&#8217;);</cite> to store the view cache files prefixed.</p>
+</div>
+<div class="section" id="additional-configuration-options">
+<h3>Additional configuration options<a class="headerlink" href="#additional-configuration-options" title="Permalink to this headline">¶</a></h3>
+<p>CacheHelper has a few additional configuration options you can use to tune and
+tweak its behavior. This is done through the <tt class="docutils literal"><span class="pre">$cacheAction</span></tt>
+variable in your controllers. <tt class="docutils literal"><span class="pre">$cacheAction</span></tt> should be set to an
+array which contains the actions you want cached, and the duration
+in seconds you want those views cached. The time value can be
+expressed in a <tt class="docutils literal"><span class="pre">strtotime()</span></tt> format (e.g. &#8220;1 hour&#8221;, or &#8220;3 minutes&#8221;).</p>
+<p>Using the example of an ArticlesController, that receives a lot of
+traffic that needs to be cached:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;view&#39;</span> <span class="o">=&gt;</span> <span class="mi">36000</span><span class="p">,</span>
+    <span class="s1">&#39;index&#39;</span> <span class="o">=&gt;</span> <span class="mi">48000</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This will cache the view action 10 hours, and the index action 13 hours. By
+making <tt class="docutils literal"><span class="pre">$cacheAction</span></tt> a <tt class="docutils literal"><span class="pre">strtotime()</span></tt> friendly value you can cache every action in the
+controller:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="s2">&quot;1 hour&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>You can also enable controller/component callbacks for cached views
+created with <tt class="docutils literal"><span class="pre">CacheHelper</span></tt>. To do so you must use the array
+format for <tt class="docutils literal"><span class="pre">$cacheAction</span></tt> and create an array like the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;view&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="mi">21600</span><span class="p">),</span>
+    <span class="s1">&#39;add&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="mi">36000</span><span class="p">),</span>
+    <span class="s1">&#39;index&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="mi">48000</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>By setting <tt class="docutils literal"><span class="pre">callbacks</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt> you tell CacheHelper that you want
+the generated files to create the components and models for the
+controller. Additionally, fire the component initialize, controller
+beforeFilter, and component startup callbacks.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Setting <tt class="docutils literal"><span class="pre">callbacks</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt> partly defeats the
+purpose of caching. This is also the reason it is disabled by
+default.</p>
+</div>
+</div>
+</div>
+<div class="section" id="marking-non-cached-content-in-views">
+<h2>Marking Non-Cached Content in Views<a class="headerlink" href="#marking-non-cached-content-in-views" title="Permalink to this headline">¶</a></h2>
+<p>There will be times when you don&#8217;t want an <em>entire</em> view cached.
+For example, certain parts of the page may look different whether a
+user is currently logged in or browsing your site as a guest.</p>
+<p>To indicate blocks of content that are <em>not</em> to be cached, wrap
+them in <tt class="docutils literal"><span class="pre">&lt;!--nocache--&gt;</span> <span class="pre">&lt;!--/nocache--&gt;</span></tt> like so:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;!--nocache--&gt;</span>
+<span class="cp">&lt;?php</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">))</span><span class="o">:</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    Welcome, </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nx">h</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x">.</span>
+<span class="cp">&lt;?php</span> <span class="k">else</span><span class="o">:</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">link</span><span class="p">(</span><span class="s1">&#39;Login&#39;</span><span class="p">,</span> <span class="s1">&#39;users/login&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">&lt;?php</span> <span class="k">endif</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;!--/nocache--&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You cannot use <tt class="docutils literal"><span class="pre">nocache</span></tt> tags in elements. Since there are no callbacks
+around elements, they cannot be cached.</p>
+</div>
+<p>It should be noted that once an action is cached, the controller method for the
+action will not be called. When a cache file is created, the request object,
+and view variables are serialized with PHP&#8217;s <tt class="docutils literal"><span class="pre">serialize()</span></tt>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you have view variables that contain un-serializable content such as
+SimpleXML objects, resource handles, or closures you might not be able to
+use view caching.</p>
+</div>
+</div>
+<div class="section" id="clearing-the-cache">
+<h2>Clearing the Cache<a class="headerlink" href="#clearing-the-cache" title="Permalink to this headline">¶</a></h2>
+<p>It is important to remember that CakePHP will clear a cached view
+if a model used in the cached view is modified. For example, if a
+cached view uses data from the Post model, and there has been an
+INSERT, UPDATE, or DELETE query made to a Post, the cache for that
+view is cleared, and new content is generated on the next request.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This automatic cache clearing requires the controller/model name to be part
+of the URL. If you&#8217;ve used routing to change your URLs this feature will not
+work.</p>
+</div>
+<p>If you need to manually clear the cache, you can do so by calling
+Cache::clear(). This will clear <strong>all</strong> cached data, excluding
+cached view files. If you need to clear the cached view files, use
+<tt class="docutils literal"><span class="pre">clearCache()</span></tt>.</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">Controllers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../views.html">Views</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../views/themes.html">Themes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views/media-view.html">Media Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../views/json-and-xml-views.html">JSON and XML views</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../views/helpers.html">Helpers</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">CacheHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form.html">FormHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="html.html">HtmlHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.html">JsHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">SessionHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="text.html">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">TimeHelper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../core-libraries.html">Core Libraries</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-general-purpose.html">General Purpose</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../global-constants-and-functions.html">Global Constants and Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core-utility-libraries/app.html">App Class</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../events.html">Events System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collections.html">Collections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-components.html">Components</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-helpers.html">Helpers</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">CacheHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="form.html">FormHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="html.html">HtmlHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="js.html">JsHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">NumberHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginator.html">Paginator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss.html">RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">SessionHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="text.html">TextHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">TimeHelper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-utilities.html">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">CacheHelper</a><ul>
+<li><a class="reference internal" href="#using-the-helper">Using the Helper</a><ul>
+<li><a class="reference internal" href="#additional-configuration-options">Additional configuration options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#marking-non-cached-content-in-views">Marking Non-Cached Content in Views</a></li>
+<li><a class="reference internal" href="#clearing-the-cache">Clearing the Cache</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="flash.html" title="Flash" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="../toc-helpers.html" title="Helpers" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

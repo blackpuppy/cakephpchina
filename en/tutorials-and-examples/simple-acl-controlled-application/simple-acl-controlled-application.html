@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Simple Acl controlled Application" lang="en" name="title" />
+<meta content="core libraries,auto increment,object oriented programming,database schema,sql statements,php class,stable release,code generation,database server,server configuration,reins,access control,shells,mvc,authentication,web server,cakephp,servers,checkout,apache" lang="en" name="keywords" />
+
+    <title>Simple Acl controlled Application &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../../index.html" />
+    <link rel="up" title="Tutorials &amp; Examples" href="../../tutorials-and-examples.html" />
+    <link rel="next" title="Simple Acl controlled Application - part 2" href="part-two.html" />
+    <link rel="prev" title="Simple Authentication and Authorization Application" href="../blog-auth-example/auth.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../../pt/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="es" href="../../../es/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="ja" href="../../../ja/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="fr" href="../../../fr/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="zh_CN" href="../../../zh/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../tutorials-and-examples.html" accesskey="U" itemprop="url"><span itemprop="title">Tutorials &amp; Examples</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../../pt/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">pt</a></li>
+				
+					<li><a href="../../../es/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">es</a></li>
+				
+					<li><a href="../../../ja/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">ja</a></li>
+				
+					<li><a href="../../../fr/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">fr</a></li>
+				
+					<li><a href="../../../zh/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="simple-acl-controlled-application">
+<h1>Simple Acl controlled Application<a class="headerlink" href="#simple-acl-controlled-application" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This isn&#8217;t a beginner level tutorial. If you are just starting out with
+CakePHP we would advise you to get a better overall experience of the
+framework&#8217;s features before trying out this tutorial.</p>
+</div>
+<p>In this tutorial you will create a simple application with
+<a class="reference internal" href="../../core-libraries/components/authentication.html"><em>Authentication</em></a> and
+<a class="reference internal" href="../../core-libraries/components/access-control-lists.html"><em>Access Control Lists</em></a>. This
+tutorial assumes you have read the <a class="reference internal" href="../blog/blog.html"><em>Blog Tutorial</em></a>
+tutorial, and you are familiar with
+<a class="reference internal" href="../../console-and-shells/code-generation-with-bake.html"><em>Code Generation with Bake</em></a>. You should have
+some experience with CakePHP, and be familiar with MVC concepts.
+This tutorial is a brief introduction to the
+<a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><tt class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></tt></a> and <a class="reference internal" href="../../core-libraries/components/access-control-lists.html#AclComponent" title="AclComponent"><tt class="xref php php-class docutils literal"><span class="pre">AclComponent</span></tt></a>.</p>
+<p>What you will need</p>
+<ol class="arabic simple">
+<li>A running web server. We&#8217;re going to assume you&#8217;re using Apache,
+though the instructions for using other servers should be very
+similar. We might have to play a little with the server
+configuration, but most folks can get CakePHP up and running without
+any configuration at all.</li>
+<li>A database server. We&#8217;re going to be using MySQL in this
+tutorial. You&#8217;ll need to know enough about SQL in order to create a
+database: CakePHP will be taking the reins from there.</li>
+<li>Basic PHP knowledge. The more object-oriented programming you&#8217;ve
+done, the better: but fear not if you&#8217;re a procedural fan.</li>
+</ol>
+<div class="section" id="preparing-our-application">
+<h2>Preparing our Application<a class="headerlink" href="#preparing-our-application" title="Permalink to this headline">¶</a></h2>
+<p>First, let&#8217;s get a copy of fresh CakePHP code.</p>
+<p>To get a fresh download, visit the CakePHP project at GitHub:
+<a class="reference external" href="https://github.com/cakephp/cakephp/tags">https://github.com/cakephp/cakephp/tags</a> and download the stable
+release. For this tutorial you need the latest 2.0 release.</p>
+<p>You can also clone the repository using
+<a class="reference external" href="http://git-scm.com/">git</a>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">git</span> <span class="k">clone</span> <span class="nx">git</span><span class="o">://</span><span class="nx">github</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">.</span><span class="nx">git</span>
+</pre></div>
+</div>
+<p>Once you&#8217;ve got a fresh copy of CakePHP setup your database.php config
+file, and change the value of Security.salt in your
+app/Config/core.php. From there we will build a simple database
+schema to build our application on. Execute the following SQL
+statements into your database:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">users</span> <span class="p">(</span>
+    <span class="nx">id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
+    <span class="nx">username</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">UNIQUE</span><span class="p">,</span>
+    <span class="nx">password</span> <span class="nx">CHAR</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">group_id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">created</span> <span class="nx">DATETIME</span><span class="p">,</span>
+    <span class="nx">modified</span> <span class="nx">DATETIME</span>
+<span class="p">);</span>
+
+<span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">groups</span> <span class="p">(</span>
+    <span class="nx">id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
+    <span class="nx">name</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">created</span> <span class="nx">DATETIME</span><span class="p">,</span>
+    <span class="nx">modified</span> <span class="nx">DATETIME</span>
+<span class="p">);</span>
+
+<span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">posts</span> <span class="p">(</span>
+    <span class="nx">id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
+    <span class="nx">user_id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">title</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">body</span> <span class="nx">TEXT</span><span class="p">,</span>
+    <span class="nx">created</span> <span class="nx">DATETIME</span><span class="p">,</span>
+    <span class="nx">modified</span> <span class="nx">DATETIME</span>
+<span class="p">);</span>
+
+<span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">widgets</span> <span class="p">(</span>
+    <span class="nx">id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
+    <span class="nx">name</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="nx">part_no</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span>
+    <span class="nx">quantity</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>These are the tables we will be using to build the rest of our
+application. Once we have the table structure in the database we
+can start cooking. Use
+<a class="reference internal" href="../../console-and-shells/code-generation-with-bake.html"><em>Code Generation with Bake</em></a> to quickly
+create your models, controllers, and views.</p>
+<p>To use cake bake, call <tt class="docutils literal"><span class="pre">cake</span> <span class="pre">bake</span> <span class="pre">all</span></tt> and this will list the 4
+tables you inserted into MySQL. Select &#8220;1. Group&#8221;, and follow the
+prompts. Repeat for the other 3 tables, and this will have
+generated the 4 controllers, models and your views for you.</p>
+<p>Avoid using Scaffold here. The generation of the ACOs will be
+seriously affected if you bake the controllers with the Scaffold
+feature.</p>
+<p>While baking the Models cake will automagically detect the
+associations between your Models (or relations between your
+tables). Let cake supply the correct hasMany and belongsTo
+associations. If you are prompted to pick hasOne or hasMany,
+generally speaking you&#8217;ll need a hasMany (only) relationships for
+this tutorial.</p>
+<p>Leave out admin routing for now, this is a complicated enough
+subject without them. Also be sure <strong>not</strong> to add either the Acl or
+Auth Components to any of your controllers as you are baking them.
+We&#8217;ll be doing that soon enough. You should now have models,
+controllers, and baked views for your users, groups, posts and
+widgets.</p>
+</div>
+<div class="section" id="preparing-to-add-auth">
+<h2>Preparing to Add Auth<a class="headerlink" href="#preparing-to-add-auth" title="Permalink to this headline">¶</a></h2>
+<p>We now have a functioning CRUD application. Bake should have setup
+all the relations we need, if not add them in now. There are a few
+other pieces that need to be added before we can add the Auth and
+Acl components. First add a login and logout action to your
+<tt class="docutils literal"><span class="pre">UsersController</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">login</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">redirectUrl</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Your username or password was incorrect.&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">logout</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//Leave empty for now.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then create the following view file for login at
+<tt class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span><span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">inputs</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;legend&#39;</span> <span class="o">=&gt;</span> <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Login&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;username&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;password&#39;</span>
+<span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">&#39;Login&#39;</span><span class="p">);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Next we&#8217;ll have to update our User model to hash passwords before they go into
+the database. Storing plaintext passwords is extremely insecure and
+AuthComponent will expect that your passwords are hashed. In
+<tt class="docutils literal"><span class="pre">app/Model/User.php</span></tt> add the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AuthComponent&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller/Component&#39;</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="c1">// other code.</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeSave</span><span class="p">(</span><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">][</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">AuthComponent</span><span class="o">::</span><span class="na">password</span><span class="p">(</span>
+          <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">][</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
+        <span class="p">);</span>
+        <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Next we need to make some modifications to <tt class="docutils literal"><span class="pre">AppController</span></tt>. If
+you don&#8217;t have <tt class="docutils literal"><span class="pre">/app/Controller/AppController.php</span></tt>, create it. Since we want our entire
+site controlled with Auth and Acl, we will set them up in
+<tt class="docutils literal"><span class="pre">AppController</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Acl&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;authorize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;Actions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;actionPath&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;controllers&#39;</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;Session&#39;</span>
+    <span class="p">);</span>
+    <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Html&#39;</span><span class="p">,</span> <span class="s1">&#39;Form&#39;</span><span class="p">,</span> <span class="s1">&#39;Session&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">//Configure AuthComponent</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">loginAction</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+          <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span>
+        <span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">logoutRedirect</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+          <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span>
+        <span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">loginRedirect</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+          <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Before we set up the ACL at all we will need to add some users and
+groups. With <a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><tt class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></tt></a> in use we will not be able to access
+any of our actions, as we are not logged in. We will now add some
+exceptions so <a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><tt class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></tt></a> will allow us to create some groups
+and users. In <strong>both</strong> your <tt class="docutils literal"><span class="pre">GroupsController</span></tt> and your
+<tt class="docutils literal"><span class="pre">UsersController</span></tt> Add the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
+
+    <span class="c1">// For CakePHP 2.0</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">);</span>
+
+    <span class="c1">// For CakePHP 2.1 and up</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>These statements tell AuthComponent to allow public access to all
+actions. This is only temporary and will be removed once we get a
+few users and groups into our database. Don&#8217;t add any users or
+groups just yet though.</p>
+</div>
+<div class="section" id="initialize-the-db-acl-tables">
+<h2>Initialize the Db Acl tables<a class="headerlink" href="#initialize-the-db-acl-tables" title="Permalink to this headline">¶</a></h2>
+<p>Before we create any users or groups we will want to connect them
+to the Acl. However, we do not at this time have any Acl tables and
+if you try to view any pages right now, you will get a missing
+table error (&#8220;Error: Database table acos for model Aco was not
+found.&#8221;). To remove these errors we need to run a schema file. In a
+shell run the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span> <span class="nx">DbAcl</span>
+</pre></div>
+</div>
+<p>This schema will prompt you to drop and create the tables. Say yes
+to dropping and creating the tables.</p>
+<p>If you don&#8217;t have shell access, or are having trouble using the
+console, you can run the sql file found in
+/path/to/app/Config/Schema/db_acl.sql.</p>
+<p>With the controllers setup for data entry, and the Acl tables
+initialized we are ready to go right? Not entirely, we still have a
+bit of work to do in the user and group models. Namely, making them
+auto-magically attach to the Acl.</p>
+</div>
+<div class="section" id="acts-as-a-requester">
+<h2>Acts As a Requester<a class="headerlink" href="#acts-as-a-requester" title="Permalink to this headline">¶</a></h2>
+<p>For Auth and Acl to work properly we need to associate our users
+and groups to rows in the Acl tables. In order to do this we will
+use the <tt class="docutils literal"><span class="pre">AclBehavior</span></tt>. The <tt class="docutils literal"><span class="pre">AclBehavior</span></tt> allows for the
+automagic connection of models with the Acl tables. Its use
+requires an implementation of <tt class="docutils literal"><span class="pre">parentNode()</span></tt> on your model. In
+our <tt class="docutils literal"><span class="pre">User</span></tt> model we will add the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Group&#39;</span><span class="p">);</span>
+    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">));</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">parentNode</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">&amp;&amp;</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">][</span><span class="s1">&#39;group_id&#39;</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nv">$groupId</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">][</span><span class="s1">&#39;group_id&#39;</span><span class="p">];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$groupId</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="s1">&#39;group_id&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$groupId</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Group&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$groupId</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then in our <tt class="docutils literal"><span class="pre">Group</span></tt> Model Add the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Group</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">));</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">parentNode</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>What this does, is tie the <tt class="docutils literal"><span class="pre">Group</span></tt> and <tt class="docutils literal"><span class="pre">User</span></tt> models to the
+Acl, and tell CakePHP that every-time you make a User or Group you
+want an entry on the <tt class="docutils literal"><span class="pre">aros</span></tt> table as well. This makes Acl
+management a piece of cake as your AROs become transparently tied
+to your <tt class="docutils literal"><span class="pre">users</span></tt> and <tt class="docutils literal"><span class="pre">groups</span></tt> tables. So anytime you create or
+delete a user/group the Aro table is updated.</p>
+<p>Our controllers and models are now prepared for adding some initial
+data, and our <tt class="docutils literal"><span class="pre">Group</span></tt> and <tt class="docutils literal"><span class="pre">User</span></tt> models are bound to the Acl
+table. So add some groups and users using the baked forms by
+browsing to <a class="reference external" href="http://example.com/groups/add">http://example.com/groups/add</a> and
+<a class="reference external" href="http://example.com/users/add">http://example.com/users/add</a>. I made the following groups:</p>
+<ul class="simple">
+<li>administrators</li>
+<li>managers</li>
+<li>users</li>
+</ul>
+<p>I also created a user in each group so I had a user of each
+different access group to test with later. Write everything down or
+use easy passwords so you don&#8217;t forget. If you do a
+<tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">aros;</span></tt> from a MySQL prompt you should get
+something like the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<span class="o">|</span> <span class="nx">id</span> <span class="o">|</span> <span class="nx">parent_id</span> <span class="o">|</span> <span class="nx">model</span> <span class="o">|</span> <span class="nx">foreign_key</span> <span class="o">|</span> <span class="nx">alias</span> <span class="o">|</span> <span class="nx">lft</span>  <span class="o">|</span> <span class="nx">rght</span> <span class="o">|</span>
+<span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<span class="o">|</span>  <span class="mi">1</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">1</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">1</span> <span class="o">|</span>    <span class="mi">4</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">2</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">2</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">5</span> <span class="o">|</span>    <span class="mi">8</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">3</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">3</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">9</span> <span class="o">|</span>   <span class="mi">12</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">4</span> <span class="o">|</span>         <span class="mi">1</span> <span class="o">|</span> <span class="nx">User</span>  <span class="o">|</span>           <span class="mi">1</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">2</span> <span class="o">|</span>    <span class="mi">3</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">5</span> <span class="o">|</span>         <span class="mi">2</span> <span class="o">|</span> <span class="nx">User</span>  <span class="o">|</span>           <span class="mi">2</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">6</span> <span class="o">|</span>    <span class="mi">7</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">6</span> <span class="o">|</span>         <span class="mi">3</span> <span class="o">|</span> <span class="nx">User</span>  <span class="o">|</span>           <span class="mi">3</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>   <span class="mi">10</span> <span class="o">|</span>   <span class="mi">11</span> <span class="o">|</span>
+<span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<span class="mi">6</span> <span class="nx">rows</span> <span class="nx">in</span> <span class="nx">set</span> <span class="p">(</span><span class="mf">0.00</span> <span class="nx">sec</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This shows us that we have 3 groups and 3 users. The users are
+nested inside the groups, which means we can set permissions on a
+per-group or per-user basis.</p>
+<div class="section" id="group-only-acl">
+<h3>Group-only ACL<a class="headerlink" href="#group-only-acl" title="Permalink to this headline">¶</a></h3>
+<p>In case we want simplified per-group only permissions, we need to
+implement <tt class="docutils literal"><span class="pre">bindNode()</span></tt> in <tt class="docutils literal"><span class="pre">User</span></tt> model:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">bindNode</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Group&#39;</span><span class="p">,</span> <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">][</span><span class="s1">&#39;group_id&#39;</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then modify the <tt class="docutils literal"><span class="pre">actsAs</span></tt> for the model <tt class="docutils literal"><span class="pre">User</span></tt> and disable the requester directive:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">,</span> <span class="s1">&#39;enabled&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>These two changes will tell ACL to skip checking <tt class="docutils literal"><span class="pre">User</span></tt> Aro&#8217;s and to check only <tt class="docutils literal"><span class="pre">Group</span></tt>
+Aro&#8217;s. This also avoids the afterSave being called.</p>
+<p>Note: Every user has to have <tt class="docutils literal"><span class="pre">group_id</span></tt> assigned for this to work.</p>
+<p>Now the <tt class="docutils literal"><span class="pre">aros</span></tt> table will look like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<span class="o">|</span> <span class="nx">id</span> <span class="o">|</span> <span class="nx">parent_id</span> <span class="o">|</span> <span class="nx">model</span> <span class="o">|</span> <span class="nx">foreign_key</span> <span class="o">|</span> <span class="nx">alias</span> <span class="o">|</span> <span class="nx">lft</span>  <span class="o">|</span> <span class="nx">rght</span> <span class="o">|</span>
+<span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<span class="o">|</span>  <span class="mi">1</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">1</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">1</span> <span class="o">|</span>    <span class="mi">2</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">2</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">2</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">3</span> <span class="o">|</span>    <span class="mi">4</span> <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">3</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">3</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">5</span> <span class="o">|</span>    <span class="mi">6</span> <span class="o">|</span>
+<span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<span class="mi">3</span> <span class="nx">rows</span> <span class="nx">in</span> <span class="nx">set</span> <span class="p">(</span><span class="mf">0.00</span> <span class="nx">sec</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note: If you have followed the tutorial up to this point you need to drop your tables, including <tt class="docutils literal"><span class="pre">aros</span></tt>, <tt class="docutils literal"><span class="pre">groups</span></tt> and <tt class="docutils literal"><span class="pre">users</span></tt>, and create the groups and users again from scratch in order to get the <tt class="docutils literal"><span class="pre">aros</span></tt> table seen above.</p>
+</div>
+</div>
+<div class="section" id="creating-acos-access-control-objects">
+<h2>Creating ACOs (Access Control Objects)<a class="headerlink" href="#creating-acos-access-control-objects" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have our users and groups (aros), we can begin
+inputting our existing controllers into the Acl and setting
+permissions for our groups and users, as well as enabling login /
+logout.</p>
+<p>Our ARO are automatically creating themselves when new users and
+groups are created. What about a way to auto-generate ACOs from our
+controllers and their actions? Well unfortunately there is no magic
+way in CakePHP&#8217;s core to accomplish this. The core classes offer a
+few ways to manually create ACO&#8217;s though. You can create ACO
+objects from the Acl shell or You can use the <tt class="docutils literal"><span class="pre">AclComponent</span></tt>.
+Creating Acos from the shell looks like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">acl</span> <span class="nx">create</span> <span class="nx">aco</span> <span class="nx">root</span> <span class="nx">controllers</span>
+</pre></div>
+</div>
+<p>While using the AclComponent would look like:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">Aco</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span> <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;controllers&#39;</span><span class="p">));</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">Aco</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Both of these examples would create our &#8216;root&#8217; or top level ACO
+which is going to be called &#8216;controllers&#8217;. The purpose of this root
+node is to make it easy to allow/deny access on a global
+application scope, and allow the use of the Acl for purposes not
+related to controllers/actions such as checking model record
+permissions. As we will be using a global root ACO we need to make
+a small modification to our <tt class="docutils literal"><span class="pre">AuthComponent</span></tt> configuration.
+<tt class="docutils literal"><span class="pre">AuthComponent</span></tt> needs to know about the existence of this root
+node, so that when making ACL checks it can use the correct node
+path when looking up controllers/actions. In <tt class="docutils literal"><span class="pre">AppController</span></tt> ensure
+that your <tt class="docutils literal"><span class="pre">$components</span></tt> array contains the <tt class="docutils literal"><span class="pre">actionPath</span></tt> defined earlier:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Acl&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;authorize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;Actions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;actionPath&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;controllers&#39;</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;Session&#39;</span>
+    <span class="p">);</span>
+</pre></div>
+</div>
+<p>Continue to <a class="reference internal" href="part-two.html"><em>Simple Acl controlled Application - part 2</em></a> to continue the tutorial.</p>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../tutorials-and-examples.html">Tutorials &amp; Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../blog/blog.html">Blog Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../blog/part-two.html">Blog Tutorial - Adding a layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../blog-auth-example/auth.html">Simple Authentication and Authorization Application</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Simple Acl controlled Application</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="part-two.html">Simple Acl controlled Application - part 2</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Simple Acl controlled Application</a><ul>
+<li><a class="reference internal" href="#preparing-our-application">Preparing our Application</a></li>
+<li><a class="reference internal" href="#preparing-to-add-auth">Preparing to Add Auth</a></li>
+<li><a class="reference internal" href="#initialize-the-db-acl-tables">Initialize the Db Acl tables</a></li>
+<li><a class="reference internal" href="#acts-as-a-requester">Acts As a Requester</a><ul>
+<li><a class="reference internal" href="#group-only-acl">Group-only ACL</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-acos-access-control-objects">Creating ACOs (Access Control Objects)</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="part-two.html" title="Simple Acl controlled Application - part 2" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="../blog-auth-example/auth.html" title="Simple Authentication and Authorization Application" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

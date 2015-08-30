@@ -1,0 +1,497 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Security" lang="zh_CN" name="title" />
+<meta content="security api,secret password,cipher text,php class,class security,text key,security library,object instance,security measures,basic security,security level,string type,fallback,hash,data security,singleton,inactivity,php encrypt,implementation,php security" lang="zh_CN" name="keywords" />
+
+    <title>安全 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="工具" href="../core-libraries/toc-utilities.html" />
+    <link rel="next" title="Set" href="set.html" />
+    <link rel="prev" title="数据清理 Data Sanitization" href="sanitize.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/core-utility-libraries/security.html" /><link rel="alternate" hreflang="pt" href="../../pt/core-utility-libraries/security.html" /><link rel="alternate" hreflang="es" href="../../es/core-utility-libraries/security.html" /><link rel="alternate" hreflang="ja" href="../../ja/core-utility-libraries/security.html" /><link rel="alternate" hreflang="fr" href="../../fr/core-utility-libraries/security.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries/toc-utilities.html" accesskey="U" itemprop="url"><span itemprop="title">工具</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/core-utility-libraries/security.html">en</a></li>
+				
+					<li><a href="../../pt/core-utility-libraries/security.html">pt</a></li>
+				
+					<li><a href="../../es/core-utility-libraries/security.html">es</a></li>
+				
+					<li><a href="../../ja/core-utility-libraries/security.html">ja</a></li>
+				
+					<li><a href="../../fr/core-utility-libraries/security.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-utility-libraries/security.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>安全<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="Security">
+<em class="property">class </em><tt class="descname">Security</tt><a class="headerlink" href="#Security" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p><a class="reference external" href="http://api20.cakephp.org/class/security">安全类库</a> 处理基本的安全措施,
+如提供哈希和加密数据的方法。</p>
+<p>The <a class="reference external" href="http://api20.cakephp.org/class/security">security library</a>
+handles basic security measures such as providing methods for
+hashing and encrypting data.</p>
+<div class="section" id="api">
+<h2>安全 API<a class="headerlink" href="#api" title="永久链接至标题">¶</a></h2>
+<dl class="staticmethod">
+<dt id="Security::cipher">
+<em class="property">static </em><tt class="descclassname">Security::</tt><tt class="descname">cipher</tt><big>(</big><em>$text</em>, <em>$key</em><big>)</big><a class="headerlink" href="#Security::cipher" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>使用给定的key加密/解密文本
+Encrypts/Decrypts a text using the given key.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 使用my_key来加密文本</span>
+<span class="nv">$secret</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">cipher</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">,</span> <span class="s1">&#39;my_key&#39;</span><span class="p">);</span>
+
+<span class="c1">// 解密文本</span>
+<span class="nv">$nosecret</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">cipher</span><span class="p">(</span><span class="nv">$secret</span><span class="p">,</span> <span class="s1">&#39;my_key&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">cipher()</span></tt> 是 <strong>微弱的</strong> 加密方法。 <strong>not</strong> 用它来加密重要或敏感的数据。</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Security::rijndael">
+<em class="property">static </em><tt class="descclassname">Security::</tt><tt class="descname">rijndael</tt><big>(</big><em>$text</em>, <em>$key</em>, <em>$mode</em><big>)</big><a class="headerlink" href="#Security::rijndael" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$text</strong> (<em>string</em>) &#8211; 需要加密的文本</li>
+<li><strong>$key</strong> (<em>string</em>) &#8211; 用来加密的key。 必须大于32 bytes。</li>
+<li><strong>$mode</strong> (<em>string</em>) &#8211; 要使用的模式，&#8217;加密&#8217; 或 &#8216;解密&#8217;。</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>加密/解密文本使用rijndael-256 cipher。需要安装php的 <cite>mcrypt 扩展&lt;http://php.net/mcrypt&gt;</cite> ::
+Encrypts/Decrypts text using the rijndael-256 cipher. This requires the
+<a class="reference external" href="http://php.net/mcrypt">mcrypt extension</a> to be installed:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 解密数据。</span>
+<span class="nv">$encrypted</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">rijndael</span><span class="p">(</span><span class="s1">&#39;a secret&#39;</span><span class="p">,</span> <span class="nx">Configure</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;Security.key&#39;</span><span class="p">),</span> <span class="s1">&#39;encrypt&#39;</span><span class="p">);</span>
+
+<span class="c1">// 解密。</span>
+<span class="nv">$decrypted</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">rijndael</span><span class="p">(</span><span class="nv">$encrypted</span><span class="p">,</span> <span class="nx">Configure</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;Security.key&#39;</span><span class="p">),</span> <span class="s1">&#39;decrypt&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">rijndael()</span></tt> 可以用来存储晚些时候需要解密的数据。像cookie内容。<strong>永远</strong> 不要用它来存储密码。
+应该使用后面提供的哈希方法 <a class="reference internal" href="#Security::hash" title="Security::hash"><tt class="xref php php-meth docutils literal"><span class="pre">hash()</span></tt></a></p>
+<p><tt class="docutils literal"><span class="pre">rijndael()</span></tt> can be used to store data you need to decrypt later, like the
+contents of cookies.  It should <strong>never</strong> be used to store passwords.
+Instead you should use the one way hashing methods provided by
+<a class="reference internal" href="#Security::hash" title="Security::hash"><tt class="xref php php-meth docutils literal"><span class="pre">hash()</span></tt></a></p>
+<div class="versionadded">
+<p><span class="versionmodified">2.2 新版功能: </span><tt class="docutils literal"><span class="pre">Security::rijndael()</span></tt> was added in 2.2.</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Security::generateAuthKey">
+<em class="property">static </em><tt class="descclassname">Security::</tt><tt class="descname">generateAuthKey</tt><big>(</big><big>)</big><a class="headerlink" href="#Security::generateAuthKey" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">string<p>生成授权哈希。
+Generate authorization hash.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Security::getInstance">
+<em class="property">static </em><tt class="descclassname">Security::</tt><tt class="descname">getInstance</tt><big>(</big><big>)</big><a class="headerlink" href="#Security::getInstance" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">object<p>实现单例对象实例。</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Singleton implementation to get object instance.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Security::hash">
+<em class="property">static </em><tt class="descclassname">Security::</tt><tt class="descname">hash</tt><big>(</big><em>$string</em>, <em>$type = NULL</em>, <em>$salt = false</em><big>)</big><a class="headerlink" href="#Security::hash" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>从给定的字符串创建一个哈希值。如果 <tt class="docutils literal"><span class="pre">$salt</span></tt> 被设置为true,
+将使用应用程序中salt的值:</p>
+<p>Create a hash from string using given method. Fallback on next
+available method. If <tt class="docutils literal"><span class="pre">$salt</span></tt> is set to true, the applications salt
+value will be used:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 使用应用程序的salt value</span>
+<span class="nv">$sha1</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">hash</span><span class="p">(</span><span class="s1">&#39;CakePHP Framework&#39;</span><span class="p">,</span> <span class="s1">&#39;sha1&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+
+<span class="c1">// 使用自定义salt value</span>
+<span class="nv">$md5</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">hash</span><span class="p">(</span><span class="s1">&#39;CakePHP Framework&#39;</span><span class="p">,</span> <span class="s1">&#39;md5&#39;</span><span class="p">,</span> <span class="s1">&#39;my-salt&#39;</span><span class="p">);</span>
+
+<span class="c1">// 使用默认的hash算法</span>
+<span class="nv">$hash</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">hash</span><span class="p">(</span><span class="s1">&#39;CakePHP Framework&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">hash()</span></tt> 函数支持更多的安全哈希算法。比如bcrypt。当使用bcrypt，会有略小的差别。</p>
+<p>also supports more secure hashing algorithms like bcrypt.  When
+using bcrypt, you should be mindful of the slightly different usage.
+Creating an initial hash works the same as other algorithms:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 使用bcrypt创建哈希</span>
+<span class="nx">Security</span><span class="o">::</span><span class="na">setHash</span><span class="p">(</span><span class="s1">&#39;blowfish&#39;</span><span class="p">);</span>
+<span class="nv">$hash</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">hash</span><span class="p">(</span><span class="s1">&#39;CakePHP Framework&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Unlike other hash types comparing plain text values to hashed values should
+be done as follows:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// $storedPassword, 是之前生成的bcrypt hash。</span>
+<span class="nv">$newHash</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">hash</span><span class="p">(</span><span class="nv">$newPassword</span><span class="p">,</span> <span class="s1">&#39;blowfish&#39;</span><span class="p">,</span> <span class="nv">$storedPassword</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When comparing values hashed with bcrypt, the original hash should be
+provided as the <tt class="docutils literal"><span class="pre">$salt</span></tt> parameter.  This allows bcrypt to reuse the same
+cost and salt values, allowing the generated hash to end up with the same
+resulting hash given the same input value.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.3 版更改: </span>2.3中新加入支持bcrypt</p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Security::inactiveMins">
+<em class="property">static </em><tt class="descclassname">Security::</tt><tt class="descname">inactiveMins</tt><big>(</big><big>)</big><a class="headerlink" href="#Security::inactiveMins" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">integer<p>基于安全级别得到允许静止运动的分钟数</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Get allowed minutes of inactivity based on security level.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$mins</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">inactiveMins</span><span class="p">();</span>
+<span class="c1">// If your config Security.level is set to &#39;medium&#39; then $mins will equal 100</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Security::setHash">
+<em class="property">static </em><tt class="descclassname">Security::</tt><tt class="descname">setHash</tt><big>(</big><em>$hash</em><big>)</big><a class="headerlink" href="#Security::setHash" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>为Security对象设置默认的hash方法。会影响到使用Security::hash()的所有对象。
+Sets the default hash method for the Security object. This
+affects all objects using Security::hash().</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="Security::validateAuthKey">
+<em class="property">static </em><tt class="descclassname">Security::</tt><tt class="descname">validateAuthKey</tt><big>(</big><em>$authKey</em><big>)</big><a class="headerlink" href="#Security::validateAuthKey" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+<p>验证授权哈希
+Validate authorization hash.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-general-purpose.html">通用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-components.html">组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-helpers.html">助件</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../core-libraries/toc-utilities.html">工具</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/caching.html">缓存</a></li>
+<li class="toctree-l3"><a class="reference internal" href="email.html">CakeEmail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file-folder.html">目录和文件 Folder &amp; File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hash.html">Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="httpsocket.html">HttpSocket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inflector.html">Inflector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/internationalization-and-localization.html">Internationalization &amp; Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/logging.html">日志记录</a></li>
+<li class="toctree-l3"><a class="reference internal" href="number.html">CakeNumber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="router.html">Router</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sanitize.html">数据清理 Data Sanitization</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">安全</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set.html">Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="string.html">字符串 String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">CakeTime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xml.html">Xml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">安全</a><ul>
+<li><a class="reference internal" href="#api">安全 API</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="set.html" title="Set" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="sanitize.html" title="数据清理 Data Sanitization" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Components" lang="zh_CN" name="title" />
+<meta content="array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc" lang="zh_CN" name="keywords" />
+
+    <title>组件 &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="Events System" href="../core-libraries/events.html" />
+    <link rel="next" title="助件" href="../views/helpers.html" />
+    <link rel="prev" title="树行为" href="../core-libraries/behaviors/tree.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/controllers/components.html" /><link rel="alternate" hreflang="pt" href="../../pt/controllers/components.html" /><link rel="alternate" hreflang="es" href="../../es/controllers/components.html" /><link rel="alternate" hreflang="ja" href="../../ja/controllers/components.html" /><link rel="alternate" hreflang="fr" href="../../fr/controllers/components.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries/toc-general-purpose.html"  itemprop="url"><span itemprop="title">通用</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries/events.html" accesskey="U" itemprop="url"><span itemprop="title">Events System</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/controllers/components.html">en</a></li>
+				
+					<li><a href="../../pt/controllers/components.html">pt</a></li>
+				
+					<li><a href="../../es/controllers/components.html">es</a></li>
+				
+					<li><a href="../../ja/controllers/components.html">ja</a></li>
+				
+					<li><a href="../../fr/controllers/components.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/controllers/components.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="id1">
+<h1>组件<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>组件(<em>Components</em>)是在控制器之间共享的封装了的逻辑。CakePHP 附带一套非常棒的核心
+组件，可帮你完成各种常见任务。你也可以创建自己的组件。如果你发现自己要在控制器间
+复制粘贴代码，就应当考虑创建自己的组件，封装这些功能。创建组件可以保持控制器代码
+简洁，并且让你可以在不同的项目中重用代码。</p>
+<p>每个核心组件都会在各自的章节中详细介绍，请参看
+<a class="reference internal" href="../core-libraries/toc-components.html"><em>组件</em></a> 。本节将描述如何配置和使用组件，以及如何创
+建你自己的组件。</p>
+<div class="section" id="configuring-components">
+<span id="id2"></span><h2>配置组件<a class="headerlink" href="#configuring-components" title="永久链接至标题">¶</a></h2>
+<p>许多核心组件需要进行配置。一些要求配置的组件的例子为
+<a class="reference internal" href="../core-libraries/components/authentication.html"><em>Authentication 认证</em></a> 以及
+<a class="reference internal" href="../core-libraries/components/cookie.html"><em>Cookie</em></a> 。这些组件以及一般组件的配置，通常都是用
+<tt class="docutils literal"><span class="pre">$components</span></tt> 数组、或者控制器的 <tt class="docutils literal"><span class="pre">beforeFilter()</span></tt> 方法来进行:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;authorize&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;loginAction&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;Cookie&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CookieMonster&#39;</span><span class="p">)</span>
+    <span class="p">);</span>
+</pre></div>
+</div>
+<p>上面的代码片段是使用 <tt class="docutils literal"><span class="pre">$components</span></tt> 数组配置组件的例子。所有的核心组件都可以使用
+这种方式进行配置。此外，你也可以在控制器的 <tt class="docutils literal"><span class="pre">beforeFilter()</span></tt> 方法中配置组件。这
+种方式适用于你需要将一个函数的结果赋值给一个组件属性的情况下。上面的例子也可以这
+样:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">authorize</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">loginAction</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span>
+    <span class="p">);</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Cookie</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="s1">&#39;CookieMonster&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>然而，也有这种可能：一个组件的特定配置选项要在控制器的 <tt class="docutils literal"><span class="pre">beforeFilter()</span></tt> 运行前
+设置。为此，一些组件允许在 <tt class="docutils literal"><span class="pre">$components</span></tt> 数组中设置配置选项:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;DebugKit.Toolbar&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;panels&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;history&#39;</span><span class="p">,</span> <span class="s1">&#39;session&#39;</span><span class="p">))</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>请查阅相关文档来确定每个组件提供的配置选项。</p>
+<p>常用的一个设置是 <tt class="docutils literal"><span class="pre">className</span></tt>，这让你可以赋予组件别名。这个选项可用于当你想要用
+定制实现的组件来替换 <tt class="docutils literal"><span class="pre">$this-&gt;Auth</span></tt> 或者其它常用组件时:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/PostsController.php</span>
+<span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;MyAuth&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// app/Controller/Component/MyAuthComponent.php</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AuthComponent&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller/Component&#39;</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">MyAuthComponent</span> <span class="k">extends</span> <span class="nx">AuthComponent</span> <span class="p">{</span>
+    <span class="c1">// 添加你的代码来重载核心 AuthComponent</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>上面的例子，将在控制器中赋予 <tt class="docutils literal"><span class="pre">$this-&gt;Auth</span></tt> 别名 <tt class="docutils literal"><span class="pre">MyAuthComponent</span></tt> 。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">赋予组件别名，会在任何用到该组件的地方，替换原来的实例，包括在其它组件内。</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>使用组件<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>一旦你已经在控制器中引入了一些组件，用起来是非常简单的。每个组件都作为控制器中的
+属性可供调用。如果你已经在控制器中加载了 <a class="reference internal" href="../core-libraries/components/sessions.html#SessionComponent" title="SessionComponent"><tt class="xref php php-class docutils literal"><span class="pre">SessionComponent</span></tt></a> 和
+<a class="reference internal" href="../core-libraries/components/cookie.html#CookieComponent" title="CookieComponent"><tt class="xref php php-class docutils literal"><span class="pre">CookieComponent</span></tt></a> ，你就可以像下面这样访问它们:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="s1">&#39;Cookie&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">delete</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">(</span><span class="s1">&#39;Post.id&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;Post deleted.&#39;</span><span class="p">);</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">由于模型和组件都是作为属性被引入到控制器中，它们共享相同的&#8217;命名空间&#8217;。确保
+不要给组件和模型起相同的名字。</p>
+</div>
+<div class="section" id="id4">
+<h3>动态加载组件<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>你可能不需要在控制器的所有动作中让所有组件可以使用。这种情况下，你可以使用
+<a class="reference internal" href="../core-libraries/collections.html"><em>Component Collection</em></a> 在运行时(即动态)加载组
+件。在控制器方法中，你可以这样做:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">OneTimer</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Components</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;OneTimer&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">OneTimer</span><span class="o">-&gt;</span><span class="na">getTime</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">切记，动态加载组件并不会调用它的 initialize 方法。如果调用的组件有这个方法，
+就需要在加载后手动调用。</p>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>组件回调<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>组件提供了一些请求生命周期的回调函数，来增强请求周期(的操作)。欲知组件提供的回调
+函数的更多信息，请参考 <a class="reference internal" href="#component-api"><em>组件 API</em></a>。</p>
+</div>
+<div class="section" id="creating-a-component">
+<span id="id6"></span><h2>创建组件<a class="headerlink" href="#creating-a-component" title="永久链接至标题">¶</a></h2>
+<p>设想我们的在线应用需要在程序的很多不同地方执行一个复杂的数学运算。我们可以创建一
+个组件把这个共享的逻辑封装起来，从而可以在很多不同的控制器中使用。</p>
+<p>首先要创建一个新组件的文件和类。创建
+<tt class="docutils literal"><span class="pre">app/Controller/Component/MathComponent.php</span></tt> 文件。组件的基本构造如下:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Component&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">MathComponent</span> <span class="k">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">doComplexOperation</span><span class="p">(</span><span class="nv">$amount1</span><span class="p">,</span> <span class="nv">$amount2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$amount1</span> <span class="o">+</span> <span class="nv">$amount2</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">所有的组件必须继承自 <a class="reference internal" href="#Component" title="Component"><tt class="xref php php-class docutils literal"><span class="pre">Component</span></tt></a>。如果不这样做，就会导致异常。</p>
+</div>
+<div class="section" id="id7">
+<h3>在控制器中引入组件<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>一旦编写好了组件，就可以在应用程序的控制器的 <tt class="docutils literal"><span class="pre">$components</span></tt> 数组中引用组件的名称
+(不包括 &#8220;Component&#8221;)来使用它。控制器会自动获得一个以组件名称命名的属性，通过这个
+属性就可以访问组件实例了:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="cm">/* 让新的组件可以通过 $this-&gt;Math 访问，以及标准的 $this-&gt;Session */</span>
+<span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Math&#39;</span><span class="p">,</span> <span class="s1">&#39;Session&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>在 <tt class="docutils literal"><span class="pre">AppController</span></tt> 控制器中声明的组件会与其它控制器中声明的组件进行合并。因此没
+有必要重复声明同一组件。</p>
+<p>在控制器中引用组件时，也可以声明一些参数，传递给组件的构造函数。这些参数可以被组
+件处理:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Math&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;precision&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s1">&#39;randomGenerator&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;srand&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="s1">&#39;Auth&#39;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>上面的例子会将包含 precision 和 randomGenerator 的数组作为第二个参数传递给
+<tt class="docutils literal"><span class="pre">MathComponent::__construct()</span></tt> 。按照约定，如果数组的键与组件的公共属性吻合，属
+性将被设置为该键对应的值。</p>
+</div>
+<div class="section" id="id8">
+<h3>在组件中使用其他组件<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<p>有时候组件可能会用到其它组件。这种情况下，可以在组件中引入其它组件，方式和在控制
+器中引入组件完全一样—使用 <tt class="docutils literal"><span class="pre">$components</span></tt> 变量:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/Component/CustomComponent.php</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Component&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">CustomComponent</span> <span class="k">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+    <span class="c1">// 你的组件使用的其它组件</span>
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Existing&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">initialize</span><span class="p">(</span><span class="nx">Controller</span> <span class="nv">$controller</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Existing</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">bar</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// app/Controller/Component/ExistingComponent.php</span>
+<span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Component&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">ExistingComponent</span> <span class="k">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">与控制器中引入的组件不同，组件中的组件不会触发回调。</p>
+</div>
+</div>
+</div>
+<div class="section" id="api">
+<span id="component-api"></span><h2>组件 API<a class="headerlink" href="#api" title="永久链接至标题">¶</a></h2>
+<dl class="class">
+<dt id="Component">
+<em class="property">class </em><tt class="descname">Component</tt><a class="headerlink" href="#Component" title="永久链接至目标">¶</a></dt>
+<dd><p>Component 基类提供了一些方法，用于通过 ComponentCollection 延迟加载其它组件，
+以及设置的常见处理。它也提供所有组件回调函数的原型。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Component::__construct">
+<tt class="descclassname">Component::</tt><tt class="descname">__construct</tt><big>(</big><em>ComponentCollection $collection</em>, <em>$settings = array()</em><big>)</big><a class="headerlink" href="#Component::__construct" title="永久链接至目标">¶</a></dt>
+<dd><p>Component 基类的构造函数。所有与 <tt class="docutils literal"><span class="pre">$settings</span></tt> 中的键同名的公共属性，其值会变
+成 <tt class="docutils literal"><span class="pre">$settings</span></tt> 中该键对应的值。</p>
+</dd></dl>
+
+<div class="section" id="id9">
+<h3>回调方法<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<dl class="method">
+<dt id="Component::initialize">
+<tt class="descclassname">Component::</tt><tt class="descname">initialize</tt><big>(</big><em>Controller $controller</em><big>)</big><a class="headerlink" href="#Component::initialize" title="永久链接至目标">¶</a></dt>
+<dd><p>在控制器的 beforeFilter() 方法执行前被调用。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Component::startup">
+<tt class="descclassname">Component::</tt><tt class="descname">startup</tt><big>(</big><em>Controller $controller</em><big>)</big><a class="headerlink" href="#Component::startup" title="永久链接至目标">¶</a></dt>
+<dd><p>在控制器的 beforeFilter 方法执行之后、但在控制器的当前动作执行之前被调用。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Component::beforeRender">
+<tt class="descclassname">Component::</tt><tt class="descname">beforeRender</tt><big>(</big><em>Controller $controller</em><big>)</big><a class="headerlink" href="#Component::beforeRender" title="永久链接至目标">¶</a></dt>
+<dd><p>在控制器执行请求的动作逻辑之后、但在控制器渲染视图和布局之前被调用。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Component::shutdown">
+<tt class="descclassname">Component::</tt><tt class="descname">shutdown</tt><big>(</big><em>Controller $controller</em><big>)</big><a class="headerlink" href="#Component::shutdown" title="永久链接至目标">¶</a></dt>
+<dd><p>在输出被送往浏览器之前被调用。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="Component::beforeRedirect">
+<tt class="descclassname">Component::</tt><tt class="descname">beforeRedirect</tt><big>(</big><em>Controller $controller</em>, <em>$url</em>, <em>$status=null</em>, <em>$exit=true</em><big>)</big><a class="headerlink" href="#Component::beforeRedirect" title="永久链接至目标">¶</a></dt>
+<dd><p>在控制器的 redirect 方法调用时、但在进行任何操作之前被调用。如果该方法返回
+false，则控制器就不会继续重定向该请求。$url、$status 和 $exit 参数与控制器方
+法中相应的参数含义相同。也可以返回一个字符串作为重定向的网址，或者返回包括键
+&#8216;url&#8217; 和可选的键 &#8216;status&#8217;、&#8217;exit&#8217; 的关联数组。</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../controllers.html">控制器</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="request-response.html">请求与响应对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="request-response.html#cakerequest">CakeRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="request-response.html#cakeresponse">CakeResponse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scaffolding.html">脚手架</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages-controller.html">页面控制器</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">组件</a><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../core-libraries/toc-general-purpose.html">通用</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/global-constants-and-functions.html">全局常量和函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/app.html">App Class</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../core-libraries/events.html">Events System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-libraries/collections.html">Collections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-components.html">组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-helpers.html">助件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core-libraries/toc-utilities.html">工具</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">组件</a><ul>
+<li><a class="reference internal" href="#configuring-components">配置组件</a></li>
+<li><a class="reference internal" href="#id3">使用组件</a><ul>
+<li><a class="reference internal" href="#id4">动态加载组件</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">组件回调</a></li>
+<li><a class="reference internal" href="#creating-a-component">创建组件</a><ul>
+<li><a class="reference internal" href="#id7">在控制器中引入组件</a></li>
+<li><a class="reference internal" href="#id8">在组件中使用其他组件</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#api">组件 API</a><ul>
+<li><a class="reference internal" href="#id9">回调方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="../views/helpers.html" title="助件" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="../core-libraries/behaviors/tree.html" title="树行为" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

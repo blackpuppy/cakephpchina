@@ -1,0 +1,665 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Schema management and migrations" lang="en" name="title" />
+<meta content="schema files,schema management,schema objects,database schema,table statements,database changes,migrations,versioning,snapshots,sql,snapshot,shell,config,functionality,choices,models,php files,php file,directory,running" lang="en" name="keywords" />
+
+    <title>Schema management and migrations &mdash; CakePHP Cookbook 2.x documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
+    <link rel="up" title="Console and Shells" href="../console-and-shells.html" />
+    <link rel="next" title="I18N shell" href="i18n-shell.html" />
+    <link rel="prev" title="Code Generation with Bake" href="code-generation-with-bake.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="pt" href="../../pt/console-and-shells/schema-management-and-migrations.html" /><link rel="alternate" hreflang="es" href="../../es/console-and-shells/schema-management-and-migrations.html" /><link rel="alternate" hreflang="ja" href="../../ja/console-and-shells/schema-management-and-migrations.html" /><link rel="alternate" hreflang="fr" href="../../fr/console-and-shells/schema-management-and-migrations.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/console-and-shells/schema-management-and-migrations.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "en";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="Search" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../console-and-shells.html" accesskey="U" itemprop="url"><span itemprop="title">Console and Shells</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">en</a>
+
+				<ul>
+				
+					<li></li>
+				
+					<li><a href="../../pt/console-and-shells/schema-management-and-migrations.html">pt</a></li>
+				
+					<li><a href="../../es/console-and-shells/schema-management-and-migrations.html">es</a></li>
+				
+					<li><a href="../../ja/console-and-shells/schema-management-and-migrations.html">ja</a></li>
+				
+					<li><a href="../../fr/console-and-shells/schema-management-and-migrations.html">fr</a></li>
+				
+					<li><a href="../../zh/console-and-shells/schema-management-and-migrations.html">zh_CN</a></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/console-and-shells/schema-management-and-migrations.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="schema-management-and-migrations">
+<h1>Schema management and migrations<a class="headerlink" href="#schema-management-and-migrations" title="Permalink to this headline">¶</a></h1>
+<p>The SchemaShell provides a functionality to create schema objects,
+schema sql dumps as well as create snapshots and restore database
+snapshots.</p>
+<div class="section" id="generating-and-using-schema-files">
+<h2>Generating and using Schema files<a class="headerlink" href="#generating-and-using-schema-files" title="Permalink to this headline">¶</a></h2>
+<p>A generated schema file allows you to easily transport a database
+agnostic schema. You can generate a schema file of your database
+using:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">generate</span>
+</pre></div>
+</div>
+<p>This will generate a schema.php file in your <tt class="docutils literal"><span class="pre">app/Config/Schema</span></tt>
+directory.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The schema shell will only process tables for which there are
+models defined. To force the schema shell to process all the
+tables, you must add the <tt class="docutils literal"><span class="pre">-f</span></tt> option in the command line.</p>
+</div>
+<p>To later rebuild the database schema from your previously made
+schema.php file run:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span>
+</pre></div>
+</div>
+<p>This will drop and create the tables based on the contents of the
+schema.php.</p>
+<p>Schema files can also be used to generate sql dump files. To
+generate a sql file containing the <tt class="docutils literal"><span class="pre">CREATE</span> <span class="pre">TABLE</span></tt> statements,
+run:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">dump</span> <span class="o">--</span><span class="nx">write</span> <span class="nx">filename</span><span class="o">.</span><span class="nx">sql</span>
+</pre></div>
+</div>
+<p>Where filename.sql is the desired filename for the sql dump. If you
+omit filename.sql the sql dump will be output to the console but
+not written to a file.</p>
+</div>
+<div class="section" id="cakeschema-callbacks">
+<h2>CakeSchema callbacks<a class="headerlink" href="#cakeschema-callbacks" title="Permalink to this headline">¶</a></h2>
+<p>After generating a schema you might want to insert data on some
+tables to get your app started. This can be achieved through
+CakeSchema callbacks. Every schema file is generated with a
+<tt class="docutils literal"><span class="pre">before($event</span> <span class="pre">=</span> <span class="pre">array())</span></tt> and a <tt class="docutils literal"><span class="pre">after($event</span> <span class="pre">=</span> <span class="pre">array())</span></tt> method.</p>
+<p>The <tt class="docutils literal"><span class="pre">$event</span></tt> param holds an array with two keys. One to tell if a
+table is being dropped or created and another for errors. Examples:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s1">&#39;drop&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;errors&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">)</span>
+<span class="k">array</span><span class="p">(</span><span class="s1">&#39;create&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;errors&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Adding data to a posts table for example would like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span><span class="p">,</span> <span class="s1">&#39;Model&#39;</span><span class="p">);</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">after</span><span class="p">(</span><span class="nv">$event</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$event</span><span class="p">[</span><span class="s1">&#39;create&#39;</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="nv">$event</span><span class="p">[</span><span class="s1">&#39;create&#39;</span><span class="p">])</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="s1">&#39;posts&#39;</span><span class="o">:</span>
+                <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;ClassRegistry&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
+                <span class="nv">$post</span> <span class="o">=</span> <span class="nx">ClassRegistry</span><span class="o">::</span><span class="na">init</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span><span class="p">);</span>
+                <span class="nv">$post</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+                <span class="nv">$post</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span>
+                    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span> <span class="o">=&gt;</span>
+                        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CakePHP Schema Files&#39;</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">before()</span></tt> and <tt class="docutils literal"><span class="pre">after()</span></tt> callbacks run each time a table is created
+or dropped on the current schema.</p>
+<p>When inserting data to more than one table you&#8217;ll need to flush the database
+cache after each table is created. Cache can be disable by setting
+<tt class="docutils literal"><span class="pre">$db-&gt;cacheSources</span> <span class="pre">=</span> <span class="pre">false</span></tt> in the before action().</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$connection</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">before</span><span class="p">(</span><span class="nv">$event</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nv">$db</span> <span class="o">=</span> <span class="nx">ConnectionManager</span><span class="o">::</span><span class="na">getDataSource</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">connection</span><span class="p">);</span>
+    <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">cacheSources</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you use models in your callbacks make sure to initialize them with the
+correct datasource, lest they fallback to their default datasources:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">before</span><span class="p">(</span><span class="nv">$event</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nv">$articles</span> <span class="o">=</span> <span class="nx">ClassRegistry</span><span class="o">::</span><span class="na">init</span><span class="p">(</span><span class="s1">&#39;Articles&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;ds&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">connection</span>
+    <span class="p">));</span>
+    <span class="c1">// Do things with articles.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="writing-cakephp-schema-by-hand">
+<h2>Writing CakePHP Schema by Hand<a class="headerlink" href="#writing-cakephp-schema-by-hand" title="Permalink to this headline">¶</a></h2>
+<p>The CakeSchema class is the base class for all database schemas. Each schema
+class is able to generate a set of tables.  The schema shell console class
+<tt class="docutils literal"><span class="pre">SchemaShell</span></tt> in the <tt class="docutils literal"><span class="pre">lib/Cake/Console/Command</span></tt> directory interprets command
+line, and base schema class can read from the database, or generate the database
+table.</p>
+<p>CakeSchema can now locate, read and write schema files to plugins. The
+SchemaShell also exposes this functionality.</p>
+<p>CakeSchema also supports <tt class="docutils literal"><span class="pre">tableParameters</span></tt>. Table Parameters are non column
+specific table information such as collation, charset, comments, and table
+engine type. Each Dbo implements the tableParameters they support.</p>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>Here is a full example from the acl class</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="sd">/**</span>
+<span class="sd"> * ACO - Access Control Object - Something that is wanted</span>
+<span class="sd"> */</span>
+    <span class="k">public</span> <span class="nv">$acos</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+            <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+            <span class="s1">&#39;length&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="s1">&#39;key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;primary&#39;</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+            <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+            <span class="s1">&#39;length&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+        <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+            <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+            <span class="s1">&#39;length&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+        <span class="s1">&#39;lft&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+            <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+            <span class="s1">&#39;length&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;rght&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+            <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+            <span class="s1">&#39;length&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;indexes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;PRIMARY&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;column&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;unique&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="columns">
+<h3>Columns<a class="headerlink" href="#columns" title="Permalink to this headline">¶</a></h3>
+<p>Each column is encoded as a key value associative array.
+The field name is the key of the field, the value is another array with some of
+the following attributes.</p>
+<p>Example column</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+    <span class="s1">&#39;length&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s1">&#39;key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;primary&#39;</span>
+ <span class="p">),</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>key</dt>
+<dd>The <tt class="docutils literal"><span class="pre">primary</span></tt> key defines the primary key index.</dd>
+<dt>null</dt>
+<dd>Is the field nullable?</dd>
+<dt>default</dt>
+<dd>What is the default value of the field?</dd>
+<dt>limit</dt>
+<dd>The limit of the type of the field.</dd>
+<dt>length</dt>
+<dd>What is the length of the field?</dd>
+<dt>type</dt>
+<dd><p class="first">One of the following types</p>
+<ul class="last simple">
+<li>integer</li>
+<li>date</li>
+<li>time</li>
+<li>datetime</li>
+<li>timestamp</li>
+<li>boolean</li>
+<li>biginteger</li>
+<li>float</li>
+<li>string</li>
+<li>text</li>
+<li>binary</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="table-key-indexes">
+<h2>Table key <cite>indexes</cite><a class="headerlink" href="#table-key-indexes" title="Permalink to this headline">¶</a></h2>
+<p>The key name <cite>indexes</cite> is put in the table array instead of a field name.</p>
+<dl class="docutils">
+<dt>column</dt>
+<dd><p class="first">This is either a single column name or an array of columns.</p>
+<p>e.g. Single</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="s1">&#39;indexes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;PRIMARY&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;column&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;unique&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>e.g. Multiple</p>
+<div class="last highlight-phpinline"><div class="highlight"><pre><span class="s1">&#39;indexes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;AB_KEY&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;column&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;a_id&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;b_id&#39;</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;unique&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>unique</dt>
+<dd>If the index is unique, set this to 1, otherwise 0.</dd>
+</dl>
+</div>
+<div class="section" id="table-key-tableparameters">
+<h2>Table key <cite>tableParameters</cite><a class="headerlink" href="#table-key-tableparameters" title="Permalink to this headline">¶</a></h2>
+<p>tableParameters are supported only in MySQL.</p>
+<p>You can use tableParameters to set a variety of MySQL specific settings.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">engine</span></tt> Control the storage engine used for your tables.</li>
+<li><tt class="docutils literal"><span class="pre">charset</span></tt> Control the character set used for tables.</li>
+<li><tt class="docutils literal"><span class="pre">encoding</span></tt> Control the encoding used for tables.</li>
+</ul>
+<p>In addition to tableParameters MySQL dbo&#8217;s implement
+<tt class="docutils literal"><span class="pre">fieldParameters</span></tt>. <tt class="docutils literal"><span class="pre">fieldParameters</span></tt> allow you to control MySQL
+specific settings per column.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">charset</span></tt> Set the character set used for a column</li>
+<li><tt class="docutils literal"><span class="pre">encoding</span></tt> Set the encoding used for a column</li>
+</ul>
+<p>See below for examples on how to use table and field parameters in
+your schema files.</p>
+<p><strong>Using tableParameters in schema files</strong></p>
+<p>You use <tt class="docutils literal"><span class="pre">tableParameters</span></tt> just as you would any other key in a
+schema file. Much like <tt class="docutils literal"><span class="pre">indexes</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">var</span> <span class="nv">$comments</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+        <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">&#39;key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;primary&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;post_id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;comment&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;indexes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;PRIMARY&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;column&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;unique&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+        <span class="s1">&#39;post_id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;column&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;post_id&#39;</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;tableParameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;InnoDB&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;charset&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;latin1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;collate&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;latin1_general_ci&#39;</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>is an example of a table using <tt class="docutils literal"><span class="pre">tableParameters</span></tt> to set some
+database specific settings. If you use a schema file that contains
+options and features your database does not implement, those
+options will be ignored.</p>
+</div>
+<div class="section" id="migrations-with-cakephp-schema-shell">
+<h2>Migrations with CakePHP schema shell<a class="headerlink" href="#migrations-with-cakephp-schema-shell" title="Permalink to this headline">¶</a></h2>
+<p>Migrations allow for versioning of your database schema, so that as
+you develop features you have an easy and database agnostic way to
+distribute database changes. Migrations are achieved through either
+SCM controlled schema files or schema snapshots. Versioning a
+schema file with the schema shell is quite easy. If you already
+have a schema file created running:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">generate</span>
+</pre></div>
+</div>
+<p>Will bring up the following choices:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Generating</span> <span class="nx">Schema</span><span class="o">...</span>
+<span class="nx">Schema</span> <span class="nb">file</span> <span class="nx">exists</span><span class="o">.</span>
+ <span class="p">[</span><span class="nx">O</span><span class="p">]</span><span class="nx">verwrite</span>
+ <span class="p">[</span><span class="nx">S</span><span class="p">]</span><span class="nx">napshot</span>
+ <span class="p">[</span><span class="nx">Q</span><span class="p">]</span><span class="nx">uit</span>
+<span class="nx">Would</span> <span class="nx">you</span> <span class="nx">like</span> <span class="nx">to</span> <span class="k">do</span><span class="o">?</span> <span class="p">(</span><span class="nx">o</span><span class="o">/</span><span class="nx">s</span><span class="o">/</span><span class="nx">q</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Choosing [s] (snapshot) will create an incremented schema.php. So
+if you have schema.php, it will create schema_2.php and so on. You
+can then restore to any of these schema files at any time by
+running:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">update</span> <span class="o">-</span><span class="nx">s</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Where 2 is the snapshot number you wish to run. The schema shell
+will prompt you to confirm you wish to perform the <tt class="docutils literal"><span class="pre">ALTER</span></tt>
+statements that represent the difference between the existing
+database the currently executing schema file.</p>
+<p>You can perform a dry run by adding a <tt class="docutils literal"><span class="pre">--dry</span></tt> to your command.</p>
+</div>
+<div class="section" id="workflow-examples">
+<h2>Workflow examples<a class="headerlink" href="#workflow-examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-schema-and-commit">
+<h3>Create schema and commit<a class="headerlink" href="#create-schema-and-commit" title="Permalink to this headline">¶</a></h3>
+<p>On a project which use versioning, the usage of cake schema
+would follow these steps:</p>
+<ol class="arabic">
+<li><p class="first">Create or modify your database tables</p>
+</li>
+<li><p class="first">Execute cake schema to export a full description of your
+database</p>
+</li>
+<li><p class="first">Commit the created or updated schema.php file:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="c1"># once your database has been updated</span>
+<span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">generate</span>
+<span class="err">$</span> <span class="nx">git</span> <span class="nx">commit</span> <span class="o">-</span><span class="nx">a</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the project is not versioned, managing schemas would
+be done through snapshots. (see previous section to
+manage snapshots)</p>
+</div>
+</div>
+<div class="section" id="getting-the-last-changes">
+<h3>Getting the last changes<a class="headerlink" href="#getting-the-last-changes" title="Permalink to this headline">¶</a></h3>
+<p>When you pull the last changes of your repository, and discover
+changes in the structure of the database (possibly because
+of an error message saying you are missing a table):</p>
+<ol class="arabic">
+<li><p class="first">Execute cake schema to update your database:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">git</span> <span class="nx">pull</span>
+<span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span>
+<span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">update</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>All these operations can be done in dry-run mode.</p>
+</div>
+<div class="section" id="rolling-back">
+<h3>Rolling back<a class="headerlink" href="#rolling-back" title="Permalink to this headline">¶</a></h3>
+<p>If at some point you need to revert and get back to the state in which you were
+before updating your database, you should be informed that this is currently not
+supported by cake schema.</p>
+<p>More specifically, you can&#8217;t automatically drop your tables once they have
+been created.</p>
+<p>Using <tt class="docutils literal"><span class="pre">update</span></tt> will, on the contrary, drop any field which differ from the
+schema file:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">git</span> <span class="nx">revert</span> <span class="nx">HEAD</span>
+<span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">update</span>
+</pre></div>
+</div>
+<p>Will bring up the following choices:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">The</span> <span class="nx">following</span> <span class="nx">statements</span> <span class="nx">will</span> <span class="nx">run</span><span class="o">.</span>
+<span class="nx">ALTER</span> <span class="nx">TABLE</span> <span class="sb">`roles`</span>
+<span class="nx">DROP</span> <span class="sb">`position`</span><span class="p">;</span>
+<span class="nx">Are</span> <span class="nx">you</span> <span class="nx">sure</span> <span class="nx">you</span> <span class="nx">want</span> <span class="nx">to</span> <span class="nx">alter</span> <span class="nx">the</span> <span class="nx">tables</span><span class="o">?</span> <span class="p">(</span><span class="nx">y</span><span class="o">/</span><span class="nx">n</span><span class="p">)</span>
+<span class="p">[</span><span class="nx">n</span><span class="p">]</span> <span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cron-jobs.html">Running Shells as cronjobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="completion-shell.html">Completion Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-generation-with-bake.html">Code Generation with Bake</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Schema management and migrations</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="i18n-shell.html">I18N shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acl-shell.html">ACL Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testsuite-shell.html">Test shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="upgrade-shell.html">Upgrade shell</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Schema management and migrations</a><ul>
+<li><a class="reference internal" href="#generating-and-using-schema-files">Generating and using Schema files</a></li>
+<li><a class="reference internal" href="#cakeschema-callbacks">CakeSchema callbacks</a></li>
+<li><a class="reference internal" href="#writing-cakephp-schema-by-hand">Writing CakePHP Schema by Hand</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#columns">Columns</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#table-key-indexes">Table key <cite>indexes</cite></a></li>
+<li><a class="reference internal" href="#table-key-tableparameters">Table key <cite>tableParameters</cite></a></li>
+<li><a class="reference internal" href="#migrations-with-cakephp-schema-shell">Migrations with CakePHP schema shell</a></li>
+<li><a class="reference internal" href="#workflow-examples">Workflow examples</a><ul>
+<li><a class="reference internal" href="#create-schema-and-commit">Create schema and commit</a></li>
+<li><a class="reference internal" href="#getting-the-last-changes">Getting the last changes</a></li>
+<li><a class="reference internal" href="#rolling-back">Rolling back</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
+	</li>
+	<li>
+		<a href="i18n-shell.html" title="I18N shell" accesskey="N">next</a>
+	</li>
+	<li>
+		<a href="code-generation-with-bake.html" title="Code Generation with Bake" accesskey="P">previous</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; Copyright 2014, Cake Software Foundation, Inc.
+				Last updated on Aug 24, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

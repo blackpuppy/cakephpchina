@@ -1,0 +1,490 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Sessions" lang="zh_CN" name="title" />
+<meta content="php array,dailyplanet com,configuration documentation,dot notation,feedback messages,reading data,session data,page requests,clark kent,dots,existence,sessions,convenience,cakephp" lang="zh_CN" name="keywords" />
+
+    <title>Sessions &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="组件" href="../toc-components.html" />
+    <link rel="next" title="Authentication 认证" href="authentication.html" />
+    <link rel="prev" title="Flash" href="flash.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/core-libraries/components/sessions.html" /><link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/components/sessions.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/components/sessions.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/components/sessions.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/components/sessions.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../toc-components.html" accesskey="U" itemprop="url"><span itemprop="title">组件</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/core-libraries/components/sessions.html">en</a></li>
+				
+					<li><a href="../../../pt/core-libraries/components/sessions.html">pt</a></li>
+				
+					<li><a href="../../../es/core-libraries/components/sessions.html">es</a></li>
+				
+					<li><a href="../../../ja/core-libraries/components/sessions.html">ja</a></li>
+				
+					<li><a href="../../../fr/core-libraries/components/sessions.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/components/sessions.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="sessions">
+<h1>Sessions<a class="headerlink" href="#sessions" title="永久链接至标题">¶</a></h1>
+<dl class="class">
+<dt id="SessionComponent">
+<em class="property">class </em><tt class="descname">SessionComponent</tt><big>(</big><em>ComponentCollection $collection</em>, <em>array $settings = array()</em><big>)</big><a class="headerlink" href="#SessionComponent" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>CakePHP的SessionComponent会话组件提供了一种页面间持久化客户端数据的方法。他是对``$_SESSION``封装，
+同时提供了用于方便操作``$_SESSION``的几种方法。</p>
+<p>The CakePHP SessionComponent provides a way to persist client data
+between page requests. It acts as a wrapper for the <tt class="docutils literal"><span class="pre">$_SESSION</span></tt> as
+well as providing convenience methods for several <tt class="docutils literal"><span class="pre">$_SESSION</span></tt>
+related functions.</p>
+<p>在CakePHP中，Sessions有多种配置方法。更多信息参见:doc:<cite>Session configuration &lt;/development/sessions&gt;</cite></p>
+<p>Sessions can be configured in a number of ways in CakePHP.  For more
+information, you should see the <a class="reference internal" href="../../development/sessions.html"><em>Session configuration</em></a>
+documentation.</p>
+<p>Interacting with Session data
+与Session数据交互
+=============================</p>
+<p>Session组件是用来与session交互信息。它包括基本的CRUD功能以及来创建反馈信息给用户。</p>
+<p>The Session component is used to interact with session information.
+It includes basic CRUD functions as well as features for creating
+feedback messages to users.</p>
+<p>请注意可以使用:term:<cite>dot notation`点记法创建数组结构的Session。所以``User.username`</cite>
+等同于下面的格式:</p>
+<p>It should be noted that Array structures can be created in the
+Session by using <a class="reference internal" href="../../appendices/glossary.html#term-dot-notation"><em class="xref std std-term">dot notation</em></a>. So <tt class="docutils literal"><span class="pre">User.username</span></tt> would
+reference the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s1">&#39;User&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;clark-kent@dailyplanet.com&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>点记法可以用来表示嵌套数组。这种记法可用在所有的Session组件方法中。
+Dots are used to indicate nested arrays. This notation is used for
+all Session component methods wherever a name/key is used.</p>
+<dl class="method">
+<dt id="SessionComponent::write">
+<tt class="descclassname">SessionComponent::</tt><tt class="descname">write</tt><big>(</big><em>$name</em>, <em>$value</em><big>)</big><a class="headerlink" href="#SessionComponent::write" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>将Session的$value写入$name，$name可以是点分隔表示的数组形式。举个例子:</div></blockquote>
+<p>Write to the Session puts $value into $name. $name can be a dot
+separated array. For example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Person.eyeColor&#39;</span><span class="p">,</span> <span class="s1">&#39;Green&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>将值&#8217;Green&#8217;写入Person =&gt;eyeColor中。
+This writes the value &#8216;Green&#8217; to the session under Person =&gt;
+eyeColor.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="SessionComponent::read">
+<tt class="descclassname">SessionComponent::</tt><tt class="descname">read</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#SessionComponent::read" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>返回Session中名字是$name的值。参数$name为null会返回整个session。E.g:</div></blockquote>
+<p>Returns the value at $name in the Session. If $name is null the
+entire session will be returned. E.g:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$green</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;Person.eyeColor&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>从session中取得值Green，不存在返回null。
+Retrieve the value Green from the session. Reading data that does not exist
+will return null.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="SessionComponent::check">
+<tt class="descclassname">SessionComponent::</tt><tt class="descname">check</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#SessionComponent::check" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>检测一个Session是否被设置,存在返回true,不存在返回false。</div></blockquote>
+<p>Used to check if a Session variable has been set. Returns true on
+existence and false on non-existence.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="SessionComponent::delete">
+<tt class="descclassname">SessionComponent::</tt><tt class="descname">delete</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#SessionComponent::delete" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>清除名字为$name的session数据。E.g:</div></blockquote>
+<p>Clear the session data at $name. E.g:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;Person.eyeColor&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>session数据中不在包含值&#8217;Green&#8217;索引eyeColor也被清除了。然后Person依然存在于Session中。
+为了删除整个Person信息需要::
+Our session data no longer has the value &#8216;Green&#8217;, or the index
+eyeColor set. However, Person is still in the Session. To delete
+the entire Person information from the session use:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;Person&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="SessionComponent::destroy">
+<tt class="descclassname">SessionComponent::</tt><tt class="descname">destroy</tt><big>(</big><big>)</big><a class="headerlink" href="#SessionComponent::destroy" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div><a href="#id1"><span class="problematic" id="id2">``</span></a>destroy``方法会删除session cookie和存储在整个临时文件系统中的session数据。
+它会销毁PHP的session，然后创建一个新的session:</div></blockquote>
+<p>The <tt class="docutils literal"><span class="pre">destroy</span></tt> method will delete the session cookie and all
+session data stored in the temporary file system. It will then
+destroy the PHP session and then create a fresh session:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">destroy</span><span class="p">();</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p id="creating-notification-messages">Creating notification messages
+创建提示信息
+==============================</p>
+<dl class="method">
+<dt id="SessionComponent::setFlash">
+<tt class="descclassname">SessionComponent::</tt><tt class="descname">setFlash</tt><big>(</big><em>string $message</em>, <em>string $element = 'default'</em>, <em>array $params = array()</em>, <em>string $key = 'flash'</em><big>)</big><a class="headerlink" href="#SessionComponent::setFlash" title="永久链接至目标">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">返回类型:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>通常在web应用程序中，在处理表单或确认数据后需要显示一次性的提示消息给用户。
+在CakePHP中，被归类为&#8221;flash messages&#8221;。可以用SessionComponent设置闪烁消息。
+然后用:php:meth:<a href="#id3"><span class="problematic" id="id4">`</span></a>SessionHelper::flash()`方法显示。设置使用``setFlash``方法。</p>
+<p>Often in web applications, you will need to display a one-time notification
+message to the user after processing a form or acknowledging data.
+In CakePHP, these are referred to as &#8220;flash messages&#8221;.  You can set flash
+message with the SessionComponent and display them with the
+<a class="reference internal" href="../helpers/session.html#SessionHelper::flash" title="SessionHelper::flash"><tt class="xref php php-meth docutils literal"><span class="pre">SessionHelper::flash()</span></tt></a>. To set a message, use <tt class="docutils literal"><span class="pre">setFlash</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// In the controller.</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;Your stuff has been saved.&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>创建一次性的消息展示给用户看，使用SessionHelper。
+This will create a one-time message that can be displayed to the user,
+using the SessionHelper:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// In the view.</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">flash</span><span class="p">();</span>
+
+<span class="c1">// The above will output.</span>
+<span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;flashMessage&quot;</span> <span class="nx">class</span><span class="o">=</span><span class="s2">&quot;message&quot;</span><span class="o">&gt;</span>
+    <span class="nx">Your</span> <span class="nx">stuff</span> <span class="nx">has</span> <span class="nx">been</span> <span class="nx">saved</span><span class="o">.</span>
+<span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>可以使用额外的参数传给``setFlash()`来创建各种类型的消息。举例，错误和确定
+的提示可能看起来不同的。使用``$key``参数来表示不同种类的消息再分开输出。</p>
+<p>You can use the additional parameters of <tt class="docutils literal"><span class="pre">setFlash()</span></tt> to create
+different kinds of flash messages.  For example, error and positive
+notifications may look differently.  CakePHP gives you a way to do that.
+Using the <tt class="docutils literal"><span class="pre">$key</span></tt> parameter you can store multiple messages, which can be
+output separately:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// set a bad message.</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;Something bad.&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(),</span> <span class="s1">&#39;bad&#39;</span><span class="p">);</span>
+
+<span class="c1">// set a good message.</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;Something good.&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(),</span> <span class="s1">&#39;good&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>在视图层，这些消息可以以不同的样式输出::
+In the view, these messages can be output and styled differently:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// in a view.</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">flash</span><span class="p">(</span><span class="s1">&#39;good&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">flash</span><span class="p">(</span><span class="s1">&#39;bad&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">$element``参数允许控制哪一个元素(位于</span></tt>/app/View/Elements``)来进行渲染消息。
+元素中的消息内容会适用于``$message``变量。</p>
+<p>The <tt class="docutils literal"><span class="pre">$element</span></tt> parameter allows you to control which element
+(located in <tt class="docutils literal"><span class="pre">/app/View/Elements</span></tt>) should be used to render the
+message in. In the element the message is available as <tt class="docutils literal"><span class="pre">$message</span></tt>.
+First we set the flash in our controller:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;Something custom!&#39;</span><span class="p">,</span> <span class="s1">&#39;flash_custom&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>然后我们创建一个文件``app/View/Elements/flash_custom.ctp``作为自定义消息元素。</p>
+<p>Then we create the file <tt class="docutils literal"><span class="pre">app/View/Elements/flash_custom.ctp</span></tt> and build our
+custom flash element:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;myCustomFlash&quot;</span><span class="o">&gt;&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$message</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p><a href="#id5"><span class="problematic" id="id6">``</span></a>$params``参数可使我们传递额外的视图变量在布局中渲染。参数能够影响被渲染的div，
+举个例子$params数组中添加&#8221;class&#8221;，使用``$this-&gt;Session-&gt;flash()``会在生成的``div``中
+新增该class。</p>
+<p><tt class="docutils literal"><span class="pre">$params</span></tt> allows you to pass additional view variables to the
+rendered layout. Parameters can be passed affecting the rendered div, for
+example adding &#8220;class&#8221; in the $params array will apply a class to the
+<tt class="docutils literal"><span class="pre">div</span></tt> output using <tt class="docutils literal"><span class="pre">$this-&gt;Session-&gt;flash()</span></tt> in your layout or view.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;Example message text&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;example_class&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>使用上面的``$this-&gt;Session-&gt;flash()``会输出::
+The output from using <tt class="docutils literal"><span class="pre">$this-&gt;Session-&gt;flash()</span></tt> with the above example
+would be:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;flashMessage&quot;</span> <span class="nx">class</span><span class="o">=</span><span class="s2">&quot;example_class&quot;</span><span class="o">&gt;</span><span class="nx">Example</span> <span class="nx">message</span> <span class="nx">text</span><span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>使用plugin插件中的元素，只需在``$params``中指定插件名::
+To use an element from a plugin just specify the plugin in the
+<tt class="docutils literal"><span class="pre">$params</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Will use /app/Plugin/Comment/View/Elements/flash_no_spam.ctp</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;Message!&#39;</span><span class="p">,</span> <span class="s1">&#39;flash_no_spam&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;plugin&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Comment&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../toc-general-purpose.html">通用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-behaviors.html">行为</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-components.html">组件</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pagination.html">Pagination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Sessions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="authentication.html">Authentication 认证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security-component.html">Form tampering prevention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security-component.html#csrf-protection">CSRF protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="request-handling.html">请求处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cookie.html">Cookie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access-control-lists.html">访问控制列表组件</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-helpers.html">助件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-utilities.html">工具</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Sessions</a></li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="authentication.html" title="Authentication 认证" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="flash.html" title="Flash" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

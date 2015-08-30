@@ -1,0 +1,501 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Internationalization &amp; Localization" lang="zh_CN" name="title" />
+<meta content="internationalization localization,internationalization and localization,localization features,language application,gettext,l10n,daunting task,adaptation,pot,i18n,audience,translation,languages" lang="zh_CN" name="keywords" />
+
+    <title>Internationalization &amp; Localization &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="../_static/app.js"></script>
+    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
+    <link rel="up" title="工具" href="toc-utilities.html" />
+    <link rel="next" title="日志记录" href="logging.html" />
+    <link rel="prev" title="Inflector" href="../core-utility-libraries/inflector.html" />
+<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../en/core-libraries/internationalization-and-localization.html" /><link rel="alternate" hreflang="pt" href="../../pt/core-libraries/internationalization-and-localization.html" /><link rel="alternate" hreflang="es" href="../../es/core-libraries/internationalization-and-localization.html" /><link rel="alternate" hreflang="ja" href="../../ja/core-libraries/internationalization-and-localization.html" /><link rel="alternate" hreflang="fr" href="../../fr/core-libraries/internationalization-and-localization.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../contents.html">
+			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="toc-utilities.html" accesskey="U" itemprop="url"><span itemprop="title">工具</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../en/core-libraries/internationalization-and-localization.html">en</a></li>
+				
+					<li><a href="../../pt/core-libraries/internationalization-and-localization.html">pt</a></li>
+				
+					<li><a href="../../es/core-libraries/internationalization-and-localization.html">es</a></li>
+				
+					<li><a href="../../ja/core-libraries/internationalization-and-localization.html">ja</a></li>
+				
+					<li><a href="../../fr/core-libraries/internationalization-and-localization.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/internationalization-and-localization.rst" target="_blank">Improve this Doc</a>
+  <div class="section" id="internationalization-localization">
+<h1>Internationalization &amp; Localization<a class="headerlink" href="#internationalization-localization" title="永久链接至标题">¶</a></h1>
+<p>One of the best ways for your applications to reach a larger
+audience is to cater for multiple languages. This can often prove
+to be a daunting task, but the internationalization and
+localization features in CakePHP make it much easier.</p>
+<p>First, it’s important to understand some terminology.
+<em>Internationalization</em> refers to the ability of an application to
+be localized. The term <em>localization</em> refers to the adaptation of
+an application to meet specific language (or culture) requirements
+(i.e., a &#8220;locale&#8221;). Internationalization and localization are often
+abbreviated as i18n and l10n respectively; 18 and 10 are the number
+of characters between the first and last character.</p>
+<div class="section" id="internationalizing-your-application">
+<h2>Internationalizing Your Application<a class="headerlink" href="#internationalizing-your-application" title="永久链接至标题">¶</a></h2>
+<p>There are only a few steps to go from a single-language application
+to a multi-lingual application, the first of which is to make use
+of the <a class="reference internal" href="global-constants-and-functions.html#__" title="__"><tt class="xref php php-func docutils literal"><span class="pre">__()</span></tt></a> function in your code. Below is an example of some code for a
+single-language application:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">Posts</span><span class="o">&lt;/</span><span class="nx">h2</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To internationalize your code, all you need to do is to wrap
+strings in <a class="reference internal" href="global-constants-and-functions.html#__" title="__"><tt class="xref php php-func docutils literal"><span class="pre">__()</span></tt></a> like so:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Posts&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x">&lt;/h2&gt;</span>
+</pre></div>
+</div>
+<p>If you do nothing further, these two code examples are functionally
+identical - they will both send the same content to the browser.
+The <a class="reference internal" href="global-constants-and-functions.html#__" title="__"><tt class="xref php php-func docutils literal"><span class="pre">__()</span></tt></a> function will translate the passed string
+if a translation is available, or return it unmodified. It works similar
+to other <a class="reference external" href="http://en.wikipedia.org/wiki/Gettext">Gettext</a> implementations
+(as do the other translate functions, such as
+<a class="reference internal" href="global-constants-and-functions.html#__d" title="__d"><tt class="xref php php-func docutils literal"><span class="pre">__d()</span></tt></a> , <a class="reference internal" href="global-constants-and-functions.html#__n" title="__n"><tt class="xref php php-func docutils literal"><span class="pre">__n()</span></tt></a> etc)</p>
+<p>With your code ready to be multilingual, the next step is to create
+your <a class="reference external" href="http://en.wikipedia.org/wiki/Gettext">pot file</a>, which is
+the template for all translatable strings in your application. To
+generate your pot file(s), all you need to do is run the
+<a class="reference internal" href="../console-and-shells.html"><em>i18n console task</em></a>,
+which will look for where you&#8217;ve used a translate function in your
+code and generate your pot file(s) for you. You can and should
+re-run this console task any time you change the translations in
+your code.</p>
+<p>The pot file(s) themselves are not used by CakePHP, they are the
+templates used to create or update your
+<a class="reference external" href="http://en.wikipedia.org/wiki/Gettext">po files</a>, which contain
+the translations. Cake will look for your po files in the following
+location:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">/</span><span class="nx">app</span><span class="o">/</span><span class="nx">Locale</span><span class="o">/&lt;</span><span class="nx">locale</span><span class="o">&gt;/</span><span class="nx">LC_MESSAGES</span><span class="o">/&lt;</span><span class="nx">domain</span><span class="o">&gt;.</span><span class="nx">po</span>
+</pre></div>
+</div>
+<p>The default domain is &#8216;default&#8217;, therefore your locale folder would
+look something like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">/</span><span class="nx">app</span><span class="o">/</span><span class="nx">Locale</span><span class="o">/</span><span class="nx">eng</span><span class="o">/</span><span class="nx">LC_MESSAGES</span><span class="o">/</span><span class="k">default</span><span class="o">.</span><span class="nx">po</span> <span class="p">(</span><span class="nx">English</span><span class="p">)</span>
+<span class="o">/</span><span class="nx">app</span><span class="o">/</span><span class="nx">Locale</span><span class="o">/</span><span class="nx">fra</span><span class="o">/</span><span class="nx">LC_MESSAGES</span><span class="o">/</span><span class="k">default</span><span class="o">.</span><span class="nx">po</span> <span class="p">(</span><span class="nx">French</span><span class="p">)</span>
+<span class="o">/</span><span class="nx">app</span><span class="o">/</span><span class="nx">Locale</span><span class="o">/</span><span class="nx">por</span><span class="o">/</span><span class="nx">LC_MESSAGES</span><span class="o">/</span><span class="k">default</span><span class="o">.</span><span class="nx">po</span> <span class="p">(</span><span class="nx">Portuguese</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To create or edit your po files it&#8217;s recommended that you do <em>not</em>
+use your favorite editor. To create a po file for the first time it
+is possible to copy the pot file to the correct location and change
+the extension <em>however</em> unless you&#8217;re familiar with their format,
+it&#8217;s quite easy to create an invalid po file or to save it as the
+wrong charset (if you&#8217;re editing manually, use UTF-8 to avoid
+problems). There are free tools such as
+<a class="reference external" href="http://www.poedit.net">PoEdit</a> which make editing and updating
+your po files an easy task; especially for updating an existing po
+file with a newly updated pot file.</p>
+<p>The three-character locale codes conform to the
+<a class="reference external" href="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO 639-2</a>
+standard, although if you create regional locales (en_US, en_GB,
+etc.) cake will use them if appropriate.</p>
+<p>Remember that po files are useful for short messages, if you find
+you want to translate long paragraphs, or even whole pages - you
+should consider implementing a different solution. e.g.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// App Controller Code.</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$locale</span> <span class="o">=</span> <span class="nx">Configure</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;Config.language&#39;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$locale</span> <span class="o">&amp;&amp;</span> <span class="nb">file_exists</span><span class="p">(</span><span class="nx">VIEWS</span> <span class="o">.</span> <span class="nv">$locale</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">viewPath</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">// e.g. use /app/View/fra/Pages/tos.ctp instead of /app/View/Pages/tos.ctp</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">viewPath</span> <span class="o">=</span> <span class="nv">$locale</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">viewPath</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// View code</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">element</span><span class="p">(</span><span class="nx">Configure</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;Config.language&#39;</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/tos&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="internationalizing-cakephp-plugins">
+<h2>Internationalizing CakePHP Plugins<a class="headerlink" href="#internationalizing-cakephp-plugins" title="永久链接至标题">¶</a></h2>
+<p>If you want to include translation files within your application you&#8217;ll need to
+follow a few conventions.</p>
+<p>Instead of __() and __n() you will have to use __d() and __dn(). The D means
+domain. So if you have a plugin called &#8216;DebugKit&#8217; you would have to do this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">__d</span><span class="p">(</span><span class="s1">&#39;debug_kit&#39;</span><span class="p">,</span> <span class="s1">&#39;My example text&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Using the underscored syntax is important, if you don&#8217;t use it CakePHP won&#8217;t
+find your translation file.</p>
+<p>Your translation file for this example should go into:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">/</span><span class="nx">app</span><span class="o">/</span><span class="nx">Plugin</span><span class="o">/</span><span class="nx">DebugKit</span><span class="o">/</span><span class="nx">Locale</span><span class="o">/&lt;</span><span class="nx">locale</span><span class="o">&gt;/</span><span class="nx">LC_MESSAGES</span><span class="o">/&lt;</span><span class="nx">domain</span><span class="o">&gt;.</span><span class="nx">po</span>
+</pre></div>
+</div>
+<p>And for other languages than the default:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">/</span><span class="nx">app</span><span class="o">/</span><span class="nx">Plugin</span><span class="o">/</span><span class="nx">DebugKit</span><span class="o">/</span><span class="nx">Locale</span><span class="o">/</span><span class="nx">eng</span><span class="o">/</span><span class="nx">LC_MESSAGES</span><span class="o">/</span><span class="nx">debug_kit</span><span class="o">.</span><span class="nx">po</span> <span class="p">(</span><span class="nx">English</span><span class="p">)</span>
+<span class="o">/</span><span class="nx">app</span><span class="o">/</span><span class="nx">Plugin</span><span class="o">/</span><span class="nx">DebugKit</span><span class="o">/</span><span class="nx">Locale</span><span class="o">/</span><span class="nx">fra</span><span class="o">/</span><span class="nx">LC_MESSAGES</span><span class="o">/</span><span class="nx">debug_kit</span><span class="o">.</span><span class="nx">po</span> <span class="p">(</span><span class="nx">French</span><span class="p">)</span>
+<span class="o">/</span><span class="nx">app</span><span class="o">/</span><span class="nx">Plugin</span><span class="o">/</span><span class="nx">DebugKit</span><span class="o">/</span><span class="nx">Locale</span><span class="o">/</span><span class="nx">por</span><span class="o">/</span><span class="nx">LC_MESSAGES</span><span class="o">/</span><span class="nx">debug_kit</span><span class="o">.</span><span class="nx">po</span> <span class="p">(</span><span class="nx">Portuguese</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The reason for that is that CakePHP will use the lower cased and underscored
+plugin name to compare it to the translation domain and is going to look into
+the plugin if there is a match for the given translation file.</p>
+</div>
+<div class="section" id="localization-in-cakephp">
+<h2>Localization in CakePHP<a class="headerlink" href="#localization-in-cakephp" title="永久链接至标题">¶</a></h2>
+<p>To change or set the language for your application, all you need to
+do is the following:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Config.language&#39;</span><span class="p">,</span> <span class="s1">&#39;fra&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This tells Cake which locale to use (if you use a regional locale, such as
+fr_FR, it will use the <a class="reference external" href="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO 639-2</a> locale as a fallback
+if it doesn&#8217;t exist), you can change the language at any time during a request.
+e.g. in your bootstrap if you&#8217;re setting the application default language, in
+your (app) controller beforeFilter if it&#8217;s specific to the request or user, or
+in fact anytime at all before you want a message in a different language.  To
+set the language for the current user, you can store the setting in the Session
+object, like this:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Config.language&#39;</span><span class="p">,</span> <span class="s1">&#39;fra&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>At the beginning of each request in your controller&#8217;s <tt class="docutils literal"><span class="pre">beforeFilter</span></tt> you
+should configure <tt class="docutils literal"><span class="pre">Configure</span></tt> as well:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;Config.language&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Config.language&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;Config.language&#39;</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Doing this will ensure that both <tt class="xref php php-class docutils literal"><span class="pre">I18n</span></tt> and
+<a class="reference internal" href="behaviors/translate.html#TranslateBehavior" title="TranslateBehavior"><tt class="xref php php-class docutils literal"><span class="pre">TranslateBehavior</span></tt></a> access the same language value.</p>
+<p>It&#8217;s a good idea to serve up public content available in multiple
+languages from a unique url - this makes it easy for users (and
+search engines) to find what they&#8217;re looking for in the language
+they are expecting. There are several ways to do this, it can be by
+using language specific subdomains (en.example.com,
+fra.example.com, etc.), or using a prefix to the url such as is
+done with this application. You may also wish to glean the
+information from the browser’s user-agent, among other things.</p>
+<p>As mentioned in the previous section, displaying localized content
+is done using the <a class="reference internal" href="global-constants-and-functions.html#__" title="__"><tt class="xref php php-func docutils literal"><span class="pre">__()</span></tt></a> convenience function, or one of the other
+translation functions all of which are globally available, but
+probably be best utilized in your views. The first parameter of the
+function is used as the msgid defined in the .po files.</p>
+<p>CakePHP will automatically assume that all model validation error messages in
+your <tt class="docutils literal"><span class="pre">$validate</span></tt> array are intended to be localized.  When running the i18n
+shell these strings will also be extracted.</p>
+<p>There&#8217;s one other aspect of localizing your application which is
+not covered by the use of the translate functions, and that is
+date/money formats. Don&#8217;t forget that CakePHP is PHP :), therefore
+to set the formats for these things you need to use
+<a class="reference external" href="http://www.php.net/setlocale">setlocale</a>.</p>
+<p>If you pass a locale that doesn&#8217;t exist on your computer to
+<a class="reference external" href="http://www.php.net/setlocale">setlocale</a> it will have no
+effect. You can find the list of available locales by running the
+command <tt class="docutils literal"><span class="pre">locale</span> <span class="pre">-a</span></tt> in a terminal.</p>
+</div>
+<div class="section" id="translating-model-validation-errors">
+<h2>Translating model validation errors<a class="headerlink" href="#translating-model-validation-errors" title="永久链接至标题">¶</a></h2>
+<p>CakePHP will automatically extract the validation error when you are using the
+<a class="reference internal" href="../console-and-shells.html"><em>i18n console task</em></a>. By default, the default domain is used.
+This can be overwritten by setting the <tt class="docutils literal"><span class="pre">$validationDomain</span></tt> property in your model:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="nv">$validationDomain</span> <span class="o">=</span> <span class="s1">&#39;validation_errors&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Additional parameters defined in the validation rule are passed to the translation
+function. This allows you to create dynamic validation messages:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="nv">$validationDomain</span> <span class="o">=</span> <span class="s1">&#39;validation&#39;</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;length&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;rule&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;between&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+                <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Username should be between %d and %d characters&#39;</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Which will do the following internal call:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">__d</span><span class="p">(</span><span class="s1">&#39;validation&#39;</span><span class="p">,</span> <span class="s1">&#39;Username should be between %d and %d characters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="toc-general-purpose.html">通用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toc-behaviors.html">行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toc-components.html">组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="toc-helpers.html">助件</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="toc-utilities.html">工具</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="caching.html">缓存</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/email.html">CakeEmail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/file-folder.html">目录和文件 Folder &amp; File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/hash.html">Hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/httpsocket.html">HttpSocket</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/inflector.html">Inflector</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Internationalization &amp; Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logging.html">日志记录</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/number.html">CakeNumber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/router.html">Router</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/sanitize.html">数据清理 Data Sanitization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/security.html">安全</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/set.html">Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/string.html">字符串 String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/time.html">CakeTime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/xml.html">Xml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Internationalization &amp; Localization</a><ul>
+<li><a class="reference internal" href="#internationalizing-your-application">Internationalizing Your Application</a></li>
+<li><a class="reference internal" href="#internationalizing-cakephp-plugins">Internationalizing CakePHP Plugins</a></li>
+<li><a class="reference internal" href="#localization-in-cakephp">Localization in CakePHP</a></li>
+<li><a class="reference internal" href="#translating-model-validation-errors">Translating model validation errors</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="logging.html" title="日志记录" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="../core-utility-libraries/inflector.html" title="Inflector" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>

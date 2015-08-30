@@ -1,0 +1,690 @@
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Security" lang="zh_CN" name="title" />
+<meta content="configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class,disable security,unlockActions" lang="zh_CN" name="keywords" />
+
+    <title>Form tampering prevention &mdash; CakePHP Cookbook 2.x 文档</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.x',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <script type="text/javascript" src="../../_static/app.js"></script>
+    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
+    <script type="text/javascript" src="../../_static/foundation.js"></script>
+    <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
+    <link rel="up" title="组件" href="../toc-components.html" />
+    <link rel="next" title="请求处理" href="request-handling.html" />
+    <link rel="prev" title="Authentication 认证" href="authentication.html" />
+<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="alternate" hreflang="en" href="../../../en/core-libraries/components/security-component.html" /><link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/components/security-component.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/components/security-component.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/components/security-component.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/components/security-component.html" />
+
+<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
+<script type="text/javascript">
+window.lang = "zh_CN";
+</script>
+
+  </head>
+  <body>
+
+<div id="container">
+
+<div id="cakephp-global-navigation">
+	<ul>
+		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
+		<li class="primary"><a href="#" class="empty">Downloads</a>
+			<ul class="second-level">
+				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
+				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="#" class="empty">Documentation</a>
+			<ul class="second-level">
+				<li><a href="http://api.cakephp.org">API</a></li>
+				<li><a href="http://book.cakephp.org">Book</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://community.cakephp.org">Community</a>
+			<ul class="second-level">
+				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
+				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
+				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
+				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
+				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
+				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
+				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
+				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
+				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
+				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
+				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
+				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
+				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
+				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
+				<li><a href="http://cakefest.org">CakeFest</a></li>
+				<li><a href="http://cakephp.org/logos">Logo</a></li>
+			</ul>
+		</li>
+		<li class="primary"><a href="http://cakephp.org/services">Services</a>
+			<ul class="second-level">
+				<li><a href="http://cakephp.org/services/certification">Certification</a></li>
+				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
+				<li><a href="http://cakephp.org/services/support">Support</a></li>
+				<li><a href="http://training.cakephp.org">Training</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="masthead">
+	<div class="header-backing"></div>
+	<div class="searchbar row">
+		<div class="columns three phone-one">
+			<a class="logo" href="../../contents.html">
+			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
+			</a>
+		</div>
+		
+<div id="searchbox" class="columns nine phone-three">
+
+	<form id="searchform" class="search" action="../../search.html" method="get">
+		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
+		<input class="search-submit search-big button red" type="submit" value="搜索" />
+		<input type="hidden" name="check_keywords" value="yes" />
+		<input type="hidden" name="area" value="default" />
+
+		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
+	</form>
+
+</div>
+	</div>
+</div>
+<div class="breadcrumb-header">
+	<div class="related row">
+		<div class="columns three root-link">
+			<a href="../../contents.html">Cookbook 2.x</a>
+		</div>
+		<div class="columns nine">
+			<ul class="inline breadcrumb">
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
+			</li>
+			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="../toc-components.html" accesskey="U" itemprop="url"><span itemprop="title">组件</span></a>
+			</li>
+			</ul>
+			<div class="versions dropdown">
+				<a href="#">2.x Book</a>
+				<ul>
+					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
+					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+				</ul>
+			</div>
+
+			<div class="languages dropdown">
+				<a href="#">zh_CN</a>
+
+				<ul>
+				
+					<li><a href="../../../en/core-libraries/components/security-component.html">en</a></li>
+				
+					<li><a href="../../../pt/core-libraries/components/security-component.html">pt</a></li>
+				
+					<li><a href="../../../es/core-libraries/components/security-component.html">es</a></li>
+				
+					<li><a href="../../../ja/core-libraries/components/security-component.html">ja</a></li>
+				
+					<li><a href="../../../fr/core-libraries/components/security-component.html">fr</a></li>
+				
+					<li></li>
+				
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content row">
+	<div class="document columns nine push-three">
+		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/components/security-component.rst" target="_blank">Improve this Doc</a>
+  <p>Security
+安全
+########</p>
+<dl class="class">
+<dt id="SecurityComponent">
+<em class="property">class </em><tt class="descname">SecurityComponent</tt><big>(</big><em>ComponentCollection $collection</em>, <em>array $settings = array()</em><big>)</big><a class="headerlink" href="#SecurityComponent" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>安全组件创建一个简单的方法使得应用程序更加安全，组件提供了一系列的方法能
+完成以下任务。</p>
+<p>The Security Component creates an easy way to integrate tighter
+security in your application. It provides methods for various tasks like:</p>
+<ul class="simple">
+<li>约束应用程序中接收的HTTP方法。</li>
+<li>CSRF(跨站请求伪造)保护。</li>
+<li>表单篡改保护。</li>
+<li>使用SSL安全连接。</li>
+<li>限制跨控制器通信。</li>
+<li>Restricting which HTTP methods your application accepts.</li>
+<li>CSRF protection.</li>
+<li>Form tampering protection</li>
+<li>Requiring that SSL be used.</li>
+<li>Limiting cross controller communication.</li>
+</ul>
+<p>与其他所有的组件一样，通过几种配置参数对组件进行配置。
+所有的属性可以直接或通过在控制器的beforeFilter同名方法中设置。</p>
+<p>Like all components it is configured through several configurable parameters.
+All of these properties can be set directly or through setter methods of the
+same name in your controller&#8217;s beforeFilter.</p>
+<p>引入Security组件将自动获得CSRF`CSRF &lt;<a class="reference external" href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">http://en.wikipedia.org/wiki/Cross-site_request_forgery</a>&gt;`_
+和表单篡改保护。一个隐藏的令牌文本框会自动插入到表单中。除此之外，在某个特定静止期之后表单
+才会提交，他是由``csrfExpires``时间控制。</p>
+<p>By using the Security Component you automatically get
+<a class="reference external" href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">CSRF</a>
+and form tampering protection. Hidden token fields will
+automatically be inserted into forms and checked by the Security
+component. Among other things, a form submission will not be
+accepted after a certain period of inactivity, which is controlled by
+the <tt class="docutils literal"><span class="pre">csrfExpires</span></tt> time.</p>
+<p>如果你正在使用安全组件的表单防御功能及其他组件。会在他们的``startup()``回调方法中
+处理表单数据，确保将安全组件放置在``$components``数组中的前面。</p>
+<p>If you are using Security component&#8217;s form protection features and
+other components that process form data in their <tt class="docutils literal"><span class="pre">startup()</span></tt>
+callbacks, be sure to place Security Component before those
+components in your <tt class="docutils literal"><span class="pre">$components</span></tt> array.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<blockquote>
+<div>当使用Security组件，<strong>必须**使用FormHelper创建表单，此外，**不要</strong></div></blockquote>
+<p class="last">When using the Security Component you <strong>must</strong> use the FormHelper to create
+your forms. In addition, you must <strong>not</strong> override any of the fields&#8217; &#8220;name&#8221;
+attributes. The Security Component looks for certain indicators that are
+created and managed by the FormHelper (especially those created in
+<a class="reference internal" href="../helpers/form.html#FormHelper::create" title="FormHelper::create"><tt class="xref php php-meth docutils literal"><span class="pre">create()</span></tt></a> and <a class="reference internal" href="../helpers/form.html#FormHelper::end" title="FormHelper::end"><tt class="xref php php-meth docutils literal"><span class="pre">end()</span></tt></a>).
+Dynamically altering the fields that are submitted in a POST request (e.g.
+disabling, deleting or creating new fields via JavaScript) is likely to
+trigger a black-holing of the request. See the <tt class="docutils literal"><span class="pre">$validatePost</span></tt> or
+<tt class="docutils literal"><span class="pre">$disabledFields</span></tt> configuration parameters.</p>
+</div>
+<p>Handling blackhole callbacks
+处理黑洞回调函数
+============================</p>
+<p>如果一个被Security组件限制的动作是一个非法请求，将默认产生404错误，可以通过
+<a href="#id1"><span class="problematic" id="id2">``</span></a>$this-&gt;Security-&gt;blackHoleCallback``属性设置一个回调函数。</p>
+<p>If an action is restricted by the Security Component it is
+black-holed as an invalid request which will result in a 404 error
+by default. You can configure this behavior by setting the
+<tt class="docutils literal"><span class="pre">$this-&gt;Security-&gt;blackHoleCallback</span></tt> property to a callback function
+in the controller.</p>
+<dl class="method">
+<dt id="SecurityComponent::blackHole">
+<tt class="descclassname">SecurityComponent::</tt><tt class="descname">blackHole</tt><big>(</big><em>object $controller</em>, <em>string $error</em><big>)</big><a class="headerlink" href="#SecurityComponent::blackHole" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div><p>黑洞是一个带有404错误的非法请求或一个自定义回调函数。如果没有回调请求将退出。
+如果一个控制器的回调在 SecurityComponent::blackHoleCallback 中进行了设置。
+黑洞将会取消并且不传递任何错误信息。</p>
+<p>Black-hole an invalid request with a 404 error or a custom</p>
+</div></blockquote>
+<p>callback. With no callback, the request will be exited. If a
+controller callback is set to SecurityComponent::blackHoleCallback,
+it will be called and passed any error information.</p>
+</dd></dl>
+
+<dl class="attr">
+<dt id="SecurityComponent::$blackHoleCallback">
+<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">blackHoleCallback</tt><a class="headerlink" href="#SecurityComponent::$blackHoleCallback" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>blackHoleCallback是处理和请求黑洞的回调函数。</div></blockquote>
+<p>A Controller callback that will handle and requests that are
+blackholed. A blackhole callback can be any public method on a controllers.
+The callback should expect an parameter indicating the type of error:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Security</span><span class="o">-&gt;</span><span class="na">blackHoleCallback</span> <span class="o">=</span> <span class="s1">&#39;blackhole&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">blackhole</span><span class="p">(</span><span class="nv">$type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// handle errors.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">$type``参数可以下面的值</span>
+<span class="pre">The</span> <span class="pre">``$type</span></tt> parameter can have the following values:</p>
+<ul class="simple">
+<li>&#8216;auth&#8217; Indicates a form validation error, or a controller/action mismatch
+error.</li>
+<li>&#8216;csrf&#8217; Indicates a CSRF error.</li>
+<li>&#8216;get&#8217; Indicates an HTTP method restriction failure.</li>
+<li>&#8216;post&#8217; Indicates an HTTP method restriction failure.</li>
+<li>&#8216;put&#8217; Indicates an HTTP method restriction failure.</li>
+<li>&#8216;delete&#8217; Indicates an HTTP method restriction failure.</li>
+<li>&#8216;secure&#8217; Indicates an SSL method restriction failure.</li>
+</ul>
+</dd></dl>
+
+<p>Restricting HTTP methods
+限制HTTP方法
+========================</p>
+<dl class="method">
+<dt id="SecurityComponent::requirePost">
+<tt class="descclassname">SecurityComponent::</tt><tt class="descname">requirePost</tt><big>(</big><big>)</big><a class="headerlink" href="#SecurityComponent::requirePost" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>设置动作接收到的必须是POST请求，接收任意数量的参数，
+没有参数将强制所有动作接收的必须是POST请求。</div></blockquote>
+<p>Sets the actions that require a POST request. Takes any number of
+arguments. Can be called with no arguments to force all actions to
+require a POST.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="SecurityComponent::requireGet">
+<tt class="descclassname">SecurityComponent::</tt><tt class="descname">requireGet</tt><big>(</big><big>)</big><a class="headerlink" href="#SecurityComponent::requireGet" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>设置动作接收到的必须是GET请求，接收任意数量的参数，
+没有参数将强制所有动作接收的必须是GET请求。</div></blockquote>
+<p>Sets the actions that require a GET request. Takes any number of
+arguments. Can be called with no arguments to force all actions to
+require a GET.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="SecurityComponent::requirePut">
+<tt class="descclassname">SecurityComponent::</tt><tt class="descname">requirePut</tt><big>(</big><big>)</big><a class="headerlink" href="#SecurityComponent::requirePut" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>设置动作接收到的必须是PUT请求，接收任意数量的参数，
+没有参数将强制所有动作接收的必须是PUT请求。</div></blockquote>
+<p>Sets the actions that require a PUT request. Takes any number of
+arguments. Can be called with no arguments to force all actions to
+require a PUT.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="SecurityComponent::requireDelete">
+<tt class="descclassname">SecurityComponent::</tt><tt class="descname">requireDelete</tt><big>(</big><big>)</big><a class="headerlink" href="#SecurityComponent::requireDelete" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>设置动作接收到的必须是DELETE请求，接收任意数量的参数，
+没有参数将强制所有动作接收的必须是DELETE请求。</div></blockquote>
+<p>Sets the actions that require a DELETE request. Takes any number of
+arguments. Can be called with no arguments to force all actions to
+require a DELETE.</p>
+</dd></dl>
+
+<p>Restrict actions to SSL
+限制动作为SSL
+=======================</p>
+<dl class="method">
+<dt id="SecurityComponent::requireSecure">
+<tt class="descclassname">SecurityComponent::</tt><tt class="descname">requireSecure</tt><big>(</big><big>)</big><a class="headerlink" href="#SecurityComponent::requireSecure" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>设置动作接收到的必须是SSL安全的请求，接收任意数量的参数，
+没有参数将强制所有动作接收的必须是SSL安全的请求。</div></blockquote>
+<p>Sets the actions that require a SSL-secured request. Takes any
+number of arguments. Can be called with no arguments to force all
+actions to require a SSL-secured.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="SecurityComponent::requireAuth">
+<tt class="descclassname">SecurityComponent::</tt><tt class="descname">requireAuth</tt><big>(</big><big>)</big><a class="headerlink" href="#SecurityComponent::requireAuth" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>设置动作接收到的必须是Security组件产生的令牌，接收任意数量的参数，
+没有参数将强制所有动作接收的必须经过合法认证。</div></blockquote>
+<p>Sets the actions that require a valid Security Component generated
+token. Takes any number of arguments. Can be called with no
+arguments to force all actions to require a valid authentication.</p>
+</dd></dl>
+
+<p>Restricting cross controller communication
+限制跨控制器通信
+==========================================</p>
+<dl class="attr">
+<dt id="SecurityComponent::$allowedControllers">
+<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">allowedControllers</tt><a class="headerlink" href="#SecurityComponent::$allowedControllers" title="永久链接至目标">¶</a></dt>
+<dd><p>A List of Controller from which the actions of the current
+controller are allowed to receive requests from. This can be used
+to control cross controller requests.</p>
+</dd></dl>
+
+<dl class="attr">
+<dt id="SecurityComponent::$allowedActions">
+<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">allowedActions</tt><a class="headerlink" href="#SecurityComponent::$allowedActions" title="永久链接至目标">¶</a></dt>
+<dd><p>Actions from which actions of the current controller are allowed to
+receive requests. This can be used to control cross controller
+requests.</p>
+</dd></dl>
+
+<div class="section" id="form-tampering-prevention">
+<h1>Form tampering prevention<a class="headerlink" href="#form-tampering-prevention" title="永久链接至标题">¶</a></h1>
+<p>By default <tt class="docutils literal"><span class="pre">SecurityComponent</span></tt> prevents users from tampering with forms.  It
+does this by working with FormHelper and tracking which files are in a form.  It
+also keeps track of the values of hidden input elements.  All of this data is
+combined and turned into a hash.  When a form is submitted, SecurityComponent
+will use the POST data to build the same structure and compare the hash.</p>
+<dl class="attr">
+<dt id="SecurityComponent::$unlockedFields">
+<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">unlockedFields</tt><a class="headerlink" href="#SecurityComponent::$unlockedFields" title="永久链接至目标">¶</a></dt>
+<dd><p>Set to a list of form fields to exclude from POST validation. Fields can be
+unlocked either in the Component, or with
+<a class="reference internal" href="../helpers/form.html#FormHelper::unlockField" title="FormHelper::unlockField"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::unlockField()</span></tt></a>.  Fields that have been unlocked are
+not required to be part of the POST and hidden unlocked fields do not have
+their values checked.</p>
+</dd></dl>
+
+<dl class="attr">
+<dt id="SecurityComponent::$validatePost">
+<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">validatePost</tt><a class="headerlink" href="#SecurityComponent::$validatePost" title="永久链接至目标">¶</a></dt>
+<dd><p>Set to <tt class="docutils literal"><span class="pre">false</span></tt> to completely skip the validation of POST
+requests, essentially turning off form validation.</p>
+</dd></dl>
+
+<p>CSRF configuration
+CSRF 配置
+==================</p>
+<dl class="attr">
+<dt id="SecurityComponent::$csrfCheck">
+<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">csrfCheck</tt><a class="headerlink" href="#SecurityComponent::$csrfCheck" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div>是否使用CSRF保护表单，设置``false``禁用。</div></blockquote>
+<p>Whether to use CSRF protected forms. Set to <tt class="docutils literal"><span class="pre">false</span></tt> to disable
+CSRF protection on forms.</p>
+</dd></dl>
+
+<dl class="attr">
+<dt id="SecurityComponent::$csrfExpires">
+<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">csrfExpires</tt><a class="headerlink" href="#SecurityComponent::$csrfExpires" title="永久链接至目标">¶</a></dt>
+<dd><p>CSRF令牌的持续时间，每个表单/页面请求会产生一个新令牌
+The duration from when a CSRF token is created that it will expire on.
+Each form/page request will generate a new token that can only
+be submitted once unless it expires.  Can be any value compatible
+with <tt class="docutils literal"><span class="pre">strtotime()</span></tt>. The default is +30 minutes.</p>
+</dd></dl>
+
+<dl class="attr">
+<dt id="SecurityComponent::$csrfUseOnce">
+<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">csrfUseOnce</tt><a class="headerlink" href="#SecurityComponent::$csrfUseOnce" title="永久链接至目标">¶</a></dt>
+<dd><p>Controls whether or not CSRF tokens are use and burn.  Set to
+<tt class="docutils literal"><span class="pre">false</span></tt> to not generate new tokens on each request.  One token
+will be reused until it expires. This reduces the chances of
+users getting invalid requests because of token consumption.
+It has the side effect of making CSRF less secure, as tokens are reusable.</p>
+</dd></dl>
+
+<p>Usage
+用法
+=====</p>
+<p>在控制器的beforeFilter()中使用security组件，可以指定约束规则，当动作启动时，
+Security组件会启动。</p>
+<p>Using the security component is generally done in the controller
+beforeFilter(). You would specify the security restrictions you
+want and the Security Component will enforce them on its startup:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">WidgetController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Security&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Security</span><span class="o">-&gt;</span><span class="na">requirePost</span><span class="p">(</span><span class="s1">&#39;delete&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>此例中只有接收到的是POST请求才会成功触发删除动作。</p>
+<p>In this example the delete action can only be successfully
+triggered if it receives a POST request:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">WidgetController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Security&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;admin&#39;</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Security</span><span class="o">-&gt;</span><span class="na">requireSecure</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>此例子将迫使所有操作，管理路由到安全SSL请求::
+This example would force all actions that had admin routing to
+require secure SSL requests:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">WidgetController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+
+    <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Security&#39;</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;admin&#39;</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Security</span><span class="o">-&gt;</span><span class="na">blackHoleCallback</span> <span class="o">=</span> <span class="s1">&#39;forceSSL&#39;</span><span class="p">;</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Security</span><span class="o">-&gt;</span><span class="na">requireSecure</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">forceSSL</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span> <span class="o">.</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;SERVER_NAME&#39;</span><span class="p">)</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">here</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>此例子将迫使所有操作，管理路由到安全SSL请求。当请求被放到黑洞，将调用
+指定的forceSSL()回调函数，他会将一个不安全的请求重定向到
+安全的请求。
+This example would force all actions that had admin routing to
+require secure SSL requests. When the request is black holed, it
+will call the nominated forceSSL() callback which will redirect
+non-secure requests to secure requests automatically.</p>
+</div>
+<div class="section" id="csrf-protection">
+<span id="security-csrf"></span><h1>CSRF protection<a class="headerlink" href="#csrf-protection" title="永久链接至标题">¶</a></h1>
+<p>CSRF or Cross Site Request Forgery is a common vulnerability in web
+applications.  It allows an attacker to capture and replay a previous request,
+and sometimes submit data requests using image tags or resources on other
+domains.</p>
+<p>Double submission and replay attacks are handled by the SecurityComponent&#8217;s CSRF
+features.  They work by adding a special token to each form request.  This token
+once used cannot be used again.  If an attempt is made to re-use an expired
+token the request will be blackholed.</p>
+<div class="section" id="using-csrf-protection">
+<h2>Using CSRF protection<a class="headerlink" href="#using-csrf-protection" title="永久链接至标题">¶</a></h2>
+<p>Simply by adding the <a class="reference internal" href="#SecurityComponent" title="SecurityComponent"><tt class="xref php php-class docutils literal"><span class="pre">SecurityComponent</span></tt></a> to your components array,
+you can benefit from the CSRF protection it provides. By default CSRF tokens are
+valid for 30 minutes and expire on use. You can control how long tokens last by setting
+csrfExpires on the component.:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Security&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;csrfExpires&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+1 hour&#39;</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>You can also set this property in your controller&#8217;s <tt class="docutils literal"><span class="pre">beforeFilter</span></tt>:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Security</span><span class="o">-&gt;</span><span class="na">csrfExpires</span> <span class="o">=</span> <span class="s1">&#39;+1 hour&#39;</span><span class="p">;</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The csrfExpires property can be any value that is compatible with
+<a class="reference external" href="http://php.net/manual/en/function.strtotime.php">strtotime()</a>. By default the
+<a class="reference internal" href="../helpers/form.html#FormHelper" title="FormHelper"><tt class="xref php php-class docutils literal"><span class="pre">FormHelper</span></tt></a> will add a <tt class="docutils literal"><span class="pre">data[_Token][key]</span></tt> containing the CSRF
+token to every form when the component is enabled.</p>
+</div>
+<div class="section" id="handling-missing-or-expired-tokens">
+<h2>Handling missing or expired tokens<a class="headerlink" href="#handling-missing-or-expired-tokens" title="永久链接至标题">¶</a></h2>
+<p>Missing or expired tokens are handled similar to other security violations. The
+SecurityComponent&#8217;s blackHoleCallback will be called with a &#8216;csrf&#8217; parameter.
+This helps you filter out CSRF token failures, from other warnings.</p>
+</div>
+<div class="section" id="using-per-session-tokens-instead-of-one-time-use-tokens">
+<h2>Using per-session tokens instead of one-time use tokens<a class="headerlink" href="#using-per-session-tokens-instead-of-one-time-use-tokens" title="永久链接至标题">¶</a></h2>
+<p>By default a new CSRF token is generated for each request, and each token can
+only be used once. If a token is used twice, it will be blackholed. Sometimes,
+this behaviour is not desirable, as it can create issues with single page
+applications. You can toggle on longer, multi-use tokens by setting
+<tt class="docutils literal"><span class="pre">csrfUseOnce</span></tt> to <tt class="docutils literal"><span class="pre">false</span></tt>. This can be done in the components array, or in
+the <tt class="docutils literal"><span class="pre">beforeFilter</span></tt> of your controller:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;Security&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;csrfUseOnce&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This will tell the component that you want to re-use a CSRF token until it
+expires - which is controlled by the <tt class="docutils literal"><span class="pre">csrfExpires</span></tt> value. If you are having
+issues with expired tokens, this is a good balance between security and ease of
+use.</p>
+<p>Disabling the CSRF protection
+禁用CSRF保护
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
+<p>There may be cases where you want to disable CSRF protection on your forms for
+some reason. If you do want to disable this feature, you can set
+<tt class="docutils literal"><span class="pre">$this-&gt;Security-&gt;csrfCheck</span> <span class="pre">=</span> <span class="pre">false;</span></tt> in your <tt class="docutils literal"><span class="pre">beforeFilter</span></tt> or use the
+components array. By default CSRF protection is enabled, and configured to use
+one-use tokens.</p>
+<p>Disabling Security Component For Specific Actions
+为特定的动作禁用Security组件
+=================================================</p>
+<p>有些情况需要对某个action禁用所有的安全检测(比如, ajax请求)。
+可以通过&#8221;解锁&#8221;，把这些actions放到``beforeFilter``里的``$this-&gt;Security-&gt;unlockedActions``列表中。
+There may be cases where you want to disable all security checks for an action (ex. ajax request).
+You may &#8220;unlock&#8221; these actions by listing them in <tt class="docutils literal"><span class="pre">$this-&gt;Security-&gt;unlockedActions</span></tt> in your
+<tt class="docutils literal"><span class="pre">beforeFilter</span></tt>.</p>
+<div class="versionadded">
+<p><span class="versionmodified">2.3 新版功能.</span></p>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</div>
+
+	<div class="sidebar columns three pull-nine">
+<div id="sidebar-navigation" class="hide-on-phones">
+	<h2 class="hide-on-desktops">Table of Contents</h2>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cakephp-overview.html">CakePHP 概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controllers.html">控制器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../views.html">视图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models.html">模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../core-libraries.html">核心库</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../toc-general-purpose.html">通用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-behaviors.html">行为</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../toc-components.html">组件</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pagination.html">Pagination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sessions.html">Sessions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="authentication.html">Authentication 认证</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Form tampering prevention</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csrf-protection">CSRF protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="request-handling.html">请求处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cookie.html">Cookie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access-control-lists.html">访问控制列表组件</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-helpers.html">助件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toc-utilities.html">工具</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
+</ul>
+
+</div>
+
+<div class="page-contents">
+	<h3>Page contents</h3>
+	<ul>
+<li><a class="reference internal" href="#">Form tampering prevention</a></li>
+<li><a class="reference internal" href="#csrf-protection">CSRF protection</a><ul>
+<li><a class="reference internal" href="#using-csrf-protection">Using CSRF protection</a></li>
+<li><a class="reference internal" href="#handling-missing-or-expired-tokens">Handling missing or expired tokens</a></li>
+<li><a class="reference internal" href="#using-per-session-tokens-instead-of-one-time-use-tokens">Using per-session tokens instead of one-time use tokens</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+
+<div class="content row">
+	<ul class="related-pages inline">
+	<li>
+		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
+	</li>
+	<li>
+		<a href="request-handling.html" title="请求处理" accesskey="N">下一页</a>
+	</li>
+	<li>
+		<a href="authentication.html" title="Authentication 认证" accesskey="P">上一页</a>
+	</li>
+	</ul>
+</div>
+
+	<div class="footer-push"> </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+	<div class="row">
+		<div class="columns six offset-by-three contribute">
+			<strong>Found an issue?</strong>
+			Submit a correction on <a href="https://github.com/cakephp/docs">GitHub</a><br />
+			<a href="http://book.cakephp.org/2.0/en/contributing/documentation.html">[ documentation on how to contribute ]</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="columns nine offset-by-three copyright">
+					&copy; 版权所有 2014, Cake Software Foundation, Inc.
+				最后更新于 Aug 29, 2015.
+				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+		</div>
+	</div>
+</div>
+
+<div id="nav-modal" class="reveal-modal"> </div>
+<div id="inline-search-results"></div>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+  </body>
+</html>
