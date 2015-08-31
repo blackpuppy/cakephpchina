@@ -1,3 +1,3 @@
 # cakephpchina
 
-This repository is just for deployment to [cakephpchina](cakephpchina.com).
+This repository is just for deployment to [cakephpchina](http://www.cakephpchina.com).
