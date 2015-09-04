@@ -285,18 +285,19 @@ resides inside the /app/webroot/css directory if path doesn&#8217;t start with a
 </div>
 <p>You can include CSS files from any loaded plugin using
 <a class="reference internal" href="../../appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a>. To include <tt class="docutils literal"><span class="pre">app/Plugin/DebugKit/webroot/css/toolbar.css</span></tt>
-You could use the following:</p>
+you could use the following:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">css</span><span class="p">(</span><span class="s1">&#39;DebugKit.toolbar.css&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>If you want to include a CSS file which shares a name with a loaded
 plugin you can do the following. For example if you had a <tt class="docutils literal"><span class="pre">Blog</span></tt> plugin,
 and also wanted to include <tt class="docutils literal"><span class="pre">app/webroot/css/Blog.common.css</span></tt>, you would:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">..</span> <span class="nx">versionchanged</span><span class="o">::</span> <span class="mf">2.4</span>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.4.</span></p>
+</div>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">echo $this-&gt;Html-&gt;css(&#39;Blog.common.css&#39;, array(&#39;plugin&#39; =&gt; false));</span>
 </pre></div>
 </div>
-<blockquote>
-<div>echo $this-&gt;Html-&gt;css(&#8216;Blog.common.css&#8217;, array(&#8216;plugin&#8217; =&gt; false));</div></blockquote>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 2.1: </span>The <tt class="docutils literal"><span class="pre">block</span></tt> option was added.
 Support for <a class="reference internal" href="../../appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a> was added.</p>
@@ -312,7 +313,8 @@ Support for <a class="reference internal" href="../../appendices/glossary.html#t
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>$type</strong> (<em>string</em>) &#8211; The type meta tag you want.</li>
-<li><strong>$url</strong> (<em>mixed</em>) &#8211; The URL for the meta tag, either a string or a <a class="reference internal" href="../../appendices/glossary.html#term-routing-array"><em class="xref std std-term">routing array</em></a>.</li>
+<li><strong>$url</strong> (<em>mixed</em>) &#8211; The URL for the meta tag, either a string or a
+<a class="reference internal" href="../../appendices/glossary.html#term-routing-array"><em class="xref std std-term">routing array</em></a>.</li>
 <li><strong>$options</strong> (<em>array</em>) &#8211; An array of <a class="reference internal" href="../../appendices/glossary.html#term-html-attributes"><em class="xref std std-term">html attributes</em></a>.</li>
 </ul>
 </td>
@@ -539,7 +541,7 @@ to /app/webroot/img/.</p>
 </pre></div>
 </div>
 <p>To create an image link specify the link destination using the
-<tt class="docutils literal"><span class="pre">url</span></tt> option in <tt class="docutils literal"><span class="pre">$htmlAttributes</span></tt>.</p>
+<tt class="docutils literal"><span class="pre">url</span></tt> option in <tt class="docutils literal"><span class="pre">$options</span></tt>.</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">(</span><span class="s2">&quot;recipes/6.jpg&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s2">&quot;alt&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Brownies&quot;</span><span class="p">,</span>
     <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;recipes&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
@@ -569,7 +571,7 @@ You could use the following:</p>
 </div>
 <p>If you want to include a image file which shares a name with a loaded
 plugin you can do the following. For example if you had a <tt class="docutils literal"><span class="pre">Blog</span></tt> plugin,
-and also wanted to include <tt class="docutils literal"><span class="pre">app/webroot/js/Blog.icon.png</span></tt>, you would:</p>
+and also wanted to include <tt class="docutils literal"><span class="pre">app/webroot/img/Blog.icon.png</span></tt>, you would:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">image</span><span class="p">(</span><span class="s1">&#39;Blog.icon.png&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;plugin&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
 </pre></div>
 </div>
@@ -657,7 +659,7 @@ dialog:</p>
 </div>
 <p>When using named parameters, use the array syntax and include
 names for ALL parameters in the URL. Using the string syntax for
-paramters (i.e. &#8220;recipes/view/6/comments:false&#8221; will result in
+paramters (i.e. &#8220;recipes/view/6/comments:false&#8221;) will result in
 the colon characters being HTML escaped and the link will not work
 as desired.</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
@@ -731,7 +733,7 @@ for more examples of different types of URLs.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>$path</strong> (<em>string|array</em>) &#8211; Path to the video file, relative to the
+<li><strong>$path</strong> (<em>string|array</em>) &#8211; Path to the media file, relative to the
 <cite>webroot/{$options[&#8216;pathPrefix&#8217;]}</cite> directory. Or an array where each
 item itself can be a path string or an associate array containing keys
 <cite>src</cite> and <cite>type</cite>.</li>
@@ -741,10 +743,10 @@ item itself can be a path string or an associate array containing keys
 <li><cite>type</cite> Type of media element to generate, valid values are &#8220;audio&#8221;
 or &#8220;video&#8221;. If type is not provided media type is guessed based on
 file&#8217;s mime type.</li>
-<li><cite>text</cite> Text to include inside the video tag</li>
+<li><cite>text</cite> Text to include inside the audio/video tag</li>
 <li><cite>pathPrefix</cite> Path prefix to use for relative URLs, defaults to
 &#8216;files/&#8217;</li>
-<li><cite>fullBase</cite> If provided the src attribute will get a full address
+<li><cite>fullBase</cite> If set to true, the src attribute will get a full address
 including domain name</li>
 </ul>
 </li>
@@ -850,10 +852,10 @@ available in previous versions.</p>
 </tr>
 </tbody>
 </table>
-<p>Used for creating div-wrapped sections of markup. The first
-parameter specifies a CSS class, and the second is used to supply
-the text to be wrapped by div tags. If the last parameter has been
-set to true, $text will be printed HTML-escaped.</p>
+<p>Used for creating div-wrapped sections of markup. The first parameter
+specifies a CSS class, and the second is used to supply the text to be
+wrapped by div tags. If the &#8216;escape&#8217; key has been to true in the last
+parameter, $text will be printed HTML-escaped.</p>
 <p>If no text is specified, only an opening div tag is returned.:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">div</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;Please enter your credit card number.&#39;</span><span class="p">);</span>
@@ -915,9 +917,8 @@ this by setting <tt class="docutils literal"><span class="pre">$options['inline'
 be added to the <tt class="docutils literal"><span class="pre">script</span></tt> block which you can print elsewhere in the document.
 If you wish to override which block name is used, you can do so by setting
 <tt class="docutils literal"><span class="pre">$options['block']</span></tt>.</p>
-<p><tt class="docutils literal"><span class="pre">$options['once']</span></tt> controls whether or
-not you want to include this script once per request or more than
-once. This defaults to true.</p>
+<p><tt class="docutils literal"><span class="pre">$options['once']</span></tt> controls whether or not you want to include this
+script once per request or more than once. This defaults to true.</p>
 <p>You can use $options to set additional properties to the
 generated script tag. If an array of script tags is used, the
 attributes will be applied to all of the generated script tags.</p>
@@ -965,8 +966,8 @@ option:</p>
 </pre></div>
 </div>
 <p>You can include script files from any loaded plugin using
-<a class="reference internal" href="../../appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a>. To include <tt class="docutils literal"><span class="pre">app/Plugin/DebugKit/webroot/js/toolbar.js</span></tt>
-You could use the following:</p>
+<a class="reference internal" href="../../appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a>. To include
+<tt class="docutils literal"><span class="pre">app/Plugin/DebugKit/webroot/js/toolbar.js</span></tt> you could use the following:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">script</span><span class="p">(</span><span class="s1">&#39;DebugKit.toolbar.js&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -997,10 +998,9 @@ Support for <a class="reference internal" href="../../appendices/glossary.html#t
 </tr>
 </tbody>
 </table>
-<p>Generate a code block containing <tt class="docutils literal"><span class="pre">$code</span></tt> set
-<tt class="docutils literal"><span class="pre">$options['inline']</span></tt> to false to have the script block appear in
-the <tt class="docutils literal"><span class="pre">script</span></tt> view block. Other options defined will be added as attributes
-to script tags.
+<p>Generate a code block containing <tt class="docutils literal"><span class="pre">$code</span></tt>. Set <tt class="docutils literal"><span class="pre">$options['inline']</span></tt> to
+false to have the script block appear in the <tt class="docutils literal"><span class="pre">script</span></tt> view block. Other
+options defined will be added as attributes to script tags.
 <tt class="docutils literal"><span class="pre">$this-&gt;Html-&gt;scriptBlock('stuff',</span> <span class="pre">array('defer'</span> <span class="pre">=&gt;</span> <span class="pre">true));</span></tt> will
 create a script tag with <tt class="docutils literal"><span class="pre">defer=&quot;defer&quot;</span></tt> attribute.</p>
 </dd></dl>
@@ -1278,7 +1278,7 @@ array() for specific &lt;td&gt;-attributes.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>$url</strong> (<em>mixed</em>) &#8211; A <a class="reference internal" href="../../appendices/glossary.html#term-routing-array"><em class="xref std std-term">routing array</em></a>.</li>
 <li><strong>$full</strong> (<em>mixed</em>) &#8211; Either a boolean to indicate whether or not the base path should
-be included on an array of options for <a class="reference internal" href="../../development/routing.html#Router::url" title="Router::url"><tt class="xref php php-meth docutils literal"><span class="pre">Router::url()</span></tt></a></li>
+be included or an array of options for <a class="reference internal" href="../../development/routing.html#Router::url" title="Router::url"><tt class="xref php php-meth docutils literal"><span class="pre">Router::url()</span></tt></a></li>
 </ul>
 </td>
 </tr>
@@ -1589,7 +1589,7 @@ you always want to include a root link. This option works the same as the
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Aug 31, 2015.
+				Last updated on Sep 04, 2015.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>
@@ -1616,5 +1616,8 @@ var duoshuoQuery = {short_name:"cakephpchina"};
 	})();
 	</script>
 <!-- Duoshuo Comment END -->
+
+<!-- Grunt Live Reload -->
+<script src="http://192.168.56.113:35729/livereload.js"></script>
   </body>
 </html>
