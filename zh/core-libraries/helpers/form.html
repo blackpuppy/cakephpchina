@@ -10,7 +10,7 @@
 <meta content="The FormHelper focuses on creating forms quickly, in a way that will streamline validation, re-population and layout." lang="zh_CN" name="description" />
 <meta content="html helper,cakephp html,form create,form input,form select,form file field,form label,form text,form password,form checkbox,form radio,form submit,form date time,form error,validate upload,unlock field,form security" lang="zh_CN" name="keywords" />
 
-    <title>FormHelper 助件 &mdash; CakePHP Cookbook 2.x 文档</title>
+    <title>FormHelper &mdash; CakePHP Cookbook 2.x 文档</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -170,15 +170,15 @@ window.lang = "zh_CN";
 	<div class="document columns nine push-three">
 		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/helpers/form.rst" target="_blank">Improve this Doc</a>
   <div class="section" id="formhelper">
-<h1>FormHelper 助件<a class="headerlink" href="#formhelper" title="永久链接至标题">¶</a></h1>
+<h1>FormHelper<a class="headerlink" href="#formhelper" title="永久链接至标题">¶</a></h1>
 <dl class="class">
 <dt id="FormHelper">
 <em class="property">class </em><tt class="descname">FormHelper</tt><big>(</big><em>View $view</em>, <em>array $settings = array()</em><big>)</big><a class="headerlink" href="#FormHelper" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
-<p>FormHelper 助件在表单的创建中做了大部分繁重的工作。FormHelper 助件意在快速创建表
-单，且以能够使验证、重新填充和布局得以简化的方式。FormHelper 助件也是灵活的——它
-几乎做任何事情都使用约定，或者你也可以用特定的方法只得到你需要的。</p>
+<p>FormHelper助件在表单的创建中做了大部分繁重的工作。FormHelper助件意在以能够简化
+验证、重新填充和布局的方式快速创建表单。FormHelper助件也是灵活的——它几乎做任何
+事情都使用约定，或者你也可以用特定的方法只得到你需要的。</p>
 <p>The FormHelper does most of the heavy lifting in form creation.
 The FormHelper focuses on creating forms quickly, in a way that
 will streamline validation, re-population and layout. The
@@ -190,19 +190,19 @@ only what you need.</p>
 </div>
 <div class="section" id="creating-forms">
 <h2>Creating Forms<a class="headerlink" href="#creating-forms" title="永久链接至标题">¶</a></h2>
-<p>为了利用 FormHelper 助件你要使用的第一个方法是``create()``方法。这个特殊的方法输
-出一个开始的 form 标签。</p>
+<p>为了利用FormHelper助件你要使用的第一个方法是 <tt class="docutils literal"><span class="pre">create()</span></tt> 方法。这个特殊的方法
+输出一个开始的form标签。</p>
 <p>The first method you&#8217;ll need to use in order to take advantage of
 the FormHelper is <tt class="docutils literal"><span class="pre">create()</span></tt>. This special method outputs an
 opening form tag.</p>
 <dl class="method">
 <dt id="FormHelper::create">
 <tt class="descclassname">FormHelper::</tt><tt class="descname">create</tt><big>(</big><em>string $model = null</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#FormHelper::create" title="永久链接至目标">¶</a></dt>
-<dd><p>所有的参数都是可选的。如果``create()``方法调用时没有参数，就会认为构建的表单
-是通过当前的 URL 提交给当前的控制器。缺省的提交表单的方法是 POST。返回的
-form 元素带有一个 DOM ID。这个 ID 是用模型的名字、控制器动作的名字，按照驼峰
-命名方式(CamelCased)生成的。如果在 UsersController 的视图中调用``create()``方
-法，在渲染得到的视图中会看到下面的输出:</p>
+<dd><p>所有的参数都是可选的。如果调用 <tt class="docutils literal"><span class="pre">create()</span></tt> 方法时没有提供参数，就会认为构建
+的表单是通过当前的网址（<em>URL</em>）提交给当前的控制器。提交表单的默认方法是
+POST。返回的form元素带有一个DOM ID。这个ID是用模型的名称和控制器动作的名称，
+按照驼峰命名方式（<em>CamelCased</em>）生成的。如果在UsersController的视图中调用
+<tt class="docutils literal"><span class="pre">create()</span></tt> 方法，在渲染得到的视图中会看到下面的输出:</p>
 <p>All parameters are optional. If <tt class="docutils literal"><span class="pre">create()</span></tt> is called with no
 parameters supplied, it assumes you are building a form that
 submits to the current controller, via the current URL.
@@ -217,19 +217,19 @@ output in the rendered view:</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p>你也可以给``$model``参数传入``false``。这样就会把表单数据放进数组:
-<a href="#id2"><span class="problematic" id="id3">``</span></a>$this-&gt;request-&gt;data``中(而不是次级数组
-<a href="#id4"><span class="problematic" id="id5">``</span></a>$this-&gt;request-&gt;data[&#8216;Model&#8217;]``中)。这对于不代表任何数据库中
-的东西的简短表单，是很方便的。</p>
+<p>你也可以给 <tt class="docutils literal"><span class="pre">$model</span></tt> 参数传入 <tt class="docutils literal"><span class="pre">false</span></tt>。这样就会把表单数据放进数组：
+<tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> 中（而不是次级数组
+<tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data['Model']</span></tt> 中）。这对于不代表任何数据库中的数据的
+简短表单，是很方便的。</p>
 <p class="last">You can also pass <tt class="docutils literal"><span class="pre">false</span></tt> for <tt class="docutils literal"><span class="pre">$model</span></tt>. This will place your
 form data into the array: <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> (instead of in the
 sub-array: <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data['Model']</span></tt>). This can be handy for short
 forms that may not represent anything in your database.</p>
 </div>
-<p>其实，<a href="#id6"><span class="problematic" id="id7">``</span></a>create()``方法允许我们用参数对表单做很多定制。首先，你可以指定模型名
-字。为表单指定模型，就是创建了表单的*上下文(context)*。所有的字段都属于该模型
-(除非另行说明)，所有引用的模型都与之关联。如果你不指定模型，就认为是使用当前
-控制器的缺省模型:</p>
+<p>其实，<tt class="docutils literal"><span class="pre">create()</span></tt> 方法允许我们用参数对表单做更多定制。首先，你可以指定模型
+名称。为表单指定模型，就是创建了表单的 <em>上下文（context）</em>。所有的字段都认为是属于
+该模型（除非另外说明），所有引用的模型都与之关联。如果你不指定模型，就认为是
+使用当前控制器的默认模型:</p>
 <p>The <tt class="docutils literal"><span class="pre">create()</span></tt> method allows us to customize much more using the
 parameters, however. First, you can specify a model name. By
 specifying a model for a form, you are creating that form&#8217;s
@@ -247,12 +247,12 @@ you are using the default model for the current controller:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;form id=&quot;RecipeAddForm&quot; method=&quot;post&quot; action=&quot;/recipes/add&quot;&gt;</span>
 </pre></div>
 </div>
-<p>这会把表单数据以 POST 方式提交给 RecipesController 控制器的``add()``动作。当
-然，你也可以用同样的逻辑创建编辑(edit)表单。FormHelper 助件用
-<a href="#id8"><span class="problematic" id="id9">``</span></a>$this-&gt;request-&gt;data``属性来自动探知是否创建新增(add)或编辑(edit)表单。如果
-<a href="#id10"><span class="problematic" id="id11">``</span></a>$this-&gt;request-&gt;data``包含一个以表单的模型命名的数组元素，而且该数组包含模
-型主键的非空值，FormHelper 助件就会为该记录创建一个编辑表单。例如，如果我们浏
-览 <a class="reference external" href="http://site.com/recipes/edit/5">http://site.com/recipes/edit/5</a> 页面，我们会得到下面这些:</p>
+<p>这会把表单数据以POST方式提交给RecipesController控制器的 <tt class="docutils literal"><span class="pre">add()</span></tt> 动作。当然，
+你也可以用同样的逻辑创建编辑（<em>edit</em>）表单。FormHelper助件用
+<tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> 属性来自动探知是否创建新增（<em>add</em>）或编辑（<em>edit</em>）表单。如果
+<tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> 包含一个以表单的模型命名的数组元素，而且该数组包含
+模型主键的非空值，那么FormHelper助件就会为该记录创建一个编辑表单。例如，如果
+我们浏览 <a class="reference external" href="http://site.com/recipes/edit/5">http://site.com/recipes/edit/5</a> 页面，我们会得到下面的输出:</p>
 <p>This will POST the form data to the <tt class="docutils literal"><span class="pre">add()</span></tt> action of
 RecipesController. However, you can also use the same logic to
 create an edit form. The FormHelper uses the <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt>
@@ -286,27 +286,28 @@ for that record. For example, if we browse to
 </div>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p>因为这是一个编辑表单，生成了一个隐藏输入字段来覆盖缺省的 HTTP 方法。</p>
+<p>因为这是一个编辑表单，生成了一个隐藏输入字段来取代默认的HTTP方法。</p>
 <p class="last">Since this is an edit form, a hidden input field is generated to
 override the default HTTP method.</p>
 </div>
-<p>当为插件中的模型创建表单时，你应当总是使用:term:<a href="#id12"><span class="problematic" id="id13">`</span></a>plugin syntax`来创建表单。这
-会确保表单生成正确:</p>
+<p>在为插件中的模型创建表单时，你应当总是使用 <a class="reference internal" href="../../appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a> 来创建表单。
+这会确保生成正确的表单:</p>
 <p>When creating forms for models in plugins, you should always use
 <a class="reference internal" href="../../appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a> when creating a form. This will ensure the form is
 correctly generated:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;ContactManager.Contact&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>绝大部分对表单的配置是通过``$options``数组进行的。这个特殊的数组可以包含一系
-列各种键-值对，影响表单标签的生成。</p>
+<p>绝大部分对表单的配置是通过 <tt class="docutils literal"><span class="pre">$options</span></tt> 数组进行的。这个特殊的数组可以包含
+一系列不同的键-值对，影响表单标签生成的方式。</p>
 <p>The <tt class="docutils literal"><span class="pre">$options</span></tt> array is where most of the form configuration
 happens. This special array can contain a number of different
 key-value pairs that affect the way the form tag is generated.</p>
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.0 版更改: </span>所有表单的缺省网址，现在是当前的网址，包括传入(passed)、命名(named)和查询
-字符串(query string)参数。你可以通过给``$this-&gt;Form-&gt;create()``方法的第二
-个参数提供``$options[&#8216;url&#8217;]``来覆盖这个缺省值。
+<p><span class="versionmodified">在 2.0 版更改: </span>所有表单的默认网址，现在是当前的网址，包括传入（<em>passed</em>）、命名（<em>named</em>
+）和查询字符串（<em>query string</em>）参数。你可以通过给
+<tt class="docutils literal"><span class="pre">$this-&gt;Form-&gt;create()</span></tt> 方法的第二个参数中提供 <tt class="docutils literal"><span class="pre">$options['url']</span></tt> 来
+改变这个默认值。
 The default URL for all forms, is now the current URL including
 passed, named, and querystring parameters. You can override this
 default by supplying <tt class="docutils literal"><span class="pre">$options['url']</span></tt> in the second parameter of
@@ -315,15 +316,15 @@ default by supplying <tt class="docutils literal"><span class="pre">$options['ur
 </dd></dl>
 
 <div class="section" id="create">
-<h3>create() 方法的选项<a class="headerlink" href="#create" title="永久链接至标题">¶</a></h3>
+<h3>create()方法的选项<a class="headerlink" href="#create" title="永久链接至标题">¶</a></h3>
 </div>
 <div class="section" id="options-for-create">
 <h3>Options for create()<a class="headerlink" href="#options-for-create" title="永久链接至标题">¶</a></h3>
-<p>create() 方法有一些选项:</p>
+<p>create()方法有一些选项:</p>
 <p>There are a number of options for create():</p>
 <ul>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['type']</span></tt> 这个键用来指明要创建的表单的类型。合法的值包括&#8217;post&#8217;，
-&#8216;get&#8217;，&#8217;file&#8217;，&#8217;put&#8217;和&#8217;delete&#8217;。</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['type']</span></tt> 这个键用来指明要创建的表单的类型。合法的值包括&#8217;post&#8217;、
+&#8216;get&#8217;、&#8217;file&#8217;、&#8217;put&#8217;和&#8217;delete&#8217;。</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['type']</span></tt> This key is used to specify the type of form to be created. Valid
 values include &#8216;post&#8217;, &#8216;get&#8217;, &#8216;file&#8217;, &#8216;put&#8217; and &#8216;delete&#8217;.</p>
@@ -338,9 +339,9 @@ accordingly:</p>
 <div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;UserAddForm&quot;</span> <span class="na">method=</span><span class="s">&quot;get&quot;</span> <span class="na">action=</span><span class="s">&quot;/users/add&quot;</span><span class="nt">&gt;</span>
 </pre></div>
 </div>
-<p>指定&#8217;file&#8217;会把表单提交方法改为&#8217;post&#8217;，并且在表单标签中包括一个为
-&#8220;multipart/form-data&#8221;的 enctype 属性。如果表单中有任何 file 元素，这(个属性)就
-要使用。如果没有正确的 enctype 属性，文件上传就无法工作:</p>
+<p>指定&#8217;file&#8217;会把表单提交方法改为&#8217;post&#8217;，并且在表单标签中包括一个值为
+&#8220;multipart/form-data&#8221;的enctype属性。如果表单中有任何file元素，就应该使用这个（
+属性）。如果没有正确的enctype属性，文件上传就无法工作:</p>
 <p>Specifying &#8216;file&#8217; changes the form submission method to &#8216;post&#8217;, and
 includes an enctype of &#8220;multipart/form-data&#8221; on the form tag. This
 is to be used if there are any file elements inside the form. The
@@ -355,17 +356,17 @@ not to function:</p>
    <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">action=</span><span class="s">&quot;/users/add&quot;</span><span class="nt">&gt;</span>
 </pre></div>
 </div>
-<p>当使用&#8217;put&#8217;或者&#8217;delete&#8217;时，表单功能上等同于&#8217;post&#8217;表单，但在提交时，HTTP 请求方法
-会被相应地改变为&#8217;PUT&#8217;或&#8217;DELETE&#8217;。这让 CakePHP 可以在网络浏览器中模拟正确的
-REST 支持。</p>
+<p>当使用&#8217;put&#8217;或者&#8217;delete&#8217;时，表单功能上等同于&#8217;post&#8217;表单，但在提交时，HTTP请求
+方法会被相应地改变为&#8217;PUT&#8217;或&#8217;DELETE&#8217;。这让CakePHP可以在网络浏览器中模拟正确的
+REST支持。</p>
 <p>When using &#8216;put&#8217; or &#8216;delete&#8217;, your form will be functionally
 equivalent to a &#8216;post&#8217; form, but when submitted, the HTTP request
 method will be overridden with &#8216;PUT&#8217; or &#8216;DELETE&#8217;, respectively.
 This allows CakePHP to emulate proper REST support in web
 browsers.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['action']</span></tt> action 键让你可以把表单指向当前控制器中的一个特定动作。
-例如，如果你要把表单指向当前控制器的 login()动作，你可以提供下面这样的 $options
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['action']</span></tt> action键让你可以把表单指向当前控制器中的一个特定动作。
+例如，如果你要把表单指向当前控制器的login()动作，你可以提供下面这样的$options
 数组:</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['action']</span></tt> The action key allows you to point the form to a
@@ -381,8 +382,8 @@ supply an $options array like the following:</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['url']</span></tt> 如果想要的表单动作不在当前控制器中，你可以用 $options 数组
-的‘url’键来为表单动作指定一个 URL。提供的 URL 可以是相对于你的 CakePHP 应用程序:</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['url']</span></tt> 如果需要的表单动作不在当前控制器中，你可以用$options数组的
+‘url’键来为表单动作指定一个网址。提供的网址可以是相对于你的CakePHP应用程序:</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['url']</span></tt> If the desired form action isn&#8217;t in the current
 controller, you can specify a URL for the form action using the &#8216;url&#8217; key of
@@ -411,11 +412,13 @@ application:</p>
 <div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">&quot;get&quot;</span> <span class="na">action=</span><span class="s">&quot;http://www.google.com/search&quot;</span><span class="nt">&gt;</span>
 </pre></div>
 </div>
-<p>也请查看:php:meth:<cite>HtmlHelper::url()</cite>，以了解更多不同类型的网址的例子。</p>
+<p>也请查看 <a class="reference internal" href="html.html#HtmlHelper::url" title="HtmlHelper::url"><tt class="xref php php-meth docutils literal"><span class="pre">HtmlHelper::url()</span></tt></a> 方法，以了解更多不同类型的网址的例子。</p>
 <p>Also check <a class="reference internal" href="html.html#HtmlHelper::url" title="HtmlHelper::url"><tt class="xref php php-meth docutils literal"><span class="pre">HtmlHelper::url()</span></tt></a> method for more examples of
 different types of URLs.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['default']</span></tt> 如果&#8217;default&#8217;被设为布尔值 false，表单的提交动作就会改成按动提交按键时不会提交表单。如果表单要通过 AJAX 提交，设置&#8217;default&#8217;为 false 阻止了表单缺省的行为，你就可以抓取数据并通过 AJAX 提交。</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['default']</span></tt> 如果&#8217;default&#8217;被设为布尔值false，表单的提交动作就会改成
+按动提交按键时不会提交表单。如果表单要通过AJAX提交，设置&#8217;default&#8217;为false阻止了
+表单默认的行为，你就可以抓取数据并通过AJAX提交。</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['default']</span></tt> If &#8216;default&#8217; has been set to boolean false, the form&#8217;s
 submit action is changed so that pressing the submit button does not submit
@@ -423,7 +426,8 @@ the form. If the form is meant to be submitted via AJAX, setting &#8216;default&
 false suppresses the form&#8217;s default behavior so you can grab the data and
 submit it via AJAX instead.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['inputDefaults']</span></tt> 你可以用``inputDefaults``键为``input()``方法设置一组缺省选项，来定制缺省的输入项(input)创建。</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['inputDefaults']</span></tt> 你可以用 <tt class="docutils literal"><span class="pre">inputDefaults</span></tt> 键为 <tt class="docutils literal"><span class="pre">input()</span></tt>
+方法设置一组默认选项，来自定义默认的输入项（<em>input</em>）的创建方式。</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['inputDefaults']</span></tt> You can declare a set of default options for
 <tt class="docutils literal"><span class="pre">input()</span></tt> with the <tt class="docutils literal"><span class="pre">inputDefaults</span></tt> key to customize your default input
@@ -436,10 +440,11 @@ creation:</p>
 <span class="p">));</span>
 </pre></div>
 </div>
-<p>之后所有创建的 input 标签就会继承 inputDefaults 中指定的选项。你可以在对 input()的调用中声明选项来覆盖 defaultOptions:</p>
+<p>之后所有创建的input标签就会继承inputDefaults中指定的选项。你可以在对input()方法
+的调用中声明选项来改变默认选项:</p>
 <p>All inputs created from that point forward would inherit the
 options declared in inputDefaults. You can override the
-defaultOptions by declaring the option in the input() call:</p>
+default options by declaring the option in the input() call:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span> <span class="c1">// 没有 div，没有 label No div, no label</span>
 <span class="c1">// 有一个 label 元素</span>
 <span class="c1">// has a label element</span>
@@ -453,15 +458,15 @@ defaultOptions by declaring the option in the input() call:</p>
 </ul>
 </div>
 </div>
-<div class="section" id="id14">
-<h2>结束表单<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id2">
+<h2>结束表单<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 </div>
 <div class="section" id="closing-the-form">
 <h2>Closing the Form<a class="headerlink" href="#closing-the-form" title="永久链接至标题">¶</a></h2>
 <dl class="method">
 <dt id="FormHelper::end">
 <tt class="descclassname">FormHelper::</tt><tt class="descname">end</tt><big>(</big><em>$options = null</em>, <em>$secureAttributes = array()</em><big>)</big><a class="headerlink" href="#FormHelper::end" title="永久链接至目标">¶</a></dt>
-<dd><p>FormHelper 助件有一个``end()``方法，用来完成表单。<a href="#id15"><span class="problematic" id="id16">``</span></a>end()``经常只输出一个结束表单标签，但使用``end()``方法也可以让 FormHelper 助件插入:php:class:<a href="#id17"><span class="problematic" id="id18">`</span></a>SecurityComponent`组件要求的隐藏表单元素:</p>
+<dd><p>FormHelper助件有一个 <tt class="docutils literal"><span class="pre">end()</span></tt> 方法，用来完成表单。<tt class="docutils literal"><span class="pre">end()</span></tt> 方法经常只输出一个结束表单标签，但使用 <tt class="docutils literal"><span class="pre">end()</span></tt> 方法也可以让FormHelper助件插入 <a class="reference internal" href="../components/security-component.html#SecurityComponent" title="SecurityComponent"><tt class="xref php php-class docutils literal"><span class="pre">SecurityComponent</span></tt></a> 组件要求的隐藏表单元素:</p>
 <p>The FormHelper includes an <tt class="docutils literal"><span class="pre">end()</span></tt> method that completes the
 form. Often, <tt class="docutils literal"><span class="pre">end()</span></tt> only outputs a closing form tag, but
 using <tt class="docutils literal"><span class="pre">end()</span></tt> also allows the FormHelper to insert needed hidden
@@ -473,7 +478,7 @@ form elements that <a class="reference internal" href="../components/security-co
 <span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 </div>
-<p>如果提供一个字符串作为``end()``方法的第一个参数，FormHelper 助件就会在和结束表单标签一起，输出一个相应(以输入参数)命名的提交按键。</p>
+<p>如果提供一个字符串作为 <tt class="docutils literal"><span class="pre">end()</span></tt> 方法的第一个参数，FormHelper助件就会和结束表单标签一起输出一个相应(以输入参数)命名的submit按键。</p>
 <p>If a string is supplied as the first parameter to <tt class="docutils literal"><span class="pre">end()</span></tt>, the
 FormHelper outputs a submit button named accordingly along with the
 closing form tag:</p>
@@ -488,7 +493,7 @@ closing form tag:</p>
 <span class="nt">&lt;/form&gt;</span>
 </pre></div>
 </div>
-<p>你可以传入一个数组给``end()``方法来指定详细设置:</p>
+<p>你可以传入一个数组给 <tt class="docutils literal"><span class="pre">end()</span></tt> 方法来指定详细设置:</p>
 <p>You can specify detail settings by passing an array to <tt class="docutils literal"><span class="pre">end()</span></tt>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Update&#39;</span><span class="p">,</span>
@@ -505,26 +510,27 @@ closing form tag:</p>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
-<p>更多细节请参看&lt;<a class="reference external" href="http://api20.cakephp.org">http://api20.cakephp.org</a>&gt;`_。</p>
+<p>欲知更多细节，请参看 <a class="reference external" href="http://api.cakephp.org/2.7/class-FormHelper.html">Form Helper API</a>。</p>
 <p>See the <a class="reference external" href="http://api.cakephp.org/2.7/class-FormHelper.html">Form Helper API</a> for further details.</p>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p>如果你在应用程序中使用:php:class:<a href="#id19"><span class="problematic" id="id20">`</span></a>SecurityComponent`组件，你应当总是用``end()``方法结束表单。</p>
+<p>如果你在应用程序中使用 <a class="reference internal" href="../components/security-component.html#SecurityComponent" title="SecurityComponent"><tt class="xref php php-class docutils literal"><span class="pre">SecurityComponent</span></tt></a> 组件，你应当总是用 <tt class="docutils literal"><span class="pre">end()</span></tt> 方法结束表单。</p>
 <p class="last">If you are using <a class="reference internal" href="../components/security-component.html#SecurityComponent" title="SecurityComponent"><tt class="xref php php-class docutils literal"><span class="pre">SecurityComponent</span></tt></a> in your application you
 should always end your forms with <tt class="docutils literal"><span class="pre">end()</span></tt>.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.5 版更改: </span>The <tt class="docutils literal"><span class="pre">$secureAttributes</span></tt> parameter was added in 2.5.</p>
+<p><span class="versionmodified">在 2.5 版更改: </span>在2.5版本中增加了 <tt class="docutils literal"><span class="pre">$secureAttributes</span></tt> 参数。
+The <tt class="docutils literal"><span class="pre">$secureAttributes</span></tt> parameter was added in 2.5.</p>
 </div>
 </dd></dl>
 
 </div>
 <div class="section" id="automagic-form-elements">
-<span id="id21"></span><h2>创建表单元素<a class="headerlink" href="#automagic-form-elements" title="永久链接至标题">¶</a></h2>
+<span id="id4"></span><h2>创建表单元素<a class="headerlink" href="#automagic-form-elements" title="永久链接至标题">¶</a></h2>
 </div>
 <div class="section" id="creating-form-elements">
 <h2>Creating form elements<a class="headerlink" href="#creating-form-elements" title="永久链接至标题">¶</a></h2>
-<p>使用 FormHelper 助件，有多种方法可以创建表单输入元素。我们从``input()``方法开始说起。这个方法会自动检查提供给它的模型字段，从而为那个字段创建适当的输入项元素。在内部``input()``方法调用 FormHelper 助件的其它方法。</p>
+<p>使用FormHelper助件，有多种方法可以创建表单输入元素。我们从 <tt class="docutils literal"><span class="pre">input()</span></tt> 方法开始说起。这个方法会自动检查提供给它的模型字段，从而为那个字段创建适当的输入项元素。在内部 <tt class="docutils literal"><span class="pre">input()</span></tt> 方法调用FormHelper助件的其它方法。</p>
 <p>There are a few ways to create form inputs with the FormHelper. We&#8217;ll start by
 looking at <tt class="docutils literal"><span class="pre">input()</span></tt>. This method will automatically inspect the model field it
 has been supplied in order to create an appropriate input for that
@@ -532,19 +538,19 @@ field. Internally <tt class="docutils literal"><span class="pre">input()</span><
 <dl class="method">
 <dt id="FormHelper::input">
 <tt class="descclassname">FormHelper::</tt><tt class="descname">input</tt><big>(</big><em>string $fieldName</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#FormHelper::input" title="永久链接至目标">¶</a></dt>
-<dd><p>根据给定的``Model.field``创建下列元素:</p>
+<dd><p>根据给定的 <tt class="docutils literal"><span class="pre">Model.field</span></tt> 创建下列元素:</p>
 <p>Creates the following elements given a particular <tt class="docutils literal"><span class="pre">Model.field</span></tt>:</p>
 <ul class="simple">
-<li>包裹的 div 元素。</li>
-<li>Label 元素</li>
-<li>(一个或多个) Input 元素</li>
-<li>如果适用，带有消息的错误元素</li>
+<li>包裹的div元素。</li>
+<li>Label元素</li>
+<li>（一个或多个）Input元素</li>
+<li>如果适用，错误消息元素</li>
 <li>Wrapping div.</li>
 <li>Label element</li>
 <li>Input element(s)</li>
 <li>Error element with message if applicable.</li>
 </ul>
-<p>创建的 input 元素的类型取决于列的数据类型:</p>
+<p>创建的input元素的类型取决于列的数据类型:</p>
 <p>The type of input created depends on the column datatype:</p>
 <dl class="docutils">
 <dt>列的类型</dt>
@@ -557,57 +563,58 @@ field. Internally <tt class="docutils literal"><span class="pre">input()</span><
 <dd>checkbox</dd>
 <dt>text</dt>
 <dd>textarea</dd>
-<dt>以 password、passwd 或 psword 命名的 text</dt>
+<dt>以password、passwd或psword命名的text</dt>
 <dd>password</dd>
 <dt>text, with name of password, passwd, or psword</dt>
 <dd>password</dd>
-<dt>以 email 命名的 text</dt>
+<dt>以email命名的text</dt>
 <dd>email</dd>
 <dt>text, with name of email</dt>
 <dd>email</dd>
-<dt>以 tel、telephone 或 phone 命名的 text</dt>
+<dt>以tel、telephone或phone命名的text</dt>
 <dd>tel</dd>
 <dt>text, with name of tel, telephone, or phone</dt>
 <dd>tel</dd>
 <dt>date</dt>
-<dd>日、月和年的 select 输入项</dd>
+<dd>日、月和年的select输入项</dd>
 <dt>date</dt>
 <dd>day, month, and year selects</dd>
 <dt>datetime, timestamp</dt>
-<dd>日、月、年、小时、分钟和上下午的 select 输入项</dd>
+<dd>日、月、年、小时、分钟和上下午的select输入项</dd>
 <dt>datetime, timestamp</dt>
 <dd>day, month, year, hour, minute, and meridian selects</dd>
 <dt>time</dt>
-<dd>小时、分钟和上下午的 select 输入项</dd>
+<dd>小时、分钟和上下午的select输入项</dd>
 <dt>time</dt>
 <dd>hour, minute, and meridian selects</dd>
 <dt>binary</dt>
 <dd>file</dd>
 </dl>
-<p><a href="#id22"><span class="problematic" id="id23">``</span></a>$options``参数让你定制``input()``方法如何工作，并微调生成的内容。</p>
+<p><tt class="docutils literal"><span class="pre">$options</span></tt> 参数让你定制 <tt class="docutils literal"><span class="pre">input()</span></tt> 方法如何工作，并微调生成的内容。</p>
 <p>The <tt class="docutils literal"><span class="pre">$options</span></tt> parameter allows you to customize how <tt class="docutils literal"><span class="pre">input()</span></tt> works,
 and finely control what is generated.</p>
-<p>如果模型字段的验证规则没有指定``allowEmpty =&gt;
-true``，包裹的 div 元素就会带有``required``的(样式)类名。这种行为的一个局限是，字段所在的模型在当前请求(的处理过程)中必须已经加载，或者直接与提供给:php:meth:<a href="#id24"><span class="problematic" id="id25">`</span></a>~FormHelper::create()`方法的模型相关联。</p>
+<p>如果模型字段的验证规则没有指定 <tt class="docutils literal"><span class="pre">allowEmpty</span> <span class="pre">=&gt;</span>
+<span class="pre">true</span></tt>，包裹的div元素就会带有 <tt class="docutils literal"><span class="pre">required</span></tt> 的（样式）类名。这种行为的一个局限是，字段所在的模型在当前请求（的处理过程）中必须已经加载，或者直接与提供给 <a class="reference internal" href="#FormHelper::create" title="FormHelper::create"><tt class="xref php php-meth docutils literal"><span class="pre">create()</span></tt></a> 方法的模型相关联。</p>
 <p>The wrapping div will have a <tt class="docutils literal"><span class="pre">required</span></tt> class name appended if the
 validation rules for the Model&#8217;s field do not specify <tt class="docutils literal"><span class="pre">allowEmpty</span> <span class="pre">=&gt;</span>
 <span class="pre">true</span></tt>. One limitation of this behavior is the field&#8217;s model must have
 been loaded during this request. Or be directly associated to the
 model supplied to <a class="reference internal" href="#FormHelper::create" title="FormHelper::create"><tt class="xref php php-meth docutils literal"><span class="pre">create()</span></tt></a>.</p>
 <div class="versionadded">
-<p><span class="versionmodified">2.5 新版功能: </span>The binary type now maps to a file input.</p>
+<p><span class="versionmodified">2.5 新版功能: </span>binary类型现在映射成file输入项。
+The binary type now maps to a file input.</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified">2.3 新版功能.</span></p>
 </div>
-<p id="html5-required">自2.3版本起，HTML5 的``required``属性也会根据验证规则被添加到 input 标签上。你可以对字段在 options 数组中显式地设置``required``键，来覆盖这一点。要对整个表单省略浏览器验证的触发，你可以对使用:php:meth:<cite>FormHelper::submit()`方法生成的 input 按键设置选项`</cite>&#8216;formnovalidate&#8217; =&gt; true``，或者在:php:meth:<cite>FormHelper::create()`的选项中设置`</cite>&#8216;novalidate&#8217; =&gt; true``。</p>
+<p id="html5-required">自2.3版本起，HTML5的 <tt class="docutils literal"><span class="pre">required</span></tt> 属性也会根据验证规则被添加到input标签上。你可以对字段在options数组中显式地设置 <tt class="docutils literal"><span class="pre">required</span></tt> 键，来改变这一点。要对整个表单省略浏览器验证的触发，你可以对使用 <a class="reference internal" href="#FormHelper::submit" title="FormHelper::submit"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::submit()</span></tt></a> 方法生成的input按键设置选项 <tt class="docutils literal"><span class="pre">'formnovalidate'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt>，或者在 <a class="reference internal" href="#FormHelper::create" title="FormHelper::create"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::create()</span></tt></a> 的选项中设置 <tt class="docutils literal"><span class="pre">'novalidate'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt>。</p>
 <p>Since 2.3 the HTML5 <tt class="docutils literal"><span class="pre">required</span></tt> attribute will also be added to the input
 based on validation rules. You can explicitly set <tt class="docutils literal"><span class="pre">required</span></tt> key in
 options array to override it for a field. To skip browser validation
 triggering for the whole form you can set option <tt class="docutils literal"><span class="pre">'formnovalidate'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt>
 for the input button you generate using <a class="reference internal" href="#FormHelper::submit" title="FormHelper::submit"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::submit()</span></tt></a> or
 set <tt class="docutils literal"><span class="pre">'novalidate'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt> in options for <a class="reference internal" href="#FormHelper::create" title="FormHelper::create"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::create()</span></tt></a>.</p>
-<p>例如，假设 User 模型包括 username (varchar)，password (varchar)，approved (datetime) 和 quote (text) 这些字段。你可以用 FormHelper 助件的 input() 方法为所有这些表单字段创建适当的 input 标签:</p>
+<p>例如，假设User模型包括username（varchar）、password（varchar）、approved（datetime）和quote（text）这些字段。你可以用FormHelper助件的input()方法为所有这些表单字段创建适当的input标签:</p>
 <p>For example, let&#8217;s assume that your User model includes fields for a
 username (varchar), password (varchar), approved (datetime) and
 quote (text). You can use the input() method of the FormHelper to
@@ -623,7 +630,7 @@ create appropriate inputs for all of these form fields:</p>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">&#39;Add&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>(下面是)一个详细的例子，说明日期字段的一些选项:</p>
+<p>（下面是）一个详细的例子，说明日期字段的一些选项:</p>
 <p>A more extensive example showing some options for a date field:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;birth_dt&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Date of birth&#39;</span><span class="p">,</span>
@@ -633,12 +640,12 @@ create appropriate inputs for all of these form fields:</p>
 <span class="p">));</span>
 </pre></div>
 </div>
-<p><a href="#id26"><span class="problematic" id="id27">``</span></a>input()``方法除了下面这些选项，你可以指定 input 类型的任何选项和任何 html 属性(例如 onfocus)。关于``$options``和``$htmlAttributes``的更多信息，请参看:doc:<cite>/core-libraries/helpers/html</cite>。</p>
+<p><tt class="docutils literal"><span class="pre">input()</span></tt> 方法除了下面这些选项，你可以指定input类型的任何选项和任何html属性（例如onfocus）。欲知关于 <tt class="docutils literal"><span class="pre">$options</span></tt> 和 <tt class="docutils literal"><span class="pre">$htmlAttributes</span></tt> 的更多信息，请参看 <a class="reference internal" href="html.html"><em>HtmlHelper</em></a>。</p>
 <p>Besides the specific options for <tt class="docutils literal"><span class="pre">input()</span></tt> found below, you can specify
 any option for the input type &amp; any HTML attribute (for instance onfocus).
 For more information on <tt class="docutils literal"><span class="pre">$options</span></tt> and <tt class="docutils literal"><span class="pre">$htmlAttributes</span></tt> see
 <a class="reference internal" href="html.html"><em>HtmlHelper</em></a>.</p>
-<p>假设 User hasAndBelongsToMany Group。在控制器中，设置一个驼峰命名(camelCase)的复数变量(在这里就是 group -&gt; groups，或者 ExtraFunkyModel -&gt; extraFunkyModels)作为 select 的可选项。在控制器动作中你可以这样写:</p>
+<p>假设User hasAndBelongsToMany Group。在控制器中，设置一个驼峰命名（<em>camelCase</em>）的复数变量（在这里就是group -&gt; groups，或者ExtraFunkyModel -&gt; extraFunkyModels）作为select的可选项。在控制器动作中你可以这样写:</p>
 <p>Assuming that User hasAndBelongsToMany Group. In your controller, set a
 camelCase plural variable (group -&gt; groups in this case, or ExtraFunkyModel
 -&gt; extraFunkyModels) with the select options. In the controller action you
@@ -646,13 +653,13 @@ would put the following:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;groups&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">Group</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>在视图中可以用这样简单的代码创建多选项:</p>
+<p>然后在视图中可以用这样简单的代码创建多选项:</p>
 <p>And in the view a multiple select can be created with this simple
 code:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Group&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>如果你要在使用 belongsTo 或 hasOne 关系时创建 select 字段，你可以在 Users 控制器中添加下面的代码(假设 User belongsTo Group):</p>
+<p>如果你要在使用belongsTo或hasOne关系时创建select字段，你可以在Users控制器中添加下面的代码（假设User belongsTo Group）:</p>
 <p>If you want to create a select field while using a belongsTo - or
 hasOne - Relation, you can add the following to your Users-controller
 (assuming your User belongsTo Group):</p>
@@ -664,7 +671,7 @@ hasOne - Relation, you can add the following to your Users-controller
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;group_id&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>如果你的模型名称由两个或多个单词组成，例如，&#8221;UserGroup&#8221;，在使用 set() 传递数据时，你应当把数据命名为复数、驼峰命名(camelCase)的格式，象下面这样:</p>
+<p>如果你的模型名称由两个或多个单词组成，例如，&#8221;UserGroup&#8221;，在使用set()方法传递数据时，你应当把数据命名为复数、驼峰命名的格式，象下面这样:</p>
 <p>If your model name consists of two or more words, e.g.,
 &#8220;UserGroup&#8221;, when passing the data using set() you should name your
 data in a pluralised and camelCased format as follows:</p>
@@ -679,7 +686,7 @@ data in a pluralised and camelCased format as follows:</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p>尽量避免使用`FormHelper::input()`方法来创建提交按键。而是使用:php:meth:<a href="#id28"><span class="problematic" id="id29">`</span></a>FormHelper::submit()`方法。</p>
+<p>尽量避免使用 <cite>FormHelper::input()</cite> 方法来创建提交按键。而是使用 <a class="reference internal" href="#FormHelper::submit" title="FormHelper::submit"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::submit()</span></tt></a> 方法。</p>
 <p class="last">Try to avoid using <cite>FormHelper::input()</cite> to generate submit buttons. Use
 <a class="reference internal" href="#FormHelper::submit" title="FormHelper::submit"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::submit()</span></tt></a> instead.</p>
 </div>
@@ -688,10 +695,10 @@ data in a pluralised and camelCased format as follows:</p>
 <dl class="method">
 <dt id="FormHelper::inputs">
 <tt class="descclassname">FormHelper::</tt><tt class="descname">inputs</tt><big>(</big><em>mixed $fields = null</em>, <em>array $blacklist = null</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#FormHelper::inputs" title="永久链接至目标">¶</a></dt>
-<dd><p>为``$fields``生成一组 input 标签。如果 $fields 是 null，就会使用当前模型。</p>
+<dd><p>为 <tt class="docutils literal"><span class="pre">$fields</span></tt> 生成一组input标签。如果$fields是null，就会使用当前模型。</p>
 <p>Generate a set of inputs for <tt class="docutils literal"><span class="pre">$fields</span></tt>. If <tt class="docutils literal"><span class="pre">$fields</span></tt> is null all fields,
 except of those defined in <tt class="docutils literal"><span class="pre">$blacklist</span></tt>, of the current model will be used.</p>
-<p>除了控制器字段输出，<a href="#id30"><span class="problematic" id="id31">``</span></a>$fields``可以通过``fieldset``及``legend``键来控制 legend 和 fieldset 的渲染。<a href="#id32"><span class="problematic" id="id33">``</span></a>$this-&gt;Form-&gt;inputs(array(&#8216;legend&#8217; =&gt; &#8216;My legend&#8217;));``会输出一个带有定制的 legend 的 input 集合。你也可以通过``$fields``定制单个的 input。:</p>
+<p>除了控制器字段输出，可以用 <tt class="docutils literal"><span class="pre">$fields</span></tt> 参数通过 <tt class="docutils literal"><span class="pre">fieldset</span></tt> 及 <tt class="docutils literal"><span class="pre">legend</span></tt> 键来控制legend和fieldset的渲染。<tt class="docutils literal"><span class="pre">$this-&gt;Form-&gt;inputs(array('legend'</span> <span class="pre">=&gt;</span> <span class="pre">'My</span> <span class="pre">legend'));</span></tt> 会输出一个带有自定义的legend的input集合。你也可以通过 <tt class="docutils literal"><span class="pre">$fields</span></tt> 参数定制单个的input。:</p>
 <p>In addition to controller fields output, <tt class="docutils literal"><span class="pre">$fields</span></tt> can be used to control
 legend and fieldset rendering with the <tt class="docutils literal"><span class="pre">fieldset</span></tt> and <tt class="docutils literal"><span class="pre">legend</span></tt> keys.
 <tt class="docutils literal"><span class="pre">$this-&gt;Form-&gt;inputs(array('legend'</span> <span class="pre">=&gt;</span> <span class="pre">'My</span> <span class="pre">legend'));</span></tt>
@@ -702,12 +709,12 @@ individual inputs through <tt class="docutils literal"><span class="pre">$fields
 <span class="p">));</span>
 </pre></div>
 </div>
-<p>除了对字段的控制，inputs()还允许你使用一些其它的选项。</p>
+<p>除了对字段的控制，inputs()方法还允许你使用一些其它的选项。</p>
 <p>In addition to fields control, inputs() allows you to use a few additional
 options.</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">fieldset</span></tt> 设置为 false 来禁用 fieldset。如果提供的是字符串，就会被用作 fieldset 元素的(样式)类名(classname)。</li>
-<li><tt class="docutils literal"><span class="pre">legend</span></tt> 设置为 false 来对生成的 input 集合禁用 legend。或者提供一个字符串来定制 legend 的文字。</li>
+<li><tt class="docutils literal"><span class="pre">fieldset</span></tt> 设置为false来禁用fieldset。如果提供的是字符串，就会被用作fieldset元素的（样式）类名（<em>classname</em>）。</li>
+<li><tt class="docutils literal"><span class="pre">legend</span></tt> 设置为false来对生成的input集合禁用legend。或者提供一个字符串来自定义legend的文字。</li>
 <li><tt class="docutils literal"><span class="pre">fieldset</span></tt> Set to false to disable the fieldset. If a string is supplied
 it will be used as the class name for the fieldset element.</li>
 <li><tt class="docutils literal"><span class="pre">legend</span></tt> Set to false to disable the legend for the generated input set.
@@ -715,26 +722,26 @@ Or supply a string to customize the legend text.</li>
 </ul>
 </dd></dl>
 
-<div class="section" id="id34">
-<h3>字段命名约定<a class="headerlink" href="#id34" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id5">
+<h3>字段命名约定<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
 </div>
 <div class="section" id="field-naming-conventions">
 <h3>Field naming conventions<a class="headerlink" href="#field-naming-conventions" title="永久链接至标题">¶</a></h3>
-<p>Form 助件相当聪明。只要你用表单助件的方法指定一个字段名称，它就会自动使用当前模型名以下面这样的格式来构建一个输入项(input):</p>
+<p>表单助件相当聪明。只要你用表单助件的方法指定一个字段名称，它就会自动使用当前模型名以下面这样的格式来构建一个输入项（<em>input</em>）:</p>
 <p>The Form helper is pretty smart. Whenever you specify a field name
 with the form helper methods, it&#8217;ll automatically use the current
 model name to build an input with a format like the following:</p>
 <div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;ModelnameFieldname&quot;</span> <span class="na">name=</span><span class="s">&quot;data[Modelname][fieldname]&quot;</span><span class="nt">&gt;</span>
 </pre></div>
 </div>
-<p>在针对一个模型创建的表单中，为该模型生成输入项时，你可以省略模型名称。你可以为关联模型或任意模型创建输入项，只需把 Modelname.fieldname 作为第一个参数传入即可:</p>
+<p>在针对一个模型创建的表单中，为该模型生成输入项时，你可以省略模型名称。你可以为关联模型或任意模型创建输入项，只需把Modelname.fieldname作为第一个参数传入即可:</p>
 <p>This allows you to omit the model name when generating inputs for the model that
 the form was created for. You can create inputs for associated models, or
 arbitrary models by passing in Modelname.fieldname as the first parameter:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Modelname.fieldname&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>如果你要使用同样的字段名称来创建多个输入字段，从而生成一个数组，可以用 saveAll() 方法一起保存，就用下面的约定:</p>
+<p>如果你要使用同样的字段名称来创建多个输入字段，从而生成一个可以用saveAll()方法一起保存的数组，就用下面的约定:</p>
 <p>If you need to specify multiple fields using the same field name,
 thus creating an array that can be saved in one shot with
 saveAll(), use the following convention:</p>
@@ -750,7 +757,7 @@ saveAll(), use the following convention:</p>
     <span class="na">name=</span><span class="s">&quot;data[Modelname][1][fieldname]&quot;</span><span class="nt">&gt;</span>
 </pre></div>
 </div>
-<p>FormHelper 助件对 datetime 输入项的创建，在内部使用几个字段后缀。如果你使用名称带有 <tt class="docutils literal"><span class="pre">year</span></tt>，<tt class="docutils literal"><span class="pre">month</span></tt>，<tt class="docutils literal"><span class="pre">day</span></tt>，<tt class="docutils literal"><span class="pre">hour</span></tt>，<a href="#id35"><span class="problematic" id="id36">``</span></a>minute``或者``meridian``的字段，并无法得到正确的输入项，你可以设置``name``属性来取代缺省的行为:</p>
+<p>FormHelper助件对datetime输入项的创建，在内部使用几个字段后缀。如果你使用名称带有 <tt class="docutils literal"><span class="pre">year</span></tt>、<tt class="docutils literal"><span class="pre">month</span></tt>、<tt class="docutils literal"><span class="pre">day</span></tt>、<tt class="docutils literal"><span class="pre">hour</span></tt>、<tt class="docutils literal"><span class="pre">minute</span></tt> 或者 <tt class="docutils literal"><span class="pre">meridian</span></tt> 的字段，并无法得到正确的输入项，你可以设置 <tt class="docutils literal"><span class="pre">name</span></tt> 属性来取代默认的行为:</p>
 <p>FormHelper uses several field-suffixes internally for datetime input creation.
 If you are using fields named <tt class="docutils literal"><span class="pre">year</span></tt>, <tt class="docutils literal"><span class="pre">month</span></tt>, <tt class="docutils literal"><span class="pre">day</span></tt>, <tt class="docutils literal"><span class="pre">hour</span></tt>,
 <tt class="docutils literal"><span class="pre">minute</span></tt>, or <tt class="docutils literal"><span class="pre">meridian</span></tt> and having issues getting the correct input, you can
@@ -762,18 +769,18 @@ set the <tt class="docutils literal"><span class="pre">name</span></tt> attribut
 </pre></div>
 </div>
 </div>
-<div class="section" id="id37">
-<h3>选项<a class="headerlink" href="#id37" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id6">
+<h3>选项<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
 </div>
 <div class="section" id="options">
 <h3>Options<a class="headerlink" href="#options" title="永久链接至标题">¶</a></h3>
-<p><a href="#id38"><span class="problematic" id="id39">``</span></a>FormHelper::input()``方法支持很多选项。除了它自身的选项，<a href="#id40"><span class="problematic" id="id41">``</span></a>input()``方法也接受生成的输入项类型的选项，以及 html 属性(attribute)。以下列出针对``FormHelper::input()``的选项。</p>
+<p><tt class="docutils literal"><span class="pre">FormHelper::input()</span></tt> 方法支持很多选项。除了它自身的选项，<tt class="docutils literal"><span class="pre">input()</span></tt> 方法也接受生成的输入项类型的选项，以及html属性（<em>attribute</em>）。以下列出针对 <tt class="docutils literal"><span class="pre">FormHelper::input()</span></tt> 的选项。</p>
 <p><tt class="docutils literal"><span class="pre">FormHelper::input()</span></tt> supports a large number of options. In addition to its
 own options <tt class="docutils literal"><span class="pre">input()</span></tt> accepts options for the generated input types, as well as
 HTML attributes. The following will cover the options specific to
 <tt class="docutils literal"><span class="pre">FormHelper::input()</span></tt>.</p>
 <ul>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['type']</span></tt> 你可以提供一个类型，来强制指定输入项的类型，取代对模型的检测。除了在:ref:<a href="#id42"><span class="problematic" id="id43">`</span></a>automagic-form-elements`中介绍的字段类型，你也可以创建&#8217;file&#8217;、&#8217;password&#8217;和任何 HTML5支持的类型:</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['type']</span></tt> 你可以提供一个类型，来强制指定输入项的类型，忽略对模型的检测。除了在 <a class="reference internal" href="#automagic-form-elements"><em>创建表单元素</em></a> 中介绍的字段类型，你也可以创建&#8217;file&#8217;、&#8217;password&#8217;和任何HTML5支持的类型:</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['type']</span></tt> You can force the type of an input, overriding model
 introspection, by specifying a type. In addition to the field types found in
@@ -796,13 +803,13 @@ and any type supported by HTML5:</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['div']</span></tt> 用这个选项来设置包含输入项的 div 的属性。使用字符串就会设置 div 的(样式)类名。用数组就可以把 div 的属性设为数组的键/值对。或者，你也可以把这个键设置为 false 从而不输出 div。</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['div']</span></tt> 用这个选项来设置包含输入项的div的属性。使用字符串就会设置div的（样式）类名。用数组就可以把div的属性设为数组的键/值对。或者，你也可以把这个键设置为false从而不输出div。</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['div']</span></tt> Use this option to set attributes of the input&#8217;s
 containing div. Using a string value will set the div&#8217;s class name. An array
 will set the div&#8217;s attributes to those specified by the array&#8217;s keys/values.
 Alternatively, you can set this key to false to disable the output of the div.</p>
-<p>设置(样式)类名:</p>
+<p>设置（样式）类名:</p>
 <p>Setting the class name:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;class_name&#39;</span>
@@ -837,7 +844,7 @@ Alternatively, you can set this key to false to disable the output of the div.</
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
-<p>禁止 div 输出:</p>
+<p>禁止div输出:</p>
 <p>Disabling div output:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;div&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
@@ -849,7 +856,7 @@ Alternatively, you can set this key to false to disable the output of the div.</
 </pre></div>
 </div>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['label']</span></tt> 把这个键设置为你要显示在通常伴随 input 输入项的 label 标签内的字符串:</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['label']</span></tt> 把这个键设置为你要显示在通常伴随input输入项的label标签内的字符串:</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['label']</span></tt> Set this key to the string you would like to be
 displayed within the label that usually accompanies the input:</p>
@@ -866,7 +873,7 @@ displayed within the label that usually accompanies the input:</p>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
-<p>或者，设置该键为 false，从而禁止 label 标签的输出:</p>
+<p>或者，设置该键为false，从而禁止label标签的输出:</p>
 <p>Alternatively, set this key to false to disable the output of the
 label:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
@@ -879,7 +886,7 @@ label:</p>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
-<p>把它设置为数组来为``label``元素提供额外的选项。如果你这么做，你可以在数组中用``text``键来定制 label 标签的文字:</p>
+<p>把它设置为数组来为 <tt class="docutils literal"><span class="pre">label</span></tt> 元素提供额外的选项。如果这么做，你可以在数组中用 <tt class="docutils literal"><span class="pre">text</span></tt> 键来自定义label标签的文字:</p>
 <p>Set this to an array to provide additional options for the
 <tt class="docutils literal"><span class="pre">label</span></tt> element. If you do this, you can use a <tt class="docutils literal"><span class="pre">text</span></tt> key in
 the array to customize the label text:</p>
@@ -900,24 +907,24 @@ the array to customize the label text:</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['error']</span></tt> 使用这个键让你可以取代缺省的模型错误信息，以及用于，例如，设置 i18n 信息。它有一些子选项，用来控制包裹的元素，包裹元素的(样式)类名，以及错误信息中的 HTML 是否要转义。</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['error']</span></tt> 使用这个键让你可以改变默认的模型错误消息，以及用于，例如，设置i18n消息。它有一些子选项，用来控制包裹的元素，包裹元素的（样式）类名，以及错误信息中的HTML是否要转义。</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['error']</span></tt> Using this key allows you to override the default model
 error messages and can be used, for example, to set i18n messages. It has a
 number of suboptions which control the wrapping element, wrapping element
 class name, and whether HTML in the error message will be escaped.</p>
-<p>要禁用错误信息输出和字段的(样式)类，设置 error 键为 false:</p>
+<p>要禁用错误消息输出和字段的（样式）类，设置error键为false:</p>
 <p>To disable error message output &amp; field classes set the error key to false:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>要只禁用错误信息，但保持字段的(样式)类，设置 errorMessage 键为 false:</p>
+<p>要只禁用错误消息，但保持字段的（样式）类，设置errorMessage键为false:</p>
 <p>To disable only the error message, but retain the field classes, set the
 errorMessage key to false:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;errorMessage&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>要改变包裹元素的类型和它的(样式)类(class)，使用下面的格式:</p>
+<p>要改变包裹元素的类型和它的（样式）类（<em>class</em>），使用下面的格式:</p>
 <p>To modify the wrapping element type and its class, use the
 following format:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
@@ -927,7 +934,7 @@ following format:</p>
 <span class="p">));</span>
 </pre></div>
 </div>
-<p>为防止在错误信息输出中的 HTML 被自动转义，设置 escape 子选项为 false:</p>
+<p>为防止在错误消息输出中的HTML被自动转义，设置escape子选项为false:</p>
 <p>To prevent HTML being automatically escaped in the error message
 output, set the escape suboption to false:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
@@ -937,7 +944,7 @@ output, set the escape suboption to false:</p>
 <span class="p">));</span>
 </pre></div>
 </div>
-<p>要取代模型的错误信息，用键与验证规则名称匹配的数组:</p>
+<p>要改变模型的错误消息，用键与验证规则名称匹配的数组:</p>
 <p>To override the model error messages use an array with
 the keys matching the validation rule names:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
@@ -945,21 +952,21 @@ the keys matching the validation rule names:</p>
 <span class="p">));</span>
 </pre></div>
 </div>
-<p>如上所示，你可以为模型中的每个验证规则设置错误信息。而且，你可以为表单提供国际化(i18n)的消息。</p>
+<p>如上所示，你可以为模型中的每个验证规则设置错误信息。而且，你可以为表单提供国际化（<em>i18n</em>）的消息。</p>
 <p>As seen above you can set the error message for each validation
 rule you have in your models. In addition you can provide i18n
 messages for your forms.</p>
 <div class="versionadded">
-<p><span class="versionmodified">2.3 新版功能: </span>在2.3版本中增加了对``errorMessage``的支持。
+<p><span class="versionmodified">2.3 新版功能: </span>在2.3版本中增加了对 <tt class="docutils literal"><span class="pre">errorMessage</span></tt> 的支持。
 Support for the <tt class="docutils literal"><span class="pre">errorMessage</span></tt> option was added in 2.3</p>
 </div>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['before']</span></tt>, <tt class="docutils literal"><span class="pre">$options['between']</span></tt>, <tt class="docutils literal"><span class="pre">$options['separator']</span></tt>,
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['before']</span></tt>、<tt class="docutils literal"><span class="pre">$options['between']</span></tt>、<tt class="docutils literal"><span class="pre">$options['separator']</span></tt>
 和 <tt class="docutils literal"><span class="pre">$options['after']</span></tt></p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['before']</span></tt>, <tt class="docutils literal"><span class="pre">$options['between']</span></tt>, <tt class="docutils literal"><span class="pre">$options['separator']</span></tt>,
 and <tt class="docutils literal"><span class="pre">$options['after']</span></tt></p>
-<p>如果你要在 input() 方法的输出中插入一些标记代码，就可以使用这些键:</p>
+<p>如果你要在input()方法的输出中插入一些标记代码，就可以使用这些键:</p>
 <p>Use these keys if you need to inject some markup inside the output
 of the input() method:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
@@ -980,7 +987,7 @@ of the input() method:</p>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
-<p>对 radio 输入项，&#8217;separator&#8217;属性可用来插入标记，来分隔每对 input/label:</p>
+<p>对radio输入项，&#8217;separator&#8217;属性可用来插入标记，来分隔每对input/label:</p>
 <p>For radio inputs the &#8216;separator&#8217; attribute can be used to
 inject markup to separate each input/label pair:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
@@ -1006,12 +1013,12 @@ inject markup to separate each input/label pair:</p>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
-<p>对于``date``和``datetime``类型的元素，&#8217;separator&#8217;可用来改变 select 元素之间的字符串。缺省为 &#8216;-&#8216;。</p>
+<p>对于 <tt class="docutils literal"><span class="pre">date</span></tt> 和 <tt class="docutils literal"><span class="pre">datetime</span></tt> 类型的元素，&#8217;separator&#8217;可用来改变select元素之间的字符串。默认为 &#8216;-&#8216;。</p>
 <p>For <tt class="docutils literal"><span class="pre">date</span></tt> and <tt class="docutils literal"><span class="pre">datetime</span></tt> type elements the &#8216;separator&#8217;
 attribute can be used to change the string between select elements.
 Defaults to &#8216;-&#8216;.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['format']</span></tt> FormHelper 助件生成的 html 的顺序也是可以控制的。&#8217;format&#8217;选项支持字符串数组，指明上述元素遵从的模板。支持的数组的键为``array(&#8216;before&#8217;, &#8216;input&#8217;, &#8216;between&#8217;, &#8216;label&#8217;, &#8216;after&#8217;,&#8217;error&#8217;)``。</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['format']</span></tt> FormHelper助件生成的html的顺序也是可以控制的。&#8217;format&#8217;选项支持字符串数组，指明上述元素遵从的模板。支持的数组的键为 <tt class="docutils literal"><span class="pre">array('before',</span> <span class="pre">'input',</span> <span class="pre">'between',</span> <span class="pre">'label',</span> <span class="pre">'after','error')</span></tt>。</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['format']</span></tt> The ordering of the HTML generated by FormHelper is
 controllable as well. The &#8216;format&#8217; options supports an array of strings
@@ -1019,7 +1026,7 @@ describing the template you would like said element to follow. The supported
 array keys are:
 <tt class="docutils literal"><span class="pre">array('before',</span> <span class="pre">'input',</span> <span class="pre">'between',</span> <span class="pre">'label',</span> <span class="pre">'after','error')</span></tt>.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['inputDefaults']</span></tt> 如果你发现在对 input() 的多个调用在重复相同的选项，你可以使用`inputDefaults``来保持你的代码 dry (译注: Don&#8217;t Repeat Yourself,指不要重复代码。)</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['inputDefaults']</span></tt> 如果你发现在对input()的多个调用在重复相同的选项，你可以使用 <tt class="docutils literal"><span class="pre">inputDefaults</span></tt> 来保持你的代码dry（译注: <a class="reference external" href="http://tech.it168.com/a2009/0622/593/000000593268.shtml">Don&#8217;t Repeat Yourself</a> ，指不要重复代码。）</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['inputDefaults']</span></tt> If you find yourself repeating the same options
 in multiple input() calls, you can use <cite>inputDefaults`</cite> to keep your code dry:</p>
@@ -1031,48 +1038,48 @@ in multiple input() calls, you can use <cite>inputDefaults`</cite> to keep your 
 <span class="p">));</span>
 </pre></div>
 </div>
-<p>以下创建的所有输入项就都会继承 inputDefaults 之中声明的选项。你可以在 input() 调用中声明选项来覆盖缺省的选项:</p>
+<p>以下创建的所有输入项就都会继承inputDefaults之中声明的选项。你可以在input()调用中声明选项来取代默认的选项:</p>
 <p>All inputs created from that point forward would inherit the
 options declared in inputDefaults. You can override the
 defaultOptions by declaring the option in the input() call:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 没有 div，没有 label</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 没有div，没有label</span>
 <span class="c1">// No div, no label</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
 
-<span class="c1">// 有一个 label 元素</span>
+<span class="c1">// 有一个label元素</span>
 <span class="c1">// has a label element</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Username&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>如果你以后需要改变缺省(选项)，你可以使用:php:meth:<a href="#id44"><span class="problematic" id="id45">`</span></a>FormHelper::inputDefaults()`方法。</p>
+<p>如果你以后需要改变默认（选项），你可以使用 <tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::inputDefaults()</span></tt> 方法。</p>
 <p>If you need to later change the defaults you can use
 <tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::inputDefaults()</span></tt>.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="section" id="input">
-<h2>生成特定类型的输入项(input)<a class="headerlink" href="#input" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id7">
+<h2>生成特定类型的输入项<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
 </div>
 <div class="section" id="generating-specific-types-of-inputs">
 <h2>Generating specific types of inputs<a class="headerlink" href="#generating-specific-types-of-inputs" title="永久链接至标题">¶</a></h2>
-<p>除了通用的``input()``方法，<a href="#id46"><span class="problematic" id="id47">``</span></a>FormHelper``助件有特定的方法来生成一系列不同类型的输入项(input)。这些方法可以用来只是生成输入项部件本身，也可以和其它象:php:meth:<a href="#id48"><span class="problematic" id="id49">`</span></a>~FormHelper::label()`和:php:meth:<a href="#id50"><span class="problematic" id="id51">`</span></a>~FormHelper::error()`这样的方法来生成完全定制的表单布局。</p>
+<p>除了通用的``input()``方法，<a href="#id8"><span class="problematic" id="id9">``</span></a>FormHelper``助件有特定的方法来生成一系列不同类型的输入项（<em>input</em>）。这些方法可以用来只是生成输入项部件本身，也可以和其它象:php:meth:<a href="#id10"><span class="problematic" id="id11">`</span></a>~FormHelper::label()`和:php:meth:<a href="#id12"><span class="problematic" id="id13">`</span></a>~FormHelper::error()`这样的方法来生成完全定制的表单布局。</p>
 <p>In addition to the generic <tt class="docutils literal"><span class="pre">input()</span></tt> method, <tt class="docutils literal"><span class="pre">FormHelper</span></tt> has specific
 methods for generating a number of different types of inputs. These can be used
 to generate just the input widget itself, and combined with other methods like
 <a class="reference internal" href="#FormHelper::label" title="FormHelper::label"><tt class="xref php php-meth docutils literal"><span class="pre">label()</span></tt></a> and <a class="reference internal" href="#FormHelper::error" title="FormHelper::error"><tt class="xref php php-meth docutils literal"><span class="pre">error()</span></tt></a> to
 generate fully custom form layouts.</p>
 <div class="section" id="general-input-options">
-<span id="id52"></span><h3>通用选项<a class="headerlink" href="#general-input-options" title="永久链接至标题">¶</a></h3>
+<span id="id14"></span><h3>通用选项<a class="headerlink" href="#general-input-options" title="永久链接至标题">¶</a></h3>
 </div>
 <div class="section" id="common-options">
 <h3>Common options<a class="headerlink" href="#common-options" title="永久链接至标题">¶</a></h3>
-<p>许多不同的输入项(input)元素方法支持一组通用的选项。<a href="#id53"><span class="problematic" id="id54">``</span></a>input()``方法也支持所有这些选项 。为避免重复，所有输入项(input)方法共用的通用选项如下:</p>
+<p>许多不同的输入项（<em>input</em>）元素方法支持一组通用的选项。<a href="#id15"><span class="problematic" id="id16">``</span></a>input()``方法也支持所有这些选项 。为避免重复，所有输入项方法共用的通用选项如下:</p>
 <p>Many of the various input element methods support a common set of options. All
 of these options are also supported by <tt class="docutils literal"><span class="pre">input()</span></tt>. To reduce repetition the
 common options shared by all input methods are as follows:</p>
 <ul>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['class']</span></tt> 你可以为一个输入项设置(样式)类名(classname):</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['class']</span></tt> 你可以为一个输入项设置（样式）类名(classname):</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['class']</span></tt> You can set the class name for an input:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;custom-class&#39;</span><span class="p">));</span>
@@ -1083,7 +1090,7 @@ common options shared by all input methods are as follows:</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['id']</span></tt> Set this key to force the value of the DOM id for the input.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['default']</span></tt> 用来设置输入项(input)的缺省值。如果传给表单的数据不包含该字段的值(或者根本没有数据传入)，该值就会被使用。</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['default']</span></tt> 用来设置输入项的默认值。如果传给表单的数据不包含该字段的值(或者根本没有数据传入)，该值就会被使用。</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['default']</span></tt> Used to set a default value for the input field. The
 value is used if the data passed to the form does not contain a value for the
@@ -1093,7 +1100,7 @@ field (or if no data is passed at all).</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;ingredient&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sugar&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>select 字段的例子(尺寸&#8221;Medium&#8221;会作为缺省值被选中):</p>
+<p>select 字段的例子(尺寸&#8221;Medium&#8221;会作为默认值被选中):</p>
 <p>Example with select field (Size &#8220;Medium&#8221; will be selected as
 default):</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$sizes</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;s&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Small&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Medium&#39;</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Large&#39;</span><span class="p">);</span>
@@ -1105,32 +1112,32 @@ default):</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p>你无法使用``default``来勾选 checkbox —— 你可以在控制器中设置``$this-&gt;request-&gt;data``的值，或者把输入项(input)的选项``checked``设为 true。</p>
+<p>你无法使用``default``来勾选 checkbox —— 你可以在控制器中设置``$this-&gt;request-&gt;data``的值，或者把输入项的选项``checked``设为 true。</p>
 <p>You cannot use <tt class="docutils literal"><span class="pre">default</span></tt> to check a checkbox - instead you might
 set the value in <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> in your controller,
 or set the input option <tt class="docutils literal"><span class="pre">checked</span></tt> to true.</p>
-<p>Date 和 datetime 字段的缺省值可以用&#8217;selected&#8217;键来设置。</p>
+<p>Date 和 datetime 字段的默认值可以用&#8217;selected&#8217;键来设置。</p>
 <p>Date and datetime fields&#8217; default values can be set by using the
 &#8216;selected&#8217; key.</p>
-<p>当心使用 false 来设置缺省值。false 值用来禁用/排除输入项(input)的选项，所以``&#8217;default&#8217; =&gt; false``完全不会设置任何值。而是(应当)使用``&#8217;default&#8217; =&gt; 0``。</p>
+<p>当心使用 false 来设置默认值。false 值用来禁用/排除输入项的选项，所以``&#8217;default&#8217; =&gt; false``完全不会设置任何值。而是(应当)使用``&#8217;default&#8217; =&gt; 0``。</p>
 <p class="last">Beware of using false to assign a default value. A false value is used to
 disable/exclude options of an input field, so <tt class="docutils literal"><span class="pre">'default'</span> <span class="pre">=&gt;</span> <span class="pre">false</span></tt> would
 not set any value at all. Instead use <tt class="docutils literal"><span class="pre">'default'</span> <span class="pre">=&gt;</span> <span class="pre">0</span></tt>.</p>
 </div>
 </li>
 </ul>
-<p>除了上述的选项之外，你可以混入(mixin)任何你想使用的 html 属性。任何普通的选项名称，会被当作 HTML 属性，并应用于生成的 HTML 输入项(input)元素。</p>
+<p>除了上述的选项之外，你可以混入(mixin)任何你想使用的 html 属性。任何普通的选项名称，会被当作 HTML 属性，并应用于生成的 HTML 输入项元素。</p>
 <p>In addition to the above options, you can mixin any HTML attribute you wish to
 use. Any non-special option name will be treated as an HTML attribute, and
 applied to the generated HTML input element.</p>
 </div>
-<div class="section" id="select-checkbox-radio-input">
-<h3>select，checkbox 和 radio 输入项(input)的选项<a class="headerlink" href="#select-checkbox-radio-input" title="永久链接至标题">¶</a></h3>
+<div class="section" id="select-checkbox-radio">
+<h3>select，checkbox 和 radio 输入项的选项<a class="headerlink" href="#select-checkbox-radio" title="永久链接至标题">¶</a></h3>
 </div>
 <div class="section" id="options-for-select-checkbox-and-radio-inputs">
 <h3>Options for select, checkbox and  radio inputs<a class="headerlink" href="#options-for-select-checkbox-and-radio-inputs" title="永久链接至标题">¶</a></h3>
 <ul>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['selected']</span></tt> 与选择类型的输入项(input)(即 select，date，time，datetime 这些类型)结合使用。设置‘selected’为输入项(input)渲染时你要缺省情况下选中的项目的值:</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['selected']</span></tt> 与选择类型的输入项(即 select，date，time，datetime 这些类型)结合使用。设置‘selected’为输入项渲染时你要默认情况下选中的项目的值:</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['selected']</span></tt> Used in combination with a select-type input (i.e.
 For types select, date, time, datetime). Set &#8216;selected&#8217; to the value of the
@@ -1143,12 +1150,12 @@ item you wish to be selected by default when the input is rendered:</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p>date 和 datetime 输入项(input)的 selected 键也可以是 UNIX 时间戳(timestamp)。</p>
+<p>date 和 datetime 输入项的 selected 键也可以是 UNIX 时间戳(timestamp)。</p>
 <p class="last">The selected key for date and datetime inputs may also be a UNIX
 timestamp.</p>
 </div>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['empty']</span></tt> 如果设置为 true，就会强制输入项(input)保持为空。</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['empty']</span></tt> 如果设置为 true，就会强制输入项保持为空。</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['empty']</span></tt> If set to true, forces the input to remain empty.</p>
 <p>当传递给一个 select 列表时，这会在你的下拉列表中创建一个带有空值的空选项(option)。如果你要空值有文字显示，而不是只是空的选项，给 empty 键传入一个字符串:</p>
@@ -1208,7 +1215,7 @@ even without a value specified:</p>
     <span class="na">id=</span><span class="s">&quot;PostPublished&quot;</span> <span class="nt">/&gt;</span>
 </pre></div>
 </div>
-<p>如果你要在一个表单上中创建组织在一起的多组输入项，你就应该在除了第一个的所有输入项(input)上使用这个参数。如果页面中的隐藏输入项分布在多个地方，只有最后一组输入项(input)的值会被保存。</p>
+<p>如果你要在一个表单上中创建组织在一起的多组输入项，你就应该在除了第一个的所有输入项上使用这个参数。如果页面中的隐藏输入项分布在多个地方，只有最后一组输入项的值会被保存。</p>
 <p>If you want to create multiple blocks of inputs on a form that are
 all grouped together, you should use this parameter on all inputs
 except the first. If the hidden input is on the page in multiple
@@ -1241,7 +1248,7 @@ primary colors would be overridden:</p>
 <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;ColorsOrange&quot;</span><span class="nt">&gt;</span>Orange<span class="nt">&lt;/label&gt;</span>
 </pre></div>
 </div>
-<p>对第二组输入项(input)禁用``&#8217;hiddenField&#8217;<a href="#id55"><span class="problematic" id="id56">``</span></a>，就可以阻止这种行为。</p>
+<p>对第二组输入项禁用``&#8217;hiddenField&#8217;<a href="#id17"><span class="problematic" id="id18">``</span></a>，就可以阻止这种行为。</p>
 <p>Disabling the <tt class="docutils literal"><span class="pre">'hiddenField'</span></tt> on the second input group would
 prevent this behavior.</p>
 <p>你可以一个不同于0的隐藏字段值，比如&#8217;N&#8217;:</p>
@@ -1279,7 +1286,7 @@ dateFormat option.</p>
 date/datetime input. Defines the lower and/or upper end of values shown in the
 years select field.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$options['orderYear']</span></tt> 与 date/datetime 输入项一起使用。定义年的值设置的顺序。有效的值包括 &#8216;asc&#8217;，&#8217;desc&#8217;。缺省值为 &#8216;desc&#8217;。</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$options['orderYear']</span></tt> 与 date/datetime 输入项一起使用。定义年的值设置的顺序。有效的值包括 &#8216;asc&#8217;，&#8217;desc&#8217;。默认值为 &#8216;desc&#8217;。</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$options['orderYear']</span></tt> Used in combination with a date/datetime input.
 Defines the order in which the year values will be set. Valid values include
@@ -1308,8 +1315,8 @@ Defaults to null which rounds half up according to <cite>interval</cite>.</p>
 </ul>
 </div>
 </div>
-<div class="section" id="id57">
-<h2>表单元素相关的方法<a class="headerlink" href="#id57" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id19">
+<h2>表单元素相关的方法<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h2>
 </div>
 <div class="section" id="form-element-specific-methods">
 <h2>Form Element-Specific Methods<a class="headerlink" href="#form-element-specific-methods" title="永久链接至标题">¶</a></h2>
@@ -1319,7 +1326,7 @@ Ex: name=data[User][username], id=UserUsername</p>
 <dl class="method">
 <dt id="FormHelper::label">
 <tt class="descclassname">FormHelper::</tt><tt class="descname">label</tt><big>(</big><em>string $fieldName</em>, <em>string $text</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::label" title="永久链接至目标">¶</a></dt>
-<dd><p>创建一个 label 元素。<a href="#id58"><span class="problematic" id="id59">``</span></a>$fieldName``用于生成 DOM id。如果``$text``未定义，<a href="#id60"><span class="problematic" id="id61">``</span></a>$fieldName``会被用来转换(inflect)生成 label 元素的文字:</p>
+<dd><p>创建一个 label 元素。<a href="#id20"><span class="problematic" id="id21">``</span></a>$fieldName``用于生成 DOM id。如果``$text``未定义，<a href="#id22"><span class="problematic" id="id23">``</span></a>$fieldName``会被用来转换(inflect)生成 label 元素的文字:</p>
 <p>Create a label element. <tt class="docutils literal"><span class="pre">$fieldName</span></tt> is used for generating the
 DOM id. If <tt class="docutils literal"><span class="pre">$text</span></tt> is undefined, <tt class="docutils literal"><span class="pre">$fieldName</span></tt> will be used to inflect
 the label&#8217;s text:</p>
@@ -1333,7 +1340,7 @@ the label&#8217;s text:</p>
 <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;UserName&quot;</span><span class="nt">&gt;</span>Your username<span class="nt">&lt;/label&gt;</span>
 </pre></div>
 </div>
-<p><a href="#id62"><span class="problematic" id="id63">``</span></a>$options``可以是一个 html 属性的数组，或者是一个会被用作样式类名的字符串:</p>
+<p><a href="#id24"><span class="problematic" id="id25">``</span></a>$options``可以是一个 html 属性的数组，或者是一个会被用作样式类名的字符串:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="sb">``</span><span class="nv">$options</span><span class="sb">``</span> <span class="nx">can</span> <span class="nx">either</span> <span class="nx">be</span> <span class="nx">an</span> <span class="k">array</span> <span class="nx">of</span> <span class="nx">HTML</span> <span class="nx">attributes</span><span class="p">,</span> <span class="k">or</span> <span class="nx">a</span> <span class="nx">string</span> <span class="nx">that</span>
 </pre></div>
 </div>
@@ -1353,7 +1360,7 @@ the label&#8217;s text:</p>
 <dl class="method">
 <dt id="FormHelper::text">
 <tt class="descclassname">FormHelper::</tt><tt class="descname">text</tt><big>(</big><em>string $name</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::text" title="永久链接至目标">¶</a></dt>
-<dd><p>FormHelper 助件的其它方法是用来创建特定的表单元素的。这些方法中的许多也用到特殊的 $options 参数。不过，在这种情况下，$options 主要是用来指定 HTML 标签的属性(比如表单中的元素的值或者 DOM id):</p>
+<dd><p>FormHelper助件的其它方法是用来创建特定的表单元素的。这些方法中的许多也用到特殊的 $options 参数。不过，在这种情况下，$options 主要是用来指定 HTML 标签的属性(比如表单中的元素的值或者 DOM id):</p>
 <p>The rest of the methods available in the FormHelper are for
 creating specific form elements. Many of these methods also make
 use of a special $options parameter. In this case, however,
@@ -1407,7 +1414,7 @@ generated. Example for data[User][id] = 10:</p>
 </pre></div>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.0 版更改: </span>隐藏字段不再去除(样式的)类属性。这意味着如果隐藏字段有验证错误，错误字段的(样式)类名就会被应用。
+<p><span class="versionmodified">在 2.0 版更改: </span>隐藏字段不再去除(样式的)类属性。这意味着如果隐藏字段有验证错误，错误字段的（样式）类名就会被应用。
 Hidden fields no longer remove the class attribute. This means
 that if there are validation errors on hidden fields, the
 error-field class name will be applied.</p>
@@ -1438,7 +1445,7 @@ This text is to be edited.
 </div>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p><tt class="docutils literal"><span class="pre">textarea``输入项类型允许``$options``属性</span></tt>&#8216;escape&#8217;<tt class="docutils literal"><span class="pre">，这决定</span> <span class="pre">textarea</span> <span class="pre">的内容是否要被转义。缺省值为``true</span></tt>。</p>
+<p><tt class="docutils literal"><span class="pre">textarea``输入项类型允许``$options``属性</span></tt>&#8216;escape&#8217;<tt class="docutils literal"><span class="pre">，这决定</span> <span class="pre">textarea</span> <span class="pre">的内容是否要被转义。默认值为``true</span></tt>。</p>
 <p class="last">The <tt class="docutils literal"><span class="pre">textarea</span></tt> input type allows for the <tt class="docutils literal"><span class="pre">$options</span></tt> attribute
 of <tt class="docutils literal"><span class="pre">'escape'</span></tt> which determines whether or not the contents of the
 textarea should be escaped. Defaults to <tt class="docutils literal"><span class="pre">true</span></tt>.</p>
@@ -1526,7 +1533,7 @@ $options array:</p>
 <p><strong>选项</strong></p>
 <p><strong>Options</strong></p>
 <ul>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['value']</span></tt> 设置哪个值作为缺省值被选中。</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['value']</span></tt> 设置哪个值作为默认值被选中。</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['value']</span></tt> to set which value should be selected default.</p>
 </li>
@@ -1540,12 +1547,12 @@ buttons (e.g. &lt;br /&gt;).</p>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['between']</span></tt> specify some content to be inserted between the
 legend and first element.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['disabled']</span></tt> 设置这个属性为``true``或``&#8217;disabled&#8217;<a href="#id64"><span class="problematic" id="id65">``</span></a>会禁用所有生成的 radio 按钮。</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['disabled']</span></tt> 设置这个属性为``true``或``&#8217;disabled&#8217;<a href="#id26"><span class="problematic" id="id27">``</span></a>会禁用所有生成的 radio 按钮。</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['disabled']</span></tt> Setting this to <tt class="docutils literal"><span class="pre">true</span></tt> or <tt class="docutils literal"><span class="pre">'disabled'</span></tt>
 will disable all of the generated radio buttons.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['legend']</span></tt> 缺省情况下 Radio 元素会包裹在 label 和 fieldset 之中。设置``$attributes[&#8216;legend&#8217;]``为 false 来去掉这些。:</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['legend']</span></tt> 默认情况下 Radio 元素会包裹在 label 和 fieldset 之中。设置``$attributes[&#8216;legend&#8217;]``为 false 来去掉这些。:</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['legend']</span></tt> Radio elements are wrapped with a legend and
 fieldset by default. Set <tt class="docutils literal"><span class="pre">$attributes['legend']</span></tt> to false to remove
@@ -1582,7 +1589,7 @@ do just that.</p>
 <dl class="method">
 <dt id="FormHelper::select">
 <tt class="descclassname">FormHelper::</tt><tt class="descname">select</tt><big>(</big><em>string $fieldName</em>, <em>array $options</em>, <em>array $attributes</em><big>)</big><a class="headerlink" href="#FormHelper::select" title="永久链接至目标">¶</a></dt>
-<dd><p>创建一个 select 元素，以``$options``中的项目填充，缺省选中以``$attributes[&#8216;value&#8217;]``指定的选项。设置``$attributes``变量中的&#8217;empty&#8217;键为 false，就可以去掉缺省的空选项:</p>
+<dd><p>创建一个 select 元素，以``$options``中的项目填充，默认选中以``$attributes[&#8216;value&#8217;]``指定的选项。设置``$attributes``变量中的&#8217;empty&#8217;键为 false，就可以去掉默认的空选项:</p>
 <p>Creates a select element, populated with the items in <tt class="docutils literal"><span class="pre">$options</span></tt>,
 with the option specified by <tt class="docutils literal"><span class="pre">$attributes['value']</span></tt> shown as selected by
 default. Set the &#8216;empty&#8217; key in the <tt class="docutils literal"><span class="pre">$attributes</span></tt> variable to false to
@@ -1600,7 +1607,7 @@ turn off the default empty option:</p>
 <span class="nt">&lt;/select&gt;</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">select``输入类型可以有一个特殊的``$option``属性，叫做</span></tt>&#8216;escape&#8217;<a href="#id66"><span class="problematic" id="id67">``</span></a>，它接受布尔值，决定是否对 select 选项的内容进行 HTML 实体编码(HTML entity encode)。缺省为 true:</p>
+<p><tt class="docutils literal"><span class="pre">select``输入类型可以有一个特殊的``$option``属性，叫做</span></tt>&#8216;escape&#8217;<a href="#id28"><span class="problematic" id="id29">``</span></a>，它接受布尔值，决定是否对 select 选项的内容进行 HTML 实体编码(HTML entity encode)。默认为 true:</p>
 <p>The <tt class="docutils literal"><span class="pre">select</span></tt> input type allows for a special <tt class="docutils literal"><span class="pre">$option</span></tt>
 attribute called <tt class="docutils literal"><span class="pre">'escape'</span></tt> which accepts a bool and determines
 whether to HTML entity encode the contents of the select options.
@@ -1610,7 +1617,7 @@ Defaults to true:</p>
 </pre></div>
 </div>
 <ul>
-<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['options']</span></tt> 这个键允许你手动指定 select 输入项或 radio 组的选项。除非&#8217;type&#8217;设置为&#8217;radio&#8217;，否则 FormHelper 助件将会认为希望的输出为 select 输入项:</p>
+<li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['options']</span></tt> 这个键允许你手动指定 select 输入项或 radio 组的选项。除非&#8217;type&#8217;设置为&#8217;radio&#8217;，否则FormHelper助件将会认为希望的输出为 select 输入项:</p>
 </li>
 <li><p class="first"><tt class="docutils literal"><span class="pre">$attributes['options']</span></tt> This key allows you to manually specify options for a
 select input, or for a radio group. Unless the &#8216;type&#8217; is specified as &#8216;radio&#8217;,
@@ -1790,7 +1797,7 @@ a create function such as the following:</p>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">(</span><span class="s1">&#39;Document.submittedfile&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>鉴于 HTML 本身的限制，无法为&#8217;file&#8217;类型的输入项字段设置缺省值。每次表单显示时，其值为空。</p>
+<p>鉴于 HTML 本身的限制，无法为&#8217;file&#8217;类型的输入项字段设置默认值。每次表单显示时，其值为空。</p>
 <p>Due to the limitations of HTML itself, it is not possible to put
 default values into input fields of type &#8216;file&#8217;. Each time the form
 is displayed, the value inside will be empty.</p>
@@ -1817,8 +1824,8 @@ way PHP handles data passed via file fields
 <a class="reference external" href="http://php.net/features.file-upload">read the PHP manual section on file uploads</a>.</p>
 </dd></dl>
 
-<div class="section" id="id68">
-<h3>验证(文件)上载<a class="headerlink" href="#id68" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id30">
+<h3>验证(文件)上载<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h3>
 </div>
 <div class="section" id="validating-uploads">
 <h3>Validating Uploads<a class="headerlink" href="#validating-uploads" title="永久链接至标题">¶</a></h3>
@@ -1857,19 +1864,19 @@ encoding-type, by setting the type option to &#8216;file&#8217; in
 </div>
 </div>
 </div>
-<div class="section" id="id69">
-<h2>创建按键和提交元素<a class="headerlink" href="#id69" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id31">
+<h2>创建按键和提交元素<a class="headerlink" href="#id31" title="永久链接至标题">¶</a></h2>
 </div>
 <div class="section" id="creating-buttons-and-submit-elements">
 <h2>Creating buttons and submit elements<a class="headerlink" href="#creating-buttons-and-submit-elements" title="永久链接至标题">¶</a></h2>
 <dl class="method">
 <dt id="FormHelper::submit">
 <tt class="descclassname">FormHelper::</tt><tt class="descname">submit</tt><big>(</big><em>string $caption</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#FormHelper::submit" title="永久链接至目标">¶</a></dt>
-<dd><p>创建带有标题``$caption``的提交按键。如果给出的``$caption``是一个图像的 URL(含有‘.’字符)，提交按键就会渲染为图像。</p>
+<dd><p>创建带有标题``$caption``的提交按键。如果给出的``$caption``是一个图像的网址(含有‘.’字符)，提交按键就会渲染为图像。</p>
 <p>Creates a submit button with caption <tt class="docutils literal"><span class="pre">$caption</span></tt>. If the supplied
 <tt class="docutils literal"><span class="pre">$caption</span></tt> is a URL to an image (it contains a &#8216;.&#8217; character),
 the submit button will be rendered as an image.</p>
-<p>缺省情况下它会被包括在``div``标签之间；你可以提供声明``$options[&#8216;div&#8217;] = false``来避免这样:</p>
+<p>默认情况下它会被包括在``div``标签之间；你可以提供声明``$options[&#8216;div&#8217;] = false``来避免这样:</p>
 <p>It is enclosed between <tt class="docutils literal"><span class="pre">div</span></tt> tags by default; you can avoid this
 by declaring <tt class="docutils literal"><span class="pre">$options['div']</span> <span class="pre">=</span> <span class="pre">false</span></tt>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">submit</span><span class="p">();</span>
@@ -1896,12 +1903,12 @@ caption parameter instead of caption text.</p>
 <dl class="method">
 <dt id="FormHelper::button">
 <tt class="descclassname">FormHelper::</tt><tt class="descname">button</tt><big>(</big><em>string $title</em>, <em>array $options = array()</em><big>)</big><a class="headerlink" href="#FormHelper::button" title="永久链接至目标">¶</a></dt>
-<dd><p>创建 HTML 按键，带有指定的标题和缺省的类型&#8221;button&#8221;。设置``$options[&#8216;type&#8217;]``可以输出三种可能的按键类型中的一种:</p>
+<dd><p>创建 HTML 按键，带有指定的标题和默认的类型&#8221;button&#8221;。设置``$options[&#8216;type&#8217;]``可以输出三种可能的按键类型中的一种:</p>
 <p>Creates an HTML button with the specified title and a default type
 of &#8220;button&#8221;. Setting <tt class="docutils literal"><span class="pre">$options['type']</span></tt> will output one of the
 three possible button types:</p>
 <ol class="arabic simple">
-<li>submit: 等同于``$this-&gt;Form-&gt;submit``方法——(缺省值)。</li>
+<li>submit: 等同于``$this-&gt;Form-&gt;submit``方法——(默认值)。</li>
 <li>reset: 创建一个表单重置按键。</li>
 <li>button: 创建一个标准的按键。</li>
 <li>submit: Same as the <tt class="docutils literal"><span class="pre">$this-&gt;Form-&gt;submit</span></tt> method - (the
@@ -1923,8 +1930,8 @@ default).</li>
 <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>Submit Form<span class="nt">&lt;/button&gt;</span>
 </pre></div>
 </div>
-<p><a href="#id70"><span class="problematic" id="id71">``</span></a>button``输入项类型支持``escape``选项，该选项接受布尔值，决定是否 HTML 实体编码 (HTML entity encode)按键的 $title。
-缺省值为 false:</p>
+<p><a href="#id32"><span class="problematic" id="id33">``</span></a>button``输入项类型支持``escape``选项，该选项接受布尔值，决定是否 HTML 实体编码 (HTML entity encode)按键的 $title。
+默认值为 false:</p>
 <p>The <tt class="docutils literal"><span class="pre">button</span></tt> input type supports the <tt class="docutils literal"><span class="pre">escape</span></tt> option, which accepts a
 bool and determines whether to HTML entity encode the $title of the button.
 Defaults to false:</p>
@@ -1954,7 +1961,7 @@ opened form. Instead use <a class="reference internal" href="#FormHelper::submit
 <dd><p>创建一个 HTML 链接，但使用 POST 来访问该链接。要求浏览器启用 javascript。</p>
 <p>Creates an HTML link, but access the URL using method POST. Requires
 JavaScript to be enabled in browser.</p>
-<p>该方法创建一个``&lt;form&gt;``元素，故此不要在一个表单中使用该方法，而是应当用:php:meth:<a href="#id72"><span class="problematic" id="id73">`</span></a>FormHelper::submit()`方法来添加提交按键。</p>
+<p>该方法创建一个``&lt;form&gt;``元素，故此不要在一个表单中使用该方法，而是应当用:php:meth:<a href="#id34"><span class="problematic" id="id35">`</span></a>FormHelper::submit()`方法来添加提交按键。</p>
 <p>This method creates a <tt class="docutils literal"><span class="pre">&lt;form&gt;</span></tt> element. So do not use this method inside
 an existing form. Instead you should add a submit button using
 <a class="reference internal" href="#FormHelper::submit" title="FormHelper::submit"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::submit()</span></tt></a></p>
@@ -1976,8 +1983,8 @@ in <tt class="docutils literal"><span class="pre">$options</span></tt> instead.<
 </dd></dl>
 
 </div>
-<div class="section" id="id74">
-<h2>创建日期和时间输入项<a class="headerlink" href="#id74" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id36">
+<h2>创建日期和时间输入项<a class="headerlink" href="#id36" title="永久链接至标题">¶</a></h2>
 </div>
 <div class="section" id="creating-date-and-time-inputs">
 <h2>Creating date and time inputs<a class="headerlink" href="#creating-date-and-time-inputs" title="永久链接至标题">¶</a></h2>
@@ -2051,7 +2058,7 @@ empty option:</p>
 <span class="nt">&lt;/select&gt;</span>
 </pre></div>
 </div>
-<p>你可以通过设置&#8217;monthNames&#8217;属性来传入自己要使用的月份数组，或者传入 false 来让月份显示为数字。(注意: 缺省的月份是国际化的，而且可以用本地化来翻译。):</p>
+<p>你可以通过设置&#8217;monthNames&#8217;属性来传入自己要使用的月份数组，或者传入 false 来让月份显示为数字。(注意: 默认的月份是国际化的，而且可以用本地化来翻译。):</p>
 <p>You can pass in your own array of months to be used by setting the
 &#8216;monthNames&#8217; attribute, or have months displayed as numbers by
 passing false. (Note: the default months are internationalized and
@@ -2110,8 +2117,8 @@ parameter as follows:</p>
 </dd></dl>
 
 </div>
-<div class="section" id="id75">
-<h2>显示及检查错误<a class="headerlink" href="#id75" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id37">
+<h2>显示及检查错误<a class="headerlink" href="#id37" title="永久链接至标题">¶</a></h2>
 </div>
 <div class="section" id="displaying-and-checking-errors">
 <h2>Displaying and checking errors<a class="headerlink" href="#displaying-and-checking-errors" title="永久链接至标题">¶</a></h2>
@@ -2126,7 +2133,7 @@ field, in the event that a validation error has occurred.</p>
 <ul class="simple">
 <li>&#8216;escape&#8217; bool 是否 html 转义错误内容。</li>
 <li>&#8216;wrap&#8217; mixed 是否将错误信息包裹在 div 中。如果是字符串，就会作为 HTML 标签使用。</li>
-<li>&#8216;class&#8217; string 错误信息的(样式)类名。</li>
+<li>&#8216;class&#8217; string 错误信息的（样式）类名。</li>
 <li>&#8216;escape&#8217; bool Whether or not to HTML escape the contents of the
 error.</li>
 <li>&#8216;wrap&#8217; mixed Whether or not the error message should be wrapped
@@ -2148,7 +2155,7 @@ error.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p>当使用:php:meth:<a href="#id76"><span class="problematic" id="id77">`</span></a>FormHelper::input()`方法时，缺省情况下错误会被渲染。</p>
+<p>当使用:php:meth:<a href="#id38"><span class="problematic" id="id39">`</span></a>FormHelper::input()`方法时，默认情况下错误会被渲染。</p>
 <p class="last">When using <a class="reference internal" href="#FormHelper::input" title="FormHelper::input"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::input()</span></tt></a>, errors are rendered by default.</p>
 </div>
 </dd></dl>
@@ -2162,15 +2169,15 @@ errors. Otherwise it returns the validation message.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="id78">
-<h2>对所有字段设置缺省值<a class="headerlink" href="#id78" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id40">
+<h2>对所有字段设置默认值<a class="headerlink" href="#id40" title="永久链接至标题">¶</a></h2>
 </div>
 <div class="section" id="setting-defaults-for-all-fields">
 <h2>Setting Defaults for all fields<a class="headerlink" href="#setting-defaults-for-all-fields" title="永久链接至标题">¶</a></h2>
 <div class="versionadded">
 <p><span class="versionmodified">2.2 新版功能.</span></p>
 </div>
-<p>你可以使用:php:meth:<a href="#id79"><span class="problematic" id="id80">`</span></a>FormHelper::inputDefaults()`为``input()``声明一组缺省值。改变缺省选项允许你把重复的选项合并为一个方法调用:</p>
+<p>你可以使用:php:meth:<a href="#id41"><span class="problematic" id="id42">`</span></a>FormHelper::inputDefaults()`为``input()``声明一组默认值。改变默认选项允许你把重复的选项合并为一个方法调用:</p>
 <p>You can declare a set of default options for <tt class="docutils literal"><span class="pre">input()</span></tt> using
 <tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::inputDefaults()</span></tt>. Changing the default options allows
 you to consolidate repeated options into a single method call:</p>
@@ -2182,12 +2189,12 @@ you to consolidate repeated options into a single method call:</p>
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>从此所有创建的输入项会继承在 inputDefaults 选项中声明的选项。你可以在 input() 调用中声明选项来覆盖缺省的选项:</p>
+<p>从此所有创建的输入项会继承在 inputDefaults 选项中声明的选项。你可以在 input() 调用中声明选项来覆盖默认的选项:</p>
 <p>All inputs created from that point forward will inherit the options declared in
 inputDefaults. You can override the default options by declaring the option in the
 input() call:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span> <span class="c1">// 没有 div，没有 label，带有&#39;fancy&#39;样式类 No div, no label with class &#39;fancy&#39;</span>
-<span class="c1">// 带有 label 及同样的缺省选项</span>
+<span class="c1">// 带有 label 及同样的默认选项</span>
 <span class="c1">// has a label element same defaults</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span>
     <span class="s1">&#39;username&#39;</span><span class="p">,</span>
@@ -2212,7 +2219,7 @@ special <tt class="docutils literal"><span class="pre">_Token</span></tt> inputs
 <dl class="method">
 <dt id="FormHelper::unlockField">
 <tt class="descclassname">FormHelper::</tt><tt class="descname">unlockField</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#FormHelper::unlockField" title="永久链接至目标">¶</a></dt>
-<dd><p>对一个字段解锁，使得该字段免于``SecurityComponent``的字段哈希(编码)。这也允许这样的字段被 Javascript 操纵。<a href="#id81"><span class="problematic" id="id82">``</span></a>$name``参数应当是输入项的名称:</p>
+<dd><p>对一个字段解锁，使得该字段免于``SecurityComponent``的字段哈希(编码)。这也允许这样的字段被 Javascript 操纵。<a href="#id43"><span class="problematic" id="id44">``</span></a>$name``参数应当是输入项的名称:</p>
 <p>Unlocks a field making it exempt from the <tt class="docutils literal"><span class="pre">SecurityComponent</span></tt> field
 hashing. This also allows the fields to be manipulated by JavaScript.
 The <tt class="docutils literal"><span class="pre">$name</span></tt> parameter should be the entity name for the input:</p>
@@ -2234,7 +2241,7 @@ in the form.</p>
 <span id="form-improvements-1-3"></span><h2>2.0 updates<a class="headerlink" href="#updates" title="永久链接至标题">¶</a></h2>
 <p><strong>$selected 参数去掉了</strong></p>
 <p><strong>$selected parameter removed</strong></p>
-<p><tt class="docutils literal"><span class="pre">$selected</span></tt> 参数从 FormHelper 助件的几个方法中去掉了。所有的方法现在支持``$attributes[&#8216;value&#8217;]``键，应当用它来代替``$selected``。这个改变简化了 FormHelper 助件的方法，减少了参数的数量，并减轻了``$selected``导致的重复。受此影响的方法有:</p>
+<p><tt class="docutils literal"><span class="pre">$selected</span></tt> 参数从FormHelper助件的几个方法中去掉了。所有的方法现在支持``$attributes[&#8216;value&#8217;]``键，应当用它来代替``$selected``。这个改变简化了FormHelper助件的方法，减少了参数的数量，并减轻了``$selected``导致的重复。受此影响的方法有:</p>
 <p>The <tt class="docutils literal"><span class="pre">$selected</span></tt> parameter was removed from several methods in
 FormHelper. All methods now support a <tt class="docutils literal"><span class="pre">$attributes['value']</span></tt> key
 now which should be used in place of <tt class="docutils literal"><span class="pre">$selected</span></tt>. This change
@@ -2253,15 +2260,15 @@ The effected methods are:</p>
 <li>FormHelper::meridian()</li>
 </ul>
 </div></blockquote>
-<p><strong>表单的缺省地址就是当前的动作</strong></p>
+<p><strong>表单的默认地址就是当前的动作</strong></p>
 <p><strong>Default URLs on forms is the current action</strong></p>
-<p>所有表单的缺省地址，现在就是当前地址。包括传入(passed)、命名(named)和查询字符串(querystring)参数。你可以通过在``$this-&gt;Form-&gt;create()``方法的第二个参数中提供``$options[&#8216;url&#8217;]``来覆盖缺省值。</p>
+<p>所有表单的默认地址，现在就是当前地址。包括传入(passed)、命名(named)和查询字符串(querystring)参数。你可以通过在``$this-&gt;Form-&gt;create()``方法的第二个参数中提供``$options[&#8216;url&#8217;]``来覆盖默认值。</p>
 <p>The default URL for all forms, is now the current URL including
 passed, named, and querystring parameters. You can override
 this default by supplying <tt class="docutils literal"><span class="pre">$options['url']</span></tt> in the second
 parameter of <tt class="docutils literal"><span class="pre">$this-&gt;Form-&gt;create()</span></tt></p>
 <p><strong>FormHelper::hidden()</strong></p>
-<p>隐藏字段不再去掉 class 属性。这意味着如果隐藏字段有验证错误，错误字段的(样式)类名就会被使用。</p>
+<p>隐藏字段不再去掉 class 属性。这意味着如果隐藏字段有验证错误，错误字段的（样式）类名就会被使用。</p>
 <p>Hidden fields no longer remove the class attribute. This means
 that if there are validation errors on hidden fields,
 the error-field class name will be applied.</p>
@@ -2288,7 +2295,7 @@ the error-field class name will be applied.</p>
 <li class="toctree-l2 current"><a class="reference internal" href="../../views/helpers.html">助件</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cache.html">缓存助件</a></li>
 <li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="">FormHelper 助件</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">FormHelper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="html.html">HtmlHelper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="js.html">JsHelper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="number.html">NumberHelper</a></li>
@@ -2315,7 +2322,7 @@ the error-field class name will be applied.</p>
 <li class="toctree-l2 current"><a class="reference internal" href="../toc-helpers.html">助件</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="cache.html">缓存助件</a></li>
 <li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="">FormHelper 助件</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">FormHelper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="html.html">HtmlHelper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="js.html">JsHelper</a></li>
 <li class="toctree-l3"><a class="reference internal" href="number.html">NumberHelper</a></li>
@@ -2343,46 +2350,46 @@ the error-field class name will be applied.</p>
 <div class="page-contents">
 	<h3>Page contents</h3>
 	<ul>
-<li><a class="reference internal" href="#">FormHelper 助件</a><ul>
+<li><a class="reference internal" href="#">FormHelper</a><ul>
 <li><a class="reference internal" href="#id1">创建表单</a></li>
 <li><a class="reference internal" href="#creating-forms">Creating Forms</a><ul>
-<li><a class="reference internal" href="#create">create() 方法的选项</a></li>
+<li><a class="reference internal" href="#create">create()方法的选项</a></li>
 <li><a class="reference internal" href="#options-for-create">Options for create()</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id14">结束表单</a></li>
+<li><a class="reference internal" href="#id2">结束表单</a></li>
 <li><a class="reference internal" href="#closing-the-form">Closing the Form</a></li>
 <li><a class="reference internal" href="#automagic-form-elements">创建表单元素</a></li>
 <li><a class="reference internal" href="#creating-form-elements">Creating form elements</a><ul>
-<li><a class="reference internal" href="#id34">字段命名约定</a></li>
+<li><a class="reference internal" href="#id5">字段命名约定</a></li>
 <li><a class="reference internal" href="#field-naming-conventions">Field naming conventions</a></li>
-<li><a class="reference internal" href="#id37">选项</a></li>
+<li><a class="reference internal" href="#id6">选项</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#input">生成特定类型的输入项(input)</a></li>
+<li><a class="reference internal" href="#id7">生成特定类型的输入项</a></li>
 <li><a class="reference internal" href="#generating-specific-types-of-inputs">Generating specific types of inputs</a><ul>
 <li><a class="reference internal" href="#general-input-options">通用选项</a></li>
 <li><a class="reference internal" href="#common-options">Common options</a></li>
-<li><a class="reference internal" href="#select-checkbox-radio-input">select，checkbox 和 radio 输入项(input)的选项</a></li>
+<li><a class="reference internal" href="#select-checkbox-radio">select，checkbox 和 radio 输入项的选项</a></li>
 <li><a class="reference internal" href="#options-for-select-checkbox-and-radio-inputs">Options for select, checkbox and  radio inputs</a></li>
 <li><a class="reference internal" href="#datetime">Datetime 选项</a></li>
 <li><a class="reference internal" href="#datetime-options">Datetime options</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id57">表单元素相关的方法</a></li>
+<li><a class="reference internal" href="#id19">表单元素相关的方法</a></li>
 <li><a class="reference internal" href="#form-element-specific-methods">Form Element-Specific Methods</a><ul>
-<li><a class="reference internal" href="#id68">验证(文件)上载</a></li>
+<li><a class="reference internal" href="#id30">验证(文件)上载</a></li>
 <li><a class="reference internal" href="#validating-uploads">Validating Uploads</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id69">创建按键和提交元素</a></li>
+<li><a class="reference internal" href="#id31">创建按键和提交元素</a></li>
 <li><a class="reference internal" href="#creating-buttons-and-submit-elements">Creating buttons and submit elements</a></li>
-<li><a class="reference internal" href="#id74">创建日期和时间输入项</a></li>
+<li><a class="reference internal" href="#id36">创建日期和时间输入项</a></li>
 <li><a class="reference internal" href="#creating-date-and-time-inputs">Creating date and time inputs</a></li>
-<li><a class="reference internal" href="#id75">显示及检查错误</a></li>
+<li><a class="reference internal" href="#id37">显示及检查错误</a></li>
 <li><a class="reference internal" href="#displaying-and-checking-errors">Displaying and checking errors</a></li>
-<li><a class="reference internal" href="#id78">对所有字段设置缺省值</a></li>
+<li><a class="reference internal" href="#id40">对所有字段设置默认值</a></li>
 <li><a class="reference internal" href="#setting-defaults-for-all-fields">Setting Defaults for all fields</a></li>
 <li><a class="reference internal" href="#securitycomponent">与 SecurityComponent 组件一起使用</a></li>
 <li><a class="reference internal" href="#working-with-securitycomponent">Working with SecurityComponent</a></li>
@@ -2430,7 +2437,7 @@ the error-field class name will be applied.</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Sep 06, 2015.
+				最后更新于 Nov 19, 2015.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>
@@ -2460,6 +2467,5 @@ var duoshuoQuery = {short_name:"cakephpchina"};
 
 <!-- Grunt Live Reload -->
 <script src="http://192.168.56.113:35729/livereload.js"></script>
-<script src="http://192.168.56.113:35730/livereload.js"></script>
   </body>
 </html>
