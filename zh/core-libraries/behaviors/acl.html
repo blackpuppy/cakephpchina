@@ -179,25 +179,25 @@ window.lang = "zh_CN";
 它可以透明地创建 ARO 或者 ACO 对象。</p>
 <p>要使用新的行为，你可以把它加到模型的 $actsAs 属性中。在添加到 actsAs 数组时，你
 可以选择把相关的 Acl 项作为 ARO 或 ACO。缺省的是 ACO:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">));</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>这会把 Acl 行为以 ARO 模式附加(到模型上)。要把 ACL 行为以 ACO 模式加入，使用:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;controlled&#39;</span><span class="p">));</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>对 User 和 Group 模型，通常需要 ACO 和 ARO 两种节点，为此请使用:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;both&#39;</span><span class="p">));</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>你也可以象这样随时附加行为:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;controlled&#39;</span><span class="p">));</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;controlled&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
 <div class="versionchanged">
@@ -212,20 +212,20 @@ AclNode 现在继承于 Model，而不是(之前的) AppModel，而那会导致�
 模型定义一个 parentNode() 方法，才可以使用它。这被 AclBehavior 行为用来判断父
 子(parent-&gt;child)关系。模型的 parentNode() 方法必须返回 null 或者返回一个父模
 型引用:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">parentNode</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">parentNode</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>如果你要设置一个 ACO 或 ARO 节点为模型的父节点，parentNode()方法必须返回 ACO
 或 ARO 节点的别名:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">parentNode</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">parentNode</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="s1">&#39;root_node&#39;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>下面是一个更完整使用 User 模型的例子，这里 User 模型 belongsTo Group 模型:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">parentNode</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">parentNode</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">&amp;&amp;</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
     <span class="p">}</span>
@@ -249,7 +249,7 @@ parentNode 关系就会失败。 AclBehavior 行为使用该数据来构建其�
 <p>AclBehavior 行为也让你获取与一条模型记录相关联的 Acl 节点。在设置了 $model-&gt;id
 之后，你可以 $model-&gt;node() 来获取相关联的 Acl 节点。</p>
 <p>你也可以获取任何数据记录的 Acl 节点，只要传入一个数据数组:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="nv">$node</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">node</span><span class="p">();</span>
 
 <span class="nv">$user</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;User&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -260,7 +260,7 @@ parentNode 关系就会失败。 AclBehavior 行为使用该数据来构建其�
 </div>
 <p>都会返回相同的 Acl 节点信息。</p>
 <p>如果你设置 AclBehavior 行为来创建 ACO 和 ARO 节点，你需要指明你需要的节点类型:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="nv">$node</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">node</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="s1">&#39;Aro&#39;</span><span class="p">);</span>
 
 <span class="nv">$user</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;User&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -387,7 +387,7 @@ parentNode 关系就会失败。 AclBehavior 行为使用该数据来构建其�
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

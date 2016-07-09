@@ -199,20 +199,20 @@ CakePHP 中助件的更多信息，请查看各个助件的章节：</p>
 <p>在 CakePHP 中，你可以通过让控制器知道助件来启用助件。 每个控制器有一个
 <a class="reference internal" href="../controllers.html#Controller::$helpers" title="Controller::$helpers"><tt class="xref php php-attr docutils literal"><span class="pre">$helpers</span></tt></a> 属性，列出视图中可以使用的助件。要在视图中启用
 一个助件，就把助件的名字添加到控制器的 <tt class="docutils literal"><span class="pre">$helpers</span></tt> 数组中:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Form&#39;</span><span class="p">,</span> <span class="s1">&#39;Html&#39;</span><span class="p">,</span> <span class="s1">&#39;Js&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>要添加插件内的助件，可以像 CakePHP 其它地方那样使用 <a class="reference internal" href="../appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Blog.Comment&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>你也可以在动作内添加助件，这样它们就只在这个动作中可用，但在控制器的其它动作中无
 法使用。这会节省那些不需要助件的其它动作的处理能力，同时保持控制器的良好结构:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">bake</span><span class="p">()</span> <span class="p">{</span>
         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">helpers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">&#39;Time&#39;</span><span class="p">;</span>
     <span class="p">}</span>
@@ -225,13 +225,13 @@ CakePHP 中助件的更多信息，请查看各个助件的章节：</p>
 <p>如果需要在所有的控制器中启用一个助件，把助件的名字加入
 <tt class="docutils literal"><span class="pre">/app/Controller/AppController.php</span></tt> 文件(如果不存在就创建它)的 <tt class="docutils literal"><span class="pre">$helpers</span></tt>
 数组中。记住，要引入缺省的 Html 和 Form 助件:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Form&#39;</span><span class="p">,</span> <span class="s1">&#39;Html&#39;</span><span class="p">,</span> <span class="s1">&#39;Js&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>你可以给助件传递选项。这些选项可以用来设置助件的属性值或者改变助件的行为:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AwesomeHelper</span> <span class="k">extends</span> <span class="nx">AppHelper</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AwesomeHelper</span> <span class="k">extends</span> <span class="nx">AppHelper</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">View</span> <span class="nv">$view</span><span class="p">,</span> <span class="nv">$settings</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
         <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="nv">$view</span><span class="p">,</span> <span class="nv">$settings</span><span class="p">);</span>
         <span class="nx">debug</span><span class="p">(</span><span class="nv">$settings</span><span class="p">);</span>
@@ -247,7 +247,7 @@ CakePHP 中助件的更多信息，请查看各个助件的章节：</p>
 <p>助件有一个通用的 <tt class="docutils literal"><span class="pre">className</span></tt> 选项，允许在视图中创建不同类名(译注：即别名，
 <em>alias</em>)的助件。这个特性在你想要替换 <tt class="docutils literal"><span class="pre">$this-&gt;Html</span></tt> 或者其它常用助件为定制的实现
 时很有用:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/PostsController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/PostsController.php</span>
 <span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Html&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -270,7 +270,7 @@ CakePHP 中助件的更多信息，请查看各个助件的章节：</p>
 </div>
 <p>使用助件的设置，让你可以声明式地配置助件，并使配置逻辑与控制器动作分离。如果你有
 不能包含在类声明中的配置选项，你可以在控制器的 beforeRender 回调函数中设置它们:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeRender</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">parent</span><span class="o">::</span><span class="na">beforeRender</span><span class="p">();</span>
         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">helpers</span><span class="p">[</span><span class="s1">&#39;CustomStuff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_getCustomStuffSettings</span><span class="p">();</span>
@@ -283,13 +283,13 @@ CakePHP 中助件的更多信息，请查看各个助件的章节：</p>
 <h2>使用助件<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <p>一旦你已经在控制器中配置好了你要使用哪些助件，每个助件就成为视图中的公有属性。例
 如，如果你启用了助件 <a class="reference internal" href="../core-libraries/helpers/html.html#HtmlHelper" title="HtmlHelper"><tt class="xref php php-class docutils literal"><span class="pre">HtmlHelper</span></tt></a> ，你就可以通过如下方式访问它:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">css</span><span class="p">(</span><span class="s1">&#39;styles&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">css</span><span class="p">(</span><span class="s1">&#39;styles&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>上面的代码调用了 HtmlHelper 的 <tt class="docutils literal"><span class="pre">css</span></tt> 方法。可以使用 <tt class="docutils literal"><span class="pre">$this-&gt;{$helperName}</span></tt> 访
 问任何已加载的助件。有时你可能需要从视图中动态加载助件。你可以使用视图的
 <tt class="xref php php-class docutils literal"><span class="pre">HelperCollection</span></tt> 来做到这一点:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$mediaHelper</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Helpers</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;Media&#39;</span><span class="p">,</span> <span class="nv">$mediaSettings</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$mediaHelper</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Helpers</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;Media&#39;</span><span class="p">,</span> <span class="nv">$mediaSettings</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>HelperCollection 是 <a class="reference internal" href="../core-libraries/collections.html"><em>collection</em></a>，如同在
@@ -308,7 +308,7 @@ CakePHP 的其它地方的用法一样支持集合 API。</p>
 定 CSS 样式的链接。为了使你的逻辑融入 CakePHP 已有的助件结构，你需要在
 <tt class="docutils literal"><span class="pre">/app/View/Helper</span></tt> 目录中创建一个新的类。让我们把我们的助件叫做 LinkHelper 助件。
 实际的 PHP 类文件将类似于:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="cm">/* /app/View/Helper/LinkHelper.php */</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="cm">/* /app/View/Helper/LinkHelper.php */</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppHelper&#39;</span><span class="p">,</span> <span class="s1">&#39;View/Helper&#39;</span><span class="p">);</span>
 
 <span class="k">class</span> <span class="nc">LinkHelper</span> <span class="k">extends</span> <span class="nx">AppHelper</span> <span class="p">{</span>
@@ -327,7 +327,7 @@ CakePHP 的其它地方的用法一样支持集合 API。</p>
 <h3>引入其它助件<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
 <p>你也许会希望使用其它助件中已经存在的功能。为此，你可以使用 <tt class="docutils literal"><span class="pre">$helpers</span></tt> 数组来指
 定要使用的助件，格式如同在控制器中一样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="cm">/* /app/View/Helper/LinkHelper.php (使用其他助件) */</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="cm">/* /app/View/Helper/LinkHelper.php (使用其他助件) */</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppHelper&#39;</span><span class="p">,</span> <span class="s1">&#39;View/Helper&#39;</span><span class="p">);</span>
 
 <span class="k">class</span> <span class="nc">LinkHelper</span> <span class="k">extends</span> <span class="nx">AppHelper</span> <span class="p">{</span>
@@ -349,13 +349,13 @@ CakePHP 的其它地方的用法一样支持集合 API。</p>
 <span id="id7"></span><h3>使用你的助件<a class="headerlink" href="#using-helpers" title="永久链接至标题">¶</a></h3>
 <p>一旦创建了助件，并放进了 <tt class="docutils literal"><span class="pre">/app/View/Helper/</span></tt> 目录，就可以在控制器中用特别的变量
 <a class="reference internal" href="../controllers.html#Controller::$helpers" title="Controller::$helpers"><tt class="xref php php-attr docutils literal"><span class="pre">$helpers</span></tt></a> 来引用它了:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Link&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>只要控制器知道了这个新的类，你就可以在视图中通过访问以这个助件命名的对象来使用它:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;!--</span> <span class="nx">使用新的助件生成链接</span> <span class="o">--&gt;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;!--</span> <span class="nx">使用新的助件生成链接</span> <span class="o">--&gt;</span>
 <span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Link</span><span class="o">-&gt;</span><span class="na">makeEdit</span><span class="p">(</span><span class="s1">&#39;Change this Recipe&#39;</span><span class="p">,</span> <span class="s1">&#39;/recipes/edit/5&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 </div>
@@ -366,7 +366,7 @@ CakePHP 的其它地方的用法一样支持集合 API。</p>
 <p>所有的助件都继承自一个特殊类 AppHelper (就象所有的模型都继承自 AppModel，而所有的
 控制器都继承自 AppController 一样)。要为所有的助件创建功能，创建
 <tt class="docutils literal"><span class="pre">/app/View/Helper/AppHelper.php</span></tt> 这个文件:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Helper&#39;</span><span class="p">,</span> <span class="s1">&#39;View&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Helper&#39;</span><span class="p">,</span> <span class="s1">&#39;View&#39;</span><span class="p">);</span>
 
 <span class="k">class</span> <span class="nc">AppHelper</span> <span class="k">extends</span> <span class="nx">Helper</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">customMethod</span><span class="p">()</span> <span class="p">{</span>
@@ -576,7 +576,7 @@ CakePHP 的其它地方的用法一样支持集合 API。</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

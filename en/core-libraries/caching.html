@@ -236,7 +236,7 @@ also lets you incrementally change the storage as needed.</p>
 File.</p>
 </div>
 <p>Example:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;short&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;short&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;File&#39;</span><span class="p">,</span>
     <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+1 hours&#39;</span><span class="p">,</span>
     <span class="s1">&#39;path&#39;</span> <span class="o">=&gt;</span> <span class="nx">CACHE</span><span class="p">,</span>
@@ -276,7 +276,7 @@ it would be placed in either <tt class="docutils literal"><span class="pre">app/
 as an app/libs or in <tt class="docutils literal"><span class="pre">$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php</span></tt> as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax.</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;custom&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;custom&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CachePack.MyCustomCache&#39;</span><span class="p">,</span>
     <span class="c1">// ...</span>
 <span class="p">));</span>
@@ -416,7 +416,7 @@ FileEngine uses this to delete files containing expired content.</p>
 results that infrequently change, or that are subject to heavy reads into the
 cache. A perfect example of this are the results from <tt class="xref php php-meth docutils literal"><span class="pre">Model::find()</span></tt>.
 A method that uses Cache to store results could look like:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="k">function</span> <span class="nf">newest</span><span class="p">()</span> <span class="p">{</span>
         <span class="nv">$result</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;newest_posts&#39;</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span><span class="p">);</span>
@@ -435,7 +435,7 @@ That is an exercise you can do though.</p>
 <p>As of 2.5 you can accomplish the above much more simply using
 <a class="reference internal" href="#Cache::remember" title="Cache::remember"><tt class="xref php php-meth docutils literal"><span class="pre">Cache::remember()</span></tt></a>. Assuming you are using PHP 5.3 or
 newer, using the <tt class="docutils literal"><span class="pre">remember()</span></tt> method would look like:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="k">function</span> <span class="nf">newest</span><span class="p">()</span> <span class="p">{</span>
         <span class="nv">$model</span> <span class="o">=</span> <span class="nv">$this</span><span class="p">;</span>
@@ -460,7 +460,7 @@ contention, a scenario where two users simultaneously lower the value by one,
 resulting in an incorrect value.</p>
 <p>After setting an integer value, you can manipulate it using
 <a class="reference internal" href="#Cache::increment" title="Cache::increment"><tt class="xref php php-meth docutils literal"><span class="pre">Cache::increment()</span></tt></a> and <a class="reference internal" href="#Cache::decrement" title="Cache::decrement"><tt class="xref php php-meth docutils literal"><span class="pre">Cache::decrement()</span></tt></a>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;initial_count&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Cache</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;initial_count&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
 
 <span class="c1">// Later on</span>
 <span class="nx">Cache</span><span class="o">::</span><span class="na">decrement</span><span class="p">(</span><span class="s1">&#39;initial_count&#39;</span><span class="p">);</span>
@@ -484,7 +484,7 @@ APC, Redis or Memcached instead.</p>
 group or namespace. This is a common requirement for mass-invalidating keys
 whenever some information changes that is shared among all entries in the same
 group. This is possible by declaring the groups in cache configuration:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;site_home&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;site_home&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Redis&#39;</span><span class="p">,</span>
     <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+999 days&#39;</span><span class="p">,</span>
     <span class="s1">&#39;groups&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;comment&#39;</span><span class="p">,</span> <span class="s1">&#39;post&#39;</span><span class="p">)</span>
@@ -498,7 +498,7 @@ we have effectively tagged any key stored into this cache configuration with
 both group names.</p>
 <p>For instance, whenever a new post is added, we could tell the Cache engine to
 remove all entries associated to the <tt class="docutils literal"><span class="pre">post</span></tt> group:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Model/Post.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Model/Post.php</span>
 
 <span class="k">public</span> <span class="k">function</span> <span class="nf">afterSave</span><span class="p">(</span><span class="nv">$created</span><span class="p">,</span> <span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$created</span><span class="p">)</span> <span class="p">{</span>
@@ -512,7 +512,7 @@ remove all entries associated to the <tt class="docutils literal"><span class="p
 </div>
 <p><a class="reference internal" href="#Cache::groupConfigs" title="Cache::groupConfigs"><tt class="xref php php-func docutils literal"><span class="pre">Cache::groupConfigs()</span></tt></a> can be used to retrieve mapping between
 group and configurations, i.e.: having the same group:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Model/Post.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Model/Post.php</span>
 
 <span class="sd">/**</span>
 <span class="sd"> * A variation of previous example that clears all Cache configurations</span>
@@ -562,7 +562,7 @@ doesn&#8217;t exist. The contents of the cache might evaluate false, so
 make sure you use the strict comparison operators: <tt class="docutils literal"><span class="pre">===</span></tt> or
 <tt class="docutils literal"><span class="pre">!==</span></tt>.</p>
 <p>For example:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$cloud</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;cloud&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$cloud</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;cloud&#39;</span><span class="p">);</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nv">$cloud</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nv">$cloud</span><span class="p">;</span>
@@ -587,7 +587,7 @@ specify an optional configuration to store the cache in as well. If
 no <tt class="docutils literal"><span class="pre">$config</span></tt> is specified, default will be used. <tt class="docutils literal"><span class="pre">Cache::write()</span></tt>
 can store any type of object and is ideal for storing results of
 model finds:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">((</span><span class="nv">$posts</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">))</span> <span class="o">===</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">((</span><span class="nv">$posts</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">))</span> <span class="o">===</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$posts</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
     <span class="nx">Cache</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nv">$posts</span><span class="p">);</span>
 <span class="p">}</span>
@@ -613,7 +613,7 @@ settings for one operation (usually a read or write). If you use
 also use <tt class="docutils literal"><span class="pre">Cache::set()</span></tt> before reading the data back in. If you
 fail to do so, the default settings will be used when the cache key
 is read.</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+30 days&#39;</span><span class="p">));</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Cache</span><span class="o">::</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+30 days&#39;</span><span class="p">));</span>
 <span class="nx">Cache</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
 
 <span class="c1">// Later on</span>
@@ -695,7 +695,7 @@ and the results stored in the cache at the provided key.</p>
 <p>For example, you often want to cache query results. You could use
 <tt class="docutils literal"><span class="pre">remember()</span></tt> to make this simple. Assuming you are using PHP 5.3 or
 newer:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Articles</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Articles</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">function</span> <span class="nf">all</span><span class="p">()</span> <span class="p">{</span>
         <span class="nv">$model</span> <span class="o">=</span> <span class="nv">$this</span><span class="p">;</span>
         <span class="k">return</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">remember</span><span class="p">(</span><span class="s1">&#39;all_articles&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$model</span><span class="p">){</span>
@@ -818,7 +818,7 @@ newer:</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

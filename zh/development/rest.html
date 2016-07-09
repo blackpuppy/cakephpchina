@@ -181,7 +181,7 @@ API 易用、不受限制的访问可以帮助你的平台被接受，允许与�
 一些默认的路由。确保 <tt class="docutils literal"><span class="pre">mapResources()</span></tt> 方法出现在
 <tt class="docutils literal"><span class="pre">require</span> <span class="pre">CAKE</span> <span class="pre">.</span> <span class="pre">'Config'</span> <span class="pre">.</span> <span class="pre">DS</span> <span class="pre">.</span> <span class="pre">'routes.php';</span></tt> 和其它会改变路由的路由。如果要
 允许以 REST 方式访问菜单(<em>recipe</em>)数据库，就要象下面这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//In app/Config/routes.php...</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">//In app/Config/routes.php...</span>
 
 <span class="nx">Router</span><span class="o">::</span><span class="na">mapResources</span><span class="p">(</span><span class="s1">&#39;recipes&#39;</span><span class="p">);</span>
 <span class="nx">Router</span><span class="o">::</span><span class="na">parseExtensions</span><span class="p">();</span>
@@ -238,7 +238,7 @@ API 易用、不受限制的访问可以帮助你的平台被接受，允许与�
 REST 客户端。只需设置 _method 为要模拟的 HTTP 请求方法的名称。</p>
 <p>一旦路由器设置好，映射 REST 请求到某些控制器动作(<em>controller action</em>)，我们就
 可以继续创建控制器动作内的逻辑。基本的控制器可以象这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Controller/RecipesController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Controller/RecipesController.php</span>
 <span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;RequestHandler&#39;</span><span class="p">);</span>
@@ -309,7 +309,7 @@ REST 客户端。只需设置 _method 为要模拟的 HTTP 请求方法的名称
 是使用视图文件。把 RecipesController 控制器的 REST 视图放在
 <tt class="docutils literal"><span class="pre">app/View/recipes/xml</span></tt> 目录中。也可以使用 <a class="reference internal" href="../core-utility-libraries/xml.html#Xml" title="Xml"><tt class="xref php php-class docutils literal"><span class="pre">Xml</span></tt></a> 类，在这些视图中
 进行快捷的 XML 输出。index 视图可以象下面这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/View/Recipes/xml/index.ctp</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/View/Recipes/xml/index.ctp</span>
 <span class="c1">// 对 $recipes 数组进行格式化和处理。</span>
 <span class="nv">$xml</span> <span class="o">=</span> <span class="nx">Xml</span><span class="o">::</span><span class="na">fromArray</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;response&#39;</span> <span class="o">=&gt;</span> <span class="nv">$recipes</span><span class="p">));</span>
 <span class="k">echo</span> <span class="nv">$xml</span><span class="o">-&gt;</span><span class="na">asXML</span><span class="p">();</span>
@@ -319,7 +319,7 @@ REST 客户端。只需设置 _method 为要模拟的 HTTP 请求方法的名称
 类型的视图助件。因为使用 XML 为内容类型，没有内置的助件，不过如果你要创建一个，
 就会在这些视图中自动加载以供使用。</p>
 <p>最终渲染的 XML 会象这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">recipes</span><span class="o">&gt;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nx">recipes</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="nx">recipe</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;234&quot;</span> <span class="nx">created</span><span class="o">=</span><span class="s2">&quot;2008-06-13&quot;</span> <span class="nx">modified</span><span class="o">=</span><span class="s2">&quot;2008-06-14&quot;</span><span class="o">&gt;</span>
         <span class="o">&lt;</span><span class="nx">author</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;23423&quot;</span> <span class="nx">first_name</span><span class="o">=</span><span class="s2">&quot;Billy&quot;</span> <span class="nx">last_name</span><span class="o">=</span><span class="s2">&quot;Bob&quot;</span><span class="o">&gt;&lt;/</span><span class="nx">author</span><span class="o">&gt;</span>
         <span class="o">&lt;</span><span class="nx">comment</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;245&quot;</span> <span class="nx">body</span><span class="o">=</span><span class="s2">&quot;Yummy yummmy&quot;</span><span class="o">&gt;&lt;/</span><span class="nx">comment</span><span class="o">&gt;</span>
@@ -354,7 +354,7 @@ CakePHP 中，<a class="reference internal" href="../core-libraries/components/r
 <p>如果默认的 REST 路由对应用程序不适用，可以用 <tt class="xref php php-meth docutils literal"><span class="pre">Router::resourceMap()</span></tt>
 方法改变。该方法让你可以设置 <a class="reference internal" href="routing.html#Router::mapResources" title="Router::mapResources"><tt class="xref php php-meth docutils literal"><span class="pre">Router::mapResources()</span></tt></a> 方法设置的默认
 路由。在使用该方法时需要设置 <em>所有</em> 要使用的默认值:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">resourceMap</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Router</span><span class="o">::</span><span class="na">resourceMap</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
@@ -377,7 +377,7 @@ CakePHP 中，<a class="reference internal" href="../core-libraries/components/r
 </div>
 <p>你可以为 <a class="reference internal" href="routing.html#Router::mapResources" title="Router::mapResources"><tt class="xref php php-meth docutils literal"><span class="pre">Router::mapResources()</span></tt></a> 方法在 <tt class="docutils literal"><span class="pre">$options</span></tt> 数组中指定
 <tt class="docutils literal"><span class="pre">connectOptions</span></tt> 键，来提供 <a class="reference internal" href="routing.html#Router::connect" title="Router::connect"><tt class="xref php php-meth docutils literal"><span class="pre">Router::connect()</span></tt></a> 方法使用的自定义设置:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">mapResources</span><span class="p">(</span><span class="s1">&#39;books&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Router</span><span class="o">::</span><span class="na">mapResources</span><span class="p">(</span><span class="s1">&#39;books&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;connectOptions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;routeClass&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ApiRoute&#39;</span><span class="p">,</span>
     <span class="p">)</span>
@@ -478,7 +478,7 @@ CakePHP 中，<a class="reference internal" href="../core-libraries/components/r
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

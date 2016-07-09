@@ -182,7 +182,7 @@ window.lang = "zh_CN";
 <p>如介绍中说所说，<tt class="docutils literal"><span class="pre">AppController</span></tt> 控制器是应用程序中所有控制器的父类。
 <tt class="docutils literal"><span class="pre">AppController</span></tt> 本身扩展了 CakePHP 核心库中的 <a class="reference internal" href="#Controller" title="Controller"><tt class="xref php php-class docutils literal"><span class="pre">Controller</span></tt></a> 类。
 AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Controller/AppController.php</span></tt> 中，象这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -205,7 +205,7 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 <p>如果你在你的 <tt class="docutils literal"><span class="pre">AppController</span></tt> 中定义 <a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><tt class="xref php php-attr docutils literal"><span class="pre">$helpers</span></tt></a>，记住加
 入默认的 Html 和 Form 助件。</p>
 <p>也请记住，最好在控制器子类的回调方法中调用 <tt class="docutils literal"><span class="pre">AppController</span></tt> 的回调方法:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
@@ -227,7 +227,7 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 们在线面包店的例子，我们的 RecipesController 也许会有 <tt class="docutils literal"><span class="pre">view()</span></tt>，<tt class="docutils literal"><span class="pre">share()</span></tt> 和
 <tt class="docutils literal"><span class="pre">search()</span></tt> 动作。控制器会是 <tt class="docutils literal"><span class="pre">/app/Controller/RecipesController.php</span></tt>，其内容
 如下:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1"># /app/Controller/RecipesController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1"># /app/Controller/RecipesController.php</span>
 
 <span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
@@ -259,7 +259,7 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 <p>当控制器方法用于 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 时，你经常要返回非字符
 串数据。如果你有用于正常网页请求 + requestAction 的控制器方法，你应当在返回前检
 查请求类型:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">popular</span><span class="p">()</span> <span class="p">{</span>
         <span class="nv">$popular</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">popular</span><span class="p">();</span>
         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;requested&#39;</span><span class="p">]))</span> <span class="p">{</span>
@@ -324,7 +324,7 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 <tt class="descclassname">Controller::</tt><tt class="descname">set</tt><big>(</big><em>string $var</em>, <em>mixed $value</em><big>)</big><a class="headerlink" href="#Controller::set" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="#Controller::set" title="Controller::set"><tt class="xref php php-meth docutils literal"><span class="pre">set()</span></tt></a> 方法是从控制器传递数据到视图的主要方式。一旦
 用了 <a class="reference internal" href="#Controller::set" title="Controller::set"><tt class="xref php php-meth docutils literal"><span class="pre">set()</span></tt></a>，变量就可以在视图中访问:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 首先从控制器传递数据:</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 首先从控制器传递数据:</span>
 
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="s1">&#39;pink&#39;</span><span class="p">);</span>
 
@@ -336,7 +336,7 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 </div>
 <p><a class="reference internal" href="#Controller::set" title="Controller::set"><tt class="xref php php-meth docutils literal"><span class="pre">set()</span></tt></a> 方法也接受关联数组作为其第一个参数。这经常是
 快速为视图设置一组信息的方法:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;color&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pink&#39;</span><span class="p">,</span>
     <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;sugar&#39;</span><span class="p">,</span>
     <span class="s1">&#39;base_price&#39;</span> <span class="o">=&gt;</span> <span class="mf">23.95</span>
@@ -348,7 +348,7 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 </pre></div>
 </div>
 <p>属性 <tt class="docutils literal"><span class="pre">$pageTitle</span></tt> 不再存在，用 <a class="reference internal" href="#Controller::set" title="Controller::set"><tt class="xref php php-meth docutils literal"><span class="pre">set()</span></tt></a> 设置标题:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;title_for_layout&#39;</span><span class="p">,</span> <span class="s1">&#39;这是页面标题&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;title_for_layout&#39;</span><span class="p">,</span> <span class="s1">&#39;这是页面标题&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>从 2.5 版本开始，变量 $title_for_layout 被废弃，请不要再使用，而使用视图代码
@@ -364,7 +364,7 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 最终用户。</p>
 <p>渲染使用的默认视图文件由约定决定。如果请求的是 RecipesController 的
 <tt class="docutils literal"><span class="pre">search()</span></tt> 动作，视图文件 /app/View/Recipes/search.ctp 将被渲染:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 <span class="c1">// ...</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">search</span><span class="p">()</span> <span class="p">{</span>
         <span class="c1">// 渲染视图 /View/Recipes/search.ctp</span>
@@ -379,7 +379,7 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 视图文件。</p>
 <p>如果 <tt class="docutils literal"><span class="pre">$view</span></tt> 以 &#8216;/&#8217; 开头，就被认为是相对于 <tt class="docutils literal"><span class="pre">/app/View</span></tt> 的视图或者元素文
 件。这可以直接渲染元素，在 AJAX 请求中很有用。</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 渲染 /View/Elements/ajaxreturn.ctp 中的元素</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 渲染 /View/Elements/ajaxreturn.ctp 中的元素</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;/Elements/ajaxreturn&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -391,7 +391,7 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 <p>在控制器中，你也许想要渲染与约定不同的视图。为此可以直接调用
 <a class="reference internal" href="#Controller::render" title="Controller::render"><tt class="xref php php-meth docutils literal"><span class="pre">render()</span></tt></a>。一旦调用了 <a class="reference internal" href="#Controller::render" title="Controller::render"><tt class="xref php php-meth docutils literal"><span class="pre">render()</span></tt></a>，
 CakePHP 就不会试图再次渲染该视图了:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">my_action</span><span class="p">()</span> <span class="p">{</span>
         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;custom_file&#39;</span><span class="p">);</span>
     <span class="p">}</span>
@@ -402,7 +402,7 @@ CakePHP 就不会试图再次渲染该视图了:</p>
 <tt class="docutils literal"><span class="pre">app/View/Posts/my_action.ctp</span></tt>。</p>
 <p>也可以用下面的语法渲染插件中的视图:
 <tt class="docutils literal"><span class="pre">$this-&gt;render('插件名称.插件控制器/定制视图文件')</span></tt> 。例如:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">my_action</span><span class="p">()</span> <span class="p">{</span>
         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;Users.UserDetails/custom_file&#39;</span><span class="p">);</span>
     <span class="p">}</span>
@@ -420,7 +420,7 @@ CakePHP 就不会试图再次渲染该视图了:</p>
 <dd><p>最常用到的流程控制方法是 <a class="reference internal" href="#Controller::redirect" title="Controller::redirect"><tt class="xref php php-meth docutils literal"><span class="pre">redirect()</span></tt></a> 方法。这个方法
 的第一个参数接受的是 CakePHP 相对网址的形式。当一个用户成功地提交了一份订单
 之后，也许要引导他们到收据页面。</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">place_order</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">place_order</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 这里是确认订单的逻辑</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$success</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span>
@@ -434,12 +434,12 @@ CakePHP 就不会试图再次渲染该视图了:</p>
 </pre></div>
 </div>
 <p>$url 参数可以使用相对或者绝对路径:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">&#39;/orders/thanks&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">&#39;/orders/thanks&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">&#39;http://www.example.com&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>也可以传递数据给动作:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">));</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">));</span>
 </pre></div>
 </div>
 <p><a class="reference internal" href="#Controller::redirect" title="Controller::redirect"><tt class="xref php php-meth docutils literal"><span class="pre">redirect()</span></tt></a> 的第二个参数让你可以指定伴随跳转的 HTTP
@@ -447,13 +447,13 @@ CakePHP 就不会试图再次渲染该视图了:</p>
 页面)。</p>
 <p>该方法会在跳转后调用 <tt class="docutils literal"><span class="pre">exit()</span></tt>，除非设置第三个参数为 <tt class="docutils literal"><span class="pre">false</span></tt>。</p>
 <p>如果需要跳转到 referer 页面，可以用:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">referer</span><span class="p">());</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">referer</span><span class="p">());</span>
 </pre></div>
 </div>
 <p>该方法也支持命名的参数。如果要跳转到类似
 <tt class="docutils literal"><span class="pre">http://www.example.com/orders/confirm/product:pizza/quantity:5</span></tt> 的网址，
 可以用:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;orders&#39;</span><span class="p">,</span>
     <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;confirm&#39;</span><span class="p">,</span>
     <span class="s1">&#39;product&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pizza&#39;</span><span class="p">,</span>
@@ -462,7 +462,7 @@ CakePHP 就不会试图再次渲染该视图了:</p>
 </pre></div>
 </div>
 <p>使用查询字符串(<em>query string</em>)和哈希(<em>hash</em>)的例子象这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;orders&#39;</span><span class="p">,</span>
     <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;confirm&#39;</span><span class="p">,</span>
     <span class="s1">&#39;?&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -474,7 +474,7 @@ CakePHP 就不会试图再次渲染该视图了:</p>
 </pre></div>
 </div>
 <p>生成的网址为:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">http</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">orders</span><span class="o">/</span><span class="nx">confirm</span><span class="o">?</span><span class="nx">product</span><span class="o">=</span><span class="nx">pizza</span><span class="o">&amp;</span><span class="nx">quantity</span><span class="o">=</span><span class="mi">5</span><span class="c1">#top</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">http</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">example</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">orders</span><span class="o">/</span><span class="nx">confirm</span><span class="o">?</span><span class="nx">product</span><span class="o">=</span><span class="nx">pizza</span><span class="o">&amp;</span><span class="nx">quantity</span><span class="o">=</span><span class="mi">5</span><span class="c1">#top</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -538,7 +538,7 @@ CakePHP，那么 <a class="reference internal" href="#Controller::constructClass
 <tt class="descclassname">Controller::</tt><tt class="descname">referer</tt><big>(</big><em>mixed $default = null</em>, <em>boolean $local = false</em><big>)</big><a class="headerlink" href="#Controller::referer" title="永久链接至目标">¶</a></dt>
 <dd><p>返回当前请求的引用网址(<em>referring URL</em>)。如果 HTTP_REFERER 无法从(请求的)头
 部信息中读出，参数 <tt class="docutils literal"><span class="pre">$default</span></tt> 可以用来提供缺省的网址。所以，与其这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// 删除的代码在这里，然后...</span>
         <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">referer</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span> <span class="p">{</span>
@@ -550,7 +550,7 @@ CakePHP，那么 <a class="reference internal" href="#Controller::constructClass
 </pre></div>
 </div>
 <p>可以这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// 删除的代码在这里，然后...</span>
         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span>
@@ -570,7 +570,7 @@ CakePHP，那么 <a class="reference internal" href="#Controller::constructClass
 <dd><p>用来告诉用户的 <strong>浏览器</strong> 不要缓存当前请求的结果。这不同于后面章节介绍的视图
 缓存。</p>
 <p>在此作用下发送的(响应)头部信息为:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Expires</span><span class="o">:</span> <span class="nx">Mon</span><span class="p">,</span> <span class="mi">26</span> <span class="nx">Jul</span> <span class="mi">1997</span> <span class="mo">05</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="nx">GMT</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Expires</span><span class="o">:</span> <span class="nx">Mon</span><span class="p">,</span> <span class="mi">26</span> <span class="nx">Jul</span> <span class="mi">1997</span> <span class="mo">05</span><span class="o">:</span><span class="mo">00</span><span class="o">:</span><span class="mo">00</span> <span class="nx">GMT</span>
 <span class="nx">Last</span><span class="o">-</span><span class="nx">Modified</span><span class="o">:</span> <span class="p">[</span><span class="nb">current</span> <span class="nx">datetime</span><span class="p">]</span> <span class="nx">GMT</span>
 <span class="nx">Cache</span><span class="o">-</span><span class="nx">Control</span><span class="o">:</span> <span class="nx">no</span><span class="o">-</span><span class="nx">store</span><span class="p">,</span> <span class="nx">no</span><span class="o">-</span><span class="nx">cache</span><span class="p">,</span> <span class="nx">must</span><span class="o">-</span><span class="nx">revalidate</span>
 <span class="nx">Cache</span><span class="o">-</span><span class="nx">Control</span><span class="o">:</span> <span class="nx">post</span><span class="o">-</span><span class="nx">check</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">pre</span><span class="o">-</span><span class="nx">check</span><span class="o">=</span><span class="mi">0</span>
@@ -587,7 +587,7 @@ CakePHP，那么 <a class="reference internal" href="#Controller::constructClass
 员也许想要能够查询订单，以便知道发送什么货物。可以用 CakePHP 的
 <a class="reference internal" href="core-libraries/helpers/form.html#FormHelper" title="FormHelper"><tt class="xref php php-class docutils literal"><span class="pre">FormHelper</span></tt></a> 和 <a class="reference internal" href="core-libraries/helpers/html.html#HtmlHelper" title="HtmlHelper"><tt class="xref php php-class docutils literal"><span class="pre">HtmlHelper</span></tt></a> 来快速创建基于 Order 模型
 的表单。然后控制器的动作就能够用从该表单提交的数据创建出查找条件:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$conditions</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">postConditions</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
     <span class="nv">$orders</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Order</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="nb">compact</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">));</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;orders&#39;</span><span class="p">,</span> <span class="nv">$orders</span><span class="p">);</span>
@@ -598,7 +598,7 @@ CakePHP，那么 <a class="reference internal" href="#Controller::constructClass
 postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方法的数组。在此例
 中，这会是 <tt class="docutils literal"><span class="pre">array('Order.destination'</span> <span class="pre">=&gt;</span> <span class="pre">'Old</span> <span class="pre">Towne</span> <span class="pre">Bakery')</span></tt>。</p>
 <p>如果你要在条件间使用不同的 SQL 运算符，用第二个参数指定:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="cm">/*</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="cm">/*</span>
 <span class="cm">$this-&gt;request-&gt;data 的内容</span>
 <span class="cm">array(</span>
 <span class="cm">    &#39;Order&#39; =&gt; array(</span>
@@ -655,7 +655,7 @@ postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方�
 <p><a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 最好和(缓存的)元素一起使用 —— 作为
 一种在渲染前为元素获取数据的方法。让我们看一个把&#8221;近期评论&#8221;的元素放入布局的例
 子。首先我们要增加一个控制器函数来返回数据:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Controller/CommentsController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Controller/CommentsController.php</span>
 <span class="k">class</span> <span class="nc">CommentsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">latest</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;requested&#39;</span><span class="p">]))</span> <span class="p">{</span>
@@ -674,7 +674,7 @@ postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方�
 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 方法可以直接从网址访问，这样通常不
 好。</p>
 <p>如果我们现在增加一个简单的元素来调用此函数:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// View/Elements/latest_comments.ctp</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// View/Elements/latest_comments.ctp</span>
 
 <span class="nv">$comments</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">requestAction</span><span class="p">(</span><span class="s1">&#39;/comments/latest&#39;</span><span class="p">);</span>
 <span class="k">foreach</span> <span class="p">(</span><span class="nv">$comments</span> <span class="k">as</span> <span class="nv">$comment</span><span class="p">)</span> <span class="p">{</span>
@@ -683,20 +683,20 @@ postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方�
 </pre></div>
 </div>
 <p>然后我们就可以象下面这样，把这个元素放在任何地方来得到输出:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">element</span><span class="p">(</span><span class="s1">&#39;latest_comments&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">element</span><span class="p">(</span><span class="s1">&#39;latest_comments&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>用这样的写法，任何时候元素被渲染，都会有一个请求被提交到控制器来获取数据，数
 据会被处理并返回。当然，与上面的警告相一致，最好使用元素缓存，来避免不必要的
 处理。这样修改对元素的调用:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">element</span><span class="p">(</span><span class="s1">&#39;latest_comments&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;cache&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">element</span><span class="p">(</span><span class="s1">&#39;latest_comments&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;cache&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>只要缓存的元素视图文件还存在并有效，<a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a>
 就不会被调用。</p>
 <p>另外，现在 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 接受基于数组的 cake 风格
 的网址:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">requestAction</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">requestAction</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;articles&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;featured&#39;</span><span class="p">),</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;return&#39;</span><span class="p">)</span>
 <span class="p">);</span>
@@ -710,12 +710,12 @@ postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方�
 数组(requestAction 的第二个参数)与 <tt class="docutils literal"><span class="pre">Controller::params</span></tt> 成员数组合并，而不
 会把命名参数数组明确地放在 &#8216;named&#8217; 键中；<tt class="docutils literal"><span class="pre">$option</span></tt> 数组中其它成员也可以从
 请求的动作的 <tt class="docutils literal"><span class="pre">Controller::params</span></tt> 数组中得到:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">requestAction</span><span class="p">(</span><span class="s1">&#39;/articles/featured/limit:3&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">requestAction</span><span class="p">(</span><span class="s1">&#39;/articles/featured/limit:3&#39;</span><span class="p">);</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">requestAction</span><span class="p">(</span><span class="s1">&#39;/articles/view/5&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>以数组形式在 requestAction 中就会是:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">requestAction</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">requestAction</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;articles&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;featured&#39;</span><span class="p">),</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;named&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">))</span>
 <span class="p">);</span>
@@ -742,7 +742,7 @@ postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方�
 <tt class="descclassname">Controller::</tt><tt class="descname">loadModel</tt><big>(</big><em>string $modelClass</em>, <em>mixed $id</em><big>)</big><a class="headerlink" href="#Controller::loadModel" title="永久链接至目标">¶</a></dt>
 <dd><p>当要使用的模型不是控制器的缺省模型或者关联模型时，
 <a class="reference internal" href="#Controller::loadModel" title="Controller::loadModel"><tt class="xref php php-meth docutils literal"><span class="pre">loadModel()</span></tt></a> 函数就很方便:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadModel</span><span class="p">(</span><span class="s1">&#39;Article&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadModel</span><span class="p">(</span><span class="s1">&#39;Article&#39;</span><span class="p">);</span>
 <span class="nv">$recentArticles</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span>
     <span class="s1">&#39;all&#39;</span><span class="p">,</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Article.created DESC&#39;</span><span class="p">)</span>
@@ -766,7 +766,7 @@ postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方�
 <dd><p><a class="reference internal" href="#Controller::$name" title="Controller::$name"><tt class="xref php php-attr docutils literal"><span class="pre">$name</span></tt></a> 属性应当置为控制器名称。通常这只是控制器使用
 的主要模型的复数形式。该属性可以省略，如果 CakePHP 不转换(<em>inflecting</em>)它的
 话:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// $name 控制器属性用法示例</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// $name 控制器属性用法示例</span>
 <span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
    <span class="k">public</span> <span class="nv">$name</span> <span class="o">=</span> <span class="s1">&#39;Recipes&#39;</span><span class="p">;</span>
 <span class="p">}</span>
@@ -815,7 +815,7 @@ postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方�
 多关于这些类的信息，就请查看本手册后面的相关章节。</p>
 <p>让我们来看看如何让 CakePHP 的 <a class="reference internal" href="#Controller" title="Controller"><tt class="xref php php-class docutils literal"><span class="pre">Controller</span></tt></a> 知道你打算使用额外的
 MVC 类:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$uses</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Recipe&#39;</span><span class="p">,</span> <span class="s1">&#39;User&#39;</span><span class="p">);</span>
     <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Js&#39;</span><span class="p">);</span>
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;RequestHandler&#39;</span><span class="p">);</span>
@@ -854,7 +854,7 @@ MVC 类:</p>
 <em class="property">property </em><tt class="descclassname">Controller::$</tt><tt class="descname">paginate</tt><a class="headerlink" href="#Controller::$paginate" title="永久链接至目标">¶</a></dt>
 <dd><p>paginate 属性是废弃了的兼容性属性。用它来加载和配置
 <a class="reference internal" href="core-libraries/components/pagination.html#PaginatorComponent" title="PaginatorComponent"><tt class="xref php php-class docutils literal"><span class="pre">PaginatorComponent</span></tt></a>。建议你更新你的代码，使用正常的组件设置:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Paginator&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;Article&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -986,7 +986,7 @@ MVC 类:</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

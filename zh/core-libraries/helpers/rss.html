@@ -187,7 +187,7 @@ extension .rss to <tt class="docutils literal"><span class="pre">posts/index</sp
 Before we jump too far ahead trying to get our webservice up and
 running we need to do a few things. First parseExtensions needs to
 be activated, this is done in <tt class="docutils literal"><span class="pre">app/Config/routes.php</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Router</span><span class="o">::</span><span class="na">parseExtensions</span><span class="p">(</span><span class="s1">&#39;rss&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Router</span><span class="o">::</span><span class="na">parseExtensions</span><span class="p">(</span><span class="s1">&#39;rss&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>In the call above we’ve activated the .rss extension. When using
@@ -201,12 +201,12 @@ add in the rss-specific code.</p>
 <h3>Controller Code<a class="headerlink" href="#controller-code" title="永久链接至标题">¶</a></h3>
 <p>It is a good idea to add RequestHandler to your PostsController&#8217;s
 $components array. This will allow a lot of automagic to occur:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;RequestHandler&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;RequestHandler&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Our view will also use the <a class="reference internal" href="text.html#TextHelper" title="TextHelper"><tt class="xref php php-class docutils literal"><span class="pre">TextHelper</span></tt></a> for formatting, so that
 should be added to the controller as well:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Text&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Text&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Before we can make an RSS version of our posts/index we need to get
@@ -218,7 +218,7 @@ for now if you have a different set of logic for the data used to
 make the RSS feed and the data for the html view you can use the
 <tt class="xref php php-meth docutils literal"><span class="pre">RequestHandler::isRss()</span></tt> method, otherwise your controller can stay
 the same:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Modify the Posts Controller action that corresponds to</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Modify the Posts Controller action that corresponds to</span>
 <span class="c1">// the action which deliver the rss feed, which is the</span>
 <span class="c1">// index action in our example</span>
 
@@ -243,7 +243,7 @@ the same:</p>
 <h3>Layout<a class="headerlink" href="#layout" title="永久链接至标题">¶</a></h3>
 <p>An Rss layout is very simple, put the following contents in
 <tt class="docutils literal"><span class="pre">app/View/Layouts/rss/default.ctp</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$documentData</span><span class="p">))</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$documentData</span><span class="p">))</span> <span class="p">{</span>
     <span class="nv">$documentData</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
 <span class="p">}</span>
 <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$channelData</span><span class="p">))</span> <span class="p">{</span>
@@ -275,7 +275,7 @@ layout, these contain all the metadata for our RSS feed. This is
 done by using the <tt class="xref php php-meth docutils literal"><span class="pre">View::set()`</span></tt> method which is analogous to the
 Controller::set() method. Here though we are passing the channel&#8217;s
 metadata back to the layout:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;channelData&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;channelData&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="nx">__</span><span class="p">(</span><span class="s2">&quot;Most Recent Posts&quot;</span><span class="p">),</span>
     <span class="s1">&#39;link&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span>
     <span class="s1">&#39;description&#39;</span> <span class="o">=&gt;</span> <span class="nx">__</span><span class="p">(</span><span class="s2">&quot;Most recent posts.&quot;</span><span class="p">),</span>
@@ -301,7 +301,7 @@ associative array into an element for each key value pair.</p>
 <p class="last">You will need to modify the $postLink variable as appropriate to
 your application.</p>
 </div>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// You should import Sanitize</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// You should import Sanitize</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Sanitize&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
 
 <span class="k">foreach</span> <span class="p">(</span><span class="nv">$posts</span> <span class="k">as</span> <span class="nv">$post</span><span class="p">)</span> <span class="p">{</span>
@@ -631,7 +631,7 @@ set of <tt class="docutils literal"><span class="pre">&lt;item</span> <span clas
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

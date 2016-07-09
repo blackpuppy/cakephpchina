@@ -219,7 +219,7 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
 <p class="last">你必须指定使用哪个引擎。<strong>不</strong> 会以文件（缓存）为默认值。</p>
 </div>
 <p>例如:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;short&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;short&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;File&#39;</span><span class="p">,</span>
     <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+1 hours&#39;</span><span class="p">,</span>
     <span class="s1">&#39;path&#39;</span> <span class="o">=&gt;</span> <span class="nx">CACHE</span><span class="p">,</span>
@@ -254,7 +254,7 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
 <tt class="docutils literal"><span class="pre">app/Lib/Cache/Engine/MyCustomCacheEngine.php</span></tt> 作为 app/libs，或者在
 <tt class="docutils literal"><span class="pre">$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php</span></tt> 作为插件的一部分。插件的缓存
 配置需要使用插件的点语法。:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;custom&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;custom&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CachePack.MyCustomCache&#39;</span><span class="p">,</span>
     <span class="c1">// ...</span>
 <span class="p">));</span>
@@ -386,7 +386,7 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
 <p>你可以把不经常变化的结果、或者被大量读取的结果放入缓存，从而极大地改善应用程序的
 性能。一个绝佳的例子是从 <tt class="xref php php-meth docutils literal"><span class="pre">Model::find()</span></tt> 返回的结果。一个用缓存保存结果
 的方法可以象下面这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="k">function</span> <span class="nf">newest</span><span class="p">()</span> <span class="p">{</span>
         <span class="nv">$result</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;newest_posts&#39;</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span><span class="p">);</span>
@@ -403,7 +403,7 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
 的方法。不过这可以作为你的一个练习。</p>
 <p>在 2.5 版本中，你可以用 <a class="reference internal" href="#Cache::remember" title="Cache::remember"><tt class="xref php php-meth docutils literal"><span class="pre">Cache::remember()</span></tt></a> 更简单地实现上面的代码。
 假设你使用PHP 5.3或更高版本，使用 <tt class="docutils literal"><span class="pre">remember()</span></tt> 方法就象这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="k">function</span> <span class="nf">newest</span><span class="p">()</span> <span class="p">{</span>
         <span class="nv">$model</span> <span class="o">=</span> <span class="nv">$this</span><span class="p">;</span>
@@ -425,7 +425,7 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
 这些值很重要，因为这减少了竞争的风险，即两个用户同时把值减一，导致不正确的值。</p>
 <p>在设置一个整数值之后，你可以用 <a class="reference internal" href="#Cache::increment" title="Cache::increment"><tt class="xref php php-meth docutils literal"><span class="pre">Cache::increment()</span></tt></a> 和
 <a class="reference internal" href="#Cache::decrement" title="Cache::decrement"><tt class="xref php php-meth docutils literal"><span class="pre">Cache::decrement()</span></tt></a> 方法来对它进行操作:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;initial_count&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Cache</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;initial_count&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
 
 <span class="c1">// 然后</span>
 <span class="nx">Cache</span><span class="o">::</span><span class="na">decrement</span><span class="p">(</span><span class="s1">&#39;initial_count&#39;</span><span class="p">);</span>
@@ -447,7 +447,7 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
 <p>有时你想要把多个缓存项标记为属于某个组或者命名空间。这是一个常见的需求，每当同一
 组内的所有项共享的某些信息发生变化时，就使这些键一起无效。这可以通过在缓存配置中
 声明分组实现:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;site_home&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Cache</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;site_home&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Redis&#39;</span><span class="p">,</span>
     <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+999 days&#39;</span><span class="p">,</span>
     <span class="s1">&#39;groups&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;comment&#39;</span><span class="p">,</span> <span class="s1">&#39;post&#39;</span><span class="p">)</span>
@@ -458,7 +458,7 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
 中时，又要自动使该缓存无效。增加了分组 <tt class="docutils literal"><span class="pre">comment</span></tt> 和 <tt class="docutils literal"><span class="pre">post</span></tt> 之后，在效果上我们
 就把存入这个缓存配置的任意键标记上这两个组的名字。</p>
 <p>例如，每添加一个新的帖子，我们可以让缓存引擎删除所有与 <tt class="docutils literal"><span class="pre">post</span></tt> 分组相联系的项:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Model/Post.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Model/Post.php</span>
 
 <span class="k">public</span> <span class="k">function</span> <span class="nf">afterSave</span><span class="p">(</span><span class="nv">$created</span><span class="p">,</span> <span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$created</span><span class="p">)</span> <span class="p">{</span>
@@ -472,7 +472,7 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
 </div>
 <p><a class="reference internal" href="#Cache::groupConfigs" title="Cache::groupConfigs"><tt class="xref php php-func docutils literal"><span class="pre">Cache::groupConfigs()</span></tt></a> 可以用来读取分组和配置之间的映射，即，具有相同
 的组:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Model/Post.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Model/Post.php</span>
 
 <span class="sd">/**</span>
 <span class="sd"> * 前一个例子的另一种写法，清除所有具有相同分组的缓存配置</span>
@@ -514,7 +514,7 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
 会返回缓存的值，如果缓存已过期或不存在，就返回 <tt class="docutils literal"><span class="pre">false</span></tt>。缓存的内容的值也许
 会为false，所以一定要使用严格的比较符 <tt class="docutils literal"><span class="pre">===</span></tt> 或者 <tt class="docutils literal"><span class="pre">!==</span></tt>。</p>
 <p>例如:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$cloud</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;cloud&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$cloud</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;cloud&#39;</span><span class="p">);</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nv">$cloud</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nv">$cloud</span><span class="p">;</span>
@@ -537,7 +537,7 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
 删除它。你也可以指定一个可选的（缓存）配置来保存要缓存的值。如果 <tt class="docutils literal"><span class="pre">$config</span></tt>
 没有指定，默认（配置）就会被使用。<tt class="docutils literal"><span class="pre">Cache::write()</span></tt> 方法可以保存任意类型的
 对象，很适合保存模型 find 方法调用的结果:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">((</span><span class="nv">$posts</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">))</span> <span class="o">===</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">((</span><span class="nv">$posts</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">))</span> <span class="o">===</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$posts</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
     <span class="nx">Cache</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nv">$posts</span><span class="p">);</span>
 <span class="p">}</span>
@@ -560,7 +560,7 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
 如果你用 <tt class="docutils literal"><span class="pre">Cache::set()</span></tt> 方法为写操作改变了设置，在读取该数据之前你也应当
 使用 <tt class="docutils literal"><span class="pre">Cache::set()</span></tt> 方法。如果你不这么做，读取该缓存键时，就会使用默认
 设置。:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Cache</span><span class="o">::</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+30 days&#39;</span><span class="p">));</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Cache</span><span class="o">::</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+30 days&#39;</span><span class="p">));</span>
 <span class="nx">Cache</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
 
 <span class="c1">// 之后</span>
@@ -636,7 +636,7 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
 不存在，则回调（callable）会被调用，结果保存在缓存中提供的键上。</p>
 <p>例如，你经常要缓存查询结果。你可以使用 <tt class="docutils literal"><span class="pre">remember()</span></tt> 方法来简化这一过程。
 假设你使用PHP 5.3或更新的版本:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Articles</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Articles</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">function</span> <span class="nf">all</span><span class="p">()</span> <span class="p">{</span>
         <span class="nv">$model</span> <span class="o">=</span> <span class="nv">$this</span><span class="p">;</span>
         <span class="k">return</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">remember</span><span class="p">(</span><span class="s1">&#39;all_articles&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$model</span><span class="p">){</span>
@@ -759,7 +759,7 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

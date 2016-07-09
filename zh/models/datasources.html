@@ -221,7 +221,7 @@ SQLite)开始。</p>
 <tt class="docutils literal"><span class="pre">Model::find()/save()/delete()</span></tt> 方法来访问第三方 API。让我们来编写一个数据源，
 来访问一个假想的基于 JSON 的 远程 API。我们会把它叫做 <tt class="docutils literal"><span class="pre">FarAwaySource</span></tt>，并把它
 放在 <tt class="docutils literal"><span class="pre">app/Model/Datasource/FarAwaySource.php</span></tt> 里:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;HttpSocket&#39;</span><span class="p">,</span> <span class="s1">&#39;Network/Http&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;HttpSocket&#39;</span><span class="p">,</span> <span class="s1">&#39;Network/Http&#39;</span><span class="p">);</span>
 
 <span class="k">class</span> <span class="nc">FarAwaySource</span> <span class="k">extends</span> <span class="nx">DataSource</span> <span class="p">{</span>
 
@@ -378,20 +378,20 @@ SQLite)开始。</p>
 </div>
 <p>接下去，我们就可以在 <tt class="docutils literal"><span class="pre">app/Config/database.php</span></tt> 文件中添加下面的代码来配置数据
 源:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$faraway</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$faraway</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;datasource&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;FarAwaySource&#39;</span><span class="p">,</span>
     <span class="s1">&#39;apiKey&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;1234abcd&#39;</span><span class="p">,</span>
 <span class="p">);</span>
 </pre></div>
 </div>
 <p>然后象这样在模型中使用数据库配置:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyModel</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyModel</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$useDbConfig</span> <span class="o">=</span> <span class="s1">&#39;faraway&#39;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>我们可以用熟悉的模型方法从远程数据源获取数据:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 从&#39;某人(Some Person)&#39;获得全部消息</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 从&#39;某人(Some Person)&#39;获得全部消息</span>
 <span class="nv">$messages</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">MyModel</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Some Person&#39;</span><span class="p">),</span>
 <span class="p">));</span>
@@ -403,21 +403,21 @@ SQLite)开始。</p>
 find 类型会导致意想不到的结果。</p>
 </div>
 <p>同样我们可以保存一条新消息:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">MyModel</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">MyModel</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Some Person&#39;</span><span class="p">,</span>
     <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;New Message&#39;</span><span class="p">,</span>
 <span class="p">));</span>
 </pre></div>
 </div>
 <p>更新上一条消息:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">MyModel</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">MyModel</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">MyModel</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Updated message&#39;</span><span class="p">,</span>
 <span class="p">));</span>
 </pre></div>
 </div>
 <p>以及删除消息:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">MyModel</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">MyModel</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -427,7 +427,7 @@ find 类型会导致意想不到的结果。</p>
 <p>你只需把你的数据源文件放在
 <tt class="docutils literal"><span class="pre">Plugin/[YourPlugin]/Model/Datasource/[YourSource].php</span></tt>，然后用插件的语法引用
 它:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$faraway</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$faraway</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;datasource&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;MyPlugin.FarAwaySource&#39;</span><span class="p">,</span>
     <span class="s1">&#39;apiKey&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;abcd1234&#39;</span><span class="p">,</span>
 <span class="p">);</span>
@@ -441,7 +441,7 @@ find 类型会导致意想不到的结果。</p>
 <p>而且必须安装 SQL Server Native Client，该扩展才能工作。由于 Native Client 只适用
 于 Windows，你无法在 Linux、Mac OS X 或者 FreeBSD 上安装。</p>
 <p>所以，如果 Sqlserver 数据源报如下错误:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Error</span><span class="o">:</span> <span class="nx">Database</span> <span class="nx">connection</span> <span class="s2">&quot;Sqlserver&quot;</span> <span class="nx">is</span> <span class="nx">missing</span><span class="p">,</span> <span class="k">or</span> <span class="nx">could</span> <span class="k">not</span> <span class="nx">be</span> <span class="nx">created</span><span class="o">.</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Error</span><span class="o">:</span> <span class="nx">Database</span> <span class="nx">connection</span> <span class="s2">&quot;Sqlserver&quot;</span> <span class="nx">is</span> <span class="nx">missing</span><span class="p">,</span> <span class="k">or</span> <span class="nx">could</span> <span class="k">not</span> <span class="nx">be</span> <span class="nx">created</span><span class="o">.</span>
 </pre></div>
 </div>
 <p>请首先检查是否正确安装了 SQL Server PHP 扩展 pdo_sqlsrv 和 SQL Server Native
@@ -543,7 +543,7 @@ Client。</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

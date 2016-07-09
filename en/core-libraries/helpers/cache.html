@@ -196,13 +196,13 @@ in your <tt class="docutils literal"><span class="pre">APP/Config/core.php</span
 files when handling requests.</p>
 <p>Once you&#8217;ve uncommented the <tt class="docutils literal"><span class="pre">Cache.check</span></tt> line you will need to add the helper
 to your controller&#8217;s <tt class="docutils literal"><span class="pre">$helpers</span></tt> array:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Cache&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>You will also need to add the CacheDispatcher to your dispatcher filters in your bootstrap:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;CacheDispatcher&#39;</span>
 <span class="p">));</span>
 </pre></div>
@@ -221,7 +221,7 @@ in seconds you want those views cached. The time value can be
 expressed in a <tt class="docutils literal"><span class="pre">strtotime()</span></tt> format (e.g. &#8220;1 hour&#8221;, or &#8220;3 minutes&#8221;).</p>
 <p>Using the example of an ArticlesController, that receives a lot of
 traffic that needs to be cached:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;view&#39;</span> <span class="o">=&gt;</span> <span class="mi">36000</span><span class="p">,</span>
     <span class="s1">&#39;index&#39;</span> <span class="o">=&gt;</span> <span class="mi">48000</span>
 <span class="p">);</span>
@@ -230,13 +230,13 @@ traffic that needs to be cached:</p>
 <p>This will cache the view action 10 hours, and the index action 13 hours. By
 making <tt class="docutils literal"><span class="pre">$cacheAction</span></tt> a <tt class="docutils literal"><span class="pre">strtotime()</span></tt> friendly value you can cache every action in the
 controller:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="s2">&quot;1 hour&quot;</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="s2">&quot;1 hour&quot;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>You can also enable controller/component callbacks for cached views
 created with <tt class="docutils literal"><span class="pre">CacheHelper</span></tt>. To do so you must use the array
 format for <tt class="docutils literal"><span class="pre">$cacheAction</span></tt> and create an array like the following:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;view&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="mi">21600</span><span class="p">),</span>
     <span class="s1">&#39;add&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="mi">36000</span><span class="p">),</span>
     <span class="s1">&#39;index&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="mi">48000</span><span class="p">)</span>
@@ -262,7 +262,7 @@ For example, certain parts of the page may look different whether a
 user is currently logged in or browsing your site as a guest.</p>
 <p>To indicate blocks of content that are <em>not</em> to be cached, wrap
 them in <tt class="docutils literal"><span class="pre">&lt;!--nocache--&gt;</span> <span class="pre">&lt;!--/nocache--&gt;</span></tt> like so:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;!--nocache--&gt;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x">&lt;!--nocache--&gt;</span>
 <span class="cp">&lt;?php</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">))</span><span class="o">:</span> <span class="cp">?&gt;</span><span class="x"></span>
 <span class="x">    Welcome, </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nx">h</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x">.</span>
 <span class="cp">&lt;?php</span> <span class="k">else</span><span class="o">:</span> <span class="cp">?&gt;</span><span class="x"></span>
@@ -431,7 +431,7 @@ cached view files. If you need to clear the cached view files, use
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

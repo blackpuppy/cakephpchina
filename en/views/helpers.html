@@ -203,14 +203,14 @@ check out the chapter for each helper:</p>
 controller has a <a class="reference internal" href="../controllers.html#Controller::$helpers" title="Controller::$helpers"><tt class="xref php php-attr docutils literal"><span class="pre">$helpers</span></tt></a> property that lists the
 helpers to be made available in the view. To enable a helper in your view, add
 the name of the helper to the controller&#8217;s <tt class="docutils literal"><span class="pre">$helpers</span></tt> array:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Form&#39;</span><span class="p">,</span> <span class="s1">&#39;Html&#39;</span><span class="p">,</span> <span class="s1">&#39;Js&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Adding helpers from plugins uses the <a class="reference internal" href="../appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a> used elsewhere in
 CakePHP:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Blog.Comment&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
@@ -220,7 +220,7 @@ be available to that action and not to the other actions in the
 controller. This saves processing power for the other actions that
 do not use the helper and helps keep the controller better
 organized:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BakeriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">bake</span><span class="p">()</span> <span class="p">{</span>
         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">helpers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">&#39;Time&#39;</span><span class="p">;</span>
     <span class="p">}</span>
@@ -234,14 +234,14 @@ organized:</p>
 the helper to the <tt class="docutils literal"><span class="pre">$helpers</span></tt> array in <tt class="docutils literal"><span class="pre">/app/Controller/AppController.php</span></tt> (or
 create it if not present). Remember to include the default Html and
 Form helpers:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Form&#39;</span><span class="p">,</span> <span class="s1">&#39;Html&#39;</span><span class="p">,</span> <span class="s1">&#39;Js&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>You can pass options to helpers. These options can be used to set
 attribute values or modify behavior of a helper:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AwesomeHelper</span> <span class="k">extends</span> <span class="nx">AppHelper</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AwesomeHelper</span> <span class="k">extends</span> <span class="nx">AppHelper</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">View</span> <span class="nv">$view</span><span class="p">,</span> <span class="nv">$settings</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
         <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="nv">$view</span><span class="p">,</span> <span class="nv">$settings</span><span class="p">);</span>
         <span class="nx">debug</span><span class="p">(</span><span class="nv">$settings</span><span class="p">);</span>
@@ -259,7 +259,7 @@ the helper.</p>
 create aliased helpers in your views. This feature is useful when you want to
 replace <tt class="docutils literal"><span class="pre">$this-&gt;Html</span></tt> or another common Helper reference with a custom
 implementation:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/PostsController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/PostsController.php</span>
 <span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Html&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -285,7 +285,7 @@ including inside other Helpers.</p>
 keep configuration logic out of your controller actions. If you have
 configuration options that cannot be included as part of a class declaration,
 you can set those in your controller&#8217;s beforeRender callback:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeRender</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">parent</span><span class="o">::</span><span class="na">beforeRender</span><span class="p">();</span>
         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">helpers</span><span class="p">[</span><span class="s1">&#39;CustomStuff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_getCustomStuffSettings</span><span class="p">();</span>
@@ -300,7 +300,7 @@ you can set those in your controller&#8217;s beforeRender callback:</p>
 each helper is exposed as a public property in the view. For example, if you
 were using the <a class="reference internal" href="../core-libraries/helpers/html.html#HtmlHelper" title="HtmlHelper"><tt class="xref php php-class docutils literal"><span class="pre">HtmlHelper</span></tt></a> you would be able to access it by
 doing the following:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">css</span><span class="p">(</span><span class="s1">&#39;styles&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Html</span><span class="o">-&gt;</span><span class="na">css</span><span class="p">(</span><span class="s1">&#39;styles&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>The above would call the <tt class="docutils literal"><span class="pre">css</span></tt> method on the HtmlHelper. You can
@@ -308,7 +308,7 @@ access any loaded helper using <tt class="docutils literal"><span class="pre">$t
 come a time where you need to dynamically load a helper from inside
 a view. You can use the view&#8217;s <tt class="xref php php-class docutils literal"><span class="pre">HelperCollection</span></tt> to
 do this:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$mediaHelper</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Helpers</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;Media&#39;</span><span class="p">,</span> <span class="nv">$mediaSettings</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$mediaHelper</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Helpers</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;Media&#39;</span><span class="p">,</span> <span class="nv">$mediaSettings</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>The HelperCollection is a <a class="reference internal" href="../core-libraries/collections.html"><em>collection</em></a> and
@@ -330,7 +330,7 @@ places in your application. In order to fit your logic into
 CakePHP&#8217;s existing helper structure, you&#8217;ll need to create a new
 class in <tt class="docutils literal"><span class="pre">/app/View/Helper</span></tt>. Let&#8217;s call our helper LinkHelper. The
 actual PHP class file would look something like this:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="cm">/* /app/View/Helper/LinkHelper.php */</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="cm">/* /app/View/Helper/LinkHelper.php */</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppHelper&#39;</span><span class="p">,</span> <span class="s1">&#39;View/Helper&#39;</span><span class="p">);</span>
 
 <span class="k">class</span> <span class="nc">LinkHelper</span> <span class="k">extends</span> <span class="nx">AppHelper</span> <span class="p">{</span>
@@ -350,7 +350,7 @@ in the <a class="reference internal" href="#helper-api"><em>Helper API</em></a>.
 <p>You may wish to use some functionality already existing in another
 helper. To do so, you can specify helpers you wish to use with a
 <tt class="docutils literal"><span class="pre">$helpers</span></tt> array, formatted just as you would in a controller:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="cm">/* /app/View/Helper/LinkHelper.php (using other helpers) */</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="cm">/* /app/View/Helper/LinkHelper.php (using other helpers) */</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppHelper&#39;</span><span class="p">,</span> <span class="s1">&#39;View/Helper&#39;</span><span class="p">);</span>
 
 <span class="k">class</span> <span class="nc">LinkHelper</span> <span class="k">extends</span> <span class="nx">AppHelper</span> <span class="p">{</span>
@@ -373,7 +373,7 @@ helper. To do so, you can specify helpers you wish to use with a
 <p>Once you&#8217;ve created your helper and placed it in
 <tt class="docutils literal"><span class="pre">/app/View/Helper/</span></tt>, you&#8217;ll be able to include it in your
 controllers using the special variable <a class="reference internal" href="../controllers.html#Controller::$helpers" title="Controller::$helpers"><tt class="xref php php-attr docutils literal"><span class="pre">$helpers</span></tt></a>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Link&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
@@ -381,7 +381,7 @@ controllers using the special variable <a class="reference internal" href="../co
 <p>Once your controller has been made aware of this new class, you can
 use it in your views by accessing an object named after the
 helper:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;!--</span> <span class="nx">make</span> <span class="nx">a</span> <span class="nb">link</span> <span class="nx">using</span> <span class="nx">the</span> <span class="k">new</span> <span class="nx">helper</span> <span class="o">--&gt;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;!--</span> <span class="nx">make</span> <span class="nx">a</span> <span class="nb">link</span> <span class="nx">using</span> <span class="nx">the</span> <span class="k">new</span> <span class="nx">helper</span> <span class="o">--&gt;</span>
 <span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Link</span><span class="o">-&gt;</span><span class="na">makeEdit</span><span class="p">(</span><span class="s1">&#39;Change this Recipe&#39;</span><span class="p">,</span> <span class="s1">&#39;/recipes/edit/5&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 </div>
@@ -393,7 +393,7 @@ helper:</p>
 extend AppModel and controllers extend AppController). To create
 functionality that would be available to all helpers, create
 <tt class="docutils literal"><span class="pre">/app/View/Helper/AppHelper.php</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Helper&#39;</span><span class="p">,</span> <span class="s1">&#39;View&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Helper&#39;</span><span class="p">,</span> <span class="s1">&#39;View&#39;</span><span class="p">);</span>
 
 <span class="k">class</span> <span class="nc">AppHelper</span> <span class="k">extends</span> <span class="nx">Helper</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">customMethod</span><span class="p">()</span> <span class="p">{</span>
@@ -608,7 +608,7 @@ argument.</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

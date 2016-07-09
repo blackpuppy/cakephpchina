@@ -173,11 +173,11 @@ window.lang = "zh_CN";
 <p>虽然通常只使用模型的 save 方法，但也许有时仅需要验证而不保存数据。例如，也许在真正的把数据
 保存到数据库之前，想要给用户显示一些额外的信息。验证数据的过程与保存数据相比，有细微的差别。</p>
 <p>首先，将数据赋值给模型:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>然后要检查数据是否正确，使用模型的 validates 方法，如果正确就会返回 true，否则就返回 false:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">validates</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">validates</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// 验证通过的逻辑</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="c1">// 验证未通过的逻辑</span>
@@ -189,7 +189,7 @@ window.lang = "zh_CN";
 last_name，email 和 password 字段。在这个例子中，当创建或者编辑一个用户时会验证整个这4个
 字段。然而当用户登录时只想验证电子邮件和密码字段。要做到这点可以传入一个选项数组指定要验证
 的字段:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">validates</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;fieldList&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">))))</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">validates</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;fieldList&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">))))</span> <span class="p">{</span>
     <span class="c1">// 有效</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="c1">// 无效</span>
@@ -198,7 +198,7 @@ last_name，email 和 password 字段。在这个例子中，当创建或者编�
 </div>
 <p>validates 方法调用 invalidFields 方法，后者填入模型的 validationErrors 属性。
 invalidFields 方法也把这个属性作为结果返回:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$errors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">invalidFields</span><span class="p">();</span> <span class="c1">// 包含 validationErrors 数组</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$errors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">invalidFields</span><span class="p">();</span> <span class="c1">// 包含 validationErrors 数组</span>
 </pre></div>
 </div>
 <p>在对 <tt class="docutils literal"><span class="pre">invalidFields()</span></tt> 的连续调用之间，验证错误列表不会清除。所以如果是在一个循环内
@@ -208,7 +208,7 @@ invalidFields 方法也把这个属性作为结果返回:</p>
 另外，记住调用 save 方法之前并没有必要调用 validates 方法，因为 save 方法在真的保存数据之前会自动
 验证数据。</p>
 <p>要验证多个模型，应当使用下面的方法:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">saveAll</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;validate&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;only&#39;</span><span class="p">)))</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">saveAll</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;validate&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;only&#39;</span><span class="p">)))</span> <span class="p">{</span>
   <span class="c1">// 验证通过</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
   <span class="c1">// 验证未通过</span>
@@ -216,7 +216,7 @@ invalidFields 方法也把这个属性作为结果返回:</p>
 </pre></div>
 </div>
 <p>如果在保存之前验证了数据，那么可以关闭验证以避免第二次验证:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">saveAll</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;validate&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">)))</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ModelName</span><span class="o">-&gt;</span><span class="na">saveAll</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;validate&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">)))</span> <span class="p">{</span>
     <span class="c1">// 不验证就保存</span>
 <span class="p">}</span>
 </pre></div>
@@ -312,7 +312,7 @@ invalidFields 方法也把这个属性作为结果返回:</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

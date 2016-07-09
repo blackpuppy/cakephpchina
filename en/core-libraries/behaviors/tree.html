@@ -216,7 +216,7 @@ fail.</p>
 <p>The tree behavior has a lot packed into it, but let&#8217;s start with a
 simple example - create the following database table and put some
 data in it:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">categories</span> <span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">categories</span> <span class="p">(</span>
     <span class="nx">id</span> <span class="nx">INTEGER</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="nx">UNSIGNED</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">AUTO_INCREMENT</span><span class="p">,</span>
     <span class="nx">parent_id</span> <span class="nx">INTEGER</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
     <span class="nx">lft</span> <span class="nx">INTEGER</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
@@ -290,7 +290,7 @@ data in it:</p>
 <p>For the purpose of checking that everything is setup correctly, we
 can create a test method and output the contents of our category
 tree to see what it looks like. With a simple controller:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CategoriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CategoriesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
         <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">generateTreeList</span><span class="p">(</span>
@@ -305,7 +305,7 @@ tree to see what it looks like. With a simple controller:</p>
 </pre></div>
 </div>
 <p>and an even simpler model definition:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Model/Category.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Model/Category.php</span>
 <span class="k">class</span> <span class="nc">Category</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Tree&#39;</span><span class="p">);</span>
 <span class="p">}</span>
@@ -371,7 +371,7 @@ tree to see what it looks like. With a simple controller:</p>
 looked hierarchal via the method <tt class="docutils literal"><span class="pre">generateTreeList</span></tt>. However,
 usually you would add your data in exactly the same way as you
 would for any model. For example:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// pseudo controller code</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// pseudo controller code</span>
 <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">][</span><span class="s1">&#39;parent_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Skating&#39;</span><span class="p">;</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
@@ -381,7 +381,7 @@ would for any model. For example:</p>
 set the parent_id, and the tree behavior will take care of the
 rest. If you don&#8217;t set the parent_id, the tree behavior will add
 to the tree making your new addition a new top level entry:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// pseudo controller code</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// pseudo controller code</span>
 <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
 <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Other People\&#39;s Categories&#39;</span><span class="p">;</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
@@ -450,7 +450,7 @@ follows:</p>
 <p>Modifying data is as transparent as adding new data. If you modify
 something, but do not change the parent_id field - the structure
 of your data will remain unchanged. For example:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// pseudo controller code</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// pseudo controller code</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// id of Extreme knitting</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Extreme fishing&#39;</span><span class="p">));</span>
 </pre></div>
@@ -518,7 +518,7 @@ the tree of data would now look like:</p>
 that Extreme fishing does not belong under Sport, but instead
 should be located under Other People&#8217;s Categories. With the
 following code:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// pseudo controller code</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// pseudo controller code</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// id of Extreme fishing</span>
 <span class="nv">$newParentId</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span>
   <span class="s1">&#39;id&#39;</span><span class="p">,</span>
@@ -595,7 +595,7 @@ data. To start with the simplest example; let&#8217;s say that the
 reports category is no longer useful. To remove it
 <em>and any children it may have</em> just call delete as you would for
 any model. For example with the following code:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// pseudo controller code</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// pseudo controller code</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
 </pre></div>
@@ -695,7 +695,7 @@ row and returns the children, by default in the order they appear
 in the tree. The second optional parameter defines whether or not
 only direct children should be returned. Using the example data
 from the previous section:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$allChildren</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// a flat array with 11 items</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$allChildren</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// a flat array with 11 items</span>
 <span class="c1">// -- or --</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="nv">$allChildren</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">children</span><span class="p">();</span> <span class="c1">// a flat array with 11 items</span>
@@ -719,7 +719,7 @@ key value (the id) of a row and returns how many children it has.
 The second optional parameter defines whether or not only direct
 children are counted. Using the example data from the previous
 section:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$totalChildren</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">childCount</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// will output 11</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$totalChildren</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">childCount</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// will output 11</span>
 <span class="c1">// -- or --</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="nv">$directChildren</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">childCount</span><span class="p">();</span> <span class="c1">// will output 11</span>
@@ -752,11 +752,11 @@ section:</p>
 <a class="reference internal" href="../../models/retrieving-your-data.html#model-find-list"><em>find(&#8216;list&#8217;)</em></a> but with a nested prefix that is specified
 in the <tt class="docutils literal"><span class="pre">spacer</span></tt> option to show the structure of your data. Below is
 an example of what you can expect this method to return:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$treelist</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">generateTreeList</span><span class="p">();</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$treelist</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">generateTreeList</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>Output:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
     <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="s2">&quot;My Categories&quot;</span><span class="p">,</span>
     <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="s2">&quot;_Fun&quot;</span><span class="p">,</span>
     <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="s2">&quot;__Sport&quot;</span><span class="p">,</span>
@@ -804,7 +804,7 @@ in the <tt class="docutils literal"><span class="pre">spacer</span></tt> option 
 <li><tt class="docutils literal"><span class="pre">spacer</span></tt>: The character or characters which will be repeated.</li>
 </ul>
 <p>An example would be:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$results</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$results</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
 <span class="nv">$results</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">formatTreeList</span><span class="p">(</span><span class="nv">$results</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;spacer&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--&#39;</span>
 <span class="p">));</span>
@@ -818,7 +818,7 @@ in the <tt class="docutils literal"><span class="pre">spacer</span></tt> option 
 <p>This convenience function will, as the name suggests, return the
 parent node for any node, or <em>false</em> if the node has no parent (it&#8217;s
 the root node). For example:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$parent</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">getParentNode</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">//&lt;- id for fun</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$parent</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">getParentNode</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">//&lt;- id for fun</span>
 <span class="c1">// $parent contains All categories</span>
 </pre></div>
 </div>
@@ -852,10 +852,10 @@ where you are to the top. So for example the path from the category
 </ul>
 <p>Using the id of &#8220;International&#8221; getPath will return each of the
 parents in turn (starting from the top).</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$parents</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">getPath</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$parents</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">getPath</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
 </pre></div>
 </div>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// contents of $parents</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// contents of $parents</span>
 <span class="k">array</span><span class="p">(</span>
     <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span>  <span class="k">array</span><span class="p">(</span>
       <span class="s1">&#39;Category&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My Categories&#39;</span><span class="p">,</span> <span class="o">..</span><span class="p">)</span>
@@ -893,7 +893,7 @@ positions the node should be moved down. All child nodes for the
 specified node will also be moved.</p>
 <p>Here is an example of a controller action (in a controller named
 Categories) that moves a specified node down the tree:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">movedown</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$delta</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">movedown</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$delta</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="nv">$id</span><span class="p">;</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">())</span> <span class="p">{</span>
        <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid category&#39;</span><span class="p">));</span>
@@ -925,7 +925,7 @@ positions the node should be moved up. All child nodes will also be
 moved.</p>
 <p>Here&#8217;s an example of a controller action (in a controller named
 Categories) that moves a node up the tree:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">moveup</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$delta</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">moveup</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$delta</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="nv">$id</span><span class="p">;</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">())</span> <span class="p">{</span>
        <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid category&#39;</span><span class="p">));</span>
@@ -982,7 +982,7 @@ its children.</p>
 </li>
 </ul>
 <p>Running the following code with the id for &#8216;Sport&#8217;:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Node</span><span class="o">-&gt;</span><span class="na">removeFromTree</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Node</span><span class="o">-&gt;</span><span class="na">removeFromTree</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>The Sport node will be become a top level node:</p>
@@ -1009,7 +1009,7 @@ its children.</p>
 moving the node to have no parent, and re-parenting all children.</p>
 <p>If however the following code snippet was used with the id for
 &#8216;Sport&#8217;:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Node</span><span class="o">-&gt;</span><span class="na">removeFromTree</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Node</span><span class="o">-&gt;</span><span class="na">removeFromTree</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>The tree would become</p>
@@ -1040,7 +1040,7 @@ children have been reparented and &#8216;Sport&#8217; has been deleted.</p>
 <p>Reorders the nodes (and child nodes) of the tree according to the
 field and direction specified in the parameters. This method does
 not change the parent of any node.</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">reorder</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">reorder</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="c1">//id of record to use as top node for reordering, default: $Model-&gt;id</span>
     <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="p">,</span>
     <span class="c1">//which field to use in reordering, default: $Model-&gt;displayField</span>
@@ -1096,7 +1096,7 @@ update <tt class="docutils literal"><span class="pre">parent_id</span></tt></li>
 <li><tt class="docutils literal"><span class="pre">int</span></tt> - set the parent_id to this id</li>
 </ul>
 <p>Example:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Rebuild all the left and right fields based on the parent_id</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Rebuild all the left and right fields based on the parent_id</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">recover</span><span class="p">();</span>
 <span class="c1">// or</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">recover</span><span class="p">(</span><span class="s1">&#39;parent&#39;</span><span class="p">);</span>
@@ -1126,7 +1126,7 @@ resorting.</li>
 </ul>
 <p><tt class="docutils literal"><span class="pre">$options</span></tt> is used to pass all extra parameters, and has the
 following possible keys by default, all of which are optional:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
     <span class="s1">&#39;field&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">displayField</span><span class="p">,</span>
     <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ASC&#39;</span><span class="p">,</span>
@@ -1149,11 +1149,11 @@ message)</p>
 <li><tt class="docutils literal"><span class="pre">'message'</span></tt> depends on the error</li>
 </ul>
 <p>Example Use:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">verify</span><span class="p">();</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">verify</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>Example output:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
         <span class="p">(</span>
@@ -1191,7 +1191,7 @@ message)</p>
 <p>Knowing the depth of tree nodes can be useful when you want to retrieve nodes
 only upto a certain level for e.g. when generating menus. You can use the
 <tt class="docutils literal"><span class="pre">level</span></tt> option to specify the field that will save level of each node:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$actAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Tree&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$actAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Tree&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;level&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;level&#39;</span><span class="p">,</span> <span class="c1">// Defaults to null, i.e. no level saving</span>
 <span class="p">));</span>
 </pre></div>
@@ -1333,7 +1333,7 @@ you can use this method to get level of a particular node.</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

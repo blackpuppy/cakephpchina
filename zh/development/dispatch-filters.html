@@ -182,7 +182,7 @@ window.lang = "zh_CN";
 文件容易地加载它们。添加或去除过滤器通过 <cite>Configure</cite> 类进行，使用特殊的键
 <tt class="docutils literal"><span class="pre">Dispatcher.filters</span></tt>。默认情况下 CakePHP 自带的一些过滤器类已经对所有请求启用，让
 我们看看它们是怎么添加的:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;AssetDispatcher&#39;</span><span class="p">,</span>
     <span class="s1">&#39;CacheDispatcher&#39;</span>
 <span class="p">));</span>
@@ -198,7 +198,7 @@ window.lang = "zh_CN";
 并不仅限于这样的角色，如我们在本节即将展示的。</p>
 <p>你可以在过滤器列表中加入自己的类名，它们会以定义的顺序执行。也有另外一种方法来附加不
 涉及特殊的 <tt class="docutils literal"><span class="pre">DispatcherFilter</span></tt> 类的过滤器:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;my-filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;callable&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="nv">$classInstance</span><span class="p">,</span> <span class="s1">&#39;methodName&#39;</span><span class="p">),</span>
         <span class="s1">&#39;on&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;after&#39;</span>
@@ -210,7 +210,7 @@ window.lang = "zh_CN";
 类型，也许你还记得，<cite>回调</cite> 是任何 PHP 可以用 <tt class="docutils literal"><span class="pre">call_user_func</span></tt> 函数执行的东西。
 我们做了一点例外，如果提供了字符串，这将被作为类名对待，而不是可能的函数名。这当然让
 PHP 5.3 的用户可以附加匿名函数作为过滤器:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
    <span class="s1">&#39;my-filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;callable&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="s1">&#39;on&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;before&#39;</span><span class="p">),</span>
    <span class="c1">//更多过滤器</span>
 <span class="p">));</span>
@@ -221,7 +221,7 @@ PHP 5.3 的用户可以附加匿名函数作为过滤器:</p>
 优先级，如果未指定，就使用默认值 <tt class="docutils literal"><span class="pre">10</span></tt>。</p>
 <p>既然所有过滤器都具有优先级 <tt class="docutils literal"><span class="pre">10</span></tt>，如果你要某个过滤器在列表中的任何其它过滤器之前运行，
 就可以根据需要选择较低的优先级数:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
    <span class="s1">&#39;my-filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;callable&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span>
         <span class="s1">&#39;on&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;before&#39;</span><span class="p">,</span>
@@ -239,7 +239,7 @@ PHP 5.3 的用户可以附加匿名函数作为过滤器:</p>
 <p>显然，在定义优先级时，过滤器声明的顺序，除了对相同优先级的过滤器，没有关系。在以类名
 定义过滤器时，无法同时定义优先级，我们很快就会谈及这点。最后，CakePHP 的插件语法可以
 用于定义位于插件内的过滤器:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;MyPlugin.MyFilter&#39;</span><span class="p">,</span>
 <span class="p">));</span>
 </pre></div>
@@ -247,7 +247,7 @@ PHP 5.3 的用户可以附加匿名函数作为过滤器:</p>
 <p>只管移除默认附加的过滤器，如果你选择使用更高级/快速的方法来提供主题和插件的资源，或者
 你不愿使用内置的完整页面缓存，或者只是要实现你自己的过滤器。</p>
 <p>如果你需要传递构造函数参数或设置给你的调度过滤器类，你可以通过提供设置数组来这么做:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;MyAssetFilter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;service&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;google.com&#39;</span><span class="p">)</span>
 <span class="p">));</span>
 </pre></div>
@@ -263,7 +263,7 @@ PHP 5.3 的用户可以附加匿名函数作为过滤器:</p>
 <p>调度器过滤器，在配置中以类名定义时，应当扩展在 CakePHP 的 <cite>Routing</cite> 目录中提供的类
 <tt class="docutils literal"><span class="pre">DispatcherFilter</span></tt> 。让我们来创建一个简单的过滤器，对特殊网址作出 &#8216;Hello World&#8217;
 文字的响应:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;DispatcherFilter&#39;</span><span class="p">,</span> <span class="s1">&#39;Routing&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;DispatcherFilter&#39;</span><span class="p">,</span> <span class="s1">&#39;Routing&#39;</span><span class="p">);</span>
 <span class="k">class</span> <span class="nc">HelloWorldFilter</span> <span class="k">extends</span> <span class="nx">DispatcherFilter</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="nv">$priority</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
@@ -299,7 +299,7 @@ PHP 5.3 的用户可以附加匿名函数作为过滤器:</p>
 <tt class="docutils literal"><span class="pre">$event-&gt;stopPropagation()</span></tt> 来防止在该过滤器之后运行其它过滤器。</p>
 <p>现在让我们再创建一个过滤器，来改变任何公开页面的响应标头(<em>header</em>)，在我们的具体情况
 下这就是任何从 <tt class="docutils literal"><span class="pre">PagesController</span></tt> 控制器响应的东西:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;DispatcherFilter&#39;</span><span class="p">,</span> <span class="s1">&#39;Routing&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;DispatcherFilter&#39;</span><span class="p">,</span> <span class="s1">&#39;Routing&#39;</span><span class="p">);</span>
 <span class="k">class</span> <span class="nc">HttpCacheFilter</span> <span class="k">extends</span> <span class="nx">DispatcherFilter</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="k">function</span> <span class="nf">afterDispatch</span><span class="p">(</span><span class="nx">CakeEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
@@ -327,7 +327,7 @@ header</em>)。你当然可以在控制器中这么做，这只是用过滤器�
 <p>我们的最后一个例子会使用匿名函数(只适用于 PHP 5.3+)来提供 JSON 格式的文章列表，我们
 鼓励你用控制器和 <a class="reference internal" href="../views/json-and-xml-views.html#JsonView" title="JsonView"><tt class="xref php php-class docutils literal"><span class="pre">JsonView</span></tt></a> 类来达成此目的，不过让我们假设你需要为这个
 关键任务的 API 端点节省几毫秒:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$postsList</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$postsList</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">url</span> <span class="o">!==</span> <span class="s1">&#39;posts/recent.json&#39;</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
@@ -449,7 +449,7 @@ CakePHP 内部的路由系统这样的核心过滤器中的逻辑了。虽然并
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

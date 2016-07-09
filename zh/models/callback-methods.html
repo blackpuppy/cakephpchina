@@ -187,7 +187,7 @@ window.lang = "zh_CN";
 <p><tt class="docutils literal"><span class="pre">afterFind(array</span> <span class="pre">$results,</span> <span class="pre">boolean</span> <span class="pre">$primary</span> <span class="pre">=</span> <span class="pre">false)</span></tt></p>
 <p>使用此回调函数来修改从 find 操作返回的结果，或者执行任何其它 find 之后的逻辑。传
 入该回调的 $results 参数包含模型的 find 操作返回的结果，即，象这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$results</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$results</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;ModelName&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;field1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value1&#39;</span><span class="p">,</span>
@@ -201,7 +201,7 @@ window.lang = "zh_CN";
 <p><tt class="docutils literal"><span class="pre">$primary</span></tt> 参数表示当前模型是查询发起的模型，还是作为关联来查询的模型。如果模
 型是作为关联来查询的，<tt class="docutils literal"><span class="pre">$results</span></tt> 的格式会不同；不是通常从 find 操作得到的结果，
 会得到如下的内容:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$results</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$results</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;field_1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value1&#39;</span><span class="p">,</span>
     <span class="s1">&#39;field_2&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value2&#39;</span>
 <span class="p">);</span>
@@ -213,7 +213,7 @@ window.lang = "zh_CN";
 命错误 &#8220;Cannot use string offset as an array&#8221;。</p>
 </div>
 <p>下面是如何使用 afterfind 回调来格式化日期的例子:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">afterFind</span><span class="p">(</span><span class="nv">$results</span><span class="p">,</span> <span class="nv">$primary</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">afterFind</span><span class="p">(</span><span class="nv">$results</span><span class="p">,</span> <span class="nv">$primary</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">foreach</span> <span class="p">(</span><span class="nv">$results</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$val</span><span class="p">[</span><span class="s1">&#39;Event&#39;</span><span class="p">][</span><span class="s1">&#39;begindate&#39;</span><span class="p">]))</span> <span class="p">{</span>
             <span class="nv">$results</span><span class="p">[</span><span class="nv">$key</span><span class="p">][</span><span class="s1">&#39;Event&#39;</span><span class="p">][</span><span class="s1">&#39;begindate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dateFormatAfterFind</span><span class="p">(</span>
@@ -251,7 +251,7 @@ window.lang = "zh_CN";
 <p>下面是个用 beforeSave 回调进行日期转换的例子。例子中的代码用于一个应用程序，其
 begindate 字段在数据库中的格式为 YYYY-MM-DD，而显示为格式 DD-MM-YYYY。当然这很容
 易改变。在适当的模型中使用下面的代码。</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeSave</span><span class="p">(</span><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeSave</span><span class="p">(</span><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;Event&#39;</span><span class="p">][</span><span class="s1">&#39;begindate&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span>
         <span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;Event&#39;</span><span class="p">][</span><span class="s1">&#39;enddate&#39;</span><span class="p">])</span>
     <span class="p">)</span> <span class="p">{</span>
@@ -294,7 +294,7 @@ begindate 字段在数据库中的格式为 YYYY-MM-DD，而显示为格式 DD-M
 <p class="first admonition-title">小技巧</p>
 <p class="last">请确保 beforeDelete() 回调返回 true，否则删除会失败。</p>
 </div>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 使用 app/Model/ProductCategory.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 使用 app/Model/ProductCategory.php</span>
 <span class="c1">// 在下面的例子中，如果一个产品类别还包含产品，则不允许删除此类别。</span>
 <span class="c1">// 在 ProductsController.php 中调用 $this-&gt;Product-&gt;delete($id) 来设置</span>
 <span class="c1">// $this-&gt;id。</span>
@@ -315,7 +315,7 @@ begindate 字段在数据库中的格式为 YYYY-MM-DD，而显示为格式 DD-M
 <h2>afterDelete<a class="headerlink" href="#afterdelete" title="永久链接至标题">¶</a></h2>
 <p><tt class="docutils literal"><span class="pre">afterDelete()</span></tt></p>
 <p>在这个回调函数里放置每次删除之后要执行的逻辑。</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 也许在从数据库中删除一条记录之后，也要删除相关联的文件</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 也许在从数据库中删除一条记录之后，也要删除相关联的文件</span>
 <span class="k">public</span> <span class="k">function</span> <span class="nf">afterDelete</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$file</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">File</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;SomeModel&#39;</span><span class="p">][</span><span class="s1">&#39;file_path&#39;</span><span class="p">]);</span>
     <span class="nv">$file</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">();</span>
@@ -429,7 +429,7 @@ begindate 字段在数据库中的格式为 YYYY-MM-DD，而显示为格式 DD-M
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

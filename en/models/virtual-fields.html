@@ -177,13 +177,13 @@ fields.</p>
 <tt class="docutils literal"><span class="pre">$virtualFields</span></tt> property that contains an array of field =&gt;
 expressions. An example of a virtual field definition using MySQL
 would be:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$virtualFields</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$virtualFields</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CONCAT(User.first_name, &quot; &quot;, User.last_name)&#39;</span>
 <span class="p">);</span>
 </pre></div>
 </div>
 <p>And with PostgreSQL:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$virtualFields</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$virtualFields</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;User.first_name || \&#39; \&#39; || User.last_name&quot;</span>
 <span class="p">);</span>
 </pre></div>
@@ -209,7 +209,7 @@ with virtual fields can be done through a few different methods.</p>
 the first parameter. By setting the second parameter of <cite>hasField()</cite> to true,
 virtualFields will also be checked when checking if a model has a field.
 Using the example field above:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Will return false, as there is no concrete field called name</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Will return false, as there is no concrete field called name</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">hasField</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
 <span class="c1">// Will return true as there is a virtual field called name</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">hasField</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
@@ -221,7 +221,7 @@ Using the example field above:</p>
 <p>This method can be used to check if a field/column is a virtual
 field or a concrete field. Will return true if the column is
 virtual:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">isVirtualField</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span> <span class="c1">//true</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">isVirtualField</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span> <span class="c1">//true</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">isVirtualField</span><span class="p">(</span><span class="s1">&#39;first_name&#39;</span><span class="p">);</span> <span class="c1">//false</span>
 </pre></div>
 </div>
@@ -231,7 +231,7 @@ virtual:</p>
 <p>This method can be used to access the SQL expression that comprises
 a virtual field. If no argument is supplied it will return all
 virtual fields in a Model:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//returns &#39;CONCAT(User.first_name, &#39; &#39;, User.last_name)&#39;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">//returns &#39;CONCAT(User.first_name, &#39; &#39;, User.last_name)&#39;</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">getVirtualField</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -241,7 +241,7 @@ virtual fields in a Model:</p>
 <p>As stated earlier <tt class="docutils literal"><span class="pre">Model::find()</span></tt> will treat virtual fields much
 like any other field in a model. The value of a virtual field will
 be placed under the model&#8217;s key in the resultset:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$results</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$results</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
 
 <span class="c1">// results contains the following</span>
 <span class="k">array</span><span class="p">(</span>
@@ -268,7 +268,7 @@ not the same as their name, you can run into problems as
 virtualFields do not update to reflect the bound alias. If you are
 using virtualFields in models that have more than one alias it is
 best to define the virtualFields in your model&#8217;s constructor:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">false</span><span class="p">,</span> <span class="nv">$table</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$ds</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">false</span><span class="p">,</span> <span class="nv">$table</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$ds</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$table</span><span class="p">,</span> <span class="nv">$ds</span><span class="p">);</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span>
         <span class="s1">&#39;CONCAT(%s.first_name, &quot; &quot;, %s.last_name)&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">alias</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">alias</span>
@@ -283,7 +283,7 @@ model.</p>
 <h2>Virtual fields in SQL queries<a class="headerlink" href="#virtual-fields-in-sql-queries" title="Permalink to this headline">¶</a></h2>
 <p>Using functions in direct SQL queries will prevent data from being returned in the same array as your model&#8217;s data.
 For example this:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Timelog</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Timelog</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span>
     <span class="s2">&quot;SELECT</span>
 <span class="s2">        project_id, SUM(id) as TotalHours</span>
 <span class="s2">    FROM</span>
@@ -296,7 +296,7 @@ For example this:</p>
 </pre></div>
 </div>
 <p>would return something like this:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
         <span class="p">(</span>
@@ -317,12 +317,12 @@ virtual field for our aggregate column. We can add this new virtual field on
 the fly rather than permanently declaring it in the model. We will provide a
 default value of <tt class="docutils literal"><span class="pre">0</span></tt> in case another query attempts to use this virtual field.
 If that were to occur, <tt class="docutils literal"><span class="pre">0</span></tt> would be returned in the TotalHours column:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Timelog</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">[</span><span class="s1">&#39;TotalHours&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Timelog</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">[</span><span class="s1">&#39;TotalHours&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>In addition to adding the virtual field we also need to alias our column using
 the form of <tt class="docutils literal"><span class="pre">MyModel__MyField</span></tt> like this:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Timelog</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Timelog</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span>
     <span class="s2">&quot;SELECT</span>
 <span class="s2">        project_id, SUM(id) as Timelog__TotalHours</span>
 <span class="s2">    FROM</span>
@@ -336,7 +336,7 @@ the form of <tt class="docutils literal"><span class="pre">MyModel__MyField</spa
 </div>
 <p>Running the query again after specifying the virtual field should result in a
 cleaner grouping of values:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
         <span class="p">(</span>
@@ -361,11 +361,11 @@ which an associated model might be found.</p>
 <p>A common workaround for this implementation issue is to copy
 <tt class="docutils literal"><span class="pre">virtualFields</span></tt> from one model to another at runtime when you
 need to access them:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Author</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">];</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Author</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">];</span>
 </pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">virtualFields</span> <span class="o">+=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Author</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">virtualFields</span> <span class="o">+=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Author</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
@@ -473,7 +473,7 @@ need to access them:</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

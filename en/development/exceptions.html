@@ -175,7 +175,7 @@ errors. See the section on <a class="reference internal" href="#built-in-excepti
 <div class="section" id="exception-configuration">
 <h2>Exception configuration<a class="headerlink" href="#exception-configuration" title="Permalink to this headline">¶</a></h2>
 <p>There are a few keys available for configuring exceptions:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Exception&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Exception&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;handler&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ErrorHandler::handleException&#39;</span><span class="p">,</span>
     <span class="s1">&#39;renderer&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ExceptionRenderer&#39;</span><span class="p">,</span>
     <span class="s1">&#39;log&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
@@ -261,7 +261,7 @@ exceptions for HTTP methods</p>
 <p>You can throw these exceptions from you controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">findById</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$post</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="s1">&#39;Could not find that post&#39;</span><span class="p">);</span>
@@ -397,7 +397,7 @@ the rfc2616 says:
 <h2>Using HTTP exceptions in your controllers<a class="headerlink" href="#using-http-exceptions-in-your-controllers" title="Permalink to this headline">¶</a></h2>
 <p>You can throw any of the HTTP related exceptions from your controller actions
 to indicate failure states. For example:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">findById</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$post</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">();</span>
@@ -440,7 +440,7 @@ are coerced into either 500 or 404 errors depending on the code they use.
 When in development mode <a class="reference internal" href="#CakeException" title="CakeException"><tt class="xref php php-exc docutils literal"><span class="pre">CakeException</span></tt></a> objects simply need a new template
 that matches the class name in order to provide useful information. If your
 application contained the following exception:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MissingWidgetException</span> <span class="k">extends</span> <span class="nx">CakeException</span> <span class="p">{};</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MissingWidgetException</span> <span class="k">extends</span> <span class="nx">CakeException</span> <span class="p">{};</span>
 </pre></div>
 </div>
 <p>You could provide nice development errors, by creating
@@ -451,7 +451,7 @@ interpolated into the the messageTemplate, as well as into the view that is used
 to represent the error in development mode. This allows you to create data rich
 exceptions, by providing more context for your errors. You can also provide a message
 template which allows the native <tt class="docutils literal"><span class="pre">__toString()</span></tt> methods to work as normal:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MissingWidgetException</span> <span class="k">extends</span> <span class="nx">CakeException</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MissingWidgetException</span> <span class="k">extends</span> <span class="nx">CakeException</span> <span class="p">{</span>
     <span class="k">protected</span> <span class="nv">$_messageTemplate</span> <span class="o">=</span> <span class="s1">&#39;Seems that %s is missing.&#39;</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -467,7 +467,7 @@ your own rich development errors, just like CakePHP uses internally.</p>
 <h3>Creating custom status codes<a class="headerlink" href="#creating-custom-status-codes" title="Permalink to this headline">¶</a></h3>
 <p>You can create custom HTTP status codes by changing the code used when
 creating an exception:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">throw</span> <span class="k">new</span> <span class="nx">MissingWidgetHelperException</span><span class="p">(</span><span class="s1">&#39;Its not here&#39;</span><span class="p">,</span> <span class="mi">501</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">throw</span> <span class="k">new</span> <span class="nx">MissingWidgetHelperException</span><span class="p">(</span><span class="s1">&#39;Its not here&#39;</span><span class="p">,</span> <span class="mi">501</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Will create a <tt class="docutils literal"><span class="pre">501</span></tt> response code, you can use any HTTP status code
@@ -500,7 +500,7 @@ handling process. The class you choose should be loaded in your
 define the handler as any callback type. By settings <tt class="docutils literal"><span class="pre">Exception.handler</span></tt> CakePHP
 will ignore all other Exception settings. A sample custom exception handling setup
 could look like:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// in app/Config/core.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// in app/Config/core.php</span>
 <span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Exception.handler&#39;</span><span class="p">,</span> <span class="s1">&#39;AppExceptionHandler::handle&#39;</span><span class="p">);</span>
 
 <span class="c1">// in app/Config/bootstrap.php</span>
@@ -520,7 +520,7 @@ could look like:</p>
 simple print &#8216;Oh noes! &#8216; plus the exception message. You can define exception
 handlers as any type of callback, even an anonymous function if you are
 using PHP 5.3:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Exception.handler&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$error</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Exception.handler&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$error</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">echo</span> <span class="s1">&#39;Ruh roh &#39;</span> <span class="o">.</span> <span class="nv">$error</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
 <span class="p">});</span>
 </pre></div>
@@ -528,7 +528,7 @@ using PHP 5.3:</p>
 <p>By creating a custom exception handler you can provide custom error handling for
 application exceptions. In the method provided as the exception handler you
 could do the following:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// in app/Lib/AppErrorHandler.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// in app/Lib/AppErrorHandler.php</span>
 <span class="k">class</span> <span class="nc">AppErrorHandler</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">handleException</span><span class="p">(</span><span class="nv">$error</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nv">$error</span> <span class="nx">instanceof</span> <span class="nx">MissingWidgetException</span><span class="p">)</span> <span class="p">{</span>
@@ -547,7 +547,7 @@ handler. It&#8217;s primarily provided for backwards compatibility, and is not
 recommended for new applications. This controller method is called instead of
 the default exception rendering. It receives the thrown exception as its only
 argument. You should implement your error handling in that method:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">appError</span><span class="p">(</span><span class="nv">$error</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// custom logic goes here.</span>
     <span class="p">}</span>
@@ -564,7 +564,7 @@ By default :php:class`ExceptionRenderer` is used. Your custom exception
 renderer class should be placed in <tt class="docutils literal"><span class="pre">app/Lib/Error</span></tt>. Or an <tt class="docutils literal"><span class="pre">Error</span></tt>
 directory in any bootstrapped Lib path. In a custom exception rendering class
 you can provide specialized handling for application specific errors:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// in app/Lib/Error/AppExceptionRenderer.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// in app/Lib/Error/AppExceptionRenderer.php</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;ExceptionRenderer&#39;</span><span class="p">,</span> <span class="s1">&#39;Error&#39;</span><span class="p">);</span>
 
 <span class="k">class</span> <span class="nc">AppExceptionRenderer</span> <span class="k">extends</span> <span class="nx">ExceptionRenderer</span> <span class="p">{</span>
@@ -597,7 +597,7 @@ callbacks to help ensure errors always display. However, you may need a more
 custom error handling controller in your application. By implementing
 <tt class="docutils literal"><span class="pre">_getController</span></tt> in your <tt class="docutils literal"><span class="pre">AppExceptionRenderer</span></tt> class, you can use any
 controller you want:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppExceptionRenderer</span> <span class="k">extends</span> <span class="nx">ExceptionRenderer</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppExceptionRenderer</span> <span class="k">extends</span> <span class="nx">ExceptionRenderer</span> <span class="p">{</span>
     <span class="k">protected</span> <span class="k">function</span> <span class="nf">_getController</span><span class="p">(</span><span class="nv">$exception</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;SuperCustomError&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nx">SuperCustomErrorController</span><span class="p">();</span>
@@ -730,7 +730,7 @@ no effect. Unless you reference it inside your implementation.</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

@@ -172,13 +172,13 @@ window.lang = "zh_CN";
 <h2>创建虚字段<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <p>创建虚拟字段很简单。在每个模型中可以设置 <tt class="docutils literal"><span class="pre">$virtualFields</span></tt> 属性，该属性是一个数组，
 形式如 字段名 =&gt; 表达式。下面是一个使用MySQL定义虚字段的例子:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$virtualFields</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$virtualFields</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CONCAT(User.first_name, &quot; &quot;, User.last_name)&#39;</span>
 <span class="p">);</span>
 </pre></div>
 </div>
 <p>PostgreSQL中的写法:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$virtualFields</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$virtualFields</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User.first_name || \&#39; \&#39; || User.last_name&#39;</span>
 <span class="p">);</span>
 </pre></div>
@@ -193,7 +193,7 @@ window.lang = "zh_CN";
 <h3>Model::hasField()<a class="headerlink" href="#model-hasfield" title="永久链接至标题">¶</a></h3>
 <p>如果模型中存在第一个参数指定的实际存在的字段，将返回true。
 将第二个参数 <cite>hasField()</cite> 设为true，虚拟字段也会被检查。使用上面的代码来举例:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">hasField</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span> <span class="c1">// 返回false，因为不存在名为name的实际字段</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">hasField</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span> <span class="c1">// 返回false，因为不存在名为name的实际字段</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">hasField</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span> <span class="c1">// 放回true，因为存在名为name的虚字段</span>
 </pre></div>
 </div>
@@ -201,7 +201,7 @@ window.lang = "zh_CN";
 <div class="section" id="model-isvirtualfield">
 <h3>Model::isVirtualField()<a class="headerlink" href="#model-isvirtualfield" title="永久链接至标题">¶</a></h3>
 <p>检测一个字段/列是虚字段还是实际字段。如果是虚拟字段将返回true:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">isVirtualField</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span> <span class="c1">//true</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">isVirtualField</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span> <span class="c1">//true</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">isVirtualField</span><span class="p">(</span><span class="s1">&#39;first_name&#39;</span><span class="p">);</span> <span class="c1">//false</span>
 </pre></div>
 </div>
@@ -209,7 +209,7 @@ window.lang = "zh_CN";
 <div class="section" id="model-getvirtualfield">
 <h3>Model::getVirtualField()<a class="headerlink" href="#model-getvirtualfield" title="永久链接至标题">¶</a></h3>
 <p>该方法用来取得虚字段对应的SQL表达式，如果没有参数，会返回该模型所有的虚字段:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//将返回 &#39;CONCAT(User.first_name, &#39; &#39;, User.last_name)&#39;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">//将返回 &#39;CONCAT(User.first_name, &#39; &#39;, User.last_name)&#39;</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">getVirtualField</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -217,7 +217,7 @@ window.lang = "zh_CN";
 <div class="section" id="find">
 <h3>模型的find()方法和虚字段<a class="headerlink" href="#find" title="永久链接至标题">¶</a></h3>
 <p>如前所述，<tt class="docutils literal"><span class="pre">Model::find()</span></tt> 像处理其他字段一样处理虚字段。虚字段的值会包括在模型的结果中:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$results</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$results</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
 
 <span class="c1">// 输出的结果</span>
 <span class="k">array</span><span class="p">(</span>
@@ -240,7 +240,7 @@ window.lang = "zh_CN";
 <h2>虚字段和模型别名(model aliases)<a class="headerlink" href="#model-aliases" title="永久链接至标题">¶</a></h2>
 <p>当你使用虚字段和带别名的模型，可能会遇到虚字段的模型不会更新映射到新的模型别名中去。
 如果使用的虚字段所在的模型中有多个别名，最好在模型的构造函数中来定义虚字段:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">false</span><span class="p">,</span> <span class="nv">$table</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$ds</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$id</span> <span class="o">=</span> <span class="k">false</span><span class="p">,</span> <span class="nv">$table</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$ds</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$table</span><span class="p">,</span> <span class="nv">$ds</span><span class="p">);</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span>
         <span class="s1">&#39;CONCAT(%s.first_name, &quot; &quot;, %s.last_name)&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">alias</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">alias</span>
@@ -253,7 +253,7 @@ window.lang = "zh_CN";
 <div class="section" id="sql">
 <h2>SQL查询中的虚字段<a class="headerlink" href="#sql" title="永久链接至标题">¶</a></h2>
 <p>使用query函数直接进行SQL查询，其返回的数据并不和模型的数据一样。比如:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Timelog</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Timelog</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span>
     <span class="s2">&quot;SELECT</span>
 <span class="s2">        project_id, SUM(id) as TotalHours</span>
 <span class="s2">    FROM</span>
@@ -266,7 +266,7 @@ window.lang = "zh_CN";
 </pre></div>
 </div>
 <p>返回如下格式的数据:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
         <span class="p">(</span>
@@ -285,11 +285,11 @@ window.lang = "zh_CN";
 <p>如果想把TotalHours放到Timelog数组中，我们需要为合计列指定一个虚拟字段。
 我们可以临时定义虚拟字段比定义在模型中更有效果。我们设定默认值为 <tt class="docutils literal"><span class="pre">0</span></tt>，免得其他查询使用这个虚拟字段。
 如果那样，TotalHours列会返回 <tt class="docutils literal"><span class="pre">0</span></tt></p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Timelog</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">[</span><span class="s1">&#39;TotalHours&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Timelog</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">[</span><span class="s1">&#39;TotalHours&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>除了增加虚拟字段，我们还需要用 <tt class="docutils literal"><span class="pre">MyModel__MyField</span></tt> 的形式给列起别名。比如:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Timelog</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Timelog</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span>
     <span class="s2">&quot;SELECT</span>
 <span class="s2">        project_id, SUM(id) as Timelog__TotalHours</span>
 <span class="s2">    FROM</span>
@@ -302,7 +302,7 @@ window.lang = "zh_CN";
 </pre></div>
 </div>
 <p>在指定虚拟字段后再次查询，将会得到一个格式化好的的结果:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
         <span class="p">(</span>
@@ -320,11 +320,11 @@ window.lang = "zh_CN";
 <h2>虚字段的局限<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
 <p>使用虚字段会带来一些局限。首先，不能在模型关联的条件(conditions)，排序(order)，字段(fields)数组中使用虚拟字段。如果那样做会产生SQL错误。因为字段被没有被ORM替代。很难去估算模型关联的深度。</p>
 <p>常见的解决办法是在运行时将 <tt class="docutils literal"><span class="pre">virtualFields</span></tt> 复制到其他模型:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Author</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">];</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Author</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">];</span>
 </pre></div>
 </div>
 <p>或:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">virtualFields</span> <span class="o">+=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Author</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">virtualFields</span> <span class="o">+=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Author</span><span class="o">-&gt;</span><span class="na">virtualFields</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
@@ -432,7 +432,7 @@ window.lang = "zh_CN";
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

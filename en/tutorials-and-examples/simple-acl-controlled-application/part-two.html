@@ -179,17 +179,17 @@ We&#8217;re going to briefly describe how to use it to generate all our ACO&#821
 <p>First grab a copy of the plugin and unzipped or clone it using git into
 <cite>app/Plugin/AclExtras</cite>. Then activate the plugin in your <cite>app/Config/boostrap.php</cite>
 file as shown below:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//app/Config/boostrap.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">//app/Config/boostrap.php</span>
 <span class="c1">// ...</span>
 <span class="nx">CakePlugin</span><span class="o">::</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;AclExtras&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Finally execute the following command in the CakePHP console:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="nx">aco_sync</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="nx">aco_sync</span>
 </pre></div>
 </div>
 <p>You can get a complete guide for all available commands like this:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="o">-</span><span class="nx">h</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="o">-</span><span class="nx">h</span>
 <span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="nx">aco_sync</span> <span class="o">-</span><span class="nx">h</span>
 </pre></div>
 </div>
@@ -201,13 +201,13 @@ file as shown below:</p>
 be providing one. To allow ARO&#8217;s access to ACO&#8217;s from the shell interface use
 the AclShell. For more information on how to use it consult the AclShell help
 which can be accessed by running:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">acl</span> <span class="o">--</span><span class="nx">help</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">acl</span> <span class="o">--</span><span class="nx">help</span>
 </pre></div>
 </div>
 <p>Note: * needs to be quoted (&#8216;*&#8217;)</p>
 <p>In order to allow with the <tt class="docutils literal"><span class="pre">AclComponent</span></tt> we would use the
 following code syntax in a custom method:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$aroAlias</span><span class="p">,</span> <span class="nv">$acoAlias</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$aroAlias</span><span class="p">,</span> <span class="nv">$acoAlias</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>We are going to add in a few allow/deny statements now. Add the
@@ -217,7 +217,7 @@ visit the address in your browser to run them (e.g.
 <tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">aros_acos</span></tt> you should see a whole pile of 1&#8217;s and
 -1&#8217;s. Once you&#8217;ve confirmed your permissions are set, remove the
 function:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;initDB&#39;</span><span class="p">);</span> <span class="c1">// We can remove this line after we&#39;re finished</span>
 <span class="p">}</span>
@@ -271,7 +271,7 @@ edit will revert to those in the Acl.</p>
 <p>Now we want to take out the references to <tt class="docutils literal"><span class="pre">Auth-&gt;allowedActions</span></tt>
 in your users and groups controllers. Then add the following to
 your posts and widgets controllers:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;view&#39;</span><span class="p">);</span>
 <span class="p">}</span>
@@ -281,7 +281,7 @@ your posts and widgets controllers:</p>
 groups controllers, and gives public access on the index and view
 actions in posts and widgets controllers. In
 <tt class="docutils literal"><span class="pre">AppController::beforeFilter()</span></tt> add the following:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;display&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;display&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>This makes the &#8216;display&#8217; action public. This will keep our
@@ -296,7 +296,7 @@ view non-public pages will redirect you to the login page. However,
 we will need to create a login view before anyone can login. Add
 the following to <tt class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></tt> if you haven&#8217;t done
 so already:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;h2&gt;Login&lt;/h2&gt;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x">&lt;h2&gt;Login&lt;/h2&gt;</span>
 <span class="cp">&lt;?php</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -311,7 +311,7 @@ so already:</p>
 </div>
 <p>If a user is already logged in, redirect him by adding this to your
 UsersController:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;Auth.User&#39;</span><span class="p">))</span> <span class="p">{</span>
         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;You are logged in!&#39;</span><span class="p">);</span>
         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
@@ -328,7 +328,7 @@ displayed if you added the <tt class="docutils literal"><span class="pre">echo</
 <p>Now onto the logout. Earlier we left this function blank, now is
 the time to fill it. In <tt class="docutils literal"><span class="pre">UsersController::logout()</span></tt> add the
 following:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;Good-Bye&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;Good-Bye&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">logout</span><span class="p">());</span>
 </pre></div>
 </div>
@@ -437,7 +437,7 @@ grows.</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

@@ -188,7 +188,7 @@ Adding and removing filters is done through the <cite>Configure</cite> class, us
 special key <tt class="docutils literal"><span class="pre">Dispatcher.filters</span></tt>. By default CakePHP comes with a couple filter
 classes already enabled for all requests, let&#8217;s take a look at how they are
 added:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;AssetDispatcher&#39;</span><span class="p">,</span>
     <span class="s1">&#39;CacheDispatcher&#39;</span>
 <span class="p">));</span>
@@ -209,7 +209,7 @@ limited to this role, as we will show shortly in this section.</p>
 <p>You can add your own class names to the list of filters, and they will get
 executed in the order they were defined. There is also an alternative way for
 attaching filters that do not involve the special <tt class="docutils literal"><span class="pre">DispatcherFilter</span></tt> classes:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;my-filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;callable&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="nv">$classInstance</span><span class="p">,</span> <span class="s1">&#39;methodName&#39;</span><span class="p">),</span>
         <span class="s1">&#39;on&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;after&#39;</span>
@@ -222,7 +222,7 @@ type, as you may remember, a <cite>callback</cite> is anything that PHP can exec
 <tt class="docutils literal"><span class="pre">call_user_func</span></tt>. We do make a little exception, if a string is provided it will
 be treated as a class name, not as a possible function name. This of course
 gives the ability to PHP 5.3 users to attach anonymous functions as filters:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
    <span class="s1">&#39;my-filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;callable&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="s1">&#39;on&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;before&#39;</span><span class="p">),</span>
    <span class="c1">//more filters here</span>
 <span class="p">));</span>
@@ -235,7 +235,7 @@ get the chance to define a priority for your filters, if none is specified then
 a default of <tt class="docutils literal"><span class="pre">10</span></tt> is selected for you.</p>
 <p>As all filters will have default priority <tt class="docutils literal"><span class="pre">10</span></tt>, should you want to run a filter before
 any other in the list, select lower priority numbers as needed:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
    <span class="s1">&#39;my-filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;callable&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span>
         <span class="s1">&#39;on&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;before&#39;</span><span class="p">,</span>
@@ -255,7 +255,7 @@ not matter but for those having the same. When defining filters as class names
 there is no option to define priority in-line, we will get into that soon.
 Finally, CakePHP&#8217;s plugin notation can be used to define filters located in
 plugins:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;MyPlugin.MyFilter&#39;</span><span class="p">,</span>
 <span class="p">));</span>
 </pre></div>
@@ -265,7 +265,7 @@ advanced/faster way of serving theme and plugin assets or if you do not wish to
 use built-in full page caching, or just implement your own.</p>
 <p>If you need to pass constructor parameters or settings to you dispatch filter
 classes you can do that by providing an array of settings:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;MyAssetFilter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;service&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;google.com&#39;</span><span class="p">)</span>
 <span class="p">));</span>
 </pre></div>
@@ -284,7 +284,7 @@ the defaults in the class.</p>
 the class <tt class="docutils literal"><span class="pre">DispatcherFilter</span></tt> provided in the <cite>Routing</cite> CakePHP&#8217;s directory.
 Let&#8217;s create a simple filter to respond to a specific URL with a &#8216;Hello World&#8217;
 text:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;DispatcherFilter&#39;</span><span class="p">,</span> <span class="s1">&#39;Routing&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;DispatcherFilter&#39;</span><span class="p">,</span> <span class="s1">&#39;Routing&#39;</span><span class="p">);</span>
 <span class="k">class</span> <span class="nc">HelloWorldFilter</span> <span class="k">extends</span> <span class="nx">DispatcherFilter</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="nv">$priority</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
@@ -326,7 +326,7 @@ object as response immediately to the client. We also added
 this one.</p>
 <p>Let&#8217;s now create another filter for altering response headers in any public
 page, in our case it would be anything served from the <tt class="docutils literal"><span class="pre">PagesController</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;DispatcherFilter&#39;</span><span class="p">,</span> <span class="s1">&#39;Routing&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;DispatcherFilter&#39;</span><span class="p">,</span> <span class="s1">&#39;Routing&#39;</span><span class="p">);</span>
 <span class="k">class</span> <span class="nc">HttpCacheFilter</span> <span class="k">extends</span> <span class="nx">DispatcherFilter</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="k">function</span> <span class="nf">afterDispatch</span><span class="p">(</span><span class="nx">CakeEvent</span> <span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
@@ -357,7 +357,7 @@ callback.</p>
 serve a list of posts in JSON format, we encourage you to do so using
 controllers and the <a class="reference internal" href="../views/json-and-xml-views.html#JsonView" title="JsonView"><tt class="xref php php-class docutils literal"><span class="pre">JsonView</span></tt></a> class, but let&#8217;s imagine you need to save a
 few milliseconds for this mission-critical API endpoint:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$postsList</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$postsList</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">url</span> <span class="o">!==</span> <span class="s1">&#39;posts/recent.json&#39;</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
@@ -482,7 +482,7 @@ usually a more accurate choice for adding any request handling code to your app.
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

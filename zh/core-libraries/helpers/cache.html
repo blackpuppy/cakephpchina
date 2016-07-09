@@ -191,13 +191,13 @@ window.lang = "zh_CN";
 <a href="#id3"><span class="problematic" id="id4">``</span></a>APP/Config/core.php``中，去掉对``Cache.check``的 Configure write 调用的注释。这
 会告诉 CakePHP 在处理请求时，检查并生成视图缓存。</p>
 <p>去掉对``Cache.check``行的注释之后，你要把助件添加到你的控制器的``$helpers``数组中:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Cache&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>你还要在你的 bootstrap 中把 CacheDispatcher 添加到你的调度过滤器中:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Dispatcher.filters&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;CacheDispatcher&#39;</span>
 <span class="p">));</span>
 </pre></div>
@@ -214,7 +214,7 @@ window.lang = "zh_CN";
 以及你要这些视图缓存的以秒计算的时间长度。时间可以用``strtotime()``格式(例如
 &#8220;1 hour&#8221;，或者&#8221;3 minutes&#8221;)来表示。</p>
 <p>用一个 ArticlesController 控制器的例子，它会收到很多(请求的)通讯，需要被缓存:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;view&#39;</span> <span class="o">=&gt;</span> <span class="mi">36000</span><span class="p">,</span>
     <span class="s1">&#39;index&#39;</span>  <span class="o">=&gt;</span> <span class="mi">48000</span>
 <span class="p">);</span>
@@ -223,12 +223,12 @@ window.lang = "zh_CN";
 <p>这样就会缓存 view 动作10个小时，index 动作12个小时(译注：原文是13个小时，当为笔误
 )。把``$cacheAction``设置为一个与``strtotime()``兼容的值，你可以缓存控制器中的每
 一个动作:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="s2">&quot;1 hour&quot;</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="s2">&quot;1 hour&quot;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>你也可以针对用``CacheHelper``助件创建的缓存视图启用控制器/组件的回调。为此，你必
 须使用 <a href="#id12"><span class="problematic" id="id13">``</span></a>$cacheAction``的数组形式，创造一个下面这样的数组:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$cacheAction</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;view&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="mi">21600</span><span class="p">),</span>
     <span class="s1">&#39;add&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="mi">36000</span><span class="p">),</span>
     <span class="s1">&#39;index&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="mi">48000</span><span class="p">)</span>
@@ -251,7 +251,7 @@ startup 这些回调。</p>
 览你的网站，页面某些部分会呈现出不同的(内容)。</p>
 <p>要让代码块的内容*不*要被缓存，把这些(部分)象这样包括在
 <a href="#id15"><span class="problematic" id="id16">``</span></a>&lt;!&#8211;nocache&#8211;&gt; &lt;!&#8211;/nocache&#8211;&gt;``之中:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;!--nocache--&gt;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x">&lt;!--nocache--&gt;</span>
 <span class="cp">&lt;?php</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">))</span><span class="o">:</span> <span class="cp">?&gt;</span><span class="x"></span>
 <span class="x">    Welcome, </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nx">h</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;User.name&#39;</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x">.</span>
 <span class="cp">&lt;?php</span> <span class="k">else</span><span class="o">:</span> <span class="cp">?&gt;</span><span class="x"></span>
@@ -412,7 +412,7 @@ UPDATE 或 DELETE 查询，则该视图的缓存会被清除，下一次请求�
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

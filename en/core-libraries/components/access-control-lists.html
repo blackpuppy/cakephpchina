@@ -525,7 +525,7 @@ for some reason might not be using a database.</p>
 <p>By default, CakePHP&#8217;s ACL is database-driven. To enable INI-based
 ACL, you&#8217;ll need to tell CakePHP what system you&#8217;re using by
 updating the following lines in app/Config/core.php:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Change these lines:</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Change these lines:</span>
 <span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Acl.classname&#39;</span><span class="p">,</span> <span class="s1">&#39;DbAcl&#39;</span><span class="p">);</span>
 <span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Acl.database&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">);</span>
 
@@ -546,7 +546,7 @@ has three properties: groups, allow, and deny.</p>
 deny properties.</p>
 <p>As an example, let&#8217;s see how the Fellowship ARO structure we&#8217;ve
 been crafting would look in INI syntax:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="p">;</span><span class="o">-------------------------------------</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="p">;</span><span class="o">-------------------------------------</span>
 <span class="p">;</span> <span class="nx">AROs</span>
 <span class="p">;</span><span class="o">-------------------------------------</span>
 <span class="p">[</span><span class="nx">aragorn</span><span class="p">]</span>
@@ -616,13 +616,13 @@ initialize your database and interact with your ACO and ARO trees.</p>
 <tt class="docutils literal"><span class="pre">/app/Config/database.php</span></tt> is present and correctly configured.</p>
 <p>Once you&#8217;ve done that, use the CakePHP console to create your ACL
 database tables:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span> <span class="nx">DbAcl</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span> <span class="nx">DbAcl</span>
 </pre></div>
 </div>
 <p>Running this command will drop and re-create the tables necessary
 to store ACO and ARO information in tree format. The output of the
 console application should look something like the following:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">---------------------------------------------------------------</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------</span>
 <span class="nx">Cake</span> <span class="nx">Schema</span> <span class="nx">Shell</span>
 <span class="o">---------------------------------------------------------------</span>
 
@@ -709,7 +709,7 @@ new child.</p>
 <p>Before we can create new ACL objects, we&#8217;ll need to load up their
 respective classes. The easiest way to do this is to include CakePHP&#8217;s
 ACL Component in your controller&#8217;s $components array:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Once we&#8217;ve got that done, let&#8217;s see some examples of creating
@@ -726,7 +726,7 @@ to them, we&#8217;ll use aliases to create the ACL objects. Here, we create them
 via a controller action, but we could do it elsewhere.</p>
 <p>Our approach shouldn&#8217;t be drastically new - we&#8217;re just using
 models to save data like we always do:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">any_action</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">any_action</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$aro</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">Aro</span><span class="p">;</span>
 
     <span class="c1">// Here&#39;s all of our group info in an array we can iterate through</span>
@@ -760,7 +760,7 @@ models to save data like we always do:</p>
 </div>
 <p>Once we&#8217;ve got the groups, we can use the ACL console
 application to verify the tree structure:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">cake</span> <span class="nx">acl</span> <span class="nx">view</span> <span class="nx">aro</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">cake</span> <span class="nx">acl</span> <span class="nx">view</span> <span class="nx">aro</span>
 
 <span class="nx">Aro</span> <span class="nx">tree</span><span class="o">:</span>
 <span class="o">---------------------------------------------------------------</span>
@@ -786,7 +786,7 @@ specific model records in our database.</p>
 <p class="last">When adding child nodes to a tree, make sure to use the ACL node
 ID, rather than a foreign_key value.</p>
 </div>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">any_action</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">any_action</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$aro</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Aro</span><span class="p">();</span>
 
     <span class="c1">// Here are our user records, ready to be linked to new ARO records.</span>
@@ -871,7 +871,7 @@ to read for demonstration purposes.</p>
 </div>
 <p>The output of that console application command should now be a
 little more interesting. Let&#8217;s give it a try:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">cake</span> <span class="nx">acl</span> <span class="nx">view</span> <span class="nx">aro</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">cake</span> <span class="nx">acl</span> <span class="nx">view</span> <span class="nx">aro</span>
 
 <span class="nx">Aro</span> <span class="nx">tree</span><span class="o">:</span>
 <span class="o">---------------------------------------------------------------</span>
@@ -941,7 +941,7 @@ component. Let&#8217;s continue with our example.</p>
 <p>Here we&#8217;ll work with Acl permisions in the context of a controller
 action. Let&#8217;s set up some basic permissions using the AclComponent in
 an action inside our controller:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SomethingsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SomethingsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="c1">// You might want to place this in the AppController</span>
     <span class="c1">// instead, but here works great too.</span>
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span><span class="p">);</span>
@@ -977,7 +977,7 @@ privileges, but we want to deny other warriors in the group the ability to
 delete Weapons records. We&#8217;re using the alias syntax to address the
 AROs above, but you might want to use the model/foreign key syntax
 yourself. What we have above is equivalent to this:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 6342 = Legolas</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 6342 = Legolas</span>
 <span class="c1">// 1564 = Gimli</span>
 
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">deny</span><span class="p">(</span>
@@ -1008,11 +1008,11 @@ AclComponent to check the permissions we&#8217;ve just set up.</p>
 remove things from the armory. At this point, we should be able to
 use the AclComponent to make a check between the ACOs and AROs
 we&#8217;ve created. The basic syntax for making a permissions check is:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="nv">$aro</span><span class="p">,</span> <span class="nv">$aco</span><span class="p">,</span> <span class="nv">$action</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="nv">$aro</span><span class="p">,</span> <span class="nv">$aco</span><span class="p">,</span> <span class="nv">$action</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Let&#8217;s give it a try inside a controller action:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// These all return true:</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;warriors/Aragorn&#39;</span><span class="p">,</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">);</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">(</span><span class="s1">&#39;warriors/Aragorn&#39;</span><span class="p">,</span> <span class="s1">&#39;Weapons&#39;</span><span class="p">,</span> <span class="s1">&#39;create&#39;</span><span class="p">);</span>
@@ -1142,7 +1142,7 @@ a login.</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

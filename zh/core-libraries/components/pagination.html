@@ -195,7 +195,7 @@ by default in the <tt class="docutils literal"><span class="pre">$paginate</span
 the basis of your pagination queries.  They are augmented by the sort, direction
 limit, and page parameters passed in from the url. It is important to note
 here that the order key must be defined in an array structure like below:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="mi">25</span><span class="p">,</span>
@@ -208,7 +208,7 @@ here that the order key must be defined in an array structure like below:</p>
 </div>
 <p>You can also include other <tt class="xref php php-meth docutils literal"><span class="pre">find()</span></tt> options, such as
 <tt class="docutils literal"><span class="pre">fields</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Post.id&#39;</span><span class="p">,</span> <span class="s1">&#39;Post.created&#39;</span><span class="p">),</span>
@@ -227,7 +227,7 @@ is: <tt class="docutils literal"><span class="pre">conditions</span></tt>, <tt c
 additional keys will also be passed directly to the model find methods.  This
 makes it very simple to use behaviors like <a class="reference internal" href="../behaviors/containable.html#ContainableBehavior" title="ContainableBehavior"><tt class="xref php php-class docutils literal"><span class="pre">ContainableBehavior</span></tt></a> with
 pagination:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="mi">25</span><span class="p">,</span>
@@ -239,7 +239,7 @@ pagination:</p>
 <p>In addition to defining general pagination values, you can define more than one
 set of pagination defaults in the controller, you just name the keys of the
 array after the model you wish to configure:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Post&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span> <span class="p">(</span><span class="o">...</span><span class="p">),</span>
@@ -259,7 +259,7 @@ information is set to <tt class="docutils literal"><span class="pre">$this-&gt;r
 <a class="reference internal" href="../helpers/paginator.html#PaginatorHelper" title="PaginatorHelper"><tt class="xref php php-class docutils literal"><span class="pre">PaginatorHelper</span></tt></a> for creating links. <tt class="docutils literal"><span class="pre">Controller::paginate()</span></tt> also
 adds PaginatorHelper to the list of helpers in your controller, if it has not
 been added already.:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">list_recipes</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">list_recipes</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// similar to findAll(), but fetches paged results</span>
     <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">(</span><span class="s1">&#39;Recipe&#39;</span><span class="p">);</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
@@ -268,12 +268,12 @@ been added already.:</p>
 </div>
 <p>You can filter the records by passing conditions as second
 parameter to the <tt class="docutils literal"><span class="pre">paginate()</span></tt> function.:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">(</span><span class="s1">&#39;Recipe&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Recipe.title LIKE&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;a%&#39;</span><span class="p">));</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">(</span><span class="s1">&#39;Recipe&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Recipe.title LIKE&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;a%&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>Or you can also set <tt class="docutils literal"><span class="pre">conditions</span></tt> and other keys in the
 <tt class="docutils literal"><span class="pre">$paginate</span></tt> array inside your action.:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">list_recipes</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">list_recipes</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Recipe.title LIKE&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;a%&#39;</span><span class="p">),</span>
         <span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span>
@@ -293,7 +293,7 @@ to display your data, there are a few options.  You can use a
 a behavior attached to your model. Behaviors implementing <tt class="docutils literal"><span class="pre">paginate</span></tt> and/or
 <tt class="docutils literal"><span class="pre">paginateCount</span></tt> should implement the method signatures defined below with the
 normal additional first parameter of <tt class="docutils literal"><span class="pre">$model</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// paginate and paginateCount implemented on a behavior.</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// paginate and paginateCount implemented on a behavior.</span>
 <span class="k">public</span> <span class="k">function</span> <span class="nf">paginate</span><span class="p">(</span><span class="nx">Model</span> <span class="nv">$model</span><span class="p">,</span> <span class="nv">$conditions</span><span class="p">,</span> <span class="nv">$fields</span><span class="p">,</span> <span class="nv">$order</span><span class="p">,</span> <span class="nv">$limit</span><span class="p">,</span> <span class="nv">$page</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">$recursive</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$extra</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// method content</span>
 <span class="p">}</span>
@@ -307,14 +307,14 @@ normal additional first parameter of <tt class="docutils literal"><span class="p
 make sure  you can&#8217;t achieve your goal with the core model methods, or a custom
 finder. To paginate with a custom find type, you should set the <tt class="docutils literal"><span class="pre">0</span></tt>&#8216;th
 element, or the <tt class="docutils literal"><span class="pre">findType</span></tt> key as of 2.3:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;popular&#39;</span>
 <span class="p">);</span>
 </pre></div>
 </div>
 <p>Since the 0th index is difficult to manage, in 2.3 the <tt class="docutils literal"><span class="pre">findType</span></tt> option was
 added:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;findType&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;popular&#39;</span>
 <span class="p">);</span>
 </pre></div>
@@ -322,7 +322,7 @@ added:</p>
 <p>The <tt class="docutils literal"><span class="pre">paginate()</span></tt> method should implement the following method signature.  To
 use your own method/logic override it in the model you wish to get the data
 from:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="sd">/**</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="sd">/**</span>
 <span class="sd"> * Overridden paginate method - group by week, away_team_id and home_team_id</span>
 <span class="sd"> */</span>
 <span class="k">public</span> <span class="k">function</span> <span class="nf">paginate</span><span class="p">(</span><span class="nv">$conditions</span><span class="p">,</span> <span class="nv">$fields</span><span class="p">,</span> <span class="nv">$order</span><span class="p">,</span> <span class="nv">$limit</span><span class="p">,</span> <span class="nv">$page</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">$recursive</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$extra</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
@@ -336,7 +336,7 @@ from:</p>
 expects the same arguments as <tt class="docutils literal"><span class="pre">Model::find('count')</span></tt>. The example
 below uses some Postgres-specifc features, so please adjust
 accordingly depending on what database you are using:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="sd">/**</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="sd">/**</span>
 <span class="sd"> * Overridden paginateCount method</span>
 <span class="sd"> */</span>
 <span class="k">public</span> <span class="k">function</span> <span class="nf">paginateCount</span><span class="p">(</span><span class="nv">$conditions</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$recursive</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$extra</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
@@ -350,7 +350,7 @@ accordingly depending on what database you are using:</p>
 <p>The observant reader will have noticed that the paginate method
 we&#8217;ve defined wasn&#8217;t actually necessary - All you have to do is add
 the keyword in controller&#8217;s <tt class="docutils literal"><span class="pre">$paginate</span></tt> class variable:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="sd">/**</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="sd">/**</span>
 <span class="sd"> * Add GROUP BY clause</span>
 <span class="sd"> */</span>
 <span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -384,7 +384,7 @@ of rows.</p>
 undesirable as it can allow users to sort on un-indexed columns, or virtual
 fields that can be expensive to calculate. You can use the 3rd parameter of
 <tt class="docutils literal"><span class="pre">Controller::paginate()</span></tt> to restrict the columns sorting will be done on:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;slug&#39;</span><span class="p">));</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;slug&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>This would allow sorting on the title and slug columns only. A user that sets
@@ -397,7 +397,7 @@ sort to any other value will be ignored.</p>
 rows in a paginated set.  By default CakePHP limits the maximum number of rows
 that can be fetched to 100.  If this default is not appropriate for your
 application, you can adjust it as part of the pagination options:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="c1">// other keys here.</span>
     <span class="s1">&#39;maxLimit&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span>
 <span class="p">);</span>
@@ -415,14 +415,14 @@ more controlled and consistent. You can choose to use either querystring or
 named parameters in the component. Incoming requests will accept only the chosen
 type, and the <a class="reference internal" href="../helpers/paginator.html#PaginatorHelper" title="PaginatorHelper"><tt class="xref php php-class docutils literal"><span class="pre">PaginatorHelper</span></tt></a> will generate links with the chosen type of
 parameter:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;paramType&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;querystring&#39;</span>
 <span class="p">);</span>
 </pre></div>
 </div>
 <p>The above would enable querystring parameter parsing and generation. You can
 also modify the <tt class="docutils literal"><span class="pre">$settings</span></tt> property on the PaginatorComponent:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">settings</span><span class="p">[</span><span class="s1">&#39;paramType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;querystring&#39;</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">settings</span><span class="p">[</span><span class="s1">&#39;paramType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;querystring&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>By default all of the typical paging parameters will be converted into GET
@@ -430,19 +430,19 @@ arguments.</p>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
 <p>You can run into a situation where assigning a value to a nonexistent property will throw errors:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">[</span><span class="s1">&#39;limit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">[</span><span class="s1">&#39;limit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>will throw the error “Notice: Indirect modification of overloaded property $paginate has no effect”.
 Assigning an initial value to the property solves the issue:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">[</span><span class="s1">&#39;limit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
 <span class="c1">//or</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Or just declare the property in the controller class:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$paginate</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
@@ -460,7 +460,7 @@ access a non-existent page, i.e. page number requested is greater than total
 page count.</p>
 <p>So you could either let the normal error page be rendered or use a try catch
 block and take appropriate action when a <cite>NotFoundException</cite> is caught:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">try</span> <span class="p">{</span>
         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">();</span>
     <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">NotFoundException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
@@ -585,7 +585,7 @@ pagination navigation.</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

@@ -197,7 +197,7 @@ Lastly, if XML/JSON data is POST&#8217;ed to your Controllers, it will be
 parsed into an array which is assigned to <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt>,
 and can then be saved as model data. In order to make use of
 RequestHandler it must be included in your $components array:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">WidgetController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">WidgetController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;RequestHandler&#39;</span><span class="p">);</span>
 
@@ -219,7 +219,7 @@ will return true if the client accepts the content type. If an
 array is specified, accepts return true if any one of the content
 types is accepted by the client. If null returns an array of the
 content-types that the client accepts. For example:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;RequestHandler&#39;</span><span class="p">);</span>
 
@@ -320,7 +320,7 @@ types. For example when responding to Ajax requests, you often will
 want to disable browser caching, and change the debug level.
 However, you want to allow caching for non-ajax requests. The
 following would accomplish that:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;ajax&#39;</span><span class="p">))</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;ajax&#39;</span><span class="p">))</span> <span class="p">{</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">disableCache</span><span class="p">();</span>
 <span class="p">}</span>
 <span class="c1">// Continue Controller action</span>
@@ -361,7 +361,7 @@ e.g. &#8216;json&#8217; or &#8216;xml&#8217;</li>
 additional arguments for the callback.  The callback should return
 an array of data contained in the request input.  For example adding a CSV
 handler in your controllers&#8217; beforeFilter could look like:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$parser</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$parser</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$rows</span> <span class="o">=</span> <span class="nb">str_getcsv</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span>
     <span class="k">foreach</span> <span class="p">(</span><span class="nv">$rows</span> <span class="k">as</span> <span class="o">&amp;</span><span class="nv">$row</span><span class="p">)</span> <span class="p">{</span>
         <span class="nv">$row</span> <span class="o">=</span> <span class="nb">str_getcsv</span><span class="p">(</span><span class="nv">$row</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="p">);</span>
@@ -375,7 +375,7 @@ handler in your controllers&#8217; beforeFilter could look like:</p>
 <a class="reference external" href="http://php.net/callback">callable</a> for the handling function.  You can
 also pass additional arguments to the callback, this is useful for callbacks
 like <tt class="docutils literal"><span class="pre">json_decode</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">RequestHandler</span><span class="o">-&gt;</span><span class="na">addInputType</span><span class="p">(</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;json_decode&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">));</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">RequestHandler</span><span class="o">-&gt;</span><span class="na">addInputType</span><span class="p">(</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;json_decode&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>The above will make <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> an array of the JSON input data,
@@ -522,7 +522,7 @@ stopped, saving processing time an  no content is returned to the client, saving
 bandwidth. The response status code is then set to <cite>304 Not Modified</cite>.</p>
 <p>You can opt-out this automatic checking by setting the <tt class="docutils literal"><span class="pre">checkHttpCache</span></tt>
 setting to false:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;RequestHandler&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;checkHttpCache&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
 <span class="p">));</span>
@@ -555,7 +555,7 @@ with a custom View class, or add View classes for other types.</p>
 </dd></dl>
 
 <p>You can also set this automatically by using the <tt class="docutils literal"><span class="pre">viewClassMap</span></tt> setting:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;RequestHandler&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;viewClassMap&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;json&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ApiKit.MyJson&#39;</span><span class="p">,</span>
@@ -663,7 +663,7 @@ with a custom View class, or add View classes for other types.</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

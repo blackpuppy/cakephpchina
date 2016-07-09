@@ -174,7 +174,7 @@ snapshots.</p>
 <p>A generated schema file allows you to easily transport a database
 agnostic schema. You can generate a schema file of your database
 using:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">generate</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">generate</span>
 </pre></div>
 </div>
 <p>This will generate a schema.php file in your <tt class="docutils literal"><span class="pre">app/Config/Schema</span></tt>
@@ -187,7 +187,7 @@ tables, you must add the <tt class="docutils literal"><span class="pre">-f</span
 </div>
 <p>To later rebuild the database schema from your previously made
 schema.php file run:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span>
 </pre></div>
 </div>
 <p>This will drop and create the tables based on the contents of the
@@ -195,7 +195,7 @@ schema.php.</p>
 <p>Schema files can also be used to generate sql dump files. To
 generate a sql file containing the <tt class="docutils literal"><span class="pre">CREATE</span> <span class="pre">TABLE</span></tt> statements,
 run:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">dump</span> <span class="o">--</span><span class="nx">write</span> <span class="nx">filename</span><span class="o">.</span><span class="nx">sql</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">dump</span> <span class="o">--</span><span class="nx">write</span> <span class="nx">filename</span><span class="o">.</span><span class="nx">sql</span>
 </pre></div>
 </div>
 <p>Where filename.sql is the desired filename for the sql dump. If you
@@ -210,12 +210,12 @@ CakeSchema callbacks. Every schema file is generated with a
 <tt class="docutils literal"><span class="pre">before($event</span> <span class="pre">=</span> <span class="pre">array())</span></tt> and a <tt class="docutils literal"><span class="pre">after($event</span> <span class="pre">=</span> <span class="pre">array())</span></tt> method.</p>
 <p>The <tt class="docutils literal"><span class="pre">$event</span></tt> param holds an array with two keys. One to tell if a
 table is being dropped or created and another for errors. Examples:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s1">&#39;drop&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;errors&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">)</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;drop&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;errors&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">)</span>
 <span class="k">array</span><span class="p">(</span><span class="s1">&#39;create&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;errors&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Adding data to a posts table for example would like this:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span><span class="p">,</span> <span class="s1">&#39;Model&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span><span class="p">,</span> <span class="s1">&#39;Model&#39;</span><span class="p">);</span>
 <span class="k">public</span> <span class="k">function</span> <span class="nf">after</span><span class="p">(</span><span class="nv">$event</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$event</span><span class="p">[</span><span class="s1">&#39;create&#39;</span><span class="p">]))</span> <span class="p">{</span>
         <span class="k">switch</span> <span class="p">(</span><span class="nv">$event</span><span class="p">[</span><span class="s1">&#39;create&#39;</span><span class="p">])</span> <span class="p">{</span>
@@ -239,7 +239,7 @@ or dropped on the current schema.</p>
 <p>When inserting data to more than one table you&#8217;ll need to flush the database
 cache after each table is created. Cache can be disable by setting
 <tt class="docutils literal"><span class="pre">$db-&gt;cacheSources</span> <span class="pre">=</span> <span class="pre">false</span></tt> in the before action().</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$connection</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$connection</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span><span class="p">;</span>
 
 <span class="k">public</span> <span class="k">function</span> <span class="nf">before</span><span class="p">(</span><span class="nv">$event</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
     <span class="nv">$db</span> <span class="o">=</span> <span class="nx">ConnectionManager</span><span class="o">::</span><span class="na">getDataSource</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">connection</span><span class="p">);</span>
@@ -250,7 +250,7 @@ cache after each table is created. Cache can be disable by setting
 </div>
 <p>If you use models in your callbacks make sure to initialize them with the
 correct datasource, lest they fallback to their default datasources:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">before</span><span class="p">(</span><span class="nv">$event</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">before</span><span class="p">(</span><span class="nv">$event</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
     <span class="nv">$articles</span> <span class="o">=</span> <span class="nx">ClassRegistry</span><span class="o">::</span><span class="na">init</span><span class="p">(</span><span class="s1">&#39;Articles&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;ds&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">connection</span>
     <span class="p">));</span>
@@ -274,7 +274,7 @@ engine type. Each Dbo implements the tableParameters they support.</p>
 <div class="section" id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>Here is a full example from the acl class</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="sd">/**</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="sd">/**</span>
 <span class="sd"> * ACO - Access Control Object - Something that is wanted</span>
 <span class="sd"> */</span>
     <span class="k">public</span> <span class="nv">$acos</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -322,7 +322,7 @@ engine type. Each Dbo implements the tableParameters they support.</p>
 The field name is the key of the field, the value is another array with some of
 the following attributes.</p>
 <p>Example column</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
     <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
     <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
@@ -368,7 +368,7 @@ the following attributes.</p>
 <dt>column</dt>
 <dd><p class="first">This is either a single column name or an array of columns.</p>
 <p>e.g. Single</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="s1">&#39;indexes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="s1">&#39;indexes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;PRIMARY&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;column&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
         <span class="s1">&#39;unique&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
@@ -377,7 +377,7 @@ the following attributes.</p>
 </pre></div>
 </div>
 <p>e.g. Multiple</p>
-<div class="last highlight-phpinline"><div class="highlight"><pre><span class="s1">&#39;indexes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<div class="last highlight-phpinline"><div class="highlight"><pre><span></span><span class="s1">&#39;indexes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;AB_KEY&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;column&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;a_id&#39;</span><span class="p">,</span>
@@ -414,7 +414,7 @@ your schema files.</p>
 <p><strong>Using tableParameters in schema files</strong></p>
 <p>You use <tt class="docutils literal"><span class="pre">tableParameters</span></tt> just as you would any other key in a
 schema file. Much like <tt class="docutils literal"><span class="pre">indexes</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">var</span> <span class="nv">$comments</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">var</span> <span class="nv">$comments</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
         <span class="s1">&#39;null&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
@@ -448,11 +448,11 @@ distribute database changes. Migrations are achieved through either
 SCM controlled schema files or schema snapshots. Versioning a
 schema file with the schema shell is quite easy. If you already
 have a schema file created running:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">generate</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">generate</span>
 </pre></div>
 </div>
 <p>Will bring up the following choices:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Generating</span> <span class="nx">Schema</span><span class="o">...</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Generating</span> <span class="nx">Schema</span><span class="o">...</span>
 <span class="nx">Schema</span> <span class="nb">file</span> <span class="nx">exists</span><span class="o">.</span>
  <span class="p">[</span><span class="nx">O</span><span class="p">]</span><span class="nx">verwrite</span>
  <span class="p">[</span><span class="nx">S</span><span class="p">]</span><span class="nx">napshot</span>
@@ -464,7 +464,7 @@ have a schema file created running:</p>
 if you have schema.php, it will create schema_2.php and so on. You
 can then restore to any of these schema files at any time by
 running:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">update</span> <span class="o">-</span><span class="nx">s</span> <span class="mi">2</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">update</span> <span class="o">-</span><span class="nx">s</span> <span class="mi">2</span>
 </pre></div>
 </div>
 <p>Where 2 is the snapshot number you wish to run. The schema shell
@@ -486,7 +486,7 @@ would follow these steps:</p>
 database</p>
 </li>
 <li><p class="first">Commit the created or updated schema.php file:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="c1"># once your database has been updated</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="c1"># once your database has been updated</span>
 <span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">generate</span>
 <span class="err">$</span> <span class="nx">git</span> <span class="nx">commit</span> <span class="o">-</span><span class="nx">a</span>
 </pre></div>
@@ -507,7 +507,7 @@ changes in the structure of the database (possibly because
 of an error message saying you are missing a table):</p>
 <ol class="arabic">
 <li><p class="first">Execute cake schema to update your database:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">git</span> <span class="nx">pull</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">git</span> <span class="nx">pull</span>
 <span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span>
 <span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">update</span>
 </pre></div>
@@ -525,12 +525,12 @@ supported by cake schema.</p>
 been created.</p>
 <p>Using <tt class="docutils literal"><span class="pre">update</span></tt> will, on the contrary, drop any field which differ from the
 schema file:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">git</span> <span class="nx">revert</span> <span class="nx">HEAD</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">git</span> <span class="nx">revert</span> <span class="nx">HEAD</span>
 <span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">update</span>
 </pre></div>
 </div>
 <p>Will bring up the following choices:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">The</span> <span class="nx">following</span> <span class="nx">statements</span> <span class="nx">will</span> <span class="nx">run</span><span class="o">.</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">The</span> <span class="nx">following</span> <span class="nx">statements</span> <span class="nx">will</span> <span class="nx">run</span><span class="o">.</span>
 <span class="nx">ALTER</span> <span class="nx">TABLE</span> <span class="sb">`roles`</span>
 <span class="nx">DROP</span> <span class="sb">`position`</span><span class="p">;</span>
 <span class="nx">Are</span> <span class="nx">you</span> <span class="nx">sure</span> <span class="nx">you</span> <span class="nx">want</span> <span class="nx">to</span> <span class="nx">alter</span> <span class="nx">the</span> <span class="nx">tables</span><span class="o">?</span> <span class="p">(</span><span class="nx">y</span><span class="o">/</span><span class="nx">n</span><span class="p">)</span>
@@ -643,7 +643,7 @@ schema file:</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

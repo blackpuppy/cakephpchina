@@ -178,17 +178,17 @@ window.lang = "zh_CN";
 <p>首先，获取一份该插件的拷贝并解压，或者用 git 克隆，放入目录
 <cite>app/Plugin/AclExtras</cite>。然后在 <cite>app/Config/boostrap.php</cite> 文件中启用该插件，如下
 所示:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//app/Config/boostrap.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">//app/Config/boostrap.php</span>
 <span class="c1">// ...</span>
 <span class="nx">CakePlugin</span><span class="o">::</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;AclExtras&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>最后，在 CakePHP 终端中执行如下命令:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="nx">aco_sync</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="nx">aco_sync</span>
 </pre></div>
 </div>
 <p>这样可以获得所有可用命令的完整说明:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="o">-</span><span class="nx">h</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="o">-</span><span class="nx">h</span>
 <span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">AclExtras</span><span class="o">.</span><span class="nx">AclExtras</span> <span class="nx">aco_sync</span> <span class="o">-</span><span class="nx">h</span>
 </pre></div>
 </div>
@@ -199,19 +199,19 @@ window.lang = "zh_CN";
 <p>创建权限很像创建 ACO，没有什么神奇的办法，我也没什么好办法。要允许 ARO 访问 ACO，
 从外壳(<em>shell</em>)接口使用 AclShell。欲知如何使用，可以运行下面的命令来查看 AclShell
 的帮助:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">acl</span> <span class="o">--</span><span class="nx">help</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">acl</span> <span class="o">--</span><span class="nx">help</span>
 </pre></div>
 </div>
 <p>注意 : * 需要被引号包起来 (&#8216;*&#8217;)</p>
 <p>为了用 <tt class="docutils literal"><span class="pre">AclComponent</span></tt> 给予(权限)，要在自定义的方法中使用如下的代码:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$aroAlias</span><span class="p">,</span> <span class="nv">$acoAlias</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="nv">$aroAlias</span><span class="p">,</span> <span class="nv">$acoAlias</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>现在要添加一些允许/拒绝的语句。在 <tt class="docutils literal"><span class="pre">UsersController</span></tt> 中添加下面的代码到一个临时
 的函数中，然后从浏览器中访问该网址(例如 <a class="reference external" href="http://localhost/cake/app/users/initdb">http://localhost/cake/app/users/initdb</a>)来
 运行。如果运行 <tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">aros_acos</span></tt> 应当看到很多 1 和 -1。一旦确认权限设置
 好了，就可以删除这个函数:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;initDB&#39;</span><span class="p">);</span> <span class="c1">// 用完之后就可以删除这一行</span>
 <span class="p">}</span>
@@ -259,7 +259,7 @@ alias 字段，所以我们必须使用对象引用或者数组，来指定我�
 view 动作的权限就会恢复到在 Acl 中的设置。</p>
 <p>现在我们要拿掉 users 和 groups 控制器中 <tt class="docutils literal"><span class="pre">Auth-&gt;allowedActions</span></tt> 的引用。然后在
 posts 和 widgets 控制器中添加如下代码:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;view&#39;</span><span class="p">);</span>
 <span class="p">}</span>
@@ -268,7 +268,7 @@ posts 和 widgets 控制器中添加如下代码:</p>
 <p>这些去掉了我们前面的在 users 和 groups 控制器中加入的 &#8216;关闭开关&#8217;，并允许对 posts
 和 widgets 控制器的 index 和 view 动作的公开访问。在
 <tt class="docutils literal"><span class="pre">AppController::beforeFilter()</span></tt> 中添加:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;display&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">allow</span><span class="p">(</span><span class="s1">&#39;display&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>这让 &#8216;display&#8217; 动作公开。让我们的 PagesController::display() 公开，这是重要的，
@@ -279,7 +279,7 @@ posts 和 widgets 控制器中添加如下代码:</p>
 <p>我们的应用现在有了访问控制，并且任何企图查看非公开页面的尝试都会重定向到登录页面。
 不过，我们需要创建登录视图，这样用户才能够登录。如果你还没有这么做，请在
 <tt class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></tt> 中添加如下代码:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;h2&gt;Login&lt;/h2&gt;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x">&lt;h2&gt;Login&lt;/h2&gt;</span>
 <span class="cp">&lt;?php</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -293,7 +293,7 @@ posts 和 widgets 控制器中添加如下代码:</p>
 </pre></div>
 </div>
 <p>如果一个用户已经登录了，添加这个方法到 UsersController 来重定向:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;Auth.User&#39;</span><span class="p">))</span> <span class="p">{</span>
         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;You are logged in!&#39;</span><span class="p">);</span>
         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
@@ -309,7 +309,7 @@ posts 和 widgets 控制器中添加如下代码:</p>
 <h2>登出<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <p>现在轮到登出了。之前我们让这个方法为空，现在是时候实现它了。在
 <tt class="docutils literal"><span class="pre">UsersController::logout()</span></tt> 中添加如下代码:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;Good-Bye&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;Good-Bye&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">logout</span><span class="p">());</span>
 </pre></div>
 </div>
@@ -414,7 +414,7 @@ logout 方法基本上是删除 Auth 的会话键(<em>Session Key</em>)，并且
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

@@ -178,7 +178,7 @@ window.lang = "zh_CN";
 者任何自定义查询类型。切记 <tt class="docutils literal"><span class="pre">$type</span></tt> 是大小写敏感的。使用大写字母(如 <tt class="docutils literal"><span class="pre">All</span></tt> )将
 无法得到期望的结果。</p>
 <p><tt class="docutils literal"><span class="pre">$params</span></tt> 用于向各种类型的 find() 方法传递所有参数，默认有如下的键，都是可选的:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span> <span class="o">=&gt;</span> <span class="nv">$thisValue</span><span class="p">),</span> <span class="c1">//查询条件数组</span>
     <span class="s1">&#39;recursive&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="c1">//整型</span>
     <span class="c1">//字段名数组</span>
@@ -201,7 +201,7 @@ window.lang = "zh_CN";
 <span id="model-find-first"></span><h2>find(&#8216;first&#8217;)<a class="headerlink" href="#find-first" title="永久链接至标题">¶</a></h2>
 <p><tt class="docutils literal"><span class="pre">find('first',</span> <span class="pre">$params)</span></tt> 只返回一条记录。你可以把它用于任何只想得到一条记录的
 情况。以下是几个简单的(控制器代码)例子:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nv">$semiRandomArticle</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
     <span class="nv">$lastCreated</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
@@ -216,7 +216,7 @@ window.lang = "zh_CN";
 </div>
 <p>在第一个示例中，没有向 find 方法传递任何参数，所以不使用任何条件和排序。
 <tt class="docutils literal"><span class="pre">find('first')</span></tt> 方法调用返回的格式如下:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="nx">ModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
         <span class="p">(</span>
@@ -240,7 +240,7 @@ window.lang = "zh_CN";
 <div class="section" id="find-count">
 <span id="model-find-count"></span><h2>find(&#8216;count&#8217;)<a class="headerlink" href="#find-count" title="永久链接至标题">¶</a></h2>
 <p><tt class="docutils literal"><span class="pre">find('count',</span> <span class="pre">$params)</span></tt> 返回一个整数值。以下是几个简单的(控制器代码)例子:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nv">$total</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">);</span>
     <span class="nv">$pending</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
@@ -266,7 +266,7 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 <p><tt class="docutils literal"><span class="pre">find('all',</span> <span class="pre">$params)</span></tt> 返回一个数组，可能包含多个结果。实际上这是所有的
 <tt class="docutils literal"><span class="pre">find()</span></tt> 方法的变体、包括 <tt class="docutils literal"><span class="pre">paginate</span></tt> 方法使用的内在机制。下面是一些简单的(
 控制器代码)示例:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nv">$allArticles</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
     <span class="nv">$pending</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
@@ -286,7 +286,7 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 条件，所以 find 方法将不会使用任何条件。</p>
 </div>
 <p><tt class="docutils literal"><span class="pre">find('all')</span></tt> 方法调用返回的结果具有如下格式:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
         <span class="p">(</span>
@@ -315,7 +315,7 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 <span id="model-find-list"></span><h2>find(&#8216;list&#8217;)<a class="headerlink" href="#find-list" title="永久链接至标题">¶</a></h2>
 <p><tt class="docutils literal"><span class="pre">find('list',</span> <span class="pre">$params)</span></tt> 返回一个索引数组，可用于任何需要列表的场合，比如在生成
 填充 select 输入元素的列表框。下面是一些简单的(控制器代码)示例:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nv">$allArticles</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">);</span>
     <span class="nv">$pending</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
@@ -337,7 +337,7 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 件，所以 find 方法将不会使用任何条件。</p>
 </div>
 <p>调用 <tt class="docutils literal"><span class="pre">find('list')</span></tt> 的结果具有如下格式:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="c1">//[id] =&gt; &#39;displayValue&#39;,</span>
     <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;displayValue1&#39;</span><span class="p">,</span>
@@ -353,7 +353,7 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 键和值、以及(可选的)用什么(字段)来把结果分组。默认情况下，模型的主键用作键，显示
 列(<em>display field</em>，可以用模型的 <a class="reference internal" href="model-attributes.html#model-displayfield"><em>displayField</em></a> 属性来配置)当作值。下
 面用更深入的示例来说明:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nv">$justusernames</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;User.username&#39;</span><span class="p">)</span>
@@ -369,7 +369,7 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 </pre></div>
 </div>
 <p>使用上面的代码示例，结果变量类似下面这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$justusernames</span> <span class="o">=</span> <span class="k">Array</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$justusernames</span> <span class="o">=</span> <span class="k">Array</span>
 <span class="p">(</span>
     <span class="c1">//[id] =&gt; &#39;username&#39;,</span>
     <span class="p">[</span><span class="mi">213</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;AD7six&#39;</span><span class="p">,</span>
@@ -412,7 +412,7 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 <span id="model-find-threaded"></span><h2>find(&#8216;threaded&#8217;)<a class="headerlink" href="#find-threaded" title="永久链接至标题">¶</a></h2>
 <p><tt class="docutils literal"><span class="pre">find('threaded',</span> <span class="pre">$params)</span></tt> 返回一个嵌套数组，适用于想使用模型数据的
 <tt class="docutils literal"><span class="pre">parent_id</span></tt> 字段来建立嵌套结果的情况。下面是几个简单的(控制器代码)示例:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nv">$allCategories</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;threaded&#39;</span><span class="p">);</span>
     <span class="nv">$comments</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Comment</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;threaded&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
@@ -428,7 +428,7 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 </div>
 <p>在上面的例子中，<tt class="docutils literal"><span class="pre">$allCategories</span></tt> 将包含一个代表整个分类结构的嵌套数组。调用
 <tt class="docutils literal"><span class="pre">find('threaded')</span></tt> 的结果具有如下格式:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
     <span class="p">(</span>
@@ -486,7 +486,7 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 <div class="admonition warning">
 <p class="first admonition-title">警告</p>
 <p>如果指定了 <tt class="docutils literal"><span class="pre">fields</span></tt>, 就总是要包含 id 和 parent_id (或者它们的当前别名):</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$categories</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;threaded&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;parent_id&#39;</span><span class="p">)</span>
     <span class="p">));</span>
@@ -500,7 +500,7 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 <span id="model-find-neighbors"></span><h2>find(&#8216;neighbors&#8217;)<a class="headerlink" href="#find-neighbors" title="永久链接至标题">¶</a></h2>
 <p><tt class="docutils literal"><span class="pre">find('neighbors',</span> <span class="pre">$params)</span></tt> 方法执行的查找与 &#8216;first&#8217; 类似, 但返回查询的记录的
 前一条和后一条记录。下面是一个简单的(控制器代码)示例：</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$neighbors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span>
         <span class="s1">&#39;neighbors&#39;</span><span class="p">,</span>
         <span class="k">array</span><span class="p">(</span><span class="s1">&#39;field&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">)</span>
@@ -512,7 +512,7 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 find 方法一样，其它元素仍然允许。(例如：如果模型采用 containable 行为，则可以在
 <tt class="docutils literal"><span class="pre">$params</span></tt> 参数中指定 &#8216;contain&#8217;。) 调用 <tt class="docutils literal"><span class="pre">find('neighbors')</span></tt> 返回的结果格式如
 下：</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="nb">prev</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
     <span class="p">(</span>
@@ -562,7 +562,7 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 <p><tt class="docutils literal"><span class="pre">find</span></tt> 方法足够灵活，能够接收我们自定义的查找类型，这是通过在模型变量中定义自
 己的(查找)类型、并在模型类中实现特殊的函数来实现的。</p>
 <p>模型的查找类型是 find() 选项的快捷方式。例如，如下两种 find 是等价的：</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
 </pre></div>
 </div>
@@ -577,7 +577,7 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 </ul>
 <p>那么其它的类型呢？比如你要一个在数据库中查找所有已发表的文章的查找类型。首先要做
 的改动是把自定义类型添加到模型的 <tt class="xref php php-attr docutils literal"><span class="pre">Model::$findMethods</span></tt> 变量中。</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Article</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Article</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$findMethods</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;available&#39;</span> <span class="o">=&gt;</span>  <span class="k">true</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
@@ -585,7 +585,7 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 <p>基本上这只是让 CakePHP 接受值 <tt class="docutils literal"><span class="pre">available</span></tt> 作为 <tt class="docutils literal"><span class="pre">find</span></tt> 函数的第一个参数。接下
 来要实现 <tt class="docutils literal"><span class="pre">_findAvailable</span></tt> 函数。这是约定。如果想实现叫做 <tt class="docutils literal"><span class="pre">myFancySearch</span></tt> 的
 查找函数，那么要实现的方法就要命名为 <tt class="docutils literal"><span class="pre">_findMyFancySearch</span></tt>。</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Article</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Article</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$findMethods</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;available&#39;</span> <span class="o">=&gt;</span>  <span class="k">true</span><span class="p">);</span>
 
     <span class="k">protected</span> <span class="k">function</span> <span class="nf">_findAvailable</span><span class="p">(</span><span class="nv">$state</span><span class="p">,</span> <span class="nv">$query</span><span class="p">,</span> <span class="nv">$results</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
@@ -599,7 +599,7 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 </pre></div>
 </div>
 <p>所有这些加在一起，就可以有下面这样的例子(控制器代码)：</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
     <span class="c1">// 将会查找所有已发表的文章，并以 created 列排序</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
@@ -622,7 +622,7 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 过或没有任何改变)。</p>
 <p>可以创建任意多想要的自定义查找，这也是复用应用程序各个模型代码的好方法。</p>
 <p>还可以象下面这样使用&#8217;findType&#8217;选项，通过自定义的查找类型对结果进行分页：</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
     <span class="c1">// 将会对所有已发布的文章进行分页</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
@@ -638,7 +638,7 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 <tt class="docutils literal"><span class="pre">available</span></tt>，而且也让你可以继续修改查找结果。</p>
 <p>要简单地返回自定义查找类型的计数，象平常那样调用 <tt class="docutils literal"><span class="pre">count</span></tt> 方法，但在第二个参数
 中传入包含查找类型的数组。</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
     <span class="c1">// 会得到所有已发表文章的数量(使用上面定义的 available 查找类型)</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
@@ -651,7 +651,7 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 </div>
 <p>如果你的分页页数损坏了，也许必须在 <tt class="docutils literal"><span class="pre">AppModel</span></tt> 中添加如下代码，就能修复分页计数
 了：</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppModel</span> <span class="k">extends</span> <span class="nx">Model</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppModel</span> <span class="k">extends</span> <span class="nx">Model</span> <span class="p">{</span>
 
 <span class="sd">/**</span>
 <span class="sd"> * 当 &#39;fields&#39; 键是数组时，从自定义查找的计数查询中删除 &#39;fields&#39; 键，因为它</span>
@@ -692,7 +692,7 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 状态现在会用 $query[&#8216;operation&#8217;] = &#8216;count&#8217; 再次调用。返回的 $query 会用于
 <tt class="docutils literal"><span class="pre">_findCount()</span></tt>。如果必要，你可以通过检查 <tt class="docutils literal"><span class="pre">'operation'</span></tt> 键来区分，并返回不同
 的 <tt class="docutils literal"><span class="pre">$query</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">protected</span> <span class="k">function</span> <span class="nf">_findAvailable</span><span class="p">(</span><span class="nv">$state</span><span class="p">,</span> <span class="nv">$query</span><span class="p">,</span> <span class="nv">$results</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">protected</span> <span class="k">function</span> <span class="nf">_findAvailable</span><span class="p">(</span><span class="nv">$state</span><span class="p">,</span> <span class="nv">$query</span><span class="p">,</span> <span class="nv">$results</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$state</span> <span class="o">===</span> <span class="s1">&#39;before&#39;</span><span class="p">)</span> <span class="p">{</span>
         <span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;conditions&#39;</span><span class="p">][</span><span class="s1">&#39;Article.published&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;operation&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;operation&#39;</span><span class="p">]</span> <span class="o">===</span> <span class="s1">&#39;count&#39;</span><span class="p">)</span> <span class="p">{</span>
@@ -806,11 +806,11 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 <tt class="docutils literal"><span class="pre">query($query,</span> <span class="pre">$cachequeries</span> <span class="pre">=</span> <span class="pre">false)</span></tt>。</p>
 </div>
 <p><tt class="docutils literal"><span class="pre">query()</span></tt> 在查询中使用表名而不是模型名作为返回数据数组的键。例如:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Picture</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM pictures LIMIT 2;&quot;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Picture</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM pictures LIMIT 2;&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>可能返回:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
     <span class="p">(</span>
@@ -833,11 +833,11 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 </pre></div>
 </div>
 <p>要使用模型名作为数组键，并返回与 Find 方法一致的结果，可以将查询写成:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Picture</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM pictures AS Picture LIMIT 2;&quot;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Picture</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM pictures AS Picture LIMIT 2;&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>这会返回:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
     <span class="p">(</span>
@@ -871,7 +871,7 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 <p>返回符合 $conditions 条件、按照 $order 排序的第一条记录中以 <tt class="docutils literal"><span class="pre">$name</span></tt> 命名的单一
 列的值。如果没有传递条件，并且设置了模型的 id，则返回当前模型结果的那一列的值。
 如果没有匹配的记录，则返回 false。</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span> <span class="c1">// 显示 id 为 22 的行的 name 列</span>
 
 <span class="c1">// 显示最后创建的实例的 name 列</span>
@@ -915,7 +915,7 @@ SQL 语法，并且正确地转义(<em>escape</em>)查询的每一个部分。�
 做会让你容易遭受 SQL 注入的攻击。</p>
 </div>
 <p>最基本的基于数组的查询类似于这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$conditions</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;This is a post&quot;</span><span class="p">,</span> <span class="s2">&quot;Post.author_id&quot;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$conditions</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;This is a post&quot;</span><span class="p">,</span> <span class="s2">&quot;Post.author_id&quot;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">);</span>
 <span class="c1">// 使用模型的用法示例:</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="nv">$conditions</span><span class="p">));</span>
 </pre></div>
@@ -926,21 +926,21 @@ SQL 语法，并且正确地转义(<em>escape</em>)查询的每一个部分。�
 如果你决定改变数据结构的话。</p>
 <p>其它的匹配类型呢？同样简单。比如说我们要查找所有标题(<em>title</em>)不是&#8221;This is a
 post&#8221;的文章:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s2">&quot;Post.title !=&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;This is a post&quot;</span><span class="p">)</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;Post.title !=&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;This is a post&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>注意，跟在字段名称之后的&#8217;!=&#8217;。CakePHP 能解析任何合法的 SQL 比较操作符，包括使用
 <tt class="docutils literal"><span class="pre">LIKE</span></tt> 、 <tt class="docutils literal"><span class="pre">BETWEEN</span></tt> 或者 <tt class="docutils literal"><span class="pre">REGEX</span></tt> 的匹配表达式，只要你用空格分隔开列名和操
 作符。这里唯一的例外是 <tt class="docutils literal"><span class="pre">IN</span></tt> (...) 这样的匹配条件。比如说要查找标题(<em>title</em>)列
 为给定的一组值之一的文章:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
     <span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;First post&quot;</span><span class="p">,</span> <span class="s2">&quot;Second post&quot;</span><span class="p">,</span> <span class="s2">&quot;Third post&quot;</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>要使用 NOT IN(...) 匹配条件来查找标题(<em>title</em>)不在给定的一组值之内的文章，那么这
 样做:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
     <span class="s2">&quot;NOT&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;First post&quot;</span><span class="p">,</span> <span class="s2">&quot;Second post&quot;</span><span class="p">,</span> <span class="s2">&quot;Third post&quot;</span><span class="p">)</span>
     <span class="p">)</span>
@@ -948,20 +948,20 @@ post&#8221;的文章:</p>
 </pre></div>
 </div>
 <p>要向条件中添加更多的过滤，简单到只要给数组添加更多的键/值对:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span> <span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span> <span class="p">(</span>
     <span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;First post&quot;</span><span class="p">,</span> <span class="s2">&quot;Second post&quot;</span><span class="p">,</span> <span class="s2">&quot;Third post&quot;</span><span class="p">),</span>
     <span class="s2">&quot;Post.created &gt;&quot;</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d&#39;</span><span class="p">,</span> <span class="nb">strtotime</span><span class="p">(</span><span class="s2">&quot;-2 weeks&quot;</span><span class="p">))</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>还可以创建对比数据库中两个字段的查询:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s2">&quot;Post.created = Post.modified&quot;</span><span class="p">)</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;Post.created = Post.modified&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>上面的例子将返回创建日期和编辑日期相同的文章(即，返回从来没被编辑过的文章)。</p>
 <p>记住，如果你发现不能用这种方法生成 <tt class="docutils literal"><span class="pre">WHERE</span></tt> 子句(例如，逻辑运算)，你总是可以使
 用字符串来指定，比如:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;Model.field &amp; 8 = 1&#39;</span><span class="p">,</span>
     <span class="c1">// 其它条件照旧</span>
 <span class="p">)</span>
@@ -970,7 +970,7 @@ post&#8221;的文章:</p>
 <p>默认情况下，CakePHP 使用逻辑 <tt class="docutils literal"><span class="pre">AND</span></tt> 来连接多个条件。这意味着，上面的代码片段仅
 匹配近两星期内创建的、并且标题(<em>title</em>)符合给定的一组标题之一的文章。不过，我们
 也可以同样容易地查找符合任一条件的文章:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s2">&quot;OR&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;OR&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
     <span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;First post&quot;</span><span class="p">,</span> <span class="s2">&quot;Second post&quot;</span><span class="p">,</span> <span class="s2">&quot;Third post&quot;</span><span class="p">),</span>
     <span class="s2">&quot;Post.created &gt;&quot;</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d&#39;</span><span class="p">,</span> <span class="nb">strtotime</span><span class="p">(</span><span class="s2">&quot;-2 weeks&quot;</span><span class="p">))</span>
 <span class="p">))</span>
@@ -980,7 +980,7 @@ post&#8221;的文章:</p>
 <tt class="docutils literal"><span class="pre">XOR</span></tt>，等等，而且大小写都可以，随你选择。这些条件还可以无限制嵌套。比如说
 Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含特定关键词(&#8220;magic&#8221;
 )或者在两星期内创建的、但仅由用户 Bob 发布的文章:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
     <span class="s2">&quot;Author.name&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span>
     <span class="s2">&quot;OR&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s2">&quot;Post.title LIKE&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;%magic%&quot;</span><span class="p">,</span>
@@ -991,7 +991,7 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 </div>
 <p>如果需要在同一个字段上设置多个条件，比如想要执行一个带有多个 <tt class="docutils literal"><span class="pre">LIKE</span></tt> 条件的搜索，
 可以使用类似如下的条件:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s1">&#39;OR&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;OR&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Post.title LIKE&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%one%&#39;</span><span class="p">),</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Post.title LIKE&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%two%&#39;</span><span class="p">)</span>
 <span class="p">))</span>
@@ -999,14 +999,14 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 </div>
 <p>也可以使用通配符操作符 <tt class="docutils literal"><span class="pre">ILIKE</span></tt> 和 <tt class="docutils literal"><span class="pre">RLIKE</span></tt> (RLIKE 自 2.6 版本起)。</p>
 <p>CakePHP 还能检查 null 字段。在本例中，查询将返回标题(<em>title</em>)不为 null 的记录:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s2">&quot;NOT&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;NOT&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="k">null</span>
     <span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>要处理 <tt class="docutils literal"><span class="pre">BETWEEN</span></tt> 查询，可以使用下面的方法:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Post.read_count BETWEEN ? AND ?&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Post.read_count BETWEEN ? AND ?&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1014,7 +1014,7 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 <p class="last">CakePHP 会根据数据库中字段的类型来决定是否为数字值加上引号。</p>
 </div>
 <p>如何处理 GROUP BY？:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Product.type&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MIN(Product.price) as price&#39;</span>
@@ -1024,7 +1024,7 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 </pre></div>
 </div>
 <p>这个查询返回的数据具有如下格式:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">Array</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
     <span class="p">(</span>
@@ -1043,14 +1043,14 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 </div>
 <p>下面是使用 <tt class="docutils literal"><span class="pre">DISTINCT</span></tt> 查询的简单示例。可以按类似的方式使用其它操作符，比如
 <tt class="docutils literal"><span class="pre">MIN()</span></tt> 、 <tt class="docutils literal"><span class="pre">MAX()</span></tt>，等等:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;DISTINCT (User.name) AS my_column_name&#39;</span><span class="p">),</span>
     <span class="s1">&#39;order&#39;</span> <span class="o">=</span> <span class="o">&gt;</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;User.id DESC&#39;</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>通过嵌套多个条件数组，可以构建非常复杂的条件:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;OR&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Company.name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Future Holdings&#39;</span><span class="p">),</span>
         <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Company.city&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CA&#39;</span><span class="p">)</span>
@@ -1069,7 +1069,7 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 </pre></div>
 </div>
 <p>这生成如下 SQL:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">SELECT</span> <span class="sb">`Company`</span><span class="o">.</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`Company`</span><span class="o">.</span><span class="sb">`name`</span><span class="p">,</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">SELECT</span> <span class="sb">`Company`</span><span class="o">.</span><span class="sb">`id`</span><span class="p">,</span> <span class="sb">`Company`</span><span class="o">.</span><span class="sb">`name`</span><span class="p">,</span>
 <span class="sb">`Company`</span><span class="o">.</span><span class="sb">`description`</span><span class="p">,</span> <span class="sb">`Company`</span><span class="o">.</span><span class="sb">`location`</span><span class="p">,</span>
 <span class="sb">`Company`</span><span class="o">.</span><span class="sb">`created`</span><span class="p">,</span> <span class="sb">`Company`</span><span class="o">.</span><span class="sb">`status`</span><span class="p">,</span> <span class="sb">`Company`</span><span class="o">.</span><span class="sb">`size`</span>
 
@@ -1090,7 +1090,7 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 &#8220;A&#8221;、&#8221;B&#8221; 或者 &#8220;C&#8221;。我们要使用子查询获取所有 status 列不是&#8221;B&#8221;的用户(<em>users</em>)。</p>
 <p>为了达到此目的，我们将获取模型的数据源，让它构建查询，就像我们调用 find() 方法那
 样，但是只让它返回 SQL 语句。然后，我们生成表达式，并将其添加到条件数组中:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$conditionsSubQuery</span><span class="p">[</span><span class="s1">&#39;&quot;User2&quot;.&quot;status&quot;&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;B&#39;</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$conditionsSubQuery</span><span class="p">[</span><span class="s1">&#39;&quot;User2&quot;.&quot;status&quot;&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;B&#39;</span><span class="p">;</span>
 
 <span class="nv">$db</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">getDataSource</span><span class="p">();</span>
 <span class="nv">$subQuery</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">buildStatement</span><span class="p">(</span>
@@ -1116,7 +1116,7 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 </pre></div>
 </div>
 <p>这会生成如下 SQL:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">SELECT</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">SELECT</span>
     <span class="s2">&quot;User&quot;</span><span class="o">.</span><span class="s2">&quot;id&quot;</span> <span class="k">AS</span> <span class="s2">&quot;User__id&quot;</span><span class="p">,</span>
     <span class="s2">&quot;User&quot;</span><span class="o">.</span><span class="s2">&quot;name&quot;</span> <span class="k">AS</span> <span class="s2">&quot;User__name&quot;</span><span class="p">,</span>
     <span class="s2">&quot;User&quot;</span><span class="o">.</span><span class="s2">&quot;status&quot;</span> <span class="k">AS</span> <span class="s2">&quot;User__status&quot;</span>
@@ -1140,7 +1140,7 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 <span id="id7"></span><h3>预处理语句<a class="headerlink" href="#prepared-statements" title="永久链接至标题">¶</a></h3>
 <p>如果还需要对查询有更多控制，可以使用预处理语句。它让你可以直接与数据库驱动对话，
 并且传递任何需要的自定义查询:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$db</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDataSource</span><span class="p">();</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$db</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDataSource</span><span class="p">();</span>
 <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span>
     <span class="s1">&#39;SELECT * from users where username = ? AND password = ?&#39;</span><span class="p">,</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;jhon&#39;</span><span class="p">,</span> <span class="s1">&#39;12345&#39;</span><span class="p">)</span>
@@ -1266,7 +1266,7 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

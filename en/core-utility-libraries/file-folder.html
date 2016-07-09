@@ -176,24 +176,24 @@ related tasks.</p>
 <div class="section" id="basic-usage">
 <h2>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
 <p>Ensure the classes are loaded using <a class="reference internal" href="app.html#App::uses" title="App::uses"><tt class="xref php php-meth docutils literal"><span class="pre">App::uses()</span></tt></a>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Folder&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;File&#39;</span><span class="p">,</span> <span class="s1">&#39;Utility&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Then we can setup a new folder instance:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$dir</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Folder</span><span class="p">(</span><span class="s1">&#39;/path/to/folder&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>and search for all <em>.ctp</em> files within that folder using regex:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$files</span> <span class="o">=</span> <span class="nv">$dir</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;.*\.ctp&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Now we can loop through the files and read from or write/append to the contents or
 simply delete the file:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">foreach</span> <span class="p">(</span><span class="nv">$files</span> <span class="k">as</span> <span class="nv">$file</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$file</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">File</span><span class="p">(</span><span class="nv">$dir</span><span class="o">-&gt;</span><span class="na">pwd</span><span class="p">()</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="nv">$file</span><span class="p">);</span>
     <span class="nv">$contents</span> <span class="o">=</span> <span class="nv">$file</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">();</span>
@@ -212,7 +212,7 @@ simply delete the file:</p>
 <em class="property">class </em><tt class="descname">Folder</tt><big>(</big><em>string $path = false</em>, <em>boolean $create = false</em>, <em>string|boolean $mode = false</em><big>)</big><a class="headerlink" href="#Folder" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="c1">// Create a new folder with 0755 permissions</span>
 <span class="nv">$dir</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Folder</span><span class="p">(</span><span class="s1">&#39;/path/to/folder&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="mo">0755</span><span class="p">);</span>
 </pre></div>
@@ -249,12 +249,12 @@ Windows machines.</p>
 </tbody>
 </table>
 <p>Returns $path with $element added, with correct slash in-between:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$path</span> <span class="o">=</span> <span class="nx">Folder</span><span class="o">::</span><span class="na">addPathElement</span><span class="p">(</span><span class="s1">&#39;/a/path/for&#39;</span><span class="p">,</span> <span class="s1">&#39;testing&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$path</span> <span class="o">=</span> <span class="nx">Folder</span><span class="o">::</span><span class="na">addPathElement</span><span class="p">(</span><span class="s1">&#39;/a/path/for&#39;</span><span class="p">,</span> <span class="s1">&#39;testing&#39;</span><span class="p">);</span>
 <span class="c1">// $path equals /a/path/for/testing</span>
 </pre></div>
 </div>
 <p>$element can also be an array:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$path</span> <span class="o">=</span> <span class="nx">Folder</span><span class="o">::</span><span class="na">addPathElement</span><span class="p">(</span><span class="s1">&#39;/a/path/for&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;testing&#39;</span><span class="p">,</span> <span class="s1">&#39;another&#39;</span><span class="p">));</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$path</span> <span class="o">=</span> <span class="nx">Folder</span><span class="o">::</span><span class="na">addPathElement</span><span class="p">(</span><span class="s1">&#39;/a/path/for&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;testing&#39;</span><span class="p">,</span> <span class="s1">&#39;another&#39;</span><span class="p">));</span>
 <span class="c1">// $path equals /a/path/for/testing/another</span>
 </pre></div>
 </div>
@@ -275,7 +275,7 @@ Windows machines.</p>
 </tbody>
 </table>
 <p>Change directory to $path. Returns false on failure:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$folder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Folder</span><span class="p">(</span><span class="s1">&#39;/foo&#39;</span><span class="p">);</span>
 <span class="k">echo</span> <span class="nv">$folder</span><span class="o">-&gt;</span><span class="na">path</span><span class="p">;</span> <span class="c1">// Prints /foo</span>
 <span class="nv">$folder</span><span class="o">-&gt;</span><span class="na">cd</span><span class="p">(</span><span class="s1">&#39;/bar&#39;</span><span class="p">);</span>
@@ -298,7 +298,7 @@ Windows machines.</p>
 </table>
 <p>Change the mode on a directory structure recursively. This includes
 changing the mode on files as well:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$dir</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Folder</span><span class="p">();</span>
 <span class="nv">$dir</span><span class="o">-&gt;</span><span class="na">chmod</span><span class="p">(</span><span class="s1">&#39;/path/to/folder&#39;</span><span class="p">,</span> <span class="mo">0755</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;skip_me.php&#39;</span><span class="p">));</span>
 </pre></div>
@@ -318,7 +318,7 @@ changing the mode on files as well:</p>
 </table>
 <p>Copy a directory (recursively by default). The only parameter $options can either
 be a path into copy to or an array of options:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$folder1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Folder</span><span class="p">(</span><span class="s1">&#39;/path/to/folder1&#39;</span><span class="p">);</span>
 <span class="nv">$folder1</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">(</span><span class="s1">&#39;/path/to/folder2&#39;</span><span class="p">);</span>
 <span class="c1">// Will put folder1 and all its contents into folder2</span>
@@ -379,7 +379,7 @@ Windows paths and &#8216;/&#8217; for other paths).</p>
 </table>
 <p>Create a directory structure recursively. Can be used to create
 deep path structures like <cite>/foo/bar/baz/shoe/horn</cite>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$folder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Folder</span><span class="p">();</span>
 <span class="k">if</span> <span class="p">(</span><span class="nv">$folder</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="s1">&#39;bar&#39;</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="s1">&#39;baz&#39;</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="s1">&#39;shoe&#39;</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="s1">&#39;horn&#39;</span><span class="p">))</span> <span class="p">{</span>
     <span class="c1">// Successfully created the nested folders</span>
@@ -400,7 +400,7 @@ deep path structures like <cite>/foo/bar/baz/shoe/horn</cite>:</p>
 </tbody>
 </table>
 <p>Recursively remove directories if the system allows:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$folder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Folder</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
 <span class="k">if</span> <span class="p">(</span><span class="nv">$folder</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// Successfully deleted foo and its nested folders</span>
@@ -449,7 +449,7 @@ deep path structures like <cite>/foo/bar/baz/shoe/horn</cite>:</p>
 </tbody>
 </table>
 <p>Returns an array of all matching files in the current directory:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="c1">// Find all .png in your app/webroot/img/ folder and sort the results</span>
 <span class="nv">$dir</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Folder</span><span class="p">(</span><span class="nx">WWW_ROOT</span> <span class="o">.</span> <span class="s1">&#39;img&#39;</span><span class="p">);</span>
 <span class="nv">$files</span> <span class="o">=</span> <span class="nv">$dir</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;.*\.png&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
@@ -485,7 +485,7 @@ would like to get folders and files see <a class="reference internal" href="#Fol
 </tbody>
 </table>
 <p>Returns an array of all matching files in and below the current directory:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="c1">// Recursively find files beginning with test or index</span>
 <span class="nv">$dir</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Folder</span><span class="p">(</span><span class="nx">WWW_ROOT</span><span class="p">);</span>
 <span class="nv">$files</span> <span class="o">=</span> <span class="nv">$dir</span><span class="o">-&gt;</span><span class="na">findRecursive</span><span class="p">(</span><span class="s1">&#39;(test|index).*&#39;</span><span class="p">);</span>
@@ -530,7 +530,7 @@ would like to get folders and files see <a class="reference internal" href="#Fol
 </tbody>
 </table>
 <p>Returns true if the file is in the given path:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$Folder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Folder</span><span class="p">(</span><span class="nx">WWW_ROOT</span><span class="p">);</span>
 <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$Folder</span><span class="o">-&gt;</span><span class="na">inPath</span><span class="p">(</span><span class="nx">APP</span><span class="p">);</span>
 <span class="c1">// $result = true, /var/www/example/app/ is in /var/www/example/app/webroot/</span>
@@ -567,7 +567,7 @@ would like to get folders and files see <a class="reference internal" href="#Fol
 </tbody>
 </table>
 <p>Returns true if given $path ends in a slash (i.e. is slash-terminated):</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$result</span> <span class="o">=</span> <span class="nx">Folder</span><span class="o">::</span><span class="na">isSlashTerm</span><span class="p">(</span><span class="s1">&#39;/my/test/path&#39;</span><span class="p">);</span>
 <span class="c1">// $result = false</span>
 <span class="nv">$result</span> <span class="o">=</span> <span class="nx">Folder</span><span class="o">::</span><span class="na">isSlashTerm</span><span class="p">(</span><span class="s1">&#39;/my/test/path/&#39;</span><span class="p">);</span>
@@ -669,7 +669,7 @@ true or &#8216;.&#8217; this method will ignore hidden or dot files.</li>
 </table>
 <p>Returns an array of the contents of the current directory. The
 returned array holds two sub arrays: One of directories and one of files:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$dir</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Folder</span><span class="p">(</span><span class="nx">WWW_ROOT</span><span class="p">);</span>
 <span class="nv">$files</span> <span class="o">=</span> <span class="nv">$dir</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="k">true</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;files&#39;</span><span class="p">,</span> <span class="s1">&#39;index.php&#39;</span><span class="p">));</span>
 <span class="cm">/*</span>
@@ -744,7 +744,7 @@ Windows or other OS).</p>
 <em class="property">class </em><tt class="descname">File</tt><big>(</big><em>string $path</em>, <em>boolean $create = false</em>, <em>integer $mode = 755</em><big>)</big><a class="headerlink" href="#File" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="c1">// Create a new file with 0644 permissions</span>
 <span class="nv">$file</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">File</span><span class="p">(</span><span class="s1">&#39;/path/to/file.php&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="mo">0644</span><span class="p">);</span>
 </pre></div>
@@ -1309,7 +1309,7 @@ will be used, &#8220;n&#8221; for all other platforms.</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

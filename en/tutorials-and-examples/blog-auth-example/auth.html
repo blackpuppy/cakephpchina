@@ -174,7 +174,7 @@ disallowing other authors to make any changes on one&#8217;s posts.</p>
 <div class="section" id="creating-all-users-related-code">
 <h2>Creating all users&#8217; related code<a class="headerlink" href="#creating-all-users-related-code" title="Permalink to this headline">¶</a></h2>
 <p>First, let&#8217;s create a new table in our blog database to hold our users&#8217; data:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">users</span> <span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">users</span> <span class="p">(</span>
     <span class="nx">id</span> <span class="nx">INT</span> <span class="nx">UNSIGNED</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
     <span class="nx">username</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
     <span class="nx">password</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
@@ -190,7 +190,7 @@ columns in a users table, CakePHP will be able to auto configure most things for
 us when implementing the user login.</p>
 <p>Next step is to create our User model, responsible for finding, saving and
 validating any user data:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Model/User.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Model/User.php</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppModel&#39;</span><span class="p">,</span> <span class="s1">&#39;Model&#39;</span><span class="p">);</span>
 
 <span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
@@ -221,7 +221,7 @@ validating any user data:</p>
 <p>Let&#8217;s also create our UsersController, the following contents correspond to a
 basic <cite>baked</cite> UsersController class using the code generation utilities bundled
 with CakePHP:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/UsersController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/UsersController.php</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppController&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
 
 <span class="k">class</span> <span class="nc">UsersController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
@@ -304,7 +304,7 @@ with CakePHP:</p>
 <p>In the same way we created the views for our blog posts or by using the code
 generation tool, we implement the views. For the purpose of this tutorial, we
 will show just the add.ctp:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;!-- app/View/Users/add.ctp --&gt;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x">&lt;!-- app/View/Users/add.ctp --&gt;</span>
 <span class="x">&lt;div class=&quot;users form&quot;&gt;</span>
 <span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
 <span class="x">    &lt;fieldset&gt;</span>
@@ -329,7 +329,7 @@ actions, handling user sign-in and sign-out, and also authorizing logged in
 users to the actions they are allowed to reach.</p>
 <p>To add this component to your application open your <tt class="docutils literal"><span class="pre">app/Controller/AppController.php</span></tt>
 file and add the following lines:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/AppController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/AppController.php</span>
 <span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
     <span class="c1">//...</span>
 
@@ -371,7 +371,7 @@ site.</p>
 and, more importantly, hash their password so it is not stored as plain text in
 our database. Let&#8217;s tell the AuthComponent to let un-authenticated users access
 the users add function and implement the login and logout action:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/UsersController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/UsersController.php</span>
 
 <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
@@ -395,7 +395,7 @@ the users add function and implement the login and logout action:</p>
 </div>
 <p>Password hashing is not done yet, open your <tt class="docutils literal"><span class="pre">app/Model/User.php</span></tt> model file
 and add the following:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Model/User.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Model/User.php</span>
 
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppModel&#39;</span><span class="p">,</span> <span class="s1">&#39;Model&#39;</span><span class="p">);</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;BlowfishPasswordHasher&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller/Component/Auth&#39;</span><span class="p">);</span>
@@ -427,7 +427,7 @@ SimplePasswordHasher will be removed as of CakePHP version 3.0</p>
 BlowfishPasswordHasher class.  We&#8217;re just missing a template view file for the
 login function. Open up your <tt class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></tt> file and add the
 following lines:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="x">//app/View/Users/login.ctp</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x">//app/View/Users/login.ctp</span>
 
 <span class="x">&lt;div class=&quot;users form&quot;&gt;</span>
 <span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">flash</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
@@ -468,12 +468,12 @@ of the <tt class="docutils literal"><span class="pre">AuthComponent::logout()</s
 <p>As stated before, we are converting this blog into a multi-user authoring tool,
 and in order to do this, we need to modify the posts table a bit to add the
 reference to the User model:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">ALTER</span> <span class="nx">TABLE</span> <span class="nx">posts</span> <span class="nx">ADD</span> <span class="nx">COLUMN</span> <span class="nx">user_id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">ALTER</span> <span class="nx">TABLE</span> <span class="nx">posts</span> <span class="nx">ADD</span> <span class="nx">COLUMN</span> <span class="nx">user_id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Also, a small change in the PostsController is required to store the currently
 logged in user as a reference for the created post:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/PostsController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/PostsController.php</span>
 <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
         <span class="c1">//Added this line</span>
@@ -494,7 +494,7 @@ others&#8217; posts. Basic rules for our app are that admin users can access eve
 URL, while normal users (the author role) can only access the permitted actions.
 Open again the AppController class and add a few more options to the Auth
 config:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/AppController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/AppController.php</span>
 
 <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;Session&#39;</span><span class="p">,</span>
@@ -535,7 +535,7 @@ delegate each controller to supply those extra rules. The rules we&#8217;re goin
 add to PostsController should allow authors to create posts but prevent the
 edition of posts if the author does not match. Open the file <tt class="docutils literal"><span class="pre">PostsController.php</span></tt>
 and add the following content:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/PostsController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/PostsController.php</span>
 
 <span class="k">public</span> <span class="k">function</span> <span class="nf">isAuthorized</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// All registered users can add posts</span>
@@ -562,7 +562,7 @@ edit and delete. A final thing is left to be implemented, to tell whether
 the user is authorized to edit the post or not, we&#8217;re calling a <tt class="docutils literal"><span class="pre">isOwnedBy()</span></tt>
 function in the Post model. It is in general a good practice to move as much
 logic as possible into models. Let&#8217;s then implement the function:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Model/Post.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Model/Post.php</span>
 
 <span class="k">public</span> <span class="k">function</span> <span class="nf">isOwnedBy</span><span class="p">(</span><span class="nv">$post</span><span class="p">,</span> <span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$post</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="p">))</span> <span class="o">!==</span> <span class="k">false</span><span class="p">;</span>
@@ -675,7 +675,7 @@ about configuring the component, creating custom Authorization classes, and much
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

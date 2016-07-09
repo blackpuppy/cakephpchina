@@ -202,14 +202,14 @@ window.lang = "zh_CN";
 <div class="section" id="id2">
 <h2>使用行为<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <p>行为通过模型的类变量 <tt class="docutils literal"><span class="pre">$actsAs</span></tt> 附加到模型上:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Category</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Category</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Tree&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>这个例子说明一个 Category 模型可以使用 TreeBehavior 在一个树形结构中处理。一旦指
 定了行为，行为新添加的方法就可以象原来的模型中一直存在的部分一样来使用:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 设置 ID</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 设置 ID</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
 
 <span class="c1">// 使用行为的方法 children():</span>
@@ -218,7 +218,7 @@ window.lang = "zh_CN";
 </div>
 <p>在把行为附加到模型时，某些行为要求或者允许定义一些设置。这里，我们告诉
 TreeBehavior 底层数据库表中&#8221;左节点(<em>left</em>)&#8221;和&#8221;右节点(<em>right</em>)&#8221;字段的名称:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Category</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Category</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Tree&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;left&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;left_node&#39;</span><span class="p">,</span>
         <span class="s1">&#39;right&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;right_node&#39;</span>
@@ -228,7 +228,7 @@ TreeBehavior 底层数据库表中&#8221;左节点(<em>left</em>)&#8221;和&#822
 </div>
 <p>我们也可以为一个模型附加多个行为。例如，没有理由我们的 Category 模型只能有树结构
 的行为，它可能也需要国际化支持:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Category</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Category</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Tree&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
           <span class="s1">&#39;left&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;left_node&#39;</span><span class="p">,</span>
@@ -243,7 +243,7 @@ TreeBehavior 底层数据库表中&#8221;左节点(<em>left</em>)&#8221;和&#822
 命周期中一直附加在模型上。然而，我们也许需要在运行时将行为从模型上分离。比方说我
 们之前的 Category 模型，具有 Tree 和 Translate 的行为，出于某种原因，我们要强制
 让它停止 Translate 的行为:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 从模型分离行为:</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 从模型分离行为:</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">unload</span><span class="p">(</span><span class="s1">&#39;Translate&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -251,13 +251,13 @@ TreeBehavior 底层数据库表中&#8221;左节点(<em>left</em>)&#8221;和&#822
 通常操作时取消 Translate 行为: 查找，保存，等等。实际上，我们想要行为不要对
 CakePHP 模型的回调作出反应。与其让行为脱离模型，我们让模型停止将这些回调通知
 Translate 行为:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 停止让行为处理模型的回调</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 停止让行为处理模型的回调</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">disable</span><span class="p">(</span><span class="s1">&#39;Translate&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>我们也有可能要知道行为是否在处理这些模型回调，如果没有，我们就恢复它对回调作出反
 应:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 如果行为没有处理模型的回调</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 如果行为没有处理模型的回调</span>
 <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">enabled</span><span class="p">(</span><span class="s1">&#39;Translate&#39;</span><span class="p">))</span> <span class="p">{</span>
     <span class="c1">// 告诉它开始处理</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">enable</span><span class="p">(</span><span class="s1">&#39;Translate&#39;</span><span class="p">);</span>
@@ -266,7 +266,7 @@ Translate 行为:</p>
 </div>
 <p>就象我们能在运行时把行为从模型上完全分离，我们也能附加新的行为。比如说，我们熟悉
 的 Category 模型要有圣诞节的行为，不过，只是在圣诞节那天:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 如果今天是12月25日</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 如果今天是12月25日</span>
 <span class="k">if</span> <span class="p">(</span><span class="nb">date</span><span class="p">(</span><span class="s1">&#39;m/d&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;12/25&#39;</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 我们的模型要有圣诞节的行为</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;Christmas&#39;</span><span class="p">);</span>
@@ -274,13 +274,13 @@ Translate 行为:</p>
 </pre></div>
 </div>
 <p>我们也可以用 load 方法重置行为的设置:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 我们来改变已经附加的行为的一个设置</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 我们来改变已经附加的行为的一个设置</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;Tree&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;left&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;new_left_node&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>还有一个方法可以获得一个模型已附加的行为的列表。如果给该方法传入一个行为的名字，
 它就会告诉我们那个行为是否已附加在模型上，否则它就会给我们一个已附加行为的列表:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// 如果 Translate 行为尚未附加上</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 如果 Translate 行为尚未附加上</span>
 <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">loaded</span><span class="p">(</span><span class="s1">&#39;Translate&#39;</span><span class="p">))</span> <span class="p">{</span>
     <span class="c1">// 得到模型附加的所有行为的完整列表</span>
     <span class="nv">$behaviors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">loaded</span><span class="p">();</span>
@@ -302,7 +302,7 @@ Translate 行为:</p>
 <p>除了实现回调，也可以为每个行为以及/或者每个模型附加的行为添加设置。给定设置的方
 法可以在核心行为及其配置的章节中找到。</p>
 <p>下面这个简单的例子说明行为的设置如何从模型传入到行为:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;YourBehavior&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;option1_key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;option1_value&#39;</span>
@@ -313,7 +313,7 @@ Translate 行为:</p>
 </div>
 <p>既然行为被所有使用它的模型实例共享，好的做法是基于使用行为的别名/模型名来保存设
 置。当被创建的行为的 <tt class="docutils literal"><span class="pre">setup()</span></tt> 方法被调用时:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">setup</span><span class="p">(</span><span class="nx">Model</span> <span class="nv">$Model</span><span class="p">,</span> <span class="nv">$settings</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">setup</span><span class="p">(</span><span class="nx">Model</span> <span class="nv">$Model</span><span class="p">,</span> <span class="nv">$settings</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">settings</span><span class="p">[</span><span class="nv">$Model</span><span class="o">-&gt;</span><span class="na">alias</span><span class="p">]))</span> <span class="p">{</span>
         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">settings</span><span class="p">[</span><span class="nv">$Model</span><span class="o">-&gt;</span><span class="na">alias</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;option1_key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;option1_default_value&#39;</span><span class="p">,</span>
@@ -330,7 +330,7 @@ Translate 行为:</p>
 <div class="section" id="id4">
 <h2>创建行为方法<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 <p>具有某个行为的任何模型自动获得该行为的方法。例如，如果你有:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Duck</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Duck</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Flying&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
@@ -338,11 +338,11 @@ Translate 行为:</p>
 <p>你可以调用 <tt class="docutils literal"><span class="pre">FlyingBehavior</span></tt> 的方法，就象它们是 Duck 模型的方法一样。当创建行为
 方法时，你自动得到调用模型的引用作为第一个参数。提供的所有其余参数都被右移一个位
 置。例如:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Duck</span><span class="o">-&gt;</span><span class="na">fly</span><span class="p">(</span><span class="s1">&#39;toronto&#39;</span><span class="p">,</span> <span class="s1">&#39;montreal&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Duck</span><span class="o">-&gt;</span><span class="na">fly</span><span class="p">(</span><span class="s1">&#39;toronto&#39;</span><span class="p">,</span> <span class="s1">&#39;montreal&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>虽然这个方法接受两个参数，但方法的签名(<em>signature</em>)应该象这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">fly</span><span class="p">(</span><span class="nx">Model</span> <span class="nv">$Model</span><span class="p">,</span> <span class="nv">$from</span><span class="p">,</span> <span class="nv">$to</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">fly</span><span class="p">(</span><span class="nx">Model</span> <span class="nv">$Model</span><span class="p">,</span> <span class="nv">$from</span><span class="p">,</span> <span class="nv">$to</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 飞行。</span>
 <span class="p">}</span>
 </pre></div>
@@ -355,7 +355,7 @@ $model 参数。</p>
 方法使用模式匹配来调用方法。这允许你在行为中创建类似 <tt class="docutils literal"><span class="pre">Model::findAllByXXX</span></tt> 的
 方法。映射方法需要在行为的 <tt class="docutils literal"><span class="pre">$mapMethods</span></tt> 数组中声明。映射方法的签名与行为正常
 的 mixin 方法略有不同:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyBehavior</span> <span class="k">extends</span> <span class="nx">ModelBehavior</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyBehavior</span> <span class="k">extends</span> <span class="nx">ModelBehavior</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$mapMethods</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/do(\w+)/&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;doSomething&#39;</span><span class="p">);</span>
 
     <span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nx">Model</span> <span class="nv">$model</span><span class="p">,</span> <span class="nv">$method</span><span class="p">,</span> <span class="nv">$arg1</span><span class="p">,</span> <span class="nv">$arg2</span><span class="p">)</span> <span class="p">{</span>
@@ -369,7 +369,7 @@ $model 参数。</p>
 然是第一个参数，但被调用的方法名称会是第二个参数。这允许你混杂额外的信息在方法的
 名称中，很象 <tt class="docutils literal"><span class="pre">Model::findAllByXX</span></tt>。如果上面的行为附加到一个模型上，就会象下面
 这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">doReleaseTheHounds</span><span class="p">(</span><span class="s1">&#39;homer&#39;</span><span class="p">,</span> <span class="s1">&#39;lenny&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">doReleaseTheHounds</span><span class="p">(</span><span class="s1">&#39;homer&#39;</span><span class="p">,</span> <span class="s1">&#39;lenny&#39;</span><span class="p">);</span>
 
 <span class="c1">// 会输出</span>
 <span class="s1">&#39;ReleaseTheHounds&#39;</span><span class="p">,</span> <span class="s1">&#39;homer&#39;</span><span class="p">,</span> <span class="s1">&#39;lenny&#39;</span>
@@ -589,7 +589,7 @@ $model 参数。</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

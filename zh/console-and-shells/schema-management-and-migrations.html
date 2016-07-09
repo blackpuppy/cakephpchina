@@ -173,7 +173,7 @@ window.lang = "zh_CN";
 <h2>生成和使用Schema文件<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
 <p>生成的schema文件允许你轻松地传输数据库到不可知的schema。你可以为你的数据库生
 成一个schema文件</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">generate</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">generate</span>
 </pre></div>
 </div>
 <p>这将会生成 schema.php 文件，位于 <tt class="docutils literal"><span class="pre">app/Config/Schema</span></tt> 目录。</p>
@@ -182,12 +182,12 @@ window.lang = "zh_CN";
 <p class="last">schema shell将只处理模型定义过的表。强制处理所有的表，需要在命令行中加上  <tt class="docutils literal"><span class="pre">-f</span></tt>  选项。</p>
 </div>
 <p>将来从你生成的文件schema.php来重建数据库schema，执行</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span>
 </pre></div>
 </div>
 <p>这将会根据文件schema.php的内容删除并创建表。</p>
 <p>Schema文件也可用来生成sql转储文件，执行</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">dump</span> <span class="o">--</span><span class="nx">write</span> <span class="nx">filename</span><span class="o">.</span><span class="nx">sql</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">dump</span> <span class="o">--</span><span class="nx">write</span> <span class="nx">filename</span><span class="o">.</span><span class="nx">sql</span>
 </pre></div>
 </div>
 <p>filename.sql指定要保存的文件名。如果你不指定，这个指令将会输出到终端而不是存入文件。</p>
@@ -199,12 +199,12 @@ window.lang = "zh_CN";
 <tt class="docutils literal"><span class="pre">after($event</span> <span class="pre">=</span> <span class="pre">array())</span></tt> 方法。</p>
 <p><tt class="docutils literal"><span class="pre">$event</span></tt> 变量是一个含有两个键的数据。一个是告诉一个表是在被删除还是被创建，另一个
 是错误。例如</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">array</span><span class="p">(</span><span class="s1">&#39;drop&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;errors&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">)</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;drop&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;errors&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">)</span>
 <span class="k">array</span><span class="p">(</span><span class="s1">&#39;create&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;errors&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>添加数据到一个posts表的例子</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span><span class="p">,</span> <span class="s1">&#39;Model&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span><span class="p">,</span> <span class="s1">&#39;Model&#39;</span><span class="p">);</span>
 <span class="k">public</span> <span class="k">function</span> <span class="nf">after</span><span class="p">(</span><span class="nv">$event</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$event</span><span class="p">[</span><span class="s1">&#39;create&#39;</span><span class="p">]))</span> <span class="p">{</span>
         <span class="k">switch</span> <span class="p">(</span><span class="nv">$event</span><span class="p">[</span><span class="s1">&#39;create&#39;</span><span class="p">])</span> <span class="p">{</span>
@@ -226,7 +226,7 @@ window.lang = "zh_CN";
 <p><tt class="docutils literal"><span class="pre">before()</span></tt> 和 <tt class="docutils literal"><span class="pre">after()</span></tt> 回调会在当前schema上的表被创建或者删除的时候执行。</p>
 <p>当插入到多个表中数据时，你需要在每个表被创建后将数据库的缓存清空。缓存可以被禁止，
 在before 动作中设置 <tt class="docutils literal"><span class="pre">$db-&gt;cacheSources</span> <span class="pre">=</span> <span class="pre">false</span></tt> 。</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$connection</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span><span class="p">;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$connection</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span><span class="p">;</span>
 
 <span class="k">public</span> <span class="k">function</span> <span class="nf">before</span><span class="p">(</span><span class="nv">$event</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
     <span class="nv">$db</span> <span class="o">=</span> <span class="nx">ConnectionManager</span><span class="o">::</span><span class="na">getDataSource</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">connection</span><span class="p">);</span>
@@ -244,11 +244,11 @@ you develop features you have an easy and database agnostic way to
 distribute database changes.
 迁移功能是通过SCM控制schema或者是schema快照。使用schema进行迁移很简单。如果你已经
 有了一个schema文件，执行</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">generate</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">generate</span>
 </pre></div>
 </div>
 <p>进行选择</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">Generating</span> <span class="nx">Schema</span><span class="o">...</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Generating</span> <span class="nx">Schema</span><span class="o">...</span>
 <span class="nx">Schema</span> <span class="nb">file</span> <span class="nx">exists</span><span class="o">.</span>
  <span class="p">[</span><span class="nx">O</span><span class="p">]</span><span class="nx">verwrite</span>
  <span class="p">[</span><span class="nx">S</span><span class="p">]</span><span class="nx">napshot</span>
@@ -258,7 +258,7 @@ distribute database changes.
 </div>
 <p>选择 [s] (snapshot) 将会创建增量的 schema.php. 因此如果你已经有了schema.php,
 它将会创建 schema_2.php等。你可以在任意时候存储这些schema文件</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">update</span> <span class="o">-</span><span class="nx">s</span> <span class="mi">2</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">update</span> <span class="o">-</span><span class="nx">s</span> <span class="mi">2</span>
 </pre></div>
 </div>
 <p>2 是你想要运行的快照的数字，schema shell将会提示你确认你要的动作，并显示
@@ -276,7 +276,7 @@ distribute database changes.
 <li><p class="first">执行你的cake schema来导出一个你的数据库的全部描述。</p>
 </li>
 <li><p class="first">提交创建的或者更新的schema.php文件</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="c1"># once your database has been updated</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="c1"># once your database has been updated</span>
 <span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">generate</span>
 <span class="err">$</span> <span class="nx">git</span> <span class="nx">commit</span> <span class="o">-</span><span class="nx">a</span>
 </pre></div>
@@ -294,7 +294,7 @@ distribute database changes.
 的错误）:</p>
 <ol class="arabic">
 <li><p class="first">执行 cake schema 更新你的数据库</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">git</span> <span class="nx">pull</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">git</span> <span class="nx">pull</span>
 <span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span>
 <span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">update</span>
 </pre></div>
@@ -308,12 +308,12 @@ distribute database changes.
 <p>如果你在更新你的数据库之前，需要回到以前的状态，你会被提示这样做cake schema是不
 支持的。更具体的说，一旦你的表创建了你就不能自动删除了。反之，使用 <tt class="docutils literal"><span class="pre">update</span></tt> 将会
 删除任何与schema文件中不同的地方</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="err">$</span> <span class="nx">git</span> <span class="nx">revert</span> <span class="nx">HEAD</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">git</span> <span class="nx">revert</span> <span class="nx">HEAD</span>
 <span class="err">$</span> <span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">update</span>
 </pre></div>
 </div>
 <p>选择提示</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">The</span> <span class="nx">following</span> <span class="nx">statements</span> <span class="nx">will</span> <span class="nx">run</span><span class="o">.</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">The</span> <span class="nx">following</span> <span class="nx">statements</span> <span class="nx">will</span> <span class="nx">run</span><span class="o">.</span>
 <span class="nx">ALTER</span> <span class="nx">TABLE</span> <span class="sb">`roles`</span>
 <span class="nx">DROP</span> <span class="sb">`position`</span><span class="p">;</span>
 <span class="nx">Are</span> <span class="nx">you</span> <span class="nx">sure</span> <span class="nx">you</span> <span class="nx">want</span> <span class="nx">to</span> <span class="nx">alter</span> <span class="nx">the</span> <span class="nx">tables</span><span class="o">?</span> <span class="p">(</span><span class="nx">y</span><span class="o">/</span><span class="nx">n</span><span class="p">)</span>
@@ -418,7 +418,7 @@ distribute database changes.
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

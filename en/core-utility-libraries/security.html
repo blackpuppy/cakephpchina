@@ -191,7 +191,7 @@ hashing and encrypting data.</p>
 </tbody>
 </table>
 <p>Encrypts/Decrypts text using the given key:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Encrypt your text with my_key</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Encrypt your text with my_key</span>
 <span class="nv">$secret</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">cipher</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">,</span> <span class="s1">&#39;my_key&#39;</span><span class="p">);</span>
 
 <span class="c1">// Later decrypt your text</span>
@@ -224,7 +224,7 @@ It is only included for backwards compatibility.</p>
 </table>
 <p>Encrypts/Decrypts text using the rijndael-256 cipher. This requires the
 <a class="reference external" href="http://php.net/mcrypt">mcrypt extension</a> to be installed:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Encrypt some data.</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Encrypt some data.</span>
 <span class="nv">$encrypted</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">rijndael</span><span class="p">(</span><span class="s1">&#39;a secret&#39;</span><span class="p">,</span> <span class="nx">Configure</span><span class="o">::</span><span class="na">read</span><span class="p">(</span><span class="s1">&#39;Security.key&#39;</span><span class="p">),</span> <span class="s1">&#39;encrypt&#39;</span><span class="p">);</span>
 
 <span class="c1">// Later decrypt it.</span>
@@ -262,7 +262,7 @@ will be the encrypted value with an HMAC checksum.</p>
 <p>This method should <strong>never</strong> be used to store passwords.  Instead you should
 use the one way hashing methods provided by <a class="reference internal" href="#Security::hash" title="Security::hash"><tt class="xref php php-meth docutils literal"><span class="pre">hash()</span></tt></a>.
 An example use would be:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Assuming key is stored somewhere it can be re-used for</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Assuming key is stored somewhere it can be re-used for</span>
 <span class="c1">// decryption later.</span>
 <span class="nv">$key</span> <span class="o">=</span> <span class="s1">&#39;wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA&#39;</span><span class="p">;</span>
 <span class="nv">$result</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">encrypt</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="nv">$key</span><span class="p">);</span>
@@ -293,7 +293,7 @@ An example use would be:</p>
 <p>Decrypt a previously encrypted value. The <tt class="docutils literal"><span class="pre">$key</span></tt> and <tt class="docutils literal"><span class="pre">$hmacSalt</span></tt>
 parameters must match the values used to encrypt or decryption will fail. An
 example use would be:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Assuming key is stored somewhere it can be re-used for</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Assuming key is stored somewhere it can be re-used for</span>
 <span class="c1">// decryption later.</span>
 <span class="nv">$key</span> <span class="o">=</span> <span class="s1">&#39;wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA&#39;</span><span class="p">;</span>
 
@@ -350,7 +350,7 @@ example use would be:</p>
 <p>Create a hash from a string using given method or fallback to next
 available method. If <tt class="docutils literal"><span class="pre">$salt</span></tt> is set to true, the applications salt
 value will be used:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Using the application&#39;s salt value</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Using the application&#39;s salt value</span>
 <span class="nv">$sha1</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">hash</span><span class="p">(</span><span class="s1">&#39;CakePHP Framework&#39;</span><span class="p">,</span> <span class="s1">&#39;sha1&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
 
 <span class="c1">// Using a custom salt value</span>
@@ -363,14 +363,14 @@ value will be used:</p>
 <p><tt class="docutils literal"><span class="pre">hash()</span></tt> also supports other secure hashing algorithms like bcrypt. When
 using bcrypt, you should be mindful of the slightly different usage.
 Creating an initial hash works the same as other algorithms:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Create a hash using bcrypt</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Create a hash using bcrypt</span>
 <span class="nx">Security</span><span class="o">::</span><span class="na">setHash</span><span class="p">(</span><span class="s1">&#39;blowfish&#39;</span><span class="p">);</span>
 <span class="nv">$hash</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">hash</span><span class="p">(</span><span class="s1">&#39;CakePHP Framework&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Unlike other hash types comparing plain text values to hashed values should
 be done as follows:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// $storedPassword, is a previously generated bcrypt hash.</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// $storedPassword, is a previously generated bcrypt hash.</span>
 <span class="nv">$newHash</span> <span class="o">=</span> <span class="nx">Security</span><span class="o">::</span><span class="na">hash</span><span class="p">(</span><span class="nv">$newPassword</span><span class="p">,</span> <span class="s1">&#39;blowfish&#39;</span><span class="p">,</span> <span class="nv">$storedPassword</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -515,7 +515,7 @@ affects all objects using Security::hash().</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

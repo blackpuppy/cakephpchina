@@ -174,7 +174,7 @@ window.lang = "zh_CN";
 <div class="section" id="id2">
 <h2>创建所有用户的相关代码<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <p>首先，让我们在博客数据库中新建一个表来保存用户的数据:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">users</span> <span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">users</span> <span class="p">(</span>
     <span class="nx">id</span> <span class="nx">INT</span> <span class="nx">UNSIGNED</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
     <span class="nx">username</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
     <span class="nx">password</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
@@ -187,7 +187,7 @@ window.lang = "zh_CN";
 <p>我们遵循CakePHP的约定来给表命名，同时我们也利用了另一个约定：在users表中使用
 username和password列，CakePHP能够自动配置好实现用户登录的大部分工作。</p>
 <p>下一步是创建 User 模型，负责查询、保存和验证任何用户数据:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Model/User.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Model/User.php</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppModel&#39;</span><span class="p">,</span> <span class="s1">&#39;Model&#39;</span><span class="p">);</span>
 
 <span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
@@ -217,7 +217,7 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
 </div>
 <p>让我们也创建 UsersController 控制器，下面的代码是使用 CakePHP 捆绑的代码生成工具
 生成的基本的 UsersController 类:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/UsersController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/UsersController.php</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppController&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller&#39;</span><span class="p">);</span>
 
 <span class="k">class</span> <span class="nc">UsersController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
@@ -298,7 +298,7 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
 </div>
 <p>以我们创建博客文章的视图同样的方式，或者使用代码生成工具，我们来实现视图。出于
 这个教程的目的，这里仅展示 add.ctp 视图：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="x">&lt;!-- app/View/Users/add.ctp --&gt;</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x">&lt;!-- app/View/Users/add.ctp --&gt;</span>
 <span class="x">&lt;div class=&quot;users form&quot;&gt;</span>
 <span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
 <span class="x">    &lt;fieldset&gt;</span>
@@ -322,7 +322,7 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
 用户登录和登出，并且授权登录的用户访问他们有权限到达的的动作。</p>
 <p>要添加这个组件到应用程序中，打开 <tt class="docutils literal"><span class="pre">app/Controller/AppController.php</span></tt> 文件，添加
 如下代码:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/AppController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/AppController.php</span>
 <span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
     <span class="c1">//...</span>
 
@@ -361,7 +361,7 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
 <p>现在，我们需要能够注册新用户，保存它们的用户名和密码，而且，更重要的是，哈希
 (<em>hash</em>)他们的密码，这样在我们的数据库中就不是用普通文本形式保存用户的密码了。让
 我们告诉 AuthComponent 组件让未验证的用户访问添加用户函数，并实现登录和登出动作:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/UsersController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/UsersController.php</span>
 
 <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
@@ -384,7 +384,7 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
 </pre></div>
 </div>
 <p>密码的哈希还没有做，打开 <tt class="docutils literal"><span class="pre">app/Model/User.php</span></tt> 模型文件，添加如下代码:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Model/User.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Model/User.php</span>
 
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppModel&#39;</span><span class="p">,</span> <span class="s1">&#39;Model&#39;</span><span class="p">);</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;BlowfishPasswordHasher&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller/Component/Auth&#39;</span><span class="p">);</span>
@@ -415,7 +415,7 @@ CakePHP 3.0 版本中去掉。</p>
 <p>所以，现在每次保存用户的时候，都会使用 BlowfishPasswordHasher 类进行哈希。我们还
 缺 login 函数的模板视图文件。打开文件 <tt class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></tt>，添加如下这些
 行：</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="x">//app/View/Users/login.ctp</span>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="x">//app/View/Users/login.ctp</span>
 
 <span class="x">&lt;div class=&quot;users form&quot;&gt;</span>
 <span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">flash</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
@@ -449,12 +449,12 @@ logoutUrl。这个网址就是 <tt class="docutils literal"><span class="pre">Au
 <h2>权限(谁可以访问什么)<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 <p>前面已经说了，我们要把这个博客应用改成多用户的创作工具，为此，我们需要稍微修改
 posts 表，添加对 User 模型的引用:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">ALTER</span> <span class="nx">TABLE</span> <span class="nx">posts</span> <span class="nx">ADD</span> <span class="nx">COLUMN</span> <span class="nx">user_id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">ALTER</span> <span class="nx">TABLE</span> <span class="nx">posts</span> <span class="nx">ADD</span> <span class="nx">COLUMN</span> <span class="nx">user_id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>另外，必须对 PostsController 做一个小改动，在新增的文章中要把当前登录的用户作为
 引用保存:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/PostsController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/PostsController.php</span>
 <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
         <span class="c1">//Added this line</span>
@@ -472,7 +472,7 @@ posts 表，添加对 User 模型的引用:</p>
 <p>让我们增强应用程序的安全性，避免一些作者编辑或删除其他作者的文章。应用的基本规则
 是，管理用户可以访问任何网址，而普通用户(作者角色)只能访问允许的动作。再次打开
 AppController 类，在 Auth 的配置中再添加一些选项:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/AppController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/AppController.php</span>
 
 <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;Session&#39;</span><span class="p">,</span>
@@ -505,7 +505,7 @@ AppController 类，在 Auth 的配置中再添加一些选项:</p>
 不是在 AppController 中设置，而是在每个控制器提供这些额外的规则。我们要在
 PostsController 中增加的规则，应当允许作者创建文章，但在作者不匹配时要防止对其
 文章的编辑。打开  <tt class="docutils literal"><span class="pre">PostsController.php</span></tt> 文件，添加如下内容:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Controller/PostsController.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/PostsController.php</span>
 
 <span class="k">public</span> <span class="k">function</span> <span class="nf">isAuthorized</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 所有注册的用户都能够添加文章</span>
@@ -529,7 +529,7 @@ PostsController 中增加的规则，应当允许作者创建文章，但在作�
 访问 edit 和 delete 动作。最后要实现的是判断用户是否有权限编辑文章，为此调用
 Post 模型的 <tt class="docutils literal"><span class="pre">isOwnedBy()</span></tt> 方法。通常，最佳实践是尽量把逻辑挪到模型中。下面让
 我们来实现这个函数:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// app/Model/Post.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Model/Post.php</span>
 
 <span class="k">public</span> <span class="k">function</span> <span class="nf">isOwnedBy</span><span class="p">(</span><span class="nv">$post</span><span class="p">,</span> <span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$post</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="p">))</span> <span class="o">!==</span> <span class="k">false</span><span class="p">;</span>
@@ -641,7 +641,7 @@ AppController 控制器中添加更普遍的规则。</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

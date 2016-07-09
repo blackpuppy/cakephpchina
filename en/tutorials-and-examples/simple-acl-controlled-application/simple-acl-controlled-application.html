@@ -202,7 +202,7 @@ done, the better: but fear not if you&#8217;re a procedural fan.</li>
 release. For this tutorial you need the latest 2.0 release.</p>
 <p>You can also clone the repository using
 <a class="reference external" href="http://git-scm.com/">git</a>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">git</span> <span class="k">clone</span> <span class="nx">git</span><span class="o">://</span><span class="nx">github</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">.</span><span class="nx">git</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">git</span> <span class="k">clone</span> <span class="nx">git</span><span class="o">://</span><span class="nx">github</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">.</span><span class="nx">git</span>
 </pre></div>
 </div>
 <p>Once you&#8217;ve got a fresh copy of CakePHP setup your database.php config
@@ -210,7 +210,7 @@ file, and change the value of Security.salt in your
 app/Config/core.php. From there we will build a simple database
 schema to build our application on. Execute the following SQL
 statements into your database:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">users</span> <span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">users</span> <span class="p">(</span>
     <span class="nx">id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
     <span class="nx">username</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">UNIQUE</span><span class="p">,</span>
     <span class="nx">password</span> <span class="nx">CHAR</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
@@ -275,7 +275,7 @@ all the relations we need, if not add them in now. There are a few
 other pieces that need to be added before we can add the Auth and
 Acl components. First add a login and logout action to your
 <tt class="docutils literal"><span class="pre">UsersController</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">login</span><span class="p">())</span> <span class="p">{</span>
             <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">redirectUrl</span><span class="p">());</span>
@@ -291,7 +291,7 @@ Acl components. First add a login and logout action to your
 </div>
 <p>Then create the following view file for login at
 <tt class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span><span class="p">));</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">inputs</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;legend&#39;</span> <span class="o">=&gt;</span> <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Login&#39;</span><span class="p">),</span>
@@ -306,7 +306,7 @@ Acl components. First add a login and logout action to your
 the database. Storing plaintext passwords is extremely insecure and
 AuthComponent will expect that your passwords are hashed. In
 <tt class="docutils literal"><span class="pre">app/Model/User.php</span></tt> add the following:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AuthComponent&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller/Component&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AuthComponent&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller/Component&#39;</span><span class="p">);</span>
 <span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="c1">// other code.</span>
 
@@ -323,7 +323,7 @@ AuthComponent will expect that your passwords are hashed. In
 you don&#8217;t have <tt class="docutils literal"><span class="pre">/app/Controller/AppController.php</span></tt>, create it. Since we want our entire
 site controlled with Auth and Acl, we will set them up in
 <tt class="docutils literal"><span class="pre">AppController</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Acl&#39;</span><span class="p">,</span>
         <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -359,7 +359,7 @@ any of our actions, as we are not logged in. We will now add some
 exceptions so <a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><tt class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></tt></a> will allow us to create some groups
 and users. In <strong>both</strong> your <tt class="docutils literal"><span class="pre">GroupsController</span></tt> and your
 <tt class="docutils literal"><span class="pre">UsersController</span></tt> Add the following:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
 
     <span class="c1">// For CakePHP 2.0</span>
@@ -383,7 +383,7 @@ if you try to view any pages right now, you will get a missing
 table error (&#8220;Error: Database table acos for model Aco was not
 found.&#8221;). To remove these errors we need to run a schema file. In a
 shell run the following:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span> <span class="nx">DbAcl</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span> <span class="nx">DbAcl</span>
 </pre></div>
 </div>
 <p>This schema will prompt you to drop and create the tables. Say yes
@@ -404,7 +404,7 @@ use the <tt class="docutils literal"><span class="pre">AclBehavior</span></tt>. 
 automagic connection of models with the Acl tables. Its use
 requires an implementation of <tt class="docutils literal"><span class="pre">parentNode()</span></tt> on your model. In
 our <tt class="docutils literal"><span class="pre">User</span></tt> model we will add the following:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Group&#39;</span><span class="p">);</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">));</span>
 
@@ -426,7 +426,7 @@ our <tt class="docutils literal"><span class="pre">User</span></tt> model we wil
 </pre></div>
 </div>
 <p>Then in our <tt class="docutils literal"><span class="pre">Group</span></tt> Model Add the following:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Group</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Group</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">));</span>
 
     <span class="k">public</span> <span class="k">function</span> <span class="nf">parentNode</span><span class="p">()</span> <span class="p">{</span>
@@ -456,7 +456,7 @@ different access group to test with later. Write everything down or
 use easy passwords so you don&#8217;t forget. If you do a
 <tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">aros;</span></tt> from a MySQL prompt you should get
 something like the following:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
 <span class="o">|</span> <span class="nx">id</span> <span class="o">|</span> <span class="nx">parent_id</span> <span class="o">|</span> <span class="nx">model</span> <span class="o">|</span> <span class="nx">foreign_key</span> <span class="o">|</span> <span class="nx">alias</span> <span class="o">|</span> <span class="nx">lft</span>  <span class="o">|</span> <span class="nx">rght</span> <span class="o">|</span>
 <span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
 <span class="o">|</span>  <span class="mi">1</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">1</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">1</span> <span class="o">|</span>    <span class="mi">4</span> <span class="o">|</span>
@@ -476,20 +476,20 @@ per-group or per-user basis.</p>
 <h3>Group-only ACL<a class="headerlink" href="#group-only-acl" title="Permalink to this headline">¶</a></h3>
 <p>In case we want simplified per-group only permissions, we need to
 implement <tt class="docutils literal"><span class="pre">bindNode()</span></tt> in <tt class="docutils literal"><span class="pre">User</span></tt> model:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">bindNode</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">bindNode</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Group&#39;</span><span class="p">,</span> <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">][</span><span class="s1">&#39;group_id&#39;</span><span class="p">]);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Then modify the <tt class="docutils literal"><span class="pre">actsAs</span></tt> for the model <tt class="docutils literal"><span class="pre">User</span></tt> and disable the requester directive:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">,</span> <span class="s1">&#39;enabled&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">,</span> <span class="s1">&#39;enabled&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>These two changes will tell ACL to skip checking <tt class="docutils literal"><span class="pre">User</span></tt> Aro&#8217;s and to check only <tt class="docutils literal"><span class="pre">Group</span></tt>
 Aro&#8217;s. This also avoids the afterSave being called.</p>
 <p>Note: Every user has to have <tt class="docutils literal"><span class="pre">group_id</span></tt> assigned for this to work.</p>
 <p>Now the <tt class="docutils literal"><span class="pre">aros</span></tt> table will look like this:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
 <span class="o">|</span> <span class="nx">id</span> <span class="o">|</span> <span class="nx">parent_id</span> <span class="o">|</span> <span class="nx">model</span> <span class="o">|</span> <span class="nx">foreign_key</span> <span class="o">|</span> <span class="nx">alias</span> <span class="o">|</span> <span class="nx">lft</span>  <span class="o">|</span> <span class="nx">rght</span> <span class="o">|</span>
 <span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
 <span class="o">|</span>  <span class="mi">1</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">1</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">1</span> <span class="o">|</span>    <span class="mi">2</span> <span class="o">|</span>
@@ -515,11 +515,11 @@ way in CakePHP&#8217;s core to accomplish this. The core classes offer a
 few ways to manually create ACO&#8217;s though. You can create ACO
 objects from the Acl shell or You can use the <tt class="docutils literal"><span class="pre">AclComponent</span></tt>.
 Creating Acos from the shell looks like:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">acl</span> <span class="nx">create</span> <span class="nx">aco</span> <span class="nx">root</span> <span class="nx">controllers</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">acl</span> <span class="nx">create</span> <span class="nx">aco</span> <span class="nx">root</span> <span class="nx">controllers</span>
 </pre></div>
 </div>
 <p>While using the AclComponent would look like:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">Aco</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span> <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;controllers&#39;</span><span class="p">));</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">Aco</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span> <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;controllers&#39;</span><span class="p">));</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">Aco</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -534,7 +534,7 @@ a small modification to our <tt class="docutils literal"><span class="pre">AuthC
 node, so that when making ACL checks it can use the correct node
 path when looking up controllers/actions. In <tt class="docutils literal"><span class="pre">AppController</span></tt> ensure
 that your <tt class="docutils literal"><span class="pre">$components</span></tt> array contains the <tt class="docutils literal"><span class="pre">actionPath</span></tt> defined earlier:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Acl&#39;</span><span class="p">,</span>
         <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -641,7 +641,7 @@ that your <tt class="docutils literal"><span class="pre">$components</span></tt>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

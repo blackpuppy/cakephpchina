@@ -195,13 +195,13 @@ window.lang = "zh_CN";
 <a class="reference external" href="https://github.com/cakephp/cakephp/tags">https://github.com/cakephp/cakephp/tags</a>，并下载稳定发行版。对于本教程，你需要
 最新的 2.0 发行版本。</p>
 <p>你也可以使用 <a class="reference external" href="http://git-scm.com/">git</a> 检出最新的代码:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">git</span> <span class="k">clone</span> <span class="nx">git</span><span class="o">://</span><span class="nx">github</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">.</span><span class="nx">git</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">git</span> <span class="k">clone</span> <span class="nx">git</span><span class="o">://</span><span class="nx">github</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">.</span><span class="nx">git</span>
 </pre></div>
 </div>
 <p>一旦你获得了最新的 CakePHP 代码，请设置配置文件 database.php，修改
 app/Config/core.php 文件中的 Security.salt 的值。在此我们将为应用重新建立一个
 简单的数据库结构。在数据库中执行如下的 SQL 语句:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">users</span> <span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">users</span> <span class="p">(</span>
     <span class="nx">id</span> <span class="nx">INT</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">AUTO_INCREMENT</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
     <span class="nx">username</span> <span class="nx">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">UNIQUE</span><span class="p">,</span>
     <span class="nx">password</span> <span class="nx">CHAR</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
@@ -256,7 +256,7 @@ ACO(<em>Access Control Object</em>)的生成。</p>
 <p>我们现在已经有一个运行正常的 CRUD 应用了。Bake 应该已经建立了我们所需要的关系，
 如果没有，现在就加上。在添加 Auth 和 Acl 组件之前，我们还需要添加一些东西。首先，
 添加 login 和 logout 动作到 <tt class="docutils literal"><span class="pre">UsersController</span></tt> 控制器:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">login</span><span class="p">())</span> <span class="p">{</span>
             <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">redirectUrl</span><span class="p">());</span>
@@ -271,7 +271,7 @@ ACO(<em>Access Control Object</em>)的生成。</p>
 </pre></div>
 </div>
 <p>然后，为 login 动作创建如下所示的视图文件 <tt class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span><span class="p">));</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">inputs</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;legend&#39;</span> <span class="o">=&gt;</span> <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Login&#39;</span><span class="p">),</span>
@@ -285,7 +285,7 @@ ACO(<em>Access Control Object</em>)的生成。</p>
 <p>接下来，我们需要更新我们的 User 模型，在保存到数据库之前先将密码散列化。存储普通
 文本格式的密码是极其危险的，并且 AuthComponent 组件会期望你的密码是经过散列化过
 的。在 <tt class="docutils literal"><span class="pre">app/Model/User.php</span></tt> 文件中添加如下代码:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AuthComponent&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller/Component&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AuthComponent&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller/Component&#39;</span><span class="p">);</span>
 <span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="c1">// 其它代码。</span>
 
@@ -301,7 +301,7 @@ ACO(<em>Access Control Object</em>)的生成。</p>
 <p>接下来要改动一下 <tt class="docutils literal"><span class="pre">AppController</span></tt>。如果还没有
 <tt class="docutils literal"><span class="pre">/app/Controller/AppController.php</span></tt>，就创建该文件。因为我们要使用 Auth 和 Acl
 组件控制整个网站，所以我们会在 <tt class="docutils literal"><span class="pre">AppController</span></tt> 中把它们设置好:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Acl&#39;</span><span class="p">,</span>
         <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -335,7 +335,7 @@ ACO(<em>Access Control Object</em>)的生成。</p>
 组件，我们无法访问任何动作，因为还没有登录。现在我们添加一些特例，这样
 <a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><tt class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></tt></a> 组件就会允许我们创建一些组和用户。在
 <tt class="docutils literal"><span class="pre">GroupsController</span></tt> 控制器和 <tt class="docutils literal"><span class="pre">UsersController</span></tt> 控制器中 <strong>都</strong> 添加:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
 
     <span class="c1">// 对 CakePHP 2.0</span>
@@ -355,7 +355,7 @@ ACO(<em>Access Control Object</em>)的生成。</p>
 任何 Acl 组件的表，如果你现在试图访问任何页面，你会得到表不存在的错误(&#8220;Error:
 Database table acos for model Aco was not found.&#8221;)。要消除这些错误，我们需要运行
 一个数据结构(<em>schema</em>)文件。在命令行执行下面的命令:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span> <span class="nx">DbAcl</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">schema</span> <span class="nx">create</span> <span class="nx">DbAcl</span>
 </pre></div>
 </div>
 <p>这个脚本会提示你删除并新建表。对删除和创建表的请求回答 yes。</p>
@@ -370,7 +370,7 @@ Database table acos for model Aco was not found.&#8221;)。要消除这些错误
 Acl 组件的表中的记录进行关联。为此需要用到 <tt class="docutils literal"><span class="pre">AclBehavior</span></tt> 行为。<tt class="docutils literal"><span class="pre">AclBehavior</span></tt>
 允许将模型自动连接到 Acl 组件的表。使用它需要在模型中实现 <tt class="docutils literal"><span class="pre">parentNode()</span></tt> 方法。
 在 <tt class="docutils literal"><span class="pre">User</span></tt> 模型中添加如下代码:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Group&#39;</span><span class="p">);</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">));</span>
 
@@ -392,7 +392,7 @@ Acl 组件的表中的记录进行关联。为此需要用到 <tt class="docutil
 </pre></div>
 </div>
 <p>然后在 <tt class="docutils literal"><span class="pre">Group</span></tt> 模型中添加如下代码:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Group</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Group</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">));</span>
 
     <span class="k">public</span> <span class="k">function</span> <span class="nf">parentNode</span><span class="p">()</span> <span class="p">{</span>
@@ -416,7 +416,7 @@ Acl 组件的表中的记录进行关联。为此需要用到 <tt class="docutil
 <p>我同时也在每个组中创建了一个用户，这样每个不同访问权限组都有一个用户，用于之后的
 测试。(把这些组和用户)全部记录下来，或者选用简单的密码，以免忘记。如果在 MySQL
 提示符后运行 <tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">aros;</span></tt>，应该可以看到象下面这样的记录:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
 <span class="o">|</span> <span class="nx">id</span> <span class="o">|</span> <span class="nx">parent_id</span> <span class="o">|</span> <span class="nx">model</span> <span class="o">|</span> <span class="nx">foreign_key</span> <span class="o">|</span> <span class="nx">alias</span> <span class="o">|</span> <span class="nx">lft</span>  <span class="o">|</span> <span class="nx">rght</span> <span class="o">|</span>
 <span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
 <span class="o">|</span>  <span class="mi">1</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">1</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">1</span> <span class="o">|</span>    <span class="mi">4</span> <span class="o">|</span>
@@ -435,20 +435,20 @@ Acl 组件的表中的记录进行关联。为此需要用到 <tt class="docutil
 <h3>只按组的 ACL<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
 <p>如果我们要简单一些，只按组设置的权限，需要在 <tt class="docutils literal"><span class="pre">User</span></tt> 模型中实现 <tt class="docutils literal"><span class="pre">bindNode()</span></tt>
 方法:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">bindNode</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">bindNode</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Group&#39;</span><span class="p">,</span> <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">][</span><span class="s1">&#39;group_id&#39;</span><span class="p">]);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>然后修改 <tt class="docutils literal"><span class="pre">User</span></tt> 模型的 <tt class="docutils literal"><span class="pre">actsAs</span></tt> 变量，禁用 requester 指令:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">,</span> <span class="s1">&#39;enabled&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">,</span> <span class="s1">&#39;enabled&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>这两处改动会告诉 ACL 忽略检查 <tt class="docutils literal"><span class="pre">User</span></tt> Aro，而只检查 <tt class="docutils literal"><span class="pre">Group</span></tt> Aro&#8217;s。这样也避免
 了对 afterSave 回调的调用。</p>
 <p>注意：每个用户都需要设置 <tt class="docutils literal"><span class="pre">group_id</span></tt> 才行。</p>
 <p>现在 <tt class="docutils literal"><span class="pre">aros</span></tt> 表会是这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
 <span class="o">|</span> <span class="nx">id</span> <span class="o">|</span> <span class="nx">parent_id</span> <span class="o">|</span> <span class="nx">model</span> <span class="o">|</span> <span class="nx">foreign_key</span> <span class="o">|</span> <span class="nx">alias</span> <span class="o">|</span> <span class="nx">lft</span>  <span class="o">|</span> <span class="nx">rght</span> <span class="o">|</span>
 <span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
 <span class="o">|</span>  <span class="mi">1</span> <span class="o">|</span>      <span class="k">NULL</span> <span class="o">|</span> <span class="nx">Group</span> <span class="o">|</span>           <span class="mi">1</span> <span class="o">|</span> <span class="k">NULL</span>  <span class="o">|</span>    <span class="mi">1</span> <span class="o">|</span>    <span class="mi">2</span> <span class="o">|</span>
@@ -469,11 +469,11 @@ Acl 组件的表中的记录进行关联。为此需要用到 <tt class="docutil
 <p>我们的 ARO 会在新建户和组的时候自动创建。有没有什么办法从控制器和动作来自动创建
 ACO？可惜 CakePHP 的核心没有这样的魔法。不过核心类提供了一些方法来手动创建 ACO。
 你可以通过 Acl 外壳程序或者 <tt class="docutils literal"><span class="pre">AclComponent</span></tt> 组件创建 ACO。从外壳程序创建 Aco:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">acl</span> <span class="nx">create</span> <span class="nx">aco</span> <span class="nx">root</span> <span class="nx">controllers</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">acl</span> <span class="nx">create</span> <span class="nx">aco</span> <span class="nx">root</span> <span class="nx">controllers</span>
 </pre></div>
 </div>
 <p>而使用 AclComponent 组件就是:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">Aco</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span> <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;controllers&#39;</span><span class="p">));</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">Aco</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;parent_id&#39;</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span> <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;controllers&#39;</span><span class="p">));</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Acl</span><span class="o">-&gt;</span><span class="na">Aco</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -484,7 +484,7 @@ ACO？可惜 CakePHP 的核心没有这样的魔法。不过核心类提供了�
 组件需要知道这个根节点的存在，这样当进行 ACL 检查的时候，它可以在查找控制器/动作
 时使用正确的节点路径。在 <tt class="docutils literal"><span class="pre">AppController</span></tt> 中确保 <tt class="docutils literal"><span class="pre">$components</span></tt> 数组中包含先前
 定义的 <tt class="docutils literal"><span class="pre">actionPath</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Acl&#39;</span><span class="p">,</span>
         <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -591,7 +591,7 @@ ACO？可惜 CakePHP 的核心没有这样的魔法。不过核心类提供了�
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

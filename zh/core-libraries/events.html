@@ -216,7 +216,7 @@ events manager.</p>
 <h3>Dispatching events<a class="headerlink" href="#dispatching-events" title="永久链接至标题">¶</a></h3>
 <p>So back to our example, we would have an <cite>Order</cite> model that will manage the buying logic,
 and probably a <cite>place</cite> method to save the order details and do any other logic:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Cart/Model/Order.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Cart/Model/Order.php</span>
 <span class="k">class</span> <span class="nc">Order</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="k">function</span> <span class="nf">place</span><span class="p">(</span><span class="nv">$order</span><span class="p">)</span> <span class="p">{</span>
@@ -237,7 +237,7 @@ and probably a <cite>place</cite> method to save the order details and do any ot
 about sending emails, and may not even have the inventory data to decrement the
 item from it, and definitely tracking usage statistics is not the best place to
 do it. So we need another solution, let&#8217;s rewrite that using the event manager:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Cart/Model/Order.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Cart/Model/Order.php</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeEvent&#39;</span><span class="p">,</span> <span class="s1">&#39;Event&#39;</span><span class="p">);</span>
 <span class="k">class</span> <span class="nc">Order</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
 
@@ -264,7 +264,7 @@ nevertheless. We will review later how to overcome this implementation detail.</
 and to dispatch events you use <tt class="xref php php-meth docutils literal"><span class="pre">CakeEventManager::dispatch()</span></tt> which
 receives an instance of the <tt class="xref php php-class docutils literal"><span class="pre">CakeEvent</span></tt> class. Let&#8217;s dissect now the
 process of dispatching an event:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">new</span> <span class="nx">CakeEvent</span><span class="p">(</span><span class="s1">&#39;Model.Order.afterPlace&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">new</span> <span class="nx">CakeEvent</span><span class="p">(</span><span class="s1">&#39;Model.Order.afterPlace&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="nv">$order</span>
 <span class="p">));</span>
 </pre></div>
@@ -298,7 +298,7 @@ to call the <tt class="xref php php-meth docutils literal"><span class="pre">Cak
 For simplicity&#8217;s sake, let&#8217;s imagine we know in the plugin what the callbacks
 are available in the controller, and say this controller is responsible for
 attaching them. The possible code would look like this:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Listeners configured somewhere else, maybe a config file:</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Listeners configured somewhere else, maybe a config file:</span>
 <span class="nx">Configure</span><span class="o">::</span><span class="na">write</span><span class="p">(</span><span class="s1">&#39;Order.afterPlace&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;email-sending&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;EmailSender::sendBuyEmail&#39;</span><span class="p">,</span>
     <span class="s1">&#39;inventory&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">InventoryManager</span><span class="p">,</span> <span class="s1">&#39;decrement&#39;</span><span class="p">),</span>
@@ -348,7 +348,7 @@ responsible for calculating useful information and compiling into the global sit
 statistics. It would be natural to pass an instance of this class as a callback,
 instead of implementing a custom static function or converting any other workaround
 to trigger methods in this class. A listener is created as follows:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeEventListener&#39;</span><span class="p">,</span> <span class="s1">&#39;Event&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeEventListener&#39;</span><span class="p">,</span> <span class="s1">&#39;Event&#39;</span><span class="p">);</span>
 <span class="k">class</span> <span class="nc">UserStatistic</span> <span class="k">implements</span> <span class="nx">CakeEventListener</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="k">function</span> <span class="nf">implementedEvents</span><span class="p">()</span> <span class="p">{</span>
@@ -389,7 +389,7 @@ callback after the others, using a number above <cite>10</cite> will do.</p>
 executed with a <cite>FIFO</cite> policy, the first listener method to be attached is called
 first and so on. You set priorities using the <cite>attach</cite> method for callbacks, and
 declaring it in the <cite>implementedEvents</cite> function for event listeners:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Setting priority for a callback</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Setting priority for a callback</span>
 <span class="nv">$callback</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;doSomething&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEventManager</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$callback</span><span class="p">,</span> <span class="s1">&#39;Model.Order.afterPlace&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;priority&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">));</span>
 
@@ -418,7 +418,7 @@ alternative to what they were used to.</p>
 <p>In order to toggle this option you have to add the <cite>passParams</cite> option to the
 third argument of the <cite>attach</cite> method, or declare it in the <cite>implementedEvents</cite>
 returned array similar to what you do with priorities:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Setting priority for a callback</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Setting priority for a callback</span>
 <span class="nv">$callback</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;doSomething&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEventManager</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$callback</span><span class="p">,</span> <span class="s1">&#39;Model.Order.afterPlace&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;passParams&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
 
@@ -439,7 +439,7 @@ returned array similar to what you do with priorities:</p>
 <p>In the above code the <cite>doSomething</cite> function and <cite>updateBuyStatistic</cite> method will
 receive <cite>$orderData</cite> instead of the <cite>$event</cite> object. This is so, because in our
 previous example we trigger the <cite>Model.Order.afterPlace</cite> event with some data:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEventManager</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="k">new</span> <span class="nx">CakeEvent</span><span class="p">(</span><span class="s1">&#39;Model.Order.afterPlace&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEventManager</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="k">new</span> <span class="nx">CakeEvent</span><span class="p">(</span><span class="s1">&#39;Model.Order.afterPlace&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="nv">$order</span>
 <span class="p">)));</span>
 </pre></div>
@@ -459,7 +459,7 @@ started it is cancelled. You see examples of this in the model callbacks
 the code detects it cannot proceed any further.</p>
 <p>In order to stop events you can either return <cite>false</cite> in your callbacks or call
 the <cite>stopPropagation</cite> method on the event object:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="k">return</span> <span class="k">false</span><span class="p">;</span> <span class="c1">// stops the event</span>
 <span class="p">}</span>
@@ -477,7 +477,7 @@ instance, in our <cite>afterPlace</cite> example it would not make any sense to 
 operation since the data was already saved and the cart emptied. Nevertheless, if
 we had a <cite>beforePlace</cite> stopping the event would have a valid meaning.</p>
 <p>To check if an event was stopped, you call the <cite>isStopped()</cite> method in the event object:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">place</span><span class="p">(</span><span class="nv">$order</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">place</span><span class="p">(</span><span class="nv">$order</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CakeEvent</span><span class="p">(</span><span class="s1">&#39;Model.Order.beforePlace&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="nv">$order</span><span class="p">));</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEventManager</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="nv">$event</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">isStopped</span><span class="p">())</span> <span class="p">{</span>
@@ -502,7 +502,7 @@ any process. Let&#8217;s take again our <cite>beforePlace</cite> example and let
 the $order data.</p>
 <p>Event results can be altered either using the event object result property
 directly or returning the value in the callback itself:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// A listener callback</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// A listener callback</span>
 <span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nv">$alteredData</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;order&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="nv">$moreData</span><span class="p">;</span>
@@ -540,7 +540,7 @@ are shared across all callback calls.</p>
 <p>If for any reason you want to remove any callback from the event manager just call
 the <tt class="xref php php-meth docutils literal"><span class="pre">CakeEventManager::detach()</span></tt> method using as arguments the first two
 params you used for attaching it:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Attaching a function</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Attaching a function</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEventManager</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;doSomething&#39;</span><span class="p">),</span> <span class="s1">&#39;My.event&#39;</span><span class="p">);</span>
 
 <span class="c1">// Detaching the function</span>
@@ -586,7 +586,7 @@ independent, the global callbacks will fire in their own priority queue and then
 the local callbacks will get called in the respective priority order.</p>
 <p>Accessing the global event manager is as easy as calling a static function,
 the following example will attach a global event to the <cite>beforePlace</cite> event:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// In any configuration file or piece of code that executes before the event</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// In any configuration file or piece of code that executes before the event</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeEventManager&#39;</span><span class="p">,</span> <span class="s1">&#39;Event&#39;</span><span class="p">);</span>
 <span class="nx">CakeEventManager</span><span class="o">::</span><span class="na">instance</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$aCallback</span><span class="p">,</span> <span class="s1">&#39;Model.Order.beforePlace&#39;</span><span class="p">);</span>
 </pre></div>
@@ -600,7 +600,7 @@ object is usually required in any function that gets attached globally in order
 to prevent some bugs. Remember that extreme flexibility implies extreme complexity.</p>
 <p>Consider this callback that wants to listen for all Model beforeFinds but in
 reality, it cannot do its logic if the model is the Cart:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeEventManager&#39;</span><span class="p">,</span> <span class="s1">&#39;Event&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeEventManager&#39;</span><span class="p">,</span> <span class="s1">&#39;Event&#39;</span><span class="p">);</span>
 <span class="nx">CakeEventManager</span><span class="o">::</span><span class="na">instance</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;myCallback&#39;</span><span class="p">,</span> <span class="s1">&#39;Model.beforeFind&#39;</span><span class="p">);</span>
 
 <span class="k">public</span> <span class="k">function</span> <span class="nf">myCallback</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
@@ -747,19 +747,19 @@ to work with, test and integrate.</p>
 <li class="toctree-l4"><a class="reference internal" href="helpers/form.html#datetime-options">Datetime options</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="helpers/form.html#id19">表单元素相关的方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="helpers/form.html#id11">表单元素相关的方法</a></li>
 <li class="toctree-l3"><a class="reference internal" href="helpers/form.html#form-element-specific-methods">Form Element-Specific Methods</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="helpers/form.html#id30">验证(文件)上载</a></li>
+<li class="toctree-l4"><a class="reference internal" href="helpers/form.html#id22">验证(文件)上载</a></li>
 <li class="toctree-l4"><a class="reference internal" href="helpers/form.html#validating-uploads">Validating Uploads</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="helpers/form.html#id31">创建按键和提交元素</a></li>
+<li class="toctree-l3"><a class="reference internal" href="helpers/form.html#id23">创建按键和提交元素</a></li>
 <li class="toctree-l3"><a class="reference internal" href="helpers/form.html#creating-buttons-and-submit-elements">Creating buttons and submit elements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="helpers/form.html#id36">创建日期和时间输入项</a></li>
+<li class="toctree-l3"><a class="reference internal" href="helpers/form.html#id28">创建日期和时间输入项</a></li>
 <li class="toctree-l3"><a class="reference internal" href="helpers/form.html#creating-date-and-time-inputs">Creating date and time inputs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="helpers/form.html#id37">显示及检查错误</a></li>
+<li class="toctree-l3"><a class="reference internal" href="helpers/form.html#id29">显示及检查错误</a></li>
 <li class="toctree-l3"><a class="reference internal" href="helpers/form.html#displaying-and-checking-errors">Displaying and checking errors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="helpers/form.html#id40">对所有字段设置默认值</a></li>
+<li class="toctree-l3"><a class="reference internal" href="helpers/form.html#id32">对所有字段设置默认值</a></li>
 <li class="toctree-l3"><a class="reference internal" href="helpers/form.html#setting-defaults-for-all-fields">Setting Defaults for all fields</a></li>
 <li class="toctree-l3"><a class="reference internal" href="helpers/form.html#securitycomponent">与 SecurityComponent 组件一起使用</a></li>
 <li class="toctree-l3"><a class="reference internal" href="helpers/form.html#working-with-securitycomponent">Working with SecurityComponent</a></li>
@@ -950,7 +950,7 @@ to work with, test and integrate.</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

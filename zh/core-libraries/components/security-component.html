@@ -259,7 +259,7 @@ it will be called and passed any error information.</p>
 <p>A Controller callback that will handle and requests that are
 blackholed. A blackhole callback can be any public method on a controllers.
 The callback should expect an parameter indicating the type of error:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Security</span><span class="o">-&gt;</span><span class="na">blackHoleCallback</span> <span class="o">=</span> <span class="s1">&#39;blackhole&#39;</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -437,7 +437,7 @@ Security组件会启动。</p>
 <p>Using the security component is generally done in the controller
 beforeFilter(). You would specify the security restrictions you
 want and the Security Component will enforce them on its startup:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">WidgetController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">WidgetController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Security&#39;</span><span class="p">);</span>
 
@@ -450,7 +450,7 @@ want and the Security Component will enforce them on its startup:</p>
 <p>此例中只有接收到的是POST请求才会成功触发删除动作。</p>
 <p>In this example the delete action can only be successfully
 triggered if it receives a POST request:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">WidgetController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">WidgetController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Security&#39;</span><span class="p">);</span>
 
@@ -465,7 +465,7 @@ triggered if it receives a POST request:</p>
 <p>此例子将迫使所有操作，管理路由到安全SSL请求::
 This example would force all actions that had admin routing to
 require secure SSL requests:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">WidgetController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">WidgetController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Security&#39;</span><span class="p">);</span>
 
@@ -506,7 +506,7 @@ token the request will be blackholed.</p>
 you can benefit from the CSRF protection it provides. By default CSRF tokens are
 valid for 30 minutes and expire on use. You can control how long tokens last by setting
 csrfExpires on the component.:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;Security&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;csrfExpires&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;+1 hour&#39;</span>
     <span class="p">)</span>
@@ -514,7 +514,7 @@ csrfExpires on the component.:</p>
 </pre></div>
 </div>
 <p>You can also set this property in your controller&#8217;s <tt class="docutils literal"><span class="pre">beforeFilter</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Security</span><span class="o">-&gt;</span><span class="na">csrfExpires</span> <span class="o">=</span> <span class="s1">&#39;+1 hour&#39;</span><span class="p">;</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
@@ -539,7 +539,7 @@ this behaviour is not desirable, as it can create issues with single page
 applications. You can toggle on longer, multi-use tokens by setting
 <tt class="docutils literal"><span class="pre">csrfUseOnce</span></tt> to <tt class="docutils literal"><span class="pre">false</span></tt>. This can be done in the components array, or in
 the <tt class="docutils literal"><span class="pre">beforeFilter</span></tt> of your controller:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;Security&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;csrfUseOnce&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
     <span class="p">)</span>
@@ -668,7 +668,7 @@ You may &#8220;unlock&#8221; these actions by listing them in <tt class="docutil
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

@@ -215,7 +215,7 @@ window.lang = "zh_CN";
 的关系类型 <strong>总是</strong> 模型 <strong>belongsTo</strong> 另一个模型的关系。</p>
 <p>要定义关联，创建一个以要定义的关联命名的类变量。此变量有时候可以简单到只是一个字
 符串，但也可以复杂到是一个多维数组，来定义关联细节。</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$hasOne</span> <span class="o">=</span> <span class="s1">&#39;Profile&#39;</span><span class="p">;</span>
     <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Recipe&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -230,7 +230,7 @@ window.lang = "zh_CN";
 <p>在上面的例子中，第一个 &#8216;Recipe&#8217; 是所谓的 &#8216;别名(<em>Alias</em>)&#8217;。它是关系的标识，可以是
 任何东西。通常选择与它引用的类相同的名字。不过，<strong>每个模型的别名在应用程序中必须
 唯一</strong>。例如，下面是正确的:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;MyRecipe&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Recipe&#39;</span><span class="p">,</span>
@@ -258,7 +258,7 @@ window.lang = "zh_CN";
 </pre></div>
 </div>
 <p>但是下面的代码在任何情况下都不大行得通:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;MyRecipe&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Recipe&#39;</span><span class="p">,</span>
@@ -290,11 +290,11 @@ window.lang = "zh_CN";
 可能会引起预料不到的行为。</p>
 <p>CakePHP 会自动在关联模型对象之间建立连接。所以，例如，在 <tt class="docutils literal"><span class="pre">User</span></tt> 模型中，可以用
 如下方式访问 <tt class="docutils literal"><span class="pre">Recipe</span></tt> 模型:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">someFunction</span><span class="p">();</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">someFunction</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>同样的，在控制器中，也可以简单地循着模型关系访问关联的模型:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">someFunction</span><span class="p">();</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">someFunction</span><span class="p">();</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -340,7 +340,7 @@ window.lang = "zh_CN";
 <p>User 模型文件会保存为 /app/Model/User.php。为了定义 &#8216;User hasOne Profile (用户有
 一份个人资料)&#8217; 的关联，为模型类添加 $hasOne 属性。记得要在
 /app/Model/Profile.php 文件中定义 Profile 模型，否则关联将无法工作:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$hasOne</span> <span class="o">=</span> <span class="s1">&#39;Profile&#39;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -349,7 +349,7 @@ window.lang = "zh_CN";
 模型的类名的字符串，就像我们上面做的那样。</p>
 <p>如果需要更多的控制，可以使用数组语法定义关联。例如，你可能想要限制关联只包含某些
 记录。</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$hasOne</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Profile&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Profile&#39;</span><span class="p">,</span>
@@ -377,7 +377,7 @@ array(&#8216;Profile.last_name&#8217; =&gt; &#8216;ASC&#8217;)。</li>
 设置为 true 将导致删除一个 User 时也会删除她/他关联的 Profile。</li>
 </ul>
 <p>一旦定义了关系，User 模型的 find 操作也会读取关联的 Profile 记录，如果存在的话:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//调用 $this-&gt;User-&gt;find() 的结果示例。</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">//调用 $this-&gt;User-&gt;find() 的结果示例。</span>
 
 <span class="k">Array</span>
 <span class="p">(</span>
@@ -433,13 +433,13 @@ belongsTo 关联以获取相关的 User 数据。belongsTo 关联是 hasOne 和 
 </div>
 <p>在 /app/Model/Profile.php 文件中的 Profile 模型里，我们可以使用如下字符串语法来
 定义 belongsTo 关联:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Profile</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Profile</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="s1">&#39;User&#39;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>我们也可以使用数组语法定义更为特定的关系:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Profile</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Profile</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;User&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
@@ -471,7 +471,7 @@ User (个人资料属于用户)&#8217; 的关系，className 键应当是 &#8216
 <li><strong>counterScope</strong>: 可选的用于更新计数器缓存字段的条件数组。</li>
 </ul>
 <p>一旦定义了关联，Profile 模型的 find 操作将同时获取相关的 User 记录，如果存在的话:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//调用 $this-&gt;Profile-&gt;find() 的结果示例。</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">//调用 $this-&gt;Profile-&gt;find() 的结果示例。</span>
 
 <span class="k">Array</span>
 <span class="p">(</span>
@@ -497,7 +497,7 @@ User (个人资料属于用户)&#8217; 的关系，className 键应当是 &#8216
 录的数量，而是让模型自动追踪关联的 <tt class="docutils literal"><span class="pre">$hasMany</span></tt> 模型的任何添加/删除操作，并递增/
 递减父模型表的专用整数字段。</p>
 <p>这个字段的名称由单数模型名称后缀以下划线和单词 &#8220;count&#8221; 构成:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">my_model_count</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">my_model_count</span>
 </pre></div>
 </div>
 <p>比方说有一个叫 <tt class="docutils literal"><span class="pre">ImageComment</span></tt> 的模型和一个叫 <tt class="docutils literal"><span class="pre">Image</span></tt> 的模型，你就要在
@@ -532,7 +532,7 @@ User (个人资料属于用户)&#8217; 的关系，className 键应当是 &#8216
 </table>
 <p>一旦添加了计数器字段，就可以使用它了。要启用计数器缓存，在关联中添加
 <tt class="docutils literal"><span class="pre">counterCache</span></tt> 键并将其值设置为 <tt class="docutils literal"><span class="pre">true</span></tt>:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ImageComment</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImageComment</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Image&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;counterCache&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
@@ -549,7 +549,7 @@ User (个人资料属于用户)&#8217; 的关系，className 键应当是 &#8216
 <p>你还可以指定 <tt class="docutils literal"><span class="pre">counterScope</span></tt>。这允许你指定一个简单的条件，告诉模型什么情况下更
 新(或者什么情况下不更新，取决于你如何看)计数器的值。</p>
 <p>在我们的 Image 模型示例中，我们可以象下面这样指定:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ImageComment</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImageComment</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Image&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;counterCache&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;active_comment_count&#39;</span><span class="p">,</span> <span class="c1">//custom field name</span>
@@ -596,7 +596,7 @@ User (个人资料属于用户)&#8217; 的关系，className 键应当是 &#8216
 </tbody>
 </table>
 <p>基于上面这样的设置，<tt class="docutils literal"><span class="pre">belongsTo</span></tt> 应当像这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Message</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Message</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;User&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;counterCache&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -640,13 +640,13 @@ User (个人资料属于用户)&#8217; 的关系，className 键应当是 &#8216
 </table>
 <p>在 /app/Model/User.php 文件的 User 模型中，我们可以使用如下字符串语法定义 hasMany
 关联:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="s1">&#39;Comment&#39;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>我们也可以使用数组语法定义更特定的关系:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Comment&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Comment&#39;</span><span class="p">,</span>
@@ -685,7 +685,7 @@ array(&#8216;Profile.last_name&#8217; =&gt; &#8216;ASC&#8217;)。</li>
 <tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">Orange.*</span> <span class="pre">from</span> <span class="pre">oranges</span> <span class="pre">as</span> <span class="pre">Orange</span> <span class="pre">WHERE</span> <span class="pre">Orange.apple_id</span> <span class="pre">=</span> <span class="pre">{$__cakeID__$};</span></tt> 。</li>
 </ul>
 <p>一旦关联被建立，User 模型的 find 操作也将读取相关的 Comment 数据，如果存在的话:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//调用 $this-&gt;User-&gt;find() 的结果示例。</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">//调用 $this-&gt;User-&gt;find() 的结果示例。</span>
 
 <span class="k">Array</span>
 <span class="p">(</span>
@@ -770,7 +770,7 @@ array(&#8216;Profile.last_name&#8217; =&gt; &#8216;ASC&#8217;)。</li>
 约定的不同，那就必须在模型的 <a class="reference internal" href="model-attributes.html#model-primarykey"><em>primaryKey</em></a> 中做(相应的)改变。</p>
 <p>一旦建立了这个新表，我们就可以在模型文件中定义 HABTM 关联了。这次我们将直接跳到
 数组语法:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Recipe</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Recipe</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$hasAndBelongsToMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Ingredient&#39;</span> <span class="o">=&gt;</span>
             <span class="k">array</span><span class="p">(</span>
@@ -841,7 +841,7 @@ Ingredient (菜谱有许多且属于原料)&#8217; 的关系，这个类名应�
 </ul>
 <p>一旦定义了关联，Recipe 模型的 find 操作也会读取相关的 Ingredient 记录，如果存在
 的话:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">//调用 $this-&gt;Recipe-&gt;find() 的结果示例。</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">//调用 $this-&gt;Recipe-&gt;find() 的结果示例。</span>
 
 <span class="k">Array</span>
 <span class="p">(</span>
@@ -893,12 +893,12 @@ HABTM 关联。</p>
 <p><cite>Course hasAndBelongsToMany Student</cite></p>
 <p>换句话说，一名学生(<em>Student</em>)可以选修多门课程(<em>Course</em>)，而一门课程(<em>Course</em>)也
 可以被多名学生(<em>Student</em>)选修。 这个简单的多对多关联需要一个类似于如下结构的表:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">id</span> <span class="o">|</span> <span class="nx">student_id</span> <span class="o">|</span> <span class="nx">course_id</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">id</span> <span class="o">|</span> <span class="nx">student_id</span> <span class="o">|</span> <span class="nx">course_id</span>
 </pre></div>
 </div>
 <p>现在，如果我们要保存学生在这门课程中出勤的天数以及他们的最终分数呢？需要的这张表
 将变成:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nx">id</span> <span class="o">|</span> <span class="nx">student_id</span> <span class="o">|</span> <span class="nx">course_id</span> <span class="o">|</span> <span class="nx">days_attended</span> <span class="o">|</span> <span class="nx">grade</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">id</span> <span class="o">|</span> <span class="nx">student_id</span> <span class="o">|</span> <span class="nx">course_id</span> <span class="o">|</span> <span class="nx">days_attended</span> <span class="o">|</span> <span class="nx">grade</span>
 </pre></div>
 </div>
 <p>问题是，hasAndBelongsToMany 不支持这类情况，因为 hasAndBelongsToMany 关联保存时，
@@ -912,7 +912,7 @@ HABTM 关联。</p>
 </div></blockquote>
 <p>实现需求的方法是使用 <strong>连接模型</strong>，或者也称为 <strong>hasMany through</strong> 关联。即，关联
 自身也是一个模型。现在我们建立一个新的模型 CourseMembership。请看下面的模型。</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Student.php</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Student.php</span>
 <span class="k">class</span> <span class="nc">Student</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;CourseMembership&#39;</span>
@@ -952,7 +952,7 @@ CakePHP 让使用它非常容易。</p>
 (还有一个非常有用的行为叫 &#8220;Containable&#8221;。欲知更多信息，请参阅手册中内置行为一节。)
 让我们来设置几个模型，看看 bindModel() 和 unbindModel() 方法如何工作。我们从两个
 模型开始:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Leader</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Leader</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Follower&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Follower&#39;</span><span class="p">,</span>
@@ -970,7 +970,7 @@ CakePHP 让使用它非常容易。</p>
 个 Leader 和与它关联的追随者(followers)。就像你上面看到的那样，Leader 模型的关联
 数组定义了 &#8220;Leader hasMany Followers&#8221; 关系。出于演示的目的，让我们在控制器动作中
 使用 unbindModel() 方法删除该关联:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">some_action</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_action</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 这会获取 Leader 及其相关的 Followers</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Leader</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
 
@@ -998,7 +998,7 @@ find 操作中有效，除非第二个参数设置为 false。如果第二个参
 在请求的余下阶段仍将保持这种(动态绑定的)效果。</p>
 </div>
 <p>以下是 unbindModel() 的基本用法模式:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Model</span><span class="o">-&gt;</span><span class="na">unbindModel</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Model</span><span class="o">-&gt;</span><span class="na">unbindModel</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;关联类型&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;关联模型类名&#39;</span><span class="p">))</span>
 <span class="p">);</span>
 </pre></div>
@@ -1007,7 +1007,7 @@ find 操作中有效，除非第二个参数设置为 false。如果第二个参
 Leader 模型需要一些关联的 Principle。我们的 Principle 模型文件几乎是空的，只有
 public $name 声明语句。让我们动态给我们的 Leader 关联一些 Principle (但记得，这
 仅在紧随其后的 find 操作中有效)。在 LeadersController 控制器中有如下函数:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">another_action</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">another_action</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 在 leader.php 模型文件中没有 Leader hasMany Principles 关联，所以这里</span>
     <span class="c1">// 的 find 只读取了 Leaders。</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Leader</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
@@ -1030,7 +1030,7 @@ public $name 声明语句。让我们动态给我们的 Leader 关联一些 Prin
 </div>
 <p>就是这样。bindModel() 方法的基本用法是封装在数组中的常规关联数组，该数组的键为要
 建立的关联的类型:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Model</span><span class="o">-&gt;</span><span class="na">bindModel</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Model</span><span class="o">-&gt;</span><span class="na">bindModel</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;关联名称&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;关联模型类名&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
                 <span class="c1">// 这里是常规的关联的键……</span>
@@ -1049,7 +1049,7 @@ public $name 声明语句。让我们动态给我们的 Leader 关联一些 Prin
 模型有两种关系：一种是与发送消息的用户的关系，第二种是与接收消息的用户的关系。
 messages 表有一个 user_id 字段，还有一个 recipient_id 字段。这样的话消息
 (Message)模型看起来就象这样:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Message</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Message</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Sender&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span>
@@ -1064,7 +1064,7 @@ messages 表有一个 user_id 字段，还有一个 recipient_id 字段。这样
 </pre></div>
 </div>
 <p>Recipient 是 User 模型的别名。现在来瞧瞧 User 模型是什么样的:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$hasMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;MessageSent&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Message&#39;</span><span class="p">,</span>
@@ -1079,7 +1079,7 @@ messages 表有一个 user_id 字段，还有一个 recipient_id 字段。这样
 </pre></div>
 </div>
 <p>也可以建立自我关联，如下所示:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
 
     <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Parent&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -1116,7 +1116,7 @@ $this-&gt;Channel-&gt;recursive = -1;</p>
 </div>
 <p>在表间强制进行连接(<em>join</em>)时，需要使用 Model::find() 的&#8221;现代&#8221;语法，在 $options
 数组中添加 &#8216;joins&#8217; 键。例如:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;joins&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;joins&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;channels&#39;</span><span class="p">,</span>
         <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Channel&#39;</span><span class="p">,</span>
         <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;LEFT&#39;</span><span class="p">,</span>
@@ -1143,7 +1143,7 @@ $this-&gt;Channel-&gt;recursive = -1;</p>
 <li><strong>conditions</strong>: 执行连接(<em>join</em>)的条件。</li>
 </ul>
 <p>使用 joins 选项，可以添加基于关联模型字段的条件:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;joins&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;joins&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;channels&#39;</span><span class="p">,</span>
         <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Channel&#39;</span><span class="p">,</span>
         <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;LEFT&#39;</span><span class="p">,</span>
@@ -1164,7 +1164,7 @@ $this-&gt;Channel-&gt;recursive = -1;</p>
 <p>假设有 Book hasAndBelongsToMany Tag (书籍有且属于多个标签)的关联。该关系使用
 books_tags 表作为连接表，所以需要把 books 表连接(<em>join</em>)到 books_tags 表，再把
 它与 tags 表连接(<em>join</em>):</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;joins&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;joins&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;books_tags&#39;</span><span class="p">,</span>
         <span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;BooksTag&#39;</span><span class="p">,</span>
         <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;inner&#39;</span><span class="p">,</span>
@@ -1300,7 +1300,7 @@ books_tags 表作为连接表，所以需要把 books 表连接(<em>join</em>)�
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Nov 19, 2015.
+				最后更新于 Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>

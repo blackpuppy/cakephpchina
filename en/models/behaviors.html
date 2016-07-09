@@ -211,7 +211,7 @@ one, reference the chapters below:</p>
 <h2>Using Behaviors<a class="headerlink" href="#using-behaviors" title="Permalink to this headline">¶</a></h2>
 <p>Behaviors are attached to models through the <tt class="docutils literal"><span class="pre">$actsAs</span></tt> model class
 variable:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Category</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Category</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Tree&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
@@ -220,7 +220,7 @@ variable:</p>
 structure using the TreeBehavior. Once a behavior has been
 specified, use the methods added by the behavior as if they always
 existed as part of the original model:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Set ID</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Set ID</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
 
 <span class="c1">// Use behavior method, children():</span>
@@ -231,7 +231,7 @@ existed as part of the original model:</p>
 behavior is attached to the model. Here, we tell our TreeBehavior
 the names of the &#8220;left&#8221; and &#8220;right&#8221; fields in the underlying
 database table:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Category</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Category</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Tree&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;left&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;left_node&#39;</span><span class="p">,</span>
         <span class="s1">&#39;right&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;right_node&#39;</span>
@@ -242,7 +242,7 @@ database table:</p>
 <p>We can also attach several behaviors to a model. There&#8217;s no reason
 why, for example, our Category model should only behave as a tree,
 it may also need internationalization support:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Category</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Category</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Tree&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
           <span class="s1">&#39;left&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;left_node&#39;</span><span class="p">,</span>
@@ -260,7 +260,7 @@ models throughout the model&#8217;s lifetime. However, we may need to
 our previous Category model, which is acting as a Tree and a
 Translate model, we need for some reason to force it to stop acting
 as a Translate model:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Detach a behavior from our model:</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Detach a behavior from our model:</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">unload</span><span class="p">(</span><span class="s1">&#39;Translate&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -271,14 +271,14 @@ our finds, our saves, etc. In fact, we are looking to disable the
 behavior from acting upon our CakePHP model callbacks. Instead of
 detaching the behavior, we then tell our model to stop informing of
 these callbacks to the Translate behavior:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// Stop letting the behavior handle our model callbacks</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Stop letting the behavior handle our model callbacks</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">disable</span><span class="p">(</span><span class="s1">&#39;Translate&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>We may also need to find out if our behavior is handling those
 model callbacks, and if not we then restore its ability to react to
 them:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// If our behavior is not handling model callbacks</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// If our behavior is not handling model callbacks</span>
 <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">enabled</span><span class="p">(</span><span class="s1">&#39;Translate&#39;</span><span class="p">))</span> <span class="p">{</span>
     <span class="c1">// Tell it to start doing so</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">enable</span><span class="p">(</span><span class="s1">&#39;Translate&#39;</span><span class="p">);</span>
@@ -289,7 +289,7 @@ them:</p>
 runtime, we can also attach new behaviors. Say that our familiar
 Category model needs to start behaving as a Christmas model, but
 only on Christmas day:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// If today is Dec 25</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// If today is Dec 25</span>
 <span class="k">if</span> <span class="p">(</span><span class="nb">date</span><span class="p">(</span><span class="s1">&#39;m/d&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;12/25&#39;</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Our model needs to behave as a Christmas model</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;Christmas&#39;</span><span class="p">);</span>
@@ -297,13 +297,13 @@ only on Christmas day:</p>
 </pre></div>
 </div>
 <p>We can also use the load method to override behavior settings:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// We will change one setting from our already attached behavior</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// We will change one setting from our already attached behavior</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;Tree&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;left&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;new_left_node&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>And using aliasing, we can customize the alias it will be loaded as, also allowing it to be loaded
 multiple times with different settings:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// The behavior will be available as &#39;MyTree&#39;</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// The behavior will be available as &#39;MyTree&#39;</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;MyTree&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Tree&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
@@ -311,7 +311,7 @@ multiple times with different settings:</p>
 attached. If we pass the name of a behavior to the method, it will
 tell us if that behavior is attached to the model, otherwise it
 will give us the list of attached behaviors:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="c1">// If the Translate behavior is not attached</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// If the Translate behavior is not attached</span>
 <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">loaded</span><span class="p">(</span><span class="s1">&#39;Translate&#39;</span><span class="p">))</span> <span class="p">{</span>
     <span class="c1">// Get the list of all behaviors the model has attached</span>
     <span class="nv">$behaviors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">Behaviors</span><span class="o">-&gt;</span><span class="na">loaded</span><span class="p">();</span>
@@ -338,7 +338,7 @@ model behavior attachment. Information about specifying settings can be found in
 the chapters about core behaviors and their configuration.</p>
 <p>A quick example that illustrates how behavior settings can be
 passed from the model to the behavior:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Post</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;YourBehavior&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;option1_key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;option1_value&#39;</span>
@@ -350,7 +350,7 @@ passed from the model to the behavior:</p>
 <p>Since behaviors are shared across all the model instances that use them, it&#8217;s a
 good practice to store the settings per alias/model name that is using the
 behavior. When created behaviors will have their <tt class="docutils literal"><span class="pre">setup()</span></tt> method called:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">setup</span><span class="p">(</span><span class="nx">Model</span> <span class="nv">$Model</span><span class="p">,</span> <span class="nv">$settings</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">setup</span><span class="p">(</span><span class="nx">Model</span> <span class="nv">$Model</span><span class="p">,</span> <span class="nv">$settings</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">settings</span><span class="p">[</span><span class="nv">$Model</span><span class="o">-&gt;</span><span class="na">alias</span><span class="p">]))</span> <span class="p">{</span>
         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">settings</span><span class="p">[</span><span class="nv">$Model</span><span class="o">-&gt;</span><span class="na">alias</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;option1_key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;option1_default_value&#39;</span><span class="p">,</span>
@@ -368,7 +368,7 @@ behavior. When created behaviors will have their <tt class="docutils literal"><s
 <h2>Creating behavior methods<a class="headerlink" href="#creating-behavior-methods" title="Permalink to this headline">¶</a></h2>
 <p>Behavior methods are automatically available on any model acting as
 the behavior. For example if you had:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Duck</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Duck</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Flying&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
@@ -378,12 +378,12 @@ methods on your Duck model. When creating behavior methods you
 automatically get passed a reference of the calling model as the
 first parameter. All other supplied parameters are shifted one
 place to the right. For example:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Duck</span><span class="o">-&gt;</span><span class="na">fly</span><span class="p">(</span><span class="s1">&#39;toronto&#39;</span><span class="p">,</span> <span class="s1">&#39;montreal&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Duck</span><span class="o">-&gt;</span><span class="na">fly</span><span class="p">(</span><span class="s1">&#39;toronto&#39;</span><span class="p">,</span> <span class="s1">&#39;montreal&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Although this method takes two parameters, the method signature
 should look like:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">fly</span><span class="p">(</span><span class="nx">Model</span> <span class="nv">$Model</span><span class="p">,</span> <span class="nv">$from</span><span class="p">,</span> <span class="nv">$to</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">fly</span><span class="p">(</span><span class="nx">Model</span> <span class="nv">$Model</span><span class="p">,</span> <span class="nv">$from</span><span class="p">,</span> <span class="nv">$to</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Do some flying.</span>
 <span class="p">}</span>
 </pre></div>
@@ -399,7 +399,7 @@ pattern matching for method invocation. This allows you to create methods
 similar to <tt class="docutils literal"><span class="pre">Model::findAllByXXX</span></tt> methods on your behaviors. Mapped methods need
 to be declared in your behaviors <tt class="docutils literal"><span class="pre">$mapMethods</span></tt> array. The method signature for
 a mapped method is slightly different than a normal behavior mixin method:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyBehavior</span> <span class="k">extends</span> <span class="nx">ModelBehavior</span> <span class="p">{</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyBehavior</span> <span class="k">extends</span> <span class="nx">ModelBehavior</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$mapMethods</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/do(\w+)/&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;doSomething&#39;</span><span class="p">);</span>
 
     <span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nx">Model</span> <span class="nv">$model</span><span class="p">,</span> <span class="nv">$method</span><span class="p">,</span> <span class="nv">$arg1</span><span class="p">,</span> <span class="nv">$arg2</span><span class="p">)</span> <span class="p">{</span>
@@ -414,7 +414,7 @@ see, the model is still the first parameter, but the called method name will be
 the 2nd parameter. This allows you to munge the method name for additional
 information, much like <tt class="docutils literal"><span class="pre">Model::findAllByXX</span></tt>. If the above behavior was
 attached to a model the following would happen:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">doReleaseTheHounds</span><span class="p">(</span><span class="s1">&#39;karl&#39;</span><span class="p">,</span> <span class="s1">&#39;lenny&#39;</span><span class="p">);</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">doReleaseTheHounds</span><span class="p">(</span><span class="s1">&#39;karl&#39;</span><span class="p">,</span> <span class="s1">&#39;lenny&#39;</span><span class="p">);</span>
 
 <span class="c1">// would output</span>
 <span class="s1">&#39;ReleaseTheHounds&#39;</span><span class="p">,</span> <span class="s1">&#39;karl&#39;</span><span class="p">,</span> <span class="s1">&#39;lenny&#39;</span>
@@ -647,7 +647,7 @@ your behavior.</p>
 	<div class="row">
 		<div class="columns nine offset-by-three copyright">
 					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Nov 19, 2015.
+				Last updated on Jul 09, 2016.
 				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
 		</div>
 	</div>
