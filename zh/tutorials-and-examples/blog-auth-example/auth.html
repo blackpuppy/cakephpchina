@@ -1,173 +1,283 @@
 
+
 <!DOCTYPE html>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Simple Authentication and Authorization Application" lang="zh_CN" name="title" />
-<meta content="auto increment,authorization application,model user,array,conventions,authentication,urls,cakephp,delete,doc,columns" lang="zh_CN" name="keywords" />
+    <meta content="Simple Authentication and Authorization Application" lang="zh" name="title" />
+<meta content="auto increment,authorization application,model user,array,conventions,authentication,urls,cakephp,delete,doc,columns" lang="zh" name="keywords" />
 
-    <title>简单的身份验证和授权应用 &mdash; CakePHP Cookbook 2.x 文档</title>
+    <title>简单的身份验证和授权应用</title>
+    <link href="../../_static/favicon.png" type="image/png" rel="icon" />
+
     
-    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/app.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '2.x',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/translations.js"></script>
     <script type="text/javascript" src="../../_static/app.js"></script>
-    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
-    <script type="text/javascript" src="../../_static/foundation.js"></script>
+
+    <link rel="alternate" hreflang="en" href="../../../en/tutorials-and-examples/blog-auth-example/auth.html" /><link rel="alternate" hreflang="pt" href="../../../pt/tutorials-and-examples/blog-auth-example/auth.html" /><link rel="alternate" hreflang="es" href="../../../es/tutorials-and-examples/blog-auth-example/auth.html" /><link rel="alternate" hreflang="ja" href="../../../ja/tutorials-and-examples/blog-auth-example/auth.html" /><link rel="alternate" hreflang="fr" href="../../../fr/tutorials-and-examples/blog-auth-example/auth.html" />
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within CakePHP Cookbook 2.x 文档" href="../../_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
     <link rel="up" title="教程 &amp; 实例" href="../../tutorials-and-examples.html" />
     <link rel="next" title="简单的 Acl 控制的应用" href="../simple-acl-controlled-application/simple-acl-controlled-application.html" />
     <link rel="prev" title="博客教程——添加一个层" href="../blog/part-two.html" />
-<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="alternate" hreflang="en" href="../../../en/tutorials-and-examples/blog-auth-example/auth.html" /><link rel="alternate" hreflang="pt" href="../../../pt/tutorials-and-examples/blog-auth-example/auth.html" /><link rel="alternate" hreflang="es" href="../../../es/tutorials-and-examples/blog-auth-example/auth.html" /><link rel="alternate" hreflang="ja" href="../../../ja/tutorials-and-examples/blog-auth-example/auth.html" /><link rel="alternate" hreflang="fr" href="../../../fr/tutorials-and-examples/blog-auth-example/auth.html" />
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
-<script type="text/javascript">
-window.lang = "zh_CN";
-</script>
-
+    <script type="text/javascript">
+    window.lang = "zh";
+    </script>
   </head>
   <body>
 
 <div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="masthead">
-	<div class="header-backing"></div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="../../contents.html">
-			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
-			</a>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
+
 		
-<div id="searchbox" class="columns nine phone-three">
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-	<form id="searchform" class="search" action="../../search.html" method="get">
-		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
-		<input class="search-submit search-big button red" type="submit" value="搜索" />
-		<input type="hidden" name="check_keywords" value="yes" />
-		<input type="hidden" name="area" value="default" />
-
-		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
-	</form>
-
-</div>
-	</div>
-</div>
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="../../contents.html">Cookbook 2.x</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="../../tutorials-and-examples.html" accesskey="U" itemprop="url"><span itemprop="title">教程 &amp; 实例</span></a>
-			</li>
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">2.x Book</a>
-				<ul>
-					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				<a href="#">zh_CN</a>
-
-				<ul>
-				
-					<li><a href="../../../en/tutorials-and-examples/blog-auth-example/auth.html">en</a></li>
-				
-					<li><a href="../../../pt/tutorials-and-examples/blog-auth-example/auth.html">pt</a></li>
-				
-					<li><a href="../../../es/tutorials-and-examples/blog-auth-example/auth.html">es</a></li>
-				
-					<li><a href="../../../ja/tutorials-and-examples/blog-auth-example/auth.html">ja</a></li>
-				
-					<li><a href="../../../fr/tutorials-and-examples/blog-auth-example/auth.html">fr</a></li>
-				
-					<li></li>
-				
-				</ul>
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="../../search.html" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="搜索" type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/tutorials-and-examples/blog-auth-example/auth.rst" target="_blank">Improve this Doc</a>
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="../../contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 2.x <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="../../search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														zh
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li><a href="../../../en/tutorials-and-examples/blog-auth-example/auth.html">en</a></li>
+											
+												<li><a href="../../../pt/tutorials-and-examples/blog-auth-example/auth.html">pt</a></li>
+											
+												<li><a href="../../../es/tutorials-and-examples/blog-auth-example/auth.html">es</a></li>
+											
+												<li><a href="../../../ja/tutorials-and-examples/blog-auth-example/auth.html">ja</a></li>
+											
+												<li><a href="../../../fr/tutorials-and-examples/blog-auth-example/auth.html">fr</a></li>
+											
+												<li></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/zh">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/zh">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/zh/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/zh/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/master/zh/tutorials-and-examples/blog-auth-example/auth.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="#">简单的身份验证和授权应用</a><ul>
+<li><a class="reference internal" href="#id2">创建所有用户的相关代码</a></li>
+<li><a class="reference internal" href="#id3">身份验证 (登录和登出)</a></li>
+<li><a class="reference internal" href="#id4">权限(谁可以访问什么)</a><ul>
+<li><a class="reference internal" href="#id5">后续阅读的建议</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
   <div class="section" id="id1">
 <h1>简单的身份验证和授权应用<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<p>接着我们的 <a class="reference internal" href="../blog/blog.html"><em>博客教程</em></a> 的例子，设想一下我们想要根据
+<p>接着我们的 <a class="reference internal" href="../blog/blog.html"><span class="doc">博客教程</span></a> 的例子，设想一下我们想要根据
 登录的用户来保护某些网址。我们还有另外一个要求，允许我们的博客应用有多个作者，每
 一位作者都可以创作他们自己的文章(<em>posts</em>)，随意编辑和删除它们，而不允许其他作者
 对自己的文章做任何改动。</p>
@@ -243,10 +353,10 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
         <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
             <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
             <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
-                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;The user has been saved&#39;</span><span class="p">));</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">success</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;The user has been saved&#39;</span><span class="p">));</span>
                 <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
             <span class="p">}</span>
-            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span>
                 <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;The user could not be saved. Please, try again.&#39;</span><span class="p">)</span>
             <span class="p">);</span>
         <span class="p">}</span>
@@ -259,10 +369,10 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
         <span class="p">}</span>
         <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;put&#39;</span><span class="p">))</span> <span class="p">{</span>
             <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
-                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;The user has been saved&#39;</span><span class="p">));</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">success</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;The user has been saved&#39;</span><span class="p">));</span>
                 <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
             <span class="p">}</span>
-            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span>
                 <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;The user could not be saved. Please, try again.&#39;</span><span class="p">)</span>
             <span class="p">);</span>
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -282,10 +392,10 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
             <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundException</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid user&#39;</span><span class="p">));</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">())</span> <span class="p">{</span>
-            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;User deleted&#39;</span><span class="p">));</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">success</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;User deleted&#39;</span><span class="p">));</span>
             <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
         <span class="p">}</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;User was not deleted&#39;</span><span class="p">));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;User was not deleted&#39;</span><span class="p">));</span>
         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
     <span class="p">}</span>
 
@@ -293,8 +403,8 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
 </pre></div>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.5 版更改: </span>自从 2.5 版本起，请使用 <tt class="docutils literal"><span class="pre">CakeRequest::allowMethod()</span></tt> 而不是
-<tt class="docutils literal"><span class="pre">CakeRequest::onlyAllow()</span></tt> (已作废)。</p>
+<p><span class="versionmodified">在 2.5 版更改: </span>自从 2.5 版本起，请使用 <code class="docutils literal"><span class="pre">CakeRequest::allowMethod()</span></code> 而不是
+<code class="docutils literal"><span class="pre">CakeRequest::onlyAllow()</span></code> (已作废)。</p>
 </div>
 <p>以我们创建博客文章的视图同样的方式，或者使用代码生成工具，我们来实现视图。出于
 这个教程的目的，这里仅展示 add.ctp 视图：</p>
@@ -318,16 +428,16 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
 <div class="section" id="id3">
 <h2>身份验证 (登录和登出)<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <p>我们现在已经准备好添加我们的认证层了。在 CakePHP 中，这是由
-<a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><tt class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></tt></a> 组件处理的，这个类负责为某些动作要求用户登录，处理
+<a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><code class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></code></a> 组件处理的，这个类负责为某些动作要求用户登录，处理
 用户登录和登出，并且授权登录的用户访问他们有权限到达的的动作。</p>
-<p>要添加这个组件到应用程序中，打开 <tt class="docutils literal"><span class="pre">app/Controller/AppController.php</span></tt> 文件，添加
+<p>要添加这个组件到应用程序中，打开 <code class="docutils literal"><span class="pre">app/Controller/AppController.php</span></code> 文件，添加
 如下代码:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/AppController.php</span>
 <span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
     <span class="c1">//...</span>
 
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">&#39;Session&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Flash&#39;</span><span class="p">,</span>
         <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
             <span class="s1">&#39;loginRedirect&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
                 <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span>
@@ -354,9 +464,9 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
 </pre></div>
 </div>
 <p>这里没有多少需要配置的，因为我们的 users 表遵循了命名约定。我们只设置了在登录和登出的动作完成之后要加载的网址，在我们的
-例子中，分别是 <tt class="docutils literal"><span class="pre">/posts/</span></tt> 和 <tt class="docutils literal"><span class="pre">/</span></tt> 。</p>
-<p>我们在 <tt class="docutils literal"><span class="pre">beforeFilter</span></tt> 回调函数中所做的是告诉 AuthComponent 组件，在每个控制器
-中所有的 <tt class="docutils literal"><span class="pre">index</span></tt> 和 <tt class="docutils literal"><span class="pre">view</span></tt> 动作中都不需要登录。我们希望我们的访问者不需要在
+例子中，分别是 <code class="docutils literal"><span class="pre">/posts/</span></code> 和 <code class="docutils literal"><span class="pre">/</span></code> 。</p>
+<p>我们在 <code class="docutils literal"><span class="pre">beforeFilter</span></code> 回调函数中所做的是告诉 AuthComponent 组件，在每个控制器
+中所有的 <code class="docutils literal"><span class="pre">index</span></code> 和 <code class="docutils literal"><span class="pre">view</span></code> 动作中都不需要登录。我们希望我们的访问者不需要在
 网站中注册就能够读取并列出文章。</p>
 <p>现在，我们需要能够注册新用户，保存它们的用户名和密码，而且，更重要的是，哈希
 (<em>hash</em>)他们的密码，这样在我们的数据库中就不是用普通文本形式保存用户的密码了。让
@@ -374,7 +484,7 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
         <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">login</span><span class="p">())</span> <span class="p">{</span>
             <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">redirectUrl</span><span class="p">());</span>
         <span class="p">}</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid username or password, try again&#39;</span><span class="p">));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Invalid username or password, try again&#39;</span><span class="p">));</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
@@ -383,7 +493,7 @@ username和password列，CakePHP能够自动配置好实现用户登录的大部
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>密码的哈希还没有做，打开 <tt class="docutils literal"><span class="pre">app/Model/User.php</span></tt> 模型文件，添加如下代码:</p>
+<p>密码的哈希还没有做，打开 <code class="docutils literal"><span class="pre">app/Model/User.php</span></code> 模型文件，添加如下代码:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Model/User.php</span>
 
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AppModel&#39;</span><span class="p">,</span> <span class="s1">&#39;Model&#39;</span><span class="p">);</span>
@@ -413,12 +523,12 @@ SimplePasswordHasher (sha1)，提供用户级的 salt。SimplePasswordHasher 类
 CakePHP 3.0 版本中去掉。</p>
 </div>
 <p>所以，现在每次保存用户的时候，都会使用 BlowfishPasswordHasher 类进行哈希。我们还
-缺 login 函数的模板视图文件。打开文件 <tt class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></tt>，添加如下这些
+缺 login 函数的模板视图文件。打开文件 <code class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></code>，添加如下这些
 行：</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="x">//app/View/Users/login.ctp</span>
 
 <span class="x">&lt;div class=&quot;users form&quot;&gt;</span>
-<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">flash</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
 <span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
 <span class="x">    &lt;fieldset&gt;</span>
 <span class="x">        &lt;legend&gt;</span>
@@ -432,18 +542,18 @@ CakePHP 3.0 版本中去掉。</p>
 <span class="x">&lt;/div&gt;</span>
 </pre></div>
 </div>
-<p>现在你可以访问 <tt class="docutils literal"><span class="pre">/users/add</span></tt> 网址来注册新用户，并在 <tt class="docutils literal"><span class="pre">/users/login</span></tt> 网址使用新
+<p>现在你可以访问 <code class="docutils literal"><span class="pre">/users/add</span></code> 网址来注册新用户，并在 <code class="docutils literal"><span class="pre">/users/login</span></code> 网址使用新
 创建的凭证登录。也可以试试访问任何其它没有明确允许访问的网址，比如
-<tt class="docutils literal"><span class="pre">/posts/add</span></tt>，你会看到应用程序会自动转向到登录页面。</p>
-<p>就是这样！简单到不可思议。让我们回过头来解释一下发生的事情。<tt class="docutils literal"><span class="pre">beforeFilter</span></tt>
-回调函数告诉 AuthComponent 组件，除了在 AppController 的 <tt class="docutils literal"><span class="pre">beforeFilter</span></tt> 函数中
-已经允许访问的 <tt class="docutils literal"><span class="pre">index</span></tt> 和 <tt class="docutils literal"><span class="pre">view</span></tt> 动作，对 <tt class="docutils literal"><span class="pre">add</span></tt> 动作也不要求登录。</p>
-<p><tt class="docutils literal"><span class="pre">login</span></tt> 动作调用 AuthComponent 组件的 <tt class="docutils literal"><span class="pre">$this-&gt;Auth-&gt;login()</span></tt> 函数，这不需要任何更多的设置，因为，正如之前提到的，我们遵循了约定。即，User
+<code class="docutils literal"><span class="pre">/posts/add</span></code>，你会看到应用程序会自动转向到登录页面。</p>
+<p>就是这样！简单到不可思议。让我们回过头来解释一下发生的事情。<code class="docutils literal"><span class="pre">beforeFilter</span></code>
+回调函数告诉 AuthComponent 组件，除了在 AppController 的 <code class="docutils literal"><span class="pre">beforeFilter</span></code> 函数中
+已经允许访问的 <code class="docutils literal"><span class="pre">index</span></code> 和 <code class="docutils literal"><span class="pre">view</span></code> 动作，对 <code class="docutils literal"><span class="pre">add</span></code> 动作也不要求登录。</p>
+<p><code class="docutils literal"><span class="pre">login</span></code> 动作调用 AuthComponent 组件的 <code class="docutils literal"><span class="pre">$this-&gt;Auth-&gt;login()</span></code> 函数，这不需要任何更多的设置，因为，正如之前提到的，我们遵循了约定。即，User
 模型有 username 和 password 列，使用表单提交用户的数据到控制器。这个函数返回登录
 是否成功，如果成功，就重定向用户到在我们把 AuthComponent 组件添加到应用程序中时
 所设置的跳转网址。</p>
-<p>要登出，只需要访问网址 <tt class="docutils literal"><span class="pre">/users/logout</span></tt>，就会重定向用户到先前描述的配置好了的
-logoutUrl。这个网址就是 <tt class="docutils literal"><span class="pre">AuthComponent::logout()</span></tt> 函数成功时返回的结果。</p>
+<p>要登出，只需要访问网址 <code class="docutils literal"><span class="pre">/users/logout</span></code>，就会重定向用户到先前描述的配置好了的
+logoutUrl。这个网址就是 <code class="docutils literal"><span class="pre">AuthComponent::logout()</span></code> 函数成功时返回的结果。</p>
 </div>
 <div class="section" id="id4">
 <h2>权限(谁可以访问什么)<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
@@ -460,14 +570,14 @@ posts 表，添加对 User 模型的引用:</p>
         <span class="c1">//Added this line</span>
         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;Post&#39;</span><span class="p">][</span><span class="s1">&#39;user_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
         <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
-            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Session</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Your post has been saved.&#39;</span><span class="p">));</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">success</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;Your post has been saved.&#39;</span><span class="p">));</span>
             <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">));</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>由组件提供的 <tt class="docutils literal"><span class="pre">user()</span></tt> 函数，返回当前登录用户的任何列。我们使用这个方法将数据
+<p>由组件提供的 <code class="docutils literal"><span class="pre">user()</span></code> 函数，返回当前登录用户的任何列。我们使用这个方法将数据
 加入请求信息中，来保存。</p>
 <p>让我们增强应用程序的安全性，避免一些作者编辑或删除其他作者的文章。应用的基本规则
 是，管理用户可以访问任何网址，而普通用户(作者角色)只能访问允许的动作。再次打开
@@ -475,7 +585,7 @@ AppController 类，在 Auth 的配置中再添加一些选项:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/AppController.php</span>
 
 <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">&#39;Session&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Flash&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Auth&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;loginRedirect&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">),</span>
         <span class="s1">&#39;logoutRedirect&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -498,13 +608,13 @@ AppController 类，在 Auth 的配置中再添加一些选项:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>我们只创建了一个非常简单的权限机制。在这个例子中，<tt class="docutils literal"><span class="pre">admin</span></tt> 角色的用户在登录后
-可以访问网站的任何网址，而其余的用户(即角色 <tt class="docutils literal"><span class="pre">author</span></tt>)不能够做任何与未登录的
+<p>我们只创建了一个非常简单的权限机制。在这个例子中，<code class="docutils literal"><span class="pre">admin</span></code> 角色的用户在登录后
+可以访问网站的任何网址，而其余的用户(即角色 <code class="docutils literal"><span class="pre">author</span></code>)不能够做任何与未登录的
 用户不同的事情。</p>
-<p>这并不是我们所想要的，所以我们需要为 <tt class="docutils literal"><span class="pre">isAuthorized()</span></tt> 方法提供更多的规则。但
+<p>这并不是我们所想要的，所以我们需要为 <code class="docutils literal"><span class="pre">isAuthorized()</span></code> 方法提供更多的规则。但
 不是在 AppController 中设置，而是在每个控制器提供这些额外的规则。我们要在
 PostsController 中增加的规则，应当允许作者创建文章，但在作者不匹配时要防止对其
-文章的编辑。打开  <tt class="docutils literal"><span class="pre">PostsController.php</span></tt> 文件，添加如下内容:</p>
+文章的编辑。打开  <code class="docutils literal"><span class="pre">PostsController.php</span></code> 文件，添加如下内容:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Controller/PostsController.php</span>
 
 <span class="k">public</span> <span class="k">function</span> <span class="nf">isAuthorized</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
@@ -525,9 +635,9 @@ PostsController 中增加的规则，应当允许作者创建文章，但在作�
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>现在，如果在父类中已授权该用户，我们就重载 AppController 的 <tt class="docutils literal"><span class="pre">isAuthorized()</span></tt> 方法的调用和内部的检查。如果用户未被授权，则只允许他访问 add 动作，并有条件地
+<p>现在，如果在父类中已授权该用户，我们就重载 AppController 的 <code class="docutils literal"><span class="pre">isAuthorized()</span></code> 方法的调用和内部的检查。如果用户未被授权，则只允许他访问 add 动作，并有条件地
 访问 edit 和 delete 动作。最后要实现的是判断用户是否有权限编辑文章，为此调用
-Post 模型的 <tt class="docutils literal"><span class="pre">isOwnedBy()</span></tt> 方法。通常，最佳实践是尽量把逻辑挪到模型中。下面让
+Post 模型的 <code class="docutils literal"><span class="pre">isOwnedBy()</span></code> 方法。通常，最佳实践是尽量把逻辑挪到模型中。下面让
 我们来实现这个函数:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// app/Model/Post.php</span>
 
@@ -540,26 +650,28 @@ Post 模型的 <tt class="docutils literal"><span class="pre">isOwnedBy()</span>
 我们在 PostsController 控制器中的做法。你也可以更有造作性，根据你自己的规则在
 AppController 控制器中添加更普遍的规则。</p>
 <p>如果你需要更多的控制，我们建议你阅读完整的 Auth 组件的指南
-<a class="reference internal" href="../../core-libraries/components/authentication.html"><em>Authentication 认证</em></a>，你可以看到更多该组件的配置，
+<a class="reference internal" href="../../core-libraries/components/authentication.html"><span class="doc">Authentication 认证</span></a>，你可以看到更多该组件的配置，
 创建自定义的 Authorization 类，以及更多信息。</p>
 <div class="section" id="id5">
 <h3>后续阅读的建议<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
 <ol class="arabic simple">
-<li><a class="reference internal" href="../../console-and-shells/code-generation-with-bake.html"><em>使用 Bake 来生成代码</em></a> 生成基本的 CRUD 代码</li>
-<li><a class="reference internal" href="../../core-libraries/components/authentication.html"><em>Authentication 认证</em></a>: 用户注册和登录</li>
+<li><a class="reference internal" href="../../console-and-shells/code-generation-with-bake.html"><span class="doc">使用 Bake 来生成代码</span></a> 生成基本的 CRUD 代码</li>
+<li><a class="reference internal" href="../../core-libraries/components/authentication.html"><span class="doc">Authentication 认证</span></a>: 用户注册和登录</li>
 </ol>
 </div>
 </div>
 </div>
 
 
+			</div>
 		</div>
-	</div>
 
-	<div class="sidebar columns three pull-nine">
-<div id="sidebar-navigation" class="hide-on-phones">
-	<h2 class="hide-on-desktops">Table of Contents</h2>
-	<ul class="current">
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="zh">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
+	<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
@@ -569,107 +681,181 @@ AppController 控制器中添加更普遍的规则。</p>
 <li class="toctree-l1"><a class="reference internal" href="../../models.html">模型</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../core-libraries.html">核心库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">Shells，任务与命令行工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../blog/blog.html">博客教程</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../blog/part-two.html">博客教程——添加一个层</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">简单的身份验证和授权应用</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../simple-acl-controlled-application/simple-acl-controlled-application.html">简单的 Acl 控制的应用</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../simple-acl-controlled-application/part-two.html">简单的 Acl 控制的应用 - 第 2 部分</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
 </ul>
 
 </div>
 
-<div class="page-contents">
-	<h3>Page contents</h3>
-	<ul>
-<li><a class="reference internal" href="#">简单的身份验证和授权应用</a><ul>
-<li><a class="reference internal" href="#id2">创建所有用户的相关代码</a></li>
-<li><a class="reference internal" href="#id3">身份验证 (登录和登出)</a></li>
-<li><a class="reference internal" href="#id4">权限(谁可以访问什么)</a><ul>
-<li><a class="reference internal" href="#id5">后续阅读的建议</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-</div>
-	</div>
-
-</div>
-
-<div class="content row">
-	<ul class="related-pages inline">
-	<li>
-		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
-	</li>
-	<li>
-		<a href="../simple-acl-controlled-application/simple-acl-controlled-application.html" title="简单的 Acl 控制的应用" accesskey="N">下一页</a>
-	</li>
-	<li>
-		<a href="../blog/part-two.html" title="博客教程——添加一个层" accesskey="P">上一页</a>
-	</li>
-	</ul>
-</div>
-
-	<div class="footer-push"> </div>
-</div>
-
-
-
-
-
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>发现翻译错误?</strong>
-			请在下面留言<br />
-			<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">[ 我要加入翻译 ]</a>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Jul 10, 2016.
-				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
 		</div>
 	</div>
 </div>
 
-<div id="nav-modal" class="reveal-modal"> </div>
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-8 social-footer text-center ">
+				<a href="#">发现翻译错误? 请在下面留言</a>
+				<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">我要加入翻译</a>
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="../../_static/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="../../_static/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
+</li>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
+
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
+
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							&copy; 版权所有 2016, Cake Software Foundation, Inc.
+						最后更新于 8月 02, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
 <div id="inline-search-results"></div>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F201cbc61deaf9f7ffb521fb23e83db40' type='text/javascript'%3E%3C/script%3E"));
-</script>
 
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+
+</div>
+
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"cakephpchina"};
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
 	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	</script>
-<!-- Duoshuo Comment END -->
-
-<!-- Grunt Live Reload -->
-<script src="http://192.168.56.113:35729/livereload.js"></script>
+</script>
   </body>
 </html>

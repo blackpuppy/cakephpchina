@@ -1,170 +1,281 @@
 
+
 <!DOCTYPE html>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="CakePHP Conventions" lang="zh_CN" name="title" />
-<meta content="web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,apples,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers" lang="zh_CN" name="keywords" />
+    <meta content="CakePHP Conventions" lang="zh" name="title" />
+<meta content="web development experience,maintenance nightmare,index method,legacy systems,method names,php class,uniform system,config files,tenets,apples,conventions,conventional controller,best practices,maps,visibility,news articles,functionality,logic,cakephp,developers" lang="zh" name="keywords" />
 
-    <title>CakePHP 的约定 &mdash; CakePHP Cookbook 2.x 文档</title>
+    <title>CakePHP 的约定</title>
+    <link href="../_static/favicon.png" type="image/png" rel="icon" />
+
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/app.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.x',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/app.js"></script>
-    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
-    <script type="text/javascript" src="../_static/foundation.js"></script>
+
+    <link rel="alternate" hreflang="en" href="../../en/getting-started/cakephp-conventions.html" /><link rel="alternate" hreflang="pt" href="../../pt/getting-started/cakephp-conventions.html" /><link rel="alternate" hreflang="es" href="../../es/getting-started/cakephp-conventions.html" /><link rel="alternate" hreflang="ja" href="../../ja/getting-started/cakephp-conventions.html" /><link rel="alternate" hreflang="fr" href="../../fr/getting-started/cakephp-conventions.html" />
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within CakePHP Cookbook 2.x 文档" href="../_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
     <link rel="up" title="入门指南" href="../getting-started.html" />
     <link rel="next" title="CakePHP 目录结构" href="cakephp-folder-structure.html" />
     <link rel="prev" title="典型的 CakePHP 请求" href="a-typical-cakephp-request.html" />
-<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="alternate" hreflang="en" href="../../en/getting-started/cakephp-conventions.html" /><link rel="alternate" hreflang="pt" href="../../pt/getting-started/cakephp-conventions.html" /><link rel="alternate" hreflang="es" href="../../es/getting-started/cakephp-conventions.html" /><link rel="alternate" hreflang="ja" href="../../ja/getting-started/cakephp-conventions.html" /><link rel="alternate" hreflang="fr" href="../../fr/getting-started/cakephp-conventions.html" />
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
-<script type="text/javascript">
-window.lang = "zh_CN";
-</script>
-
+    <script type="text/javascript">
+    window.lang = "zh";
+    </script>
   </head>
   <body>
 
 <div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="masthead">
-	<div class="header-backing"></div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="../contents.html">
-			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
-			</a>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
+
 		
-<div id="searchbox" class="columns nine phone-three">
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-	<form id="searchform" class="search" action="../search.html" method="get">
-		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
-		<input class="search-submit search-big button red" type="submit" value="搜索" />
-		<input type="hidden" name="check_keywords" value="yes" />
-		<input type="hidden" name="area" value="default" />
-
-		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
-	</form>
-
-</div>
-	</div>
-</div>
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="../contents.html">Cookbook 2.x</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="../getting-started.html" accesskey="U" itemprop="url"><span itemprop="title">入门指南</span></a>
-			</li>
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">2.x Book</a>
-				<ul>
-					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				<a href="#">zh_CN</a>
-
-				<ul>
-				
-					<li><a href="../../en/getting-started/cakephp-conventions.html">en</a></li>
-				
-					<li><a href="../../pt/getting-started/cakephp-conventions.html">pt</a></li>
-				
-					<li><a href="../../es/getting-started/cakephp-conventions.html">es</a></li>
-				
-					<li><a href="../../ja/getting-started/cakephp-conventions.html">ja</a></li>
-				
-					<li><a href="../../fr/getting-started/cakephp-conventions.html">fr</a></li>
-				
-					<li></li>
-				
-				</ul>
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="../search.html" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="搜索" type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/getting-started/cakephp-conventions.rst" target="_blank">Improve this Doc</a>
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="../contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 2.x <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="../search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														zh
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li><a href="../../en/getting-started/cakephp-conventions.html">en</a></li>
+											
+												<li><a href="../../pt/getting-started/cakephp-conventions.html">pt</a></li>
+											
+												<li><a href="../../es/getting-started/cakephp-conventions.html">es</a></li>
+											
+												<li><a href="../../ja/getting-started/cakephp-conventions.html">ja</a></li>
+											
+												<li><a href="../../fr/getting-started/cakephp-conventions.html">fr</a></li>
+											
+												<li></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/zh">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/zh">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/zh/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/zh/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/master/zh/getting-started/cakephp-conventions.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="#">CakePHP 的约定</a><ul>
+<li><a class="reference internal" href="#id1">控制器的约定</a><ul>
+<li><a class="reference internal" href="#id2">控制器命名对网址的影响</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#file-and-classname-conventions">文件和类名的约定</a></li>
+<li><a class="reference internal" href="#id4">模型和数据库命名约定</a></li>
+<li><a class="reference internal" href="#id5">视图的约定</a></li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
   <div class="section" id="cakephp">
 <h1>CakePHP 的约定<a class="headerlink" href="#cakephp" title="永久链接至标题">¶</a></h1>
 <p>我们坚信约定高于配置。虽然需要花一些时间来学习 CakePHP 的约定，但是从长期来看这会
@@ -175,13 +286,13 @@ window.lang = "zh_CN";
 式(<em>legacy</em>)系统中的工作更为方便。</p>
 <div class="section" id="id1">
 <h2>控制器的约定<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
-<p>控制器的名称必须用复数、驼峰法表示，并以 <tt class="docutils literal"><span class="pre">Controller</span></tt> 结尾。<tt class="docutils literal"><span class="pre">PeopleController</span></tt>
-和 <tt class="docutils literal"><span class="pre">LatestArticlesController</span></tt> 都是符合约定的例子。</p>
-<p>控制器的第一个方法可以是 <tt class="docutils literal"><span class="pre">index()</span></tt> 方法。当一个请求指定了控制器但没有指定方法时，
-CakePHP 会默认执行那个控制器的 <tt class="docutils literal"><span class="pre">index()</span></tt> 方法。例如，对
-<a class="reference external" href="http://www.example.com/apples/">http://www.example.com/apples/</a> 的请求会被映射到对 <tt class="docutils literal"><span class="pre">ApplesController</span></tt> 控制器的
-<tt class="docutils literal"><span class="pre">index()</span></tt> 方法的调用，而 <a class="reference external" href="http://www.example.com/apples/view/">http://www.example.com/apples/view/</a> 会被映射到对
-<tt class="docutils literal"><span class="pre">ApplesController</span></tt> 的 <tt class="docutils literal"><span class="pre">view()</span></tt> 方法的调用。</p>
+<p>控制器的名称必须用复数、驼峰法表示，并以 <code class="docutils literal"><span class="pre">Controller</span></code> 结尾。<code class="docutils literal"><span class="pre">PeopleController</span></code>
+和 <code class="docutils literal"><span class="pre">LatestArticlesController</span></code> 都是符合约定的例子。</p>
+<p>控制器的第一个方法可以是 <code class="docutils literal"><span class="pre">index()</span></code> 方法。当一个请求指定了控制器但没有指定方法时，
+CakePHP 会默认执行那个控制器的 <code class="docutils literal"><span class="pre">index()</span></code> 方法。例如，对
+<a class="reference external" href="http://www.example.com/apples/">http://www.example.com/apples/</a> 的请求会被映射到对 <code class="docutils literal"><span class="pre">ApplesController</span></code> 控制器的
+<code class="docutils literal"><span class="pre">index()</span></code> 方法的调用，而 <a class="reference external" href="http://www.example.com/apples/view/">http://www.example.com/apples/view/</a> 会被映射到对
+<code class="docutils literal"><span class="pre">ApplesController</span></code> 的 <code class="docutils literal"><span class="pre">view()</span></code> 方法的调用。</p>
 <p>也可以通过在 CakePHP 控制器的方法名称前加下划线来改变该方法的可见性。如果一个控制
 器的方法名称前面带一个下划线(_)，该方法是无法直接通过 web 访问的，但是可以在内部
 调用。例如:</p>
@@ -204,7 +315,7 @@ CakePHP 会默认执行那个控制器的 <tt class="docutils literal"><span cla
 <div class="section" id="id2">
 <h3>控制器命名对网址的影响<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
 <p>正如你所看到的，单个单词的控制器很容易映射为简单的小写网址路径。例如
-<tt class="docutils literal"><span class="pre">ApplesController</span></tt> (定义在文件 &#8216;ApplesController.php&#8217; 中)可通过
+<code class="docutils literal"><span class="pre">ApplesController</span></code> (定义在文件 &#8216;ApplesController.php&#8217; 中)可通过
 <a class="reference external" href="http://example.com/apples">http://example.com/apples</a> 来访问。</p>
 <p>多个单词的控制器，<em>可以</em> 变换为以下等价于同一控制器名称的多种形式(的网址)，所以：</p>
 <ul class="simple">
@@ -214,10 +325,10 @@ CakePHP 会默认执行那个控制器的 <tt class="docutils literal"><span cla
 <li>/red_apples</li>
 </ul>
 <p>都能解析为 RedApples 控制器的 index 方法。不过，按照约定，网址应当是小写字母，由
-下划线分隔，因此 /red_apples/go_pick 是访问 <tt class="docutils literal"><span class="pre">RedApplesController::go_pick</span></tt> 动
+下划线分隔，因此 /red_apples/go_pick 是访问 <code class="docutils literal"><span class="pre">RedApplesController::go_pick</span></code> 动
 作的正确网址。</p>
-<p>有关 CakePHP 网址和参数处理的详情，请参见 <a class="reference internal" href="../development/routing.html#routes-configuration"><em>路由的配置</em></a>。如果在
-<tt class="docutils literal"><span class="pre">/webroot</span></tt> 内有和路由/控制器同名的文件/目录，就会被重定向到这个文件/目录，而不
+<p>有关 CakePHP 网址和参数处理的详情，请参见 <a class="reference internal" href="../development/routing.html#routes-configuration"><span class="std std-ref">路由的配置</span></a>。如果在
+<code class="docutils literal"><span class="pre">/webroot</span></code> 内有和路由/控制器同名的文件/目录，就会被重定向到这个文件/目录，而不
 是控制器。</p>
 </div>
 </div>
@@ -241,9 +352,9 @@ CakePHP 会默认执行那个控制器的 <tt class="docutils literal"><span cla
 <p>模型类的名称是单数、驼峰形式。Person、BigPerson 和 ReallyBigPerson 都是符合约定的
 模型名称。</p>
 <p>CakePHP 模型对应的数据库表的名称应当是复数且以下划线分隔。上面提及的模型所对应的
-数据库表就应当是 <tt class="docutils literal"><span class="pre">people</span></tt> 、 <tt class="docutils literal"><span class="pre">big_people</span></tt> 和 <tt class="docutils literal"><span class="pre">really_big_people</span></tt>。</p>
-<p>你可以使用工具库中的 <a class="reference internal" href="../core-utility-libraries/inflector.html#Inflector" title="Inflector"><tt class="xref php php-class docutils literal"><span class="pre">Inflector</span></tt></a> 类来检查单词的单复数。详情可参阅
-<a class="reference internal" href="../core-utility-libraries/inflector.html"><em>Inflector</em></a>。</p>
+数据库表就应当是 <code class="docutils literal"><span class="pre">people</span></code> 、 <code class="docutils literal"><span class="pre">big_people</span></code> 和 <code class="docutils literal"><span class="pre">really_big_people</span></code>。</p>
+<p>你可以使用工具库中的 <a class="reference internal" href="../core-utility-libraries/inflector.html#Inflector" title="Inflector"><code class="xref php php-class docutils literal"><span class="pre">Inflector</span></code></a> 类来检查单词的单复数。详情可参阅
+<a class="reference internal" href="../core-utility-libraries/inflector.html"><span class="doc">Inflector</span></a>。</p>
 <p>由多个单词组成的字段名应当以下划线分隔，例如 first_name。</p>
 <p>hasMany、belongsTo 或 hasOne 关系中的外键名称，默认为关联表的(单数)名称之后加上
 _id。所以，如果 Baker 有多个 Cake，cakes 数据库表会通过 baker_id 这个外键与
@@ -255,7 +366,7 @@ bakers 数据库表关联。对于包含多个单词的数据库表名，比如 
 每一行。如果你要为一个还没有单列主键的数据库表建立模型，CakePHP 的约定就是为该表
 增加单列主键。如果你要使用该表的模型，就必须为该表增加单列主键。</p>
 <p>CakePHP 不支持复合主键。如果你要直接操作连接表的数据，请直接调用
-<a class="reference internal" href="../models/retrieving-your-data.html#model-query"><em>query</em></a>，或者，增加一个主键，作为正常的模型来使用。例如：</p>
+<a class="reference internal" href="../models/retrieving-your-data.html#model-query"><span class="std std-ref">query</span></a>，或者，增加一个主键，作为正常的模型来使用。例如：</p>
 <blockquote>
 <div>CREATE TABLE posts_tags (
 id INT(10) NOT NULL AUTO_INCREMENT,
@@ -284,26 +395,26 @@ PeopleController 控制器的 index() 方法的调用，并自动加载 Person �
 据库中的 &#8216;people&#8217; 表关联)，再渲染对应的视图文件。所有这些关系都没有通过任何方式进
 行配置，只是创建你本来就要创建的类和文件。</p>
 <p>现在你已经了解到了 CakePHP 的基础，你也许可以试试
-<a class="reference internal" href="../tutorials-and-examples/blog/blog.html"><em>博客教程</em></a>，看各部分是如何在一起配合的。</p>
+<a class="reference internal" href="../tutorials-and-examples/blog/blog.html"><span class="doc">博客教程</span></a>，看各部分是如何在一起配合的。</p>
 </div>
 </div>
 
 
+			</div>
 		</div>
-	</div>
 
-	<div class="sidebar columns three pull-nine">
-<div id="sidebar-navigation" class="hide-on-phones">
-	<h2 class="hide-on-desktops">Table of Contents</h2>
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="zh">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../getting-started.html">入门指南</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../installation/url-rewriting.html">网址重写(<em>URL Rewriting</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="a-typical-cakephp-request.html">典型的 CakePHP 请求</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">CakePHP 的约定</a><ul class="simple">
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CakePHP 的约定</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cakephp-folder-structure.html">CakePHP 目录结构</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cakephp-structure.html">CakePHP 的结构</a></li>
 </ul>
@@ -314,7 +425,7 @@ PeopleController 控制器的 index() 方法的调用，并自动加载 Person �
 <li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Shells，任务与命令行工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
@@ -324,89 +435,171 @@ PeopleController 控制器的 index() 方法的调用，并自动加载 Person �
 
 </div>
 
-<div class="page-contents">
-	<h3>Page contents</h3>
-	<ul>
-<li><a class="reference internal" href="#">CakePHP 的约定</a><ul>
-<li><a class="reference internal" href="#id1">控制器的约定</a><ul>
-<li><a class="reference internal" href="#id2">控制器命名对网址的影响</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#file-and-classname-conventions">文件和类名的约定</a></li>
-<li><a class="reference internal" href="#id4">模型和数据库命名约定</a></li>
-<li><a class="reference internal" href="#id5">视图的约定</a></li>
-</ul>
-</li>
-</ul>
-
-</div>
-	</div>
-
-</div>
-
-<div class="content row">
-	<ul class="related-pages inline">
-	<li>
-		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
-	</li>
-	<li>
-		<a href="cakephp-folder-structure.html" title="CakePHP 目录结构" accesskey="N">下一页</a>
-	</li>
-	<li>
-		<a href="a-typical-cakephp-request.html" title="典型的 CakePHP 请求" accesskey="P">上一页</a>
-	</li>
-	</ul>
-</div>
-
-	<div class="footer-push"> </div>
-</div>
-
-
-
-
-
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>发现翻译错误?</strong>
-			请在下面留言<br />
-			<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">[ 我要加入翻译 ]</a>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Jul 10, 2016.
-				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
 		</div>
 	</div>
 </div>
 
-<div id="nav-modal" class="reveal-modal"> </div>
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-8 social-footer text-center ">
+				<a href="#">发现翻译错误? 请在下面留言</a>
+				<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">我要加入翻译</a>
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="../_static/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="../_static/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
+</li>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
+
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
+
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							&copy; 版权所有 2016, Cake Software Foundation, Inc.
+						最后更新于 8月 02, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
 <div id="inline-search-results"></div>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F201cbc61deaf9f7ffb521fb23e83db40' type='text/javascript'%3E%3C/script%3E"));
-</script>
 
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+
+</div>
+
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"cakephpchina"};
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
 	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	</script>
-<!-- Duoshuo Comment END -->
-
-<!-- Grunt Live Reload -->
-<script src="http://192.168.56.113:35729/livereload.js"></script>
+</script>
   </body>
 </html>

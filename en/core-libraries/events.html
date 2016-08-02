@@ -1,172 +1,292 @@
 
+
 <!DOCTYPE html>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta content="Events system" lang="en" name="title" />
 <meta content="events, dispatch, decoupling, cakephp, callbacks, triggers, hooks, php" lang="en" name="keywords" />
 
-    <title>Events System &mdash; CakePHP Cookbook 2.x documentation</title>
+    <title>Events System</title>
+    <link href="../_static/favicon.png" type="image/png" rel="icon" />
+
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/app.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.x',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/app.js"></script>
-    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
-    <script type="text/javascript" src="../_static/foundation.js"></script>
+
+    <link rel="alternate" hreflang="pt" href="../../pt/core-libraries/events.html" /><link rel="alternate" hreflang="es" href="../../es/core-libraries/events.html" /><link rel="alternate" hreflang="ja" href="../../ja/core-libraries/events.html" /><link rel="alternate" hreflang="fr" href="../../fr/core-libraries/events.html" /><link rel="alternate" hreflang="zh" href="../../zh/core-libraries/events.html" />
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within CakePHP Cookbook 2.x documentation" href="../_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
     <link rel="up" title="General Purpose" href="toc-general-purpose.html" />
     <link rel="next" title="Collections" href="collections.html" />
     <link rel="prev" title="App Class" href="../core-utility-libraries/app.html" />
-<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="alternate" hreflang="pt" href="../../pt/core-libraries/events.html" /><link rel="alternate" hreflang="es" href="../../es/core-libraries/events.html" /><link rel="alternate" hreflang="ja" href="../../ja/core-libraries/events.html" /><link rel="alternate" hreflang="fr" href="../../fr/core-libraries/events.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/core-libraries/events.html" />
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
-<script type="text/javascript">
-window.lang = "en";
-</script>
-
+    <script type="text/javascript">
+    window.lang = "en";
+    </script>
   </head>
   <body>
 
 <div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="masthead">
-	<div class="header-backing"></div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="../contents.html">
-			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
-			</a>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
+
 		
-<div id="searchbox" class="columns nine phone-three">
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-	<form id="searchform" class="search" action="../search.html" method="get">
-		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
-		<input class="search-submit search-big button red" type="submit" value="Search" />
-		<input type="hidden" name="check_keywords" value="yes" />
-		<input type="hidden" name="area" value="default" />
-
-		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
-	</form>
-
-</div>
-	</div>
-</div>
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="../contents.html">Cookbook 2.x</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="../core-libraries.html"  itemprop="url"><span itemprop="title">Core Libraries</span></a>
-			</li>
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="toc-general-purpose.html" accesskey="U" itemprop="url"><span itemprop="title">General Purpose</span></a>
-			</li>
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">2.x Book</a>
-				<ul>
-					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				<a href="#">en</a>
-
-				<ul>
-				
-					<li></li>
-				
-					<li><a href="../../pt/core-libraries/events.html">pt</a></li>
-				
-					<li><a href="../../es/core-libraries/events.html">es</a></li>
-				
-					<li><a href="../../ja/core-libraries/events.html">ja</a></li>
-				
-					<li><a href="../../fr/core-libraries/events.html">fr</a></li>
-				
-					<li><a href="../../zh/core-libraries/events.html">zh_CN</a></li>
-				
-				</ul>
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="../search.html" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="Search" type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/core-libraries/events.rst" target="_blank">Improve this Doc</a>
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="../contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 2.x <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="../search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														en
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li></li>
+											
+												<li><a href="../../pt/core-libraries/events.html">pt</a></li>
+											
+												<li><a href="../../es/core-libraries/events.html">es</a></li>
+											
+												<li><a href="../../ja/core-libraries/events.html">ja</a></li>
+											
+												<li><a href="../../fr/core-libraries/events.html">fr</a></li>
+											
+												<li><a href="../../zh/core-libraries/events.html">zh</a></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/en">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/en">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/master/en/core-libraries/events.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="#">Events System</a><ul>
+<li><a class="reference internal" href="#example-event-usage">Example Event Usage</a></li>
+<li><a class="reference internal" href="#accessing-event-managers">Accessing Event Managers</a><ul>
+<li><a class="reference internal" href="#global-event-manager">Global Event Manager</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dispatching-events">Dispatching Events</a></li>
+<li><a class="reference internal" href="#registering-listeners">Registering Listeners</a><ul>
+<li><a class="reference internal" href="#registering-global-listeners">Registering Global Listeners</a></li>
+<li><a class="reference internal" href="#registering-anonymous-listeners">Registering Anonymous Listeners</a></li>
+<li><a class="reference internal" href="#establishing-priorities">Establishing Priorities</a></li>
+<li><a class="reference internal" href="#getting-event-data-as-function-parameters">Getting Event Data as Function Parameters</a></li>
+<li><a class="reference internal" href="#stopping-events">Stopping Events</a></li>
+<li><a class="reference internal" href="#getting-event-results">Getting Event Results</a></li>
+<li><a class="reference internal" href="#removing-callbacks-and-listeners">Removing Callbacks and Listeners</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li><a class="reference internal" href="#additional-reading">Additional Reading</a></li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
   <div class="section" id="events-system">
 <h1>Events System<a class="headerlink" href="#events-system" title="Permalink to this headline">¶</a></h1>
 <div class="versionadded">
@@ -238,7 +358,7 @@ objects that focus on those concerns.</p>
 <div class="section" id="accessing-event-managers">
 <h2>Accessing Event Managers<a class="headerlink" href="#accessing-event-managers" title="Permalink to this headline">¶</a></h2>
 <p>In CakePHP events are triggered against event managers. Event managers are
-available in every Model, View and Controller using <tt class="docutils literal"><span class="pre">getEventManager()</span></tt>:</p>
+available in every Model, View and Controller using <code class="docutils literal"><span class="pre">getEventManager()</span></code>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$events</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEventManager</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -251,7 +371,7 @@ or controllers to act upon events created in the view if necessary.</p>
 manager that allows you to listen to any event fired in an application. This
 is useful when attaching listeners to a specific instance might be cumbersome or
 difficult. The global manager is a singleton instance of
-<tt class="xref php php-class docutils literal"><span class="pre">CakeEventManager</span></tt>.  When an event is
+<code class="xref php php-class docutils literal"><span class="pre">CakeEventManager</span></code>.  When an event is
 dispatched, it will be dispatched to the both the global and instance level
 listeners in priority order. You can access the global manager using a static method:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// In any configuration file or piece of code that executes before the event</span>
@@ -277,8 +397,8 @@ listeners are fired in priority order.</p>
 <div class="section" id="dispatching-events">
 <h2>Dispatching Events<a class="headerlink" href="#dispatching-events" title="Permalink to this headline">¶</a></h2>
 <p>Once you have obtained an instance of an event manager you can dispatch events
-using <tt class="xref php php-meth docutils literal"><span class="pre">dispatch()</span></tt>. This method takes an instance
-of the <tt class="xref php php-class docutils literal"><span class="pre">CakeEvent</span></tt> class. Let&#8217;s look at dispatching an event:</p>
+using <code class="xref php php-meth docutils literal"><span class="pre">dispatch()</span></code>. This method takes an instance
+of the <code class="xref php php-class docutils literal"><span class="pre">CakeEvent</span></code> class. Let&#8217;s look at dispatching an event:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Create a new event and dispatch it.</span>
 <span class="nv">$event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CakeEvent</span><span class="p">(</span><span class="s1">&#39;Model.Order.afterPlace&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="nv">$order</span>
@@ -286,37 +406,37 @@ of the <tt class="xref php php-class docutils literal"><span class="pre">CakeEve
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEventManager</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span><span class="nv">$event</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><tt class="xref php php-class docutils literal"><span class="pre">CakeEvent</span></tt> accepts 3 arguments in its constructor. The first one is
+<p><code class="xref php php-class docutils literal"><span class="pre">CakeEvent</span></code> accepts 3 arguments in its constructor. The first one is
 the event name, you should try to keep this name as unique as possible, while
-making it readable. We suggest a convention as follows: <tt class="docutils literal"><span class="pre">Layer.eventName</span></tt> for
-general events happening at a layer level (e.g. <tt class="docutils literal"><span class="pre">Controller.startup</span></tt>,
-<tt class="docutils literal"><span class="pre">View.beforeRender</span></tt>) and <tt class="docutils literal"><span class="pre">Layer.Class.eventName</span></tt> for events happening in
-specific classes on a layer, for example <tt class="docutils literal"><span class="pre">Model.User.afterRegister</span></tt> or
-<tt class="docutils literal"><span class="pre">Controller.Courses.invalidAccess</span></tt>.</p>
-<p>The second argument is the <tt class="docutils literal"><span class="pre">subject</span></tt>, meaning the object associated to the event,
-usually when it is the same class triggering events about itself, using <tt class="docutils literal"><span class="pre">$this</span></tt>
-will be the most common case. Although a <a class="reference internal" href="../controllers/components.html#Component" title="Component"><tt class="xref php php-class docutils literal"><span class="pre">Component</span></tt></a> could trigger
+making it readable. We suggest a convention as follows: <code class="docutils literal"><span class="pre">Layer.eventName</span></code> for
+general events happening at a layer level (e.g. <code class="docutils literal"><span class="pre">Controller.startup</span></code>,
+<code class="docutils literal"><span class="pre">View.beforeRender</span></code>) and <code class="docutils literal"><span class="pre">Layer.Class.eventName</span></code> for events happening in
+specific classes on a layer, for example <code class="docutils literal"><span class="pre">Model.User.afterRegister</span></code> or
+<code class="docutils literal"><span class="pre">Controller.Courses.invalidAccess</span></code>.</p>
+<p>The second argument is the <code class="docutils literal"><span class="pre">subject</span></code>, meaning the object associated to the event,
+usually when it is the same class triggering events about itself, using <code class="docutils literal"><span class="pre">$this</span></code>
+will be the most common case. Although a <a class="reference internal" href="../controllers/components.html#Component" title="Component"><code class="xref php php-class docutils literal"><span class="pre">Component</span></code></a> could trigger
 controller events too. The subject class is important because listeners will get
 immediate access to the object properties and have the chance to inspect or
 change them on the fly.</p>
 <p>Finally, the third argument is any additional event data.This can be any data
 you consider useful to pass around so listeners can act upon it. While this can
 be an argument of any type, we recommend passing an associative array.</p>
-<p>The <tt class="xref php php-meth docutils literal"><span class="pre">dispatch()</span></tt> method accepts an event object as
+<p>The <code class="xref php php-meth docutils literal"><span class="pre">dispatch()</span></code> method accepts an event object as
 an argument and notifies all subscribed listeners.</p>
 </div>
 <div class="section" id="registering-listeners">
 <h2>Registering Listeners<a class="headerlink" href="#registering-listeners" title="Permalink to this headline">¶</a></h2>
 <p>Listeners are the preferred way to register callbacks for an event. This is done by
-implementing the <tt class="xref php php-class docutils literal"><span class="pre">CakeEventListener</span></tt> interface in any class you wish
+implementing the <code class="xref php php-class docutils literal"><span class="pre">CakeEventListener</span></code> interface in any class you wish
 to register some callbacks. Classes implementing it need to provide the
-<tt class="docutils literal"><span class="pre">implementedEvents()</span></tt> method. This method must return an associative array
+<code class="docutils literal"><span class="pre">implementedEvents()</span></code> method. This method must return an associative array
 with all event names that the class will handle.</p>
 <p>To continue our previous example, let&#8217;s imagine we have a UserStatistic class
 responsible for calculating a user&#8217;s purchasing history, and compiling into
 global site statistics. This is a great place to use a listener class. Doing so
 allows you concentrate the statistics logic in one place and react to events as
-necessary. Our <tt class="docutils literal"><span class="pre">UserStatistics</span></tt> listener might start out like:</p>
+necessary. Our <code class="docutils literal"><span class="pre">UserStatistics</span></code> listener might start out like:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// In app/Lib/Event/UserStatistic.php</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeEventListener&#39;</span><span class="p">,</span> <span class="s1">&#39;Event&#39;</span><span class="p">);</span>
 
@@ -339,13 +459,13 @@ necessary. Our <tt class="docutils literal"><span class="pre">UserStatistics</sp
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Order</span><span class="o">-&gt;</span><span class="na">getEventManager</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$statistics</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>As you can see in the above code, the <tt class="docutils literal"><span class="pre">attach</span></tt> function will accept instances
-of the <tt class="docutils literal"><span class="pre">CakeEventListener</span></tt> interface. Internally, the event manager will use
-<tt class="docutils literal"><span class="pre">implementedEvents</span></tt> to attach the correct callbacks.</p>
+<p>As you can see in the above code, the <code class="docutils literal"><span class="pre">attach</span></code> function will accept instances
+of the <code class="docutils literal"><span class="pre">CakeEventListener</span></code> interface. Internally, the event manager will use
+<code class="docutils literal"><span class="pre">implementedEvents</span></code> to attach the correct callbacks.</p>
 <div class="section" id="registering-global-listeners">
 <h3>Registering Global Listeners<a class="headerlink" href="#registering-global-listeners" title="Permalink to this headline">¶</a></h3>
 <p>As shown in the example above, event listeners are conventionally placed in
-<tt class="docutils literal"><span class="pre">app/Lib/Event</span></tt>. Following this convention allows you to easily locate your
+<code class="docutils literal"><span class="pre">app/Lib/Event</span></code>. Following this convention allows you to easily locate your
 listener classes. It is also recommended that you attach global listeners during
 your application bootstrap process:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// In app/Config/bootstrap.php</span>
@@ -371,7 +491,7 @@ your application bootstrap process:</p>
 <div class="section" id="registering-anonymous-listeners">
 <h3>Registering Anonymous Listeners<a class="headerlink" href="#registering-anonymous-listeners" title="Permalink to this headline">¶</a></h3>
 <p>While event listener objects are generally a better way to implement listeners,
-you can also bind any <tt class="docutils literal"><span class="pre">callable</span></tt> as an event listener. For example if we
+you can also bind any <code class="docutils literal"><span class="pre">callable</span></code> as an event listener. For example if we
 wanted to put any orders into the log files, we could use a simple anonymous
 function to do so:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Anonymous functions require PHP 5.3+</span>
@@ -406,12 +526,12 @@ objects in the case that other listeners have modified the subject or event
 object.</p>
 <p>Priorities are defined as an integer when adding a listener. The higher the
 number, the later the method will be fired. The default priority for all
-listeners is <tt class="docutils literal"><span class="pre">10</span></tt>. If you need your method to be run earlier, using any value
+listeners is <code class="docutils literal"><span class="pre">10</span></code>. If you need your method to be run earlier, using any value
 below this default will work. On the other hand if you desire to run the
-callback after the others, using a number above <tt class="docutils literal"><span class="pre">10</span></tt> will do.</p>
+callback after the others, using a number above <code class="docutils literal"><span class="pre">10</span></code> will do.</p>
 <p>If two callbacks happen to have the same priority value, they will be executed
-with a the order they were attached. You set priorities using the <tt class="docutils literal"><span class="pre">attach</span></tt>
-method for callbacks, and declaring it in the <tt class="docutils literal"><span class="pre">implementedEvents</span></tt> function for
+with a the order they were attached. You set priorities using the <code class="docutils literal"><span class="pre">attach</span></code>
+method for callbacks, and declaring it in the <code class="docutils literal"><span class="pre">implementedEvents</span></code> function for
 event listeners:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Setting priority for a callback</span>
 <span class="nv">$callback</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;doSomething&#39;</span><span class="p">);</span>
@@ -434,9 +554,9 @@ event listeners:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>As you see, the main difference for <tt class="docutils literal"><span class="pre">CakeEventListener</span></tt> objects is that you need
+<p>As you see, the main difference for <code class="docutils literal"><span class="pre">CakeEventListener</span></code> objects is that you need
 to use an array for specifying the callable method and the priority preference.
-The <tt class="docutils literal"><span class="pre">callable</span></tt> key is an special array entry that the manager will read to know
+The <code class="docutils literal"><span class="pre">callable</span></code> key is an special array entry that the manager will read to know
 what function in the class it should be calling.</p>
 </div>
 <div class="section" id="getting-event-data-as-function-parameters">
@@ -445,8 +565,8 @@ what function in the class it should be calling.</p>
 are building an event that doesn&#8217;t need access to the event object you may want
 to have the event data passed as function parameters. This feature is used by
 the callbacks CakePHP fires in order to preserve backwards compatibility.</p>
-<p>If you want to enable this feature, you have to add the <tt class="docutils literal"><span class="pre">passParams</span></tt> option to the
-third argument of the <tt class="docutils literal"><span class="pre">attach</span></tt> method, or declare it in the <tt class="docutils literal"><span class="pre">implementedEvents</span></tt>
+<p>If you want to enable this feature, you have to add the <code class="docutils literal"><span class="pre">passParams</span></code> option to the
+third argument of the <code class="docutils literal"><span class="pre">attach</span></code> method, or declare it in the <code class="docutils literal"><span class="pre">implementedEvents</span></code>
 returned array similar to what you do with priorities:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Enabling passed parameters mode for an anonymous listener</span>
 <span class="nv">$callback</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;doSomething&#39;</span><span class="p">);</span>
@@ -473,9 +593,9 @@ returned array similar to what you do with priorities:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>In the above code the <tt class="docutils literal"><span class="pre">doSomething</span></tt> function and <tt class="docutils literal"><span class="pre">updateBuyStatistic</span></tt> method will
-receive <tt class="docutils literal"><span class="pre">$orderData</span></tt> instead of the <tt class="docutils literal"><span class="pre">$event</span></tt> object. This is so, because in our
-previous example we trigger the <tt class="docutils literal"><span class="pre">Model.Order.afterPlace</span></tt> event with some data:</p>
+<p>In the above code the <code class="docutils literal"><span class="pre">doSomething</span></code> function and <code class="docutils literal"><span class="pre">updateBuyStatistic</span></code> method will
+receive <code class="docutils literal"><span class="pre">$orderData</span></code> instead of the <code class="docutils literal"><span class="pre">$event</span></code> object. This is so, because in our
+previous example we trigger the <code class="docutils literal"><span class="pre">Model.Order.afterPlace</span></code> event with some data:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CakeEvent</span><span class="p">(</span><span class="s1">&#39;Model.Order.afterPlace&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;order&#39;</span> <span class="o">=&gt;</span> <span class="nv">$order</span>
 <span class="p">));</span>
@@ -495,8 +615,8 @@ this option is often the most adequate choice.</p>
 listeners from being notified. You can see this in action during model callbacks
 (e.g. beforeSave) in which it is possible to stop the saving operation if
 the code detects it cannot proceed any further.</p>
-<p>In order to stop events you can either return <tt class="docutils literal"><span class="pre">false</span></tt> in your callbacks or call
-the <tt class="docutils literal"><span class="pre">stopPropagation</span></tt> method on the event object:</p>
+<p>In order to stop events you can either return <code class="docutils literal"><span class="pre">false</span></code> in your callbacks or call
+the <code class="docutils literal"><span class="pre">stopPropagation</span></code> method on the event object:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="k">return</span> <span class="k">false</span><span class="p">;</span> <span class="c1">// stops the event</span>
@@ -513,7 +633,7 @@ Additionally the code triggering the event may behave differently based on the
 event being stopped or not. Generally it does not make sense to stop &#8216;after&#8217;
 events, but stopping &#8216;before&#8217; events is often used to prevent the entire
 operation from occurring.</p>
-<p>To check if an event was stopped, you call the <tt class="docutils literal"><span class="pre">isStopped()</span></tt> method in the event object:</p>
+<p>To check if an event was stopped, you call the <code class="docutils literal"><span class="pre">isStopped()</span></code> method in the event object:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">place</span><span class="p">(</span><span class="nv">$order</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CakeEvent</span><span class="p">(</span>
         <span class="s1">&#39;Model.Order.beforePlace&#39;</span><span class="p">,</span>
@@ -531,13 +651,13 @@ operation from occurring.</p>
 </pre></div>
 </div>
 <p>In the previous example the order would not get saved if the event is stopped
-during the <tt class="docutils literal"><span class="pre">beforePlace</span></tt> process.</p>
+during the <code class="docutils literal"><span class="pre">beforePlace</span></code> process.</p>
 </div>
 <div class="section" id="getting-event-results">
 <h3>Getting Event Results<a class="headerlink" href="#getting-event-results" title="Permalink to this headline">¶</a></h3>
-<p>Every time a callback returns a value, it gets stored in the <tt class="docutils literal"><span class="pre">$result</span></tt>
+<p>Every time a callback returns a value, it gets stored in the <code class="docutils literal"><span class="pre">$result</span></code>
 property of the event object. This is useful when you want to allow callbacks to
-modify the event execution. Let&#8217;s take again our <tt class="docutils literal"><span class="pre">beforePlace</span></tt> example and let
+modify the event execution. Let&#8217;s take again our <code class="docutils literal"><span class="pre">beforePlace</span></code> example and let
 callbacks modify the $order data.</p>
 <p>Event results can be altered either using the event object result property
 directly or returning the value in the callback itself:</p>
@@ -579,7 +699,7 @@ kept the same and modifications are shared across all callback calls.</p>
 <div class="section" id="removing-callbacks-and-listeners">
 <h3>Removing Callbacks and Listeners<a class="headerlink" href="#removing-callbacks-and-listeners" title="Permalink to this headline">¶</a></h3>
 <p>If for any reason you want to remove any callback from the event manager just call
-the <tt class="xref php php-meth docutils literal"><span class="pre">CakeEventManager::detach()</span></tt> method using as arguments the first two
+the <code class="xref php php-meth docutils literal"><span class="pre">CakeEventManager::detach()</span></code> method using as arguments the first two
 params you used for attaching it:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Attaching a function</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEventManager</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;doSomething&#39;</span><span class="p">),</span> <span class="s1">&#39;My.event&#39;</span><span class="p">);</span>
@@ -629,12 +749,14 @@ events can make debugging harder and require additional integration testing.</p>
 </div>
 
 
+			</div>
 		</div>
-	</div>
 
-	<div class="sidebar columns three pull-nine">
-<div id="sidebar-navigation" class="hide-on-phones">
-	<h2 class="hide-on-desktops">Table of Contents</h2>
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="en">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
@@ -647,7 +769,7 @@ events can make debugging harder and require additional integration testing.</p>
 <li class="toctree-l2 current"><a class="reference internal" href="toc-general-purpose.html">General Purpose</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="global-constants-and-functions.html">Global Constants and Functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../core-utility-libraries/app.html">App Class</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="">Events System</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Events System</a></li>
 <li class="toctree-l3"><a class="reference internal" href="collections.html">Collections</a></li>
 </ul>
 </li>
@@ -658,7 +780,7 @@ events can make debugging harder and require additional integration testing.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Shells, Tasks &amp; Console Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
@@ -668,100 +790,171 @@ events can make debugging harder and require additional integration testing.</p>
 
 </div>
 
-<div class="page-contents">
-	<h3>Page contents</h3>
-	<ul>
-<li><a class="reference internal" href="#">Events System</a><ul>
-<li><a class="reference internal" href="#example-event-usage">Example Event Usage</a></li>
-<li><a class="reference internal" href="#accessing-event-managers">Accessing Event Managers</a><ul>
-<li><a class="reference internal" href="#global-event-manager">Global Event Manager</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#dispatching-events">Dispatching Events</a></li>
-<li><a class="reference internal" href="#registering-listeners">Registering Listeners</a><ul>
-<li><a class="reference internal" href="#registering-global-listeners">Registering Global Listeners</a></li>
-<li><a class="reference internal" href="#registering-anonymous-listeners">Registering Anonymous Listeners</a></li>
-<li><a class="reference internal" href="#establishing-priorities">Establishing Priorities</a></li>
-<li><a class="reference internal" href="#getting-event-data-as-function-parameters">Getting Event Data as Function Parameters</a></li>
-<li><a class="reference internal" href="#stopping-events">Stopping Events</a></li>
-<li><a class="reference internal" href="#getting-event-results">Getting Event Results</a></li>
-<li><a class="reference internal" href="#removing-callbacks-and-listeners">Removing Callbacks and Listeners</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
-<li><a class="reference internal" href="#additional-reading">Additional Reading</a></li>
-</ul>
-</li>
-</ul>
-
-</div>
-	</div>
-
-</div>
-
-<div class="content row">
-	<ul class="related-pages inline">
-	<li>
-		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
-	</li>
-	<li>
-		<a href="collections.html" title="Collections" accesskey="N">next</a>
-	</li>
-	<li>
-		<a href="../core-utility-libraries/app.html" title="App Class" accesskey="P">previous</a>
-	</li>
-	</ul>
-</div>
-
-	<div class="footer-push"> </div>
-</div>
-
-
-
-
-
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>发现翻译错误?</strong>
-			请在下面留言<br />
-			<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">[ 我要加入翻译 ]</a>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Jul 10, 2016.
-				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
 		</div>
 	</div>
 </div>
 
-<div id="nav-modal" class="reveal-modal"> </div>
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-8 social-footer text-center ">
+				<a href="#">发现翻译错误? 请在下面留言</a>
+				<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">我要加入翻译</a>
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="../_static/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="../_static/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
+</li>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
+
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
+
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							&copy; Copyright 2016, Cake Software Foundation, Inc.
+						Last updated on Aug 02, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
 <div id="inline-search-results"></div>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F201cbc61deaf9f7ffb521fb23e83db40' type='text/javascript'%3E%3C/script%3E"));
-</script>
 
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+
+</div>
+
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"cakephpchina"};
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
 	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	</script>
-<!-- Duoshuo Comment END -->
-
-<!-- Grunt Live Reload -->
-<script src="http://192.168.56.113:35729/livereload.js"></script>
+</script>
   </body>
 </html>

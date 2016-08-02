@@ -1,179 +1,284 @@
 
+
 <!DOCTYPE html>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Security" lang="zh_CN" name="title" />
-<meta content="configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class,disable security,unlockActions" lang="zh_CN" name="keywords" />
+    <meta content="Security" lang="zh" name="title" />
+<meta content="configurable parameters,security component,configuration parameters,invalid request,protection features,tighter security,holing,php class,meth,404 error,period of inactivity,csrf,array,submission,security class,disable security,unlockActions" lang="zh" name="keywords" />
 
-    <title>Form tampering prevention &mdash; CakePHP Cookbook 2.x 文档</title>
+    <title>Form tampering prevention</title>
+    <link href="../../_static/favicon.png" type="image/png" rel="icon" />
+
     
-    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/app.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '2.x',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/translations.js"></script>
     <script type="text/javascript" src="../../_static/app.js"></script>
-    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
-    <script type="text/javascript" src="../../_static/foundation.js"></script>
+
+    <link rel="alternate" hreflang="en" href="../../../en/core-libraries/components/security-component.html" /><link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/components/security-component.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/components/security-component.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/components/security-component.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/components/security-component.html" />
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within CakePHP Cookbook 2.x 文档" href="../../_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
     <link rel="up" title="组件" href="../toc-components.html" />
     <link rel="next" title="请求处理" href="request-handling.html" />
     <link rel="prev" title="Authentication 认证" href="authentication.html" />
-<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="alternate" hreflang="en" href="../../../en/core-libraries/components/security-component.html" /><link rel="alternate" hreflang="pt" href="../../../pt/core-libraries/components/security-component.html" /><link rel="alternate" hreflang="es" href="../../../es/core-libraries/components/security-component.html" /><link rel="alternate" hreflang="ja" href="../../../ja/core-libraries/components/security-component.html" /><link rel="alternate" hreflang="fr" href="../../../fr/core-libraries/components/security-component.html" />
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
-<script type="text/javascript">
-window.lang = "zh_CN";
-</script>
-
+    <script type="text/javascript">
+    window.lang = "zh";
+    </script>
   </head>
   <body>
 
 <div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="masthead">
-	<div class="header-backing"></div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="../../contents.html">
-			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
-			</a>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
+
 		
-<div id="searchbox" class="columns nine phone-three">
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-	<form id="searchform" class="search" action="../../search.html" method="get">
-		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
-		<input class="search-submit search-big button red" type="submit" value="搜索" />
-		<input type="hidden" name="check_keywords" value="yes" />
-		<input type="hidden" name="area" value="default" />
-
-		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
-	</form>
-
-</div>
-	</div>
-</div>
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="../../contents.html">Cookbook 2.x</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="../../core-libraries.html"  itemprop="url"><span itemprop="title">核心库</span></a>
-			</li>
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="../toc-components.html" accesskey="U" itemprop="url"><span itemprop="title">组件</span></a>
-			</li>
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">2.x Book</a>
-				<ul>
-					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				<a href="#">zh_CN</a>
-
-				<ul>
-				
-					<li><a href="../../../en/core-libraries/components/security-component.html">en</a></li>
-				
-					<li><a href="../../../pt/core-libraries/components/security-component.html">pt</a></li>
-				
-					<li><a href="../../../es/core-libraries/components/security-component.html">es</a></li>
-				
-					<li><a href="../../../ja/core-libraries/components/security-component.html">ja</a></li>
-				
-					<li><a href="../../../fr/core-libraries/components/security-component.html">fr</a></li>
-				
-					<li></li>
-				
-				</ul>
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="../../search.html" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="搜索" type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/components/security-component.rst" target="_blank">Improve this Doc</a>
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="../../contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 2.x <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="../../search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														zh
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li><a href="../../../en/core-libraries/components/security-component.html">en</a></li>
+											
+												<li><a href="../../../pt/core-libraries/components/security-component.html">pt</a></li>
+											
+												<li><a href="../../../es/core-libraries/components/security-component.html">es</a></li>
+											
+												<li><a href="../../../ja/core-libraries/components/security-component.html">ja</a></li>
+											
+												<li><a href="../../../fr/core-libraries/components/security-component.html">fr</a></li>
+											
+												<li></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/zh">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/zh">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/zh/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/zh/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/master/zh/core-libraries/components/security-component.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="#">Form tampering prevention</a></li>
+<li><a class="reference internal" href="#csrf-protection">CSRF protection</a><ul>
+<li><a class="reference internal" href="#using-csrf-protection">Using CSRF protection</a></li>
+<li><a class="reference internal" href="#handling-missing-or-expired-tokens">Handling missing or expired tokens</a></li>
+<li><a class="reference internal" href="#using-per-session-tokens-instead-of-one-time-use-tokens">Using per-session tokens instead of one-time use tokens</a></li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
   <p>Security
 安全
 ########</p>
 <dl class="class">
 <dt id="SecurityComponent">
-<em class="property">class </em><tt class="descname">SecurityComponent</tt><big>(</big><em>ComponentCollection $collection</em>, <em>array $settings = array()</em><big>)</big><a class="headerlink" href="#SecurityComponent" title="永久链接至目标">¶</a></dt>
+<em class="property">class </em><code class="descname">SecurityComponent</code><span class="sig-paren">(</span><em>ComponentCollection $collection</em>, <em>array $settings = array()</em><span class="sig-paren">)</span><a class="headerlink" href="#SecurityComponent" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
 <p>安全组件创建一个简单的方法使得应用程序更加安全，组件提供了一系列的方法能
@@ -206,13 +311,13 @@ and form tampering protection. Hidden token fields will
 automatically be inserted into forms and checked by the Security
 component. Among other things, a form submission will not be
 accepted after a certain period of inactivity, which is controlled by
-the <tt class="docutils literal"><span class="pre">csrfExpires</span></tt> time.</p>
+the <code class="docutils literal"><span class="pre">csrfExpires</span></code> time.</p>
 <p>如果你正在使用安全组件的表单防御功能及其他组件。会在他们的``startup()``回调方法中
 处理表单数据，确保将安全组件放置在``$components``数组中的前面。</p>
 <p>If you are using Security component&#8217;s form protection features and
-other components that process form data in their <tt class="docutils literal"><span class="pre">startup()</span></tt>
+other components that process form data in their <code class="docutils literal"><span class="pre">startup()</span></code>
 callbacks, be sure to place Security Component before those
-components in your <tt class="docutils literal"><span class="pre">$components</span></tt> array.</p>
+components in your <code class="docutils literal"><span class="pre">$components</span></code> array.</p>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
 <blockquote>
@@ -221,11 +326,11 @@ components in your <tt class="docutils literal"><span class="pre">$components</s
 your forms. In addition, you must <strong>not</strong> override any of the fields&#8217; &#8220;name&#8221;
 attributes. The Security Component looks for certain indicators that are
 created and managed by the FormHelper (especially those created in
-<a class="reference internal" href="../helpers/form.html#FormHelper::create" title="FormHelper::create"><tt class="xref php php-meth docutils literal"><span class="pre">create()</span></tt></a> and <a class="reference internal" href="../helpers/form.html#FormHelper::end" title="FormHelper::end"><tt class="xref php php-meth docutils literal"><span class="pre">end()</span></tt></a>).
+<a class="reference internal" href="../helpers/form.html#FormHelper::create" title="FormHelper::create"><code class="xref php php-meth docutils literal"><span class="pre">create()</span></code></a> and <a class="reference internal" href="../helpers/form.html#FormHelper::end" title="FormHelper::end"><code class="xref php php-meth docutils literal"><span class="pre">end()</span></code></a>).
 Dynamically altering the fields that are submitted in a POST request (e.g.
 disabling, deleting or creating new fields via JavaScript) is likely to
-trigger a black-holing of the request. See the <tt class="docutils literal"><span class="pre">$validatePost</span></tt> or
-<tt class="docutils literal"><span class="pre">$disabledFields</span></tt> configuration parameters.</p>
+trigger a black-holing of the request. See the <code class="docutils literal"><span class="pre">$validatePost</span></code> or
+<code class="docutils literal"><span class="pre">$disabledFields</span></code> configuration parameters.</p>
 </div>
 <p>Handling blackhole callbacks
 处理黑洞回调函数
@@ -235,11 +340,11 @@ trigger a black-holing of the request. See the <tt class="docutils literal"><spa
 <p>If an action is restricted by the Security Component it is
 black-holed as an invalid request which will result in a 404 error
 by default. You can configure this behavior by setting the
-<tt class="docutils literal"><span class="pre">$this-&gt;Security-&gt;blackHoleCallback</span></tt> property to a callback function
+<code class="docutils literal"><span class="pre">$this-&gt;Security-&gt;blackHoleCallback</span></code> property to a callback function
 in the controller.</p>
 <dl class="method">
 <dt id="SecurityComponent::blackHole">
-<tt class="descclassname">SecurityComponent::</tt><tt class="descname">blackHole</tt><big>(</big><em>object $controller</em>, <em>string $error</em><big>)</big><a class="headerlink" href="#SecurityComponent::blackHole" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">SecurityComponent::</code><code class="descname">blackHole</code><span class="sig-paren">(</span><em>object $controller</em>, <em>string $error</em><span class="sig-paren">)</span><a class="headerlink" href="#SecurityComponent::blackHole" title="永久链接至目标">¶</a></dt>
 <dd><blockquote>
 <div><p>黑洞是一个带有404错误的非法请求或一个自定义回调函数。如果没有回调请求将退出。
 如果一个控制器的回调在 SecurityComponent::blackHoleCallback 中进行了设置。
@@ -253,7 +358,7 @@ it will be called and passed any error information.</p>
 
 <dl class="attr">
 <dt id="SecurityComponent::$blackHoleCallback">
-<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">blackHoleCallback</tt><a class="headerlink" href="#SecurityComponent::$blackHoleCallback" title="永久链接至目标">¶</a></dt>
+<em class="property">property </em><code class="descclassname">SecurityComponent::$</code><code class="descname">blackHoleCallback</code><a class="headerlink" href="#SecurityComponent::$blackHoleCallback" title="永久链接至目标">¶</a></dt>
 <dd><blockquote>
 <div>blackHoleCallback是处理和请求黑洞的回调函数。</div></blockquote>
 <p>A Controller callback that will handle and requests that are
@@ -268,8 +373,8 @@ The callback should expect an parameter indicating the type of error:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">$type``参数可以下面的值</span>
-<span class="pre">The</span> <span class="pre">``$type</span></tt> parameter can have the following values:</p>
+<p><code class="docutils literal"><span class="pre">$type``参数可以下面的值</span>
+<span class="pre">The</span> <span class="pre">``$type</span></code> parameter can have the following values:</p>
 <ul class="simple">
 <li>&#8216;auth&#8217; Indicates a form validation error, or a controller/action mismatch
 error.</li>
@@ -287,7 +392,7 @@ error.</li>
 ========================</p>
 <dl class="method">
 <dt id="SecurityComponent::requirePost">
-<tt class="descclassname">SecurityComponent::</tt><tt class="descname">requirePost</tt><big>(</big><big>)</big><a class="headerlink" href="#SecurityComponent::requirePost" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">SecurityComponent::</code><code class="descname">requirePost</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SecurityComponent::requirePost" title="永久链接至目标">¶</a></dt>
 <dd><blockquote>
 <div>设置动作接收到的必须是POST请求，接收任意数量的参数，
 没有参数将强制所有动作接收的必须是POST请求。</div></blockquote>
@@ -298,7 +403,7 @@ require a POST.</p>
 
 <dl class="method">
 <dt id="SecurityComponent::requireGet">
-<tt class="descclassname">SecurityComponent::</tt><tt class="descname">requireGet</tt><big>(</big><big>)</big><a class="headerlink" href="#SecurityComponent::requireGet" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">SecurityComponent::</code><code class="descname">requireGet</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SecurityComponent::requireGet" title="永久链接至目标">¶</a></dt>
 <dd><blockquote>
 <div>设置动作接收到的必须是GET请求，接收任意数量的参数，
 没有参数将强制所有动作接收的必须是GET请求。</div></blockquote>
@@ -309,7 +414,7 @@ require a GET.</p>
 
 <dl class="method">
 <dt id="SecurityComponent::requirePut">
-<tt class="descclassname">SecurityComponent::</tt><tt class="descname">requirePut</tt><big>(</big><big>)</big><a class="headerlink" href="#SecurityComponent::requirePut" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">SecurityComponent::</code><code class="descname">requirePut</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SecurityComponent::requirePut" title="永久链接至目标">¶</a></dt>
 <dd><blockquote>
 <div>设置动作接收到的必须是PUT请求，接收任意数量的参数，
 没有参数将强制所有动作接收的必须是PUT请求。</div></blockquote>
@@ -320,7 +425,7 @@ require a PUT.</p>
 
 <dl class="method">
 <dt id="SecurityComponent::requireDelete">
-<tt class="descclassname">SecurityComponent::</tt><tt class="descname">requireDelete</tt><big>(</big><big>)</big><a class="headerlink" href="#SecurityComponent::requireDelete" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">SecurityComponent::</code><code class="descname">requireDelete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SecurityComponent::requireDelete" title="永久链接至目标">¶</a></dt>
 <dd><blockquote>
 <div>设置动作接收到的必须是DELETE请求，接收任意数量的参数，
 没有参数将强制所有动作接收的必须是DELETE请求。</div></blockquote>
@@ -334,7 +439,7 @@ require a DELETE.</p>
 =======================</p>
 <dl class="method">
 <dt id="SecurityComponent::requireSecure">
-<tt class="descclassname">SecurityComponent::</tt><tt class="descname">requireSecure</tt><big>(</big><big>)</big><a class="headerlink" href="#SecurityComponent::requireSecure" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">SecurityComponent::</code><code class="descname">requireSecure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SecurityComponent::requireSecure" title="永久链接至目标">¶</a></dt>
 <dd><blockquote>
 <div>设置动作接收到的必须是SSL安全的请求，接收任意数量的参数，
 没有参数将强制所有动作接收的必须是SSL安全的请求。</div></blockquote>
@@ -345,7 +450,7 @@ actions to require a SSL-secured.</p>
 
 <dl class="method">
 <dt id="SecurityComponent::requireAuth">
-<tt class="descclassname">SecurityComponent::</tt><tt class="descname">requireAuth</tt><big>(</big><big>)</big><a class="headerlink" href="#SecurityComponent::requireAuth" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">SecurityComponent::</code><code class="descname">requireAuth</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SecurityComponent::requireAuth" title="永久链接至目标">¶</a></dt>
 <dd><blockquote>
 <div>设置动作接收到的必须是Security组件产生的令牌，接收任意数量的参数，
 没有参数将强制所有动作接收的必须经过合法认证。</div></blockquote>
@@ -359,7 +464,7 @@ arguments to force all actions to require a valid authentication.</p>
 ==========================================</p>
 <dl class="attr">
 <dt id="SecurityComponent::$allowedControllers">
-<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">allowedControllers</tt><a class="headerlink" href="#SecurityComponent::$allowedControllers" title="永久链接至目标">¶</a></dt>
+<em class="property">property </em><code class="descclassname">SecurityComponent::$</code><code class="descname">allowedControllers</code><a class="headerlink" href="#SecurityComponent::$allowedControllers" title="永久链接至目标">¶</a></dt>
 <dd><p>A List of Controller from which the actions of the current
 controller are allowed to receive requests from. This can be used
 to control cross controller requests.</p>
@@ -367,7 +472,7 @@ to control cross controller requests.</p>
 
 <dl class="attr">
 <dt id="SecurityComponent::$allowedActions">
-<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">allowedActions</tt><a class="headerlink" href="#SecurityComponent::$allowedActions" title="永久链接至目标">¶</a></dt>
+<em class="property">property </em><code class="descclassname">SecurityComponent::$</code><code class="descname">allowedActions</code><a class="headerlink" href="#SecurityComponent::$allowedActions" title="永久链接至目标">¶</a></dt>
 <dd><p>Actions from which actions of the current controller are allowed to
 receive requests. This can be used to control cross controller
 requests.</p>
@@ -375,25 +480,25 @@ requests.</p>
 
 <div class="section" id="form-tampering-prevention">
 <h1>Form tampering prevention<a class="headerlink" href="#form-tampering-prevention" title="永久链接至标题">¶</a></h1>
-<p>By default <tt class="docutils literal"><span class="pre">SecurityComponent</span></tt> prevents users from tampering with forms.  It
+<p>By default <code class="docutils literal"><span class="pre">SecurityComponent</span></code> prevents users from tampering with forms.  It
 does this by working with FormHelper and tracking which files are in a form.  It
 also keeps track of the values of hidden input elements.  All of this data is
 combined and turned into a hash.  When a form is submitted, SecurityComponent
 will use the POST data to build the same structure and compare the hash.</p>
 <dl class="attr">
 <dt id="SecurityComponent::$unlockedFields">
-<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">unlockedFields</tt><a class="headerlink" href="#SecurityComponent::$unlockedFields" title="永久链接至目标">¶</a></dt>
+<em class="property">property </em><code class="descclassname">SecurityComponent::$</code><code class="descname">unlockedFields</code><a class="headerlink" href="#SecurityComponent::$unlockedFields" title="永久链接至目标">¶</a></dt>
 <dd><p>Set to a list of form fields to exclude from POST validation. Fields can be
 unlocked either in the Component, or with
-<a class="reference internal" href="../helpers/form.html#FormHelper::unlockField" title="FormHelper::unlockField"><tt class="xref php php-meth docutils literal"><span class="pre">FormHelper::unlockField()</span></tt></a>.  Fields that have been unlocked are
+<a class="reference internal" href="../helpers/form.html#FormHelper::unlockField" title="FormHelper::unlockField"><code class="xref php php-meth docutils literal"><span class="pre">FormHelper::unlockField()</span></code></a>.  Fields that have been unlocked are
 not required to be part of the POST and hidden unlocked fields do not have
 their values checked.</p>
 </dd></dl>
 
 <dl class="attr">
 <dt id="SecurityComponent::$validatePost">
-<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">validatePost</tt><a class="headerlink" href="#SecurityComponent::$validatePost" title="永久链接至目标">¶</a></dt>
-<dd><p>Set to <tt class="docutils literal"><span class="pre">false</span></tt> to completely skip the validation of POST
+<em class="property">property </em><code class="descclassname">SecurityComponent::$</code><code class="descname">validatePost</code><a class="headerlink" href="#SecurityComponent::$validatePost" title="永久链接至目标">¶</a></dt>
+<dd><p>Set to <code class="docutils literal"><span class="pre">false</span></code> to completely skip the validation of POST
 requests, essentially turning off form validation.</p>
 </dd></dl>
 
@@ -402,28 +507,28 @@ CSRF 配置
 ==================</p>
 <dl class="attr">
 <dt id="SecurityComponent::$csrfCheck">
-<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">csrfCheck</tt><a class="headerlink" href="#SecurityComponent::$csrfCheck" title="永久链接至目标">¶</a></dt>
+<em class="property">property </em><code class="descclassname">SecurityComponent::$</code><code class="descname">csrfCheck</code><a class="headerlink" href="#SecurityComponent::$csrfCheck" title="永久链接至目标">¶</a></dt>
 <dd><blockquote>
 <div>是否使用CSRF保护表单，设置``false``禁用。</div></blockquote>
-<p>Whether to use CSRF protected forms. Set to <tt class="docutils literal"><span class="pre">false</span></tt> to disable
+<p>Whether to use CSRF protected forms. Set to <code class="docutils literal"><span class="pre">false</span></code> to disable
 CSRF protection on forms.</p>
 </dd></dl>
 
 <dl class="attr">
 <dt id="SecurityComponent::$csrfExpires">
-<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">csrfExpires</tt><a class="headerlink" href="#SecurityComponent::$csrfExpires" title="永久链接至目标">¶</a></dt>
+<em class="property">property </em><code class="descclassname">SecurityComponent::$</code><code class="descname">csrfExpires</code><a class="headerlink" href="#SecurityComponent::$csrfExpires" title="永久链接至目标">¶</a></dt>
 <dd><p>CSRF令牌的持续时间，每个表单/页面请求会产生一个新令牌
 The duration from when a CSRF token is created that it will expire on.
 Each form/page request will generate a new token that can only
 be submitted once unless it expires.  Can be any value compatible
-with <tt class="docutils literal"><span class="pre">strtotime()</span></tt>. The default is +30 minutes.</p>
+with <code class="docutils literal"><span class="pre">strtotime()</span></code>. The default is +30 minutes.</p>
 </dd></dl>
 
 <dl class="attr">
 <dt id="SecurityComponent::$csrfUseOnce">
-<em class="property">property </em><tt class="descclassname">SecurityComponent::$</tt><tt class="descname">csrfUseOnce</tt><a class="headerlink" href="#SecurityComponent::$csrfUseOnce" title="永久链接至目标">¶</a></dt>
+<em class="property">property </em><code class="descclassname">SecurityComponent::$</code><code class="descname">csrfUseOnce</code><a class="headerlink" href="#SecurityComponent::$csrfUseOnce" title="永久链接至目标">¶</a></dt>
 <dd><p>Controls whether or not CSRF tokens are use and burn.  Set to
-<tt class="docutils literal"><span class="pre">false</span></tt> to not generate new tokens on each request.  One token
+<code class="docutils literal"><span class="pre">false</span></code> to not generate new tokens on each request.  One token
 will be reused until it expires. This reduces the chances of
 users getting invalid requests because of token consumption.
 It has the side effect of making CSRF less secure, as tokens are reusable.</p>
@@ -502,7 +607,7 @@ once used cannot be used again.  If an attempt is made to re-use an expired
 token the request will be blackholed.</p>
 <div class="section" id="using-csrf-protection">
 <h2>Using CSRF protection<a class="headerlink" href="#using-csrf-protection" title="永久链接至标题">¶</a></h2>
-<p>Simply by adding the <a class="reference internal" href="#SecurityComponent" title="SecurityComponent"><tt class="xref php php-class docutils literal"><span class="pre">SecurityComponent</span></tt></a> to your components array,
+<p>Simply by adding the <a class="reference internal" href="#SecurityComponent" title="SecurityComponent"><code class="xref php php-class docutils literal"><span class="pre">SecurityComponent</span></code></a> to your components array,
 you can benefit from the CSRF protection it provides. By default CSRF tokens are
 valid for 30 minutes and expire on use. You can control how long tokens last by setting
 csrfExpires on the component.:</p>
@@ -513,7 +618,7 @@ csrfExpires on the component.:</p>
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>You can also set this property in your controller&#8217;s <tt class="docutils literal"><span class="pre">beforeFilter</span></tt>:</p>
+<p>You can also set this property in your controller&#8217;s <code class="docutils literal"><span class="pre">beforeFilter</span></code>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Security</span><span class="o">-&gt;</span><span class="na">csrfExpires</span> <span class="o">=</span> <span class="s1">&#39;+1 hour&#39;</span><span class="p">;</span>
     <span class="c1">// ...</span>
@@ -522,7 +627,7 @@ csrfExpires on the component.:</p>
 </div>
 <p>The csrfExpires property can be any value that is compatible with
 <a class="reference external" href="http://php.net/manual/en/function.strtotime.php">strtotime()</a>. By default the
-<a class="reference internal" href="../helpers/form.html#FormHelper" title="FormHelper"><tt class="xref php php-class docutils literal"><span class="pre">FormHelper</span></tt></a> will add a <tt class="docutils literal"><span class="pre">data[_Token][key]</span></tt> containing the CSRF
+<a class="reference internal" href="../helpers/form.html#FormHelper" title="FormHelper"><code class="xref php php-class docutils literal"><span class="pre">FormHelper</span></code></a> will add a <code class="docutils literal"><span class="pre">data[_Token][key]</span></code> containing the CSRF
 token to every form when the component is enabled.</p>
 </div>
 <div class="section" id="handling-missing-or-expired-tokens">
@@ -537,8 +642,8 @@ This helps you filter out CSRF token failures, from other warnings.</p>
 only be used once. If a token is used twice, it will be blackholed. Sometimes,
 this behaviour is not desirable, as it can create issues with single page
 applications. You can toggle on longer, multi-use tokens by setting
-<tt class="docutils literal"><span class="pre">csrfUseOnce</span></tt> to <tt class="docutils literal"><span class="pre">false</span></tt>. This can be done in the components array, or in
-the <tt class="docutils literal"><span class="pre">beforeFilter</span></tt> of your controller:</p>
+<code class="docutils literal"><span class="pre">csrfUseOnce</span></code> to <code class="docutils literal"><span class="pre">false</span></code>. This can be done in the components array, or in
+the <code class="docutils literal"><span class="pre">beforeFilter</span></code> of your controller:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;Security&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;csrfUseOnce&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
@@ -547,7 +652,7 @@ the <tt class="docutils literal"><span class="pre">beforeFilter</span></tt> of y
 </pre></div>
 </div>
 <p>This will tell the component that you want to re-use a CSRF token until it
-expires - which is controlled by the <tt class="docutils literal"><span class="pre">csrfExpires</span></tt> value. If you are having
+expires - which is controlled by the <code class="docutils literal"><span class="pre">csrfExpires</span></code> value. If you are having
 issues with expired tokens, this is a good balance between security and ease of
 use.</p>
 <p>Disabling the CSRF protection
@@ -555,7 +660,7 @@ use.</p>
 &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
 <p>There may be cases where you want to disable CSRF protection on your forms for
 some reason. If you do want to disable this feature, you can set
-<tt class="docutils literal"><span class="pre">$this-&gt;Security-&gt;csrfCheck</span> <span class="pre">=</span> <span class="pre">false;</span></tt> in your <tt class="docutils literal"><span class="pre">beforeFilter</span></tt> or use the
+<code class="docutils literal"><span class="pre">$this-&gt;Security-&gt;csrfCheck</span> <span class="pre">=</span> <span class="pre">false;</span></code> in your <code class="docutils literal"><span class="pre">beforeFilter</span></code> or use the
 components array. By default CSRF protection is enabled, and configured to use
 one-use tokens.</p>
 <p>Disabling Security Component For Specific Actions
@@ -564,8 +669,8 @@ one-use tokens.</p>
 <p>有些情况需要对某个action禁用所有的安全检测(比如, ajax请求)。
 可以通过&#8221;解锁&#8221;，把这些actions放到``beforeFilter``里的``$this-&gt;Security-&gt;unlockedActions``列表中。
 There may be cases where you want to disable all security checks for an action (ex. ajax request).
-You may &#8220;unlock&#8221; these actions by listing them in <tt class="docutils literal"><span class="pre">$this-&gt;Security-&gt;unlockedActions</span></tt> in your
-<tt class="docutils literal"><span class="pre">beforeFilter</span></tt>.</p>
+You may &#8220;unlock&#8221; these actions by listing them in <code class="docutils literal"><span class="pre">$this-&gt;Security-&gt;unlockedActions</span></code> in your
+<code class="docutils literal"><span class="pre">beforeFilter</span></code>.</p>
 <div class="versionadded">
 <p><span class="versionmodified">2.3 新版功能.</span></p>
 </div>
@@ -573,12 +678,14 @@ You may &#8220;unlock&#8221; these actions by listing them in <tt class="docutil
 </div>
 
 
+			</div>
 		</div>
-	</div>
 
-	<div class="sidebar columns three pull-nine">
-<div id="sidebar-navigation" class="hide-on-phones">
-	<h2 class="hide-on-desktops">Table of Contents</h2>
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="zh">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
@@ -595,7 +702,7 @@ You may &#8220;unlock&#8221; these actions by listing them in <tt class="docutil
 <li class="toctree-l3"><a class="reference internal" href="flash.html">Flash</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sessions.html">Sessions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="authentication.html">Authentication 认证</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="">Form tampering prevention</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Form tampering prevention</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#csrf-protection">CSRF protection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="request-handling.html">请求处理</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cookie.html">Cookie</a></li>
@@ -607,7 +714,7 @@ You may &#8220;unlock&#8221; these actions by listing them in <tt class="docutil
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">Shells，任务与命令行工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a></li>
@@ -617,86 +724,171 @@ You may &#8220;unlock&#8221; these actions by listing them in <tt class="docutil
 
 </div>
 
-<div class="page-contents">
-	<h3>Page contents</h3>
-	<ul>
-<li><a class="reference internal" href="#">Form tampering prevention</a></li>
-<li><a class="reference internal" href="#csrf-protection">CSRF protection</a><ul>
-<li><a class="reference internal" href="#using-csrf-protection">Using CSRF protection</a></li>
-<li><a class="reference internal" href="#handling-missing-or-expired-tokens">Handling missing or expired tokens</a></li>
-<li><a class="reference internal" href="#using-per-session-tokens-instead-of-one-time-use-tokens">Using per-session tokens instead of one-time use tokens</a></li>
-</ul>
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
+		</div>
+	</div>
+</div>
+
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-8 social-footer text-center ">
+				<a href="#">发现翻译错误? 请在下面留言</a>
+				<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">我要加入翻译</a>
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="../../_static/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="../../_static/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
 </li>
-</ul>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
 
-</div>
-	</div>
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
 
-</div>
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="content row">
-	<ul class="related-pages inline">
-	<li>
-		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
-	</li>
-	<li>
-		<a href="request-handling.html" title="请求处理" accesskey="N">下一页</a>
-	</li>
-	<li>
-		<a href="authentication.html" title="Authentication 认证" accesskey="P">上一页</a>
-	</li>
-	</ul>
-</div>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
 
-	<div class="footer-push"> </div>
-</div>
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
 
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
 
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
 
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
 
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>发现翻译错误?</strong>
-			请在下面留言<br />
-			<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">[ 我要加入翻译 ]</a>
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							&copy; 版权所有 2016, Cake Software Foundation, Inc.
+						最后更新于 8月 02, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
 		</div>
 	</div>
-	
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Jul 10, 2016.
-				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
-		</div>
-	</div>
-</div>
+</footer>
 
-<div id="nav-modal" class="reveal-modal"> </div>
 <div id="inline-search-results"></div>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F201cbc61deaf9f7ffb521fb23e83db40' type='text/javascript'%3E%3C/script%3E"));
-</script>
 
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+
+</div>
+
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"cakephpchina"};
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
 	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	</script>
-<!-- Duoshuo Comment END -->
-
-<!-- Grunt Live Reload -->
-<script src="http://192.168.56.113:35729/livereload.js"></script>
+</script>
   </body>
 </html>

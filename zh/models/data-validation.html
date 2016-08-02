@@ -1,170 +1,300 @@
 
+
 <!DOCTYPE html>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Data Validation" lang="zh_CN" name="title" />
-<meta content="validation rules,validation data,validation errors,data validation,credit card numbers,core libraries,password email,model fields,login field,model definition,php class,many different aspects,eight characters,letters and numbers,business rules,validation process,date validation,error messages,array,formatting" lang="zh_CN" name="keywords" />
+    <meta content="Data Validation" lang="zh" name="title" />
+<meta content="validation rules,validation data,validation errors,data validation,credit card numbers,core libraries,password email,model fields,login field,model definition,php class,many different aspects,eight characters,letters and numbers,business rules,validation process,date validation,error messages,array,formatting" lang="zh" name="keywords" />
 
-    <title>数据验证 &mdash; CakePHP Cookbook 2.x 文档</title>
+    <title>数据验证</title>
+    <link href="../_static/favicon.png" type="image/png" rel="icon" />
+
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/app.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.x',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/app.js"></script>
-    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
-    <script type="text/javascript" src="../_static/foundation.js"></script>
+
+    <link rel="alternate" hreflang="en" href="../../en/models/data-validation.html" /><link rel="alternate" hreflang="pt" href="../../pt/models/data-validation.html" /><link rel="alternate" hreflang="es" href="../../es/models/data-validation.html" /><link rel="alternate" hreflang="ja" href="../../ja/models/data-validation.html" /><link rel="alternate" hreflang="fr" href="../../fr/models/data-validation.html" />
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within CakePHP Cookbook 2.x 文档" href="../_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
     <link rel="up" title="模型" href="../models.html" />
     <link rel="next" title="从控制器验证数据" href="data-validation/validating-data-from-the-controller.html" />
     <link rel="prev" title="删除数据" href="deleting-data.html" />
-<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="alternate" hreflang="en" href="../../en/models/data-validation.html" /><link rel="alternate" hreflang="pt" href="../../pt/models/data-validation.html" /><link rel="alternate" hreflang="es" href="../../es/models/data-validation.html" /><link rel="alternate" hreflang="ja" href="../../ja/models/data-validation.html" /><link rel="alternate" hreflang="fr" href="../../fr/models/data-validation.html" />
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
-<script type="text/javascript">
-window.lang = "zh_CN";
-</script>
-
+    <script type="text/javascript">
+    window.lang = "zh";
+    </script>
   </head>
   <body>
 
 <div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="masthead">
-	<div class="header-backing"></div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="../contents.html">
-			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
-			</a>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
+
 		
-<div id="searchbox" class="columns nine phone-three">
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-	<form id="searchform" class="search" action="../search.html" method="get">
-		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
-		<input class="search-submit search-big button red" type="submit" value="搜索" />
-		<input type="hidden" name="check_keywords" value="yes" />
-		<input type="hidden" name="area" value="default" />
-
-		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
-	</form>
-
-</div>
-	</div>
-</div>
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="../contents.html">Cookbook 2.x</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="../models.html" accesskey="U" itemprop="url"><span itemprop="title">模型</span></a>
-			</li>
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">2.x Book</a>
-				<ul>
-					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				<a href="#">zh_CN</a>
-
-				<ul>
-				
-					<li><a href="../../en/models/data-validation.html">en</a></li>
-				
-					<li><a href="../../pt/models/data-validation.html">pt</a></li>
-				
-					<li><a href="../../es/models/data-validation.html">es</a></li>
-				
-					<li><a href="../../ja/models/data-validation.html">ja</a></li>
-				
-					<li><a href="../../fr/models/data-validation.html">fr</a></li>
-				
-					<li></li>
-				
-				</ul>
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="../search.html" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="搜索" type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/models/data-validation.rst" target="_blank">Improve this Doc</a>
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="../contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 2.x <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="../search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														zh
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li><a href="../../en/models/data-validation.html">en</a></li>
+											
+												<li><a href="../../pt/models/data-validation.html">pt</a></li>
+											
+												<li><a href="../../es/models/data-validation.html">es</a></li>
+											
+												<li><a href="../../ja/models/data-validation.html">ja</a></li>
+											
+												<li><a href="../../fr/models/data-validation.html">fr</a></li>
+											
+												<li></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/zh">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/zh">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/zh/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/zh/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/master/zh/models/data-validation.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="#">数据验证</a><ul>
+<li><a class="reference internal" href="#id2">简单的规则</a></li>
+<li><a class="reference internal" href="#id3">每个字段带一个规则</a><ul>
+<li><a class="reference internal" href="#rule">rule</a></li>
+<li><a class="reference internal" href="#required">required</a></li>
+<li><a class="reference internal" href="#allowempty">allowEmpty</a></li>
+<li><a class="reference internal" href="#on">on</a></li>
+<li><a class="reference internal" href="#message">message</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">每个字段多条规则</a><ul>
+<li><a class="reference internal" href="#last">last</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">自定义验证规则</a><ul>
+<li><a class="reference internal" href="#id6">使用自定义的正则表达式进行验证</a></li>
+<li><a class="reference internal" href="#id7">添加自定义的验证方法</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">动态改变验证规则</a><ul>
+<li><a class="reference internal" href="#id9">添加新的验证规则</a></li>
+<li><a class="reference internal" href="#id10">修改现存的验证规则</a></li>
+<li><a class="reference internal" href="#id11">从集合中删除规则</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#core-validation-rules">核心验证规则</a></li>
+<li><a class="reference internal" href="#id13">本地化验证</a></li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
   <div class="section" id="id1">
 <h1>数据验证<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <p>数据验证是任何应用程序的重要组成部分，因为这有助于确保模型中的数据符合应用程序的
@@ -172,7 +302,7 @@ window.lang = "zh_CN";
 使得表单的处理容易得多得多。</p>
 <p>验证过程包含很多方面。本节中我们只涉及模型中的部分。基本上这意味着:当你调用模型
 的 save() 方法时会发生什么。有关如何处理验证错误显示的更多信息，请参看
-<a class="reference internal" href="../core-libraries/helpers/form.html"><em>FormHelper</em></a> 。</p>
+<a class="reference internal" href="../core-libraries/helpers/form.html"><span class="doc">FormHelper</span></a> 。</p>
 <p>数据验证的第一步是在模型中建立验证规则。这需要用到在模型中定义的 Model::validate
 数组，例如:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
@@ -180,7 +310,7 @@ window.lang = "zh_CN";
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>在上面的例子中，<tt class="docutils literal"><span class="pre">$validate</span></tt> 数组被加到 User 模型中，但此数组还不包含任何验证规
+<p>在上面的例子中，<code class="docutils literal"><span class="pre">$validate</span></code> 数组被加到 User 模型中，但此数组还不包含任何验证规
 则。假设 users 表中有login，password，email和born这些字段，下面的例子中是一些针
 对这些字段的简单验证规则:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
@@ -272,7 +402,7 @@ window.lang = "zh_CN";
 <h3>rule<a class="headerlink" href="#rule" title="永久链接至标题">¶</a></h3>
 <p>&#8216;rule&#8217; 键定义了验证的方法，可以是单一的值，也可以是一个数组。指定的 &#8216;rule&#8217; 可以
 是模型的方法名称，核心验证类的方法，或者正则表达式。关于在缺省情况下可用的规则的
-更多信息，请参看 <a class="reference internal" href="#core-validation-rules"><em>核心验证规则</em></a>。</p>
+更多信息，请参看 <a class="reference internal" href="#core-validation-rules"><span class="std std-ref">核心验证规则</span></a>。</p>
 <p>如果某个规则不需要带任何参数，&#8217;rule&#8217; 就可以是单一值，例如:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;login&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -293,8 +423,8 @@ window.lang = "zh_CN";
 </div>
 <div class="section" id="required">
 <h3>required<a class="headerlink" href="#required" title="永久链接至标题">¶</a></h3>
-<p>这个键接受布尔值，<tt class="docutils literal"><span class="pre">create</span></tt> 或者 <tt class="docutils literal"><span class="pre">update</span></tt>。把这个键置为 <tt class="docutils literal"><span class="pre">true</span></tt> 就会认为该字
-段总是必需的。而把它设成 <tt class="docutils literal"><span class="pre">create</span></tt> 或 <tt class="docutils literal"><span class="pre">update</span></tt> 就会认为该字段只在创建或者更新
+<p>这个键接受布尔值，<code class="docutils literal"><span class="pre">create</span></code> 或者 <code class="docutils literal"><span class="pre">update</span></code>。把这个键置为 <code class="docutils literal"><span class="pre">true</span></code> 就会认为该字
+段总是必需的。而把它设成 <code class="docutils literal"><span class="pre">create</span></code> 或 <code class="docutils literal"><span class="pre">update</span></code> 就会认为该字段只在创建或者更新
 操作时是必需的。如果 &#8216;required&#8217; 的值为真，则该字段在数据数组中必须存在。例如，如
 果验证规则如下定义:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -307,22 +437,22 @@ window.lang = "zh_CN";
 </div>
 <p>传给模型的 save() 方法的数据中必须含有 login 字段的数据，否则验证就会失败。该键
 的缺省值为布尔类型 false。</p>
-<p><tt class="docutils literal"><span class="pre">required</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt> 和验证规则 <tt class="docutils literal"><span class="pre">notBlank()</span></tt> 并不是一回事。
-<tt class="docutils literal"><span class="pre">required</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt> 意味着数组的 <em>键</em> 必须存在 - 这不代表必须有值。所以，如果字
+<p><code class="docutils literal"><span class="pre">required</span> <span class="pre">=&gt;</span> <span class="pre">true</span></code> 和验证规则 <code class="docutils literal"><span class="pre">notBlank()</span></code> 并不是一回事。
+<code class="docutils literal"><span class="pre">required</span> <span class="pre">=&gt;</span> <span class="pre">true</span></code> 意味着数组的 <em>键</em> 必须存在 - 这不代表必须有值。所以，如果字
 段在数据集中不存在，验证就会失败，但如果提交的值为空(&#8216;&#8217;)，验证有可能(取决于规则)
 会成功。</p>
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.1 版更改: </span>增加了对 <tt class="docutils literal"><span class="pre">create</span></tt> 和 <tt class="docutils literal"><span class="pre">update</span></tt> 的支持。</p>
+<p><span class="versionmodified">在 2.1 版更改: </span>增加了对 <code class="docutils literal"><span class="pre">create</span></code> 和 <code class="docutils literal"><span class="pre">update</span></code> 的支持。</p>
 </div>
 </div>
 <div class="section" id="allowempty">
 <h3>allowEmpty<a class="headerlink" href="#allowempty" title="永久链接至标题">¶</a></h3>
-<p>如果设为 <tt class="docutils literal"><span class="pre">false</span></tt> ，字段的值必须为 <em>非空</em>，而 &#8220;nonempty&#8221; 定义为
-<tt class="docutils literal"><span class="pre">!empty($value)</span> <span class="pre">||</span> <span class="pre">is_numeric($value)</span></tt> 。对数字的检查是为了使 CakePHP 能正确处
-理 <tt class="docutils literal"><span class="pre">$value</span></tt> 为零的情况。</p>
-<p><tt class="docutils literal"><span class="pre">required</span></tt> 和 <tt class="docutils literal"><span class="pre">allowEmpty</span></tt> 的区别可能令人迷惑。<tt class="docutils literal"><span class="pre">'required'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt> 意味着
-在 <tt class="docutils literal"><span class="pre">$this-&gt;data``中没有该字段的</span> <span class="pre">*键*</span> <span class="pre">，你就不能保存模型(使用</span> <span class="pre">``isset</span></tt> 检查)；
-然而，<tt class="docutils literal"><span class="pre">'allowEmpty'</span> <span class="pre">=&gt;</span> <span class="pre">false</span></tt> 正如前所述，确保当前字段的 <em>值</em> 不为空。</p>
+<p>如果设为 <code class="docutils literal"><span class="pre">false</span></code> ，字段的值必须为 <em>非空</em>，而 &#8220;nonempty&#8221; 定义为
+<code class="docutils literal"><span class="pre">!empty($value)</span> <span class="pre">||</span> <span class="pre">is_numeric($value)</span></code> 。对数字的检查是为了使 CakePHP 能正确处
+理 <code class="docutils literal"><span class="pre">$value</span></code> 为零的情况。</p>
+<p><code class="docutils literal"><span class="pre">required</span></code> 和 <code class="docutils literal"><span class="pre">allowEmpty</span></code> 的区别可能令人迷惑。<code class="docutils literal"><span class="pre">'required'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></code> 意味着
+在 <code class="docutils literal"><span class="pre">$this-&gt;data``中没有该字段的</span> <span class="pre">*键*</span> <span class="pre">，你就不能保存模型(使用</span> <span class="pre">``isset</span></code> 检查)；
+然而，<code class="docutils literal"><span class="pre">'allowEmpty'</span> <span class="pre">=&gt;</span> <span class="pre">false</span></code> 正如前所述，确保当前字段的 <em>值</em> 不为空。</p>
 </div>
 <div class="section" id="on">
 <h3>on<a class="headerlink" href="#on" title="永久链接至标题">¶</a></h3>
@@ -393,7 +523,7 @@ window.lang = "zh_CN";
 <h3>last<a class="headerlink" href="#last" title="永久链接至标题">¶</a></h3>
 <p>当一个字段有多条规则时，缺省情况下，如果一条规则验证失败，那么这条规则的错误信息
 就会返回，而该字段的其它规则就不会继续执行了。如果你希望,即使在一条规则验证失败
-时，验证也继续执行，就把该条规则的 <tt class="docutils literal"><span class="pre">last</span></tt> 设置为 <tt class="docutils literal"><span class="pre">false</span></tt>。</p>
+时，验证也继续执行，就把该条规则的 <code class="docutils literal"><span class="pre">last</span></code> 设置为 <code class="docutils literal"><span class="pre">false</span></code>。</p>
 <p>在下面的例子中，即使 &#8220;rule1&#8221; 验证失败，&#8221;rule2&#8221; 也会继续执行，而且，如果 &#8220;rule2&#8221;
 也失败，则两条失败规则的错误信息都会返回:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -411,7 +541,7 @@ window.lang = "zh_CN";
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>当使用这种数组格式设置验证规则时，可以不带 <tt class="docutils literal"><span class="pre">message</span></tt> 键。请看下面的例子:</p>
+<p>当使用这种数组格式设置验证规则时，可以不带 <code class="docutils literal"><span class="pre">message</span></code> 键。请看下面的例子:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;login&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Only alphabets and numbers allowed&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -421,7 +551,7 @@ window.lang = "zh_CN";
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>如果 <tt class="docutils literal"><span class="pre">alphaNumeric</span></tt> 规则验证失败，因为没有设置 <tt class="docutils literal"><span class="pre">message</span></tt> 键，该规则的键
+<p>如果 <code class="docutils literal"><span class="pre">alphaNumeric</span></code> 规则验证失败，因为没有设置 <code class="docutils literal"><span class="pre">message</span></code> 键，该规则的键
 &#8216;Only alphabets and numbers allowed&#8217; 就会作为错误信息返回。</p>
 </div>
 </div>
@@ -442,7 +572,7 @@ window.lang = "zh_CN";
 </pre></div>
 </div>
 <p>上面的例子检查 login 字段是否只包含字母和数字，至少3个字符。</p>
-<p><tt class="docutils literal"><span class="pre">rule</span></tt> 中的正则表达式必须由斜线界定起始。最后一个斜线之后的 &#8216;i&#8217; 是可以省略的，
+<p><code class="docutils literal"><span class="pre">rule</span></code> 中的正则表达式必须由斜线界定起始。最后一个斜线之后的 &#8216;i&#8217; 是可以省略的，
 表示正则表达式是大小写无关。</p>
 </div>
 <div class="section" id="id7">
@@ -473,12 +603,12 @@ window.lang = "zh_CN";
 <p>要验证的当前字段会以关联数组的形式传入函数的第一个参数，字段名为键，提交的数据为
 值。</p>
 <p>如果要给验证函数传入其他参数，需要在 &#8216;rule&#8217; 数组中加入更多元素，再在你的函数中
-(在主要的 <tt class="docutils literal"><span class="pre">$check</span></tt> 参数之后)作为其他参数处理。</p>
+(在主要的 <code class="docutils literal"><span class="pre">$check</span></code> 参数之后)作为其他参数处理。</p>
 <p>自定义的验证函数可以定义在模型中(正如上面的例子)，也可以定义在一个模型实现的行为
 中。这包括映射方法(<em>mapped method</em>)。</p>
-<p>模型/行为方法会优先考虑，之后才会查找 <tt class="docutils literal"><span class="pre">Validation</span></tt> 类的方法。这意味着你可以重
-载现存的验证方法(例如 <tt class="docutils literal"><span class="pre">alphaNumeric()</span></tt>)，或者在应用程序级别(通过给
-<tt class="docutils literal"><span class="pre">AppModel</span></tt> 添加方法)，或者在模型级别。</p>
+<p>模型/行为方法会优先考虑，之后才会查找 <code class="docutils literal"><span class="pre">Validation</span></code> 类的方法。这意味着你可以重
+载现存的验证方法(例如 <code class="docutils literal"><span class="pre">alphaNumeric()</span></code>)，或者在应用程序级别(通过给
+<code class="docutils literal"><span class="pre">AppModel</span></code> 添加方法)，或者在模型级别。</p>
 <p>当编写一个可以用于多个字段的验证规则时，注意从 $check 提取字段的值。$check 数组
 传入时以表单名为键，以字段的值为其值。要被验证的整个记录保存在 $this-&gt;data 成员
 变量中:</p>
@@ -505,26 +635,26 @@ window.lang = "zh_CN";
 </div>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p class="last">自定义的验证方法必须有 <tt class="docutils literal"><span class="pre">public</span></tt>。<tt class="docutils literal"><span class="pre">protected</span></tt> 和 <tt class="docutils literal"><span class="pre">private</span></tt> 的验证方法是
+<p class="last">自定义的验证方法必须有 <code class="docutils literal"><span class="pre">public</span></code>。<code class="docutils literal"><span class="pre">protected</span></code> 和 <code class="docutils literal"><span class="pre">private</span></code> 的验证方法是
 不支持的。</p>
 </div>
-<p>如果值合法，方法应该返回 <tt class="docutils literal"><span class="pre">true</span></tt>。如果验证失败，返回 <tt class="docutils literal"><span class="pre">false</span></tt>。其它合法的返回
+<p>如果值合法，方法应该返回 <code class="docutils literal"><span class="pre">true</span></code>。如果验证失败，返回 <code class="docutils literal"><span class="pre">false</span></code>。其它合法的返回
 值可以是字符串，作为错误信息显示。返回字符串意味着验证失败。字符串会覆盖
 $validate 数组中设置的信息，作为字段不合法的原因，显示在视图的表单中。</p>
 </div>
 </div>
 <div class="section" id="id8">
 <h2>动态改变验证规则<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
-<p>使用 <tt class="docutils literal"><span class="pre">$validate</span></tt> 属性来声明验证规则是为一个类定义静态规则的好方法。但难免会有
+<p>使用 <code class="docutils literal"><span class="pre">$validate</span></code> 属性来声明验证规则是为一个类定义静态规则的好方法。但难免会有
 一些情况下，你想对预先定义的规则集动态添加、修改或删除验证规则。</p>
-<p>所有的验证规则都保存在一个 <tt class="docutils literal"><span class="pre">ModelValidator</span></tt> 对象中，你模型中每个字段的验证规则
+<p>所有的验证规则都保存在一个 <code class="docutils literal"><span class="pre">ModelValidator</span></code> 对象中，你模型中每个字段的验证规则
 集都在这里。定义新的规则简单到只需告诉该对象来存储需要的字段新的验证方法。</p>
 <div class="section" id="id9">
 <h3>添加新的验证规则<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
 <div class="versionadded">
 <p><span class="versionmodified">2.2 新版功能.</span></p>
 </div>
-<p><tt class="docutils literal"><span class="pre">ModelValidator</span></tt> 对象允许多种方法添加新字段到集合中。第一种是使用 <tt class="docutils literal"><span class="pre">add</span></tt> 方法:</p>
+<p><code class="docutils literal"><span class="pre">ModelValidator</span></code> 对象允许多种方法添加新字段到集合中。第一种是使用 <code class="docutils literal"><span class="pre">add</span></code> 方法:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 在一个模型类中</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">validator</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;rule&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;notBlank&#39;</span><span class="p">,</span>
@@ -595,13 +725,13 @@ $validate 数组中设置的信息，作为字段不合法的原因，显示在�
 <span class="p">));</span>
 </pre></div>
 </div>
-<p>如果只要改变一个规则中的一个属性，可以直接设置 <tt class="docutils literal"><span class="pre">CakeValidationRule</span></tt> 对象的属性:</p>
+<p>如果只要改变一个规则中的一个属性，可以直接设置 <code class="docutils literal"><span class="pre">CakeValidationRule</span></code> 对象的属性:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 在一个模型类中</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">validator</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getField</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
     <span class="o">-&gt;</span><span class="na">getRule</span><span class="p">(</span><span class="s1">&#39;required&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">message</span> <span class="o">=</span> <span class="s1">&#39;This field cannot be left blank&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>在定义验证规则属性可以使用的数组键，就可以作为 <tt class="docutils literal"><span class="pre">CakeValidationRule</span></tt> 中的属性的
+<p>在定义验证规则属性可以使用的数组键，就可以作为 <code class="docutils literal"><span class="pre">CakeValidationRule</span></code> 中的属性的
 名字，比如 &#8216;message&#8217; 和 &#8216;allowEmpty&#8217;。</p>
 <p>类似于对集合添加新规则，也可以用存取数组的方式修改现存的规则:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$validator</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">validator</span><span class="p">();</span>
@@ -643,7 +773,7 @@ $validate 数组中设置的信息，作为字段不合法的原因，显示在�
 <span id="id12"></span><h2>核心验证规则<a class="headerlink" href="#core-validation-rules" title="永久链接至标题">¶</a></h2>
 <dl class="class">
 <dt id="Validation">
-<em class="property">class </em><tt class="descname">Validation</tt><a class="headerlink" href="#Validation" title="永久链接至目标">¶</a></dt>
+<em class="property">class </em><code class="descname">Validation</code><a class="headerlink" href="#Validation" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
 <p>CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证容易得多。这个类有许
@@ -651,7 +781,7 @@ $validate 数组中设置的信息，作为字段不合法的原因，显示在�
 如何使用的例子。</p>
 <dl class="staticmethod">
 <dt id="Validation::alphaNumeric">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">alphaNumeric</tt><big>(</big><em>mixed $check</em><big>)</big><a class="headerlink" href="#Validation::alphaNumeric" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">alphaNumeric</code><span class="sig-paren">(</span><em>mixed $check</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::alphaNumeric" title="永久链接至目标">¶</a></dt>
 <dd><p>字段的数据只能含有字母和数字。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;login&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -665,7 +795,7 @@ $validate 数组中设置的信息，作为字段不合法的原因，显示在�
 
 <dl class="staticmethod">
 <dt id="Validation::between">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">between</tt><big>(</big><em>string $check</em>, <em>integer $min</em>, <em>integer $max</em><big>)</big><a class="headerlink" href="#Validation::between" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">between</code><span class="sig-paren">(</span><em>string $check</em>, <em>integer $min</em>, <em>integer $max</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::between" title="永久链接至目标">¶</a></dt>
 <dd><p>字段的数据长度必须在指定的数字范围内。必须提供最小值和最大值。
 Uses = not。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -682,7 +812,7 @@ Uses = not。</p>
 
 <dl class="staticmethod">
 <dt id="Validation::blank">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">blank</tt><big>(</big><em>mixed $check</em><big>)</big><a class="headerlink" href="#Validation::blank" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">blank</code><span class="sig-paren">(</span><em>mixed $check</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::blank" title="永久链接至目标">¶</a></dt>
 <dd><p>这个规则用来保证字段为空或者只含有空字符。空字符包括空格、制表符、回车和换行。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -696,7 +826,7 @@ Uses = not。</p>
 
 <dl class="staticmethod">
 <dt id="Validation::boolean">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">boolean</tt><big>(</big><em>string $check</em><big>)</big><a class="headerlink" href="#Validation::boolean" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">boolean</code><span class="sig-paren">(</span><em>string $check</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::boolean" title="永久链接至目标">¶</a></dt>
 <dd><p>字符的数据必须是布尔值。合法的值为 true 或 false，整数0或1，或者字符串&#8216;0&#8217;或
 &#8216;1&#8217;。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -711,7 +841,7 @@ Uses = not。</p>
 
 <dl class="staticmethod">
 <dt id="Validation::cc">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">cc</tt><big>(</big><em>mixed $check</em>, <em>mixed $type = 'fast'</em>, <em>boolean $deep = false</em>, <em>string $regex = null</em><big>)</big><a class="headerlink" href="#Validation::cc" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">cc</code><span class="sig-paren">(</span><em>mixed $check</em>, <em>mixed $type = 'fast'</em>, <em>boolean $deep = false</em>, <em>string $regex = null</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::cc" title="永久链接至目标">¶</a></dt>
 <dd><p>这个规则用来检查数据是否是一个合法的信用卡号码。它接受3个参数: &#8216;type&#8217;、
 &#8216;deep&#8217; 和 &#8216;regex&#8217;。</p>
 <p>&#8216;type&#8217; 键可以赋值为 &#8216;fast&#8217;，&#8217;all&#8217; 或者任意下面的值:</p>
@@ -749,7 +879,7 @@ Uses = not。</p>
 
 <dl class="staticmethod">
 <dt id="Validation::comparison">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">comparison</tt><big>(</big><em>mixed $check1</em>, <em>string $operator = null</em>, <em>integer $check2 = null</em><big>)</big><a class="headerlink" href="#Validation::comparison" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">comparison</code><span class="sig-paren">(</span><em>mixed $check1</em>, <em>string $operator = null</em>, <em>integer $check2 = null</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::comparison" title="永久链接至目标">¶</a></dt>
 <dd><p>Comparison 用来比较数值。它支持&#8221;大于&#8221;、&#8221;小于&#8221;、&#8221;大于等于&#8221;、&#8221;小于等于&#8221;、
 &#8220;等于&#8221;、&#8221;不等于&#8221;。下面是一些例子:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -771,7 +901,7 @@ Uses = not。</p>
 
 <dl class="staticmethod">
 <dt id="Validation::custom">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">custom</tt><big>(</big><em>mixed $check</em>, <em>string $regex = null</em><big>)</big><a class="headerlink" href="#Validation::custom" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">custom</code><span class="sig-paren">(</span><em>mixed $check</em>, <em>string $regex = null</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::custom" title="永久链接至目标">¶</a></dt>
 <dd><p>当需要自定义的正则表达式时使用:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;infinite&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -785,7 +915,7 @@ Uses = not。</p>
 
 <dl class="staticmethod">
 <dt id="Validation::date">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">date</tt><big>(</big><em>string $check</em>, <em>mixed $format = 'ymd'</em>, <em>string $regex = null</em><big>)</big><a class="headerlink" href="#Validation::date" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">date</code><span class="sig-paren">(</span><em>string $check</em>, <em>mixed $format = 'ymd'</em>, <em>string $regex = null</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::date" title="永久链接至目标">¶</a></dt>
 <dd><p>这个规则确保数据是以合法的日期格式输入的。可以传入单个参数(可以是一个数组)，
 用来检查输入日期的格式。参数的值可以为下列之一:</p>
 <ul class="simple">
@@ -811,13 +941,13 @@ Uses = not。</p>
 接受众多的日期格式，然后再尝试进行转换，而不是强制用户使用指定的格式。能为用
 户做的越多越好。</p>
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.4 版更改: </span>加入 <tt class="docutils literal"><span class="pre">ym</span></tt> 和 <tt class="docutils literal"><span class="pre">y</span></tt> 格式。</p>
+<p><span class="versionmodified">在 2.4 版更改: </span>加入 <code class="docutils literal"><span class="pre">ym</span></code> 和 <code class="docutils literal"><span class="pre">y</span></code> 格式。</p>
 </div>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="Validation::datetime">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">datetime</tt><big>(</big><em>array $check</em>, <em>mixed $dateFormat = 'ymd'</em>, <em>string $regex = null</em><big>)</big><a class="headerlink" href="#Validation::datetime" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">datetime</code><span class="sig-paren">(</span><em>array $check</em>, <em>mixed $dateFormat = 'ymd'</em>, <em>string $regex = null</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::datetime" title="永久链接至目标">¶</a></dt>
 <dd><p>这条规则确保数据是合法的 datetime 格式。可以传入一个参数(可以是数组)
 来指定日期的格式。参数的值可以是下面的一个或多个:</p>
 <ul class="simple">
@@ -845,7 +975,7 @@ Uses = not。</p>
 
 <dl class="staticmethod">
 <dt id="Validation::decimal">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">decimal</tt><big>(</big><em>integer $check</em>, <em>integer $places = null</em>, <em>string $regex = null</em><big>)</big><a class="headerlink" href="#Validation::decimal" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">decimal</code><span class="sig-paren">(</span><em>integer $check</em>, <em>integer $places = null</em>, <em>string $regex = null</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::decimal" title="永久链接至目标">¶</a></dt>
 <dd><p>这个规则确保数据是合法的 decimal 数值。可以传入参数来指定小数点后需要多少位
 小数。如果没有参数传入，数据将会当做科学计数法的浮点数来验证，这样的话，如果
 小数点后面没有数字，验证就会失败:</p>
@@ -860,7 +990,7 @@ Uses = not。</p>
 
 <dl class="staticmethod">
 <dt id="Validation::email">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">email</tt><big>(</big><em>string $check</em>, <em>boolean $deep = false</em>, <em>string $regex = null</em><big>)</big><a class="headerlink" href="#Validation::email" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">email</code><span class="sig-paren">(</span><em>string $check</em>, <em>boolean $deep = false</em>, <em>string $regex = null</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::email" title="永久链接至目标">¶</a></dt>
 <dd><p>这条规则检查数据是否是合法的电子邮件地址。给规则的第二个参数传入布尔值
 true，就会同时也验证电子邮件的主机地址是否也是合法的:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;rule&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;email&#39;</span><span class="p">));</span>
@@ -877,7 +1007,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::equalTo">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">equalTo</tt><big>(</big><em>mixed $check</em>, <em>mixed $compareTo</em><big>)</big><a class="headerlink" href="#Validation::equalTo" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">equalTo</code><span class="sig-paren">(</span><em>mixed $check</em>, <em>mixed $compareTo</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::equalTo" title="永久链接至目标">¶</a></dt>
 <dd><p>这条规则确保数据的值等于给定的值，并且是相同的类型。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;food&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -891,7 +1021,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::extension">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">extension</tt><big>(</big><em>mixed $check</em>, <em>array $extensions = array('gif'</em>, <em>'jpeg'</em>, <em>'png'</em>, <em>'jpg')</em><big>)</big><a class="headerlink" href="#Validation::extension" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">extension</code><span class="sig-paren">(</span><em>mixed $check</em>, <em>array $extensions = array('gif'</em>, <em>'jpeg'</em>, <em>'png'</em>, <em>'jpg')</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::extension" title="永久链接至目标">¶</a></dt>
 <dd><p>这条规则检查合法的文件扩展名，比如.jpg或者.png。
 允许多个扩展名以数组的形式传入。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -906,11 +1036,11 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::fileSize">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">fileSize</tt><big>(</big><em>$check</em>, <em>$operator = null</em>, <em>$size = null</em><big>)</big><a class="headerlink" href="#Validation::fileSize" title="永久链接至目标">¶</a></dt>
-<dd><p>这条规则用来检查文件大小。可以用 <tt class="docutils literal"><span class="pre">$operator</span></tt> 来决定要
-使用的比较方法。所有 <a class="reference internal" href="#Validation::comparison" title="Validation::comparison"><tt class="xref php php-func docutils literal"><span class="pre">comparison()</span></tt></a> 支持的
-操作符这里都可以使用。这个方法可以自动处理来自 <tt class="docutils literal"><span class="pre">$_FILES</span></tt> 的数组，
-它可以从 <tt class="docutils literal"><span class="pre">tmp_name</span></tt> 键读取，只要 <tt class="docutils literal"><span class="pre">$check</span></tt> 是个数组，并且含有这个键:</p>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">fileSize</code><span class="sig-paren">(</span><em>$check</em>, <em>$operator = null</em>, <em>$size = null</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::fileSize" title="永久链接至目标">¶</a></dt>
+<dd><p>这条规则用来检查文件大小。可以用 <code class="docutils literal"><span class="pre">$operator</span></code> 来决定要
+使用的比较方法。所有 <a class="reference internal" href="#Validation::comparison" title="Validation::comparison"><code class="xref php php-func docutils literal"><span class="pre">comparison()</span></code></a> 支持的
+操作符这里都可以使用。这个方法可以自动处理来自 <code class="docutils literal"><span class="pre">$_FILES</span></code> 的数组，
+它可以从 <code class="docutils literal"><span class="pre">tmp_name</span></code> 键读取，只要 <code class="docutils literal"><span class="pre">$check</span></code> 是个数组，并且含有这个键:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;image&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;rule&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;fileSize&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">,</span> <span class="s1">&#39;1MB&#39;</span><span class="p">),</span>
@@ -926,7 +1056,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::inList">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">inList</tt><big>(</big><em>string $check</em>, <em>array $list</em><big>)</big><a class="headerlink" href="#Validation::inList" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">inList</code><span class="sig-paren">(</span><em>string $check</em>, <em>array $list</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::inList" title="永久链接至目标">¶</a></dt>
 <dd><p>这条规则确保数据限于一个给定的集合中。它需要以数组形式提供的一组值。如果数据
 能够和给定的数组中的一个值匹配，字段就是合法的。</p>
 <p>例如:</p>
@@ -940,12 +1070,12 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
  <span class="p">);</span>
 </pre></div>
 </div>
-<p>默认区分大小写，可以设置 <tt class="docutils literal"><span class="pre">$caseInsensitive</span></tt> 为真来不区分大小写。</p>
+<p>默认区分大小写，可以设置 <code class="docutils literal"><span class="pre">$caseInsensitive</span></code> 为真来不区分大小写。</p>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="Validation::ip">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">ip</tt><big>(</big><em>string $check</em>, <em>string $type = 'both'</em><big>)</big><a class="headerlink" href="#Validation::ip" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">ip</code><span class="sig-paren">(</span><em>string $check</em>, <em>string $type = 'both'</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::ip" title="永久链接至目标">¶</a></dt>
 <dd><p>这条规则确保提交的是合法的 IPv4 或 IPv6 的地址。允许 &#8216;both&#8217; (缺省值)，
 &#8216;IPv4&#8217;或者&#8217;IPv6&#8217;。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -960,7 +1090,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="method">
 <dt id="Model::Validation::isUnique">
-<tt class="descclassname">Model::</tt><tt class="descname">isUnique</tt><big>(</big><big>)</big><a class="headerlink" href="#Model::Validation::isUnique" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Model::</code><code class="descname">isUnique</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Model::Validation::isUnique" title="永久链接至目标">¶</a></dt>
 <dd><p>字段的数据必须唯一，它不可以被其他任何数据行使用。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;login&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -970,7 +1100,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>可以提供多个字段并且设置 <tt class="docutils literal"><span class="pre">$or</span></tt> 为 <tt class="docutils literal"><span class="pre">false</span></tt> 来验证一组字段是否唯一:</p>
+<p>可以提供多个字段并且设置 <code class="docutils literal"><span class="pre">$or</span></code> 为 <code class="docutils literal"><span class="pre">false</span></code> 来验证一组字段是否唯一:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;rule&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;isUnique&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">),</span> <span class="k">false</span><span class="p">),</span>
@@ -984,14 +1114,14 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::luhn">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">luhn</tt><big>(</big><em>string|array $check</em>, <em>boolean $deep = false</em><big>)</big><a class="headerlink" href="#Validation::luhn" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">luhn</code><span class="sig-paren">(</span><em>string|array $check</em>, <em>boolean $deep = false</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::luhn" title="永久链接至目标">¶</a></dt>
 <dd><p>Luhn 算法：一个校验码公式，来验证各种识别号码。更多信息，请参见
 <a class="reference external" href="http://en.wikipedia.org/wiki/Luhn_algorithm">Luhn 算法</a>。</p>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="Validation::maxLength">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">maxLength</tt><big>(</big><em>string $check</em>, <em>integer $max</em><big>)</big><a class="headerlink" href="#Validation::maxLength" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">maxLength</code><span class="sig-paren">(</span><em>string $check</em>, <em>integer $max</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::maxLength" title="永久链接至目标">¶</a></dt>
 <dd><p>这个规则确保数据在最大长度范围内。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;login&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -1007,7 +1137,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::mimeType">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">mimeType</tt><big>(</big><em>mixed $check</em>, <em>array $mimeTypes</em><big>)</big><a class="headerlink" href="#Validation::mimeType" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">mimeType</code><span class="sig-paren">(</span><em>mixed $check</em>, <em>array $mimeTypes</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::mimeType" title="永久链接至目标">¶</a></dt>
 <dd><div class="versionadded">
 <p><span class="versionmodified">2.2 新版功能.</span></p>
 </div>
@@ -1015,7 +1145,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 <div class="versionchanged">
 <p><span class="versionmodified">在 2.5 版更改.</span></p>
 </div>
-<p>从 2.5 版本开始 <tt class="docutils literal"><span class="pre">$mimeTypes</span></tt> 可以是正则表达式字符串.</p>
+<p>从 2.5 版本开始 <code class="docutils literal"><span class="pre">$mimeTypes</span></code> 可以是正则表达式字符串.</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;image&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;rule&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;mimeType&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;image/gif&#39;</span><span class="p">)),</span>
@@ -1032,7 +1162,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::minLength">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">minLength</tt><big>(</big><em>string $check</em>, <em>integer $min</em><big>)</big><a class="headerlink" href="#Validation::minLength" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">minLength</code><span class="sig-paren">(</span><em>string $check</em>, <em>integer $min</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::minLength" title="永久链接至目标">¶</a></dt>
 <dd><p>这个规则确保数据满足最小长度要求。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;login&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -1048,7 +1178,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::money">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">money</tt><big>(</big><em>string $check</em>, <em>string $symbolPosition = 'left'</em><big>)</big><a class="headerlink" href="#Validation::money" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">money</code><span class="sig-paren">(</span><em>string $check</em>, <em>string $symbolPosition = 'left'</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::money" title="永久链接至目标">¶</a></dt>
 <dd><p>这条规则确保数值是正确的财务金额。</p>
 <p>第二个参数指定货币符号在哪里(左/右)。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -1063,7 +1193,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::multiple">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">multiple</tt><big>(</big><em>mixed $check</em>, <em>mixed $options = array()</em><big>)</big><a class="headerlink" href="#Validation::multiple" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">multiple</code><span class="sig-paren">(</span><em>mixed $check</em>, <em>mixed $options = array()</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::multiple" title="永久链接至目标">¶</a></dt>
 <dd><p>用这条规则验证一个多选输入。它支持&#8221;in&#8221;，&#8221;max&#8221;和&#8221;min&#8221;参数。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;multiple&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -1077,21 +1207,21 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>默认区分大小写，可以设置 <tt class="docutils literal"><span class="pre">$caseInsensitive</span></tt> 为真来不区分大小写。</p>
+<p>默认区分大小写，可以设置 <code class="docutils literal"><span class="pre">$caseInsensitive</span></code> 为真来不区分大小写。</p>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="Validation::notEmpty">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">notEmpty</tt><big>(</big><em>mixed $check</em><big>)</big><a class="headerlink" href="#Validation::notEmpty" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">notEmpty</code><span class="sig-paren">(</span><em>mixed $check</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::notEmpty" title="永久链接至目标">¶</a></dt>
 <dd><div class="deprecated">
 <p><span class="versionmodified">2.7 版后已移除.</span></p>
 </div>
-<p>不要再使用，而是用 <tt class="docutils literal"><span class="pre">notBlank</span></tt>。</p>
+<p>不要再使用，而是用 <code class="docutils literal"><span class="pre">notBlank</span></code>。</p>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="Validation::notBlank">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">notBlank</tt><big>(</big><em>mixed $check</em><big>)</big><a class="headerlink" href="#Validation::notBlank" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">notBlank</code><span class="sig-paren">(</span><em>mixed $check</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::notBlank" title="永久链接至目标">¶</a></dt>
 <dd><div class="versionadded">
 <p><span class="versionmodified">2.7 新版功能.</span></p>
 </div>
@@ -1109,7 +1239,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::numeric">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">numeric</tt><big>(</big><em>string $check</em><big>)</big><a class="headerlink" href="#Validation::numeric" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">numeric</code><span class="sig-paren">(</span><em>string $check</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::numeric" title="永久链接至目标">¶</a></dt>
 <dd><p>检查传入的数据是一个合法的数。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;cars&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -1123,11 +1253,11 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::naturalNumber">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">naturalNumber</tt><big>(</big><em>mixed $check</em>, <em>boolean $allowZero = false</em><big>)</big><a class="headerlink" href="#Validation::naturalNumber" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">naturalNumber</code><span class="sig-paren">(</span><em>mixed $check</em>, <em>boolean $allowZero = false</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::naturalNumber" title="永久链接至目标">¶</a></dt>
 <dd><div class="versionadded">
 <p><span class="versionmodified">2.2 新版功能.</span></p>
 </div>
-<p>这个规则检查传入的数据是否是正确的自然数。如果 <tt class="docutils literal"><span class="pre">$allowZero</span></tt> 设为 true，零
+<p>这个规则检查传入的数据是否是正确的自然数。如果 <code class="docutils literal"><span class="pre">$allowZero</span></code> 设为 true，零
 也可以接受。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;wheels&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -1145,7 +1275,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::phone">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">phone</tt><big>(</big><em>mixed $check</em>, <em>string $regex = null</em>, <em>string $country = 'all'</em><big>)</big><a class="headerlink" href="#Validation::phone" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">phone</code><span class="sig-paren">(</span><em>mixed $check</em>, <em>string $regex = null</em>, <em>string $country = 'all'</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::phone" title="永久链接至目标">¶</a></dt>
 <dd><p>Phone 规则验证美国的电话号码。如果要验证美国以外的电话号码，可以在第二个参数
 用一个正则表达式来处理其他的号码格式。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -1159,7 +1289,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::postal">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">postal</tt><big>(</big><em>mixed $check</em>, <em>string $regex = null</em>, <em>string $country = 'us'</em><big>)</big><a class="headerlink" href="#Validation::postal" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">postal</code><span class="sig-paren">(</span><em>mixed $check</em>, <em>string $regex = null</em>, <em>string $country = 'us'</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::postal" title="永久链接至目标">¶</a></dt>
 <dd><p>Postal 规则验证美国(us)、加拿大(ca)、英国(uk)、意大利(it)、德国(de)和比利时
 (be)的邮政编码。对于其他的邮政编码格式，可以在第二个参数提供一个正则表达式。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -1173,7 +1303,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::range">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">range</tt><big>(</big><em>string $check</em>, <em>integer $lower = null</em>, <em>integer $upper = null</em><big>)</big><a class="headerlink" href="#Validation::range" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">range</code><span class="sig-paren">(</span><em>string $check</em>, <em>integer $lower = null</em>, <em>integer $upper = null</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::range" title="永久链接至目标">¶</a></dt>
 <dd><p>这条规则确保数值在一个给定范围内。如果没有指定范围，规则会检查数值是当前平台
 上的合法有限数。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -1193,7 +1323,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::ssn">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">ssn</tt><big>(</big><em>mixed $check</em>, <em>string $regex = null</em>, <em>string $country = null</em><big>)</big><a class="headerlink" href="#Validation::ssn" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">ssn</code><span class="sig-paren">(</span><em>mixed $check</em>, <em>string $regex = null</em>, <em>string $country = null</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::ssn" title="永久链接至目标">¶</a></dt>
 <dd><p>Ssn 规则验证美国(us)，丹麦(dk)，和荷兰(nl)的社会保险号码。对于其他的社会保险
 号码，可以指定正则表达式。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -1207,14 +1337,14 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::time">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">time</tt><big>(</big><em>string $check</em><big>)</big><a class="headerlink" href="#Validation::time" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">time</code><span class="sig-paren">(</span><em>string $check</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::time" title="永久链接至目标">¶</a></dt>
 <dd><p>Time 验证规则决定传入的字符串是否是正确的时间。以24小时(HH:MM)或上午/下午(
 [H]H:MM[a|p]m)来验证。不允许/验证秒。</p>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="Validation::uploadError">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">uploadError</tt><big>(</big><em>mixed $check</em><big>)</big><a class="headerlink" href="#Validation::uploadError" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">uploadError</code><span class="sig-paren">(</span><em>mixed $check</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::uploadError" title="永久链接至目标">¶</a></dt>
 <dd><div class="versionadded">
 <p><span class="versionmodified">2.2 新版功能.</span></p>
 </div>
@@ -1231,7 +1361,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::url">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">url</tt><big>(</big><em>string $check</em>, <em>boolean $strict = false</em><big>)</big><a class="headerlink" href="#Validation::url" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">url</code><span class="sig-paren">(</span><em>string $check</em>, <em>boolean $strict = false</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::url" title="永久链接至目标">¶</a></dt>
 <dd><p>这条规则检查合法的网址格式。支持 http(s)、ftp(s)、file、news 和 gopher 协议:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;website&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -1254,13 +1384,13 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 <dl class="staticmethod">
 <dt id="Validation::userDefined">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">userDefined</tt><big>(</big><em>mixed $check</em>, <em>object $object</em>, <em>string $method</em>, <em>array $args = null</em><big>)</big><a class="headerlink" href="#Validation::userDefined" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">userDefined</code><span class="sig-paren">(</span><em>mixed $check</em>, <em>object $object</em>, <em>string $method</em>, <em>array $args = null</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::userDefined" title="永久链接至目标">¶</a></dt>
 <dd><p>执行用户定义的验证。</p>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="Validation::uuid">
-<em class="property">static </em><tt class="descclassname">Validation::</tt><tt class="descname">uuid</tt><big>(</big><em>string $check</em><big>)</big><a class="headerlink" href="#Validation::uuid" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Validation::</code><code class="descname">uuid</code><span class="sig-paren">(</span><em>string $check</em><span class="sig-paren">)</span><a class="headerlink" href="#Validation::uuid" title="永久链接至目标">¶</a></dt>
 <dd><p>检查数据是合法的 UUID: <a class="reference external" href="http://tools.ietf.org/html/rfc4122">http://tools.ietf.org/html/rfc4122</a>。</p>
 </dd></dl>
 
@@ -1279,7 +1409,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>这个文件可以放在 <tt class="docutils literal"><span class="pre">APP/Validation/</span></tt> 或者 <tt class="docutils literal"><span class="pre">App/PluginName/Validation/</span></tt>，但必须
+<p>这个文件可以放在 <code class="docutils literal"><span class="pre">APP/Validation/</span></code> 或者 <code class="docutils literal"><span class="pre">App/PluginName/Validation/</span></code>，但必须
 在使用之前用 App::uses() 导入。在模型验证中可以这样使用 NlValidation 类:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$validate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;phone_no&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;rule&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;phone&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="s1">&#39;nl&#39;</span><span class="p">)),</span>
@@ -1287,8 +1417,8 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>当模型数据被验证时，验证程序会知道它无法处理 <tt class="docutils literal"><span class="pre">nl</span></tt> 地区，就会尝试把任务
-交给 <tt class="docutils literal"><span class="pre">NlValidation::postal()</span></tt>，该方法的返回值就会被用作验证通过/失败的标志。这
+<p>当模型数据被验证时，验证程序会知道它无法处理 <code class="docutils literal"><span class="pre">nl</span></code> 地区，就会尝试把任务
+交给 <code class="docutils literal"><span class="pre">NlValidation::postal()</span></code>，该方法的返回值就会被用作验证通过/失败的标志。这
 个方法允许你创建一些类来处理一组或一个子集的地区，这是一个大的 switch 语句无法实
 现的。单个验证方法的用法并没有改变，只是增加了跳转到其他验证的功能。</p>
 <div class="admonition tip">
@@ -1305,12 +1435,14 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 </div>
 
 
+			</div>
 		</div>
-	</div>
 
-	<div class="sidebar columns three pull-nine">
-<div id="sidebar-navigation" class="hide-on-phones">
-	<h2 class="hide-on-desktops">Table of Contents</h2>
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="zh">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
@@ -1323,7 +1455,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 <li class="toctree-l2"><a class="reference internal" href="retrieving-your-data.html">检索数据</a></li>
 <li class="toctree-l2"><a class="reference internal" href="saving-your-data.html">保存数据</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deleting-data.html">删除数据</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">数据验证</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">数据验证</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data-validation/validating-data-from-the-controller.html">从控制器验证数据</a></li>
 </ul>
 </li>
@@ -1338,7 +1470,7 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Shells，任务与命令行工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
@@ -1348,108 +1480,171 @@ true，就会同时也验证电子邮件的主机地址是否也是合法的:</p
 
 </div>
 
-<div class="page-contents">
-	<h3>Page contents</h3>
-	<ul>
-<li><a class="reference internal" href="#">数据验证</a><ul>
-<li><a class="reference internal" href="#id2">简单的规则</a></li>
-<li><a class="reference internal" href="#id3">每个字段带一个规则</a><ul>
-<li><a class="reference internal" href="#rule">rule</a></li>
-<li><a class="reference internal" href="#required">required</a></li>
-<li><a class="reference internal" href="#allowempty">allowEmpty</a></li>
-<li><a class="reference internal" href="#on">on</a></li>
-<li><a class="reference internal" href="#message">message</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id4">每个字段多条规则</a><ul>
-<li><a class="reference internal" href="#last">last</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id5">自定义验证规则</a><ul>
-<li><a class="reference internal" href="#id6">使用自定义的正则表达式进行验证</a></li>
-<li><a class="reference internal" href="#id7">添加自定义的验证方法</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id8">动态改变验证规则</a><ul>
-<li><a class="reference internal" href="#id9">添加新的验证规则</a></li>
-<li><a class="reference internal" href="#id10">修改现存的验证规则</a></li>
-<li><a class="reference internal" href="#id11">从集合中删除规则</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#core-validation-rules">核心验证规则</a></li>
-<li><a class="reference internal" href="#id13">本地化验证</a></li>
-</ul>
-</li>
-</ul>
-
-</div>
-	</div>
-
-</div>
-
-<div class="content row">
-	<ul class="related-pages inline">
-	<li>
-		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
-	</li>
-	<li>
-		<a href="data-validation/validating-data-from-the-controller.html" title="从控制器验证数据" accesskey="N">下一页</a>
-	</li>
-	<li>
-		<a href="deleting-data.html" title="删除数据" accesskey="P">上一页</a>
-	</li>
-	</ul>
-</div>
-
-	<div class="footer-push"> </div>
-</div>
-
-
-
-
-
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>发现翻译错误?</strong>
-			请在下面留言<br />
-			<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">[ 我要加入翻译 ]</a>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Jul 10, 2016.
-				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
 		</div>
 	</div>
 </div>
 
-<div id="nav-modal" class="reveal-modal"> </div>
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-8 social-footer text-center ">
+				<a href="#">发现翻译错误? 请在下面留言</a>
+				<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">我要加入翻译</a>
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="../_static/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="../_static/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
+</li>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
+
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
+
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							&copy; 版权所有 2016, Cake Software Foundation, Inc.
+						最后更新于 8月 02, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
 <div id="inline-search-results"></div>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F201cbc61deaf9f7ffb521fb23e83db40' type='text/javascript'%3E%3C/script%3E"));
-</script>
 
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+
+</div>
+
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"cakephpchina"};
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
 	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	</script>
-<!-- Duoshuo Comment END -->
-
-<!-- Grunt Live Reload -->
-<script src="http://192.168.56.113:35729/livereload.js"></script>
+</script>
   </body>
 </html>

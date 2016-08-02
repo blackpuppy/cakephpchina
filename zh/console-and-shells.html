@@ -1,168 +1,308 @@
 
+
 <!DOCTYPE html>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Console and Shells" lang="zh_CN" name="title" />
-<meta content="shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc" lang="zh_CN" name="keywords" />
+    <meta content="Shells, Tasks &amp; Console Tools" lang="zh" name="title" />
+<meta content="shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc" lang="zh" name="keywords" />
 
-    <title>命令行与Shells &mdash; CakePHP Cookbook 2.x 文档</title>
+    <title>Shells，任务与命令行工具</title>
+    <link href="_static/favicon.png" type="image/png" rel="icon" />
+
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/app.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '2.x',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/translations.js"></script>
     <script type="text/javascript" src="_static/app.js"></script>
-    <script type="text/javascript" src="_static/modernizr.foundation.js"></script>
-    <script type="text/javascript" src="_static/foundation.js"></script>
+
+    <link rel="alternate" hreflang="en" href="../en/console-and-shells.html" /><link rel="alternate" hreflang="pt" href="../pt/console-and-shells.html" /><link rel="alternate" hreflang="es" href="../es/console-and-shells.html" /><link rel="alternate" hreflang="ja" href="../ja/console-and-shells.html" /><link rel="alternate" hreflang="fr" href="../fr/console-and-shells.html" />
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within CakePHP Cookbook 2.x 文档" href="_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="top" title="CakePHP Cookbook 2.x 文档" href="index.html" />
-    <link rel="next" title="定期运行Shells" href="console-and-shells/cron-jobs.html" />
+    <link rel="next" title="Shell Helpers" href="console-and-shells/helpers.html" />
     <link rel="prev" title="How To Create Plugins" href="plugins/how-to-create-plugins.html" />
-<link href="_static/favicon.ico" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="alternate" hreflang="en" href="../en/console-and-shells.html" /><link rel="alternate" hreflang="pt" href="../pt/console-and-shells.html" /><link rel="alternate" hreflang="es" href="../es/console-and-shells.html" /><link rel="alternate" hreflang="ja" href="../ja/console-and-shells.html" /><link rel="alternate" hreflang="fr" href="../fr/console-and-shells.html" />
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="_static/opensearchdescription-book-2-x.xml">
-<script type="text/javascript">
-window.lang = "zh_CN";
-</script>
-
+    <script type="text/javascript">
+    window.lang = "zh";
+    </script>
   </head>
   <body>
 
 <div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="masthead">
-	<div class="header-backing"></div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="contents.html">
-			<img src="_static/cake-logo.png" alt="CakePHP" width="70" />
-			</a>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
+
 		
-<div id="searchbox" class="columns nine phone-three">
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-	<form id="searchform" class="search" action="search.html" method="get">
-		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
-		<input class="search-submit search-big button red" type="submit" value="搜索" />
-		<input type="hidden" name="check_keywords" value="yes" />
-		<input type="hidden" name="area" value="default" />
-
-		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
-	</form>
-
-</div>
-	</div>
-</div>
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="contents.html">Cookbook 2.x</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">2.x Book</a>
-				<ul>
-					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				<a href="#">zh_CN</a>
-
-				<ul>
-				
-					<li><a href="../en/console-and-shells.html">en</a></li>
-				
-					<li><a href="../pt/console-and-shells.html">pt</a></li>
-				
-					<li><a href="../es/console-and-shells.html">es</a></li>
-				
-					<li><a href="../ja/console-and-shells.html">ja</a></li>
-				
-					<li><a href="../fr/console-and-shells.html">fr</a></li>
-				
-					<li></li>
-				
-				</ul>
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="search.html" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="搜索" type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/console-and-shells.rst" target="_blank">Improve this Doc</a>
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 2.x <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														zh
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li><a href="../en/console-and-shells.html">en</a></li>
+											
+												<li><a href="../pt/console-and-shells.html">pt</a></li>
+											
+												<li><a href="../es/console-and-shells.html">es</a></li>
+											
+												<li><a href="../ja/console-and-shells.html">ja</a></li>
+											
+												<li><a href="../fr/console-and-shells.html">fr</a></li>
+											
+												<li></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/zh">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/zh">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/zh/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/zh/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/master/zh/console-and-shells.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="#">Shells，任务与命令行工具</a><ul>
+<li><a class="reference internal" href="#the-cakephp-console">The CakePHP console</a><ul>
+<li><a class="reference internal" href="#adding-cake-to-your-system-path">Adding cake to your system path</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#shell-creating-a-shell">创建一个shell Creating a shell</a><ul>
+<li><a class="reference internal" href="#using-models-in-your-shells">Using Models in your shells</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#shell-tasks">Shell tasks</a><ul>
+<li><a class="reference internal" href="#loading-tasks-on-the-fly-with-taskcollection">Loading tasks on the fly with TaskCollection</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#invoking-other-shells-from-your-shell">Invoking other shells from your shell</a></li>
+<li><a class="reference internal" href="#console-output-levels">Console output levels</a></li>
+<li><a class="reference internal" href="#styling-output">Styling output</a><ul>
+<li><a class="reference internal" href="#turning-off-colouring">Turning off colouring</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuring-options-and-generating-help">Configuring options and generating help</a><ul>
+<li><a class="reference internal" href="#configuring-an-option-parser-with-the-fluent-interface">Configuring an option parser with the fluent interface</a></li>
+<li><a class="reference internal" href="#adding-arguments">Adding arguments</a></li>
+<li><a class="reference internal" href="#validating-arguments">Validating arguments</a></li>
+<li><a class="reference internal" href="#adding-options">Adding Options</a></li>
+<li><a class="reference internal" href="#validating-options">Validating options</a></li>
+<li><a class="reference internal" href="#using-boolean-options">Using boolean options</a></li>
+<li><a class="reference internal" href="#adding-subcommands">Adding subcommands</a></li>
+<li><a class="reference internal" href="#building-a-consoleoptionparser-from-an-array">Building a ConsoleOptionParser from an array</a></li>
+<li><a class="reference internal" href="#getting-help-from-shells">Getting help from shells</a></li>
+<li><a class="reference internal" href="#getting-help-as-xml">Getting help as XML</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#shell-api">Shell API</a></li>
+<li><a class="reference internal" href="#more-topics">More topics</a></li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
   <div class="section" id="shells">
-<h1>命令行与Shells<a class="headerlink" href="#shells" title="永久链接至标题">¶</a></h1>
+<h1>Shells，任务与命令行工具<a class="headerlink" href="#shells" title="永久链接至标题">¶</a></h1>
 <p>CakePHP不单单是个Web框架,而且是一个通过控制台创建应用程序的框架。
 控制台应用程序非常适合处理各种后台任务，如维护等务,并完成请求-响应周期以外的工作。
 CakePHP控制台应用程序允许您从命令行重用应用程序的类。</p>
@@ -198,7 +338,7 @@ Console is Windows-compatible as well. Let’s execute the Console
 program from bash. This example assumes that the user is currently
 logged into a bash prompt and is currently at the root of a CakePHP
 application.</p>
-<p>CakePHP applications contain a <tt class="docutils literal"><span class="pre">Console</span></tt> directory that contains
+<p>CakePHP applications contain a <code class="docutils literal"><span class="pre">Console</span></code> directory that contains
 all the shells and tasks for an application.  It also comes with an
 executable:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">cd</span> <span class="o">/</span><span class="nx">path</span><span class="o">/</span><span class="nx">to</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">/</span><span class="nx">app</span>
@@ -207,7 +347,7 @@ executable:</p>
 </div>
 <p>It&#8217;s often wise to add the core cake executable to your system path
 so you can use the cake command anywhere.  This comes in handy when you are
-creating new projects. See <a class="reference internal" href="#adding-cake-to-your-path"><em>Adding cake to your system path</em></a> for how to make <tt class="docutils literal"><span class="pre">cake</span></tt>
+creating new projects. See <a class="reference internal" href="#adding-cake-to-your-path"><span class="std std-ref">Adding cake to your system path</span></a> for how to make <code class="docutils literal"><span class="pre">cake</span></code>
 available systemwide.</p>
 <p>Running the Console with no arguments produces this help message:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Welcome</span> <span class="nx">to</span> <span class="nx">CakePHP</span> <span class="nx">v2</span><span class="o">.</span><span class="mf">0.0</span> <span class="nx">Console</span>
@@ -249,7 +389,7 @@ paths allows you to see where the console will be making changes.
 To change the app folder you wish to work with, you can supply its
 path as the first argument to the cake command. This next example
 shows how to specify an app folder, assuming you’ve already added
-the console folder to your <tt class="docutils literal"><span class="pre">PATH</span></tt>:</p>
+the console folder to your <code class="docutils literal"><span class="pre">PATH</span></code>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="nx">cake</span> <span class="o">-</span><span class="nx">app</span> <span class="o">/</span><span class="nx">path</span><span class="o">/</span><span class="nx">to</span><span class="o">/</span><span class="nx">cakephp</span><span class="o">/</span><span class="nx">app</span>
 </pre></div>
 </div>
@@ -261,20 +401,20 @@ or supplied as an absolute path.</p>
 cake executable to your system path.</p>
 <ol class="arabic">
 <li><p class="first">Locate where your CakePHP install, and cake executable are.  For example
-<tt class="docutils literal"><span class="pre">/Users/mark/cakephp/lib/Cake/Console/cake</span></tt></p>
+<code class="docutils literal"><span class="pre">/Users/mark/cakephp/lib/Cake/Console/cake</span></code></p>
 </li>
-<li><p class="first">Edit your <tt class="docutils literal"><span class="pre">.bashrc</span></tt> or <tt class="docutils literal"><span class="pre">.bash_profile</span></tt> file in your home directory, and add the following:</p>
+<li><p class="first">Edit your <code class="docutils literal"><span class="pre">.bashrc</span></code> or <code class="docutils literal"><span class="pre">.bash_profile</span></code> file in your home directory, and add the following:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">export</span> <span class="nx">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">$PATH</span><span class="s2">:/Users/mark/cakephp/lib/Cake/Console&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Reload the bash configuration or open a new terminal, and <tt class="docutils literal"><span class="pre">cake</span></tt> should work anywhere.</p>
+<li><p class="first">Reload the bash configuration or open a new terminal, and <code class="docutils literal"><span class="pre">cake</span></code> should work anywhere.</p>
 </li>
 </ol>
 <p>If you are on Windows Vista or 7, you should follow the steps below.</p>
 <ol class="arabic">
 <li><p class="first">Locate where your CakePHP install and cake executable are.  For example
-<tt class="docutils literal"><span class="pre">C:\xampp\htdocs\cakephp\lib\Cake\Console</span></tt></p>
+<code class="docutils literal"><span class="pre">C:\xampp\htdocs\cakephp\lib\Cake\Console</span></code></p>
 </li>
 <li><p class="first">Open System Properties window from My Computer. You want to try the shortcut Windows Key + Pause or Windows Key + Break. Or, from the Desktop, right-click My Computer, click Properties then click Advanced System Settings link in the left column</p>
 </li>
@@ -282,12 +422,12 @@ cake executable to your system path.</p>
 </li>
 <li><p class="first">In the System Variables portion, reach Path variable and double-click on it to Edit</p>
 </li>
-<li><p class="first">Add the <tt class="docutils literal"><span class="pre">cake</span></tt> install path string followed by a semi colon. Result example:</p>
+<li><p class="first">Add the <code class="docutils literal"><span class="pre">cake</span></code> install path string followed by a semi colon. Result example:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">%</span><span class="nx">SystemRoot</span><span class="o">%</span><span class="nx">\system32</span><span class="p">;</span><span class="o">%</span><span class="nx">SystemRoot</span><span class="o">%</span><span class="p">;</span><span class="nx">C</span><span class="o">:</span><span class="nx">\xampp\htdocs\cakephp\lib\Cake\Console</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Click Ok and <tt class="docutils literal"><span class="pre">cake</span></tt> should work anywhere.</p>
+<li><p class="first">Click Ok and <code class="docutils literal"><span class="pre">cake</span></code> should work anywhere.</p>
 </li>
 </ol>
 </div>
@@ -297,7 +437,7 @@ cake executable to your system path.</p>
 <p>让我们创建一个shell在命令行中使用。在这个例子中，我们创建一个简单的Hello world的shell。</p>
 <p>Let&#8217;s create a shell for use in the Console. For this example,
 we&#8217;ll create a simple Hello world shell.  In your applications
-<tt class="docutils literal"><span class="pre">Console/Command</span></tt> directory create <tt class="docutils literal"><span class="pre">HelloShell.php</span></tt>.  Put the following
+<code class="docutils literal"><span class="pre">Console/Command</span></code> directory create <code class="docutils literal"><span class="pre">HelloShell.php</span></code>.  Put the following
 code inside it:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HelloShell</span> <span class="k">extends</span> <span class="nx">AppShell</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
@@ -307,7 +447,7 @@ code inside it:</p>
 </pre></div>
 </div>
 <p>The conventions for shell classes are that the class name should match
-the file name, with the suffix of Shell. In our shell we created a <tt class="docutils literal"><span class="pre">main()</span></tt> method.
+the file name, with the suffix of Shell. In our shell we created a <code class="docutils literal"><span class="pre">main()</span></code> method.
 This method is called when a shell is called with no additional commands.  We&#8217;ll add
 some more commands in a bit, but for now lets just run our shell.  From your application
 directory, run:</p>
@@ -323,11 +463,11 @@ directory, run:</p>
 <span class="nx">Hello</span> <span class="nx">world</span><span class="o">.</span>
 </pre></div>
 </div>
-<p>As mentioned before, the <tt class="docutils literal"><span class="pre">main()</span></tt> method in shells is a special method called
+<p>As mentioned before, the <code class="docutils literal"><span class="pre">main()</span></code> method in shells is a special method called
 whenever there are no other commands or arguments given to a shell.  You may have also
-noticed that HelloShell is extending <tt class="docutils literal"><span class="pre">AppShell</span></tt>.  Much like <a class="reference internal" href="controllers.html#app-controller"><em>App 控制器</em></a>, AppShell
+noticed that HelloShell is extending <code class="docutils literal"><span class="pre">AppShell</span></code>.  Much like <a class="reference internal" href="controllers.html#app-controller"><span class="std std-ref">App 控制器</span></a>, AppShell
 gives you a base class to contain all your common functions or logic.  You can define an AppShell,
-by creating <tt class="docutils literal"><span class="pre">app/Console/Command/AppShell.php</span></tt>.  If you don&#8217;t have one, CakePHP will use the
+by creating <code class="docutils literal"><span class="pre">app/Console/Command/AppShell.php</span></code>.  If you don&#8217;t have one, CakePHP will use the
 built-in one. Since our main method wasn&#8217;t very interesting lets add another command
 that does something:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HelloShell</span> <span class="k">extends</span> <span class="nx">AppShell</span> <span class="p">{</span>
@@ -341,20 +481,20 @@ that does something:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>After saving this file you should be able to run <tt class="docutils literal"><span class="pre">Console/cake</span> <span class="pre">hello</span> <span class="pre">hey_there</span> <span class="pre">your-name</span></tt>
-and see your name printed out.  Any public method not prefixed by an <tt class="docutils literal"><span class="pre">_</span></tt> is allowed to be
-called from the command line.  In our <tt class="docutils literal"><span class="pre">hey_there</span></tt> method we also used <tt class="docutils literal"><span class="pre">$this-&gt;args</span></tt>, this
+<p>After saving this file you should be able to run <code class="docutils literal"><span class="pre">Console/cake</span> <span class="pre">hello</span> <span class="pre">hey_there</span> <span class="pre">your-name</span></code>
+and see your name printed out.  Any public method not prefixed by an <code class="docutils literal"><span class="pre">_</span></code> is allowed to be
+called from the command line.  In our <code class="docutils literal"><span class="pre">hey_there</span></code> method we also used <code class="docutils literal"><span class="pre">$this-&gt;args</span></code>, this
 property contains an array of all the positional arguments provided to a command.  You can
-also use switches or options on shell applications, these are available at <tt class="docutils literal"><span class="pre">$this-&gt;params</span></tt>,
+also use switches or options on shell applications, these are available at <code class="docutils literal"><span class="pre">$this-&gt;params</span></code>,
 but we&#8217;ll cover that in a bit.</p>
-<p>When using a <tt class="docutils literal"><span class="pre">main()</span></tt> method you won&#8217;t be able to use the positional arguments
+<p>When using a <code class="docutils literal"><span class="pre">main()</span></code> method you won&#8217;t be able to use the positional arguments
 or parameters.  This is because the first positional argument or option is
 interpreted as the command name.  If you want to use arguments and options, you
-should use method names other than <tt class="docutils literal"><span class="pre">main</span></tt>.</p>
+should use method names other than <code class="docutils literal"><span class="pre">main</span></code>.</p>
 <div class="section" id="using-models-in-your-shells">
 <h3>Using Models in your shells<a class="headerlink" href="#using-models-in-your-shells" title="永久链接至标题">¶</a></h3>
 <p>You&#8217;ll often need access to your application&#8217;s business logic in shell utilities;
-CakePHP makes that super easy.  By setting a <tt class="docutils literal"><span class="pre">$uses</span></tt> property, you can define an
+CakePHP makes that super easy.  By setting a <code class="docutils literal"><span class="pre">$uses</span></code> property, you can define an
 array of models you want to have access to in your shell.  The defined models
 are loaded in as properties attached to your shell, just like a controller gets
 models attached to it:</p>
@@ -376,18 +516,18 @@ stored in the database.</p>
 <h2>Shell tasks<a class="headerlink" href="#shell-tasks" title="永久链接至标题">¶</a></h2>
 <p>There will be times when building more advanced console applications, you&#8217;ll want
 to compose functionality into re-usable classes that can be shared across many shells.
-Tasks allow you to extract commands into classes.  For example the <tt class="docutils literal"><span class="pre">bake</span></tt> is made
-almost entirely of tasks.  You define a shell&#8217;s tasks by using the <tt class="docutils literal"><span class="pre">$tasks</span></tt> property:</p>
+Tasks allow you to extract commands into classes.  For example the <code class="docutils literal"><span class="pre">bake</span></code> is made
+almost entirely of tasks.  You define a shell&#8217;s tasks by using the <code class="docutils literal"><span class="pre">$tasks</span></code> property:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">UserShell</span> <span class="k">extends</span> <span class="nx">AppShell</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$tasks</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Template&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>You can use tasks from plugins using the standard <a class="reference internal" href="appendices/glossary.html#term-plugin-syntax"><em class="xref std std-term">plugin syntax</em></a>.
-Tasks are stored in <tt class="docutils literal"><span class="pre">Console/Command/Task/</span></tt> in files named after
+<p>You can use tasks from plugins using the standard <a class="reference internal" href="appendices/glossary.html#term-plugin-syntax"><span class="xref std std-term">plugin syntax</span></a>.
+Tasks are stored in <code class="docutils literal"><span class="pre">Console/Command/Task/</span></code> in files named after
 their classes. So if we were to create a new &#8216;FileGenerator&#8217; task, you would create
-<tt class="docutils literal"><span class="pre">Console/Command/Task/FileGeneratorTask.php</span></tt>.</p>
-<p>Each task must at least implement an <tt class="docutils literal"><span class="pre">execute()</span></tt> method.  The ShellDispatcher,
+<code class="docutils literal"><span class="pre">Console/Command/Task/FileGeneratorTask.php</span></code>.</p>
+<p>Each task must at least implement an <code class="docutils literal"><span class="pre">execute()</span></code> method.  The ShellDispatcher,
 will call this method when the task is invoked.  A task class looks like:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FileGeneratorTask</span> <span class="k">extends</span> <span class="nx">Shell</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$uses</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">);</span>
@@ -398,7 +538,7 @@ will call this method when the task is invoked.  A task class looks like:</p>
 </pre></div>
 </div>
 <p>A shell can also access it&#8217;s tasks as properties, which makes tasks great for
-making re-usable chunks of functionality similar to <a class="reference internal" href="controllers/components.html"><em>组件</em></a>:</p>
+making re-usable chunks of functionality similar to <a class="reference internal" href="controllers/components.html"><span class="doc">组件</span></a>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// found in Console/Command/SeaShell.php</span>
 <span class="k">class</span> <span class="nc">SeaShell</span> <span class="k">extends</span> <span class="nx">AppShell</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$tasks</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Sound&#39;</span><span class="p">);</span> <span class="c1">// found in Console/Command/Task/SoundTask.php</span>
@@ -457,7 +597,7 @@ most output is un-necessary.  And there are times when you are not interested in
 everything that a shell has to say.  You can use output levels to flag output
 appropriately.  The user of the shell, can then decide what level of detail
 they are interested in by setting the correct flag when calling the shell.
-<a class="reference internal" href="#Shell::out" title="Shell::out"><tt class="xref php php-meth docutils literal"><span class="pre">Shell::out()</span></tt></a> supports 3 types of output by default.</p>
+<a class="reference internal" href="#Shell::out" title="Shell::out"><code class="xref php php-meth docutils literal"><span class="pre">Shell::out()</span></code></a> supports 3 types of output by default.</p>
 <ul class="simple">
 <li>QUIET - Only absolutely important information should be marked for quiet output.</li>
 <li>NORMAL - The default level, and normal usage</li>
@@ -476,7 +616,7 @@ for debugging as VERBOSE</li>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">out</span><span class="p">(</span><span class="s1">&#39;extra message&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">Shell</span><span class="o">::</span><span class="na">VERBOSE</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>You can control the output level of shells, by using the <tt class="docutils literal"><span class="pre">--quiet</span></tt> and <tt class="docutils literal"><span class="pre">--verbose</span></tt>
+<p>You can control the output level of shells, by using the <code class="docutils literal"><span class="pre">--quiet</span></code> and <code class="docutils literal"><span class="pre">--verbose</span></code>
 options. These options are added by default, and allow you to consistently control
 output levels inside your CakePHP shells.</p>
 </div>
@@ -487,20 +627,20 @@ ConsoleOutput will replace these tags with the correct ansi code sequence, or
 remove the tags if you are on a console that doesn&#8217;t support ansi codes. There
 are several built in styles, and you can create more.  The built in ones are</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">error</span></tt> Error messages. Red underlined text.</li>
-<li><tt class="docutils literal"><span class="pre">warning</span></tt> Warning messages. Yellow text.</li>
-<li><tt class="docutils literal"><span class="pre">info</span></tt> Informational messages. Cyan text.</li>
-<li><tt class="docutils literal"><span class="pre">comment</span></tt> Additional text. Blue text.</li>
-<li><tt class="docutils literal"><span class="pre">question</span></tt> Text that is a question, added automatically by shell.</li>
+<li><code class="docutils literal"><span class="pre">error</span></code> Error messages. Red underlined text.</li>
+<li><code class="docutils literal"><span class="pre">warning</span></code> Warning messages. Yellow text.</li>
+<li><code class="docutils literal"><span class="pre">info</span></code> Informational messages. Cyan text.</li>
+<li><code class="docutils literal"><span class="pre">comment</span></code> Additional text. Blue text.</li>
+<li><code class="docutils literal"><span class="pre">question</span></code> Text that is a question, added automatically by shell.</li>
 </ul>
 <p>You can create additional styles using <cite>$this-&gt;stdout-&gt;styles()</cite>.  To declare a
 new output style you could do:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">stdout</span><span class="o">-&gt;</span><span class="na">styles</span><span class="p">(</span><span class="s1">&#39;flashy&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;text&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;magenta&#39;</span><span class="p">,</span> <span class="s1">&#39;blink&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>This would then allow you to use a <tt class="docutils literal"><span class="pre">&lt;flashy&gt;</span></tt> tag in your shell output, and if ansi
+<p>This would then allow you to use a <code class="docutils literal"><span class="pre">&lt;flashy&gt;</span></code> tag in your shell output, and if ansi
 colours are enabled, the following would be rendered as blinking magenta text
-<tt class="docutils literal"><span class="pre">$this-&gt;out('&lt;flashy&gt;Whoooa&lt;/flashy&gt;</span> <span class="pre">Something</span> <span class="pre">went</span> <span class="pre">wrong');</span></tt>.  When defining
+<code class="docutils literal"><span class="pre">$this-&gt;out('&lt;flashy&gt;Whoooa&lt;/flashy&gt;</span> <span class="pre">Something</span> <span class="pre">went</span> <span class="pre">wrong');</span></code>.  When defining
 styles you can use the following colours for the <cite>text</cite> and <cite>background</cite> attributes:</p>
 <ul class="simple">
 <li>black</li>
@@ -532,15 +672,15 @@ or force it on:</p>
 <p>The above will put the output object into raw output mode.  In raw output mode,
 no styling is done at all.  There are three modes you can use.</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">ConsoleOutput::RAW</span></tt> - Raw output, no styling or formatting will be done.
+<li><code class="docutils literal"><span class="pre">ConsoleOutput::RAW</span></code> - Raw output, no styling or formatting will be done.
 This is a good mode to use if you are outputting XML or, want to debug why
 your styling isn&#8217;t working.</li>
-<li><tt class="docutils literal"><span class="pre">ConsoleOutput::PLAIN</span></tt> - Plain text output, known style tags will be stripped
+<li><code class="docutils literal"><span class="pre">ConsoleOutput::PLAIN</span></code> - Plain text output, known style tags will be stripped
 from the output.</li>
-<li><tt class="docutils literal"><span class="pre">ConsoleOutput::COLOR</span></tt> - Output with color escape codes in place.</li>
+<li><code class="docutils literal"><span class="pre">ConsoleOutput::COLOR</span></code> - Output with color escape codes in place.</li>
 </ul>
 <p>By default on *nix systems ConsoleOutput objects default to colour output.
-On windows systems, plain output is the default unless the <tt class="docutils literal"><span class="pre">ANSICON</span></tt> environment
+On windows systems, plain output is the default unless the <code class="docutils literal"><span class="pre">ANSICON</span></code> environment
 variable is present.</p>
 </div>
 </div>
@@ -548,18 +688,18 @@ variable is present.</p>
 <h2>Configuring options and generating help<a class="headerlink" href="#configuring-options-and-generating-help" title="永久链接至标题">¶</a></h2>
 <dl class="class">
 <dt id="ConsoleOptionParser">
-<em class="property">class </em><tt class="descname">ConsoleOptionParser</tt><a class="headerlink" href="#ConsoleOptionParser" title="永久链接至目标">¶</a></dt>
+<em class="property">class </em><code class="descname">ConsoleOptionParser</code><a class="headerlink" href="#ConsoleOptionParser" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
 <p>Console option parsing in CakePHP has always been a little bit different
-from everything else on the command line.  In 2.0 <tt class="docutils literal"><span class="pre">ConsoleOptionParser</span></tt>
+from everything else on the command line.  In 2.0 <code class="docutils literal"><span class="pre">ConsoleOptionParser</span></code>
 helps provide a more familiar command line option and argument parser.</p>
 <p>OptionParsers allow you to accomplish two goals at the same time.
 First they allow you to define the options and arguments, separating
 basic input validation and your code.  Secondly, it allows you to provide
 documentation, that is used to generate well formatted help file.</p>
 <p>The console framework gets your shell&#8217;s option parser by calling
-<tt class="docutils literal"><span class="pre">$this-&gt;getOptionParser()</span></tt>.  Overriding this method allows you to
+<code class="docutils literal"><span class="pre">$this-&gt;getOptionParser()</span></code>.  Overriding this method allows you to
 configure the OptionParser to match the expected inputs of your shell.
 You can also configure subcommand option parsers, which allow you to
 have different option parsers for subcommands and tasks.
@@ -604,7 +744,7 @@ allowing you to define an entire option parser in one series of method calls:</p
 </ul>
 <dl class="method">
 <dt id="ConsoleOptionParser::description">
-<tt class="descclassname">ConsoleOptionParser::</tt><tt class="descname">description</tt><big>(</big><em>$text = null</em><big>)</big><a class="headerlink" href="#ConsoleOptionParser::description" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">ConsoleOptionParser::</code><code class="descname">description</code><span class="sig-paren">(</span><em>$text = null</em><span class="sig-paren">)</span><a class="headerlink" href="#ConsoleOptionParser::description" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
 <p>Gets or sets the description for the option parser.  The description
@@ -620,7 +760,7 @@ Calling with no arguments will return the current value:</p>
 </div>
 <dl class="method">
 <dt id="ConsoleOptionParser::epilog">
-<tt class="descclassname">ConsoleOptionParser::</tt><tt class="descname">epilog</tt><big>(</big><em>$text = null</em><big>)</big><a class="headerlink" href="#ConsoleOptionParser::epilog" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">ConsoleOptionParser::</code><code class="descname">epilog</code><span class="sig-paren">(</span><em>$text = null</em><span class="sig-paren">)</span><a class="headerlink" href="#ConsoleOptionParser::epilog" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
 <p>Gets or sets the epilog for the option parser.  The epilog
@@ -639,32 +779,32 @@ Calling with no arguments will return the current value:</p>
 <h3>Adding arguments<a class="headerlink" href="#adding-arguments" title="永久链接至标题">¶</a></h3>
 <dl class="method">
 <dt id="ConsoleOptionParser::addArgument">
-<tt class="descclassname">ConsoleOptionParser::</tt><tt class="descname">addArgument</tt><big>(</big><em>$name</em>, <em>$params = array()</em><big>)</big><a class="headerlink" href="#ConsoleOptionParser::addArgument" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">ConsoleOptionParser::</code><code class="descname">addArgument</code><span class="sig-paren">(</span><em>$name</em>, <em>$params = array()</em><span class="sig-paren">)</span><a class="headerlink" href="#ConsoleOptionParser::addArgument" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
 <p>Positional arguments are frequently used in command line tools,
-and <tt class="docutils literal"><span class="pre">ConsoleOptionParser</span></tt> allows you to define positional
+and <code class="docutils literal"><span class="pre">ConsoleOptionParser</span></code> allows you to define positional
 arguments as well as make them required.  You can add arguments
-one at a time with <tt class="docutils literal"><span class="pre">$parser-&gt;addArgument();</span></tt> or multiple at once
-with <tt class="docutils literal"><span class="pre">$parser-&gt;addArguments();</span></tt>:</p>
+one at a time with <code class="docutils literal"><span class="pre">$parser-&gt;addArgument();</span></code> or multiple at once
+with <code class="docutils literal"><span class="pre">$parser-&gt;addArguments();</span></code>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$parser</span><span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;help&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;The model to bake&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>You can use the following options when creating an argument:</p>
 <ul>
-<li><p class="first"><tt class="docutils literal"><span class="pre">help</span></tt> The help text to display for this argument.</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">help</span></code> The help text to display for this argument.</p>
 </li>
-<li><p class="first"><tt class="docutils literal"><span class="pre">required</span></tt> Whether this parameter is required.</p>
+<li><p class="first"><code class="docutils literal"><span class="pre">required</span></code> Whether this parameter is required.</p>
 </li>
 <li><dl class="first docutils">
-<dt><tt class="docutils literal"><span class="pre">index</span></tt> The index for the arg, if left undefined the argument will be put</dt>
+<dt><code class="docutils literal"><span class="pre">index</span></code> The index for the arg, if left undefined the argument will be put</dt>
 <dd><p class="first last">onto the end of the arguments. If you define the same index twice the
 first option will be overwritten.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><tt class="docutils literal"><span class="pre">choices</span></tt> An array of valid choices for this argument.  If left empty all</dt>
+<dt><code class="docutils literal"><span class="pre">choices</span></code> An array of valid choices for this argument.  If left empty all</dt>
 <dd><p class="first last">values are valid. An exception will be raised when parse() encounters an
 invalid value.</p>
 </dd>
@@ -676,10 +816,10 @@ parsing the command if they have been omitted. So you don&#8217;t have to
 handle that in your shell.</p>
 <dl class="method">
 <dt id="ConsoleOptionParser::addArguments">
-<tt class="descclassname">ConsoleOptionParser::</tt><tt class="descname">addArguments</tt><big>(</big><em>array $args</em><big>)</big><a class="headerlink" href="#ConsoleOptionParser::addArguments" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">ConsoleOptionParser::</code><code class="descname">addArguments</code><span class="sig-paren">(</span><em>array $args</em><span class="sig-paren">)</span><a class="headerlink" href="#ConsoleOptionParser::addArguments" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
-<p>If you have an array with multiple arguments you can use <tt class="docutils literal"><span class="pre">$parser-&gt;addArguments()</span></tt>
+<p>If you have an array with multiple arguments you can use <code class="docutils literal"><span class="pre">$parser-&gt;addArguments()</span></code>
 to add multiple arguments at once.:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$parser</span><span class="o">-&gt;</span><span class="na">addArguments</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;node&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;help&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;The node to create&#39;</span><span class="p">,</span> <span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
@@ -692,9 +832,9 @@ can be used as part of a fluent method chain.</p>
 </div>
 <div class="section" id="validating-arguments">
 <h3>Validating arguments<a class="headerlink" href="#validating-arguments" title="永久链接至标题">¶</a></h3>
-<p>When creating positional arguments, you can use the <tt class="docutils literal"><span class="pre">required</span></tt> flag, to
+<p>When creating positional arguments, you can use the <code class="docutils literal"><span class="pre">required</span></code> flag, to
 indicate that an argument must be present when a shell is called.
-Additionally you can use <tt class="docutils literal"><span class="pre">choices</span></tt> to force an argument to
+Additionally you can use <code class="docutils literal"><span class="pre">choices</span></code> to force an argument to
 be from a list of valid choices:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$parser</span><span class="o">-&gt;</span><span class="na">addArgument</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;help&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;The type of node to interact with.&#39;</span><span class="p">,</span>
@@ -711,14 +851,14 @@ value an exception will be raised and the shell will be stopped.</p>
 <h3>Adding Options<a class="headerlink" href="#adding-options" title="永久链接至标题">¶</a></h3>
 <dl class="method">
 <dt id="ConsoleOptionParser::addOption">
-<tt class="descclassname">ConsoleOptionParser::</tt><tt class="descname">addOption</tt><big>(</big><em>$name</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#ConsoleOptionParser::addOption" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">ConsoleOptionParser::</code><code class="descname">addOption</code><span class="sig-paren">(</span><em>$name</em>, <em>$options = array()</em><span class="sig-paren">)</span><a class="headerlink" href="#ConsoleOptionParser::addOption" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
 <p>Options or flags are also frequently used in command line tools.
-<tt class="docutils literal"><span class="pre">ConsoleOptionParser</span></tt> supports creating options
+<code class="docutils literal"><span class="pre">ConsoleOptionParser</span></code> supports creating options
 with both verbose and short aliases, supplying defaults
 and creating boolean switches. Options are created with either
-<tt class="docutils literal"><span class="pre">$parser-&gt;addOption()</span></tt> or <tt class="docutils literal"><span class="pre">$parser-&gt;addOptions()</span></tt>.:</p>
+<code class="docutils literal"><span class="pre">$parser-&gt;addOption()</span></code> or <code class="docutils literal"><span class="pre">$parser-&gt;addOptions()</span></code>.:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$parser</span><span class="o">-&gt;</span><span class="na">addOption</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;short&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span>
     <span class="s1">&#39;help&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;connection&#39;</span><span class="p">,</span>
@@ -726,36 +866,36 @@ and creating boolean switches. Options are created with either
 <span class="p">));</span>
 </pre></div>
 </div>
-<p>The above would allow you to use either <tt class="docutils literal"><span class="pre">cake</span> <span class="pre">myshell</span> <span class="pre">--connection=other</span></tt>,
-<tt class="docutils literal"><span class="pre">cake</span> <span class="pre">myshell</span> <span class="pre">--connection</span> <span class="pre">other</span></tt>, or <tt class="docutils literal"><span class="pre">cake</span> <span class="pre">myshell</span> <span class="pre">-c</span> <span class="pre">other</span></tt>
+<p>The above would allow you to use either <code class="docutils literal"><span class="pre">cake</span> <span class="pre">myshell</span> <span class="pre">--connection=other</span></code>,
+<code class="docutils literal"><span class="pre">cake</span> <span class="pre">myshell</span> <span class="pre">--connection</span> <span class="pre">other</span></code>, or <code class="docutils literal"><span class="pre">cake</span> <span class="pre">myshell</span> <span class="pre">-c</span> <span class="pre">other</span></code>
 when invoking the shell. You can also create boolean switches, these switches do not
 consume values, and their presence just enables them in the
 parsed parameters.:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$parser</span><span class="o">-&gt;</span><span class="na">addOption</span><span class="p">(</span><span class="s1">&#39;no-commit&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;boolean&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>With this option, when calling a shell like <tt class="docutils literal"><span class="pre">cake</span> <span class="pre">myshell</span> <span class="pre">--no-commit</span> <span class="pre">something</span></tt>
+<p>With this option, when calling a shell like <code class="docutils literal"><span class="pre">cake</span> <span class="pre">myshell</span> <span class="pre">--no-commit</span> <span class="pre">something</span></code>
 the no-commit param would have a value of true, and &#8216;something&#8217;
 would be a treated as a positional argument.
-The built-in <tt class="docutils literal"><span class="pre">--help</span></tt>, <tt class="docutils literal"><span class="pre">--verbose</span></tt>, and <tt class="docutils literal"><span class="pre">--quiet</span></tt> options
+The built-in <code class="docutils literal"><span class="pre">--help</span></code>, <code class="docutils literal"><span class="pre">--verbose</span></code>, and <code class="docutils literal"><span class="pre">--quiet</span></code> options
 use this feature.</p>
 <p>When creating options you can use the following options to
 define the behavior of the option:</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">short</span></tt> - The single letter variant for this option, leave undefined for none.</li>
-<li><tt class="docutils literal"><span class="pre">help</span></tt> - Help text for this option.  Used when generating help for the option.</li>
-<li><tt class="docutils literal"><span class="pre">default</span></tt> - The default value for this option.  If not defined the default will be true.</li>
-<li><tt class="docutils literal"><span class="pre">boolean</span></tt> - The option uses no value, it&#8217;s just a boolean switch.
+<li><code class="docutils literal"><span class="pre">short</span></code> - The single letter variant for this option, leave undefined for none.</li>
+<li><code class="docutils literal"><span class="pre">help</span></code> - Help text for this option.  Used when generating help for the option.</li>
+<li><code class="docutils literal"><span class="pre">default</span></code> - The default value for this option.  If not defined the default will be true.</li>
+<li><code class="docutils literal"><span class="pre">boolean</span></code> - The option uses no value, it&#8217;s just a boolean switch.
 Defaults to false.</li>
-<li><tt class="docutils literal"><span class="pre">choices</span></tt> An array of valid choices for this option.  If left empty all
+<li><code class="docutils literal"><span class="pre">choices</span></code> An array of valid choices for this option.  If left empty all
 values are valid. An exception will be raised when parse() encounters an invalid value.</li>
 </ul>
 <dl class="method">
 <dt id="ConsoleOptionParser::addOptions">
-<tt class="descclassname">ConsoleOptionParser::</tt><tt class="descname">addOptions</tt><big>(</big><em>array $options</em><big>)</big><a class="headerlink" href="#ConsoleOptionParser::addOptions" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">ConsoleOptionParser::</code><code class="descname">addOptions</code><span class="sig-paren">(</span><em>array $options</em><span class="sig-paren">)</span><a class="headerlink" href="#ConsoleOptionParser::addOptions" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
-<p>If you have an array with multiple options you can use <tt class="docutils literal"><span class="pre">$parser-&gt;addOptions()</span></tt>
+<p>If you have an array with multiple options you can use <code class="docutils literal"><span class="pre">$parser-&gt;addOptions()</span></code>
 to add multiple options at once.:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$parser</span><span class="o">-&gt;</span><span class="na">addOptions</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;node&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;short&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;help&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;The node to create&#39;</span><span class="p">),</span>
@@ -770,7 +910,7 @@ as part of a fluent method chain.</p>
 <h3>Validating options<a class="headerlink" href="#validating-options" title="永久链接至标题">¶</a></h3>
 <p>Options can be provided with a set of choices much like positional arguments
 can be.  When an option has defined choices, those are the only valid choices
-for an option.  All other values will raise an <tt class="docutils literal"><span class="pre">InvalidArgumentException</span></tt>:</p>
+for an option.  All other values will raise an <code class="docutils literal"><span class="pre">InvalidArgumentException</span></code>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$parser</span><span class="o">-&gt;</span><span class="na">addOption</span><span class="p">(</span><span class="s1">&#39;accept&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;help&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;What version to accept.&#39;</span><span class="p">,</span>
     <span class="s1">&#39;choices&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;working&#39;</span><span class="p">,</span> <span class="s1">&#39;theirs&#39;</span><span class="p">,</span> <span class="s1">&#39;mine&#39;</span><span class="p">)</span>
@@ -790,28 +930,28 @@ to true, when they are absent false:</p>
 <span class="p">));</span>
 </pre></div>
 </div>
-<p>The following option would result in <tt class="docutils literal"><span class="pre">$this-&gt;params['verbose']</span></tt> always
-being available.  This lets you omit <tt class="docutils literal"><span class="pre">empty()</span></tt> or <tt class="docutils literal"><span class="pre">isset()</span></tt>
+<p>The following option would result in <code class="docutils literal"><span class="pre">$this-&gt;params['verbose']</span></code> always
+being available.  This lets you omit <code class="docutils literal"><span class="pre">empty()</span></code> or <code class="docutils literal"><span class="pre">isset()</span></code>
 checks for boolean flags:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;verbose&#39;</span><span class="p">])</span> <span class="p">{</span>
     <span class="c1">// do something</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Since the boolean options are always defined as <tt class="docutils literal"><span class="pre">true</span></tt> or
-<tt class="docutils literal"><span class="pre">false</span></tt> you can omit additional check methods.</p>
+<p>Since the boolean options are always defined as <code class="docutils literal"><span class="pre">true</span></code> or
+<code class="docutils literal"><span class="pre">false</span></code> you can omit additional check methods.</p>
 </div>
 <div class="section" id="adding-subcommands">
 <h3>Adding subcommands<a class="headerlink" href="#adding-subcommands" title="永久链接至标题">¶</a></h3>
 <dl class="method">
 <dt id="ConsoleOptionParser::addSubcommand">
-<tt class="descclassname">ConsoleOptionParser::</tt><tt class="descname">addSubcommand</tt><big>(</big><em>$name</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#ConsoleOptionParser::addSubcommand" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">ConsoleOptionParser::</code><code class="descname">addSubcommand</code><span class="sig-paren">(</span><em>$name</em>, <em>$options = array()</em><span class="sig-paren">)</span><a class="headerlink" href="#ConsoleOptionParser::addSubcommand" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
 <p>Console applications are often made of subcommands, and these subcommands
 may require special option parsing and have their own help.  A perfect
-example of this is <tt class="docutils literal"><span class="pre">bake</span></tt>.  Bake is made of many separate tasks that all
-have their own help and options. <tt class="docutils literal"><span class="pre">ConsoleOptionParser</span></tt> allows you to
+example of this is <code class="docutils literal"><span class="pre">bake</span></code>.  Bake is made of many separate tasks that all
+have their own help and options. <code class="docutils literal"><span class="pre">ConsoleOptionParser</span></code> allows you to
 define subcommands and provide command specific option parsers so the
 shell knows how to parse commands for its tasks:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$parser</span><span class="o">-&gt;</span><span class="na">addSubcommand</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
@@ -821,23 +961,23 @@ shell knows how to parse commands for its tasks:</p>
 </pre></div>
 </div>
 <p>The above is an example of how you could provide help and a specialized
-option parser for a shell&#8217;s task. By calling the Task&#8217;s <tt class="docutils literal"><span class="pre">getOptionParser()</span></tt>
+option parser for a shell&#8217;s task. By calling the Task&#8217;s <code class="docutils literal"><span class="pre">getOptionParser()</span></code>
 we don&#8217;t have to duplicate the option parser generation, or mix concerns
 in our shell.  Adding subcommands in this way has two advantages.
 First it lets your shell easily document its subcommands in the
 generated help, and it also allows easy access to the subcommand
 help.  With the above subcommand created you could call
-<tt class="docutils literal"><span class="pre">cake</span> <span class="pre">myshell</span> <span class="pre">--help</span></tt> and see the list of subcommands, and
-also run <tt class="docutils literal"><span class="pre">cake</span> <span class="pre">myshell</span> <span class="pre">model</span> <span class="pre">--help</span></tt> to view the help for
+<code class="docutils literal"><span class="pre">cake</span> <span class="pre">myshell</span> <span class="pre">--help</span></code> and see the list of subcommands, and
+also run <code class="docutils literal"><span class="pre">cake</span> <span class="pre">myshell</span> <span class="pre">model</span> <span class="pre">--help</span></code> to view the help for
 just the model task.</p>
 <p>When defining a subcommand you can use the following options:</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">help</span></tt> - Help text for the subcommand.</li>
-<li><tt class="docutils literal"><span class="pre">parser</span></tt> - A ConsoleOptionParser for the subcommand.  This allows you
+<li><code class="docutils literal"><span class="pre">help</span></code> - Help text for the subcommand.</li>
+<li><code class="docutils literal"><span class="pre">parser</span></code> - A ConsoleOptionParser for the subcommand.  This allows you
 to create method specific option parsers.  When help is generated for a
 subcommand, if a parser is present it will be used. You can also
 supply the parser as an array that is compatible with
-<a class="reference internal" href="#ConsoleOptionParser::buildFromArray" title="ConsoleOptionParser::buildFromArray"><tt class="xref php php-meth docutils literal"><span class="pre">ConsoleOptionParser::buildFromArray()</span></tt></a></li>
+<a class="reference internal" href="#ConsoleOptionParser::buildFromArray" title="ConsoleOptionParser::buildFromArray"><code class="xref php php-meth docutils literal"><span class="pre">ConsoleOptionParser::buildFromArray()</span></code></a></li>
 </ul>
 <p>Adding subcommands can be done as part of a fluent method chain.</p>
 </div>
@@ -845,7 +985,7 @@ supply the parser as an array that is compatible with
 <h3>Building a ConsoleOptionParser from an array<a class="headerlink" href="#building-a-consoleoptionparser-from-an-array" title="永久链接至标题">¶</a></h3>
 <dl class="method">
 <dt id="ConsoleOptionParser::buildFromArray">
-<tt class="descclassname">ConsoleOptionParser::</tt><tt class="descname">buildFromArray</tt><big>(</big><em>$spec</em><big>)</big><a class="headerlink" href="#ConsoleOptionParser::buildFromArray" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">ConsoleOptionParser::</code><code class="descname">buildFromArray</code><span class="sig-paren">(</span><em>$spec</em><span class="sig-paren">)</span><a class="headerlink" href="#ConsoleOptionParser::buildFromArray" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
 <p>As previously mentioned, when creating subcommand option parsers,
@@ -868,11 +1008,11 @@ make building subcommand parsers easier, as everything is an array:</p>
 <span class="p">));</span>
 </pre></div>
 </div>
-<p>Inside the parser spec, you can define keys for <tt class="docutils literal"><span class="pre">definition</span></tt>,
-<tt class="docutils literal"><span class="pre">arguments</span></tt>, <tt class="docutils literal"><span class="pre">options</span></tt>, and <tt class="docutils literal"><span class="pre">epilog</span></tt>.  You cannot define
+<p>Inside the parser spec, you can define keys for <code class="docutils literal"><span class="pre">definition</span></code>,
+<code class="docutils literal"><span class="pre">arguments</span></code>, <code class="docutils literal"><span class="pre">options</span></code>, and <code class="docutils literal"><span class="pre">epilog</span></code>.  You cannot define
 subcommands inside an array style builder.  The values for
 arguments, and options, should follow the format that
-<a class="reference internal" href="#ConsoleOptionParser::addArguments" title="ConsoleOptionParser::addArguments"><tt class="xref php php-func docutils literal"><span class="pre">ConsoleOptionParser::addArguments()</span></tt></a> and <a class="reference internal" href="#ConsoleOptionParser::addOptions" title="ConsoleOptionParser::addOptions"><tt class="xref php php-func docutils literal"><span class="pre">ConsoleOptionParser::addOptions()</span></tt></a>
+<a class="reference internal" href="#ConsoleOptionParser::addArguments" title="ConsoleOptionParser::addArguments"><code class="xref php php-func docutils literal"><span class="pre">ConsoleOptionParser::addArguments()</span></code></a> and <a class="reference internal" href="#ConsoleOptionParser::addOptions" title="ConsoleOptionParser::addOptions"><code class="xref php php-func docutils literal"><span class="pre">ConsoleOptionParser::addOptions()</span></code></a>
 use.  You can also use buildFromArray on its own, to build an option parser:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">getOptionParser</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">ConsoleOptionParser</span><span class="o">::</span><span class="na">buildFromArray</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
@@ -894,7 +1034,7 @@ use.  You can also use buildFromArray on its own, to build an option parser:</p>
 <div class="section" id="getting-help-from-shells">
 <h3>Getting help from shells<a class="headerlink" href="#getting-help-from-shells" title="永久链接至标题">¶</a></h3>
 <p>With the addition of ConsoleOptionParser getting help from shells is done
-in a consistent and uniform way. By using the <tt class="docutils literal"><span class="pre">--help</span></tt> or -<tt class="docutils literal"><span class="pre">h</span></tt> option you
+in a consistent and uniform way. By using the <code class="docutils literal"><span class="pre">--help</span></code> or -<code class="docutils literal"><span class="pre">h</span></code> option you
 can view the help for any core shell, and any shell that implements a ConsoleOptionParser:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">cake</span> <span class="nx">bake</span> <span class="o">--</span><span class="nx">help</span>
 <span class="nx">cake</span> <span class="nx">bake</span> <span class="o">-</span><span class="nx">h</span>
@@ -973,39 +1113,39 @@ would look like:</p>
 <h2>Shell API<a class="headerlink" href="#shell-api" title="永久链接至标题">¶</a></h2>
 <dl class="class">
 <dt id="AppShell">
-<em class="property">class </em><tt class="descname">AppShell</tt><a class="headerlink" href="#AppShell" title="永久链接至目标">¶</a></dt>
+<em class="property">class </em><code class="descname">AppShell</code><a class="headerlink" href="#AppShell" title="永久链接至目标">¶</a></dt>
 <dd><p>AppShell can be used as a base class for all your shells. It should extend
-<a class="reference internal" href="#Shell" title="Shell"><tt class="xref php php-class docutils literal"><span class="pre">Shell</span></tt></a>, and be located in <tt class="docutils literal"><span class="pre">Console/Command/AppShell.php</span></tt></p>
+<a class="reference internal" href="#Shell" title="Shell"><code class="xref php php-class docutils literal"><span class="pre">Shell</span></code></a>, and be located in <code class="docutils literal"><span class="pre">Console/Command/AppShell.php</span></code></p>
 </dd></dl>
 
 <dl class="class">
 <dt id="Shell">
-<em class="property">class </em><tt class="descname">Shell</tt><big>(</big><em>$stdout = null</em>, <em>$stderr = null</em>, <em>$stdin = null</em><big>)</big><a class="headerlink" href="#Shell" title="永久链接至目标">¶</a></dt>
+<em class="property">class </em><code class="descname">Shell</code><span class="sig-paren">(</span><em>$stdout = null</em>, <em>$stderr = null</em>, <em>$stdin = null</em><span class="sig-paren">)</span><a class="headerlink" href="#Shell" title="永久链接至目标">¶</a></dt>
 <dd><p>Shell is the base class for all shells, and provides a number of functions for
 interacting with user input, outputting text a generating errors.</p>
 </dd></dl>
 
 <dl class="attr">
 <dt id="Shell::$tasks">
-<em class="property">property </em><tt class="descclassname">Shell::$</tt><tt class="descname">tasks</tt><a class="headerlink" href="#Shell::$tasks" title="永久链接至目标">¶</a></dt>
+<em class="property">property </em><code class="descclassname">Shell::$</code><code class="descname">tasks</code><a class="headerlink" href="#Shell::$tasks" title="永久链接至目标">¶</a></dt>
 <dd><p>An array of tasks you want loaded for this shell/task.</p>
 </dd></dl>
 
 <dl class="attr">
 <dt id="Shell::$uses">
-<em class="property">property </em><tt class="descclassname">Shell::$</tt><tt class="descname">uses</tt><a class="headerlink" href="#Shell::$uses" title="永久链接至目标">¶</a></dt>
+<em class="property">property </em><code class="descclassname">Shell::$</code><code class="descname">uses</code><a class="headerlink" href="#Shell::$uses" title="永久链接至目标">¶</a></dt>
 <dd><p>An array of models that should be loaded for this shell/task.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Shell::clear">
-<tt class="descclassname">Shell::</tt><tt class="descname">clear</tt><big>(</big><big>)</big><a class="headerlink" href="#Shell::clear" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Shell::clear" title="永久链接至目标">¶</a></dt>
 <dd><p>Clears the current output being displayed.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Shell::createFile">
-<tt class="descclassname">Shell::</tt><tt class="descname">createFile</tt><big>(</big><em>$path</em>, <em>$contents</em><big>)</big><a class="headerlink" href="#Shell::createFile" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">createFile</code><span class="sig-paren">(</span><em>$path</em>, <em>$contents</em><span class="sig-paren">)</span><a class="headerlink" href="#Shell::createFile" title="永久链接至目标">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1026,16 +1166,16 @@ will simply be overwritten.</p>
 
 <dl class="method">
 <dt id="Shell::dispatchShell">
-<tt class="descclassname">Shell::</tt><tt class="descname">dispatchShell</tt><big>(</big><big>)</big><a class="headerlink" href="#Shell::dispatchShell" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">dispatchShell</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Shell::dispatchShell" title="永久链接至目标">¶</a></dt>
 <dd><p>Dispatch a command to another Shell. Similar to
-<a class="reference internal" href="controllers.html#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">Controller::requestAction()</span></tt></a> but intended for running shells
+<a class="reference internal" href="controllers.html#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">Controller::requestAction()</span></code></a> but intended for running shells
 from other shells.</p>
-<p>See <a class="reference internal" href="#invoking-other-shells-from-your-shell"><em>Invoking other shells from your shell</em></a>.</p>
+<p>See <a class="reference internal" href="#invoking-other-shells-from-your-shell"><span class="std std-ref">Invoking other shells from your shell</span></a>.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Shell::err">
-<tt class="descclassname">Shell::</tt><tt class="descname">err</tt><big>(</big><em>$message = null</em>, <em>$newlines = 1</em><big>)</big><a class="headerlink" href="#Shell::err" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">err</code><span class="sig-paren">(</span><em>$message = null</em>, <em>$newlines = 1</em><span class="sig-paren">)</span><a class="headerlink" href="#Shell::err" title="永久链接至目标">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1048,12 +1188,12 @@ from other shells.</p>
 </tr>
 </tbody>
 </table>
-<p>Outputs a method to <tt class="docutils literal"><span class="pre">stderr</span></tt>, works similar to <a class="reference internal" href="#Shell::out" title="Shell::out"><tt class="xref php php-meth docutils literal"><span class="pre">Shell::out()</span></tt></a></p>
+<p>Outputs a method to <code class="docutils literal"><span class="pre">stderr</span></code>, works similar to <a class="reference internal" href="#Shell::out" title="Shell::out"><code class="xref php php-meth docutils literal"><span class="pre">Shell::out()</span></code></a></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Shell::error">
-<tt class="descclassname">Shell::</tt><tt class="descname">error</tt><big>(</big><em>$title</em>, <em>$message = null</em><big>)</big><a class="headerlink" href="#Shell::error" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">error</code><span class="sig-paren">(</span><em>$title</em>, <em>$message = null</em><span class="sig-paren">)</span><a class="headerlink" href="#Shell::error" title="永久链接至目标">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1072,26 +1212,26 @@ code 1</p>
 
 <dl class="method">
 <dt id="Shell::getOptionParser">
-<tt class="descclassname">Shell::</tt><tt class="descname">getOptionParser</tt><big>(</big><big>)</big><a class="headerlink" href="#Shell::getOptionParser" title="永久链接至目标">¶</a></dt>
-<dd><p>Should return a <a class="reference internal" href="#ConsoleOptionParser" title="ConsoleOptionParser"><tt class="xref php php-class docutils literal"><span class="pre">ConsoleOptionParser</span></tt></a> object, with any
+<code class="descclassname">Shell::</code><code class="descname">getOptionParser</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Shell::getOptionParser" title="永久链接至目标">¶</a></dt>
+<dd><p>Should return a <a class="reference internal" href="#ConsoleOptionParser" title="ConsoleOptionParser"><code class="xref php php-class docutils literal"><span class="pre">ConsoleOptionParser</span></code></a> object, with any
 sub-parsers for the shell.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Shell::hasMethod">
-<tt class="descclassname">Shell::</tt><tt class="descname">hasMethod</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#Shell::hasMethod" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">hasMethod</code><span class="sig-paren">(</span><em>$name</em><span class="sig-paren">)</span><a class="headerlink" href="#Shell::hasMethod" title="永久链接至目标">¶</a></dt>
 <dd><p>Check to see if this shell has a callable method by the given name.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Shell::hasTask">
-<tt class="descclassname">Shell::</tt><tt class="descname">hasTask</tt><big>(</big><em>$task</em><big>)</big><a class="headerlink" href="#Shell::hasTask" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">hasTask</code><span class="sig-paren">(</span><em>$task</em><span class="sig-paren">)</span><a class="headerlink" href="#Shell::hasTask" title="永久链接至目标">¶</a></dt>
 <dd><p>Check to see if this shell has a task with the provided name.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Shell::hr">
-<tt class="descclassname">Shell::</tt><tt class="descname">hr</tt><big>(</big><em>$newlines = 0</em>, <em>$width = 63</em><big>)</big><a class="headerlink" href="#Shell::hr" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">hr</code><span class="sig-paren">(</span><em>$newlines = 0</em>, <em>$width = 63</em><span class="sig-paren">)</span><a class="headerlink" href="#Shell::hr" title="永久链接至目标">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1109,7 +1249,7 @@ sub-parsers for the shell.</p>
 
 <dl class="method">
 <dt id="Shell::in">
-<tt class="descclassname">Shell::</tt><tt class="descname">in</tt><big>(</big><em>$prompt</em>, <em>$options = null</em>, <em>$default = null</em><big>)</big><a class="headerlink" href="#Shell::in" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">in</code><span class="sig-paren">(</span><em>$prompt</em>, <em>$options = null</em>, <em>$default = null</em><span class="sig-paren">)</span><a class="headerlink" href="#Shell::in" title="永久链接至目标">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1135,27 +1275,27 @@ list of valid options the user can choose from:</p>
 
 <dl class="method">
 <dt id="Shell::initialize">
-<tt class="descclassname">Shell::</tt><tt class="descname">initialize</tt><big>(</big><big>)</big><a class="headerlink" href="#Shell::initialize" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Shell::initialize" title="永久链接至目标">¶</a></dt>
 <dd><p>Initializes the Shell acts as constructor for subclasses allows
 configuration of tasks prior to shell execution.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Shell::loadTasks">
-<tt class="descclassname">Shell::</tt><tt class="descname">loadTasks</tt><big>(</big><big>)</big><a class="headerlink" href="#Shell::loadTasks" title="永久链接至目标">¶</a></dt>
-<dd><p>Loads tasks defined in public <a class="reference internal" href="#Shell::$tasks" title="Shell::$tasks"><tt class="xref php php-attr docutils literal"><span class="pre">Shell::$tasks</span></tt></a></p>
+<code class="descclassname">Shell::</code><code class="descname">loadTasks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Shell::loadTasks" title="永久链接至目标">¶</a></dt>
+<dd><p>Loads tasks defined in public <a class="reference internal" href="#Shell::$tasks" title="Shell::$tasks"><code class="xref php php-attr docutils literal"><span class="pre">Shell::$tasks</span></code></a></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Shell::nl">
-<tt class="descclassname">Shell::</tt><tt class="descname">nl</tt><big>(</big><em>$multiplier = 1</em><big>)</big><a class="headerlink" href="#Shell::nl" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">nl</code><span class="sig-paren">(</span><em>$multiplier = 1</em><span class="sig-paren">)</span><a class="headerlink" href="#Shell::nl" title="永久链接至目标">¶</a></dt>
 <dd><p>:param int $multiplier Number of times the linefeed sequence should be repeated</p>
 <p>Returns a number of linefeed sequences.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Shell::out">
-<tt class="descclassname">Shell::</tt><tt class="descname">out</tt><big>(</big><em>$message = null</em>, <em>$newlines = 1</em>, <em>$level = Shell::NORMAL</em><big>)</big><a class="headerlink" href="#Shell::out" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">out</code><span class="sig-paren">(</span><em>$message = null</em>, <em>$newlines = 1</em>, <em>$level = Shell::NORMAL</em><span class="sig-paren">)</span><a class="headerlink" href="#Shell::out" title="永久链接至目标">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1163,7 +1303,7 @@ configuration of tasks prior to shell execution.</p>
 <tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
 <li><strong>$method</strong> (<em>string</em>) &#8211; The message to print.</li>
 <li><strong>$newlines</strong> (<em>integer</em>) &#8211; The number of newlines to follow the message.</li>
-<li><strong>$level</strong> (<em>integer</em>) &#8211; The highest <a class="reference internal" href="#shell-output-level"><em>Console output levels</em></a> this message
+<li><strong>$level</strong> (<em>integer</em>) &#8211; The highest <a class="reference internal" href="#shell-output-level"><span class="std std-ref">Console output levels</span></a> this message
 should display at.</li>
 </ul>
 </td>
@@ -1175,24 +1315,24 @@ can limit how verbose a shell is.  out() also allows you to use colour formattin
 tags, which will enable coloured output on systems that support it.  There are
 several built in styles for colouring text, and you can define your own.</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">error</span></tt> Error messages.</li>
-<li><tt class="docutils literal"><span class="pre">warning</span></tt> Warning messages.</li>
-<li><tt class="docutils literal"><span class="pre">info</span></tt> Informational messages.</li>
-<li><tt class="docutils literal"><span class="pre">comment</span></tt> Additional text.</li>
-<li><tt class="docutils literal"><span class="pre">question</span></tt> Magenta text used for user prompts</li>
+<li><code class="docutils literal"><span class="pre">error</span></code> Error messages.</li>
+<li><code class="docutils literal"><span class="pre">warning</span></code> Warning messages.</li>
+<li><code class="docutils literal"><span class="pre">info</span></code> Informational messages.</li>
+<li><code class="docutils literal"><span class="pre">comment</span></code> Additional text.</li>
+<li><code class="docutils literal"><span class="pre">question</span></code> Magenta text used for user prompts</li>
 </ul>
 <p>By formatting messages with style tags you can display styled output:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">out</span><span class="p">(</span><span class="s1">&#39;&lt;warning&gt;This will remove data from the filesystems.&lt;/warning&gt;&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>By default on *nix systems ConsoleOutput objects default to colour output.
-On windows systems, plain output is the default unless the <tt class="docutils literal"><span class="pre">ANSICON</span></tt> environment
+On windows systems, plain output is the default unless the <code class="docutils literal"><span class="pre">ANSICON</span></code> environment
 variable is present.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Shell::runCommand">
-<tt class="descclassname">Shell::</tt><tt class="descname">runCommand</tt><big>(</big><em>$command</em>, <em>$argv</em><big>)</big><a class="headerlink" href="#Shell::runCommand" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">runCommand</code><span class="sig-paren">(</span><em>$command</em>, <em>$argv</em><span class="sig-paren">)</span><a class="headerlink" href="#Shell::runCommand" title="永久链接至目标">¶</a></dt>
 <dd><p>Runs the Shell with the provided argv.</p>
 <p>Delegates calls to Tasks and resolves methods inside the class. Commands
 are looked up with the following order:</p>
@@ -1207,13 +1347,13 @@ sent to main() with the original method name in the argv.</p>
 
 <dl class="method">
 <dt id="Shell::shortPath">
-<tt class="descclassname">Shell::</tt><tt class="descname">shortPath</tt><big>(</big><em>$file</em><big>)</big><a class="headerlink" href="#Shell::shortPath" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">shortPath</code><span class="sig-paren">(</span><em>$file</em><span class="sig-paren">)</span><a class="headerlink" href="#Shell::shortPath" title="永久链接至目标">¶</a></dt>
 <dd><p>Makes absolute file path easier to read.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Shell::startup">
-<tt class="descclassname">Shell::</tt><tt class="descname">startup</tt><big>(</big><big>)</big><a class="headerlink" href="#Shell::startup" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">startup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Shell::startup" title="永久链接至目标">¶</a></dt>
 <dd><p>Starts up the Shell and displays the welcome message. Allows for checking
 and configuring prior to command or main execution.</p>
 <p>Override this method if you want to remove the welcome information, or
@@ -1222,7 +1362,7 @@ otherwise modify the pre-command flow.</p>
 
 <dl class="method">
 <dt id="Shell::wrapText">
-<tt class="descclassname">Shell::</tt><tt class="descname">wrapText</tt><big>(</big><em>$text</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#Shell::wrapText" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Shell::</code><code class="descname">wrapText</code><span class="sig-paren">(</span><em>$text</em>, <em>$options = array()</em><span class="sig-paren">)</span><a class="headerlink" href="#Shell::wrapText" title="永久链接至目标">¶</a></dt>
 <dd><p>Wrap a block of text. Allows you to set the width, and indenting on a
 block of text.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1232,9 +1372,9 @@ block of text.</p>
 <tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
 <li><strong>$text</strong> (<em>string</em>) &#8211; The text to format</li>
 <li><strong>$options</strong> (<em>array</em>) &#8211; <ul>
-<li><tt class="docutils literal"><span class="pre">width</span></tt> The width to wrap to. Defaults to 72</li>
-<li><tt class="docutils literal"><span class="pre">wordWrap</span></tt> Only wrap on words breaks (spaces) Defaults to true.</li>
-<li><tt class="docutils literal"><span class="pre">indent</span></tt> Indent the text with the string provided. Defaults to null.</li>
+<li><code class="docutils literal"><span class="pre">width</span></code> The width to wrap to. Defaults to 72</li>
+<li><code class="docutils literal"><span class="pre">wordWrap</span></code> Only wrap on words breaks (spaces) Defaults to true.</li>
+<li><code class="docutils literal"><span class="pre">indent</span></code> Indent the text with the string provided. Defaults to null.</li>
 </ul>
 </li>
 </ul>
@@ -1249,7 +1389,9 @@ block of text.</p>
 <h2>More topics<a class="headerlink" href="#more-topics" title="永久链接至标题">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="console-and-shells/helpers.html">Shell Helpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="console-and-shells/cron-jobs.html">定期运行Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console-and-shells/completion-shell.html">Completion Shell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="console-and-shells/code-generation-with-bake.html">使用 Bake 来生成代码</a></li>
 <li class="toctree-l1"><a class="reference internal" href="console-and-shells/schema-management-and-migrations.html">Schema管理和迁移</a></li>
 <li class="toctree-l1"><a class="reference internal" href="console-and-shells/i18n-shell.html">shell支持国际化I18N</a></li>
@@ -1262,12 +1404,14 @@ block of text.</p>
 </div>
 
 
+			</div>
 		</div>
-	</div>
 
-	<div class="sidebar columns three pull-nine">
-<div id="sidebar-navigation" class="hide-on-phones">
-	<h2 class="hide-on-desktops">Table of Contents</h2>
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="zh">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">欢迎</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">安装</a></li>
@@ -1278,8 +1422,10 @@ block of text.</p>
 <li class="toctree-l1"><a class="reference internal" href="models.html">模型</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core-libraries.html">核心库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plugins.html">插件</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">命令行与Shells</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Shells，任务与命令行工具</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="console-and-shells/helpers.html">Shell Helpers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="console-and-shells/cron-jobs.html">定期运行Shells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="console-and-shells/completion-shell.html">Completion Shell</a></li>
 <li class="toctree-l2"><a class="reference internal" href="console-and-shells/code-generation-with-bake.html">使用 Bake 来生成代码</a></li>
 <li class="toctree-l2"><a class="reference internal" href="console-and-shells/schema-management-and-migrations.html">Schema管理和迁移</a></li>
 <li class="toctree-l2"><a class="reference internal" href="console-and-shells/i18n-shell.html">shell支持国际化I18N</a></li>
@@ -1297,115 +1443,171 @@ block of text.</p>
 
 </div>
 
-<div class="page-contents">
-	<h3>Page contents</h3>
-	<ul>
-<li><a class="reference internal" href="#">命令行与Shells</a><ul>
-<li><a class="reference internal" href="#the-cakephp-console">The CakePHP console</a><ul>
-<li><a class="reference internal" href="#adding-cake-to-your-system-path">Adding cake to your system path</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#shell-creating-a-shell">创建一个shell Creating a shell</a><ul>
-<li><a class="reference internal" href="#using-models-in-your-shells">Using Models in your shells</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#shell-tasks">Shell tasks</a><ul>
-<li><a class="reference internal" href="#loading-tasks-on-the-fly-with-taskcollection">Loading tasks on the fly with TaskCollection</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#invoking-other-shells-from-your-shell">Invoking other shells from your shell</a></li>
-<li><a class="reference internal" href="#console-output-levels">Console output levels</a></li>
-<li><a class="reference internal" href="#styling-output">Styling output</a><ul>
-<li><a class="reference internal" href="#turning-off-colouring">Turning off colouring</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#configuring-options-and-generating-help">Configuring options and generating help</a><ul>
-<li><a class="reference internal" href="#configuring-an-option-parser-with-the-fluent-interface">Configuring an option parser with the fluent interface</a></li>
-<li><a class="reference internal" href="#adding-arguments">Adding arguments</a></li>
-<li><a class="reference internal" href="#validating-arguments">Validating arguments</a></li>
-<li><a class="reference internal" href="#adding-options">Adding Options</a></li>
-<li><a class="reference internal" href="#validating-options">Validating options</a></li>
-<li><a class="reference internal" href="#using-boolean-options">Using boolean options</a></li>
-<li><a class="reference internal" href="#adding-subcommands">Adding subcommands</a></li>
-<li><a class="reference internal" href="#building-a-consoleoptionparser-from-an-array">Building a ConsoleOptionParser from an array</a></li>
-<li><a class="reference internal" href="#getting-help-from-shells">Getting help from shells</a></li>
-<li><a class="reference internal" href="#getting-help-as-xml">Getting help as XML</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#shell-api">Shell API</a></li>
-<li><a class="reference internal" href="#more-topics">More topics</a></li>
-</ul>
-</li>
-</ul>
-
-</div>
-	</div>
-
-</div>
-
-<div class="content row">
-	<ul class="related-pages inline">
-	<li>
-		<a href="genindex.html" title="总目录" accesskey="I">索引</a>
-	</li>
-	<li>
-		<a href="console-and-shells/cron-jobs.html" title="定期运行Shells" accesskey="N">下一页</a>
-	</li>
-	<li>
-		<a href="plugins/how-to-create-plugins.html" title="How To Create Plugins" accesskey="P">上一页</a>
-	</li>
-	</ul>
-</div>
-
-	<div class="footer-push"> </div>
-</div>
-
-
-
-
-
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>发现翻译错误?</strong>
-			请在下面留言<br />
-			<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">[ 我要加入翻译 ]</a>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Jul 10, 2016.
-				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
 		</div>
 	</div>
 </div>
 
-<div id="nav-modal" class="reveal-modal"> </div>
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-8 social-footer text-center ">
+				<a href="#">发现翻译错误? 请在下面留言</a>
+				<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">我要加入翻译</a>
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="_static/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="_static/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
+</li>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
+
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
+
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							&copy; 版权所有 2016, Cake Software Foundation, Inc.
+						最后更新于 8月 02, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
 <div id="inline-search-results"></div>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F201cbc61deaf9f7ffb521fb23e83db40' type='text/javascript'%3E%3C/script%3E"));
-</script>
 
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+
+</div>
+
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"cakephpchina"};
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
 	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	</script>
-<!-- Duoshuo Comment END -->
-
-<!-- Grunt Live Reload -->
-<script src="http://192.168.56.113:35729/livereload.js"></script>
+</script>
   </body>
 </html>

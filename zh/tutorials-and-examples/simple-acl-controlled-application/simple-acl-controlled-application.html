@@ -1,170 +1,282 @@
 
+
 <!DOCTYPE html>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Simple Acl controlled Application" lang="zh_CN" name="title" />
-<meta content="core libraries,auto increment,object oriented programming,database schema,sql statements,php class,stable release,code generation,database server,server configuration,reins,access control,shells,mvc,authentication,web server,cakephp,servers,checkout,apache" lang="zh_CN" name="keywords" />
+    <meta content="Simple Acl controlled Application" lang="zh" name="title" />
+<meta content="core libraries,auto increment,object oriented programming,database schema,sql statements,php class,stable release,code generation,database server,server configuration,reins,access control,shells,mvc,authentication,web server,cakephp,servers,checkout,apache" lang="zh" name="keywords" />
 
-    <title>简单的 Acl 控制的应用 &mdash; CakePHP Cookbook 2.x 文档</title>
+    <title>简单的 Acl 控制的应用</title>
+    <link href="../../_static/favicon.png" type="image/png" rel="icon" />
+
     
-    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/app.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '2.x',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/translations.js"></script>
     <script type="text/javascript" src="../../_static/app.js"></script>
-    <script type="text/javascript" src="../../_static/modernizr.foundation.js"></script>
-    <script type="text/javascript" src="../../_static/foundation.js"></script>
+
+    <link rel="alternate" hreflang="en" href="../../../en/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="pt" href="../../../pt/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="es" href="../../../es/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="ja" href="../../../ja/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="fr" href="../../../fr/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" />
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within CakePHP Cookbook 2.x 文档" href="../../_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../../index.html" />
     <link rel="up" title="教程 &amp; 实例" href="../../tutorials-and-examples.html" />
     <link rel="next" title="简单的 Acl 控制的应用 - 第 2 部分" href="part-two.html" />
     <link rel="prev" title="简单的身份验证和授权应用" href="../blog-auth-example/auth.html" />
-<link href="../../_static/favicon.ico" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="alternate" hreflang="en" href="../../../en/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="pt" href="../../../pt/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="es" href="../../../es/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="ja" href="../../../ja/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" /><link rel="alternate" hreflang="fr" href="../../../fr/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html" />
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../../_static/opensearchdescription-book-2-x.xml">
-<script type="text/javascript">
-window.lang = "zh_CN";
-</script>
-
+    <script type="text/javascript">
+    window.lang = "zh";
+    </script>
   </head>
   <body>
 
 <div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="masthead">
-	<div class="header-backing"></div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="../../contents.html">
-			<img src="../../_static/cake-logo.png" alt="CakePHP" width="70" />
-			</a>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
+
 		
-<div id="searchbox" class="columns nine phone-three">
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-	<form id="searchform" class="search" action="../../search.html" method="get">
-		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
-		<input class="search-submit search-big button red" type="submit" value="搜索" />
-		<input type="hidden" name="check_keywords" value="yes" />
-		<input type="hidden" name="area" value="default" />
-
-		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
-	</form>
-
-</div>
-	</div>
-</div>
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="../../contents.html">Cookbook 2.x</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="../../tutorials-and-examples.html" accesskey="U" itemprop="url"><span itemprop="title">教程 &amp; 实例</span></a>
-			</li>
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">2.x Book</a>
-				<ul>
-					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				<a href="#">zh_CN</a>
-
-				<ul>
-				
-					<li><a href="../../../en/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">en</a></li>
-				
-					<li><a href="../../../pt/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">pt</a></li>
-				
-					<li><a href="../../../es/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">es</a></li>
-				
-					<li><a href="../../../ja/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">ja</a></li>
-				
-					<li><a href="../../../fr/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">fr</a></li>
-				
-					<li></li>
-				
-				</ul>
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="../../search.html" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="搜索" type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.rst" target="_blank">Improve this Doc</a>
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="../../contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 2.x <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="../../search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														zh
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li><a href="../../../en/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">en</a></li>
+											
+												<li><a href="../../../pt/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">pt</a></li>
+											
+												<li><a href="../../../es/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">es</a></li>
+											
+												<li><a href="../../../ja/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">ja</a></li>
+											
+												<li><a href="../../../fr/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.html">fr</a></li>
+											
+												<li></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/zh">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/zh">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/zh/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/zh/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/master/zh/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="#">简单的 Acl 控制的应用</a><ul>
+<li><a class="reference internal" href="#id1">准备我们的应用</a></li>
+<li><a class="reference internal" href="#auth">准备添加 Auth</a></li>
+<li><a class="reference internal" href="#db-acl">初始化 Db Acl 表</a></li>
+<li><a class="reference internal" href="#id2">作为请求者</a><ul>
+<li><a class="reference internal" href="#id3">只按组的 ACL</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#aco-access-control-objects">创建 ACO (Access Control Objects)</a></li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
   <div class="section" id="acl">
 <h1>简单的 Acl 控制的应用<a class="headerlink" href="#acl" title="永久链接至标题">¶</a></h1>
 <div class="admonition note">
@@ -172,12 +284,12 @@ window.lang = "zh_CN";
 <p class="last">这不是初学者的教程。如果你刚刚开始学习 CakePHP，我们建议你还是先对整个框架的
 特点全面了解之后再开始本教程。</p>
 </div>
-<p>在这个教程中，你将会使用 <a class="reference internal" href="../../core-libraries/components/authentication.html"><em>Authentication 认证</em></a> 和
-<a class="reference internal" href="../../core-libraries/components/access-control-lists.html"><em>访问控制列表组件</em></a> 创建一个简单的应用。这个
-教程假设你已经阅读过 <a class="reference internal" href="../blog/blog.html"><em>博客教程</em></a>，并且熟悉
-<a class="reference internal" href="../../console-and-shells/code-generation-with-bake.html"><em>使用 Bake 来生成代码</em></a>。你应该对 CakePHP 有了一些
-经验, 并且熟悉 MVC 概念。这个教程是对 <a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><tt class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></tt></a> 和
-<a class="reference internal" href="../../core-libraries/components/access-control-lists.html#AclComponent" title="AclComponent"><tt class="xref php php-class docutils literal"><span class="pre">AclComponent</span></tt></a> 的一个简单介绍。</p>
+<p>在这个教程中，你将会使用 <a class="reference internal" href="../../core-libraries/components/authentication.html"><span class="doc">Authentication 认证</span></a> 和
+<a class="reference internal" href="../../core-libraries/components/access-control-lists.html"><span class="doc">访问控制列表组件</span></a> 创建一个简单的应用。这个
+教程假设你已经阅读过 <a class="reference internal" href="../blog/blog.html"><span class="doc">博客教程</span></a>，并且熟悉
+<a class="reference internal" href="../../console-and-shells/code-generation-with-bake.html"><span class="doc">使用 Bake 来生成代码</span></a>。你应该对 CakePHP 有了一些
+经验, 并且熟悉 MVC 概念。这个教程是对 <a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><code class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></code></a> 和
+<a class="reference internal" href="../../core-libraries/components/access-control-lists.html#AclComponent" title="AclComponent"><code class="xref php php-class docutils literal"><span class="pre">AclComponent</span></code></a> 的一个简单介绍。</p>
 <p>你所需要的：</p>
 <ol class="arabic simple">
 <li>一个可以运行的 web 服务器。我们将假定你使用的是 Apache，不过使用其他服务器的
@@ -237,9 +349,9 @@ app/Config/core.php 文件中的 Security.salt 的值。在此我们将为应用
 </pre></div>
 </div>
 <p>这些是我们构建应用程序的其余部分要用到的表。一旦数据库中有了表结构，我们就可以
-开始了。使用 <a class="reference internal" href="../../console-and-shells/code-generation-with-bake.html"><em>使用 Bake 来生成代码</em></a> 快速创建你的
+开始了。使用 <a class="reference internal" href="../../console-and-shells/code-generation-with-bake.html"><span class="doc">使用 Bake 来生成代码</span></a> 快速创建你的
 模型、控制器和视图。</p>
-<p>要使用 cake bake，调用 <tt class="docutils literal"><span class="pre">cake</span> <span class="pre">bake</span> <span class="pre">all</span></tt>，这会列出你插入到 MySQL 中的4个表，选择
+<p>要使用 cake bake，调用 <code class="docutils literal"><span class="pre">cake</span> <span class="pre">bake</span> <span class="pre">all</span></code>，这会列出你插入到 MySQL 中的4个表，选择
 &#8220;1. Group&#8221; 并按照提示操作。对其他 3 个表也进行同样的操作，这会为你生成 4 个控制
 器、模型和相应的视图。</p>
 <p>在这里要避免使用脚手架(<em>Scaffold</em>)。如果生成带有脚手架功能的控制器，将会严重影响
@@ -255,7 +367,7 @@ ACO(<em>Access Control Object</em>)的生成。</p>
 <h2>准备添加 Auth<a class="headerlink" href="#auth" title="永久链接至标题">¶</a></h2>
 <p>我们现在已经有一个运行正常的 CRUD 应用了。Bake 应该已经建立了我们所需要的关系，
 如果没有，现在就加上。在添加 Auth 和 Acl 组件之前，我们还需要添加一些东西。首先，
-添加 login 和 logout 动作到 <tt class="docutils literal"><span class="pre">UsersController</span></tt> 控制器:</p>
+添加 login 和 logout 动作到 <code class="docutils literal"><span class="pre">UsersController</span></code> 控制器:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">login</span><span class="p">())</span> <span class="p">{</span>
@@ -270,7 +382,7 @@ ACO(<em>Access Control Object</em>)的生成。</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>然后，为 login 动作创建如下所示的视图文件 <tt class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></tt>:</p>
+<p>然后，为 login 动作创建如下所示的视图文件 <code class="docutils literal"><span class="pre">app/View/Users/login.ctp</span></code>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;login&#39;</span><span class="p">));</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">inputs</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
@@ -284,7 +396,7 @@ ACO(<em>Access Control Object</em>)的生成。</p>
 </div>
 <p>接下来，我们需要更新我们的 User 模型，在保存到数据库之前先将密码散列化。存储普通
 文本格式的密码是极其危险的，并且 AuthComponent 组件会期望你的密码是经过散列化过
-的。在 <tt class="docutils literal"><span class="pre">app/Model/User.php</span></tt> 文件中添加如下代码:</p>
+的。在 <code class="docutils literal"><span class="pre">app/Model/User.php</span></code> 文件中添加如下代码:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;AuthComponent&#39;</span><span class="p">,</span> <span class="s1">&#39;Controller/Component&#39;</span><span class="p">);</span>
 <span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="c1">// 其它代码。</span>
@@ -298,9 +410,9 @@ ACO(<em>Access Control Object</em>)的生成。</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>接下来要改动一下 <tt class="docutils literal"><span class="pre">AppController</span></tt>。如果还没有
-<tt class="docutils literal"><span class="pre">/app/Controller/AppController.php</span></tt>，就创建该文件。因为我们要使用 Auth 和 Acl
-组件控制整个网站，所以我们会在 <tt class="docutils literal"><span class="pre">AppController</span></tt> 中把它们设置好:</p>
+<p>接下来要改动一下 <code class="docutils literal"><span class="pre">AppController</span></code>。如果还没有
+<code class="docutils literal"><span class="pre">/app/Controller/AppController.php</span></code>，就创建该文件。因为我们要使用 Auth 和 Acl
+组件控制整个网站，所以我们会在 <code class="docutils literal"><span class="pre">AppController</span></code> 中把它们设置好:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Acl&#39;</span><span class="p">,</span>
@@ -331,10 +443,10 @@ ACO(<em>Access Control Object</em>)的生成。</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>在设置 ACL 组件之前，需要添加一些用户和组。因为启用了 <a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><tt class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></tt></a>
+<p>在设置 ACL 组件之前，需要添加一些用户和组。因为启用了 <a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><code class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></code></a>
 组件，我们无法访问任何动作，因为还没有登录。现在我们添加一些特例，这样
-<a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><tt class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></tt></a> 组件就会允许我们创建一些组和用户。在
-<tt class="docutils literal"><span class="pre">GroupsController</span></tt> 控制器和 <tt class="docutils literal"><span class="pre">UsersController</span></tt> 控制器中 <strong>都</strong> 添加:</p>
+<a class="reference internal" href="../../core-libraries/components/authentication.html#AuthComponent" title="AuthComponent"><code class="xref php php-class docutils literal"><span class="pre">AuthComponent</span></code></a> 组件就会允许我们创建一些组和用户。在
+<code class="docutils literal"><span class="pre">GroupsController</span></code> 控制器和 <code class="docutils literal"><span class="pre">UsersController</span></code> 控制器中 <strong>都</strong> 添加:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
 
@@ -367,9 +479,9 @@ Database table acos for model Aco was not found.&#8221;)。要消除这些错误
 <div class="section" id="id2">
 <h2>作为请求者<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <p>为了让 Auth 组件和 Acl 组件正常工作，我们需要将用户(<em>users</em>)表和组(<em>groups</em>)表同
-Acl 组件的表中的记录进行关联。为此需要用到 <tt class="docutils literal"><span class="pre">AclBehavior</span></tt> 行为。<tt class="docutils literal"><span class="pre">AclBehavior</span></tt>
-允许将模型自动连接到 Acl 组件的表。使用它需要在模型中实现 <tt class="docutils literal"><span class="pre">parentNode()</span></tt> 方法。
-在 <tt class="docutils literal"><span class="pre">User</span></tt> 模型中添加如下代码:</p>
+Acl 组件的表中的记录进行关联。为此需要用到 <code class="docutils literal"><span class="pre">AclBehavior</span></code> 行为。<code class="docutils literal"><span class="pre">AclBehavior</span></code>
+允许将模型自动连接到 Acl 组件的表。使用它需要在模型中实现 <code class="docutils literal"><span class="pre">parentNode()</span></code> 方法。
+在 <code class="docutils literal"><span class="pre">User</span></code> 模型中添加如下代码:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Group&#39;</span><span class="p">);</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">));</span>
@@ -391,7 +503,7 @@ Acl 组件的表中的记录进行关联。为此需要用到 <tt class="docutil
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>然后在 <tt class="docutils literal"><span class="pre">Group</span></tt> 模型中添加如下代码:</p>
+<p>然后在 <code class="docutils literal"><span class="pre">Group</span></code> 模型中添加如下代码:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Group</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">));</span>
 
@@ -401,11 +513,11 @@ Acl 组件的表中的记录进行关联。为此需要用到 <tt class="docutil
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>我们所做的，就是将 <tt class="docutils literal"><span class="pre">Group</span></tt> 和 <tt class="docutils literal"><span class="pre">User</span></tt> 模型与 Acl 组件联系起来，并告诉 CakePHP
-每次你创建一个用户(<em>User</em>)或组(<em>Group</em>)的同时也要在 <tt class="docutils literal"><span class="pre">aros</span></tt> 表中创建一条记录。
-这使得 Acl 的管理轻而易举，因为 ARO 透明地与 <tt class="docutils literal"><span class="pre">users</span></tt> 和 <tt class="docutils literal"><span class="pre">groups</span></tt> 表绑定在
+<p>我们所做的，就是将 <code class="docutils literal"><span class="pre">Group</span></code> 和 <code class="docutils literal"><span class="pre">User</span></code> 模型与 Acl 组件联系起来，并告诉 CakePHP
+每次你创建一个用户(<em>User</em>)或组(<em>Group</em>)的同时也要在 <code class="docutils literal"><span class="pre">aros</span></code> 表中创建一条记录。
+这使得 Acl 的管理轻而易举，因为 ARO 透明地与 <code class="docutils literal"><span class="pre">users</span></code> 和 <code class="docutils literal"><span class="pre">groups</span></code> 表绑定在
 一起了。所以，每次创建或者删除一个用户/组的同时，Aro 表也会更新。</p>
-<p>我们的控制器和模型已经可以添加一些初始数据了，而且我们的 <tt class="docutils literal"><span class="pre">Group</span></tt> 和 <tt class="docutils literal"><span class="pre">User</span></tt>
+<p>我们的控制器和模型已经可以添加一些初始数据了，而且我们的 <code class="docutils literal"><span class="pre">Group</span></code> 和 <code class="docutils literal"><span class="pre">User</span></code>
 模型已经绑定到 Acl 组件的表了。所以可以浏览 <a class="reference external" href="http://example.com/groups/add">http://example.com/groups/add</a> 和
 <a class="reference external" href="http://example.com/users/add">http://example.com/users/add</a>，使用自动生成的表单添加一些组和用户。我添加了这些组：</p>
 <ul class="simple">
@@ -415,7 +527,7 @@ Acl 组件的表中的记录进行关联。为此需要用到 <tt class="docutil
 </ul>
 <p>我同时也在每个组中创建了一个用户，这样每个不同访问权限组都有一个用户，用于之后的
 测试。(把这些组和用户)全部记录下来，或者选用简单的密码，以免忘记。如果在 MySQL
-提示符后运行 <tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">aros;</span></tt>，应该可以看到象下面这样的记录:</p>
+提示符后运行 <code class="docutils literal"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">aros;</span></code>，应该可以看到象下面这样的记录:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
 <span class="o">|</span> <span class="nx">id</span> <span class="o">|</span> <span class="nx">parent_id</span> <span class="o">|</span> <span class="nx">model</span> <span class="o">|</span> <span class="nx">foreign_key</span> <span class="o">|</span> <span class="nx">alias</span> <span class="o">|</span> <span class="nx">lft</span>  <span class="o">|</span> <span class="nx">rght</span> <span class="o">|</span>
 <span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
@@ -433,21 +545,21 @@ Acl 组件的表中的记录进行关联。为此需要用到 <tt class="docutil
 用户设置权限。</p>
 <div class="section" id="id3">
 <h3>只按组的 ACL<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
-<p>如果我们要简单一些，只按组设置的权限，需要在 <tt class="docutils literal"><span class="pre">User</span></tt> 模型中实现 <tt class="docutils literal"><span class="pre">bindNode()</span></tt>
+<p>如果我们要简单一些，只按组设置的权限，需要在 <code class="docutils literal"><span class="pre">User</span></code> 模型中实现 <code class="docutils literal"><span class="pre">bindNode()</span></code>
 方法:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">bindNode</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Group&#39;</span><span class="p">,</span> <span class="s1">&#39;foreign_key&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;User&#39;</span><span class="p">][</span><span class="s1">&#39;group_id&#39;</span><span class="p">]);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>然后修改 <tt class="docutils literal"><span class="pre">User</span></tt> 模型的 <tt class="docutils literal"><span class="pre">actsAs</span></tt> 变量，禁用 requester 指令:</p>
+<p>然后修改 <code class="docutils literal"><span class="pre">User</span></code> 模型的 <code class="docutils literal"><span class="pre">actsAs</span></code> 变量，禁用 requester 指令:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="nv">$actsAs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Acl&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;requester&#39;</span><span class="p">,</span> <span class="s1">&#39;enabled&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>这两处改动会告诉 ACL 忽略检查 <tt class="docutils literal"><span class="pre">User</span></tt> Aro，而只检查 <tt class="docutils literal"><span class="pre">Group</span></tt> Aro&#8217;s。这样也避免
+<p>这两处改动会告诉 ACL 忽略检查 <code class="docutils literal"><span class="pre">User</span></code> Aro，而只检查 <code class="docutils literal"><span class="pre">Group</span></code> Aro&#8217;s。这样也避免
 了对 afterSave 回调的调用。</p>
-<p>注意：每个用户都需要设置 <tt class="docutils literal"><span class="pre">group_id</span></tt> 才行。</p>
-<p>现在 <tt class="docutils literal"><span class="pre">aros</span></tt> 表会是这样:</p>
+<p>注意：每个用户都需要设置 <code class="docutils literal"><span class="pre">group_id</span></code> 才行。</p>
+<p>现在 <code class="docutils literal"><span class="pre">aros</span></code> 表会是这样:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
 <span class="o">|</span> <span class="nx">id</span> <span class="o">|</span> <span class="nx">parent_id</span> <span class="o">|</span> <span class="nx">model</span> <span class="o">|</span> <span class="nx">foreign_key</span> <span class="o">|</span> <span class="nx">alias</span> <span class="o">|</span> <span class="nx">lft</span>  <span class="o">|</span> <span class="nx">rght</span> <span class="o">|</span>
 <span class="o">+----+-----------+-------+-------------+-------+------+------+</span>
@@ -458,8 +570,8 @@ Acl 组件的表中的记录进行关联。为此需要用到 <tt class="docutil
 <span class="mi">3</span> <span class="nx">rows</span> <span class="nx">in</span> <span class="nx">set</span> <span class="p">(</span><span class="mf">0.00</span> <span class="nx">sec</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>注意：如果你到这里一直跟随此教程，你需要删除你的表，包括 <tt class="docutils literal"><span class="pre">aros</span></tt>，<tt class="docutils literal"><span class="pre">groups</span></tt> 和
-<tt class="docutils literal"><span class="pre">users</span></tt>，然后从头重新创建组和用户，才能得到上面的 <tt class="docutils literal"><span class="pre">aros</span></tt> 表。</p>
+<p>注意：如果你到这里一直跟随此教程，你需要删除你的表，包括 <code class="docutils literal"><span class="pre">aros</span></code>，<code class="docutils literal"><span class="pre">groups</span></code> 和
+<code class="docutils literal"><span class="pre">users</span></code>，然后从头重新创建组和用户，才能得到上面的 <code class="docutils literal"><span class="pre">aros</span></code> 表。</p>
 </div>
 </div>
 <div class="section" id="aco-access-control-objects">
@@ -468,7 +580,7 @@ Acl 组件的表中的记录进行关联。为此需要用到 <tt class="docutil
 用户设置权限，并启用登录/登出。</p>
 <p>我们的 ARO 会在新建户和组的时候自动创建。有没有什么办法从控制器和动作来自动创建
 ACO？可惜 CakePHP 的核心没有这样的魔法。不过核心类提供了一些方法来手动创建 ACO。
-你可以通过 Acl 外壳程序或者 <tt class="docutils literal"><span class="pre">AclComponent</span></tt> 组件创建 ACO。从外壳程序创建 Aco:</p>
+你可以通过 Acl 外壳程序或者 <code class="docutils literal"><span class="pre">AclComponent</span></code> 组件创建 ACO。从外壳程序创建 Aco:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">./</span><span class="nx">Console</span><span class="o">/</span><span class="nx">cake</span> <span class="nx">acl</span> <span class="nx">create</span> <span class="nx">aco</span> <span class="nx">root</span> <span class="nx">controllers</span>
 </pre></div>
 </div>
@@ -480,10 +592,10 @@ ACO？可惜 CakePHP 的核心没有这样的魔法。不过核心类提供了�
 <p>上面两个例子都会创建 &#8216;root&#8217; 或者顶层 ACO，会叫做 &#8216;controllers&#8217; 。这个根(<em>root</em>)
 节点的目的，是为了在整个应用程序的范围内更容易地允许/拒绝访问，并且允许把 Acl
 组件用于和控制器/动作无关的目的，比如检查模型记录的访问权限。既然我们要使用全局
-的根(<em>root</em>) ACO，我们要略微修改 <tt class="docutils literal"><span class="pre">AuthComponent</span></tt> 组件的配置。<tt class="docutils literal"><span class="pre">AuthComponent</span></tt>
+的根(<em>root</em>) ACO，我们要略微修改 <code class="docutils literal"><span class="pre">AuthComponent</span></code> 组件的配置。<code class="docutils literal"><span class="pre">AuthComponent</span></code>
 组件需要知道这个根节点的存在，这样当进行 ACL 检查的时候，它可以在查找控制器/动作
-时使用正确的节点路径。在 <tt class="docutils literal"><span class="pre">AppController</span></tt> 中确保 <tt class="docutils literal"><span class="pre">$components</span></tt> 数组中包含先前
-定义的 <tt class="docutils literal"><span class="pre">actionPath</span></tt>:</p>
+时使用正确的节点路径。在 <code class="docutils literal"><span class="pre">AppController</span></code> 中确保 <code class="docutils literal"><span class="pre">$components</span></code> 数组中包含先前
+定义的 <code class="docutils literal"><span class="pre">actionPath</span></code>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Acl&#39;</span><span class="p">,</span>
@@ -496,18 +608,20 @@ ACO？可惜 CakePHP 的核心没有这样的魔法。不过核心类提供了�
     <span class="p">);</span>
 </pre></div>
 </div>
-<p>本教程在 <a class="reference internal" href="part-two.html"><em>简单的 Acl 控制的应用 - 第 2 部分</em></a> 中继续。</p>
+<p>本教程在 <a class="reference internal" href="part-two.html"><span class="doc">简单的 Acl 控制的应用 - 第 2 部分</span></a> 中继续。</p>
 </div>
 </div>
 
 
+			</div>
 		</div>
-	</div>
 
-	<div class="sidebar columns three pull-nine">
-<div id="sidebar-navigation" class="hide-on-phones">
-	<h2 class="hide-on-desktops">Table of Contents</h2>
-	<ul class="current">
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="zh">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
+	<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">欢迎</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">入门指南</a></li>
@@ -517,109 +631,181 @@ ACO？可惜 CakePHP 的核心没有这样的魔法。不过核心类提供了�
 <li class="toctree-l1"><a class="reference internal" href="../../models.html">模型</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../core-libraries.html">核心库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../plugins.html">插件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console-and-shells.html">Shells，任务与命令行工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development.html">开发</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../deployment.html">部署</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../blog/blog.html">博客教程</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../blog/part-two.html">博客教程——添加一个层</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../blog-auth-example/auth.html">简单的身份验证和授权应用</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">简单的 Acl 控制的应用</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="part-two.html">简单的 Acl 控制的应用 - 第 2 部分</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials-and-examples.html">教程 &amp; 实例</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">贡献</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../appendices.html">Appendices</a></li>
 </ul>
 
 </div>
 
-<div class="page-contents">
-	<h3>Page contents</h3>
-	<ul>
-<li><a class="reference internal" href="#">简单的 Acl 控制的应用</a><ul>
-<li><a class="reference internal" href="#id1">准备我们的应用</a></li>
-<li><a class="reference internal" href="#auth">准备添加 Auth</a></li>
-<li><a class="reference internal" href="#db-acl">初始化 Db Acl 表</a></li>
-<li><a class="reference internal" href="#id2">作为请求者</a><ul>
-<li><a class="reference internal" href="#id3">只按组的 ACL</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#aco-access-control-objects">创建 ACO (Access Control Objects)</a></li>
-</ul>
-</li>
-</ul>
-
-</div>
-	</div>
-
-</div>
-
-<div class="content row">
-	<ul class="related-pages inline">
-	<li>
-		<a href="../../genindex.html" title="总目录" accesskey="I">索引</a>
-	</li>
-	<li>
-		<a href="part-two.html" title="简单的 Acl 控制的应用 - 第 2 部分" accesskey="N">下一页</a>
-	</li>
-	<li>
-		<a href="../blog-auth-example/auth.html" title="简单的身份验证和授权应用" accesskey="P">上一页</a>
-	</li>
-	</ul>
-</div>
-
-	<div class="footer-push"> </div>
-</div>
-
-
-
-
-
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>发现翻译错误?</strong>
-			请在下面留言<br />
-			<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">[ 我要加入翻译 ]</a>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Jul 10, 2016.
-				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
 		</div>
 	</div>
 </div>
 
-<div id="nav-modal" class="reveal-modal"> </div>
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-8 social-footer text-center ">
+				<a href="#">发现翻译错误? 请在下面留言</a>
+				<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">我要加入翻译</a>
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="../../_static/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="../../_static/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
+</li>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
+
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
+
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							&copy; 版权所有 2016, Cake Software Foundation, Inc.
+						最后更新于 8月 02, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
 <div id="inline-search-results"></div>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F201cbc61deaf9f7ffb521fb23e83db40' type='text/javascript'%3E%3C/script%3E"));
-</script>
 
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+
+</div>
+
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"cakephpchina"};
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
 	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	</script>
-<!-- Duoshuo Comment END -->
-
-<!-- Grunt Live Reload -->
-<script src="http://192.168.56.113:35729/livereload.js"></script>
+</script>
   </body>
 </html>

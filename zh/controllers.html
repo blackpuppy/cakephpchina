@@ -1,166 +1,293 @@
 
+
 <!DOCTYPE html>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Controllers" lang="zh_CN" name="title" />
-<meta content="correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes" lang="zh_CN" name="keywords" />
+    <meta content="Controllers" lang="zh" name="title" />
+<meta content="correct models,controller class,controller controller,core library,single model,request data,middle man,bakery,mvc,attributes,logic,recipes" lang="zh" name="keywords" />
 
-    <title>控制器 &mdash; CakePHP Cookbook 2.x 文档</title>
+    <title>控制器</title>
+    <link href="_static/favicon.png" type="image/png" rel="icon" />
+
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/app.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '2.x',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/translations.js"></script>
     <script type="text/javascript" src="_static/app.js"></script>
-    <script type="text/javascript" src="_static/modernizr.foundation.js"></script>
-    <script type="text/javascript" src="_static/foundation.js"></script>
+
+    <link rel="alternate" hreflang="en" href="../en/controllers.html" /><link rel="alternate" hreflang="pt" href="../pt/controllers.html" /><link rel="alternate" hreflang="es" href="../es/controllers.html" /><link rel="alternate" hreflang="ja" href="../ja/controllers.html" /><link rel="alternate" hreflang="fr" href="../fr/controllers.html" />
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within CakePHP Cookbook 2.x 文档" href="_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="top" title="CakePHP Cookbook 2.x 文档" href="index.html" />
     <link rel="next" title="请求与响应对象" href="controllers/request-response.html" />
     <link rel="prev" title="获取帮助" href="cakephp-overview/where-to-get-help.html" />
-<link href="_static/favicon.ico" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="alternate" hreflang="en" href="../en/controllers.html" /><link rel="alternate" hreflang="pt" href="../pt/controllers.html" /><link rel="alternate" hreflang="es" href="../es/controllers.html" /><link rel="alternate" hreflang="ja" href="../ja/controllers.html" /><link rel="alternate" hreflang="fr" href="../fr/controllers.html" />
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="_static/opensearchdescription-book-2-x.xml">
-<script type="text/javascript">
-window.lang = "zh_CN";
-</script>
-
+    <script type="text/javascript">
+    window.lang = "zh";
+    </script>
   </head>
   <body>
 
 <div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="masthead">
-	<div class="header-backing"></div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="contents.html">
-			<img src="_static/cake-logo.png" alt="CakePHP" width="70" />
-			</a>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
+
 		
-<div id="searchbox" class="columns nine phone-three">
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-	<form id="searchform" class="search" action="search.html" method="get">
-		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
-		<input class="search-submit search-big button red" type="submit" value="搜索" />
-		<input type="hidden" name="check_keywords" value="yes" />
-		<input type="hidden" name="area" value="default" />
-
-		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
-	</form>
-
-</div>
-	</div>
-</div>
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="contents.html">Cookbook 2.x</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">2.x Book</a>
-				<ul>
-					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				<a href="#">zh_CN</a>
-
-				<ul>
-				
-					<li><a href="../en/controllers.html">en</a></li>
-				
-					<li><a href="../pt/controllers.html">pt</a></li>
-				
-					<li><a href="../es/controllers.html">es</a></li>
-				
-					<li><a href="../ja/controllers.html">ja</a></li>
-				
-					<li><a href="../fr/controllers.html">fr</a></li>
-				
-					<li></li>
-				
-				</ul>
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="search.html" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="搜索" type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/controllers.rst" target="_blank">Improve this Doc</a>
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 2.x <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														zh
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li><a href="../en/controllers.html">en</a></li>
+											
+												<li><a href="../pt/controllers.html">pt</a></li>
+											
+												<li><a href="../es/controllers.html">es</a></li>
+											
+												<li><a href="../ja/controllers.html">ja</a></li>
+											
+												<li><a href="../fr/controllers.html">fr</a></li>
+											
+												<li></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/zh">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/zh">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/zh/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/zh/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/master/zh/controllers.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="#">控制器</a><ul>
+<li><a class="reference internal" href="#app">App 控制器</a></li>
+<li><a class="reference internal" href="#id2">请求参数</a></li>
+<li><a class="reference internal" href="#id3">控制器动作</a></li>
+<li><a class="reference internal" href="#controller-life-cycle">请求生命周期回调</a></li>
+<li><a class="reference internal" href="#controller-methods">控制器方法</a><ul>
+<li><a class="reference internal" href="#id6">与视图交互</a><ul>
+<li><a class="reference internal" href="#id7">渲染某个视图</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">流程控制</a></li>
+<li><a class="reference internal" href="#id9">回调</a></li>
+<li><a class="reference internal" href="#id10">其它有用的方法</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">控制器属性</a><ul>
+<li><a class="reference internal" href="#components-helpers-uses">$components、$helpers 和 $uses</a></li>
+<li><a class="reference internal" href="#id13">其它属性</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id14">关于控制器的更多内容</a></li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
   <div class="section" id="id1">
 <h1>控制器<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <p>控制器是 MVC 中的 &#8216;C&#8217;。当经过路由处理，找到正确的控制器之后，就会调用控制器的动
@@ -170,41 +297,41 @@ window.lang = "zh_CN";
 <p>通常，控制器用于管理单个模型的逻辑。例如，如果你在制作一个在线面包店网站，可能会
 创建 RecipesController 来管理食谱，IngredientsController 来管理它们的成分。控制
 器可以处理多个模型。在CakePHP中，控制器的名称会依照主模型的名字来命名。</p>
-<p>应用程序中的控制器继承于 <tt class="docutils literal"><span class="pre">AppController</span></tt> 类，而 <tt class="docutils literal"><span class="pre">AppController</span></tt> 类又继承于核
-心的 <a class="reference internal" href="#Controller" title="Controller"><tt class="xref php php-class docutils literal"><span class="pre">Controller</span></tt></a> 类。<tt class="docutils literal"><span class="pre">AppController</span></tt> 类定义在
-<tt class="docutils literal"><span class="pre">/app/Controller/AppController.php</span></tt> 中，它所包含的方法是在应用程序所有的控制器
+<p>应用程序中的控制器继承于 <code class="docutils literal"><span class="pre">AppController</span></code> 类，而 <code class="docutils literal"><span class="pre">AppController</span></code> 类又继承于核
+心的 <a class="reference internal" href="#Controller" title="Controller"><code class="xref php php-class docutils literal"><span class="pre">Controller</span></code></a> 类。<code class="docutils literal"><span class="pre">AppController</span></code> 类定义在
+<code class="docutils literal"><span class="pre">/app/Controller/AppController.php</span></code> 中，它所包含的方法是在应用程序所有的控制器
 之间共享的。</p>
 <p>控制器提供了一些处理请求的方法，称为 <em>动作(action)</em> 。在默认情况下，控制器所有的
 公有方法都是动作，可通过网址(<em>URL</em>)访问。动作负责解释请求并生成响应。通常响应是
 以渲染视图的方式产生，但也可以用其他的方式来生成。</p>
 <div class="section" id="app">
 <span id="app-controller"></span><h2>App 控制器<a class="headerlink" href="#app" title="永久链接至标题">¶</a></h2>
-<p>如介绍中说所说，<tt class="docutils literal"><span class="pre">AppController</span></tt> 控制器是应用程序中所有控制器的父类。
-<tt class="docutils literal"><span class="pre">AppController</span></tt> 本身扩展了 CakePHP 核心库中的 <a class="reference internal" href="#Controller" title="Controller"><tt class="xref php php-class docutils literal"><span class="pre">Controller</span></tt></a> 类。
-AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Controller/AppController.php</span></tt> 中，象这样:</p>
+<p>如介绍中说所说，<code class="docutils literal"><span class="pre">AppController</span></code> 控制器是应用程序中所有控制器的父类。
+<code class="docutils literal"><span class="pre">AppController</span></code> 本身扩展了 CakePHP 核心库中的 <a class="reference internal" href="#Controller" title="Controller"><code class="xref php php-class docutils literal"><span class="pre">Controller</span></code></a> 类。
+AppController 定义在 <code class="docutils literal"><span class="pre">/app/Controller/AppController.php</span></code> 中，象这样:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppController</span> <span class="k">extends</span> <span class="nx">Controller</span> <span class="p">{</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>在 <tt class="docutils literal"><span class="pre">AppController</span></tt> 中创建的控制器的属性和方法， 可以在你的应用程序所有的控制器
+<p>在 <code class="docutils literal"><span class="pre">AppController</span></code> 中创建的控制器的属性和方法， 可以在你的应用程序所有的控制器
 中使用。这是为你的应用程序中所有的控制器编写共用代码的理想地方。组件(你以后将会
 了解到)最好用于多个(但不一定是所有)控制器中用到的代码。</p>
 <p>虽然通常的面向对象继承规则依然适用，CakePHP 针对特殊的控制器属性做了一些额外的工
 作。控制器使用的组件(<em>components</em>)和助件(<em>helpers</em>)列表被特别处理。对这两个列表，
-<tt class="docutils literal"><span class="pre">AppController</span></tt> 中的值会和控制器子类中的(同名)数组合并。子类中的值总是覆盖
-<tt class="docutils literal"><span class="pre">AppController</span></tt> 中的值。</p>
+<code class="docutils literal"><span class="pre">AppController</span></code> 中的值会和控制器子类中的(同名)数组合并。子类中的值总是覆盖
+<code class="docutils literal"><span class="pre">AppController</span></code> 中的值。</p>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p>CakePHP 将下列变量从 <tt class="docutils literal"><span class="pre">AppController</span></tt> 合并到你应用程序的控制器:</p>
+<p>CakePHP 将下列变量从 <code class="docutils literal"><span class="pre">AppController</span></code> 合并到你应用程序的控制器:</p>
 <ul class="last simple">
-<li><a class="reference internal" href="#Controller::$components" title="Controller::$components"><tt class="xref php php-attr docutils literal"><span class="pre">$components</span></tt></a></li>
-<li><a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><tt class="xref php php-attr docutils literal"><span class="pre">$helpers</span></tt></a></li>
-<li><a class="reference internal" href="#Controller::$uses" title="Controller::$uses"><tt class="xref php php-attr docutils literal"><span class="pre">$uses</span></tt></a></li>
+<li><a class="reference internal" href="#Controller::$components" title="Controller::$components"><code class="xref php php-attr docutils literal"><span class="pre">$components</span></code></a></li>
+<li><a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><code class="xref php php-attr docutils literal"><span class="pre">$helpers</span></code></a></li>
+<li><a class="reference internal" href="#Controller::$uses" title="Controller::$uses"><code class="xref php php-attr docutils literal"><span class="pre">$uses</span></code></a></li>
 </ul>
 </div>
-<p>如果你在你的 <tt class="docutils literal"><span class="pre">AppController</span></tt> 中定义 <a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><tt class="xref php php-attr docutils literal"><span class="pre">$helpers</span></tt></a>，记住加
+<p>如果你在你的 <code class="docutils literal"><span class="pre">AppController</span></code> 中定义 <a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><code class="xref php php-attr docutils literal"><span class="pre">$helpers</span></code></a>，记住加
 入默认的 Html 和 Form 助件。</p>
-<p>也请记住，最好在控制器子类的回调方法中调用 <tt class="docutils literal"><span class="pre">AppController</span></tt> 的回调方法:</p>
+<p>也请记住，最好在控制器子类的回调方法中调用 <code class="docutils literal"><span class="pre">AppController</span></code> 的回调方法:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">beforeFilter</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">parent</span><span class="o">::</span><span class="na">beforeFilter</span><span class="p">();</span>
 <span class="p">}</span>
@@ -213,19 +340,19 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 </div>
 <div class="section" id="id2">
 <h2>请求参数<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<p>当一个请求提交给 CakePHP 应用程序时，CakePHP 的 <a class="reference internal" href="development/routing.html#Router" title="Router"><tt class="xref php php-class docutils literal"><span class="pre">Router</span></tt></a> 和
-<tt class="xref php php-class docutils literal"><span class="pre">Dispatcher</span></tt> 类使用 <a class="reference internal" href="development/routing.html#routes-configuration"><em>路由的配置</em></a> 来查找和创建正确的控
+<p>当一个请求提交给 CakePHP 应用程序时，CakePHP 的 <a class="reference internal" href="development/routing.html#Router" title="Router"><code class="xref php php-class docutils literal"><span class="pre">Router</span></code></a> 和
+<code class="xref php php-class docutils literal"><span class="pre">Dispatcher</span></code> 类使用 <a class="reference internal" href="development/routing.html#routes-configuration"><span class="std std-ref">路由的配置</span></a> 来查找和创建正确的控
 制器。请求数据被封装在一个请求对象中。CakePHP 把所有重要的请求信息放在
-<tt class="docutils literal"><span class="pre">$this-&gt;request</span></tt> 属性中。欲知 CakePHP 请求对象的更多信息，请参看
-<a class="reference internal" href="controllers/request-response.html#cake-request"><em>CakeRequest</em></a> 这一节。</p>
+<code class="docutils literal"><span class="pre">$this-&gt;request</span></code> 属性中。欲知 CakePHP 请求对象的更多信息，请参看
+<a class="reference internal" href="controllers/request-response.html#cake-request"><span class="std std-ref">CakeRequest</span></a> 这一节。</p>
 </div>
 <div class="section" id="id3">
 <h2>控制器动作<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <p>控制器动作负责将请求参数转换成对提交请求的浏览器/用户的响应。CakePHP 使用约定使
 这个过程自动化，去掉一些否则你要自己写的样板(<em>boiler-plate</em>)代码。</p>
 <p>根据约定，CakePHP 会渲染一个以动作名称的转换(<em>inflected</em>)版本命名的视图。回到我
-们在线面包店的例子，我们的 RecipesController 也许会有 <tt class="docutils literal"><span class="pre">view()</span></tt>，<tt class="docutils literal"><span class="pre">share()</span></tt> 和
-<tt class="docutils literal"><span class="pre">search()</span></tt> 动作。控制器会是 <tt class="docutils literal"><span class="pre">/app/Controller/RecipesController.php</span></tt>，其内容
+们在线面包店的例子，我们的 RecipesController 也许会有 <code class="docutils literal"><span class="pre">view()</span></code>，<code class="docutils literal"><span class="pre">share()</span></code> 和
+<code class="docutils literal"><span class="pre">search()</span></code> 动作。控制器会是 <code class="docutils literal"><span class="pre">/app/Controller/RecipesController.php</span></code>，其内容
 如下:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1"># /app/Controller/RecipesController.php</span>
 
@@ -244,19 +371,19 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>这些动作的视图文件将会是 <tt class="docutils literal"><span class="pre">app/View/Recipes/view.ctp</span></tt> 、
-<tt class="docutils literal"><span class="pre">app/View/Recipes/share.ctp</span></tt> 和 <tt class="docutils literal"><span class="pre">app/View/Recipes/search.ctp</span></tt>。根据约定，视
+<p>这些动作的视图文件将会是 <code class="docutils literal"><span class="pre">app/View/Recipes/view.ctp</span></code> 、
+<code class="docutils literal"><span class="pre">app/View/Recipes/share.ctp</span></code> 和 <code class="docutils literal"><span class="pre">app/View/Recipes/search.ctp</span></code>。根据约定，视
 图文件名是动作名称的下划线分隔的小写格式。</p>
-<p>控制器动作通常用 <a class="reference internal" href="#Controller::set" title="Controller::set"><tt class="xref php php-meth docutils literal"><span class="pre">set()</span></tt></a> 创建上下文，供 <a class="reference internal" href="views.html#View" title="View"><tt class="xref php php-class docutils literal"><span class="pre">View</span></tt></a>
+<p>控制器动作通常用 <a class="reference internal" href="#Controller::set" title="Controller::set"><code class="xref php php-meth docutils literal"><span class="pre">set()</span></code></a> 创建上下文，供 <a class="reference internal" href="views.html#View" title="View"><code class="xref php php-class docutils literal"><span class="pre">View</span></code></a>
 用来渲染视图。正是得益于 CakePHP 使用的约定，你不必手动创建和渲染视图。而是一旦
 控制器动作完成，CakePHP 会处理视图的渲染和发送。</p>
 <p>如果出于某种原因，想要跳过默认的行为，下面的两种技术都可以跳过默认的视图渲染过程。</p>
 <ul class="simple">
 <li>如果你从控制器动作返回一个字符串，或者可以转换成字符串的对象，这就会被作为响应
 体。</li>
-<li>你可以返回一个 <a class="reference internal" href="controllers/request-response.html#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> 对象，包含创建的完整响应。</li>
+<li>你可以返回一个 <a class="reference internal" href="controllers/request-response.html#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a> 对象，包含创建的完整响应。</li>
 </ul>
-<p>当控制器方法用于 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 时，你经常要返回非字符
+<p>当控制器方法用于 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> 时，你经常要返回非字符
 串数据。如果你有用于正常网页请求 + requestAction 的控制器方法，你应当在返回前检
 查请求类型:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
@@ -271,9 +398,9 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 </pre></div>
 </div>
 <p>上面的控制器动作是一例，说明同一个方法如何用于
-<a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 和正常的请求。对非 requestAction 请求返
-回数组数据会引起错误，应当避免。欲知使用 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a>
-的更多窍门，请参看 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 一节。</p>
+<a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> 和正常的请求。对非 requestAction 请求返
+回数组数据会引起错误，应当避免。欲知使用 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a>
+的更多窍门，请参看 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> 一节。</p>
 <p>为了让你在自己的应用程序中有效地使用控制器，我们来介绍一些 CakePHP 的控制器提供
 的核心属性和方法。</p>
 </div>
@@ -281,13 +408,13 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 <span id="id4"></span><h2>请求生命周期回调<a class="headerlink" href="#controller-life-cycle" title="永久链接至标题">¶</a></h2>
 <dl class="class">
 <dt id="Controller">
-<em class="property">class </em><tt class="descname">Controller</tt><a class="headerlink" href="#Controller" title="永久链接至目标">¶</a></dt>
+<em class="property">class </em><code class="descname">Controller</code><a class="headerlink" href="#Controller" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
 <p>CakePHP 控制器带有回调方法，用来在请求生命周期的各个阶段插入逻辑：</p>
 <dl class="method">
 <dt id="Controller::beforeFilter">
-<tt class="descclassname">Controller::</tt><tt class="descname">beforeFilter</tt><big>(</big><big>)</big><a class="headerlink" href="#Controller::beforeFilter" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Controller::</code><code class="descname">beforeFilter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Controller::beforeFilter" title="永久链接至目标">¶</a></dt>
 <dd><p>这个函数在控制器每个动作之前执行。这里可以方便地检查有效的会话，或者检查用户
 的权限。</p>
 <div class="admonition note">
@@ -298,32 +425,32 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 
 <dl class="method">
 <dt id="Controller::beforeRender">
-<tt class="descclassname">Controller::</tt><tt class="descname">beforeRender</tt><big>(</big><big>)</big><a class="headerlink" href="#Controller::beforeRender" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Controller::</code><code class="descname">beforeRender</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Controller::beforeRender" title="永久链接至目标">¶</a></dt>
 <dd><p>在控制器动作逻辑之后、但在视图渲染之前被调用。这个回调不常用，但如果你在一个
-动作结束前自己调用 <a class="reference internal" href="#Controller::render" title="Controller::render"><tt class="xref php php-meth docutils literal"><span class="pre">render()</span></tt></a>，就可能会需要。</p>
+动作结束前自己调用 <a class="reference internal" href="#Controller::render" title="Controller::render"><code class="xref php php-meth docutils literal"><span class="pre">render()</span></code></a>，就可能会需要。</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Controller::afterFilter">
-<tt class="descclassname">Controller::</tt><tt class="descname">afterFilter</tt><big>(</big><big>)</big><a class="headerlink" href="#Controller::afterFilter" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Controller::</code><code class="descname">afterFilter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Controller::afterFilter" title="永久链接至目标">¶</a></dt>
 <dd><p>在每个动作之后、且在渲染完成之后才调用。这是控制器运行的最后一个方法。</p>
 </dd></dl>
 
-<p>除了控制器生命周期的回调，<a class="reference internal" href="controllers/components.html"><em>组件</em></a> 也提供了一组类似的回调。</p>
+<p>除了控制器生命周期的回调，<a class="reference internal" href="controllers/components.html"><span class="doc">组件</span></a> 也提供了一组类似的回调。</p>
 </div>
 <div class="section" id="controller-methods">
 <span id="id5"></span><h2>控制器方法<a class="headerlink" href="#controller-methods" title="永久链接至标题">¶</a></h2>
 <p>欲知控制器方法的完整列表及其描述，请参看
-<a class="reference external" href="http://api.cakephp.org/2.7/class-Controller.html">CakePHP API</a> 。</p>
+<a class="reference external" href="http://api.cakephp.org/2.8/class-Controller.html">CakePHP API</a> 。</p>
 <div class="section" id="id6">
 <h3>与视图交互<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
-<p>控制器有若干种方式与视图交互。首先可以用 <a class="reference internal" href="#Controller::set" title="Controller::set"><tt class="xref php php-meth docutils literal"><span class="pre">set()</span></tt></a> 传递数据
+<p>控制器有若干种方式与视图交互。首先可以用 <a class="reference internal" href="#Controller::set" title="Controller::set"><code class="xref php php-meth docutils literal"><span class="pre">set()</span></code></a> 传递数据
 给视图。也可以决定使用哪个视图类，以及渲染控制器的哪个视图文件。</p>
 <dl class="method">
 <dt id="Controller::set">
-<tt class="descclassname">Controller::</tt><tt class="descname">set</tt><big>(</big><em>string $var</em>, <em>mixed $value</em><big>)</big><a class="headerlink" href="#Controller::set" title="永久链接至目标">¶</a></dt>
-<dd><p><a class="reference internal" href="#Controller::set" title="Controller::set"><tt class="xref php php-meth docutils literal"><span class="pre">set()</span></tt></a> 方法是从控制器传递数据到视图的主要方式。一旦
-用了 <a class="reference internal" href="#Controller::set" title="Controller::set"><tt class="xref php php-meth docutils literal"><span class="pre">set()</span></tt></a>，变量就可以在视图中访问:</p>
+<code class="descclassname">Controller::</code><code class="descname">set</code><span class="sig-paren">(</span><em>string $var</em>, <em>mixed $value</em><span class="sig-paren">)</span><a class="headerlink" href="#Controller::set" title="永久链接至目标">¶</a></dt>
+<dd><p><a class="reference internal" href="#Controller::set" title="Controller::set"><code class="xref php php-meth docutils literal"><span class="pre">set()</span></code></a> 方法是从控制器传递数据到视图的主要方式。一旦
+用了 <a class="reference internal" href="#Controller::set" title="Controller::set"><code class="xref php php-meth docutils literal"><span class="pre">set()</span></code></a>，变量就可以在视图中访问:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 首先从控制器传递数据:</span>
 
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="s1">&#39;pink&#39;</span><span class="p">);</span>
@@ -334,7 +461,7 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 <span class="x">你为蛋糕选择了 </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$color</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"> 色的糖霜。</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#Controller::set" title="Controller::set"><tt class="xref php php-meth docutils literal"><span class="pre">set()</span></tt></a> 方法也接受关联数组作为其第一个参数。这经常是
+<p><a class="reference internal" href="#Controller::set" title="Controller::set"><code class="xref php php-meth docutils literal"><span class="pre">set()</span></code></a> 方法也接受关联数组作为其第一个参数。这经常是
 快速为视图设置一组信息的方法:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;color&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pink&#39;</span><span class="p">,</span>
@@ -347,7 +474,7 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>属性 <tt class="docutils literal"><span class="pre">$pageTitle</span></tt> 不再存在，用 <a class="reference internal" href="#Controller::set" title="Controller::set"><tt class="xref php php-meth docutils literal"><span class="pre">set()</span></tt></a> 设置标题:</p>
+<p>属性 <code class="docutils literal"><span class="pre">$pageTitle</span></code> 不再存在，用 <a class="reference internal" href="#Controller::set" title="Controller::set"><code class="xref php php-meth docutils literal"><span class="pre">set()</span></code></a> 设置标题:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;title_for_layout&#39;</span><span class="p">,</span> <span class="s1">&#39;这是页面标题&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -357,13 +484,13 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 
 <dl class="method">
 <dt id="Controller::render">
-<tt class="descclassname">Controller::</tt><tt class="descname">render</tt><big>(</big><em>string $view</em>, <em>string $layout</em><big>)</big><a class="headerlink" href="#Controller::render" title="永久链接至目标">¶</a></dt>
-<dd><p><a class="reference internal" href="#Controller::render" title="Controller::render"><tt class="xref php php-meth docutils literal"><span class="pre">render()</span></tt></a> 方法在每个请求的控制器动作结束时会被自动调
-用。这个方法执行所有的视图逻辑(使用你用 <a class="reference internal" href="#Controller::set" title="Controller::set"><tt class="xref php php-meth docutils literal"><span class="pre">set()</span></tt></a> 方法
-给出的数据)，将视图放入它的布局(<a class="reference internal" href="views.html#View::$layout" title="View::$layout"><tt class="xref php php-attr docutils literal"><span class="pre">$layout</span></tt></a>)中，并把它提供给
+<code class="descclassname">Controller::</code><code class="descname">render</code><span class="sig-paren">(</span><em>string $view</em>, <em>string $layout</em><span class="sig-paren">)</span><a class="headerlink" href="#Controller::render" title="永久链接至目标">¶</a></dt>
+<dd><p><a class="reference internal" href="#Controller::render" title="Controller::render"><code class="xref php php-meth docutils literal"><span class="pre">render()</span></code></a> 方法在每个请求的控制器动作结束时会被自动调
+用。这个方法执行所有的视图逻辑(使用你用 <a class="reference internal" href="#Controller::set" title="Controller::set"><code class="xref php php-meth docutils literal"><span class="pre">set()</span></code></a> 方法
+给出的数据)，将视图放入它的布局(<a class="reference internal" href="views.html#View::$layout" title="View::$layout"><code class="xref php php-attr docutils literal"><span class="pre">$layout</span></code></a>)中，并把它提供给
 最终用户。</p>
 <p>渲染使用的默认视图文件由约定决定。如果请求的是 RecipesController 的
-<tt class="docutils literal"><span class="pre">search()</span></tt> 动作，视图文件 /app/View/Recipes/search.ctp 将被渲染:</p>
+<code class="docutils literal"><span class="pre">search()</span></code> 动作，视图文件 /app/View/Recipes/search.ctp 将被渲染:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 <span class="c1">// ...</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">search</span><span class="p">()</span> <span class="p">{</span>
@@ -374,22 +501,22 @@ AppController 定义在 <tt class="docutils literal"><span class="pre">/app/Cont
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>虽然 CakePHP 会在每个动作的逻辑之后自动调用它(除非设置了 <tt class="docutils literal"><span class="pre">$this-&gt;autoRender</span></tt>
-为 false)，仍然可以用该方法通过用 <tt class="docutils literal"><span class="pre">$view</span></tt> 指定一个视图名称来指定另外一个
+<p>虽然 CakePHP 会在每个动作的逻辑之后自动调用它(除非设置了 <code class="docutils literal"><span class="pre">$this-&gt;autoRender</span></code>
+为 false)，仍然可以用该方法通过用 <code class="docutils literal"><span class="pre">$view</span></code> 指定一个视图名称来指定另外一个
 视图文件。</p>
-<p>如果 <tt class="docutils literal"><span class="pre">$view</span></tt> 以 &#8216;/&#8217; 开头，就被认为是相对于 <tt class="docutils literal"><span class="pre">/app/View</span></tt> 的视图或者元素文
+<p>如果 <code class="docutils literal"><span class="pre">$view</span></code> 以 &#8216;/&#8217; 开头，就被认为是相对于 <code class="docutils literal"><span class="pre">/app/View</span></code> 的视图或者元素文
 件。这可以直接渲染元素，在 AJAX 请求中很有用。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 渲染 /View/Elements/ajaxreturn.ctp 中的元素</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;/Elements/ajaxreturn&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="views.html#View::$layout" title="View::$layout"><tt class="xref php php-attr docutils literal"><span class="pre">$layout</span></tt></a> 参数用来指定视图渲染所使用的布局。</p>
+<p><a class="reference internal" href="views.html#View::$layout" title="View::$layout"><code class="xref php php-attr docutils literal"><span class="pre">$layout</span></code></a> 参数用来指定视图渲染所使用的布局。</p>
 </dd></dl>
 
 <div class="section" id="id7">
 <h4>渲染某个视图<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
 <p>在控制器中，你也许想要渲染与约定不同的视图。为此可以直接调用
-<a class="reference internal" href="#Controller::render" title="Controller::render"><tt class="xref php php-meth docutils literal"><span class="pre">render()</span></tt></a>。一旦调用了 <a class="reference internal" href="#Controller::render" title="Controller::render"><tt class="xref php php-meth docutils literal"><span class="pre">render()</span></tt></a>，
+<a class="reference internal" href="#Controller::render" title="Controller::render"><code class="xref php php-meth docutils literal"><span class="pre">render()</span></code></a>。一旦调用了 <a class="reference internal" href="#Controller::render" title="Controller::render"><code class="xref php php-meth docutils literal"><span class="pre">render()</span></code></a>，
 CakePHP 就不会试图再次渲染该视图了:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">my_action</span><span class="p">()</span> <span class="p">{</span>
@@ -398,10 +525,10 @@ CakePHP 就不会试图再次渲染该视图了:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>这会渲染 <tt class="docutils literal"><span class="pre">app/View/Posts/custom_file.ctp</span></tt>，而不是
-<tt class="docutils literal"><span class="pre">app/View/Posts/my_action.ctp</span></tt>。</p>
+<p>这会渲染 <code class="docutils literal"><span class="pre">app/View/Posts/custom_file.ctp</span></code>，而不是
+<code class="docutils literal"><span class="pre">app/View/Posts/my_action.ctp</span></code>。</p>
 <p>也可以用下面的语法渲染插件中的视图:
-<tt class="docutils literal"><span class="pre">$this-&gt;render('插件名称.插件控制器/定制视图文件')</span></tt> 。例如:</p>
+<code class="docutils literal"><span class="pre">$this-&gt;render('插件名称.插件控制器/定制视图文件')</span></code> 。例如:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">my_action</span><span class="p">()</span> <span class="p">{</span>
         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;Users.UserDetails/custom_file&#39;</span><span class="p">);</span>
@@ -409,15 +536,15 @@ CakePHP 就不会试图再次渲染该视图了:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>这会渲染 <tt class="docutils literal"><span class="pre">app/Plugin/Users/View/UserDetails/custom_file.ctp</span></tt>。</p>
+<p>这会渲染 <code class="docutils literal"><span class="pre">app/Plugin/Users/View/UserDetails/custom_file.ctp</span></code>。</p>
 </div>
 </div>
 <div class="section" id="id8">
 <h3>流程控制<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
 <dl class="method">
 <dt id="Controller::redirect">
-<tt class="descclassname">Controller::</tt><tt class="descname">redirect</tt><big>(</big><em>mixed $url</em>, <em>integer $status</em>, <em>boolean $exit</em><big>)</big><a class="headerlink" href="#Controller::redirect" title="永久链接至目标">¶</a></dt>
-<dd><p>最常用到的流程控制方法是 <a class="reference internal" href="#Controller::redirect" title="Controller::redirect"><tt class="xref php php-meth docutils literal"><span class="pre">redirect()</span></tt></a> 方法。这个方法
+<code class="descclassname">Controller::</code><code class="descname">redirect</code><span class="sig-paren">(</span><em>mixed $url</em>, <em>integer $status</em>, <em>boolean $exit</em><span class="sig-paren">)</span><a class="headerlink" href="#Controller::redirect" title="永久链接至目标">¶</a></dt>
+<dd><p>最常用到的流程控制方法是 <a class="reference internal" href="#Controller::redirect" title="Controller::redirect"><code class="xref php php-meth docutils literal"><span class="pre">redirect()</span></code></a> 方法。这个方法
 的第一个参数接受的是 CakePHP 相对网址的形式。当一个用户成功地提交了一份订单
 之后，也许要引导他们到收据页面。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">place_order</span><span class="p">()</span> <span class="p">{</span>
@@ -442,16 +569,16 @@ CakePHP 就不会试图再次渲染该视图了:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">));</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#Controller::redirect" title="Controller::redirect"><tt class="xref php php-meth docutils literal"><span class="pre">redirect()</span></tt></a> 的第二个参数让你可以指定伴随跳转的 HTTP
+<p><a class="reference internal" href="#Controller::redirect" title="Controller::redirect"><code class="xref php php-meth docutils literal"><span class="pre">redirect()</span></code></a> 的第二个参数让你可以指定伴随跳转的 HTTP
 状态编码。根据跳转的性质，也许要使用 301 (页面永久性移动)或者 303 (参见其他
 页面)。</p>
-<p>该方法会在跳转后调用 <tt class="docutils literal"><span class="pre">exit()</span></tt>，除非设置第三个参数为 <tt class="docutils literal"><span class="pre">false</span></tt>。</p>
+<p>该方法会在跳转后调用 <code class="docutils literal"><span class="pre">exit()</span></code>，除非设置第三个参数为 <code class="docutils literal"><span class="pre">false</span></code>。</p>
 <p>如果需要跳转到 referer 页面，可以用:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">referer</span><span class="p">());</span>
 </pre></div>
 </div>
 <p>该方法也支持命名的参数。如果要跳转到类似
-<tt class="docutils literal"><span class="pre">http://www.example.com/orders/confirm/product:pizza/quantity:5</span></tt> 的网址，
+<code class="docutils literal"><span class="pre">http://www.example.com/orders/confirm/product:pizza/quantity:5</span></code> 的网址，
 可以用:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;orders&#39;</span><span class="p">,</span>
@@ -481,44 +608,44 @@ CakePHP 就不会试图再次渲染该视图了:</p>
 
 <dl class="method">
 <dt id="Controller::flash">
-<tt class="descclassname">Controller::</tt><tt class="descname">flash</tt><big>(</big><em>string $message</em>, <em>string|array $url</em>, <em>integer $pause</em>, <em>string $layout</em><big>)</big><a class="headerlink" href="#Controller::flash" title="永久链接至目标">¶</a></dt>
-<dd><p>如同 <a class="reference internal" href="#Controller::redirect" title="Controller::redirect"><tt class="xref php php-meth docutils literal"><span class="pre">redirect()</span></tt></a>，<a class="reference internal" href="#Controller::flash" title="Controller::flash"><tt class="xref php php-meth docutils literal"><span class="pre">flash()</span></tt></a>
+<code class="descclassname">Controller::</code><code class="descname">flash</code><span class="sig-paren">(</span><em>string $message</em>, <em>string|array $url</em>, <em>integer $pause</em>, <em>string $layout</em><span class="sig-paren">)</span><a class="headerlink" href="#Controller::flash" title="永久链接至目标">¶</a></dt>
+<dd><p>如同 <a class="reference internal" href="#Controller::redirect" title="Controller::redirect"><code class="xref php php-meth docutils literal"><span class="pre">redirect()</span></code></a>，<a class="reference internal" href="#Controller::flash" title="Controller::flash"><code class="xref php php-meth docutils literal"><span class="pre">flash()</span></code></a>
 方法用于在一项操作之后引导用户到一个新的页面。
-<a class="reference internal" href="#Controller::flash" title="Controller::flash"><tt class="xref php php-meth docutils literal"><span class="pre">flash()</span></tt></a> 方法的不同之处在于，它会显示一条信息，然后
+<a class="reference internal" href="#Controller::flash" title="Controller::flash"><code class="xref php php-meth docutils literal"><span class="pre">flash()</span></code></a> 方法的不同之处在于，它会显示一条信息，然后
 才引导用户到另一个网址。</p>
 <p>第一个参数应当为要显示的信息，而第二个参数是 CakePHP 的相对网址。CakePHP 会
-显示 <tt class="docutils literal"><span class="pre">$message</span></tt> 并停留 <tt class="docutils literal"><span class="pre">$pause</span></tt> 秒，再引导用户跳转。</p>
-<p>如果你想用某个模板来显示你的跳转信息，可以在 <a class="reference internal" href="views.html#View::$layout" title="View::$layout"><tt class="xref php php-attr docutils literal"><span class="pre">$layout</span></tt></a> 参数
+显示 <code class="docutils literal"><span class="pre">$message</span></code> 并停留 <code class="docutils literal"><span class="pre">$pause</span></code> 秒，再引导用户跳转。</p>
+<p>如果你想用某个模板来显示你的跳转信息，可以在 <a class="reference internal" href="views.html#View::$layout" title="View::$layout"><code class="xref php php-attr docutils literal"><span class="pre">$layout</span></code></a> 参数
 指定那个布局的名字。</p>
-<p>对于页面内的闪现提示信息，请务必参考 <a class="reference internal" href="core-libraries/components/sessions.html#SessionComponent::setFlash" title="SessionComponent::setFlash"><tt class="xref php php-meth docutils literal"><span class="pre">SessionComponent::setFlash()</span></tt></a>
+<p>对于页面内的闪现提示信息，请务必参考 <a class="reference internal" href="core-libraries/components/sessions.html#SessionComponent::setFlash" title="SessionComponent::setFlash"><code class="xref php php-meth docutils literal"><span class="pre">SessionComponent::setFlash()</span></code></a>
 方法。</p>
 </dd></dl>
 
 </div>
 <div class="section" id="id9">
 <h3>回调<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
-<p>除了 <a class="reference internal" href="#controller-life-cycle"><em>请求生命周期回调</em></a>， CakePHP 还支持脚手架相关的的回调。</p>
+<p>除了 <a class="reference internal" href="#controller-life-cycle"><span class="std std-ref">请求生命周期回调</span></a>， CakePHP 还支持脚手架相关的的回调。</p>
 <dl class="method">
 <dt id="Controller::beforeScaffold">
-<tt class="descclassname">Controller::</tt><tt class="descname">beforeScaffold</tt><big>(</big><em>$method</em><big>)</big><a class="headerlink" href="#Controller::beforeScaffold" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Controller::</code><code class="descname">beforeScaffold</code><span class="sig-paren">(</span><em>$method</em><span class="sig-paren">)</span><a class="headerlink" href="#Controller::beforeScaffold" title="永久链接至目标">¶</a></dt>
 <dd><p>$method 是调用的方法名，例如 index、edit，等等。</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Controller::afterScaffoldSave">
-<tt class="descclassname">Controller::</tt><tt class="descname">afterScaffoldSave</tt><big>(</big><em>$method</em><big>)</big><a class="headerlink" href="#Controller::afterScaffoldSave" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Controller::</code><code class="descname">afterScaffoldSave</code><span class="sig-paren">(</span><em>$method</em><span class="sig-paren">)</span><a class="headerlink" href="#Controller::afterScaffoldSave" title="永久链接至目标">¶</a></dt>
 <dd><p>$method 是调用的方法名，为 edit 或 update。</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Controller::afterScaffoldSaveError">
-<tt class="descclassname">Controller::</tt><tt class="descname">afterScaffoldSaveError</tt><big>(</big><em>$method</em><big>)</big><a class="headerlink" href="#Controller::afterScaffoldSaveError" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Controller::</code><code class="descname">afterScaffoldSaveError</code><span class="sig-paren">(</span><em>$method</em><span class="sig-paren">)</span><a class="headerlink" href="#Controller::afterScaffoldSaveError" title="永久链接至目标">¶</a></dt>
 <dd><p>$method 是调用的方法名，为 edit 或 update。</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Controller::scaffoldError">
-<tt class="descclassname">Controller::</tt><tt class="descname">scaffoldError</tt><big>(</big><em>$method</em><big>)</big><a class="headerlink" href="#Controller::scaffoldError" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Controller::</code><code class="descname">scaffoldError</code><span class="sig-paren">(</span><em>$method</em><span class="sig-paren">)</span><a class="headerlink" href="#Controller::scaffoldError" title="永久链接至目标">¶</a></dt>
 <dd><p>$method 是调用的方法名，例如 index、edit，等等。</p>
 </dd></dl>
 
@@ -527,17 +654,17 @@ CakePHP 就不会试图再次渲染该视图了:</p>
 <h3>其它有用的方法<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
 <dl class="method">
 <dt id="Controller::constructClasses">
-<tt class="descclassname">Controller::</tt><tt class="descname">constructClasses</tt><big>(</big><big>)</big><a class="headerlink" href="#Controller::constructClasses" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Controller::</code><code class="descname">constructClasses</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Controller::constructClasses" title="永久链接至目标">¶</a></dt>
 <dd><p>这个方法加载控制器需要的模型。此加载过程通常由 CakePHP 执行，但在不同的情况
 下使用控制器时，有该方法就很方便。如果在命令行脚本或者一些其它外部应用中需要
-CakePHP，那么 <a class="reference internal" href="#Controller::constructClasses" title="Controller::constructClasses"><tt class="xref php php-meth docutils literal"><span class="pre">constructClasses()</span></tt></a> 就会很方便。</p>
+CakePHP，那么 <a class="reference internal" href="#Controller::constructClasses" title="Controller::constructClasses"><code class="xref php php-meth docutils literal"><span class="pre">constructClasses()</span></code></a> 就会很方便。</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Controller::referer">
-<tt class="descclassname">Controller::</tt><tt class="descname">referer</tt><big>(</big><em>mixed $default = null</em>, <em>boolean $local = false</em><big>)</big><a class="headerlink" href="#Controller::referer" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Controller::</code><code class="descname">referer</code><span class="sig-paren">(</span><em>mixed $default = null</em>, <em>boolean $local = false</em><span class="sig-paren">)</span><a class="headerlink" href="#Controller::referer" title="永久链接至目标">¶</a></dt>
 <dd><p>返回当前请求的引用网址(<em>referring URL</em>)。如果 HTTP_REFERER 无法从(请求的)头
-部信息中读出，参数 <tt class="docutils literal"><span class="pre">$default</span></tt> 可以用来提供缺省的网址。所以，与其这样:</p>
+部信息中读出，参数 <code class="docutils literal"><span class="pre">$default</span></code> 可以用来提供缺省的网址。所以，与其这样:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// 删除的代码在这里，然后...</span>
@@ -560,13 +687,13 @@ CakePHP，那么 <a class="reference internal" href="#Controller::constructClass
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>如果 <tt class="docutils literal"><span class="pre">$default</span></tt> 没有设置，该功能的缺省值为域的根目录 — &#8216;/&#8217;。</p>
-<p>参数 <tt class="docutils literal"><span class="pre">$local</span></tt> 如果设为 <tt class="docutils literal"><span class="pre">true</span></tt>，引用网址会被限制为本地服务器。</p>
+<p>如果 <code class="docutils literal"><span class="pre">$default</span></code> 没有设置，该功能的缺省值为域的根目录 — &#8216;/&#8217;。</p>
+<p>参数 <code class="docutils literal"><span class="pre">$local</span></code> 如果设为 <code class="docutils literal"><span class="pre">true</span></code>，引用网址会被限制为本地服务器。</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Controller::disableCache">
-<tt class="descclassname">Controller::</tt><tt class="descname">disableCache</tt><big>(</big><big>)</big><a class="headerlink" href="#Controller::disableCache" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Controller::</code><code class="descname">disableCache</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Controller::disableCache" title="永久链接至目标">¶</a></dt>
 <dd><p>用来告诉用户的 <strong>浏览器</strong> 不要缓存当前请求的结果。这不同于后面章节介绍的视图
 缓存。</p>
 <p>在此作用下发送的(响应)头部信息为:</p>
@@ -581,11 +708,11 @@ CakePHP，那么 <a class="reference internal" href="#Controller::constructClass
 
 <dl class="method">
 <dt id="Controller::postConditions">
-<tt class="descclassname">Controller::</tt><tt class="descname">postConditions</tt><big>(</big><em>array $data</em>, <em>mixed $op</em>, <em>string $bool</em>, <em>boolean $exclusive</em><big>)</big><a class="headerlink" href="#Controller::postConditions" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Controller::</code><code class="descname">postConditions</code><span class="sig-paren">(</span><em>array $data</em>, <em>mixed $op</em>, <em>string $bool</em>, <em>boolean $exclusive</em><span class="sig-paren">)</span><a class="headerlink" href="#Controller::postConditions" title="永久链接至目标">¶</a></dt>
 <dd><p>用此方法来将一组提交(POSTed)的模型数据(来自与 HtmlHelper 助件兼容的输入)转换
 成一组模型的查找条件。这个函数提供了一个建立搜索逻辑的快捷方式。例如，管理人
 员也许想要能够查询订单，以便知道发送什么货物。可以用 CakePHP 的
-<a class="reference internal" href="core-libraries/helpers/form.html#FormHelper" title="FormHelper"><tt class="xref php php-class docutils literal"><span class="pre">FormHelper</span></tt></a> 和 <a class="reference internal" href="core-libraries/helpers/html.html#HtmlHelper" title="HtmlHelper"><tt class="xref php php-class docutils literal"><span class="pre">HtmlHelper</span></tt></a> 来快速创建基于 Order 模型
+<a class="reference internal" href="core-libraries/helpers/form.html#FormHelper" title="FormHelper"><code class="xref php php-class docutils literal"><span class="pre">FormHelper</span></code></a> 和 <a class="reference internal" href="core-libraries/helpers/html.html#HtmlHelper" title="HtmlHelper"><code class="xref php php-class docutils literal"><span class="pre">HtmlHelper</span></code></a> 来快速创建基于 Order 模型
 的表单。然后控制器的动作就能够用从该表单提交的数据创建出查找条件:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$conditions</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">postConditions</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
@@ -594,9 +721,9 @@ CakePHP，那么 <a class="reference internal" href="#Controller::constructClass
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>如果 <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data['Order']['destination']</span></tt> 等于 &#8220;Old Towne Bakery&#8221;，
+<p>如果 <code class="docutils literal"><span class="pre">$this-&gt;request-&gt;data['Order']['destination']</span></code> 等于 &#8220;Old Towne Bakery&#8221;，
 postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方法的数组。在此例
-中，这会是 <tt class="docutils literal"><span class="pre">array('Order.destination'</span> <span class="pre">=&gt;</span> <span class="pre">'Old</span> <span class="pre">Towne</span> <span class="pre">Bakery')</span></tt>。</p>
+中，这会是 <code class="docutils literal"><span class="pre">array('Order.destination'</span> <span class="pre">=&gt;</span> <span class="pre">'Old</span> <span class="pre">Towne</span> <span class="pre">Bakery')</span></code>。</p>
 <p>如果你要在条件间使用不同的 SQL 运算符，用第二个参数指定:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="cm">/*</span>
 <span class="cm">$this-&gt;request-&gt;data 的内容</span>
@@ -627,32 +754,32 @@ postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方�
 
 <dl class="method">
 <dt id="Controller::paginate">
-<tt class="descclassname">Controller::</tt><tt class="descname">paginate</tt><big>(</big><big>)</big><a class="headerlink" href="#Controller::paginate" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Controller::</code><code class="descname">paginate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Controller::paginate" title="永久链接至目标">¶</a></dt>
 <dd><p>该方法用于将模型读取的结果分页。你可以指定分页大小，模型的查找条件，等等。
 欲知如何使用 paginate 的更多细节，请参看
-<a class="reference internal" href="core-libraries/components/pagination.html"><em>分页</em></a> 一节。</p>
+<a class="reference internal" href="core-libraries/components/pagination.html"><span class="doc">分页</span></a> 一节。</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Controller::requestAction">
-<tt class="descclassname">Controller::</tt><tt class="descname">requestAction</tt><big>(</big><em>string $url</em>, <em>array $options</em><big>)</big><a class="headerlink" href="#Controller::requestAction" title="永久链接至目标">¶</a></dt>
-<dd><p>该函数从任何地方调用一个控制器的动作，并从该动作返回数据。传入的 <tt class="docutils literal"><span class="pre">$url</span></tt> 参
+<code class="descclassname">Controller::</code><code class="descname">requestAction</code><span class="sig-paren">(</span><em>string $url</em>, <em>array $options</em><span class="sig-paren">)</span><a class="headerlink" href="#Controller::requestAction" title="永久链接至目标">¶</a></dt>
+<dd><p>该函数从任何地方调用一个控制器的动作，并从该动作返回数据。传入的 <code class="docutils literal"><span class="pre">$url</span></code> 参
 数是一个 CakePHP 网址(/控制器名称/动作名称/参数)。要给被调用的控制器动作传入
 更多数据，就(把数据)加入到 $options 数组中。</p>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
 <p class="last">从 options 参数传入 &#8216;return&#8217;，就能用
-<a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 得到完整渲染的视图:
-<tt class="docutils literal"><span class="pre">requestAction($url,</span> <span class="pre">array('return'));</span></tt>。重要的是，请注意，从控制器方
-法用 &#8216;return&#8217; 调用 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a>，可能引起脚
+<a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> 得到完整渲染的视图:
+<code class="docutils literal"><span class="pre">requestAction($url,</span> <span class="pre">array('return'));</span></code>。重要的是，请注意，从控制器方
+法用 &#8216;return&#8217; 调用 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a>，可能引起脚
 本和 CSS 标签无法正常工作。</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">警告</p>
-<p class="last">如果不使用缓存，<a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 可能会导致糟糕
+<p class="last">如果不使用缓存，<a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> 可能会导致糟糕
 的性能。所以在控制器或者模型中都极少适用。</p>
 </div>
-<p><a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 最好和(缓存的)元素一起使用 —— 作为
+<p><a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> 最好和(缓存的)元素一起使用 —— 作为
 一种在渲染前为元素获取数据的方法。让我们看一个把&#8221;近期评论&#8221;的元素放入布局的例
 子。首先我们要增加一个控制器函数来返回数据:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Controller/CommentsController.php</span>
@@ -669,9 +796,9 @@ postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方�
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>你应当总是包括确认 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 方法的调用确实来
-自 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 的检查。不做此检查，将允许
-<a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 方法可以直接从网址访问，这样通常不
+<p>你应当总是包括确认 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> 方法的调用确实来
+自 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> 的检查。不做此检查，将允许
+<a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> 方法可以直接从网址访问，这样通常不
 好。</p>
 <p>如果我们现在增加一个简单的元素来调用此函数:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// View/Elements/latest_comments.ctp</span>
@@ -692,9 +819,9 @@ postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方�
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">element</span><span class="p">(</span><span class="s1">&#39;latest_comments&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;cache&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>只要缓存的元素视图文件还存在并有效，<a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a>
+<p>只要缓存的元素视图文件还存在并有效，<a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a>
 就不会被调用。</p>
-<p>另外，现在 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 接受基于数组的 cake 风格
+<p>另外，现在 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> 接受基于数组的 cake 风格
 的网址:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">requestAction</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;articles&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;featured&#39;</span><span class="p">),</span>
@@ -702,14 +829,14 @@ postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方�
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>这允许 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 的调用略过
-<a class="reference internal" href="development/routing.html#Router::url" title="Router::url"><tt class="xref php php-meth docutils literal"><span class="pre">Router::url()</span></tt></a> 的使用，从而可以改善性能。基于网址的数组与
-<a class="reference internal" href="core-libraries/helpers/html.html#HtmlHelper::link" title="HtmlHelper::link"><tt class="xref php php-meth docutils literal"><span class="pre">HtmlHelper::link()</span></tt></a> 使用的相同，除了有一点区别 — 如果你使用命名参
+<p>这允许 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> 的调用略过
+<a class="reference internal" href="development/routing.html#Router::url" title="Router::url"><code class="xref php php-meth docutils literal"><span class="pre">Router::url()</span></code></a> 的使用，从而可以改善性能。基于网址的数组与
+<a class="reference internal" href="core-libraries/helpers/html.html#HtmlHelper::link" title="HtmlHelper::link"><code class="xref php php-meth docutils literal"><span class="pre">HtmlHelper::link()</span></code></a> 使用的相同，除了有一点区别 — 如果你使用命名参
 数或者传入参数(named or passed parameters)，你必须把它们放入第二个数组并配以
-正确的键。这是因为 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 方法会把命名参数
-数组(requestAction 的第二个参数)与 <tt class="docutils literal"><span class="pre">Controller::params</span></tt> 成员数组合并，而不
-会把命名参数数组明确地放在 &#8216;named&#8217; 键中；<tt class="docutils literal"><span class="pre">$option</span></tt> 数组中其它成员也可以从
-请求的动作的 <tt class="docutils literal"><span class="pre">Controller::params</span></tt> 数组中得到:</p>
+正确的键。这是因为 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> 方法会把命名参数
+数组(requestAction 的第二个参数)与 <code class="docutils literal"><span class="pre">Controller::params</span></code> 成员数组合并，而不
+会把命名参数数组明确地放在 &#8216;named&#8217; 键中；<code class="docutils literal"><span class="pre">$option</span></code> 数组中其它成员也可以从
+请求的动作的 <code class="docutils literal"><span class="pre">Controller::params</span></code> 数组中得到:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">requestAction</span><span class="p">(</span><span class="s1">&#39;/articles/featured/limit:3&#39;</span><span class="p">);</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">requestAction</span><span class="p">(</span><span class="s1">&#39;/articles/view/5&#39;</span><span class="p">);</span>
 </pre></div>
@@ -729,19 +856,19 @@ postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方�
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
 <p class="last">不像其它地方，数组网址和字符串网址类似，
-<a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 方法对它们的处理不同。</p>
+<a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> 方法对它们的处理不同。</p>
 </div>
-<p>当把数组网址和 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> 方法一起使用时，一定
-要给出请求的动作所需要的 <strong>所有</strong> 参数。这包括象 <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> 这
+<p>当把数组网址和 <a class="reference internal" href="#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> 方法一起使用时，一定
+要给出请求的动作所需要的 <strong>所有</strong> 参数。这包括象 <code class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></code> 这
 样的参数。除了传入所有需要的参数外，命名(<em>named</em>)参数和传入(<em>pass</em>)参数必须
 在第二个数组提供，如上面所示。</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Controller::loadModel">
-<tt class="descclassname">Controller::</tt><tt class="descname">loadModel</tt><big>(</big><em>string $modelClass</em>, <em>mixed $id</em><big>)</big><a class="headerlink" href="#Controller::loadModel" title="永久链接至目标">¶</a></dt>
+<code class="descclassname">Controller::</code><code class="descname">loadModel</code><span class="sig-paren">(</span><em>string $modelClass</em>, <em>mixed $id</em><span class="sig-paren">)</span><a class="headerlink" href="#Controller::loadModel" title="永久链接至目标">¶</a></dt>
 <dd><p>当要使用的模型不是控制器的缺省模型或者关联模型时，
-<a class="reference internal" href="#Controller::loadModel" title="Controller::loadModel"><tt class="xref php php-meth docutils literal"><span class="pre">loadModel()</span></tt></a> 函数就很方便:</p>
+<a class="reference internal" href="#Controller::loadModel" title="Controller::loadModel"><code class="xref php php-meth docutils literal"><span class="pre">loadModel()</span></code></a> 函数就很方便:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadModel</span><span class="p">(</span><span class="s1">&#39;Article&#39;</span><span class="p">);</span>
 <span class="nv">$recentArticles</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span>
     <span class="s1">&#39;all&#39;</span><span class="p">,</span>
@@ -759,11 +886,11 @@ postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方�
 <div class="section" id="id11">
 <h2>控制器属性<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
 <p>欲知控制器属性的完整列表及其描述，请参看
-<a class="reference external" href="http://api.cakephp.org/2.7/class-Controller.html">CakePHP API</a> 。</p>
+<a class="reference external" href="http://api.cakephp.org/2.8/class-Controller.html">CakePHP API</a> 。</p>
 <dl class="attr">
 <dt id="Controller::$name">
-<em class="property">property </em><tt class="descclassname">Controller::$</tt><tt class="descname">name</tt><a class="headerlink" href="#Controller::$name" title="永久链接至目标">¶</a></dt>
-<dd><p><a class="reference internal" href="#Controller::$name" title="Controller::$name"><tt class="xref php php-attr docutils literal"><span class="pre">$name</span></tt></a> 属性应当置为控制器名称。通常这只是控制器使用
+<em class="property">property </em><code class="descclassname">Controller::$</code><code class="descname">name</code><a class="headerlink" href="#Controller::$name" title="永久链接至目标">¶</a></dt>
+<dd><p><a class="reference internal" href="#Controller::$name" title="Controller::$name"><code class="xref php php-attr docutils literal"><span class="pre">$name</span></code></a> 属性应当置为控制器名称。通常这只是控制器使用
 的主要模型的复数形式。该属性可以省略，如果 CakePHP 不转换(<em>inflecting</em>)它的
 话:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// $name 控制器属性用法示例</span>
@@ -777,43 +904,43 @@ postConditions 方法会把该条件转换成可以用于 Model-&gt;find() 方�
 <div class="section" id="components-helpers-uses">
 <h3>$components、$helpers 和 $uses<a class="headerlink" href="#components-helpers-uses" title="永久链接至标题">¶</a></h3>
 <p>下一个最常用的控制器属性告诉 CakePHP 当前控制器使用什么
-<a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><tt class="xref php php-attr docutils literal"><span class="pre">$helpers</span></tt></a> 、 <a class="reference internal" href="#Controller::$components" title="Controller::$components"><tt class="xref php php-attr docutils literal"><span class="pre">$components</span></tt></a> 和
-<tt class="docutils literal"><span class="pre">models</span></tt>。使用这些属性让由 <a class="reference internal" href="#Controller::$components" title="Controller::$components"><tt class="xref php php-attr docutils literal"><span class="pre">$components</span></tt></a> 和
-<a class="reference internal" href="#Controller::$uses" title="Controller::$uses"><tt class="xref php php-attr docutils literal"><span class="pre">$uses</span></tt></a> 指定的 MVC 类成为(控制器的)类变量(例如
-<tt class="docutils literal"><span class="pre">$this-&gt;模型名称</span></tt>)可以为控制器所用，而由 <a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><tt class="xref php php-attr docutils literal"><span class="pre">$helpers</span></tt></a> 指
-定的类作为(视图的)对象引用变量(<tt class="docutils literal"><span class="pre">$this-&gt;{助件名称}</span></tt>)可以被视图使用。</p>
+<a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><code class="xref php php-attr docutils literal"><span class="pre">$helpers</span></code></a> 、 <a class="reference internal" href="#Controller::$components" title="Controller::$components"><code class="xref php php-attr docutils literal"><span class="pre">$components</span></code></a> 和
+<code class="docutils literal"><span class="pre">models</span></code>。使用这些属性让由 <a class="reference internal" href="#Controller::$components" title="Controller::$components"><code class="xref php php-attr docutils literal"><span class="pre">$components</span></code></a> 和
+<a class="reference internal" href="#Controller::$uses" title="Controller::$uses"><code class="xref php php-attr docutils literal"><span class="pre">$uses</span></code></a> 指定的 MVC 类成为(控制器的)类变量(例如
+<code class="docutils literal"><span class="pre">$this-&gt;模型名称</span></code>)可以为控制器所用，而由 <a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><code class="xref php php-attr docutils literal"><span class="pre">$helpers</span></code></a> 指
+定的类作为(视图的)对象引用变量(<code class="docutils literal"><span class="pre">$this-&gt;{助件名称}</span></code>)可以被视图使用。</p>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
 <p class="last">每个控制器缺省就可以使用这些类中的某些，所以你也许完全不用配置你的控制器。</p>
 </div>
 <dl class="attr">
 <dt id="Controller::$uses">
-<em class="property">property </em><tt class="descclassname">Controller::$</tt><tt class="descname">uses</tt><a class="headerlink" href="#Controller::$uses" title="永久链接至目标">¶</a></dt>
+<em class="property">property </em><code class="descclassname">Controller::$</code><code class="descname">uses</code><a class="headerlink" href="#Controller::$uses" title="永久链接至目标">¶</a></dt>
 <dd><p>缺省情况下，控制器可以访问它们的主模型。我们的 RecipesController 可以用
-<tt class="docutils literal"><span class="pre">$this-&gt;Recipe</span></tt> 访问 Recipe 模型类，而我们的 ProductsController 也可以通过
-<tt class="docutils literal"><span class="pre">$this-&gt;Product</span></tt> 来访问 Product 模型。然而，当要使用
-<a class="reference internal" href="#Controller::$uses" title="Controller::$uses"><tt class="xref php php-attr docutils literal"><span class="pre">$uses</span></tt></a> 变量让控制器访问更多的模型时，当前控制器的(主
+<code class="docutils literal"><span class="pre">$this-&gt;Recipe</span></code> 访问 Recipe 模型类，而我们的 ProductsController 也可以通过
+<code class="docutils literal"><span class="pre">$this-&gt;Product</span></code> 来访问 Product 模型。然而，当要使用
+<a class="reference internal" href="#Controller::$uses" title="Controller::$uses"><code class="xref php php-attr docutils literal"><span class="pre">$uses</span></code></a> 变量让控制器访问更多的模型时，当前控制器的(主
 要)模型名称一定也要包括在内。这可由下面的例子说明。</p>
-<p>如果你在控制器中不想使用(任何)模型，就设置 <tt class="docutils literal"><span class="pre">public</span> <span class="pre">$uses</span> <span class="pre">=</span> <span class="pre">array()</span></tt>。这让
-你可以使用控制器，而不需要相应的模型文件。然而 <tt class="docutils literal"><span class="pre">AppController</span></tt> 中定义的模
-型仍然会加载。你也可以用 <tt class="docutils literal"><span class="pre">false</span></tt> 来完全不加载任何模型，即使是
-<tt class="docutils literal"><span class="pre">AppController</span></tt> 中定义的模型。</p>
+<p>如果你在控制器中不想使用(任何)模型，就设置 <code class="docutils literal"><span class="pre">public</span> <span class="pre">$uses</span> <span class="pre">=</span> <span class="pre">array()</span></code>。这让
+你可以使用控制器，而不需要相应的模型文件。然而 <code class="docutils literal"><span class="pre">AppController</span></code> 中定义的模
+型仍然会加载。你也可以用 <code class="docutils literal"><span class="pre">false</span></code> 来完全不加载任何模型，即使是
+<code class="docutils literal"><span class="pre">AppController</span></code> 中定义的模型。</p>
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.1 版更改: </span><a class="reference internal" href="#Controller::$uses" title="Controller::$uses"><tt class="xref php php-attr docutils literal"><span class="pre">$uses</span></tt></a> 变量现在有了新的缺省值，而且它对 <tt class="docutils literal"><span class="pre">false</span></tt>
+<p><span class="versionmodified">在 2.1 版更改: </span><a class="reference internal" href="#Controller::$uses" title="Controller::$uses"><code class="xref php php-attr docutils literal"><span class="pre">$uses</span></code></a> 变量现在有了新的缺省值，而且它对 <code class="docutils literal"><span class="pre">false</span></code>
 的处理也不同了。</p>
 </div>
 </dd></dl>
 
 <dl class="attr">
 <dt id="Controller::$helpers">
-<em class="property">property </em><tt class="descclassname">Controller::$</tt><tt class="descname">helpers</tt><a class="headerlink" href="#Controller::$helpers" title="永久链接至目标">¶</a></dt>
-<dd><p>默认情况下 <a class="reference internal" href="core-libraries/helpers/html.html#HtmlHelper" title="HtmlHelper"><tt class="xref php php-class docutils literal"><span class="pre">HtmlHelper</span></tt></a> 、 <a class="reference internal" href="core-libraries/helpers/form.html#FormHelper" title="FormHelper"><tt class="xref php php-class docutils literal"><span class="pre">FormHelper</span></tt></a> 和
-<a class="reference internal" href="core-libraries/helpers/session.html#SessionHelper" title="SessionHelper"><tt class="xref php php-class docutils literal"><span class="pre">SessionHelper</span></tt></a> 助件都是可用的，就象 <a class="reference internal" href="core-libraries/components/sessions.html#SessionComponent" title="SessionComponent"><tt class="xref php php-class docutils literal"><span class="pre">SessionComponent</span></tt></a>
-组件一样。但如果选择在 <tt class="docutils literal"><span class="pre">AppController</span></tt> 中定义你自己的
-<a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><tt class="xref php php-attr docutils literal"><span class="pre">$helpers</span></tt></a> 数组，记得包括 <a class="reference internal" href="core-libraries/helpers/html.html#HtmlHelper" title="HtmlHelper"><tt class="xref php php-class docutils literal"><span class="pre">HtmlHelper</span></tt></a> 和
-<a class="reference internal" href="core-libraries/helpers/form.html#FormHelper" title="FormHelper"><tt class="xref php php-class docutils literal"><span class="pre">FormHelper</span></tt></a>，如果还想让它们在控制器中缺省就可用的话。要想了解更
+<em class="property">property </em><code class="descclassname">Controller::$</code><code class="descname">helpers</code><a class="headerlink" href="#Controller::$helpers" title="永久链接至目标">¶</a></dt>
+<dd><p>默认情况下 <a class="reference internal" href="core-libraries/helpers/html.html#HtmlHelper" title="HtmlHelper"><code class="xref php php-class docutils literal"><span class="pre">HtmlHelper</span></code></a> 、 <a class="reference internal" href="core-libraries/helpers/form.html#FormHelper" title="FormHelper"><code class="xref php php-class docutils literal"><span class="pre">FormHelper</span></code></a> 和
+<a class="reference internal" href="core-libraries/helpers/session.html#SessionHelper" title="SessionHelper"><code class="xref php php-class docutils literal"><span class="pre">SessionHelper</span></code></a> 助件都是可用的，就象 <a class="reference internal" href="core-libraries/components/sessions.html#SessionComponent" title="SessionComponent"><code class="xref php php-class docutils literal"><span class="pre">SessionComponent</span></code></a>
+组件一样。但如果选择在 <code class="docutils literal"><span class="pre">AppController</span></code> 中定义你自己的
+<a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><code class="xref php php-attr docutils literal"><span class="pre">$helpers</span></code></a> 数组，记得包括 <a class="reference internal" href="core-libraries/helpers/html.html#HtmlHelper" title="HtmlHelper"><code class="xref php php-class docutils literal"><span class="pre">HtmlHelper</span></code></a> 和
+<a class="reference internal" href="core-libraries/helpers/form.html#FormHelper" title="FormHelper"><code class="xref php php-class docutils literal"><span class="pre">FormHelper</span></code></a>，如果还想让它们在控制器中缺省就可用的话。要想了解更
 多关于这些类的信息，就请查看本手册后面的相关章节。</p>
-<p>让我们来看看如何让 CakePHP 的 <a class="reference internal" href="#Controller" title="Controller"><tt class="xref php php-class docutils literal"><span class="pre">Controller</span></tt></a> 知道你打算使用额外的
+<p>让我们来看看如何让 CakePHP 的 <a class="reference internal" href="#Controller" title="Controller"><code class="xref php php-class docutils literal"><span class="pre">Controller</span></code></a> 知道你打算使用额外的
 MVC 类:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RecipesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$uses</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Recipe&#39;</span><span class="p">,</span> <span class="s1">&#39;User&#39;</span><span class="p">);</span>
@@ -823,18 +950,18 @@ MVC 类:</p>
 </pre></div>
 </div>
 <p>这些变量每个都会与它们继承的值合并，所以没有必要(比如)再次声明 Form 助件，或
-者任何你在  <tt class="docutils literal"><span class="pre">AppController</span></tt> 中已经声明的东西。</p>
+者任何你在  <code class="docutils literal"><span class="pre">AppController</span></code> 中已经声明的东西。</p>
 </dd></dl>
 
 <dl class="attr">
 <dt id="Controller::$components">
-<em class="property">property </em><tt class="descclassname">Controller::$</tt><tt class="descname">components</tt><a class="headerlink" href="#Controller::$components" title="永久链接至目标">¶</a></dt>
-<dd><p>数组 components 用来设置控制器要用哪个 <a class="reference internal" href="controllers/components.html"><em>组件</em></a>。就像
-<a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><tt class="xref php php-attr docutils literal"><span class="pre">$helpers</span></tt></a> 和 <a class="reference internal" href="#Controller::$uses" title="Controller::$uses"><tt class="xref php php-attr docutils literal"><span class="pre">$uses</span></tt></a> 一样，控
-制器中的组件(<em>components</em>)会与 <tt class="docutils literal"><span class="pre">AppController</span></tt> 中的合并。如同
-<a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><tt class="xref php php-attr docutils literal"><span class="pre">$helpers</span></tt></a>，可以传递参数给
-<a class="reference internal" href="#Controller::$components" title="Controller::$components"><tt class="xref php php-attr docutils literal"><span class="pre">$components</span></tt></a>。欲知更多信息，请参看
-<a class="reference internal" href="controllers/components.html#configuring-components"><em>配置组件</em></a>。</p>
+<em class="property">property </em><code class="descclassname">Controller::$</code><code class="descname">components</code><a class="headerlink" href="#Controller::$components" title="永久链接至目标">¶</a></dt>
+<dd><p>数组 components 用来设置控制器要用哪个 <a class="reference internal" href="controllers/components.html"><span class="doc">组件</span></a>。就像
+<a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><code class="xref php php-attr docutils literal"><span class="pre">$helpers</span></code></a> 和 <a class="reference internal" href="#Controller::$uses" title="Controller::$uses"><code class="xref php php-attr docutils literal"><span class="pre">$uses</span></code></a> 一样，控
+制器中的组件(<em>components</em>)会与 <code class="docutils literal"><span class="pre">AppController</span></code> 中的合并。如同
+<a class="reference internal" href="#Controller::$helpers" title="Controller::$helpers"><code class="xref php php-attr docutils literal"><span class="pre">$helpers</span></code></a>，可以传递参数给
+<a class="reference internal" href="#Controller::$components" title="Controller::$components"><code class="xref php php-attr docutils literal"><span class="pre">$components</span></code></a>。欲知更多信息，请参看
+<a class="reference internal" href="controllers/components.html#configuring-components"><span class="std std-ref">配置组件</span></a>。</p>
 </dd></dl>
 
 </div>
@@ -844,16 +971,16 @@ MVC 类:</p>
 有其它一些控制器属性值得我们在手册中花费章节单独介绍它们。</p>
 <dl class="attr">
 <dt id="Controller::$cacheAction">
-<em class="property">property </em><tt class="descclassname">Controller::$</tt><tt class="descname">cacheAction</tt><a class="headerlink" href="#Controller::$cacheAction" title="永久链接至目标">¶</a></dt>
+<em class="property">property </em><code class="descclassname">Controller::$</code><code class="descname">cacheAction</code><a class="headerlink" href="#Controller::$cacheAction" title="永久链接至目标">¶</a></dt>
 <dd><p>cacheAction 属性用来指定完整页面缓存的时间段和其它信息。你可以在
-<a class="reference internal" href="core-libraries/helpers/cache.html#CacheHelper" title="CacheHelper"><tt class="xref php php-class docutils literal"><span class="pre">CacheHelper</span></tt></a> 文档中读到更多关于完整页面缓存的内容。</p>
+<a class="reference internal" href="core-libraries/helpers/cache.html#CacheHelper" title="CacheHelper"><code class="xref php php-class docutils literal"><span class="pre">CacheHelper</span></code></a> 文档中读到更多关于完整页面缓存的内容。</p>
 </dd></dl>
 
 <dl class="attr">
 <dt id="Controller::$paginate">
-<em class="property">property </em><tt class="descclassname">Controller::$</tt><tt class="descname">paginate</tt><a class="headerlink" href="#Controller::$paginate" title="永久链接至目标">¶</a></dt>
+<em class="property">property </em><code class="descclassname">Controller::$</code><code class="descname">paginate</code><a class="headerlink" href="#Controller::$paginate" title="永久链接至目标">¶</a></dt>
 <dd><p>paginate 属性是废弃了的兼容性属性。用它来加载和配置
-<a class="reference internal" href="core-libraries/components/pagination.html#PaginatorComponent" title="PaginatorComponent"><tt class="xref php php-class docutils literal"><span class="pre">PaginatorComponent</span></tt></a>。建议你更新你的代码，使用正常的组件设置:</p>
+<a class="reference internal" href="core-libraries/components/pagination.html#PaginatorComponent" title="PaginatorComponent"><code class="xref php php-class docutils literal"><span class="pre">PaginatorComponent</span></code></a>。建议你更新你的代码，使用正常的组件设置:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Paginator&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -885,18 +1012,20 @@ MVC 类:</p>
 </div>
 
 
+			</div>
 		</div>
-	</div>
 
-	<div class="sidebar columns three pull-nine">
-<div id="sidebar-navigation" class="hide-on-phones">
-	<h2 class="hide-on-desktops">Table of Contents</h2>
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="zh">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">欢迎</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">入门指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cakephp-overview.html">CakePHP 概述</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">控制器</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">控制器</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="controllers/request-response.html">请求与响应对象</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/request-response.html#cakerequest">CakeRequest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controllers/request-response.html#cakeresponse">CakeResponse</a></li>
@@ -909,7 +1038,7 @@ MVC 类:</p>
 <li class="toctree-l1"><a class="reference internal" href="models.html">模型</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core-libraries.html">核心库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plugins.html">插件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console-and-shells.html">Shells，任务与命令行工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">开发</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deployment.html">部署</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials-and-examples.html">教程 &amp; 实例</a></li>
@@ -919,102 +1048,171 @@ MVC 类:</p>
 
 </div>
 
-<div class="page-contents">
-	<h3>Page contents</h3>
-	<ul>
-<li><a class="reference internal" href="#">控制器</a><ul>
-<li><a class="reference internal" href="#app">App 控制器</a></li>
-<li><a class="reference internal" href="#id2">请求参数</a></li>
-<li><a class="reference internal" href="#id3">控制器动作</a></li>
-<li><a class="reference internal" href="#controller-life-cycle">请求生命周期回调</a></li>
-<li><a class="reference internal" href="#controller-methods">控制器方法</a><ul>
-<li><a class="reference internal" href="#id6">与视图交互</a><ul>
-<li><a class="reference internal" href="#id7">渲染某个视图</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id8">流程控制</a></li>
-<li><a class="reference internal" href="#id9">回调</a></li>
-<li><a class="reference internal" href="#id10">其它有用的方法</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id11">控制器属性</a><ul>
-<li><a class="reference internal" href="#components-helpers-uses">$components、$helpers 和 $uses</a></li>
-<li><a class="reference internal" href="#id13">其它属性</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id14">关于控制器的更多内容</a></li>
-</ul>
-</li>
-</ul>
-
-</div>
-	</div>
-
-</div>
-
-<div class="content row">
-	<ul class="related-pages inline">
-	<li>
-		<a href="genindex.html" title="总目录" accesskey="I">索引</a>
-	</li>
-	<li>
-		<a href="controllers/request-response.html" title="请求与响应对象" accesskey="N">下一页</a>
-	</li>
-	<li>
-		<a href="cakephp-overview/where-to-get-help.html" title="获取帮助" accesskey="P">上一页</a>
-	</li>
-	</ul>
-</div>
-
-	<div class="footer-push"> </div>
-</div>
-
-
-
-
-
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>发现翻译错误?</strong>
-			请在下面留言<br />
-			<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">[ 我要加入翻译 ]</a>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Jul 10, 2016.
-				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
 		</div>
 	</div>
 </div>
 
-<div id="nav-modal" class="reveal-modal"> </div>
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-8 social-footer text-center ">
+				<a href="#">发现翻译错误? 请在下面留言</a>
+				<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">我要加入翻译</a>
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="_static/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="_static/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
+</li>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
+
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
+
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							&copy; 版权所有 2016, Cake Software Foundation, Inc.
+						最后更新于 8月 02, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
 <div id="inline-search-results"></div>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F201cbc61deaf9f7ffb521fb23e83db40' type='text/javascript'%3E%3C/script%3E"));
-</script>
 
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+
+</div>
+
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"cakephpchina"};
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
 	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	</script>
-<!-- Duoshuo Comment END -->
-
-<!-- Grunt Live Reload -->
-<script src="http://192.168.56.113:35729/livereload.js"></script>
+</script>
   </body>
 </html>

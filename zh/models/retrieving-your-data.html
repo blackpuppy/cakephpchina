@@ -1,183 +1,308 @@
 
+
 <!DOCTYPE html>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Retrieving Your Data" lang="zh_CN" name="title" />
-<meta content="upper case character,array model,order array,controller code,retrieval functions,model layer,model methods,model class,model data,data retrieval,field names,workhorse,desc,neighbors,parameters,storage,models" lang="zh_CN" name="keywords" />
+    <meta content="Retrieving Your Data" lang="zh" name="title" />
+<meta content="upper case character,array model,order array,controller code,retrieval functions,model layer,model methods,model class,model data,data retrieval,field names,workhorse,desc,neighbors,parameters,storage,models" lang="zh" name="keywords" />
 
-    <title>检索数据 &mdash; CakePHP Cookbook 2.x 文档</title>
+    <title>检索数据</title>
+    <link href="../_static/favicon.png" type="image/png" rel="icon" />
+
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/app.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.x',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/app.js"></script>
-    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
-    <script type="text/javascript" src="../_static/foundation.js"></script>
+
+    <link rel="alternate" hreflang="en" href="../../en/models/retrieving-your-data.html" /><link rel="alternate" hreflang="pt" href="../../pt/models/retrieving-your-data.html" /><link rel="alternate" hreflang="es" href="../../es/models/retrieving-your-data.html" /><link rel="alternate" hreflang="ja" href="../../ja/models/retrieving-your-data.html" /><link rel="alternate" hreflang="fr" href="../../fr/models/retrieving-your-data.html" />
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within CakePHP Cookbook 2.x 文档" href="../_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
     <link rel="up" title="模型" href="../models.html" />
     <link rel="next" title="保存数据" href="saving-your-data.html" />
     <link rel="prev" title="关联：将模型连接在一起" href="associations-linking-models-together.html" />
-<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="alternate" hreflang="en" href="../../en/models/retrieving-your-data.html" /><link rel="alternate" hreflang="pt" href="../../pt/models/retrieving-your-data.html" /><link rel="alternate" hreflang="es" href="../../es/models/retrieving-your-data.html" /><link rel="alternate" hreflang="ja" href="../../ja/models/retrieving-your-data.html" /><link rel="alternate" hreflang="fr" href="../../fr/models/retrieving-your-data.html" />
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
-<script type="text/javascript">
-window.lang = "zh_CN";
-</script>
-
+    <script type="text/javascript">
+    window.lang = "zh";
+    </script>
   </head>
   <body>
 
 <div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="masthead">
-	<div class="header-backing"></div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="../contents.html">
-			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
-			</a>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
+
 		
-<div id="searchbox" class="columns nine phone-three">
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-	<form id="searchform" class="search" action="../search.html" method="get">
-		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
-		<input class="search-submit search-big button red" type="submit" value="搜索" />
-		<input type="hidden" name="check_keywords" value="yes" />
-		<input type="hidden" name="area" value="default" />
-
-		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
-	</form>
-
-</div>
-	</div>
-</div>
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="../contents.html">Cookbook 2.x</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="../models.html" accesskey="U" itemprop="url"><span itemprop="title">模型</span></a>
-			</li>
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">2.x Book</a>
-				<ul>
-					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				<a href="#">zh_CN</a>
-
-				<ul>
-				
-					<li><a href="../../en/models/retrieving-your-data.html">en</a></li>
-				
-					<li><a href="../../pt/models/retrieving-your-data.html">pt</a></li>
-				
-					<li><a href="../../es/models/retrieving-your-data.html">es</a></li>
-				
-					<li><a href="../../ja/models/retrieving-your-data.html">ja</a></li>
-				
-					<li><a href="../../fr/models/retrieving-your-data.html">fr</a></li>
-				
-					<li></li>
-				
-				</ul>
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="../search.html" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="搜索" type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/models/retrieving-your-data.rst" target="_blank">Improve this Doc</a>
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="../contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 2.x <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="../search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														zh
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li><a href="../../en/models/retrieving-your-data.html">en</a></li>
+											
+												<li><a href="../../pt/models/retrieving-your-data.html">pt</a></li>
+											
+												<li><a href="../../es/models/retrieving-your-data.html">es</a></li>
+											
+												<li><a href="../../ja/models/retrieving-your-data.html">ja</a></li>
+											
+												<li><a href="../../fr/models/retrieving-your-data.html">fr</a></li>
+											
+												<li></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/zh">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/zh">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/zh/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/zh/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/master/zh/models/retrieving-your-data.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="#">检索数据</a><ul>
+<li><a class="reference internal" href="#find">find</a></li>
+<li><a class="reference internal" href="#find-first">find(&#8216;first&#8217;)</a></li>
+<li><a class="reference internal" href="#find-count">find(&#8216;count&#8217;)</a></li>
+<li><a class="reference internal" href="#find-all">find(&#8216;all&#8217;)</a></li>
+<li><a class="reference internal" href="#find-list">find(&#8216;list&#8217;)</a></li>
+<li><a class="reference internal" href="#find-threaded">find(&#8216;threaded&#8217;)</a></li>
+<li><a class="reference internal" href="#find-neighbors">find(&#8216;neighbors&#8217;)</a></li>
+<li><a class="reference internal" href="#model-custom-find">创建自定义查询类型</a></li>
+<li><a class="reference internal" href="#id3">魔法查找类型</a><ul>
+<li><a class="reference internal" href="#findallby">findAllBy</a></li>
+<li><a class="reference internal" href="#findby">findBy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#model-query"><code class="docutils literal"><span class="pre">Model::query()</span></code></a></li>
+<li><a class="reference internal" href="#model-field"><code class="docutils literal"><span class="pre">Model::field()</span></code></a></li>
+<li><a class="reference internal" href="#model-read"><code class="docutils literal"><span class="pre">Model::read()</span></code></a></li>
+<li><a class="reference internal" href="#id5">复杂的查找条件</a><ul>
+<li><a class="reference internal" href="#id6">子查询</a></li>
+<li><a class="reference internal" href="#prepared-statements">预处理语句</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
   <div class="section" id="id1">
 <h1>检索数据<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <p>如前所述，模型层的角色之一是从多种类型的存储中获取数据。CakePHP 的模型类拥有一些
 功能，能够帮助你搜索数据、把数据排序、分页以及过滤。模型中最常用的功能是
-<tt class="xref php php-meth docutils literal"><span class="pre">Model::find()</span></tt> 方法。</p>
+<code class="xref php php-meth docutils literal"><span class="pre">Model::find()</span></code> 方法。</p>
 <div class="section" id="find">
 <span id="model-find"></span><h2>find<a class="headerlink" href="#find" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">find(string</span> <span class="pre">$type</span> <span class="pre">=</span> <span class="pre">'first',</span> <span class="pre">array</span> <span class="pre">$params</span> <span class="pre">=</span> <span class="pre">array())</span></tt></p>
-<p>find 方法是所有检索数据方法中的多功能机器。<tt class="docutils literal"><span class="pre">$type</span></tt> 参数值可以是 <tt class="docutils literal"><span class="pre">'all'</span></tt> 、
-<tt class="docutils literal"><span class="pre">'first'</span></tt> 、 <tt class="docutils literal"><span class="pre">'count'</span></tt> 、 <tt class="docutils literal"><span class="pre">'list'</span></tt> 、<tt class="docutils literal"><span class="pre">'neighbors'</span></tt> 或 <tt class="docutils literal"><span class="pre">'threaded'</span></tt>，或
-者任何自定义查询类型。切记 <tt class="docutils literal"><span class="pre">$type</span></tt> 是大小写敏感的。使用大写字母(如 <tt class="docutils literal"><span class="pre">All</span></tt> )将
+<p><code class="docutils literal"><span class="pre">find(string</span> <span class="pre">$type</span> <span class="pre">=</span> <span class="pre">'first',</span> <span class="pre">array</span> <span class="pre">$params</span> <span class="pre">=</span> <span class="pre">array())</span></code></p>
+<p>find 方法是所有检索数据方法中的多功能机器。<code class="docutils literal"><span class="pre">$type</span></code> 参数值可以是 <code class="docutils literal"><span class="pre">'all'</span></code> 、
+<code class="docutils literal"><span class="pre">'first'</span></code> 、 <code class="docutils literal"><span class="pre">'count'</span></code> 、 <code class="docutils literal"><span class="pre">'list'</span></code> 、<code class="docutils literal"><span class="pre">'neighbors'</span></code> 或 <code class="docutils literal"><span class="pre">'threaded'</span></code>，或
+者任何自定义查询类型。切记 <code class="docutils literal"><span class="pre">$type</span></code> 是大小写敏感的。使用大写字母(如 <code class="docutils literal"><span class="pre">All</span></code> )将
 无法得到期望的结果。</p>
-<p><tt class="docutils literal"><span class="pre">$params</span></tt> 用于向各种类型的 find() 方法传递所有参数，默认有如下的键，都是可选的:</p>
+<p><code class="docutils literal"><span class="pre">$params</span></code> 用于向各种类型的 find() 方法传递所有参数，默认有如下的键，都是可选的:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Model.field&#39;</span> <span class="o">=&gt;</span> <span class="nv">$thisValue</span><span class="p">),</span> <span class="c1">//查询条件数组</span>
     <span class="s1">&#39;recursive&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="c1">//整型</span>
@@ -199,7 +324,7 @@ window.lang = "zh_CN";
 </div>
 <div class="section" id="find-first">
 <span id="model-find-first"></span><h2>find(&#8216;first&#8217;)<a class="headerlink" href="#find-first" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">find('first',</span> <span class="pre">$params)</span></tt> 只返回一条记录。你可以把它用于任何只想得到一条记录的
+<p><code class="docutils literal"><span class="pre">find('first',</span> <span class="pre">$params)</span></code> 只返回一条记录。你可以把它用于任何只想得到一条记录的
 情况。以下是几个简单的(控制器代码)例子:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
@@ -215,7 +340,7 @@ window.lang = "zh_CN";
 </pre></div>
 </div>
 <p>在第一个示例中，没有向 find 方法传递任何参数，所以不使用任何条件和排序。
-<tt class="docutils literal"><span class="pre">find('first')</span></tt> 方法调用返回的格式如下:</p>
+<code class="docutils literal"><span class="pre">find('first')</span></code> 方法调用返回的格式如下:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="nx">ModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
@@ -239,7 +364,7 @@ window.lang = "zh_CN";
 </div>
 <div class="section" id="find-count">
 <span id="model-find-count"></span><h2>find(&#8216;count&#8217;)<a class="headerlink" href="#find-count" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">find('count',</span> <span class="pre">$params)</span></tt> 返回一个整数值。以下是几个简单的(控制器代码)例子:</p>
+<p><code class="docutils literal"><span class="pre">find('count',</span> <span class="pre">$params)</span></code> 返回一个整数值。以下是几个简单的(控制器代码)例子:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nv">$total</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">);</span>
@@ -257,14 +382,14 @@ window.lang = "zh_CN";
 </div>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p class="last">不要把数组形式的 <tt class="docutils literal"><span class="pre">fields</span></tt> 参数传递给 <tt class="docutils literal"><span class="pre">find('count')</span></tt> 方法。只需为
+<p class="last">不要把数组形式的 <code class="docutils literal"><span class="pre">fields</span></code> 参数传递给 <code class="docutils literal"><span class="pre">find('count')</span></code> 方法。只需为
 DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的，仅取决于条件)。</p>
 </div>
 </div>
 <div class="section" id="find-all">
 <span id="model-find-all"></span><h2>find(&#8216;all&#8217;)<a class="headerlink" href="#find-all" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">find('all',</span> <span class="pre">$params)</span></tt> 返回一个数组，可能包含多个结果。实际上这是所有的
-<tt class="docutils literal"><span class="pre">find()</span></tt> 方法的变体、包括 <tt class="docutils literal"><span class="pre">paginate</span></tt> 方法使用的内在机制。下面是一些简单的(
+<p><code class="docutils literal"><span class="pre">find('all',</span> <span class="pre">$params)</span></code> 返回一个数组，可能包含多个结果。实际上这是所有的
+<code class="docutils literal"><span class="pre">find()</span></code> 方法的变体、包括 <code class="docutils literal"><span class="pre">paginate</span></code> 方法使用的内在机制。下面是一些简单的(
 控制器代码)示例:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
@@ -282,10 +407,10 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 </div>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p class="last">上面的例子中，<tt class="docutils literal"><span class="pre">$allAuthors</span></tt> 包含 users 表的中的每个用户。因为没有传入任何
+<p class="last">上面的例子中，<code class="docutils literal"><span class="pre">$allAuthors</span></code> 包含 users 表的中的每个用户。因为没有传入任何
 条件，所以 find 方法将不会使用任何条件。</p>
 </div>
-<p><tt class="docutils literal"><span class="pre">find('all')</span></tt> 方法调用返回的结果具有如下格式:</p>
+<p><code class="docutils literal"><span class="pre">find('all')</span></code> 方法调用返回的结果具有如下格式:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
@@ -313,7 +438,7 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 </div>
 <div class="section" id="find-list">
 <span id="model-find-list"></span><h2>find(&#8216;list&#8217;)<a class="headerlink" href="#find-list" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">find('list',</span> <span class="pre">$params)</span></tt> 返回一个索引数组，可用于任何需要列表的场合，比如在生成
+<p><code class="docutils literal"><span class="pre">find('list',</span> <span class="pre">$params)</span></code> 返回一个索引数组，可用于任何需要列表的场合，比如在生成
 填充 select 输入元素的列表框。下面是一些简单的(控制器代码)示例:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
@@ -333,10 +458,10 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 </div>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p class="last">上面的例子中，<tt class="docutils literal"><span class="pre">$allAuthors</span></tt> 将包含 users 表的所有用户。因为没有传入任何条
+<p class="last">上面的例子中，<code class="docutils literal"><span class="pre">$allAuthors</span></code> 将包含 users 表的所有用户。因为没有传入任何条
 件，所以 find 方法将不会使用任何条件。</p>
 </div>
-<p>调用 <tt class="docutils literal"><span class="pre">find('list')</span></tt> 的结果具有如下格式:</p>
+<p>调用 <code class="docutils literal"><span class="pre">find('list')</span></code> 的结果具有如下格式:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="c1">//[id] =&gt; &#39;displayValue&#39;,</span>
@@ -349,9 +474,9 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>当调用 <tt class="docutils literal"><span class="pre">find('list')</span></tt> 时，传入的 <tt class="docutils literal"><span class="pre">fields</span></tt> 参数用于决定用什么(字段)作为数组的
+<p>当调用 <code class="docutils literal"><span class="pre">find('list')</span></code> 时，传入的 <code class="docutils literal"><span class="pre">fields</span></code> 参数用于决定用什么(字段)作为数组的
 键和值、以及(可选的)用什么(字段)来把结果分组。默认情况下，模型的主键用作键，显示
-列(<em>display field</em>，可以用模型的 <a class="reference internal" href="model-attributes.html#model-displayfield"><em>displayField</em></a> 属性来配置)当作值。下
+列(<em>display field</em>，可以用模型的 <a class="reference internal" href="model-attributes.html#model-displayfield"><span class="std std-ref">displayField</span></a> 属性来配置)当作值。下
 面用更深入的示例来说明:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
@@ -410,8 +535,8 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 </div>
 <div class="section" id="find-threaded">
 <span id="model-find-threaded"></span><h2>find(&#8216;threaded&#8217;)<a class="headerlink" href="#find-threaded" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">find('threaded',</span> <span class="pre">$params)</span></tt> 返回一个嵌套数组，适用于想使用模型数据的
-<tt class="docutils literal"><span class="pre">parent_id</span></tt> 字段来建立嵌套结果的情况。下面是几个简单的(控制器代码)示例:</p>
+<p><code class="docutils literal"><span class="pre">find('threaded',</span> <span class="pre">$params)</span></code> 返回一个嵌套数组，适用于想使用模型数据的
+<code class="docutils literal"><span class="pre">parent_id</span></code> 字段来建立嵌套结果的情况。下面是几个简单的(控制器代码)示例:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nv">$allCategories</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;threaded&#39;</span><span class="p">);</span>
@@ -424,10 +549,10 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">小技巧</p>
-<p class="last">处理嵌套数据的更好的方法是使用 <a class="reference internal" href="../core-libraries/behaviors/tree.html"><em>树行为</em></a> 行为。</p>
+<p class="last">处理嵌套数据的更好的方法是使用 <a class="reference internal" href="../core-libraries/behaviors/tree.html"><span class="doc">树行为</span></a> 行为。</p>
 </div>
-<p>在上面的例子中，<tt class="docutils literal"><span class="pre">$allCategories</span></tt> 将包含一个代表整个分类结构的嵌套数组。调用
-<tt class="docutils literal"><span class="pre">find('threaded')</span></tt> 的结果具有如下格式:</p>
+<p>在上面的例子中，<code class="docutils literal"><span class="pre">$allCategories</span></code> 将包含一个代表整个分类结构的嵌套数组。调用
+<code class="docutils literal"><span class="pre">find('threaded')</span></code> 的结果具有如下格式:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
@@ -481,11 +606,11 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 </pre></div>
 </div>
 <p>结果出现的顺序是可以改变的，因为它受处理的顺序的影响。例如，如果将
-<tt class="docutils literal"><span class="pre">'order'</span> <span class="pre">=&gt;</span> <span class="pre">'name</span> <span class="pre">ASC'</span></tt> 在 params 参数中传递给 <tt class="docutils literal"><span class="pre">find('threaded')</span></tt> 方法，结果
+<code class="docutils literal"><span class="pre">'order'</span> <span class="pre">=&gt;</span> <span class="pre">'name</span> <span class="pre">ASC'</span></code> 在 params 参数中传递给 <code class="docutils literal"><span class="pre">find('threaded')</span></code> 方法，结果
 将按 name 的顺序排列。任何顺序都可以；此方法没有内置的要顶层的结果最先返回的要求。</p>
 <div class="admonition warning">
 <p class="first admonition-title">警告</p>
-<p>如果指定了 <tt class="docutils literal"><span class="pre">fields</span></tt>, 就总是要包含 id 和 parent_id (或者它们的当前别名):</p>
+<p>如果指定了 <code class="docutils literal"><span class="pre">fields</span></code>, 就总是要包含 id 和 parent_id (或者它们的当前别名):</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$categories</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Category</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;threaded&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;parent_id&#39;</span><span class="p">)</span>
@@ -498,7 +623,7 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 </div>
 <div class="section" id="find-neighbors">
 <span id="model-find-neighbors"></span><h2>find(&#8216;neighbors&#8217;)<a class="headerlink" href="#find-neighbors" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">find('neighbors',</span> <span class="pre">$params)</span></tt> 方法执行的查找与 &#8216;first&#8217; 类似, 但返回查询的记录的
+<p><code class="docutils literal"><span class="pre">find('neighbors',</span> <span class="pre">$params)</span></code> 方法执行的查找与 &#8216;first&#8217; 类似, 但返回查询的记录的
 前一条和后一条记录。下面是一个简单的(控制器代码)示例：</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$neighbors</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span>
@@ -508,9 +633,9 @@ DISTINCT count 指定字段(因为其它情况下，计数结果总是相同的�
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>在本例中可以看到，<tt class="docutils literal"><span class="pre">$params</span></tt> 数组的两个必要元素：field 和 value。如同其它形式的
+<p>在本例中可以看到，<code class="docutils literal"><span class="pre">$params</span></code> 数组的两个必要元素：field 和 value。如同其它形式的
 find 方法一样，其它元素仍然允许。(例如：如果模型采用 containable 行为，则可以在
-<tt class="docutils literal"><span class="pre">$params</span></tt> 参数中指定 &#8216;contain&#8217;。) 调用 <tt class="docutils literal"><span class="pre">find('neighbors')</span></tt> 返回的结果格式如
+<code class="docutils literal"><span class="pre">$params</span></code> 参数中指定 &#8216;contain&#8217;。) 调用 <code class="docutils literal"><span class="pre">find('neighbors')</span></code> 返回的结果格式如
 下：</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
@@ -559,7 +684,7 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 </div>
 <div class="section" id="model-custom-find">
 <span id="id2"></span><h2>创建自定义查询类型<a class="headerlink" href="#model-custom-find" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">find</span></tt> 方法足够灵活，能够接收我们自定义的查找类型，这是通过在模型变量中定义自
+<p><code class="docutils literal"><span class="pre">find</span></code> 方法足够灵活，能够接收我们自定义的查找类型，这是通过在模型变量中定义自
 己的(查找)类型、并在模型类中实现特殊的函数来实现的。</p>
 <p>模型的查找类型是 find() 选项的快捷方式。例如，如下两种 find 是等价的：</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">User</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
@@ -568,23 +693,23 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 </div>
 <p>以下是核心查找类型：:</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">first</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">all</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">count</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">list</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">threaded</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">neighbors</span></tt></li>
+<li><code class="docutils literal"><span class="pre">first</span></code></li>
+<li><code class="docutils literal"><span class="pre">all</span></code></li>
+<li><code class="docutils literal"><span class="pre">count</span></code></li>
+<li><code class="docutils literal"><span class="pre">list</span></code></li>
+<li><code class="docutils literal"><span class="pre">threaded</span></code></li>
+<li><code class="docutils literal"><span class="pre">neighbors</span></code></li>
 </ul>
 <p>那么其它的类型呢？比如你要一个在数据库中查找所有已发表的文章的查找类型。首先要做
-的改动是把自定义类型添加到模型的 <tt class="xref php php-attr docutils literal"><span class="pre">Model::$findMethods</span></tt> 变量中。</p>
+的改动是把自定义类型添加到模型的 <code class="xref php php-attr docutils literal"><span class="pre">Model::$findMethods</span></code> 变量中。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Article</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$findMethods</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;available&#39;</span> <span class="o">=&gt;</span>  <span class="k">true</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>基本上这只是让 CakePHP 接受值 <tt class="docutils literal"><span class="pre">available</span></tt> 作为 <tt class="docutils literal"><span class="pre">find</span></tt> 函数的第一个参数。接下
-来要实现 <tt class="docutils literal"><span class="pre">_findAvailable</span></tt> 函数。这是约定。如果想实现叫做 <tt class="docutils literal"><span class="pre">myFancySearch</span></tt> 的
-查找函数，那么要实现的方法就要命名为 <tt class="docutils literal"><span class="pre">_findMyFancySearch</span></tt>。</p>
+<p>基本上这只是让 CakePHP 接受值 <code class="docutils literal"><span class="pre">available</span></code> 作为 <code class="docutils literal"><span class="pre">find</span></code> 函数的第一个参数。接下
+来要实现 <code class="docutils literal"><span class="pre">_findAvailable</span></code> 函数。这是约定。如果想实现叫做 <code class="docutils literal"><span class="pre">myFancySearch</span></code> 的
+查找函数，那么要实现的方法就要命名为 <code class="docutils literal"><span class="pre">_findMyFancySearch</span></code>。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Article</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$findMethods</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;available&#39;</span> <span class="o">=&gt;</span>  <span class="k">true</span><span class="p">);</span>
 
@@ -611,13 +736,13 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>如上所示，这个特殊的方法 <tt class="docutils literal"><span class="pre">_find[Type]</span></tt> 接收三个参数。第一个参数为查询运行的状
-态，这可以是 <tt class="docutils literal"><span class="pre">before</span></tt> 或 <tt class="docutils literal"><span class="pre">after</span></tt>。采用这种方式是因为此函数只是一种回调函数，
+<p>如上所示，这个特殊的方法 <code class="docutils literal"><span class="pre">_find[Type]</span></code> 接收三个参数。第一个参数为查询运行的状
+态，这可以是 <code class="docutils literal"><span class="pre">before</span></code> 或 <code class="docutils literal"><span class="pre">after</span></code>。采用这种方式是因为此函数只是一种回调函数，
 可以在查询结束前修改查询，或者在获取结果后对结果进行修改。</p>
-<p>通常在该自定义查询方法中要检查的第一件事情是查询的状态。在 <tt class="docutils literal"><span class="pre">before</span></tt> 状态下，可
-以修改查询、绑定新的关联、应用更多的行为，以及解释任何在 <tt class="docutils literal"><span class="pre">find</span></tt> 方法的第二个参
+<p>通常在该自定义查询方法中要检查的第一件事情是查询的状态。在 <code class="docutils literal"><span class="pre">before</span></code> 状态下，可
+以修改查询、绑定新的关联、应用更多的行为，以及解释任何在 <code class="docutils literal"><span class="pre">find</span></code> 方法的第二个参
 数中传入的特别的键。这个状态要求返回 $query 参数(修改过或没有任何改变)。</p>
-<p><tt class="docutils literal"><span class="pre">after</span></tt> 状态是理想的时机，来检测查询结果，注入新的数据，处理以便于以另外一种格
+<p><code class="docutils literal"><span class="pre">after</span></code> 状态是理想的时机，来检测查询结果，注入新的数据，处理以便于以另外一种格
 式返回，或者对刚获取的数据做任何想做的事情。此状态需要你返回 $results 数组(修改
 过或没有任何改变)。</p>
 <p>可以创建任意多想要的自定义查找，这也是复用应用程序各个模型代码的好方法。</p>
@@ -634,9 +759,9 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>象上面这样设置控制器的 <tt class="docutils literal"><span class="pre">$this-&gt;paginate</span></tt> 属性，会导致查找的 <tt class="docutils literal"><span class="pre">type</span></tt> 变成
-<tt class="docutils literal"><span class="pre">available</span></tt>，而且也让你可以继续修改查找结果。</p>
-<p>要简单地返回自定义查找类型的计数，象平常那样调用 <tt class="docutils literal"><span class="pre">count</span></tt> 方法，但在第二个参数
+<p>象上面这样设置控制器的 <code class="docutils literal"><span class="pre">$this-&gt;paginate</span></code> 属性，会导致查找的 <code class="docutils literal"><span class="pre">type</span></code> 变成
+<code class="docutils literal"><span class="pre">available</span></code>，而且也让你可以继续修改查找结果。</p>
+<p>要简单地返回自定义查找类型的计数，象平常那样调用 <code class="docutils literal"><span class="pre">count</span></code> 方法，但在第二个参数
 中传入包含查找类型的数组。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ArticlesController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
@@ -649,7 +774,7 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>如果你的分页页数损坏了，也许必须在 <tt class="docutils literal"><span class="pre">AppModel</span></tt> 中添加如下代码，就能修复分页计数
+<p>如果你的分页页数损坏了，也许必须在 <code class="docutils literal"><span class="pre">AppModel</span></code> 中添加如下代码，就能修复分页计数
 了：</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppModel</span> <span class="k">extends</span> <span class="nx">Model</span> <span class="p">{</span>
 
@@ -688,10 +813,10 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 <div class="versionchanged">
 <p><span class="versionmodified">在 2.2 版更改.</span></p>
 </div>
-<p>不必再需要重载 _findCount 方法来修复不正确的计数结果。自定义查找的 <tt class="docutils literal"><span class="pre">'before'</span></tt>
+<p>不必再需要重载 _findCount 方法来修复不正确的计数结果。自定义查找的 <code class="docutils literal"><span class="pre">'before'</span></code>
 状态现在会用 $query[&#8216;operation&#8217;] = &#8216;count&#8217; 再次调用。返回的 $query 会用于
-<tt class="docutils literal"><span class="pre">_findCount()</span></tt>。如果必要，你可以通过检查 <tt class="docutils literal"><span class="pre">'operation'</span></tt> 键来区分，并返回不同
-的 <tt class="docutils literal"><span class="pre">$query</span></tt>:</p>
+<code class="docutils literal"><span class="pre">_findCount()</span></code>。如果必要，你可以通过检查 <code class="docutils literal"><span class="pre">'operation'</span></code> 键来区分，并返回不同
+的 <code class="docutils literal"><span class="pre">$query</span></code>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">protected</span> <span class="k">function</span> <span class="nf">_findAvailable</span><span class="p">(</span><span class="nv">$state</span><span class="p">,</span> <span class="nv">$query</span><span class="p">,</span> <span class="nv">$results</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$state</span> <span class="o">===</span> <span class="s1">&#39;before&#39;</span><span class="p">)</span> <span class="p">{</span>
         <span class="nv">$query</span><span class="p">[</span><span class="s1">&#39;conditions&#39;</span><span class="p">][</span><span class="s1">&#39;Article.published&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
@@ -712,11 +837,11 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 <h2>魔法查找类型<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <p>这些魔法函数可以用作搜寻表中特定字段的快捷方式。只要在这些函数末尾添加字段名(驼
 峰命名格式)，并且提供字段的条件作为第一个参数。</p>
-<p>findAllBy() 函数返回象 <tt class="docutils literal"><span class="pre">find('all')</span></tt> 方法返回的格式的结果，而 findBy() 返回与
-<tt class="docutils literal"><span class="pre">find('first')</span></tt> 相同的格式。</p>
+<p>findAllBy() 函数返回象 <code class="docutils literal"><span class="pre">find('all')</span></code> 方法返回的格式的结果，而 findBy() 返回与
+<code class="docutils literal"><span class="pre">find('first')</span></code> 相同的格式。</p>
 <div class="section" id="findallby">
 <h3>findAllBy<a class="headerlink" href="#findallby" title="永久链接至标题">¶</a></h3>
-<p><tt class="docutils literal"><span class="pre">findAllBy&lt;fieldName&gt;(string</span> <span class="pre">$value,</span> <span class="pre">array</span> <span class="pre">$fields,</span> <span class="pre">array</span> <span class="pre">$order,</span> <span class="pre">int</span> <span class="pre">$limit,</span> <span class="pre">int</span> <span class="pre">$page,</span> <span class="pre">int</span> <span class="pre">$recursive)</span></tt></p>
+<p><code class="docutils literal"><span class="pre">findAllBy&lt;fieldName&gt;(string</span> <span class="pre">$value,</span> <span class="pre">array</span> <span class="pre">$fields,</span> <span class="pre">array</span> <span class="pre">$order,</span> <span class="pre">int</span> <span class="pre">$limit,</span> <span class="pre">int</span> <span class="pre">$page,</span> <span class="pre">int</span> <span class="pre">$recursive)</span></code></p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="60%" />
@@ -728,36 +853,36 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$this-&gt;Product-&gt;findAllByOrderStatus('3');</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">Product.order_status</span> <span class="pre">=</span> <span class="pre">3</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">$this-&gt;Product-&gt;findAllByOrderStatus('3');</span></code></td>
+<td><code class="docutils literal"><span class="pre">Product.order_status</span> <span class="pre">=</span> <span class="pre">3</span></code></td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$this-&gt;Recipe-&gt;findAllByType('Cookie');</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">Recipe.type</span> <span class="pre">=</span> <span class="pre">'Cookie'</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">$this-&gt;Recipe-&gt;findAllByType('Cookie');</span></code></td>
+<td><code class="docutils literal"><span class="pre">Recipe.type</span> <span class="pre">=</span> <span class="pre">'Cookie'</span></code></td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$this-&gt;User-&gt;findAllByLastName('Anderson');</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">User.last_name</span> <span class="pre">=</span> <span class="pre">'Anderson'</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">$this-&gt;User-&gt;findAllByLastName('Anderson');</span></code></td>
+<td><code class="docutils literal"><span class="pre">User.last_name</span> <span class="pre">=</span> <span class="pre">'Anderson'</span></code></td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$this-&gt;Cake-&gt;findAllById(7);</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">Cake.id</span> <span class="pre">=</span> <span class="pre">7</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">$this-&gt;Cake-&gt;findAllById(7);</span></code></td>
+<td><code class="docutils literal"><span class="pre">Cake.id</span> <span class="pre">=</span> <span class="pre">7</span></code></td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$this-&gt;User-&gt;findAllByEmailOrUsername('jhon',</span> <span class="pre">'jhon');</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">User.email</span> <span class="pre">=</span> <span class="pre">'jhon'</span> <span class="pre">OR</span> <span class="pre">User.username</span> <span class="pre">=</span> <span class="pre">'jhon';</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">$this-&gt;User-&gt;findAllByEmailOrUsername('jhon',</span> <span class="pre">'jhon');</span></code></td>
+<td><code class="docutils literal"><span class="pre">User.email</span> <span class="pre">=</span> <span class="pre">'jhon'</span> <span class="pre">OR</span> <span class="pre">User.username</span> <span class="pre">=</span> <span class="pre">'jhon';</span></code></td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$this-&gt;User-&gt;findAllByUsernameAndPassword('jhon',</span> <span class="pre">'123');</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">User.username</span> <span class="pre">=</span> <span class="pre">'jhon'</span> <span class="pre">AND</span> <span class="pre">User.password</span> <span class="pre">=</span> <span class="pre">'123';</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">$this-&gt;User-&gt;findAllByUsernameAndPassword('jhon',</span> <span class="pre">'123');</span></code></td>
+<td><code class="docutils literal"><span class="pre">User.username</span> <span class="pre">=</span> <span class="pre">'jhon'</span> <span class="pre">AND</span> <span class="pre">User.password</span> <span class="pre">=</span> <span class="pre">'123';</span></code></td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$this-&gt;User-&gt;findAllByLastName('psychic',</span> <span class="pre">array(),</span> <span class="pre">array('User.user_name</span> <span class="pre">=&gt;</span> <span class="pre">'asc'));</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">User.last_name</span> <span class="pre">=</span> <span class="pre">'psychic'</span> <span class="pre">ORDER</span> <span class="pre">BY</span> <span class="pre">User.user_name</span> <span class="pre">ASC</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">$this-&gt;User-&gt;findAllByLastName('psychic',</span> <span class="pre">array(),</span> <span class="pre">array('User.user_name</span> <span class="pre">=&gt;</span> <span class="pre">'asc'));</span></code></td>
+<td><code class="docutils literal"><span class="pre">User.last_name</span> <span class="pre">=</span> <span class="pre">'psychic'</span> <span class="pre">ORDER</span> <span class="pre">BY</span> <span class="pre">User.user_name</span> <span class="pre">ASC</span></code></td>
 </tr>
 </tbody>
 </table>
-<p>返回结果数组的格式与 <tt class="docutils literal"><span class="pre">find('all')</span></tt> 的返回值格式一样。</p>
+<p>返回结果数组的格式与 <code class="docutils literal"><span class="pre">find('all')</span></code> 的返回值格式一样。</p>
 </div>
 <div class="section" id="findby">
 <h3>findBy<a class="headerlink" href="#findby" title="永久链接至标题">¶</a></h3>
-<p><tt class="docutils literal"><span class="pre">findBy&lt;fieldName&gt;(string</span> <span class="pre">$value);</span></tt></p>
+<p><code class="docutils literal"><span class="pre">findBy&lt;fieldName&gt;(string</span> <span class="pre">$value);</span></code></p>
 <p>findBy 魔法函数同样接受一些可选参数:</p>
-<p><tt class="docutils literal"><span class="pre">findBy&lt;fieldName&gt;(string</span> <span class="pre">$value[,</span> <span class="pre">mixed</span> <span class="pre">$fields[,</span> <span class="pre">mixed</span> <span class="pre">$order]]);</span></tt></p>
+<p><code class="docutils literal"><span class="pre">findBy&lt;fieldName&gt;(string</span> <span class="pre">$value[,</span> <span class="pre">mixed</span> <span class="pre">$fields[,</span> <span class="pre">mixed</span> <span class="pre">$order]]);</span></code></p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="52%" />
@@ -769,43 +894,43 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$this-&gt;Product-&gt;findByOrderStatus('3');</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">Product.order_status</span> <span class="pre">=</span> <span class="pre">3</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">$this-&gt;Product-&gt;findByOrderStatus('3');</span></code></td>
+<td><code class="docutils literal"><span class="pre">Product.order_status</span> <span class="pre">=</span> <span class="pre">3</span></code></td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$this-&gt;Recipe-&gt;findByType('Cookie');</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">Recipe.type</span> <span class="pre">=</span> <span class="pre">'Cookie'</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">$this-&gt;Recipe-&gt;findByType('Cookie');</span></code></td>
+<td><code class="docutils literal"><span class="pre">Recipe.type</span> <span class="pre">=</span> <span class="pre">'Cookie'</span></code></td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$this-&gt;User-&gt;findByLastName('Anderson');</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">User.last_name</span> <span class="pre">=</span> <span class="pre">'Anderson';</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">$this-&gt;User-&gt;findByLastName('Anderson');</span></code></td>
+<td><code class="docutils literal"><span class="pre">User.last_name</span> <span class="pre">=</span> <span class="pre">'Anderson';</span></code></td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$this-&gt;User-&gt;findByEmailOrUsername('jhon',</span> <span class="pre">'jhon');</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">User.email</span> <span class="pre">=</span> <span class="pre">'jhon'</span> <span class="pre">OR</span> <span class="pre">User.username</span> <span class="pre">=</span> <span class="pre">'jhon';</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">$this-&gt;User-&gt;findByEmailOrUsername('jhon',</span> <span class="pre">'jhon');</span></code></td>
+<td><code class="docutils literal"><span class="pre">User.email</span> <span class="pre">=</span> <span class="pre">'jhon'</span> <span class="pre">OR</span> <span class="pre">User.username</span> <span class="pre">=</span> <span class="pre">'jhon';</span></code></td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">$this-&gt;User-&gt;findByUsernameAndPassword('jhon',</span> <span class="pre">'123');</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">User.username</span> <span class="pre">=</span> <span class="pre">'jhon'</span> <span class="pre">AND</span> <span class="pre">User.password</span> <span class="pre">=</span> <span class="pre">'123';</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">$this-&gt;User-&gt;findByUsernameAndPassword('jhon',</span> <span class="pre">'123');</span></code></td>
+<td><code class="docutils literal"><span class="pre">User.username</span> <span class="pre">=</span> <span class="pre">'jhon'</span> <span class="pre">AND</span> <span class="pre">User.password</span> <span class="pre">=</span> <span class="pre">'123';</span></code></td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">$this-&gt;Cake-&gt;findById(7);</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">Cake.id</span> <span class="pre">=</span> <span class="pre">7</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">$this-&gt;Cake-&gt;findById(7);</span></code></td>
+<td><code class="docutils literal"><span class="pre">Cake.id</span> <span class="pre">=</span> <span class="pre">7</span></code></td>
 </tr>
 </tbody>
 </table>
-<p>findBy() 函数返回的结果类似于 <tt class="docutils literal"><span class="pre">find('first')</span></tt>。</p>
+<p>findBy() 函数返回的结果类似于 <code class="docutils literal"><span class="pre">find('first')</span></code>。</p>
 </div>
 </div>
 <div class="section" id="model-query">
-<span id="id4"></span><h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::query()</span></tt><a class="headerlink" href="#model-query" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">query(string</span> <span class="pre">$query)</span></tt></p>
-<p>你无法或者不想通过其它方模型法实现的 SQL 调用，可以使用模型的 <tt class="docutils literal"><span class="pre">query()</span></tt> 方法实
+<span id="id4"></span><h2><code class="xref php php-meth docutils literal"><span class="pre">Model::query()</span></code><a class="headerlink" href="#model-query" title="永久链接至标题">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">query(string</span> <span class="pre">$query)</span></code></p>
+<p>你无法或者不想通过其它方模型法实现的 SQL 调用，可以使用模型的 <code class="docutils literal"><span class="pre">query()</span></code> 方法实
 现(虽然这很少有必要)。</p>
-<p>如果使用该方法，请确保正确使用数据库驱动的 <tt class="docutils literal"><span class="pre">value()</span></tt> 方法转义(<em>escape</em>)所有参
+<p>如果使用该方法，请确保正确使用数据库驱动的 <code class="docutils literal"><span class="pre">value()</span></code> 方法转义(<em>escape</em>)所有参
 数。不转义参数会造成 SQL 注入漏洞。</p>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p class="last"><tt class="docutils literal"><span class="pre">query()</span></tt> 不理会 $Model-&gt;cacheQueries，因为其功能与调用的模型根本毫无关系。
+<p class="last"><code class="docutils literal"><span class="pre">query()</span></code> 不理会 $Model-&gt;cacheQueries，因为其功能与调用的模型根本毫无关系。
 为避免对调用查询的缓存，将第二个参数设置为 false，例如：
-<tt class="docutils literal"><span class="pre">query($query,</span> <span class="pre">$cachequeries</span> <span class="pre">=</span> <span class="pre">false)</span></tt>。</p>
+<code class="docutils literal"><span class="pre">query($query,</span> <span class="pre">$cachequeries</span> <span class="pre">=</span> <span class="pre">false)</span></code>。</p>
 </div>
-<p><tt class="docutils literal"><span class="pre">query()</span></tt> 在查询中使用表名而不是模型名作为返回数据数组的键。例如:</p>
+<p><code class="docutils literal"><span class="pre">query()</span></code> 在查询中使用表名而不是模型名作为返回数据数组的键。例如:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Picture</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM pictures LIMIT 2;&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -866,9 +991,9 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 </div>
 </div>
 <div class="section" id="model-field">
-<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::field()</span></tt><a class="headerlink" href="#model-field" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">field(string</span> <span class="pre">$name,</span> <span class="pre">array</span> <span class="pre">$conditions</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">string</span> <span class="pre">$order</span> <span class="pre">=</span> <span class="pre">null)</span></tt></p>
-<p>返回符合 $conditions 条件、按照 $order 排序的第一条记录中以 <tt class="docutils literal"><span class="pre">$name</span></tt> 命名的单一
+<h2><code class="xref php php-meth docutils literal"><span class="pre">Model::field()</span></code><a class="headerlink" href="#model-field" title="永久链接至标题">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">field(string</span> <span class="pre">$name,</span> <span class="pre">array</span> <span class="pre">$conditions</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">string</span> <span class="pre">$order</span> <span class="pre">=</span> <span class="pre">null)</span></code></p>
+<p>返回符合 $conditions 条件、按照 $order 排序的第一条记录中以 <code class="docutils literal"><span class="pre">$name</span></code> 命名的单一
 列的值。如果没有传递条件，并且设置了模型的 id，则返回当前模型结果的那一列的值。
 如果没有匹配的记录，则返回 false。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>
@@ -884,20 +1009,20 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 </div>
 </div>
 <div class="section" id="model-read">
-<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::read()</span></tt><a class="headerlink" href="#model-read" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">read($fields,</span> <span class="pre">$id)</span></tt></p>
-<p><tt class="docutils literal"><span class="pre">read()</span></tt> 方法用于设置当前模型数据(<tt class="docutils literal"><span class="pre">Model::$data</span></tt>) —— 例如在编辑过程中 —— 但
+<h2><code class="xref php php-meth docutils literal"><span class="pre">Model::read()</span></code><a class="headerlink" href="#model-read" title="永久链接至标题">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">read($fields,</span> <span class="pre">$id)</span></code></p>
+<p><code class="docutils literal"><span class="pre">read()</span></code> 方法用于设置当前模型数据(<code class="docutils literal"><span class="pre">Model::$data</span></code>) —— 例如在编辑过程中 —— 但
 是也可以在其他情况下从数据库中获取单条记录。</p>
-<p><tt class="docutils literal"><span class="pre">$fields</span></tt> 用来以字符串传递单个字段名、或者字段名称数组；如果为空，则读取所有字
+<p><code class="docutils literal"><span class="pre">$fields</span></code> 用来以字符串传递单个字段名、或者字段名称数组；如果为空，则读取所有字
 段。</p>
-<p><tt class="docutils literal"><span class="pre">$id</span></tt> 指定要读取的记录的 ID，默认会使用由 <tt class="docutils literal"><span class="pre">Model::$id</span></tt> 指定的当前选中记录。
-传递不同的值给 <tt class="docutils literal"><span class="pre">$id</span></tt> 参数就会使该条记录被选中。</p>
-<p><tt class="docutils literal"><span class="pre">read()</span></tt> 方法总是返回数组(即使仅请求一个字段名)。使用 <tt class="docutils literal"><span class="pre">field</span></tt> 方法来获取单个字段的值。</p>
+<p><code class="docutils literal"><span class="pre">$id</span></code> 指定要读取的记录的 ID，默认会使用由 <code class="docutils literal"><span class="pre">Model::$id</span></code> 指定的当前选中记录。
+传递不同的值给 <code class="docutils literal"><span class="pre">$id</span></code> 参数就会使该条记录被选中。</p>
+<p><code class="docutils literal"><span class="pre">read()</span></code> 方法总是返回数组(即使仅请求一个字段名)。使用 <code class="docutils literal"><span class="pre">field</span></code> 方法来获取单个字段的值。</p>
 <div class="admonition warning">
 <p class="first admonition-title">警告</p>
-<p class="last">由于 <tt class="docutils literal"><span class="pre">read</span></tt> 方法覆盖任何存储在模型的 <tt class="docutils literal"><span class="pre">data</span></tt> 和 <tt class="docutils literal"><span class="pre">id</span></tt> 属性中的数据，通常
-使用此功能是要非常小心，尤其在类似 <tt class="docutils literal"><span class="pre">beforeValidate</span></tt> 和 <tt class="docutils literal"><span class="pre">beforeSave</span></tt> 等模
-型回调函数中。通常而言，<tt class="docutils literal"><span class="pre">find</span></tt> 方法提供了比 <tt class="docutils literal"><span class="pre">read</span></tt> 方法更健壮和易用的
+<p class="last">由于 <code class="docutils literal"><span class="pre">read</span></code> 方法覆盖任何存储在模型的 <code class="docutils literal"><span class="pre">data</span></code> 和 <code class="docutils literal"><span class="pre">id</span></code> 属性中的数据，通常
+使用此功能是要非常小心，尤其在类似 <code class="docutils literal"><span class="pre">beforeValidate</span></code> 和 <code class="docutils literal"><span class="pre">beforeSave</span></code> 等模
+型回调函数中。通常而言，<code class="docutils literal"><span class="pre">find</span></code> 方法提供了比 <code class="docutils literal"><span class="pre">read</span></code> 方法更健壮和易用的
 API。</p>
 </div>
 </div>
@@ -930,8 +1055,8 @@ post&#8221;的文章:</p>
 </pre></div>
 </div>
 <p>注意，跟在字段名称之后的&#8217;!=&#8217;。CakePHP 能解析任何合法的 SQL 比较操作符，包括使用
-<tt class="docutils literal"><span class="pre">LIKE</span></tt> 、 <tt class="docutils literal"><span class="pre">BETWEEN</span></tt> 或者 <tt class="docutils literal"><span class="pre">REGEX</span></tt> 的匹配表达式，只要你用空格分隔开列名和操
-作符。这里唯一的例外是 <tt class="docutils literal"><span class="pre">IN</span></tt> (...) 这样的匹配条件。比如说要查找标题(<em>title</em>)列
+<code class="docutils literal"><span class="pre">LIKE</span></code> 、 <code class="docutils literal"><span class="pre">BETWEEN</span></code> 或者 <code class="docutils literal"><span class="pre">REGEX</span></code> 的匹配表达式，只要你用空格分隔开列名和操
+作符。这里唯一的例外是 <code class="docutils literal"><span class="pre">IN</span></code> (...) 这样的匹配条件。比如说要查找标题(<em>title</em>)列
 为给定的一组值之一的文章:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
     <span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;First post&quot;</span><span class="p">,</span> <span class="s2">&quot;Second post&quot;</span><span class="p">,</span> <span class="s2">&quot;Third post&quot;</span><span class="p">)</span>
@@ -959,7 +1084,7 @@ post&#8221;的文章:</p>
 </pre></div>
 </div>
 <p>上面的例子将返回创建日期和编辑日期相同的文章(即，返回从来没被编辑过的文章)。</p>
-<p>记住，如果你发现不能用这种方法生成 <tt class="docutils literal"><span class="pre">WHERE</span></tt> 子句(例如，逻辑运算)，你总是可以使
+<p>记住，如果你发现不能用这种方法生成 <code class="docutils literal"><span class="pre">WHERE</span></code> 子句(例如，逻辑运算)，你总是可以使
 用字符串来指定，比如:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;Model.field &amp; 8 = 1&#39;</span><span class="p">,</span>
@@ -967,7 +1092,7 @@ post&#8221;的文章:</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>默认情况下，CakePHP 使用逻辑 <tt class="docutils literal"><span class="pre">AND</span></tt> 来连接多个条件。这意味着，上面的代码片段仅
+<p>默认情况下，CakePHP 使用逻辑 <code class="docutils literal"><span class="pre">AND</span></code> 来连接多个条件。这意味着，上面的代码片段仅
 匹配近两星期内创建的、并且标题(<em>title</em>)符合给定的一组标题之一的文章。不过，我们
 也可以同样容易地查找符合任一条件的文章:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;OR&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -976,8 +1101,8 @@ post&#8221;的文章:</p>
 <span class="p">))</span>
 </pre></div>
 </div>
-<p>CakePHP 接受所有合法的 SQL 逻辑运算符，包括 <tt class="docutils literal"><span class="pre">AND</span></tt> 、 <tt class="docutils literal"><span class="pre">OR</span></tt> 、 <tt class="docutils literal"><span class="pre">NOT</span></tt> 、
-<tt class="docutils literal"><span class="pre">XOR</span></tt>，等等，而且大小写都可以，随你选择。这些条件还可以无限制嵌套。比如说
+<p>CakePHP 接受所有合法的 SQL 逻辑运算符，包括 <code class="docutils literal"><span class="pre">AND</span></code> 、 <code class="docutils literal"><span class="pre">OR</span></code> 、 <code class="docutils literal"><span class="pre">NOT</span></code> 、
+<code class="docutils literal"><span class="pre">XOR</span></code>，等等，而且大小写都可以，随你选择。这些条件还可以无限制嵌套。比如说
 Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含特定关键词(&#8220;magic&#8221;
 )或者在两星期内创建的、但仅由用户 Bob 发布的文章:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
@@ -989,7 +1114,7 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>如果需要在同一个字段上设置多个条件，比如想要执行一个带有多个 <tt class="docutils literal"><span class="pre">LIKE</span></tt> 条件的搜索，
+<p>如果需要在同一个字段上设置多个条件，比如想要执行一个带有多个 <code class="docutils literal"><span class="pre">LIKE</span></code> 条件的搜索，
 可以使用类似如下的条件:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;OR&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Post.title LIKE&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;%one%&#39;</span><span class="p">),</span>
@@ -997,7 +1122,7 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 <span class="p">))</span>
 </pre></div>
 </div>
-<p>也可以使用通配符操作符 <tt class="docutils literal"><span class="pre">ILIKE</span></tt> 和 <tt class="docutils literal"><span class="pre">RLIKE</span></tt> (RLIKE 自 2.6 版本起)。</p>
+<p>也可以使用通配符操作符 <code class="docutils literal"><span class="pre">ILIKE</span></code> 和 <code class="docutils literal"><span class="pre">RLIKE</span></code> (RLIKE 自 2.6 版本起)。</p>
 <p>CakePHP 还能检查 null 字段。在本例中，查询将返回标题(<em>title</em>)不为 null 的记录:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;NOT&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s2">&quot;Post.title&quot;</span> <span class="o">=&gt;</span> <span class="k">null</span>
@@ -1005,7 +1130,7 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>要处理 <tt class="docutils literal"><span class="pre">BETWEEN</span></tt> 查询，可以使用下面的方法:</p>
+<p>要处理 <code class="docutils literal"><span class="pre">BETWEEN</span></code> 查询，可以使用下面的方法:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Post.read_count BETWEEN ? AND ?&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -1041,8 +1166,8 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
     <span class="o">...</span>
 </pre></div>
 </div>
-<p>下面是使用 <tt class="docutils literal"><span class="pre">DISTINCT</span></tt> 查询的简单示例。可以按类似的方式使用其它操作符，比如
-<tt class="docutils literal"><span class="pre">MIN()</span></tt> 、 <tt class="docutils literal"><span class="pre">MAX()</span></tt>，等等:</p>
+<p>下面是使用 <code class="docutils literal"><span class="pre">DISTINCT</span></code> 查询的简单示例。可以按类似的方式使用其它操作符，比如
+<code class="docutils literal"><span class="pre">MIN()</span></code> 、 <code class="docutils literal"><span class="pre">MAX()</span></code>，等等:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;DISTINCT (User.name) AS my_column_name&#39;</span><span class="p">),</span>
     <span class="s1">&#39;order&#39;</span> <span class="o">=</span> <span class="o">&gt;</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;User.id DESC&#39;</span><span class="p">)</span>
@@ -1156,12 +1281,14 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 </div>
 
 
+			</div>
 		</div>
-	</div>
 
-	<div class="sidebar columns three pull-nine">
-<div id="sidebar-navigation" class="hide-on-phones">
-	<h2 class="hide-on-desktops">Table of Contents</h2>
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="zh">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
@@ -1171,9 +1298,7 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 <li class="toctree-l1"><a class="reference internal" href="../views.html">视图</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../models.html">模型</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="associations-linking-models-together.html">关联：将模型连接在一起</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">检索数据</a><ul class="simple">
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">检索数据</a></li>
 <li class="toctree-l2"><a class="reference internal" href="saving-your-data.html">保存数据</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deleting-data.html">删除数据</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data-validation.html">数据验证</a></li>
@@ -1188,7 +1313,7 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Shells，任务与命令行工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
@@ -1198,103 +1323,171 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 
 </div>
 
-<div class="page-contents">
-	<h3>Page contents</h3>
-	<ul>
-<li><a class="reference internal" href="#">检索数据</a><ul>
-<li><a class="reference internal" href="#find">find</a></li>
-<li><a class="reference internal" href="#find-first">find(&#8216;first&#8217;)</a></li>
-<li><a class="reference internal" href="#find-count">find(&#8216;count&#8217;)</a></li>
-<li><a class="reference internal" href="#find-all">find(&#8216;all&#8217;)</a></li>
-<li><a class="reference internal" href="#find-list">find(&#8216;list&#8217;)</a></li>
-<li><a class="reference internal" href="#find-threaded">find(&#8216;threaded&#8217;)</a></li>
-<li><a class="reference internal" href="#find-neighbors">find(&#8216;neighbors&#8217;)</a></li>
-<li><a class="reference internal" href="#model-custom-find">创建自定义查询类型</a></li>
-<li><a class="reference internal" href="#id3">魔法查找类型</a><ul>
-<li><a class="reference internal" href="#findallby">findAllBy</a></li>
-<li><a class="reference internal" href="#findby">findBy</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#model-query"><tt class="docutils literal"><span class="pre">Model::query()</span></tt></a></li>
-<li><a class="reference internal" href="#model-field"><tt class="docutils literal"><span class="pre">Model::field()</span></tt></a></li>
-<li><a class="reference internal" href="#model-read"><tt class="docutils literal"><span class="pre">Model::read()</span></tt></a></li>
-<li><a class="reference internal" href="#id5">复杂的查找条件</a><ul>
-<li><a class="reference internal" href="#id6">子查询</a></li>
-<li><a class="reference internal" href="#prepared-statements">预处理语句</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-</div>
-	</div>
-
-</div>
-
-<div class="content row">
-	<ul class="related-pages inline">
-	<li>
-		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
-	</li>
-	<li>
-		<a href="saving-your-data.html" title="保存数据" accesskey="N">下一页</a>
-	</li>
-	<li>
-		<a href="associations-linking-models-together.html" title="关联：将模型连接在一起" accesskey="P">上一页</a>
-	</li>
-	</ul>
-</div>
-
-	<div class="footer-push"> </div>
-</div>
-
-
-
-
-
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>发现翻译错误?</strong>
-			请在下面留言<br />
-			<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">[ 我要加入翻译 ]</a>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Jul 10, 2016.
-				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
 		</div>
 	</div>
 </div>
 
-<div id="nav-modal" class="reveal-modal"> </div>
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-8 social-footer text-center ">
+				<a href="#">发现翻译错误? 请在下面留言</a>
+				<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">我要加入翻译</a>
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="../_static/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="../_static/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
+</li>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
+
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
+
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							&copy; 版权所有 2016, Cake Software Foundation, Inc.
+						最后更新于 8月 02, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
 <div id="inline-search-results"></div>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F201cbc61deaf9f7ffb521fb23e83db40' type='text/javascript'%3E%3C/script%3E"));
-</script>
 
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+
+</div>
+
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"cakephpchina"};
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
 	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	</script>
-<!-- Duoshuo Comment END -->
-
-<!-- Grunt Live Reload -->
-<script src="http://192.168.56.113:35729/livereload.js"></script>
+</script>
   </body>
 </html>

@@ -1,171 +1,281 @@
 
+
 <!DOCTYPE html>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Debugging" lang="zh_CN" name="title" />
-<meta content="Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin." lang="zh_CN" name="description" />
-<meta content="code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options" lang="zh_CN" name="keywords" />
+    <meta content="Debugging" lang="zh" name="title" />
+<meta content="Debugging CakePHP with the Debugger class, logging, basic debugging and using the DebugKit plugin." lang="zh" name="description" />
+<meta content="code excerpt,stack trace,default output,error link,default error,web requests,error report,debugger,arrays,different ways,excerpt from,cakephp,ide,options" lang="zh" name="keywords" />
 
-    <title>调试 &mdash; CakePHP Cookbook 2.x 文档</title>
+    <title>调试</title>
+    <link href="../_static/favicon.png" type="image/png" rel="icon" />
+
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/app.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.x',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/app.js"></script>
-    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
-    <script type="text/javascript" src="../_static/foundation.js"></script>
+
+    <link rel="alternate" hreflang="en" href="../../en/development/debugging.html" /><link rel="alternate" hreflang="pt" href="../../pt/development/debugging.html" /><link rel="alternate" hreflang="es" href="../../es/development/debugging.html" /><link rel="alternate" hreflang="ja" href="../../ja/development/debugging.html" /><link rel="alternate" hreflang="fr" href="../../fr/development/debugging.html" />
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within CakePHP Cookbook 2.x 文档" href="../_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
     <link rel="up" title="开发" href="../development.html" />
     <link rel="next" title="测试" href="testing.html" />
     <link rel="prev" title="错误处理" href="errors.html" />
-<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="alternate" hreflang="en" href="../../en/development/debugging.html" /><link rel="alternate" hreflang="pt" href="../../pt/development/debugging.html" /><link rel="alternate" hreflang="es" href="../../es/development/debugging.html" /><link rel="alternate" hreflang="ja" href="../../ja/development/debugging.html" /><link rel="alternate" hreflang="fr" href="../../fr/development/debugging.html" />
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
-<script type="text/javascript">
-window.lang = "zh_CN";
-</script>
-
+    <script type="text/javascript">
+    window.lang = "zh";
+    </script>
   </head>
   <body>
 
 <div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="masthead">
-	<div class="header-backing"></div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="../contents.html">
-			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
-			</a>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
+
 		
-<div id="searchbox" class="columns nine phone-three">
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-	<form id="searchform" class="search" action="../search.html" method="get">
-		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
-		<input class="search-submit search-big button red" type="submit" value="搜索" />
-		<input type="hidden" name="check_keywords" value="yes" />
-		<input type="hidden" name="area" value="default" />
-
-		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
-	</form>
-
-</div>
-	</div>
-</div>
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="../contents.html">Cookbook 2.x</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="../development.html" accesskey="U" itemprop="url"><span itemprop="title">开发</span></a>
-			</li>
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">2.x Book</a>
-				<ul>
-					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				<a href="#">zh_CN</a>
-
-				<ul>
-				
-					<li><a href="../../en/development/debugging.html">en</a></li>
-				
-					<li><a href="../../pt/development/debugging.html">pt</a></li>
-				
-					<li><a href="../../es/development/debugging.html">es</a></li>
-				
-					<li><a href="../../ja/development/debugging.html">ja</a></li>
-				
-					<li><a href="../../fr/development/debugging.html">fr</a></li>
-				
-					<li></li>
-				
-				</ul>
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="../search.html" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="搜索" type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/development/debugging.rst" target="_blank">Improve this Doc</a>
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="../contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 2.x <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="../search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														zh
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li><a href="../../en/development/debugging.html">en</a></li>
+											
+												<li><a href="../../pt/development/debugging.html">pt</a></li>
+											
+												<li><a href="../../es/development/debugging.html">es</a></li>
+											
+												<li><a href="../../ja/development/debugging.html">ja</a></li>
+											
+												<li><a href="../../fr/development/debugging.html">fr</a></li>
+											
+												<li></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/zh">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/zh">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/zh/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/zh/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/master/zh/development/debugging.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="#">调试</a><ul>
+<li><a class="reference internal" href="#id2">基本的调试</a></li>
+<li><a class="reference internal" href="#debugger">Debugger 类</a></li>
+<li><a class="reference internal" href="#id3">使用 Debugger 调试类</a></li>
+<li><a class="reference internal" href="#id4">使用日志进行调试</a></li>
+<li><a class="reference internal" href="#debug-kit">Debug Kit</a></li>
+<li><a class="reference internal" href="#xdebug">Xdebug</a></li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
   <div class="section" id="id1">
 <h1>调试<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <p>调试在任何开发流程中都是不可避免和必要的组成部分。尽管 CakePHP 没有提供任何工具直接
@@ -173,8 +283,8 @@ window.lang = "zh_CN";
 <div class="section" id="id2">
 <h2>基本的调试<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <dl class="function">
-<dt id="debug">
-<tt class="descname">debug</tt><big>(</big><em>mixed $var</em>, <em>boolean $showHtml = null</em>, <em>$showFrom = true</em><big>)</big><a class="headerlink" href="#debug" title="永久链接至目标">¶</a></dt>
+<dt>
+<code class="descname">debug</code><span class="sig-paren">(</span><em>mixed $var</em>, <em>boolean $showHtml = null</em>, <em>$showFrom = true</em><span class="sig-paren">)</span></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -196,7 +306,7 @@ window.lang = "zh_CN";
 第二个参数为 true。默认情况下会输出调用该函数的行号和文件。</p>
 <p>只有(在配置文件中)把核心的 debug 变量设置为大于 0 的值，该函数的输出才会显示。</p>
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.1 版更改: </span><tt class="docutils literal"><span class="pre">debug()</span></tt> 的输出内容和 <tt class="docutils literal"><span class="pre">var_dump()</span></tt> 很相似，在内部使用 <a class="reference internal" href="#Debugger" title="Debugger"><tt class="xref php php-class docutils literal"><span class="pre">Debugger</span></tt></a>
+<p><span class="versionmodified">在 2.1 版更改: </span><code class="docutils literal"><span class="pre">debug()</span></code> 的输出内容和 <code class="docutils literal"><span class="pre">var_dump()</span></code> 很相似，在内部使用 <a class="reference internal" href="#Debugger" title="Debugger"><code class="xref php php-class docutils literal"><span class="pre">Debugger</span></code></a>
 类。</p>
 </div>
 </div>
@@ -205,7 +315,7 @@ window.lang = "zh_CN";
 <p>Debugger 类是随着 CakePHP 1.2 引入的，提供了更多获得调试信息的手段。其中包含了一些
 静态调用的、提供输出内容、日志和错误处理的函数。</p>
 <p>Debugger 类重载了 PHP 默认的错误处理，替换为更加实用的错误报告功能。在 CakePHP 中，
-默认使用 Debugger 类的错误处理。对所有的调试函数来说，<tt class="docutils literal"><span class="pre">Configure::debug</span></tt> 的值必须
+默认使用 Debugger 类的错误处理。对所有的调试函数来说，<code class="docutils literal"><span class="pre">Configure::debug</span></code> 的值必须
 设置为大于 0 的值才会生效。</p>
 <p>当一个错误发生时，Debugger 既会在页面上输出信息，并且也会将信息写入 error.log 错误
 日志中。生成的错误报告会包含堆栈追踪记录和发生错误之处的代码摘要。点击 &#8220;Error&#8221; 链接，
@@ -215,13 +325,13 @@ window.lang = "zh_CN";
 <h2>使用 Debugger 调试类<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <dl class="class">
 <dt id="Debugger">
-<em class="property">class </em><tt class="descname">Debugger</tt><a class="headerlink" href="#Debugger" title="永久链接至目标">¶</a></dt>
+<em class="property">class </em><code class="descname">Debugger</code><a class="headerlink" href="#Debugger" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
 <p>为了使用 Debugger，首先要确保 Configure::read(&#8216;debug&#8217;) 设置为大于 0 的值。</p>
 <dl class="staticmethod">
 <dt id="Debugger::dump">
-<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">dump</tt><big>(</big><em>$var</em>, <em>$depth = 3</em><big>)</big><a class="headerlink" href="#Debugger::dump" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Debugger::</code><code class="descname">dump</code><span class="sig-paren">(</span><em>$var</em>, <em>$depth = 3</em><span class="sig-paren">)</span><a class="headerlink" href="#Debugger::dump" title="永久链接至目标">¶</a></dt>
 <dd><p>将变量的内容全部输出，包含所有的属性和方法(如果存在任何方法):</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$foo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
 
@@ -252,27 +362,27 @@ window.lang = "zh_CN";
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified">在 2.1 版更改: </span>在 2.1 及以后版本中，为提高内容的可读性，输出进行了改变，详见
-<a class="reference internal" href="#Debugger::exportVar" title="Debugger::exportVar"><tt class="xref php php-func docutils literal"><span class="pre">Debugger::exportVar()</span></tt></a>。</p>
+<a class="reference internal" href="#Debugger::exportVar" title="Debugger::exportVar"><code class="xref php php-func docutils literal"><span class="pre">Debugger::exportVar()</span></code></a>。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.5.0 版更改: </span>增加了 <tt class="docutils literal"><span class="pre">depth</span></tt> 参数。</p>
+<p><span class="versionmodified">在 2.5.0 版更改: </span>增加了 <code class="docutils literal"><span class="pre">depth</span></code> 参数。</p>
 </div>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="Debugger::log">
-<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">log</tt><big>(</big><em>$var</em>, <em>$level = 7</em>, <em>$depth = 3</em><big>)</big><a class="headerlink" href="#Debugger::log" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Debugger::</code><code class="descname">log</code><span class="sig-paren">(</span><em>$var</em>, <em>$level = 7</em>, <em>$depth = 3</em><span class="sig-paren">)</span><a class="headerlink" href="#Debugger::log" title="永久链接至目标">¶</a></dt>
 <dd><p>创建调用时的详细堆栈追踪记录的日志。log() 方法的输出内容和 Debugger::dump()
 方法相似，但是它不是写入输出缓冲，而是写入 debug.log 日志中。注意要使 web 服务器
 对 app/tmp 目录(及其内容)可以写入，log() 方法才能正确运作。</p>
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.5.0 版更改: </span>增加了 <tt class="docutils literal"><span class="pre">depth</span></tt> 参数。</p>
+<p><span class="versionmodified">在 2.5.0 版更改: </span>增加了 <code class="docutils literal"><span class="pre">depth</span></code> 参数。</p>
 </div>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="Debugger::trace">
-<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">trace</tt><big>(</big><em>$options</em><big>)</big><a class="headerlink" href="#Debugger::trace" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Debugger::</code><code class="descname">trace</code><span class="sig-paren">(</span><em>$options</em><span class="sig-paren">)</span><a class="headerlink" href="#Debugger::trace" title="永久链接至目标">¶</a></dt>
 <dd><p>返回当前的堆栈追踪记录，每行显示调用的方法，包含调用所在的文件及行号。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">//在 PostsController::index() 中</span>
 <span class="nx">pr</span><span class="p">(</span><span class="nx">Debugger</span><span class="o">::</span><span class="na">trace</span><span class="p">());</span>
@@ -293,7 +403,7 @@ _invoke() 方法又调用了 PostsController::index() 方法。这样的信息�
 
 <dl class="staticmethod">
 <dt id="Debugger::excerpt">
-<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">excerpt</tt><big>(</big><em>$file</em>, <em>$line</em>, <em>$context</em><big>)</big><a class="headerlink" href="#Debugger::excerpt" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Debugger::</code><code class="descname">excerpt</code><span class="sig-paren">(</span><em>$file</em>, <em>$line</em>, <em>$context</em><span class="sig-paren">)</span><a class="headerlink" href="#Debugger::excerpt" title="永久链接至目标">¶</a></dt>
 <dd><p>获得 $path (绝对路径)所指向的文件的摘要，并高亮凸显位于第 $line 行前后 $context
 行的内容。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">pr</span><span class="p">(</span><span class="nx">Debugger</span><span class="o">::</span><span class="na">excerpt</span><span class="p">(</span><span class="nx">ROOT</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="nx">LIBS</span> <span class="o">.</span> <span class="s1">&#39;debugger.php&#39;</span><span class="p">,</span> <span class="mi">321</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span>
@@ -315,7 +425,7 @@ _invoke() 方法又调用了 PostsController::index() 方法。这样的信息�
 
 <dl class="staticmethod">
 <dt id="Debugger::exportVar">
-<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">exportVar</tt><big>(</big><em>$var</em>, <em>$recursion = 0</em><big>)</big><a class="headerlink" href="#Debugger::exportVar" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Debugger::</code><code class="descname">exportVar</code><span class="sig-paren">(</span><em>$var</em>, <em>$recursion = 0</em><span class="sig-paren">)</span><a class="headerlink" href="#Debugger::exportVar" title="永久链接至目标">¶</a></dt>
 <dd><p>将任何类型的变量转换成字符串，用于调试输出。这个方法同样也主要被调试器用于内部的
 变量转换，也可以在你自己的调试器中使用。</p>
 <div class="versionchanged">
@@ -325,13 +435,13 @@ _invoke() 方法又调用了 PostsController::index() 方法。这样的信息�
 
 <dl class="staticmethod">
 <dt id="Debugger::invoke">
-<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">invoke</tt><big>(</big><em>$debugger</em><big>)</big><a class="headerlink" href="#Debugger::invoke" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Debugger::</code><code class="descname">invoke</code><span class="sig-paren">(</span><em>$debugger</em><span class="sig-paren">)</span><a class="headerlink" href="#Debugger::invoke" title="永久链接至目标">¶</a></dt>
 <dd><p>用新的实例替换 CakePHP 的 Debugger。</p>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="Debugger::getType">
-<em class="property">static </em><tt class="descclassname">Debugger::</tt><tt class="descname">getType</tt><big>(</big><em>$var</em><big>)</big><a class="headerlink" href="#Debugger::getType" title="永久链接至目标">¶</a></dt>
+<em class="property">static </em><code class="descclassname">Debugger::</code><code class="descname">getType</code><span class="sig-paren">(</span><em>$var</em><span class="sig-paren">)</span><a class="headerlink" href="#Debugger::getType" title="永久链接至目标">¶</a></dt>
 <dd><p>返回变量的类型，对象将返回他们的类名。</p>
 <div class="versionadded">
 <p><span class="versionmodified">2.1 新版功能.</span></p>
@@ -341,14 +451,14 @@ _invoke() 方法又调用了 PostsController::index() 方法。这样的信息�
 </div>
 <div class="section" id="id4">
 <h2>使用日志进行调试<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
-<p>日志消息是另一个调试应用程序的好方法，你可以使用 <a class="reference internal" href="../core-libraries/logging.html#CakeLog" title="CakeLog"><tt class="xref php php-class docutils literal"><span class="pre">CakeLog</span></tt></a> 在应用程序中
-记录日志。所有扩展 <tt class="xref php php-class docutils literal"><span class="pre">Object</span></tt> 的对象都有一个实例方法 <cite>log()</cite>，可以用来记录
+<p>日志消息是另一个调试应用程序的好方法，你可以使用 <a class="reference internal" href="../core-libraries/logging.html#CakeLog" title="CakeLog"><code class="xref php php-class docutils literal"><span class="pre">CakeLog</span></code></a> 在应用程序中
+记录日志。所有扩展 <code class="xref php php-class docutils literal"><span class="pre">Object</span></code> 的对象都有一个实例方法 <cite>log()</cite>，可以用来记录
 日志消息:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">(</span><span class="s1">&#39;Got here&#39;</span><span class="p">,</span> <span class="s1">&#39;debug&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>上面的代码会把 <tt class="docutils literal"><span class="pre">Got</span> <span class="pre">here</span></tt> 写入 debug 日志中，你可以使用日志来帮助调试涉及重定向或
-复杂循环的方法。也可以使用 <a class="reference internal" href="../core-libraries/logging.html#CakeLog::write" title="CakeLog::write"><tt class="xref php php-meth docutils literal"><span class="pre">CakeLog::write()</span></tt></a> 来写入日志信息。这个方法
+<p>上面的代码会把 <code class="docutils literal"><span class="pre">Got</span> <span class="pre">here</span></code> 写入 debug 日志中，你可以使用日志来帮助调试涉及重定向或
+复杂循环的方法。也可以使用 <a class="reference internal" href="../core-libraries/logging.html#CakeLog::write" title="CakeLog::write"><code class="xref php php-meth docutils literal"><span class="pre">CakeLog::write()</span></code></a> 来写入日志信息。这个方法
 可以在程序中任何加载了 CakeLog 类的地方以静态方式调用:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 在 app/Config/bootstrap.php 中</span>
 <span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeLog&#39;</span><span class="p">,</span> <span class="s1">&#39;Log&#39;</span><span class="p">);</span>
@@ -372,12 +482,14 @@ _invoke() 方法又调用了 PostsController::index() 方法。这样的信息�
 </div>
 
 
+			</div>
 		</div>
-	</div>
 
-	<div class="sidebar columns three pull-nine">
-<div id="sidebar-navigation" class="hide-on-phones">
-	<h2 class="hide-on-desktops">Table of Contents</h2>
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="zh">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
@@ -388,16 +500,14 @@ _invoke() 方法又调用了 PostsController::index() 方法。这样的信息�
 <li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Shells，任务与命令行工具</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../development.html">开发</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="configuration.html">配置</a></li>
 <li class="toctree-l2"><a class="reference internal" href="routing.html">路由</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sessions.html">会话</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exceptions.html">异常</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">错误处理</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">调试</a><ul class="simple">
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">调试</a></li>
 <li class="toctree-l2"><a class="reference internal" href="testing.html">测试</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rest.html">REST</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dispatch-filters.html">调度器过滤器</a></li>
@@ -411,88 +521,171 @@ _invoke() 方法又调用了 PostsController::index() 方法。这样的信息�
 
 </div>
 
-<div class="page-contents">
-	<h3>Page contents</h3>
-	<ul>
-<li><a class="reference internal" href="#">调试</a><ul>
-<li><a class="reference internal" href="#id2">基本的调试</a></li>
-<li><a class="reference internal" href="#debugger">Debugger 类</a></li>
-<li><a class="reference internal" href="#id3">使用 Debugger 调试类</a></li>
-<li><a class="reference internal" href="#id4">使用日志进行调试</a></li>
-<li><a class="reference internal" href="#debug-kit">Debug Kit</a></li>
-<li><a class="reference internal" href="#xdebug">Xdebug</a></li>
-</ul>
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
+		</div>
+	</div>
+</div>
+
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-8 social-footer text-center ">
+				<a href="#">发现翻译错误? 请在下面留言</a>
+				<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">我要加入翻译</a>
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="../_static/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="../_static/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
 </li>
-</ul>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
 
-</div>
-	</div>
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
 
-</div>
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="content row">
-	<ul class="related-pages inline">
-	<li>
-		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
-	</li>
-	<li>
-		<a href="testing.html" title="测试" accesskey="N">下一页</a>
-	</li>
-	<li>
-		<a href="errors.html" title="错误处理" accesskey="P">上一页</a>
-	</li>
-	</ul>
-</div>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
 
-	<div class="footer-push"> </div>
-</div>
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
 
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
 
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
 
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
 
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>发现翻译错误?</strong>
-			请在下面留言<br />
-			<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">[ 我要加入翻译 ]</a>
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							&copy; 版权所有 2016, Cake Software Foundation, Inc.
+						最后更新于 8月 02, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
 		</div>
 	</div>
-	
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Jul 10, 2016.
-				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
-		</div>
-	</div>
-</div>
+</footer>
 
-<div id="nav-modal" class="reveal-modal"> </div>
 <div id="inline-search-results"></div>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F201cbc61deaf9f7ffb521fb23e83db40' type='text/javascript'%3E%3C/script%3E"));
-</script>
 
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+
+</div>
+
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"cakephpchina"};
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
 	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	</script>
-<!-- Duoshuo Comment END -->
-
-<!-- Grunt Live Reload -->
-<script src="http://192.168.56.113:35729/livereload.js"></script>
+</script>
   </body>
 </html>

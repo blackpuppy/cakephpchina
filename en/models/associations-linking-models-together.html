@@ -1,169 +1,288 @@
 
+
 <!DOCTYPE html>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta content="Associations: Linking Models Together" lang="en" name="title" />
 <meta content="relationship types,relational mapping,recipe database,relational database,this section covers,web applications,recipes,models,cakephp,storage" lang="en" name="keywords" />
 
-    <title>Associations: Linking Models Together &mdash; CakePHP Cookbook 2.x documentation</title>
+    <title>Associations: Linking Models Together</title>
+    <link href="../_static/favicon.png" type="image/png" rel="icon" />
+
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/app.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.x',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/app.js"></script>
-    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
-    <script type="text/javascript" src="../_static/foundation.js"></script>
+
+    <link rel="alternate" hreflang="pt" href="../../pt/models/associations-linking-models-together.html" /><link rel="alternate" hreflang="es" href="../../es/models/associations-linking-models-together.html" /><link rel="alternate" hreflang="ja" href="../../ja/models/associations-linking-models-together.html" /><link rel="alternate" hreflang="fr" href="../../fr/models/associations-linking-models-together.html" /><link rel="alternate" hreflang="zh" href="../../zh/models/associations-linking-models-together.html" />
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within CakePHP Cookbook 2.x documentation" href="../_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
     <link rel="up" title="Models" href="../models.html" />
     <link rel="next" title="Retrieving Your Data" href="retrieving-your-data.html" />
     <link rel="prev" title="Models" href="../models.html" />
-<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="alternate" hreflang="pt" href="../../pt/models/associations-linking-models-together.html" /><link rel="alternate" hreflang="es" href="../../es/models/associations-linking-models-together.html" /><link rel="alternate" hreflang="ja" href="../../ja/models/associations-linking-models-together.html" /><link rel="alternate" hreflang="fr" href="../../fr/models/associations-linking-models-together.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/models/associations-linking-models-together.html" />
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
-<script type="text/javascript">
-window.lang = "en";
-</script>
-
+    <script type="text/javascript">
+    window.lang = "en";
+    </script>
   </head>
   <body>
 
 <div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="masthead">
-	<div class="header-backing"></div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="../contents.html">
-			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
-			</a>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
+
 		
-<div id="searchbox" class="columns nine phone-three">
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-	<form id="searchform" class="search" action="../search.html" method="get">
-		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
-		<input class="search-submit search-big button red" type="submit" value="Search" />
-		<input type="hidden" name="check_keywords" value="yes" />
-		<input type="hidden" name="area" value="default" />
-
-		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
-	</form>
-
-</div>
-	</div>
-</div>
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="../contents.html">Cookbook 2.x</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="../models.html" accesskey="U" itemprop="url"><span itemprop="title">Models</span></a>
-			</li>
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">2.x Book</a>
-				<ul>
-					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				<a href="#">en</a>
-
-				<ul>
-				
-					<li></li>
-				
-					<li><a href="../../pt/models/associations-linking-models-together.html">pt</a></li>
-				
-					<li><a href="../../es/models/associations-linking-models-together.html">es</a></li>
-				
-					<li><a href="../../ja/models/associations-linking-models-together.html">ja</a></li>
-				
-					<li><a href="../../fr/models/associations-linking-models-together.html">fr</a></li>
-				
-					<li><a href="../../zh/models/associations-linking-models-together.html">zh_CN</a></li>
-				
-				</ul>
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="../search.html" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="Search" type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/models/associations-linking-models-together.rst" target="_blank">Improve this Doc</a>
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="../contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 2.x <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="../search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														en
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li></li>
+											
+												<li><a href="../../pt/models/associations-linking-models-together.html">pt</a></li>
+											
+												<li><a href="../../es/models/associations-linking-models-together.html">es</a></li>
+											
+												<li><a href="../../ja/models/associations-linking-models-together.html">ja</a></li>
+											
+												<li><a href="../../fr/models/associations-linking-models-together.html">fr</a></li>
+											
+												<li><a href="../../zh/models/associations-linking-models-together.html">zh</a></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/en">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/en">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/master/en/models/associations-linking-models-together.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="#">Associations: Linking Models Together</a><ul>
+<li><a class="reference internal" href="#relationship-types">Relationship Types</a></li>
+<li><a class="reference internal" href="#hasone">hasOne</a></li>
+<li><a class="reference internal" href="#belongsto">belongsTo</a><ul>
+<li><a class="reference internal" href="#countercache-cache-your-count">counterCache - Cache your count()</a></li>
+<li><a class="reference internal" href="#counterscope">counterScope</a></li>
+<li><a class="reference internal" href="#multiple-countercache">Multiple counterCache</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hasmany">hasMany</a></li>
+<li><a class="reference internal" href="#hasandbelongstomany-habtm">hasAndBelongsToMany (HABTM)</a></li>
+<li><a class="reference internal" href="#hasmany-through-the-join-model">hasMany through (The Join Model)</a></li>
+<li><a class="reference internal" href="#creating-and-destroying-associations-on-the-fly">Creating and Destroying Associations on the Fly</a></li>
+<li><a class="reference internal" href="#multiple-relations-to-the-same-model">Multiple relations to the same model</a></li>
+<li><a class="reference internal" href="#joining-tables">Joining tables</a></li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
   <div class="section" id="associations-linking-models-together">
 <h1>Associations: Linking Models Together<a class="headerlink" href="#associations-linking-models-together" title="Permalink to this headline">¶</a></h1>
 <p>One of the most powerful features of CakePHP is the ability to link
@@ -181,7 +300,7 @@ and utilize associations between models in CakePHP.</p>
 of storage in web applications is a relational database. Most of
 what this section covers will be in that context.</p>
 <p>For information on associations with Plugin models, see
-<a class="reference internal" href="../plugins/how-to-create-plugins.html#plugin-models"><em>Plugin Models</em></a>.</p>
+<a class="reference internal" href="../plugins/how-to-create-plugins.html#plugin-models"><span class="std std-ref">Plugin Models</span></a>.</p>
 <div class="section" id="relationship-types">
 <h2>Relationship Types<a class="headerlink" href="#relationship-types" title="Permalink to this headline">¶</a></h2>
 <p>The four association types in CakePHP are: hasOne, hasMany,
@@ -302,8 +421,8 @@ appropriate to have:</p>
 Choosing non-unique names for model aliases across models can cause
 unexpected behavior.</p>
 <p>CakePHP will automatically create links between associated model
-objects. So for example in your <tt class="docutils literal"><span class="pre">User</span></tt> model you can access the
-<tt class="docutils literal"><span class="pre">Recipe</span></tt> model as:</p>
+objects. So for example in your <code class="docutils literal"><span class="pre">User</span></code> model you can access the
+<code class="docutils literal"><span class="pre">Recipe</span></code> model as:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">someFunction</span><span class="p">();</span>
 </pre></div>
 </div>
@@ -494,9 +613,9 @@ relationship, the className key should equal &#8216;User&#8217;.</li>
 model. This is especially handy if you need to define multiple
 belongsTo relationships. The default value for this key is the
 underscored, singular name of the other model, suffixed with
-<tt class="docutils literal"><span class="pre">_id</span></tt>.</li>
+<code class="docutils literal"><span class="pre">_id</span></code>.</li>
 <li><strong>conditions</strong>: an array of find() compatible conditions or SQL
-strings such as <tt class="docutils literal"><span class="pre">array('User.active'</span> <span class="pre">=&gt;</span> <span class="pre">true)</span></tt></li>
+strings such as <code class="docutils literal"><span class="pre">array('User.active'</span> <span class="pre">=&gt;</span> <span class="pre">true)</span></code></li>
 <li><strong>type</strong>: the type of the join to use in the SQL query. The default
 is &#8216;LEFT&#8217;, which may not fit your needs in all situations. The value
 &#8216;INNER&#8217; may be helpful (when used with some conditions) when you want
@@ -504,14 +623,14 @@ everything from your main and associated models or nothing at all.</li>
 <li><strong>fields</strong>: A list of fields to be retrieved when the associated
 model data is fetched. Returns all fields by default.</li>
 <li><strong>order</strong>: an array of find() compatible order clauses or SQL
-strings such as <tt class="docutils literal"><span class="pre">array('User.username'</span> <span class="pre">=&gt;</span> <span class="pre">'ASC')</span></tt></li>
+strings such as <code class="docutils literal"><span class="pre">array('User.username'</span> <span class="pre">=&gt;</span> <span class="pre">'ASC')</span></code></li>
 <li><strong>counterCache</strong>: If set to true, the associated Model will
 automatically increase or decrease the
 &#8220;[singular_model_name]_count&#8221; field in the foreign table
-whenever you do a <tt class="docutils literal"><span class="pre">save()</span></tt> or <tt class="docutils literal"><span class="pre">delete()</span></tt>. If it&#8217;s a string, then it&#8217;s the
+whenever you do a <code class="docutils literal"><span class="pre">save()</span></code> or <code class="docutils literal"><span class="pre">delete()</span></code>. If it&#8217;s a string, then it&#8217;s the
 field name to use. The value in the counter field represents the
 number of related rows. You can also specify multiple counter caches
-by defining an array. See <a class="reference internal" href="#multiple-countercache"><em>Multiple counterCache</em></a>.</li>
+by defining an array. See <a class="reference internal" href="#multiple-countercache"><span class="std std-ref">Multiple counterCache</span></a>.</li>
 <li><strong>counterScope</strong>: Optional conditions array to use for updating
 counter cache field.</li>
 </ul>
@@ -540,18 +659,18 @@ Profile model will also fetch a related User record if it exists:</p>
 <div class="section" id="countercache-cache-your-count">
 <h3>counterCache - Cache your count()<a class="headerlink" href="#countercache-cache-your-count" title="Permalink to this headline">¶</a></h3>
 <p>This feature helps you cache the count of related data. Instead of
-counting the records manually via <tt class="docutils literal"><span class="pre">find('count')</span></tt>, the model
+counting the records manually via <code class="docutils literal"><span class="pre">find('count')</span></code>, the model
 itself tracks any addition/deletion towards the associated
-<tt class="docutils literal"><span class="pre">$hasMany</span></tt> model and increases/decreases a dedicated integer
+<code class="docutils literal"><span class="pre">$hasMany</span></code> model and increases/decreases a dedicated integer
 field within the parent model table.</p>
 <p>The name of the field consists of the singular model name followed
 by a underscore and the word &#8220;count&#8221;:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">my_model_count</span>
 </pre></div>
 </div>
-<p>Let&#8217;s say you have a model called <tt class="docutils literal"><span class="pre">ImageComment</span></tt> and a model
-called <tt class="docutils literal"><span class="pre">Image</span></tt>. You would add a new INT-field to the <tt class="docutils literal"><span class="pre">images</span></tt>
-table and name it <tt class="docutils literal"><span class="pre">image_comment_count</span></tt>.</p>
+<p>Let&#8217;s say you have a model called <code class="docutils literal"><span class="pre">ImageComment</span></code> and a model
+called <code class="docutils literal"><span class="pre">Image</span></code>. You would add a new INT-field to the <code class="docutils literal"><span class="pre">images</span></code>
+table and name it <code class="docutils literal"><span class="pre">image_comment_count</span></code>.</p>
 <p>Here are some more examples:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -581,8 +700,8 @@ table and name it <tt class="docutils literal"><span class="pre">image_comment_c
 </tbody>
 </table>
 <p>Once you have added the counter field, you are good to go. Activate
-counter-cache in your association by adding a <tt class="docutils literal"><span class="pre">counterCache</span></tt> key
-and set the value to <tt class="docutils literal"><span class="pre">true</span></tt>:</p>
+counter-cache in your association by adding a <code class="docutils literal"><span class="pre">counterCache</span></code> key
+and set the value to <code class="docutils literal"><span class="pre">true</span></code>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ImageComment</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;Image&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -592,13 +711,13 @@ and set the value to <tt class="docutils literal"><span class="pre">true</span><
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>From now on, every time you add or remove a <tt class="docutils literal"><span class="pre">ImageComment</span></tt> associated to
-<tt class="docutils literal"><span class="pre">Image</span></tt>, the number within <tt class="docutils literal"><span class="pre">image_comment_count</span></tt> is adjusted
+<p>From now on, every time you add or remove a <code class="docutils literal"><span class="pre">ImageComment</span></code> associated to
+<code class="docutils literal"><span class="pre">Image</span></code>, the number within <code class="docutils literal"><span class="pre">image_comment_count</span></code> is adjusted
 automatically.</p>
 </div>
 <div class="section" id="counterscope">
 <h3>counterScope<a class="headerlink" href="#counterscope" title="Permalink to this headline">¶</a></h3>
-<p>You can also specify <tt class="docutils literal"><span class="pre">counterScope</span></tt>. It allows you to specify a
+<p>You can also specify <code class="docutils literal"><span class="pre">counterScope</span></code>. It allows you to specify a
 simple condition which tells the model when to update (or when not
 to, depending on how you look at it) the counter value.</p>
 <p>Using our Image model example, we can specify it like so:</p>
@@ -618,9 +737,9 @@ to, depending on how you look at it) the counter value.</p>
 </div>
 <div class="section" id="multiple-countercache">
 <span id="id1"></span><h3>Multiple counterCache<a class="headerlink" href="#multiple-countercache" title="Permalink to this headline">¶</a></h3>
-<p>Since 2.0, CakePHP has supported having multiple <tt class="docutils literal"><span class="pre">counterCache</span></tt> in a single model
-relation. It is also possible to define a <tt class="docutils literal"><span class="pre">counterScope</span></tt> for each <tt class="docutils literal"><span class="pre">counterCache</span></tt>.
-Assuming you have a <tt class="docutils literal"><span class="pre">User</span></tt> model and a <tt class="docutils literal"><span class="pre">Message</span></tt> model, and you want to be able
+<p>Since 2.0, CakePHP has supported having multiple <code class="docutils literal"><span class="pre">counterCache</span></code> in a single model
+relation. It is also possible to define a <code class="docutils literal"><span class="pre">counterScope</span></code> for each <code class="docutils literal"><span class="pre">counterCache</span></code>.
+Assuming you have a <code class="docutils literal"><span class="pre">User</span></code> model and a <code class="docutils literal"><span class="pre">Message</span></code> model, and you want to be able
 to count the amount of read and unread messages for each user.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -637,19 +756,19 @@ to count the amount of read and unread messages for each user.</p>
 <tbody valign="top">
 <tr class="row-even"><td>User</td>
 <td>users.messages_read</td>
-<td>Count read <tt class="docutils literal"><span class="pre">Message</span></tt></td>
+<td>Count read <code class="docutils literal"><span class="pre">Message</span></code></td>
 </tr>
 <tr class="row-odd"><td>User</td>
 <td>users.messages_unread</td>
-<td>Count unread <tt class="docutils literal"><span class="pre">Message</span></tt></td>
+<td>Count unread <code class="docutils literal"><span class="pre">Message</span></code></td>
 </tr>
 <tr class="row-even"><td>Message</td>
 <td>messages.is_read</td>
-<td>Determines if a <tt class="docutils literal"><span class="pre">Message</span></tt> is read or not.</td>
+<td>Determines if a <code class="docutils literal"><span class="pre">Message</span></code> is read or not.</td>
 </tr>
 </tbody>
 </table>
-<p>With this setup, your <tt class="docutils literal"><span class="pre">belongsTo</span></tt> would look like this:</p>
+<p>With this setup, your <code class="docutils literal"><span class="pre">belongsTo</span></code> would look like this:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Message</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$belongsTo</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;User&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -746,10 +865,10 @@ but may not be ideal for all circumstances.</li>
 associated model records. This should be used in situations that
 require highly customized results.
 If a query you&#8217;re building requires a reference to the associated
-model ID, use the special <tt class="docutils literal"><span class="pre">{$__cakeID__$}</span></tt> marker in the query.
+model ID, use the special <code class="docutils literal"><span class="pre">{$__cakeID__$}</span></code> marker in the query.
 For example, if your Apple model hasMany Orange, the query should
 look something like this:
-<tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">Orange.*</span> <span class="pre">from</span> <span class="pre">oranges</span> <span class="pre">as</span> <span class="pre">Orange</span> <span class="pre">WHERE</span> <span class="pre">Orange.apple_id</span> <span class="pre">=</span> <span class="pre">{$__cakeID__$};</span></tt></li>
+<code class="docutils literal"><span class="pre">SELECT</span> <span class="pre">Orange.*</span> <span class="pre">from</span> <span class="pre">oranges</span> <span class="pre">as</span> <span class="pre">Orange</span> <span class="pre">WHERE</span> <span class="pre">Orange.apple_id</span> <span class="pre">=</span> <span class="pre">{$__cakeID__$};</span></code></li>
 </ul>
 <p>Once this association has been defined, find operations on the User
 model will also fetch related Comment records if they exist:</p>
@@ -851,7 +970,7 @@ possible to define a custom table name in association definition.</p>
 </div>
 <p>Make sure primary keys in tables <strong>cakes</strong> and <strong>recipes</strong> have
 &#8220;id&#8221; fields as assumed by convention. If they&#8217;re different than
-assumed, they must be changed in model&#8217;s <a class="reference internal" href="model-attributes.html#model-primarykey"><em>primaryKey</em></a>.</p>
+assumed, they must be changed in model&#8217;s <a class="reference internal" href="model-attributes.html#model-primarykey"><span class="std std-ref">primaryKey</span></a>.</p>
 <p>Once this new table has been created, we can define the HABTM
 association in the model files. We&#8217;re going to skip straight to the
 array syntax this time:</p>
@@ -907,7 +1026,7 @@ underscored, singular name of the other model, suffixed with
 &#8216;_id&#8217;.</p>
 </li>
 <li><dl class="first docutils">
-<dt><strong>unique</strong>: boolean or string <tt class="docutils literal"><span class="pre">keepExisting</span></tt>.</dt>
+<dt><strong>unique</strong>: boolean or string <code class="docutils literal"><span class="pre">keepExisting</span></code>.</dt>
 <dd><ul class="first last simple">
 <li>If true (default value) CakePHP will first delete existing relationship
 records in the foreign keys table before inserting new ones.
@@ -915,7 +1034,7 @@ Existing associations need to be passed again when updating.</li>
 <li>When false, CakePHP will insert the specified new relationship records
 and leave any existing relationship records in place, possibly
 resulting in duplicate relationship records.</li>
-<li>When set to <tt class="docutils literal"><span class="pre">keepExisting</span></tt>, the behavior is similar to <cite>true</cite>,
+<li>When set to <code class="docutils literal"><span class="pre">keepExisting</span></code>, the behavior is similar to <cite>true</cite>,
 but with an additional check so that if any of the records
 to be added are duplicates of an existing relationship record, the
 existing relationship record is not deleted, and the duplicate
@@ -987,11 +1106,11 @@ like to fetch Recipe data when using the Ingredient model.</p>
 <p class="last">HABTM data is treated like a complete set. Each time a new data association is added,
 the complete set of associated rows in the database is dropped and created again so you
 will always need to pass the whole data set for saving. For an alternative to using
-HABTM, see <a class="reference internal" href="#hasmany-through"><em>hasMany through (The Join Model)</em></a>.</p>
+HABTM, see <a class="reference internal" href="#hasmany-through"><span class="std std-ref">hasMany through (The Join Model)</span></a>.</p>
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">For more information on saving HABTM objects, see <a class="reference internal" href="saving-your-data.html#saving-habtm"><em>Saving Related Model Data (HABTM)</em></a></p>
+<p class="last">For more information on saving HABTM objects, see <a class="reference internal" href="saving-your-data.html#saving-habtm"><span class="std std-ref">Saving Related Model Data (HABTM)</span></a></p>
 </div>
 </div>
 <div class="section" id="hasmany-through-the-join-model">
@@ -1020,9 +1139,9 @@ the columns as it is not replaced in the new insert.</p>
 <div><div class="versionchanged">
 <p><span class="versionmodified">Changed in version 2.1.</span></p>
 </div>
-<p>You can set the <tt class="docutils literal"><span class="pre">unique</span></tt> setting to <tt class="docutils literal"><span class="pre">keepExisting</span></tt> to circumvent
-losing extra data during the save operation. See <tt class="docutils literal"><span class="pre">unique</span></tt>
-key in <a class="reference internal" href="#ref-habtm-arrays"><em>HABTM association arrays</em></a>.</p>
+<p>You can set the <code class="docutils literal"><span class="pre">unique</span></code> setting to <code class="docutils literal"><span class="pre">keepExisting</span></code> to circumvent
+losing extra data during the save operation. See <code class="docutils literal"><span class="pre">unique</span></code>
+key in <a class="reference internal" href="#ref-habtm-arrays"><span class="std std-ref">HABTM association arrays</span></a>.</p>
 </div></blockquote>
 <p>The way to implement our requirement is to use a <strong>join model</strong>,
 otherwise known as a <strong>hasMany through</strong> association.
@@ -1157,6 +1276,18 @@ LeadersController:</p>
         <span class="p">)</span>
     <span class="p">);</span>
 
+    <span class="c1">// If we need keep this association after model reset</span>
+    <span class="c1">// we will pass a second boolean parameter like this:</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Leader</span><span class="o">-&gt;</span><span class="na">bindModel</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span><span class="s1">&#39;hasMany&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;Principle&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                    <span class="s1">&#39;className&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Principle&#39;</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="k">false</span>
+    <span class="p">);</span>
+
     <span class="c1">// Now that we&#39;re associated correctly,</span>
     <span class="c1">// we can use a single find function to fetch</span>
     <span class="c1">// Leaders with their associated principles:</span>
@@ -1240,7 +1371,7 @@ User model would look like:</p>
 </pre></div>
 </div>
 <p><strong>Fetching a nested array of associated records:</strong></p>
-<p>If your table has a <tt class="docutils literal"><span class="pre">parent_id</span></tt> field, you can also use <a class="reference internal" href="retrieving-your-data.html#model-find-threaded"><em>find(&#8216;threaded&#8217;)</em></a>
+<p>If your table has a <code class="docutils literal"><span class="pre">parent_id</span></code> field, you can also use <a class="reference internal" href="retrieving-your-data.html#model-find-threaded"><span class="std std-ref">find(&#8216;threaded&#8217;)</span></a>
 to fetch a nested array of records using a single query without
 setting up any associations.</p>
 </div>
@@ -1279,7 +1410,7 @@ example:</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Note that the &#8216;join&#8217; arrays are not keyed.</p>
+<p class="last">Note that the &#8216;joins&#8217; arrays are not keyed.</p>
 </div>
 <p>In the above example, a model called Item is left-joined to the
 channels table. You can alias the table with the Model name, so the
@@ -1349,12 +1480,14 @@ SQL queries if combined with any of the former techniques described for associat
 </div>
 
 
+			</div>
 		</div>
-	</div>
 
-	<div class="sidebar columns three pull-nine">
-<div id="sidebar-navigation" class="hide-on-phones">
-	<h2 class="hide-on-desktops">Table of Contents</h2>
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="en">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
@@ -1363,9 +1496,7 @@ SQL queries if combined with any of the former techniques described for associat
 <li class="toctree-l1"><a class="reference internal" href="../controllers.html">Controllers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../views.html">Views</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../models.html">Models</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="">Associations: Linking Models Together</a><ul class="simple">
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Associations: Linking Models Together</a></li>
 <li class="toctree-l2"><a class="reference internal" href="retrieving-your-data.html">Retrieving Your Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="saving-your-data.html">Saving Your Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deleting-data.html">Deleting Data</a></li>
@@ -1381,7 +1512,7 @@ SQL queries if combined with any of the former techniques described for associat
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Shells, Tasks &amp; Console Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
@@ -1391,96 +1522,171 @@ SQL queries if combined with any of the former techniques described for associat
 
 </div>
 
-<div class="page-contents">
-	<h3>Page contents</h3>
-	<ul>
-<li><a class="reference internal" href="#">Associations: Linking Models Together</a><ul>
-<li><a class="reference internal" href="#relationship-types">Relationship Types</a></li>
-<li><a class="reference internal" href="#hasone">hasOne</a></li>
-<li><a class="reference internal" href="#belongsto">belongsTo</a><ul>
-<li><a class="reference internal" href="#countercache-cache-your-count">counterCache - Cache your count()</a></li>
-<li><a class="reference internal" href="#counterscope">counterScope</a></li>
-<li><a class="reference internal" href="#multiple-countercache">Multiple counterCache</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#hasmany">hasMany</a></li>
-<li><a class="reference internal" href="#hasandbelongstomany-habtm">hasAndBelongsToMany (HABTM)</a></li>
-<li><a class="reference internal" href="#hasmany-through-the-join-model">hasMany through (The Join Model)</a></li>
-<li><a class="reference internal" href="#creating-and-destroying-associations-on-the-fly">Creating and Destroying Associations on the Fly</a></li>
-<li><a class="reference internal" href="#multiple-relations-to-the-same-model">Multiple relations to the same model</a></li>
-<li><a class="reference internal" href="#joining-tables">Joining tables</a></li>
-</ul>
-</li>
-</ul>
-
-</div>
-	</div>
-
-</div>
-
-<div class="content row">
-	<ul class="related-pages inline">
-	<li>
-		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
-	</li>
-	<li>
-		<a href="retrieving-your-data.html" title="Retrieving Your Data" accesskey="N">next</a>
-	</li>
-	<li>
-		<a href="../models.html" title="Models" accesskey="P">previous</a>
-	</li>
-	</ul>
-</div>
-
-	<div class="footer-push"> </div>
-</div>
-
-
-
-
-
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>发现翻译错误?</strong>
-			请在下面留言<br />
-			<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">[ 我要加入翻译 ]</a>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Jul 10, 2016.
-				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
 		</div>
 	</div>
 </div>
 
-<div id="nav-modal" class="reveal-modal"> </div>
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-8 social-footer text-center ">
+				<a href="#">发现翻译错误? 请在下面留言</a>
+				<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">我要加入翻译</a>
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="../_static/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="../_static/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
+</li>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
+
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
+
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							&copy; Copyright 2016, Cake Software Foundation, Inc.
+						Last updated on Aug 02, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
 <div id="inline-search-results"></div>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F201cbc61deaf9f7ffb521fb23e83db40' type='text/javascript'%3E%3C/script%3E"));
-</script>
 
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+
+</div>
+
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"cakephpchina"};
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
 	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	</script>
-<!-- Duoshuo Comment END -->
-
-<!-- Grunt Live Reload -->
-<script src="http://192.168.56.113:35729/livereload.js"></script>
+</script>
   </body>
 </html>

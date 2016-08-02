@@ -1,174 +1,287 @@
 
+
 <!DOCTYPE html>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Migrating from CakePHP 1.2 to 1.3" lang="zh_CN" name="title" />
-<meta content="inflections,bootstrap,unit tests,constants,cipher,php 5,replacements,pear,array,variables,models,cakephp,plugins" lang="zh_CN" name="keywords" />
+    <meta content="Migrating from CakePHP 1.2 to 1.3" lang="en" name="title" />
+<meta content="inflections,bootstrap,unit tests,constants,cipher,php 5,replacements,pear,array,variables,models,cakephp,plugins" lang="en" name="keywords" />
 
-    <title>Migrating from CakePHP 1.2 to 1.3 &mdash; CakePHP Cookbook 2.x 文档</title>
+    <title>Migrating from CakePHP 1.2 to 1.3</title>
+    <link href="../_static/favicon.png" type="image/png" rel="icon" />
+
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/app.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.x',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/app.js"></script>
-    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
-    <script type="text/javascript" src="../_static/foundation.js"></script>
+
+    <link rel="alternate" hreflang="en" href="../../en/appendices/migrating-from-cakephp-1-2-to-1-3.html" /><link rel="alternate" hreflang="pt" href="../../pt/appendices/migrating-from-cakephp-1-2-to-1-3.html" /><link rel="alternate" hreflang="es" href="../../es/appendices/migrating-from-cakephp-1-2-to-1-3.html" /><link rel="alternate" hreflang="ja" href="../../ja/appendices/migrating-from-cakephp-1-2-to-1-3.html" /><link rel="alternate" hreflang="fr" href="../../fr/appendices/migrating-from-cakephp-1-2-to-1-3.html" />
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within CakePHP Cookbook 2.x 文档" href="../_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
     <link rel="up" title="Appendices" href="../appendices.html" />
     <link rel="next" title="New features in CakePHP 1.3" href="new-features-in-cakephp-1-3.html" />
     <link rel="prev" title="PHPUnit Migration Hints" href="phpunit-migration-hints.html" />
-<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="alternate" hreflang="en" href="../../en/appendices/migrating-from-cakephp-1-2-to-1-3.html" /><link rel="alternate" hreflang="pt" href="../../pt/appendices/migrating-from-cakephp-1-2-to-1-3.html" /><link rel="alternate" hreflang="es" href="../../es/appendices/migrating-from-cakephp-1-2-to-1-3.html" /><link rel="alternate" hreflang="ja" href="../../ja/appendices/migrating-from-cakephp-1-2-to-1-3.html" /><link rel="alternate" hreflang="fr" href="../../fr/appendices/migrating-from-cakephp-1-2-to-1-3.html" />
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
-<script type="text/javascript">
-window.lang = "zh_CN";
-</script>
-
+    <script type="text/javascript">
+    window.lang = "zh";
+    </script>
   </head>
   <body>
 
 <div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="masthead">
-	<div class="header-backing"></div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="../contents.html">
-			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
-			</a>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
+
 		
-<div id="searchbox" class="columns nine phone-three">
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-	<form id="searchform" class="search" action="../search.html" method="get">
-		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
-		<input class="search-submit search-big button red" type="submit" value="搜索" />
-		<input type="hidden" name="check_keywords" value="yes" />
-		<input type="hidden" name="area" value="default" />
-
-		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
-	</form>
-
-</div>
-	</div>
-</div>
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="../contents.html">Cookbook 2.x</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="../appendices.html" accesskey="U" itemprop="url"><span itemprop="title">Appendices</span></a>
-			</li>
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">2.x Book</a>
-				<ul>
-					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				<a href="#">zh_CN</a>
-
-				<ul>
-				
-					<li><a href="../../en/appendices/migrating-from-cakephp-1-2-to-1-3.html">en</a></li>
-				
-					<li><a href="../../pt/appendices/migrating-from-cakephp-1-2-to-1-3.html">pt</a></li>
-				
-					<li><a href="../../es/appendices/migrating-from-cakephp-1-2-to-1-3.html">es</a></li>
-				
-					<li><a href="../../ja/appendices/migrating-from-cakephp-1-2-to-1-3.html">ja</a></li>
-				
-					<li><a href="../../fr/appendices/migrating-from-cakephp-1-2-to-1-3.html">fr</a></li>
-				
-					<li></li>
-				
-				</ul>
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="../search.html" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="搜索" type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/appendices/migrating-from-cakephp-1-2-to-1-3.rst" target="_blank">Improve this Doc</a>
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="../contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 2.x <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="../search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														zh
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li><a href="../../en/appendices/migrating-from-cakephp-1-2-to-1-3.html">en</a></li>
+											
+												<li><a href="../../pt/appendices/migrating-from-cakephp-1-2-to-1-3.html">pt</a></li>
+											
+												<li><a href="../../es/appendices/migrating-from-cakephp-1-2-to-1-3.html">es</a></li>
+											
+												<li><a href="../../ja/appendices/migrating-from-cakephp-1-2-to-1-3.html">ja</a></li>
+											
+												<li><a href="../../fr/appendices/migrating-from-cakephp-1-2-to-1-3.html">fr</a></li>
+											
+												<li></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/zh">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/zh">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/zh/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/zh/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/master/zh/appendices/migrating-from-cakephp-1-2-to-1-3.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="#">Migrating from CakePHP 1.2 to 1.3</a><ul>
+<li><a class="reference internal" href="#removed-constants">Removed Constants</a></li>
+<li><a class="reference internal" href="#configuration-and-application-bootstrapping">Configuration and application bootstrapping</a></li>
+<li><a class="reference internal" href="#file-renames-and-internal-changes">File renames and internal changes</a></li>
+<li><a class="reference internal" href="#controller-components">Controller &amp; Components</a></li>
+<li><a class="reference internal" href="#library-classes">Library Classes</a></li>
+<li><a class="reference internal" href="#model-databases-and-datasources">Model Databases and Datasources</a></li>
+<li><a class="reference internal" href="#view-and-helpers">View and Helpers</a></li>
+<li><a class="reference internal" href="#console-and-shells">Console and shells</a></li>
+<li><a class="reference internal" href="#vendors-test-suite-schema">Vendors, Test Suite &amp; schema</a></li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
   <div class="section" id="migrating-from-cakephp-1-2-to-1-3">
 <h1>Migrating from CakePHP 1.2 to 1.3<a class="headerlink" href="#migrating-from-cakephp-1-2-to-1-3" title="永久链接至标题">¶</a></h1>
 <p>This guide summarizes many of the changes necessary when migrating
-from a 1.2 to 1.3 Cake core. Each section contains relevant
+from a 1.2 to 1.3 CakePHP core. Each section contains relevant
 information for the modifications made to existing methods as well
 as any methods that have been removed/renamed.</p>
 <p><strong>App File Replacements (important)</strong></p>
@@ -183,56 +296,95 @@ which are required for PHP 5.3.</li>
 <h2>Removed Constants<a class="headerlink" href="#removed-constants" title="永久链接至标题">¶</a></h2>
 <p>The following constants have been removed from CakePHP. If your
 application depends on them you must define them in
-<tt class="docutils literal"><span class="pre">app/config/bootstrap.php</span></tt></p>
+<code class="docutils literal"><span class="pre">app/config/bootstrap.php</span></code></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">CIPHER_SEED</span></tt> - It has been replaced with Configure class var
-<tt class="docutils literal"><span class="pre">Security.cipherSeed</span></tt> which should be changed in
-<tt class="docutils literal"><span class="pre">app/config/core.php</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">PEAR</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">INFLECTIONS</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">VALID_NOT_EMPTY</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">VALID_EMAIL</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">VALID_NUMBER</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">VALID_YEAR</span></tt></li>
+<li><code class="docutils literal"><span class="pre">CIPHER_SEED</span></code> - It has been replaced with Configure class var
+<code class="docutils literal"><span class="pre">Security.cipherSeed</span></code> which should be changed in
+<code class="docutils literal"><span class="pre">app/config/core.php</span></code></li>
+<li><code class="docutils literal"><span class="pre">PEAR</span></code></li>
+<li><code class="docutils literal"><span class="pre">INFLECTIONS</span></code></li>
+<li><code class="docutils literal"><span class="pre">VALID_NOT_EMPTY</span></code></li>
+<li><code class="docutils literal"><span class="pre">VALID_EMAIL</span></code></li>
+<li><code class="docutils literal"><span class="pre">VALID_NUMBER</span></code></li>
+<li><code class="docutils literal"><span class="pre">VALID_YEAR</span></code></li>
 </ul>
 </div>
 <div class="section" id="configuration-and-application-bootstrapping">
 <h2>Configuration and application bootstrapping<a class="headerlink" href="#configuration-and-application-bootstrapping" title="永久链接至标题">¶</a></h2>
 <p><strong>Bootstrapping Additional Paths.</strong></p>
 <p>In your app/config/bootstrap.php you may have variables like
-<tt class="docutils literal"><span class="pre">$pluginPaths</span></tt> or <tt class="docutils literal"><span class="pre">$controllerPaths</span></tt>.
+<code class="docutils literal"><span class="pre">$pluginPaths</span></code> or <code class="docutils literal"><span class="pre">$controllerPaths</span></code>.
 There is a new way to add those paths. As of 1.3 RC1 the
-<tt class="docutils literal"><span class="pre">$pluginPaths</span></tt> variables will no longer work. You must use
-<tt class="docutils literal"><span class="pre">App::build()</span></tt> to modify paths.</p>
+<code class="docutils literal"><span class="pre">$pluginPaths</span></code> variables will no longer work. You must use
+<code class="docutils literal"><span class="pre">App::build()</span></code> to modify paths.</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">App</span><span class="o">::</span><span class="na">build</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-    <span class="s1">&#39;plugins&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/plugins/&#39;</span><span class="p">,</span> <span class="s1">&#39;/next/full/path/to/plugins/&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;models&#39;</span> <span class="o">=&gt;</span>  <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/models/&#39;</span><span class="p">,</span> <span class="s1">&#39;/next/full/path/to/models/&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;views&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/views/&#39;</span><span class="p">,</span> <span class="s1">&#39;/next/full/path/to/views/&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;controllers&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/controllers/&#39;</span><span class="p">,</span> <span class="s1">&#39;/next/full/path/to/controllers/&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;datasources&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/datasources/&#39;</span><span class="p">,</span> <span class="s1">&#39;/next/full/path/to/datasources/&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;behaviors&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/behaviors/&#39;</span><span class="p">,</span> <span class="s1">&#39;/next/full/path/to/behaviors/&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;components&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/components/&#39;</span><span class="p">,</span> <span class="s1">&#39;/next/full/path/to/components/&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;helpers&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/helpers/&#39;</span><span class="p">,</span> <span class="s1">&#39;/next/full/path/to/helpers/&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;vendors&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/vendors/&#39;</span><span class="p">,</span> <span class="s1">&#39;/next/full/path/to/vendors/&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;shells&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/shells/&#39;</span><span class="p">,</span> <span class="s1">&#39;/next/full/path/to/shells/&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;locales&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/locale/&#39;</span><span class="p">,</span> <span class="s1">&#39;/next/full/path/to/locale/&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;libs&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/full/path/to/libs/&#39;</span><span class="p">,</span> <span class="s1">&#39;/next/full/path/to/libs/&#39;</span><span class="p">)</span>
+    <span class="s1">&#39;plugins&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;/full/path/to/plugins/&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;/next/full/path/to/plugins/&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;models&#39;</span> <span class="o">=&gt;</span>  <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;/full/path/to/models/&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;/next/full/path/to/models/&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;views&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;/full/path/to/views/&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;/next/full/path/to/views/&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;controllers&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;/full/path/to/controllers/&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;/next/full/path/to/controllers/&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;datasources&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;/full/path/to/datasources/&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;/next/full/path/to/datasources/&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;behaviors&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;/full/path/to/behaviors/&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;/next/full/path/to/behaviors/&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;components&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;/full/path/to/components/&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;/next/full/path/to/components/&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;helpers&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;/full/path/to/helpers/&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;/next/full/path/to/helpers/&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;vendors&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;/full/path/to/vendors/&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;/next/full/path/to/vendors/&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;shells&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;/full/path/to/shells/&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;/next/full/path/to/shells/&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;locales&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;/full/path/to/locale/&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;/next/full/path/to/locale/&#39;</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;libs&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;/full/path/to/libs/&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;/next/full/path/to/libs/&#39;</span>
+    <span class="p">)</span>
 <span class="p">));</span>
 </pre></div>
 </div>
 <p>Also changed is the order in which bootstrapping occurs. In the
-past <tt class="docutils literal"><span class="pre">app/config/core.php</span></tt> was loaded <strong>after</strong>
-<tt class="docutils literal"><span class="pre">app/config/bootstrap.php</span></tt>. This caused any <tt class="docutils literal"><span class="pre">App::import()</span></tt> in
+past <code class="docutils literal"><span class="pre">app/config/core.php</span></code> was loaded <strong>after</strong>
+<code class="docutils literal"><span class="pre">app/config/bootstrap.php</span></code>. This caused any <code class="docutils literal"><span class="pre">App::import()</span></code> in
 an application bootstrap to be un-cached and considerably slower
 than a cached include. In 1.3 core.php is loaded and the core cache
 configs are created <strong>before</strong> bootstrap.php is loaded.</p>
 <p><strong>Loading custom inflections</strong></p>
-<p><tt class="docutils literal"><span class="pre">inflections.php</span></tt> has been removed, it was an unnecessary file
+<p><code class="docutils literal"><span class="pre">inflections.php</span></code> has been removed, it was an unnecessary file
 hit, and the related features have been refactored into a method to
-increase their flexibility. You now use <tt class="docutils literal"><span class="pre">Inflector::rules()</span></tt> to
+increase their flexibility. You now use <code class="docutils literal"><span class="pre">Inflector::rules()</span></code> to
 load custom inflections:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Inflector</span><span class="o">::</span><span class="na">rules</span><span class="p">(</span><span class="s1">&#39;singular&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">&#39;rules&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;/^(bil)er$/i&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;\1&#39;</span><span class="p">,</span> <span class="s1">&#39;/^(inflec|contribu)tors$/i&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;\1ta&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;rules&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;/^(bil)er$/i&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;\1&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;/^(inflec|contribu)tors$/i&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;\1ta&#39;</span>
+    <span class="p">),</span>
     <span class="s1">&#39;uninflected&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;singulars&#39;</span><span class="p">),</span>
     <span class="s1">&#39;irregular&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;spins&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;spinor&#39;</span><span class="p">)</span>
 <span class="p">));</span>
@@ -288,31 +440,31 @@ to not use those methods.</p>
 <h2>Controller &amp; Components<a class="headerlink" href="#controller-components" title="永久链接至标题">¶</a></h2>
 <p><strong>Controller</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">Controller::set()</span></tt> no longer changes variables from
-<tt class="docutils literal"><span class="pre">$var_name</span></tt> to <tt class="docutils literal"><span class="pre">$varName</span></tt>. Variables always appear in the view
+<li><code class="docutils literal"><span class="pre">Controller::set()</span></code> no longer changes variables from
+<code class="docutils literal"><span class="pre">$var_name</span></code> to <code class="docutils literal"><span class="pre">$varName</span></code>. Variables always appear in the view
 exactly as you set them.</li>
-<li><tt class="docutils literal"><span class="pre">Controller::set('title',</span> <span class="pre">$var)</span></tt> no longer sets
-<tt class="docutils literal"><span class="pre">$title_for_layout</span></tt> when rendering the layout.
-<tt class="docutils literal"><span class="pre">$title_for_layout</span></tt> is still populated by default. But if you
+<li><code class="docutils literal"><span class="pre">Controller::set('title',</span> <span class="pre">$var)</span></code> no longer sets
+<code class="docutils literal"><span class="pre">$title_for_layout</span></code> when rendering the layout.
+<code class="docutils literal"><span class="pre">$title_for_layout</span></code> is still populated by default. But if you
 want to customize it, use
-<tt class="docutils literal"><span class="pre">$this-&gt;set('title_for_layout',</span> <span class="pre">$var)</span></tt>.</li>
-<li><tt class="docutils literal"><span class="pre">Controller::$pageTitle</span></tt> has been removed. Use
-<tt class="docutils literal"><span class="pre">$this-&gt;set('title_for_layout',</span> <span class="pre">$var);</span></tt> instead.</li>
-<li>Controller has two new methods <tt class="docutils literal"><span class="pre">startupProcess</span></tt> and
-<tt class="docutils literal"><span class="pre">shutdownProcess</span></tt>. These methods are responsible for handling the
+<code class="docutils literal"><span class="pre">$this-&gt;set('title_for_layout',</span> <span class="pre">$var)</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">Controller::$pageTitle</span></code> has been removed. Use
+<code class="docutils literal"><span class="pre">$this-&gt;set('title_for_layout',</span> <span class="pre">$var);</span></code> instead.</li>
+<li>Controller has two new methods <code class="docutils literal"><span class="pre">startupProcess</span></code> and
+<code class="docutils literal"><span class="pre">shutdownProcess</span></code>. These methods are responsible for handling the
 controller startup and shutdown processes.</li>
 </ul>
 <p><strong>Component</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">Component::triggerCallback</span></tt> has been added. It is a generic
+<li><code class="docutils literal"><span class="pre">Component::triggerCallback</span></code> has been added. It is a generic
 hook into the component callback process. It supplants
-<tt class="docutils literal"><span class="pre">Component::startup()</span></tt>, <tt class="docutils literal"><span class="pre">Component::shutdown()</span></tt> and
-<tt class="docutils literal"><span class="pre">Component::beforeRender()</span></tt> as the preferred way to trigger
+<code class="docutils literal"><span class="pre">Component::startup()</span></code>, <code class="docutils literal"><span class="pre">Component::shutdown()</span></code> and
+<code class="docutils literal"><span class="pre">Component::beforeRender()</span></code> as the preferred way to trigger
 callbacks.</li>
 </ul>
 <p><strong>CookieComponent</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">del</span></tt> is deprecated use <tt class="docutils literal"><span class="pre">delete</span></tt></li>
+<li><code class="docutils literal"><span class="pre">del</span></code> is deprecated use <code class="docutils literal"><span class="pre">delete</span></code></li>
 </ul>
 <p><strong>AclComponent + DbAcl</strong></p>
 <p>Node reference checks done with paths are now less greedy and will
@@ -324,18 +476,18 @@ past given the structure:</p>
                 <span class="nx">edit</span>
 </pre></div>
 </div>
-<p>The path <tt class="docutils literal"><span class="pre">ROOT/Users</span></tt> would match the last Users node instead of
+<p>The path <code class="docutils literal"><span class="pre">ROOT/Users</span></code> would match the last Users node instead of
 the first. In 1.3, if you were expecting to get the last node you
-would need to use the path <tt class="docutils literal"><span class="pre">ROOT/Users/Users</span></tt></p>
+would need to use the path <code class="docutils literal"><span class="pre">ROOT/Users/Users</span></code></p>
 <p><strong>RequestHandlerComponent</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">getReferrer</span></tt> is deprecated use <tt class="docutils literal"><span class="pre">getReferer</span></tt></li>
+<li><code class="docutils literal"><span class="pre">getReferrer</span></code> is deprecated use <code class="docutils literal"><span class="pre">getReferer</span></code></li>
 </ul>
 <p><strong>SessionComponent &amp; SessionHelper</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">del</span></tt> is deprecated use <tt class="docutils literal"><span class="pre">delete</span></tt></li>
+<li><code class="docutils literal"><span class="pre">del</span></code> is deprecated use <code class="docutils literal"><span class="pre">delete</span></code></li>
 </ul>
-<p><tt class="docutils literal"><span class="pre">SessionComponent::setFlash()</span></tt> second param used to be used for
+<p><code class="docutils literal"><span class="pre">SessionComponent::setFlash()</span></code> second param used to be used for
 setting the layout and accordingly rendered a layout file. This has
 been modified to use an element. If you specified custom session
 flash layouts in your applications you will need to make the
@@ -343,15 +495,15 @@ following changes.</p>
 <ol class="arabic simple">
 <li>Move the required layout files into app/views/elements</li>
 <li>Rename the $content_for_layout variable to $message</li>
-<li>Make sure you have <tt class="docutils literal"><span class="pre">echo</span> <span class="pre">$session-&gt;flash();</span></tt> in your layout</li>
+<li>Make sure you have <code class="docutils literal"><span class="pre">echo</span> <span class="pre">$session-&gt;flash();</span></code> in your layout</li>
 </ol>
-<p><tt class="docutils literal"><span class="pre">SessionComponent</span></tt> and <tt class="docutils literal"><span class="pre">SessionHelper</span></tt> are not automatically
+<p><code class="docutils literal"><span class="pre">SessionComponent</span></code> and <code class="docutils literal"><span class="pre">SessionHelper</span></code> are not automatically
 loaded.
-Both <tt class="docutils literal"><span class="pre">SessionComponent</span></tt> and <tt class="docutils literal"><span class="pre">SessionHelper</span></tt> are no longer
+Both <code class="docutils literal"><span class="pre">SessionComponent</span></code> and <code class="docutils literal"><span class="pre">SessionHelper</span></code> are no longer
 automatically included without you asking for them. SessionHelper
 and SessionComponent now act like every other component and must be
 declared like any other helper/component. You should update
-<tt class="docutils literal"><span class="pre">AppController::$components</span></tt> and <tt class="docutils literal"><span class="pre">AppController::$helpers</span></tt> to
+<code class="docutils literal"><span class="pre">AppController::$components</span></code> and <code class="docutils literal"><span class="pre">AppController::$helpers</span></code> to
 include these classes to retain existing behavior:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">var</span> <span class="nv">$components</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="s1">&#39;Auth&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">);</span>
 <span class="k">var</span> <span class="nv">$helpers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Session&#39;</span><span class="p">,</span> <span class="s1">&#39;Html&#39;</span><span class="p">,</span> <span class="s1">&#39;Form&#39;</span> <span class="o">...</span><span class="p">);</span>
@@ -369,35 +521,35 @@ behavior amongst all classes.</p>
 <h2>Library Classes<a class="headerlink" href="#library-classes" title="永久链接至标题">¶</a></h2>
 <p><strong>CakeSession</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">del</span></tt> is deprecated use <tt class="docutils literal"><span class="pre">delete</span></tt></li>
+<li><code class="docutils literal"><span class="pre">del</span></code> is deprecated use <code class="docutils literal"><span class="pre">delete</span></code></li>
 </ul>
 <p><strong>SessionComponent</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">SessionComponent::setFlash()</span></tt> now uses an <em>element</em> instead
+<li><code class="docutils literal"><span class="pre">SessionComponent::setFlash()</span></code> now uses an <em>element</em> instead
 of a <em>layout</em> as its second parameter. Be sure to move any flash
 layouts from app/views/layouts to app/views/elements and change
 instances of $content_for_layout to $message.</li>
 </ul>
 <p><strong>Folder</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">mkdir</span></tt> is deprecated use <tt class="docutils literal"><span class="pre">create</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">mv</span></tt> is deprecated use <tt class="docutils literal"><span class="pre">move</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">ls</span></tt> is deprecated use <tt class="docutils literal"><span class="pre">read</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">cp</span></tt> is deprecated use <tt class="docutils literal"><span class="pre">copy</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">rm</span></tt> is deprecated use <tt class="docutils literal"><span class="pre">delete</span></tt></li>
+<li><code class="docutils literal"><span class="pre">mkdir</span></code> is deprecated use <code class="docutils literal"><span class="pre">create</span></code></li>
+<li><code class="docutils literal"><span class="pre">mv</span></code> is deprecated use <code class="docutils literal"><span class="pre">move</span></code></li>
+<li><code class="docutils literal"><span class="pre">ls</span></code> is deprecated use <code class="docutils literal"><span class="pre">read</span></code></li>
+<li><code class="docutils literal"><span class="pre">cp</span></code> is deprecated use <code class="docutils literal"><span class="pre">copy</span></code></li>
+<li><code class="docutils literal"><span class="pre">rm</span></code> is deprecated use <code class="docutils literal"><span class="pre">delete</span></code></li>
 </ul>
 <p><strong>Set</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">isEqual</span></tt> is deprecated. Use == or ===.</li>
+<li><code class="docutils literal"><span class="pre">isEqual</span></code> is deprecated. Use == or ===.</li>
 </ul>
 <p><strong>String</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">getInstance</span></tt> is deprecated, call String methods statically.</li>
+<li><code class="docutils literal"><span class="pre">getInstance</span></code> is deprecated, call String methods statically.</li>
 </ul>
 <p><strong>Router</strong></p>
-<p><tt class="docutils literal"><span class="pre">Routing.admin</span></tt> is deprecated. It provided an inconsistent
+<p><code class="docutils literal"><span class="pre">Routing.admin</span></code> is deprecated. It provided an inconsistent
 behavior with other prefix style routes in that it was treated
-differently. Instead you should use <tt class="docutils literal"><span class="pre">Routing.prefixes</span></tt>. Prefix
+differently. Instead you should use <code class="docutils literal"><span class="pre">Routing.prefixes</span></code>. Prefix
 routes in 1.3 do not require additional routes to be declared
 manually. All prefix routes will be generated automatically. To
 update simply change your core.php:</p>
@@ -411,7 +563,7 @@ update simply change your core.php:</p>
 <p>See the New features guide for more information on using prefix
 routes. A small change has also been done to routing params. Routed
 params should now only consist of alphanumeric chars, - and _ or
-<tt class="docutils literal"><span class="pre">/[A-Z0-9-_+]+/</span></tt>:</p>
+<code class="docutils literal"><span class="pre">/[A-Z0-9-_+]+/</span></code>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span><span class="s1">&#39;/:$%@#param/:action/*&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="o">...</span><span class="p">));</span> <span class="c1">// BAD</span>
 <span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span><span class="s1">&#39;/:can/:anybody/:see/:m-3/*&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="o">...</span><span class="p">));</span> <span class="c1">//Acceptable</span>
 </pre></div>
@@ -422,7 +574,10 @@ this is two seldom used features were removed, as they were
 problematic and buggy even with the existing code base. First path
 segments using full regular expressions was removed. You can no
 longer create routes like:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span><span class="s1">&#39;/([0-9]+)-p-(.*)/&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;products&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;show&#39;</span><span class="p">));</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Router</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span>
+  <span class="s1">&#39;/([0-9]+)-p-(.*)/&#39;</span><span class="p">,</span>
+  <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;products&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;show&#39;</span><span class="p">)</span>
+<span class="p">);</span>
 </pre></div>
 </div>
 <p>These routes complicated route compilation and impossible to
@@ -461,31 +616,31 @@ $this-&gt;redirect() calls to reflect this change.</p>
 </pre></div>
 </div>
 <p><strong>Dispatcher</strong></p>
-<p><tt class="docutils literal"><span class="pre">Dispatcher</span></tt> is no longer capable of setting a controller&#8217;s
+<p><code class="docutils literal"><span class="pre">Dispatcher</span></code> is no longer capable of setting a controller&#8217;s
 layout/viewPath with request parameters. Control of these
 properties should be handled by the Controller, not the Dispatcher.
 This feature was also undocumented, and untested.</p>
 <p><strong>Debugger</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">Debugger::checkSessionKey()</span></tt> has been renamed to
-<tt class="docutils literal"><span class="pre">Debugger::checkSecurityKeys()</span></tt></li>
-<li>Calling <tt class="docutils literal"><span class="pre">Debugger::output(&quot;text&quot;)</span></tt> no longer works. Use
-<tt class="docutils literal"><span class="pre">Debugger::output(&quot;txt&quot;)</span></tt>.</li>
+<li><code class="docutils literal"><span class="pre">Debugger::checkSessionKey()</span></code> has been renamed to
+<code class="docutils literal"><span class="pre">Debugger::checkSecurityKeys()</span></code></li>
+<li>Calling <code class="docutils literal"><span class="pre">Debugger::output(&quot;text&quot;)</span></code> no longer works. Use
+<code class="docutils literal"><span class="pre">Debugger::output(&quot;txt&quot;)</span></code>.</li>
 </ul>
 <p><strong>Object</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">Object::$_log</span></tt> has been removed. <tt class="docutils literal"><span class="pre">CakeLog::write</span></tt> is now
-called statically. See <a class="reference internal" href="../core-libraries/logging.html"><em>日志记录</em></a>
+<li><code class="docutils literal"><span class="pre">Object::$_log</span></code> has been removed. <code class="docutils literal"><span class="pre">CakeLog::write</span></code> is now
+called statically. See <a class="reference internal" href="../core-libraries/logging.html"><span class="doc">日志记录</span></a>
 for more information on changes made to logging.</li>
 </ul>
 <p><strong>Sanitize</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">Sanitize::html()</span></tt> now actually always returns escaped
-strings. In the past using the <tt class="docutils literal"><span class="pre">$remove</span></tt> parameter would skip
+<li><code class="docutils literal"><span class="pre">Sanitize::html()</span></code> now actually always returns escaped
+strings. In the past using the <code class="docutils literal"><span class="pre">$remove</span></code> parameter would skip
 entity encoding, returning possibly dangerous content.</li>
-<li><tt class="docutils literal"><span class="pre">Sanitize::clean()</span></tt> now has a <tt class="docutils literal"><span class="pre">remove_html</span></tt> option. This
-will trigger the <tt class="docutils literal"><span class="pre">strip_tags</span></tt> feature of <tt class="docutils literal"><span class="pre">Sanitize::html()</span></tt>,
-and must be used in conjunction with the <tt class="docutils literal"><span class="pre">encode</span></tt> parameter.</li>
+<li><code class="docutils literal"><span class="pre">Sanitize::clean()</span></code> now has a <code class="docutils literal"><span class="pre">remove_html</span></code> option. This
+will trigger the <code class="docutils literal"><span class="pre">strip_tags</span></code> feature of <code class="docutils literal"><span class="pre">Sanitize::html()</span></code>,
+and must be used in conjunction with the <code class="docutils literal"><span class="pre">encode</span></code> parameter.</li>
 </ul>
 <p><strong>Configure and App</strong></p>
 <ul class="simple">
@@ -498,14 +653,14 @@ App::build(array(&#8216;models&#8217; =&gt; array...))</li>
 <li>Configure::read(&#8216;modelPaths&#8217;) replaced by App::path(&#8216;models&#8217;)</li>
 <li>There is no longer a debug = 3. The controller dumps generated
 by this setting often caused memory consumption issues making it an
-impractical and unusable setting. The <tt class="docutils literal"><span class="pre">$cakeDebug</span></tt> variable has
-also been removed from <tt class="docutils literal"><span class="pre">View::renderLayout</span></tt> You should remove
+impractical and unusable setting. The <code class="docutils literal"><span class="pre">$cakeDebug</span></code> variable has
+also been removed from <code class="docutils literal"><span class="pre">View::renderLayout</span></code> You should remove
 this variable reference to avoid errors.</li>
-<li><tt class="docutils literal"><span class="pre">Configure::load()</span></tt> can now load configuration files from
-plugins. Use <tt class="docutils literal"><span class="pre">Configure::load('plugin.file');</span></tt> to load
+<li><code class="docutils literal"><span class="pre">Configure::load()</span></code> can now load configuration files from
+plugins. Use <code class="docutils literal"><span class="pre">Configure::load('plugin.file');</span></code> to load
 configuration files from plugins. Any configuration files in your
-application that use <tt class="docutils literal"><span class="pre">.</span></tt> in the name should be updated to use
-<tt class="docutils literal"><span class="pre">_</span></tt></li>
+application that use <code class="docutils literal"><span class="pre">.</span></code> in the name should be updated to use
+<code class="docutils literal"><span class="pre">_</span></code></li>
 </ul>
 <p><strong>Cache</strong></p>
 <p>In addition to being able to load CacheEngines from app/libs or
@@ -516,44 +671,44 @@ improvement with only a few minor API changes which are detailed
 below.</p>
 <p>The changes in Cache removed the singletons used for each Engine
 type, and instead an engine instance is made for each unique key
-created with <tt class="docutils literal"><span class="pre">Cache::config()</span></tt>. Since engines are not singletons
-anymore, <tt class="docutils literal"><span class="pre">Cache::engine()</span></tt> was not needed and was removed. In
-addition <tt class="docutils literal"><span class="pre">Cache::isInitialized()</span></tt> now checks cache
+created with <code class="docutils literal"><span class="pre">Cache::config()</span></code>. Since engines are not singletons
+anymore, <code class="docutils literal"><span class="pre">Cache::engine()</span></code> was not needed and was removed. In
+addition <code class="docutils literal"><span class="pre">Cache::isInitialized()</span></code> now checks cache
 <em>configuration names</em>, not cache <em>engine names</em>. You can still use
-<tt class="docutils literal"><span class="pre">Cache::set()</span></tt> or <tt class="docutils literal"><span class="pre">Cache::engine()</span></tt> to modify cache
+<code class="docutils literal"><span class="pre">Cache::set()</span></code> or <code class="docutils literal"><span class="pre">Cache::engine()</span></code> to modify cache
 configurations. Also checkout the
-<a class="reference internal" href="new-features-in-cakephp-1-3.html"><em>New features in CakePHP 1.3</em></a> for
-more information on the additional methods added to <tt class="docutils literal"><span class="pre">Cache</span></tt>.</p>
+<a class="reference internal" href="new-features-in-cakephp-1-3.html"><span class="doc">New features in CakePHP 1.3</span></a> for
+more information on the additional methods added to <code class="docutils literal"><span class="pre">Cache</span></code>.</p>
 <p>It should be noted that using an app/libs or plugin cache engine
 for the default cache config can cause performance issues as the
 import that loads these classes will always be uncached. It is
 recommended that you either use one of the core cache engines for
-your <tt class="docutils literal"><span class="pre">default</span></tt> configuration, or manually include the cache
+your <code class="docutils literal"><span class="pre">default</span></code> configuration, or manually include the cache
 engine class before configuring it. Furthermore any non-core cache
 engine configurations should be done in
-<tt class="docutils literal"><span class="pre">app/config/bootstrap.php</span></tt> for the same reasons detailed above.</p>
+<code class="docutils literal"><span class="pre">app/config/bootstrap.php</span></code> for the same reasons detailed above.</p>
 </div>
 <div class="section" id="model-databases-and-datasources">
 <h2>Model Databases and Datasources<a class="headerlink" href="#model-databases-and-datasources" title="永久链接至标题">¶</a></h2>
 <p><strong>Model</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">Model::del()</span></tt> and <tt class="docutils literal"><span class="pre">Model::remove()</span></tt> have been removed in
-favor of <tt class="docutils literal"><span class="pre">Model::delete()</span></tt>, which is now the canonical delete
+<li><code class="docutils literal"><span class="pre">Model::del()</span></code> and <code class="docutils literal"><span class="pre">Model::remove()</span></code> have been removed in
+favor of <code class="docutils literal"><span class="pre">Model::delete()</span></code>, which is now the canonical delete
 method.</li>
-<li><tt class="docutils literal"><span class="pre">Model::findAll</span></tt>, findCount, findNeighbours, removed.</li>
+<li><code class="docutils literal"><span class="pre">Model::findAll</span></code>, findCount, findNeighbours, removed.</li>
 <li>Dynamic calling of setTablePrefix() has been removed.
-tableprefix should be with the <tt class="docutils literal"><span class="pre">$tablePrefix</span></tt> property, and any
+tableprefix should be with the <code class="docutils literal"><span class="pre">$tablePrefix</span></code> property, and any
 other custom construction behavior should be done in an overridden
-<tt class="docutils literal"><span class="pre">Model::__construct()</span></tt>.</li>
-<li><tt class="docutils literal"><span class="pre">DboSource::query()</span></tt> now throws warnings for un-handled model
+<code class="docutils literal"><span class="pre">Model::__construct()</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">DboSource::query()</span></code> now throws warnings for un-handled model
 methods, instead of trying to run them as queries. This means,
 people starting transactions improperly via the
-<tt class="docutils literal"><span class="pre">$this-&gt;Model-&gt;begin()</span></tt> syntax will need to update their code so
+<code class="docutils literal"><span class="pre">$this-&gt;Model-&gt;begin()</span></code> syntax will need to update their code so
 that it accesses the model&#8217;s DataSource object directly.</li>
 <li>Missing validation methods will now trigger errors in
 development mode.</li>
 <li>Missing behaviors will now trigger a cakeError.</li>
-<li><tt class="docutils literal"><span class="pre">Model::find(first)</span></tt> will no longer use the id property for
+<li><code class="docutils literal"><span class="pre">Model::find(first)</span></code> will no longer use the id property for
 default conditions if no conditions are supplied and id is not
 empty. Instead no conditions will be used</li>
 <li>For Model::saveAll() the default value for option &#8216;validate&#8217; is
@@ -563,153 +718,153 @@ now &#8216;first&#8217; instead of true</li>
 <ul class="simple">
 <li>DataSource::exists() has been refactored to be more consistent
 with non-database backed datasources. Previously, if you set
-<tt class="docutils literal"><span class="pre">var</span> <span class="pre">$useTable</span> <span class="pre">=</span> <span class="pre">false;</span> <span class="pre">var</span> <span class="pre">$useDbConfig</span> <span class="pre">=</span> <span class="pre">'custom';</span></tt>, it was
-impossible for <tt class="docutils literal"><span class="pre">Model::exists()</span></tt> to return anything but false.
-This prevented custom datasources from using <tt class="docutils literal"><span class="pre">create()</span></tt> or
-<tt class="docutils literal"><span class="pre">update()</span></tt> correctly without some ugly hacks. If you have custom
-datasources that implement <tt class="docutils literal"><span class="pre">create()</span></tt>, <tt class="docutils literal"><span class="pre">update()</span></tt>, and
-<tt class="docutils literal"><span class="pre">read()</span></tt> (since <tt class="docutils literal"><span class="pre">Model::exists()</span></tt> will make a call to
-<tt class="docutils literal"><span class="pre">Model::find('count')</span></tt>, which is passed to
-<tt class="docutils literal"><span class="pre">DataSource::read()</span></tt>), make sure to re-run your unit tests on
+<code class="docutils literal"><span class="pre">var</span> <span class="pre">$useTable</span> <span class="pre">=</span> <span class="pre">false;</span> <span class="pre">var</span> <span class="pre">$useDbConfig</span> <span class="pre">=</span> <span class="pre">'custom';</span></code>, it was
+impossible for <code class="docutils literal"><span class="pre">Model::exists()</span></code> to return anything but false.
+This prevented custom datasources from using <code class="docutils literal"><span class="pre">create()</span></code> or
+<code class="docutils literal"><span class="pre">update()</span></code> correctly without some ugly hacks. If you have custom
+datasources that implement <code class="docutils literal"><span class="pre">create()</span></code>, <code class="docutils literal"><span class="pre">update()</span></code>, and
+<code class="docutils literal"><span class="pre">read()</span></code> (since <code class="docutils literal"><span class="pre">Model::exists()</span></code> will make a call to
+<code class="docutils literal"><span class="pre">Model::find('count')</span></code>, which is passed to
+<code class="docutils literal"><span class="pre">DataSource::read()</span></code>), make sure to re-run your unit tests on
 1.3.</li>
 </ul>
 <p><strong>Databases</strong></p>
 <p>Most database configurations no longer support the &#8216;connect&#8217; key
 (which has been deprecated since pre-1.2). Instead, set
-<tt class="docutils literal"><span class="pre">'persistent'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></tt> or false to determine whether or not a
+<code class="docutils literal"><span class="pre">'persistent'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></code> or false to determine whether or not a
 persistent database connection should be used</p>
 <p><strong>SQL log dumping</strong></p>
 <p>A commonly asked question is how can one disable or remove the SQL
 log dump at the bottom of the page?. In previous versions the HTML
 SQL log generation was buried inside DboSource. For 1.3 there is a
-new core element called <tt class="docutils literal"><span class="pre">sql_dump</span></tt>. <tt class="docutils literal"><span class="pre">DboSource</span></tt> no longer
+new core element called <code class="docutils literal"><span class="pre">sql_dump</span></code>. <code class="docutils literal"><span class="pre">DboSource</span></code> no longer
 automatically outputs SQL logs. If you want to output SQL logs in
 1.3, do the following:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">element</span><span class="p">(</span><span class="s1">&#39;sql_dump&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>You can place this element anywhere in your layout or view. The
-<tt class="docutils literal"><span class="pre">sql_dump</span></tt> element will only generate output when
-<tt class="docutils literal"><span class="pre">Configure::read('debug')</span></tt> is equal to 2. You can of course
+<code class="docutils literal"><span class="pre">sql_dump</span></code> element will only generate output when
+<code class="docutils literal"><span class="pre">Configure::read('debug')</span></code> is equal to 2. You can of course
 customize or override this element in your app by creating
-<tt class="docutils literal"><span class="pre">app/views/elements/sql_dump.ctp</span></tt>.</p>
+<code class="docutils literal"><span class="pre">app/views/elements/sql_dump.ctp</span></code>.</p>
 </div>
 <div class="section" id="view-and-helpers">
 <h2>View and Helpers<a class="headerlink" href="#view-and-helpers" title="永久链接至标题">¶</a></h2>
 <p><strong>View</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">View::renderElement</span></tt> removed. Use <tt class="docutils literal"><span class="pre">View::element()</span></tt>
+<li><code class="docutils literal"><span class="pre">View::renderElement</span></code> removed. Use <code class="docutils literal"><span class="pre">View::element()</span></code>
 instead.</li>
-<li>Automagic support for <tt class="docutils literal"><span class="pre">.thtml</span></tt> view file extension has been
-removed either declare <tt class="docutils literal"><span class="pre">$this-&gt;ext</span> <span class="pre">=</span> <span class="pre">'thtml';</span></tt> in your
-controllers, or rename your views to use <tt class="docutils literal"><span class="pre">.ctp</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">View::set('title',</span> <span class="pre">$var)</span></tt> no longer sets
-<tt class="docutils literal"><span class="pre">$title_for_layout</span></tt> when rendering the layout.
-<tt class="docutils literal"><span class="pre">$title_for_layout</span></tt> is still populated by default. But if you
-want to customize it, use <tt class="docutils literal"><span class="pre">$this-&gt;set('title_for_layout',</span> <span class="pre">$var)</span></tt>.</li>
-<li><tt class="docutils literal"><span class="pre">View::$pageTitle</span></tt> has been removed. Use
-<tt class="docutils literal"><span class="pre">$this-&gt;set('title_for_layout',</span> <span class="pre">$var);</span></tt> instead.</li>
-<li>The <tt class="docutils literal"><span class="pre">$cakeDebug</span></tt> layout variable associated with debug = 3 has
+<li>Automagic support for <code class="docutils literal"><span class="pre">.thtml</span></code> view file extension has been
+removed either declare <code class="docutils literal"><span class="pre">$this-&gt;ext</span> <span class="pre">=</span> <span class="pre">'thtml';</span></code> in your
+controllers, or rename your views to use <code class="docutils literal"><span class="pre">.ctp</span></code></li>
+<li><code class="docutils literal"><span class="pre">View::set('title',</span> <span class="pre">$var)</span></code> no longer sets
+<code class="docutils literal"><span class="pre">$title_for_layout</span></code> when rendering the layout.
+<code class="docutils literal"><span class="pre">$title_for_layout</span></code> is still populated by default. But if you
+want to customize it, use <code class="docutils literal"><span class="pre">$this-&gt;set('title_for_layout',</span> <span class="pre">$var)</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">View::$pageTitle</span></code> has been removed. Use
+<code class="docutils literal"><span class="pre">$this-&gt;set('title_for_layout',</span> <span class="pre">$var);</span></code> instead.</li>
+<li>The <code class="docutils literal"><span class="pre">$cakeDebug</span></code> layout variable associated with debug = 3 has
 been removed. Remove it from your layouts as it will cause errors.
 Also see the notes related to SQL log dumping and Configure for
 more information.</li>
 </ul>
-<p>All core helpers no longer use <tt class="docutils literal"><span class="pre">Helper::output()</span></tt>. The method was
+<p>All core helpers no longer use <code class="docutils literal"><span class="pre">Helper::output()</span></code>. The method was
 inconsistently used and caused output issues with many of
 FormHelper&#8217;s methods. If you previously overrode
-<tt class="docutils literal"><span class="pre">AppHelper::output()</span></tt> to force helpers to auto-echo you will need
+<code class="docutils literal"><span class="pre">AppHelper::output()</span></code> to force helpers to auto-echo you will need
 to update your view files to manually echo helper output.</p>
 <p><strong>TextHelper</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">TextHelper::trim()</span></tt> is deprecated, used <tt class="docutils literal"><span class="pre">truncate()</span></tt>
+<li><code class="docutils literal"><span class="pre">TextHelper::trim()</span></code> is deprecated, used <code class="docutils literal"><span class="pre">truncate()</span></code>
 instead.</li>
-<li><tt class="docutils literal"><span class="pre">TextHelper::highlight()</span></tt> no longer has:</li>
-<li>an <tt class="docutils literal"><span class="pre">$highlighter</span></tt> parameter. Use <tt class="docutils literal"><span class="pre">$options['format']</span></tt>
+<li><code class="docutils literal"><span class="pre">TextHelper::highlight()</span></code> no longer has:</li>
+<li>an <code class="docutils literal"><span class="pre">$highlighter</span></code> parameter. Use <code class="docutils literal"><span class="pre">$options['format']</span></code>
 instead.</li>
-<li>an <tt class="docutils literal"><span class="pre">$considerHtml``parameter.</span> <span class="pre">Use</span> <span class="pre">``$options['html']</span></tt> instead.</li>
-<li><tt class="docutils literal"><span class="pre">TextHelper::truncate()</span></tt> no longer has:</li>
-<li>an <tt class="docutils literal"><span class="pre">$ending</span></tt> parameter. Use <tt class="docutils literal"><span class="pre">$options['ending']</span></tt> instead.</li>
-<li>an <tt class="docutils literal"><span class="pre">$exact</span></tt> parameter. Use <tt class="docutils literal"><span class="pre">$options['exact']</span></tt> instead.</li>
-<li>an <tt class="docutils literal"><span class="pre">$considerHtml``parameter.</span> <span class="pre">Use</span> <span class="pre">``$options['html']</span></tt>
+<li>an <code class="docutils literal"><span class="pre">$considerHtml``parameter.</span> <span class="pre">Use</span> <span class="pre">``$options['html']</span></code> instead.</li>
+<li><code class="docutils literal"><span class="pre">TextHelper::truncate()</span></code> no longer has:</li>
+<li>an <code class="docutils literal"><span class="pre">$ending</span></code> parameter. Use <code class="docutils literal"><span class="pre">$options['ending']</span></code> instead.</li>
+<li>an <code class="docutils literal"><span class="pre">$exact</span></code> parameter. Use <code class="docutils literal"><span class="pre">$options['exact']</span></code> instead.</li>
+<li>an <code class="docutils literal"><span class="pre">$considerHtml``parameter.</span> <span class="pre">Use</span> <span class="pre">``$options['html']</span></code>
 instead.</li>
 </ul>
 <p><strong>PaginatorHelper</strong></p>
 <p>PaginatorHelper has had a number of enhancements applied to make
 styling easier.
-<tt class="docutils literal"><span class="pre">prev()</span></tt>, <tt class="docutils literal"><span class="pre">next()</span></tt>, <tt class="docutils literal"><span class="pre">first()</span></tt> and <tt class="docutils literal"><span class="pre">last()</span></tt></p>
-<p>The disabled state of these methods now defaults to <tt class="docutils literal"><span class="pre">&lt;span&gt;</span></tt> tags
-instead of <tt class="docutils literal"><span class="pre">&lt;div&gt;</span></tt> tags.</p>
-<p>passedArgs are now auto merged with url options in paginator.</p>
-<p><tt class="docutils literal"><span class="pre">sort()</span></tt>, <tt class="docutils literal"><span class="pre">prev()</span></tt>, <tt class="docutils literal"><span class="pre">next()</span></tt> now add additional class names
-to the generated html. <tt class="docutils literal"><span class="pre">prev()</span></tt> adds a class of prev. <tt class="docutils literal"><span class="pre">next()</span></tt>
-adds a class of next. <tt class="docutils literal"><span class="pre">sort()</span></tt> will add the direction currently
+<code class="docutils literal"><span class="pre">prev()</span></code>, <code class="docutils literal"><span class="pre">next()</span></code>, <code class="docutils literal"><span class="pre">first()</span></code> and <code class="docutils literal"><span class="pre">last()</span></code></p>
+<p>The disabled state of these methods now defaults to <code class="docutils literal"><span class="pre">&lt;span&gt;</span></code> tags
+instead of <code class="docutils literal"><span class="pre">&lt;div&gt;</span></code> tags.</p>
+<p>passedArgs are now auto merged with URL options in paginator.</p>
+<p><code class="docutils literal"><span class="pre">sort()</span></code>, <code class="docutils literal"><span class="pre">prev()</span></code>, <code class="docutils literal"><span class="pre">next()</span></code> now add additional class names
+to the generated html. <code class="docutils literal"><span class="pre">prev()</span></code> adds a class of prev. <code class="docutils literal"><span class="pre">next()</span></code>
+adds a class of next. <code class="docutils literal"><span class="pre">sort()</span></code> will add the direction currently
 being sorted, either asc or desc.</p>
 <p><strong>FormHelper</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">FormHelper::dateTime()</span></tt> no longer has a <tt class="docutils literal"><span class="pre">$showEmpty</span></tt>
-parameter. Use <tt class="docutils literal"><span class="pre">$attributes['empty']</span></tt> instead.</li>
-<li><tt class="docutils literal"><span class="pre">FormHelper::year()</span></tt> no longer has a <tt class="docutils literal"><span class="pre">$showEmpty</span></tt> parameter.
-Use <tt class="docutils literal"><span class="pre">$attributes['empty']</span></tt> instead.</li>
-<li><tt class="docutils literal"><span class="pre">FormHelper::month()</span></tt> no longer has a <tt class="docutils literal"><span class="pre">$showEmpty</span></tt>
-parameter. Use <tt class="docutils literal"><span class="pre">$attributes['empty']</span></tt> instead.</li>
-<li><tt class="docutils literal"><span class="pre">FormHelper::day()</span></tt> no longer has a <tt class="docutils literal"><span class="pre">$showEmpty</span></tt> parameter.
-Use <tt class="docutils literal"><span class="pre">$attributes['empty']</span></tt> instead.</li>
-<li><tt class="docutils literal"><span class="pre">FormHelper::minute()</span></tt> no longer has a <tt class="docutils literal"><span class="pre">$showEmpty</span></tt>
-parameter. Use <tt class="docutils literal"><span class="pre">$attributes['empty']</span></tt> instead.</li>
-<li><tt class="docutils literal"><span class="pre">FormHelper::meridian()</span></tt> no longer has a <tt class="docutils literal"><span class="pre">$showEmpty</span></tt>
-parameter. Use <tt class="docutils literal"><span class="pre">$attributes['empty']</span></tt> instead.</li>
-<li><tt class="docutils literal"><span class="pre">FormHelper::select()</span></tt> no longer has a <tt class="docutils literal"><span class="pre">$showEmpty</span></tt>
-parameter. Use <tt class="docutils literal"><span class="pre">$attributes['empty']</span></tt> instead.</li>
-<li>Default urls generated by form helper no longer contain &#8216;id&#8217;
-parameter. This makes default urls more consistent with documented
+<li><code class="docutils literal"><span class="pre">FormHelper::dateTime()</span></code> no longer has a <code class="docutils literal"><span class="pre">$showEmpty</span></code>
+parameter. Use <code class="docutils literal"><span class="pre">$attributes['empty']</span></code> instead.</li>
+<li><code class="docutils literal"><span class="pre">FormHelper::year()</span></code> no longer has a <code class="docutils literal"><span class="pre">$showEmpty</span></code> parameter.
+Use <code class="docutils literal"><span class="pre">$attributes['empty']</span></code> instead.</li>
+<li><code class="docutils literal"><span class="pre">FormHelper::month()</span></code> no longer has a <code class="docutils literal"><span class="pre">$showEmpty</span></code>
+parameter. Use <code class="docutils literal"><span class="pre">$attributes['empty']</span></code> instead.</li>
+<li><code class="docutils literal"><span class="pre">FormHelper::day()</span></code> no longer has a <code class="docutils literal"><span class="pre">$showEmpty</span></code> parameter.
+Use <code class="docutils literal"><span class="pre">$attributes['empty']</span></code> instead.</li>
+<li><code class="docutils literal"><span class="pre">FormHelper::minute()</span></code> no longer has a <code class="docutils literal"><span class="pre">$showEmpty</span></code>
+parameter. Use <code class="docutils literal"><span class="pre">$attributes['empty']</span></code> instead.</li>
+<li><code class="docutils literal"><span class="pre">FormHelper::meridian()</span></code> no longer has a <code class="docutils literal"><span class="pre">$showEmpty</span></code>
+parameter. Use <code class="docutils literal"><span class="pre">$attributes['empty']</span></code> instead.</li>
+<li><code class="docutils literal"><span class="pre">FormHelper::select()</span></code> no longer has a <code class="docutils literal"><span class="pre">$showEmpty</span></code>
+parameter. Use <code class="docutils literal"><span class="pre">$attributes['empty']</span></code> instead.</li>
+<li>Default URLs generated by form helper no longer contain &#8216;id&#8217;
+parameter. This makes default URLs more consistent with documented
 userland routes. Also enables reverse routing to work in a more
-intuitive fashion with default FormHelper urls.</li>
-<li><tt class="docutils literal"><span class="pre">FormHelper::submit()</span></tt> Can now create other types of inputs
+intuitive fashion with default FormHelper URLs.</li>
+<li><code class="docutils literal"><span class="pre">FormHelper::submit()</span></code> Can now create other types of inputs
 other than type=submit. Use the type option to control the type of
 input generated.</li>
-<li><tt class="docutils literal"><span class="pre">FormHelper::button()</span></tt> Now creates <tt class="docutils literal"><span class="pre">&lt;button&gt;</span></tt> elements
+<li><code class="docutils literal"><span class="pre">FormHelper::button()</span></code> Now creates <code class="docutils literal"><span class="pre">&lt;button&gt;</span></code> elements
 instead of reset or clear inputs. If you want to generate those
-types of inputs use <tt class="docutils literal"><span class="pre">FormHelper::submit()</span></tt> with a
-<tt class="docutils literal"><span class="pre">'type'</span> <span class="pre">=&gt;</span> <span class="pre">'reset'</span></tt> option for example.</li>
-<li><tt class="docutils literal"><span class="pre">FormHelper::secure()</span></tt> and <tt class="docutils literal"><span class="pre">FormHelper::create()</span></tt> no longer
+types of inputs use <code class="docutils literal"><span class="pre">FormHelper::submit()</span></code> with a
+<code class="docutils literal"><span class="pre">'type'</span> <span class="pre">=&gt;</span> <span class="pre">'reset'</span></code> option for example.</li>
+<li><code class="docutils literal"><span class="pre">FormHelper::secure()</span></code> and <code class="docutils literal"><span class="pre">FormHelper::create()</span></code> no longer
 create hidden fieldset elements. Instead they create hidden div
 elements. This improves validation with HTML4.</li>
 </ul>
-<p>Also be sure to check the <a class="reference internal" href="../core-libraries/helpers/form.html#form-improvements-1-3"><em>2.0 updates</em></a> for additional changes and
+<p>Also be sure to check the <a class="reference internal" href="../core-libraries/helpers/form.html#form-improvements-1-3"><span class="std std-ref">2.0 updates</span></a> for additional changes and
 new features in the FormHelper.</p>
 <p><strong>HtmlHelper</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">HtmlHelper::meta()</span></tt> no longer has an <tt class="docutils literal"><span class="pre">$inline</span></tt> parameter.
-It has been merged with the <tt class="docutils literal"><span class="pre">$options</span></tt> array.</li>
-<li><tt class="docutils literal"><span class="pre">HtmlHelper::link()</span></tt> no longer has an <tt class="docutils literal"><span class="pre">$escapeTitle</span></tt>
-parameter. Use <tt class="docutils literal"><span class="pre">$options['escape']</span></tt> instead. The <tt class="docutils literal"><span class="pre">escape</span></tt> option
+<li><code class="docutils literal"><span class="pre">HtmlHelper::meta()</span></code> no longer has an <code class="docutils literal"><span class="pre">$inline</span></code> parameter.
+It has been merged with the <code class="docutils literal"><span class="pre">$options</span></code> array.</li>
+<li><code class="docutils literal"><span class="pre">HtmlHelper::link()</span></code> no longer has an <code class="docutils literal"><span class="pre">$escapeTitle</span></code>
+parameter. Use <code class="docutils literal"><span class="pre">$options['escape']</span></code> instead. The <code class="docutils literal"><span class="pre">escape</span></code> option
 now controls the escaping of the title and attributes at the same time.</li>
-<li><tt class="docutils literal"><span class="pre">HtmlHelper::para()</span></tt> no longer has an <tt class="docutils literal"><span class="pre">$escape</span></tt> parameter.
-Use <tt class="docutils literal"><span class="pre">$options['escape']</span></tt> instead.</li>
-<li><tt class="docutils literal"><span class="pre">HtmlHelper::div()</span></tt> no longer has an <tt class="docutils literal"><span class="pre">$escape</span></tt> parameter.
-Use <tt class="docutils literal"><span class="pre">$options['escape']</span></tt> instead.</li>
-<li><tt class="docutils literal"><span class="pre">HtmlHelper::tag()</span></tt> no longer has an <tt class="docutils literal"><span class="pre">$escape</span></tt> parameter.
-Use <tt class="docutils literal"><span class="pre">$options['escape']</span></tt> instead.</li>
-<li><tt class="docutils literal"><span class="pre">HtmlHelper::css()</span></tt> no longer has an <tt class="docutils literal"><span class="pre">$inline</span></tt> parameter.
-Use <tt class="docutils literal"><span class="pre">$options['inline']</span></tt> instead.</li>
+<li><code class="docutils literal"><span class="pre">HtmlHelper::para()</span></code> no longer has an <code class="docutils literal"><span class="pre">$escape</span></code> parameter.
+Use <code class="docutils literal"><span class="pre">$options['escape']</span></code> instead.</li>
+<li><code class="docutils literal"><span class="pre">HtmlHelper::div()</span></code> no longer has an <code class="docutils literal"><span class="pre">$escape</span></code> parameter.
+Use <code class="docutils literal"><span class="pre">$options['escape']</span></code> instead.</li>
+<li><code class="docutils literal"><span class="pre">HtmlHelper::tag()</span></code> no longer has an <code class="docutils literal"><span class="pre">$escape</span></code> parameter.
+Use <code class="docutils literal"><span class="pre">$options['escape']</span></code> instead.</li>
+<li><code class="docutils literal"><span class="pre">HtmlHelper::css()</span></code> no longer has an <code class="docutils literal"><span class="pre">$inline</span></code> parameter.
+Use <code class="docutils literal"><span class="pre">$options['inline']</span></code> instead.</li>
 </ul>
 <p><strong>SessionHelper</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">flash()</span></tt> no longer auto echos. You must add an
-<tt class="docutils literal"><span class="pre">echo</span> <span class="pre">$session-&gt;flash();</span></tt> to your session-&gt;flash() calls. <tt class="docutils literal"><span class="pre">flash()</span></tt>
+<li><code class="docutils literal"><span class="pre">flash()</span></code> no longer auto echos. You must add an
+<code class="docutils literal"><span class="pre">echo</span> <span class="pre">$session-&gt;flash();</span></code> to your session-&gt;flash() calls. <code class="docutils literal"><span class="pre">flash()</span></code>
 was the only helper method that auto outputted, and was changed to
 create consistency in helper methods.</li>
 </ul>
 <p><strong>CacheHelper</strong></p>
-<p>CacheHelper&#8217;s interactions with <tt class="docutils literal"><span class="pre">Controller::$cacheAction</span></tt> has
+<p>CacheHelper&#8217;s interactions with <code class="docutils literal"><span class="pre">Controller::$cacheAction</span></code> has
 changed slightly. In the past if you used an array for
-<tt class="docutils literal"><span class="pre">$cacheAction</span></tt> you were required to use the routed url as the
+<code class="docutils literal"><span class="pre">$cacheAction</span></code> you were required to use the routed URL as the
 keys, this caused caching to break whenever routes were changed.
 You also could set different cache durations for different passed
 argument values, but not different named parameters or query string
 parameters. Both of these limitations/inconsistencies have been
 removed. You now use the controller&#8217;s action names as the keys for
-<tt class="docutils literal"><span class="pre">$cacheAction</span></tt>. This makes configuring <tt class="docutils literal"><span class="pre">$cacheAction</span></tt> easier as
+<code class="docutils literal"><span class="pre">$cacheAction</span></code>. This makes configuring <code class="docutils literal"><span class="pre">$cacheAction</span></code> easier as
 it&#8217;s no longer coupled to the routing, and allows cacheAction to
 work with all custom routing. If you need to have custom cache
 durations for specific argument sets you will need to detect and
@@ -736,33 +891,33 @@ format string must be compatible with date().</li>
 the JsHelper + HtmlHelper should be used in their place.</p>
 <p>You should replace</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">$javascript-&gt;link()</span></tt> with <tt class="docutils literal"><span class="pre">$html-&gt;script()</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">$javascript-&gt;codeBlock()</span></tt> with <tt class="docutils literal"><span class="pre">$html-&gt;scriptBlock()</span></tt> or
-<tt class="docutils literal"><span class="pre">$html-&gt;scriptStart()</span></tt> and <tt class="docutils literal"><span class="pre">$html-&gt;scriptEnd()</span></tt> depending on
+<li><code class="docutils literal"><span class="pre">$javascript-&gt;link()</span></code> with <code class="docutils literal"><span class="pre">$html-&gt;script()</span></code></li>
+<li><code class="docutils literal"><span class="pre">$javascript-&gt;codeBlock()</span></code> with <code class="docutils literal"><span class="pre">$html-&gt;scriptBlock()</span></code> or
+<code class="docutils literal"><span class="pre">$html-&gt;scriptStart()</span></code> and <code class="docutils literal"><span class="pre">$html-&gt;scriptEnd()</span></code> depending on
 your usage.</li>
 </ul>
 </div>
 <div class="section" id="console-and-shells">
 <h2>Console and shells<a class="headerlink" href="#console-and-shells" title="永久链接至标题">¶</a></h2>
 <p><strong>Shell</strong></p>
-<p><tt class="docutils literal"><span class="pre">Shell::getAdmin()</span></tt> has been moved up to
-<tt class="docutils literal"><span class="pre">ProjectTask::getAdmin()</span></tt></p>
+<p><code class="docutils literal"><span class="pre">Shell::getAdmin()</span></code> has been moved up to
+<code class="docutils literal"><span class="pre">ProjectTask::getAdmin()</span></code></p>
 <p><strong>Schema shell</strong></p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">cake</span> <span class="pre">schema</span> <span class="pre">run</span> <span class="pre">create</span></tt> has been renamed to
-<tt class="docutils literal"><span class="pre">cake</span> <span class="pre">schema</span> <span class="pre">create</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">cake</span> <span class="pre">schema</span> <span class="pre">run</span> <span class="pre">update</span></tt> has been renamed to
-<tt class="docutils literal"><span class="pre">cake</span> <span class="pre">schema</span> <span class="pre">update</span></tt></li>
+<li><code class="docutils literal"><span class="pre">cake</span> <span class="pre">schema</span> <span class="pre">run</span> <span class="pre">create</span></code> has been renamed to
+<code class="docutils literal"><span class="pre">cake</span> <span class="pre">schema</span> <span class="pre">create</span></code></li>
+<li><code class="docutils literal"><span class="pre">cake</span> <span class="pre">schema</span> <span class="pre">run</span> <span class="pre">update</span></code> has been renamed to
+<code class="docutils literal"><span class="pre">cake</span> <span class="pre">schema</span> <span class="pre">update</span></code></li>
 </ul>
 <p><strong>Console Error Handling</strong></p>
-<p>The shell dispatcher has been modified to exit with a <tt class="docutils literal"><span class="pre">1</span></tt> status
+<p>The shell dispatcher has been modified to exit with a <code class="docutils literal"><span class="pre">1</span></code> status
 code if the method called on the shell explicitly returns
-<tt class="docutils literal"><span class="pre">false</span></tt>. Returning anything else results in a <tt class="docutils literal"><span class="pre">0</span></tt> status code.
+<code class="docutils literal"><span class="pre">false</span></code>. Returning anything else results in a <code class="docutils literal"><span class="pre">0</span></code> status code.
 Before the value returned from the method was used directly as the
 status code for exiting the shell.</p>
-<p>Shell methods which are returning <tt class="docutils literal"><span class="pre">1</span></tt> to indicate an error should
-be updated to return <tt class="docutils literal"><span class="pre">false</span></tt> instead.</p>
-<p><tt class="docutils literal"><span class="pre">Shell::error()</span></tt> has been modified to exit with status code 1
+<p>Shell methods which are returning <code class="docutils literal"><span class="pre">1</span></code> to indicate an error should
+be updated to return <code class="docutils literal"><span class="pre">false</span></code> instead.</p>
+<p><code class="docutils literal"><span class="pre">Shell::error()</span></code> has been modified to exit with status code 1
 after printing the error message which now uses a slightly
 different formatting.</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s1">&#39;Invalid Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;Please provide bar.&#39;</span><span class="p">);</span>
@@ -772,9 +927,9 @@ different formatting.</p>
 <span class="c1">// exits with status code 1</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">ShellDispatcher::stderr()</span></tt> has been modified to not prepend
-Error: to the message anymore. It&#8217;s signature is now similar to
-<tt class="docutils literal"><span class="pre">Shell::stdout()</span></tt>.</p>
+<p><code class="docutils literal"><span class="pre">ShellDispatcher::stderr()</span></code> has been modified to not prepend
+Error: to the message anymore. Its signature is now similar to
+<code class="docutils literal"><span class="pre">Shell::stdout()</span></code>.</p>
 <p><strong>ShellDispatcher::shiftArgs()</strong></p>
 <p>The method has been modified to return the shifted argument. Before
 if no arguments were available the method was returning false, it
@@ -784,8 +939,8 @@ returning true, it now returns the shifted argument instead.</p>
 <div class="section" id="vendors-test-suite-schema">
 <h2>Vendors, Test Suite &amp; schema<a class="headerlink" href="#vendors-test-suite-schema" title="永久链接至标题">¶</a></h2>
 <p><strong>vendors/css, vendors/js, and vendors/img</strong></p>
-<p>Support for these three directories, both in <tt class="docutils literal"><span class="pre">app/vendors</span></tt> as
-well as <tt class="docutils literal"><span class="pre">plugin/vendors</span></tt> has been removed. They have been
+<p>Support for these three directories, both in <code class="docutils literal"><span class="pre">app/vendors</span></code> as
+well as <code class="docutils literal"><span class="pre">plugin/vendors</span></code> has been removed. They have been
 replaced with plugin and theme webroot directories.</p>
 <p><strong>Test Suite and Unit Tests</strong></p>
 <p>Group tests should now extend TestSuite instead of the deprecated
@@ -795,19 +950,21 @@ update the base class.</p>
 <p>Vendor asset serving has been removed in 1.3 in favour of plugin
 and theme webroot directories.</p>
 <p>Schema files used with the SchemaShell have been moved to
-<tt class="docutils literal"><span class="pre">app/config/schema</span></tt> instead of <tt class="docutils literal"><span class="pre">app/config/sql</span></tt> Although
-<tt class="docutils literal"><span class="pre">config/sql</span></tt> will continue to work in 1.3, it will not in future
+<code class="docutils literal"><span class="pre">app/config/schema</span></code> instead of <code class="docutils literal"><span class="pre">app/config/sql</span></code> Although
+<code class="docutils literal"><span class="pre">config/sql</span></code> will continue to work in 1.3, it will not in future
 versions, it is recommend that the new path is used.</p>
 </div>
 </div>
 
 
+			</div>
 		</div>
-	</div>
 
-	<div class="sidebar columns three pull-nine">
-<div id="sidebar-navigation" class="hide-on-phones">
-	<h2 class="hide-on-desktops">Table of Contents</h2>
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="zh">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
@@ -818,12 +975,13 @@ versions, it is recommend that the new path is used.</p>
 <li class="toctree-l1"><a class="reference internal" href="../models.html">模型</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Shells，任务与命令行工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">贡献</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../appendices.html">Appendices</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2-8-migration-guide.html">2.8 Migration Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2-7-migration-guide.html">2.7 Migration Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2-6-migration-guide.html">2.6 Migration Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="2-5-migration-guide.html">2.5 Migration Guide</a></li>
@@ -835,9 +993,7 @@ versions, it is recommend that the new path is used.</p>
 <li class="toctree-l2"><a class="reference internal" href="2-0-migration-guide.html">2.0 Migration Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="new-features-in-cakephp-2-0.html">New Features in CakePHP 2.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="phpunit-migration-hints.html">PHPUnit Migration Hints</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Migrating from CakePHP 1.2 to 1.3</a><ul class="simple">
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Migrating from CakePHP 1.2 to 1.3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="new-features-in-cakephp-1-3.html">New features in CakePHP 1.3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
@@ -846,91 +1002,171 @@ versions, it is recommend that the new path is used.</p>
 
 </div>
 
-<div class="page-contents">
-	<h3>Page contents</h3>
-	<ul>
-<li><a class="reference internal" href="#">Migrating from CakePHP 1.2 to 1.3</a><ul>
-<li><a class="reference internal" href="#removed-constants">Removed Constants</a></li>
-<li><a class="reference internal" href="#configuration-and-application-bootstrapping">Configuration and application bootstrapping</a></li>
-<li><a class="reference internal" href="#file-renames-and-internal-changes">File renames and internal changes</a></li>
-<li><a class="reference internal" href="#controller-components">Controller &amp; Components</a></li>
-<li><a class="reference internal" href="#library-classes">Library Classes</a></li>
-<li><a class="reference internal" href="#model-databases-and-datasources">Model Databases and Datasources</a></li>
-<li><a class="reference internal" href="#view-and-helpers">View and Helpers</a></li>
-<li><a class="reference internal" href="#console-and-shells">Console and shells</a></li>
-<li><a class="reference internal" href="#vendors-test-suite-schema">Vendors, Test Suite &amp; schema</a></li>
-</ul>
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
+		</div>
+	</div>
+</div>
+
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-8 social-footer text-center ">
+				<a href="#">发现翻译错误? 请在下面留言</a>
+				<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">我要加入翻译</a>
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="../_static/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="../_static/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
 </li>
-</ul>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
 
-</div>
-	</div>
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
 
-</div>
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="content row">
-	<ul class="related-pages inline">
-	<li>
-		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
-	</li>
-	<li>
-		<a href="new-features-in-cakephp-1-3.html" title="New features in CakePHP 1.3" accesskey="N">下一页</a>
-	</li>
-	<li>
-		<a href="phpunit-migration-hints.html" title="PHPUnit Migration Hints" accesskey="P">上一页</a>
-	</li>
-	</ul>
-</div>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
 
-	<div class="footer-push"> </div>
-</div>
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
 
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
 
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
 
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
 
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>发现翻译错误?</strong>
-			请在下面留言<br />
-			<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">[ 我要加入翻译 ]</a>
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							&copy; 版权所有 2016, Cake Software Foundation, Inc.
+						最后更新于 8月 02, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
 		</div>
 	</div>
-	
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Jul 10, 2016.
-				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
-		</div>
-	</div>
-</div>
+</footer>
 
-<div id="nav-modal" class="reveal-modal"> </div>
 <div id="inline-search-results"></div>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F201cbc61deaf9f7ffb521fb23e83db40' type='text/javascript'%3E%3C/script%3E"));
-</script>
 
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+
+</div>
+
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"cakephpchina"};
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
 	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	</script>
-<!-- Duoshuo Comment END -->
-
-<!-- Grunt Live Reload -->
-<script src="http://192.168.56.113:35729/livereload.js"></script>
+</script>
   </body>
 </html>

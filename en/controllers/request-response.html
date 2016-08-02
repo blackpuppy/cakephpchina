@@ -1,188 +1,323 @@
 
+
 <!DOCTYPE html>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta content="Request and Response objects" lang="en" name="title" />
 <meta content="request controller,request parameters,array indexes,purpose index,response objects,domain information,request object,request data,interrogating,params,previous versions,introspection,dispatcher,rout,data structures,arrays,ip address,migration,indexes,cakephp" lang="en" name="keywords" />
 
-    <title>Request and Response objects &mdash; CakePHP Cookbook 2.x documentation</title>
+    <title>Request and Response objects</title>
+    <link href="../_static/favicon.png" type="image/png" rel="icon" />
+
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/app.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.x',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/app.js"></script>
-    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
-    <script type="text/javascript" src="../_static/foundation.js"></script>
+
+    <link rel="alternate" hreflang="pt" href="../../pt/controllers/request-response.html" /><link rel="alternate" hreflang="es" href="../../es/controllers/request-response.html" /><link rel="alternate" hreflang="ja" href="../../ja/controllers/request-response.html" /><link rel="alternate" hreflang="fr" href="../../fr/controllers/request-response.html" /><link rel="alternate" hreflang="zh" href="../../zh/controllers/request-response.html" />
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within CakePHP Cookbook 2.x documentation" href="../_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="top" title="CakePHP Cookbook 2.x documentation" href="../index.html" />
     <link rel="up" title="Controllers" href="../controllers.html" />
     <link rel="next" title="Scaffolding" href="scaffolding.html" />
     <link rel="prev" title="Controllers" href="../controllers.html" />
-<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="alternate" hreflang="pt" href="../../pt/controllers/request-response.html" /><link rel="alternate" hreflang="es" href="../../es/controllers/request-response.html" /><link rel="alternate" hreflang="ja" href="../../ja/controllers/request-response.html" /><link rel="alternate" hreflang="fr" href="../../fr/controllers/request-response.html" /><link rel="alternate" hreflang="zh_CN" href="../../zh/controllers/request-response.html" />
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
-<script type="text/javascript">
-window.lang = "en";
-</script>
-
+    <script type="text/javascript">
+    window.lang = "en";
+    </script>
   </head>
   <body>
 
 <div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="masthead">
-	<div class="header-backing"></div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="../contents.html">
-			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
-			</a>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
+
 		
-<div id="searchbox" class="columns nine phone-three">
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-	<form id="searchform" class="search" action="../search.html" method="get">
-		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
-		<input class="search-submit search-big button red" type="submit" value="Search" />
-		<input type="hidden" name="check_keywords" value="yes" />
-		<input type="hidden" name="area" value="default" />
-
-		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
-	</form>
-
-</div>
-	</div>
-</div>
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="../contents.html">Cookbook 2.x</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="../controllers.html" accesskey="U" itemprop="url"><span itemprop="title">Controllers</span></a>
-			</li>
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">2.x Book</a>
-				<ul>
-					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				<a href="#">en</a>
-
-				<ul>
-				
-					<li></li>
-				
-					<li><a href="../../pt/controllers/request-response.html">pt</a></li>
-				
-					<li><a href="../../es/controllers/request-response.html">es</a></li>
-				
-					<li><a href="../../ja/controllers/request-response.html">ja</a></li>
-				
-					<li><a href="../../fr/controllers/request-response.html">fr</a></li>
-				
-					<li><a href="../../zh/controllers/request-response.html">zh_CN</a></li>
-				
-				</ul>
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="../search.html" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="Search" type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/en/controllers/request-response.rst" target="_blank">Improve this Doc</a>
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="../contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 2.x <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="../search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														en
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li></li>
+											
+												<li><a href="../../pt/controllers/request-response.html">pt</a></li>
+											
+												<li><a href="../../es/controllers/request-response.html">es</a></li>
+											
+												<li><a href="../../ja/controllers/request-response.html">ja</a></li>
+											
+												<li><a href="../../fr/controllers/request-response.html">fr</a></li>
+											
+												<li><a href="../../zh/controllers/request-response.html">zh</a></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/en">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/en">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/en/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/en/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/master/en/controllers/request-response.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="#">Request and Response objects</a></li>
+<li><a class="reference internal" href="#cakerequest">CakeRequest</a><ul>
+<li><a class="reference internal" href="#accessing-request-parameters">Accessing request parameters</a></li>
+<li><a class="reference internal" href="#accessing-querystring-parameters">Accessing Querystring parameters</a></li>
+<li><a class="reference internal" href="#accessing-post-data">Accessing POST data</a></li>
+<li><a class="reference internal" href="#accessing-put-or-post-data">Accessing PUT or POST data</a></li>
+<li><a class="reference internal" href="#accessing-xml-or-json-data">Accessing XML or JSON data</a></li>
+<li><a class="reference internal" href="#accessing-path-information">Accessing path information</a></li>
+<li><a class="reference internal" href="#inspecting-the-request">Inspecting the request</a></li>
+<li><a class="reference internal" href="#cakerequest-and-requesthandlercomponent">CakeRequest and RequestHandlerComponent</a></li>
+<li><a class="reference internal" href="#interacting-with-other-aspects-of-the-request">Interacting with other aspects of the request</a></li>
+<li><a class="reference internal" href="#cakerequest-api">CakeRequest API</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cakeresponse">CakeResponse</a><ul>
+<li><a class="reference internal" href="#changing-the-response-class">Changing the response class</a></li>
+<li><a class="reference internal" href="#dealing-with-content-types">Dealing with content types</a></li>
+<li><a class="reference internal" href="#sending-files">Sending files</a></li>
+<li><a class="reference internal" href="#sending-a-string-as-file">Sending a string as file</a></li>
+<li><a class="reference internal" href="#setting-headers">Setting headers</a></li>
+<li><a class="reference internal" href="#interacting-with-browser-caching">Interacting with browser caching</a></li>
+<li><a class="reference internal" href="#fine-tuning-http-cache">Fine tuning HTTP cache</a><ul>
+<li><a class="reference internal" href="#the-cache-control-header">The Cache Control header</a></li>
+<li><a class="reference internal" href="#the-expiration-header">The Expiration header</a></li>
+<li><a class="reference internal" href="#the-etag-header">The Etag header</a></li>
+<li><a class="reference internal" href="#the-last-modified-header">The Last Modified header</a></li>
+<li><a class="reference internal" href="#the-vary-header">The Vary header</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cakeresponse-and-testing">CakeResponse and testing</a></li>
+<li><a class="reference internal" href="#cakeresponse-api">CakeResponse API</a></li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
   <div class="section" id="request-and-response-objects">
 <h1>Request and Response objects<a class="headerlink" href="#request-and-response-objects" title="Permalink to this headline">¶</a></h1>
 <p>New in CakePHP 2.0 are request and response objects. In previous versions, these
 objects were represented through arrays, and the related methods were spread
-across <a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a>, <a class="reference internal" href="../development/routing.html#Router" title="Router"><tt class="xref php php-class docutils literal"><span class="pre">Router</span></tt></a>,
-<tt class="xref php php-class docutils literal"><span class="pre">Dispatcher</span></tt> and <a class="reference internal" href="../controllers.html#Controller" title="Controller"><tt class="xref php php-class docutils literal"><span class="pre">Controller</span></tt></a>. There was no authoritative
+across <a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><code class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></code></a>, <a class="reference internal" href="../development/routing.html#Router" title="Router"><code class="xref php php-class docutils literal"><span class="pre">Router</span></code></a>,
+<code class="xref php php-class docutils literal"><span class="pre">Dispatcher</span></code> and <a class="reference internal" href="../controllers.html#Controller" title="Controller"><code class="xref php php-class docutils literal"><span class="pre">Controller</span></code></a>. There was no authoritative
 object on what information the request contained. For 2.0,
-<a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> and <a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> are used for this
+<a class="reference internal" href="#CakeRequest" title="CakeRequest"><code class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></code></a> and <a class="reference internal" href="#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a> are used for this
 purpose.</p>
 </div>
 <div class="section" id="cakerequest">
 <span id="cake-request"></span><span id="index-0"></span><h1>CakeRequest<a class="headerlink" href="#cakerequest" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> is the default request object used in CakePHP. It centralizes
+<p><a class="reference internal" href="#CakeRequest" title="CakeRequest"><code class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></code></a> is the default request object used in CakePHP. It centralizes
 a number of features for interrogating and interacting with request data.
-On each request, one <a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> is created and then passed by reference to the various
-layers of an application that use request data. By default, <a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> is assigned to
-<tt class="docutils literal"><span class="pre">$this-&gt;request</span></tt>, and is available in Controllers, Views and Helpers. You can
+On each request, one <a class="reference internal" href="#CakeRequest" title="CakeRequest"><code class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></code></a> is created and then passed by reference to the various
+layers of an application that use request data. By default, <a class="reference internal" href="#CakeRequest" title="CakeRequest"><code class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></code></a> is assigned to
+<code class="docutils literal"><span class="pre">$this-&gt;request</span></code>, and is available in Controllers, Views and Helpers. You can
 also access it in Components by using the controller reference. Some of the duties
-<a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> performs include:</p>
+<a class="reference internal" href="#CakeRequest" title="CakeRequest"><code class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></code></a> performs include:</p>
 <ul class="simple">
 <li>Process the GET, POST, and FILES arrays into the data structures you are
 familiar with.</li>
@@ -194,8 +329,8 @@ properties.</li>
 </ul>
 <div class="section" id="accessing-request-parameters">
 <h2>Accessing request parameters<a class="headerlink" href="#accessing-request-parameters" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> exposes several interfaces for accessing request parameters. The first uses object
-properties, the second uses array indexes, and the third uses <tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;params</span></tt>:</p>
+<p><a class="reference internal" href="#CakeRequest" title="CakeRequest"><code class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></code></a> exposes several interfaces for accessing request parameters. The first uses object
+properties, the second uses array indexes, and the third uses <code class="docutils literal"><span class="pre">$this-&gt;request-&gt;params</span></code>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">controller</span><span class="p">;</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">];</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;controller&#39;</span><span class="p">];</span>
@@ -203,9 +338,9 @@ properties, the second uses array indexes, and the third uses <tt class="docutil
 </div>
 <p>All of the above will access the same value. Multiple ways of accessing the
 parameters have been provided to ease migration for existing applications. All
-<a class="reference internal" href="../development/routing.html#route-elements"><em>Route Elements</em></a> are accessed through this interface.</p>
-<p>In addition to <a class="reference internal" href="../development/routing.html#route-elements"><em>Route Elements</em></a>, you also often need access to
-<a class="reference internal" href="../development/routing.html#passed-arguments"><em>Passed Arguments</em></a> and <a class="reference internal" href="../development/routing.html#named-parameters"><em>Named Parameters</em></a>. These are both available
+<a class="reference internal" href="../development/routing.html#route-elements"><span class="std std-ref">Route Elements</span></a> are accessed through this interface.</p>
+<p>In addition to <a class="reference internal" href="../development/routing.html#route-elements"><span class="std std-ref">Route Elements</span></a>, you also often need access to
+<a class="reference internal" href="../development/routing.html#passed-arguments"><span class="std std-ref">Passed Arguments</span></a> and <a class="reference internal" href="../development/routing.html#named-parameters"><span class="std std-ref">Named Parameters</span></a>. These are both available
 on the request object as well:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Passed arguments</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">pass</span><span class="p">;</span>
@@ -222,19 +357,19 @@ on the request object as well:</p>
 are several important/useful parameters that CakePHP uses internally. These
 are also all found in the request parameters:</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">plugin</span></tt> The plugin handling the request. Will be null when there is no plugin.</li>
-<li><tt class="docutils literal"><span class="pre">controller</span></tt> The controller handling the current request.</li>
-<li><tt class="docutils literal"><span class="pre">action</span></tt> The action handling the current request.</li>
-<li><tt class="docutils literal"><span class="pre">prefix</span></tt> The prefix for the current action. See <a class="reference internal" href="../development/routing.html#prefix-routing"><em>Prefix Routing</em></a> for
+<li><code class="docutils literal"><span class="pre">plugin</span></code> The plugin handling the request. Will be null when there is no plugin.</li>
+<li><code class="docutils literal"><span class="pre">controller</span></code> The controller handling the current request.</li>
+<li><code class="docutils literal"><span class="pre">action</span></code> The action handling the current request.</li>
+<li><code class="docutils literal"><span class="pre">prefix</span></code> The prefix for the current action. See <a class="reference internal" href="../development/routing.html#prefix-routing"><span class="std std-ref">Prefix Routing</span></a> for
 more information.</li>
-<li><tt class="docutils literal"><span class="pre">bare</span></tt> Present when the request came from <a class="reference internal" href="../controllers.html#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a> and included the
+<li><code class="docutils literal"><span class="pre">bare</span></code> Present when the request came from <a class="reference internal" href="../controllers.html#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a> and included the
 bare option. Bare requests do not have layouts rendered.</li>
-<li><tt class="docutils literal"><span class="pre">requested</span></tt> Present and set to true when the action came from <a class="reference internal" href="../controllers.html#Controller::requestAction" title="Controller::requestAction"><tt class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></tt></a>.</li>
+<li><code class="docutils literal"><span class="pre">requested</span></code> Present and set to true when the action came from <a class="reference internal" href="../controllers.html#Controller::requestAction" title="Controller::requestAction"><code class="xref php php-meth docutils literal"><span class="pre">requestAction()</span></code></a>.</li>
 </ul>
 </div>
 <div class="section" id="accessing-querystring-parameters">
 <h2>Accessing Querystring parameters<a class="headerlink" href="#accessing-querystring-parameters" title="Permalink to this headline">¶</a></h2>
-<p>Querystring parameters can be read using <a class="reference internal" href="#CakeRequest::$query" title="CakeRequest::$query"><tt class="xref php php-attr docutils literal"><span class="pre">CakeRequest::$query</span></tt></a>:</p>
+<p>Querystring parameters can be read using <a class="reference internal" href="#CakeRequest::$query" title="CakeRequest::$query"><code class="xref php php-attr docutils literal"><span class="pre">CakeRequest::$query</span></code></a>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// URL is /posts/index?page=1&amp;sort=title</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">[</span><span class="s1">&#39;page&#39;</span><span class="p">];</span>
 
@@ -243,9 +378,9 @@ bare option. Bare requests do not have layouts rendered.</li>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">][</span><span class="s1">&#39;page&#39;</span><span class="p">];</span>
 </pre></div>
 </div>
-<p>You can either directly access the <a class="reference internal" href="#CakeRequest::$query" title="CakeRequest::$query"><tt class="xref php php-attr docutils literal"><span class="pre">$query</span></tt></a> property, or you can use
-<a class="reference internal" href="#CakeRequest::query" title="CakeRequest::query"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::query()</span></tt></a> to read the URL query array in an error-free manner.
-Any keys that do not exist will return <tt class="docutils literal"><span class="pre">null</span></tt>:</p>
+<p>You can either directly access the <a class="reference internal" href="#CakeRequest::$query" title="CakeRequest::$query"><code class="xref php php-attr docutils literal"><span class="pre">$query</span></code></a> property, or you can use
+<a class="reference internal" href="#CakeRequest::query" title="CakeRequest::query"><code class="xref php php-meth docutils literal"><span class="pre">CakeRequest::query()</span></code></a> to read the URL query array in an error-free manner.
+Any keys that do not exist will return <code class="docutils literal"><span class="pre">null</span></code>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s1">&#39;value_that_does_not_exist&#39;</span><span class="p">);</span>
 <span class="c1">// $foo === null</span>
 </pre></div>
@@ -253,16 +388,16 @@ Any keys that do not exist will return <tt class="docutils literal"><span class=
 </div>
 <div class="section" id="accessing-post-data">
 <h2>Accessing POST data<a class="headerlink" href="#accessing-post-data" title="Permalink to this headline">¶</a></h2>
-<p>All POST data can be accessed using <a class="reference internal" href="#CakeRequest::$data" title="CakeRequest::$data"><tt class="xref php php-attr docutils literal"><span class="pre">CakeRequest::$data</span></tt></a>. Any form data
-that contains a <tt class="docutils literal"><span class="pre">data</span></tt> prefix will have that data prefix removed. For example:</p>
+<p>All POST data can be accessed using <a class="reference internal" href="#CakeRequest::$data" title="CakeRequest::$data"><code class="xref php php-attr docutils literal"><span class="pre">CakeRequest::$data</span></code></a>. Any form data
+that contains a <code class="docutils literal"><span class="pre">data</span></code> prefix will have that data prefix removed. For example:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// An input with a name attribute equal to &#39;data[MyModel][title]&#39;</span>
 <span class="c1">// is accessible at</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">[</span><span class="s1">&#39;MyModel&#39;</span><span class="p">][</span><span class="s1">&#39;title&#39;</span><span class="p">];</span>
 </pre></div>
 </div>
-<p>You can either directly access the <a class="reference internal" href="#CakeRequest::$data" title="CakeRequest::$data"><tt class="xref php php-attr docutils literal"><span class="pre">$data</span></tt></a> property, or you can use
-<a class="reference internal" href="#CakeRequest::data" title="CakeRequest::data"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::data()</span></tt></a> to read the data array in an error-free manner.
-Any keys that do not exist will return <tt class="docutils literal"><span class="pre">null</span></tt>:</p>
+<p>You can either directly access the <a class="reference internal" href="#CakeRequest::$data" title="CakeRequest::$data"><code class="xref php php-attr docutils literal"><span class="pre">$data</span></code></a> property, or you can use
+<a class="reference internal" href="#CakeRequest::data" title="CakeRequest::data"><code class="xref php php-meth docutils literal"><span class="pre">CakeRequest::data()</span></code></a> to read the data array in an error-free manner.
+Any keys that do not exist will return <code class="docutils literal"><span class="pre">null</span></code>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">(</span><span class="s1">&#39;Value.that.does.not.exist&#39;</span><span class="p">);</span>
 <span class="c1">// $foo == null</span>
 </pre></div>
@@ -273,25 +408,25 @@ Any keys that do not exist will return <tt class="docutils literal"><span class=
 <div class="versionadded">
 <p><span class="versionmodified">New in version 2.2.</span></p>
 </div>
-<p>When building REST services, you often accept request data on <tt class="docutils literal"><span class="pre">PUT</span></tt> and
-<tt class="docutils literal"><span class="pre">DELETE</span></tt> requests. As of 2.2, any <tt class="docutils literal"><span class="pre">application/x-www-form-urlencoded</span></tt>
-request body data will automatically be parsed and set to <tt class="docutils literal"><span class="pre">$this-&gt;data</span></tt> for
-<tt class="docutils literal"><span class="pre">PUT</span></tt> and <tt class="docutils literal"><span class="pre">DELETE</span></tt> requests. If you are accepting JSON or XML data, see
+<p>When building REST services, you often accept request data on <code class="docutils literal"><span class="pre">PUT</span></code> and
+<code class="docutils literal"><span class="pre">DELETE</span></code> requests. As of 2.2, any <code class="docutils literal"><span class="pre">application/x-www-form-urlencoded</span></code>
+request body data will automatically be parsed and set to <code class="docutils literal"><span class="pre">$this-&gt;data</span></code> for
+<code class="docutils literal"><span class="pre">PUT</span></code> and <code class="docutils literal"><span class="pre">DELETE</span></code> requests. If you are accepting JSON or XML data, see
 below for how you can access those request bodies.</p>
 </div>
 <div class="section" id="accessing-xml-or-json-data">
 <h2>Accessing XML or JSON data<a class="headerlink" href="#accessing-xml-or-json-data" title="Permalink to this headline">¶</a></h2>
-<p>Applications employing <a class="reference internal" href="../development/rest.html"><em>REST</em></a> often exchange data in non-URL-encoded
+<p>Applications employing <a class="reference internal" href="../development/rest.html"><span class="doc">REST</span></a> often exchange data in non-URL-encoded
 post bodies. You can read input data in any format using
-<a class="reference internal" href="#CakeRequest::input" title="CakeRequest::input"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::input()</span></tt></a>. By providing a decoding function, you can
+<a class="reference internal" href="#CakeRequest::input" title="CakeRequest::input"><code class="xref php php-meth docutils literal"><span class="pre">CakeRequest::input()</span></code></a>. By providing a decoding function, you can
 receive the content in a deserialized format:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Get JSON encoded data submitted to a PUT/POST action</span>
 <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;json_decode&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Some deserializing methods require additional parameters when called,
-such as the &#8216;as array&#8217; parameter on <tt class="docutils literal"><span class="pre">json_decode</span></tt>. If you want XML converted
-into a DOMDocument object, <a class="reference internal" href="#CakeRequest::input" title="CakeRequest::input"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::input()</span></tt></a> supports passing
+such as the &#8216;as array&#8217; parameter on <code class="docutils literal"><span class="pre">json_decode</span></code>. If you want XML converted
+into a DOMDocument object, <a class="reference internal" href="#CakeRequest::input" title="CakeRequest::input"><code class="xref php php-meth docutils literal"><span class="pre">CakeRequest::input()</span></code></a> supports passing
 in additional parameters as well:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Get Xml encoded data submitted to a PUT/POST action</span>
 <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Xml::build&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;return&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;domdocument&#39;</span><span class="p">));</span>
@@ -300,33 +435,33 @@ in additional parameters as well:</p>
 </div>
 <div class="section" id="accessing-path-information">
 <h2>Accessing path information<a class="headerlink" href="#accessing-path-information" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> also provides useful information about the paths in your
-application. <a class="reference internal" href="#CakeRequest::$base" title="CakeRequest::$base"><tt class="xref php php-attr docutils literal"><span class="pre">CakeRequest::$base</span></tt></a> and
-<a class="reference internal" href="#CakeRequest::$webroot" title="CakeRequest::$webroot"><tt class="xref php php-attr docutils literal"><span class="pre">CakeRequest::$webroot</span></tt></a> are useful for generating URLs, and
+<p><a class="reference internal" href="#CakeRequest" title="CakeRequest"><code class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></code></a> also provides useful information about the paths in your
+application. <a class="reference internal" href="#CakeRequest::$base" title="CakeRequest::$base"><code class="xref php php-attr docutils literal"><span class="pre">CakeRequest::$base</span></code></a> and
+<a class="reference internal" href="#CakeRequest::$webroot" title="CakeRequest::$webroot"><code class="xref php php-attr docutils literal"><span class="pre">CakeRequest::$webroot</span></code></a> are useful for generating URLs, and
 determining whether or not your application is in a subdirectory.</p>
 </div>
 <div class="section" id="inspecting-the-request">
 <span id="check-the-request"></span><h2>Inspecting the request<a class="headerlink" href="#inspecting-the-request" title="Permalink to this headline">¶</a></h2>
 <p>Detecting various request conditions used to require using
-<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a>. These methods have been moved to
-<a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a>, and offer a new interface alongside a more backwards-compatible
+<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><code class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></code></a>. These methods have been moved to
+<a class="reference internal" href="#CakeRequest" title="CakeRequest"><code class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></code></a>, and offer a new interface alongside a more backwards-compatible
 usage:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">isPost</span><span class="p">();</span> <span class="c1">// deprecated</span>
 </pre></div>
 </div>
 <p>Both method calls will return the same value. For the time being, the methods
-are still available on <a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a>, but are deprecated and
+are still available on <a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><code class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></code></a>, but are deprecated and
 will be removed in 3.0.0. You can also easily extend the request
-detectors that are available by using <a class="reference internal" href="#CakeRequest::addDetector" title="CakeRequest::addDetector"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::addDetector()</span></tt></a>
+detectors that are available by using <a class="reference internal" href="#CakeRequest::addDetector" title="CakeRequest::addDetector"><code class="xref php php-meth docutils literal"><span class="pre">CakeRequest::addDetector()</span></code></a>
 to create new kinds of detectors. There are four different types of detectors
 that you can create:</p>
 <ul class="simple">
 <li>Environment value comparison - Compares a
-value fetched from <a class="reference internal" href="../core-libraries/global-constants-and-functions.html#env" title="env"><tt class="xref php php-func docutils literal"><span class="pre">env()</span></tt></a> for equality
+value fetched from <a class="reference internal" href="../core-libraries/global-constants-and-functions.html#env" title="env"><code class="xref php php-func docutils literal"><span class="pre">env()</span></code></a> for equality
 with the provided value.</li>
 <li>Pattern value comparison - Pattern value comparison allows you to compare a
-value fetched from <a class="reference internal" href="../core-libraries/global-constants-and-functions.html#env" title="env"><tt class="xref php php-func docutils literal"><span class="pre">env()</span></tt></a> to a regular expression.</li>
+value fetched from <a class="reference internal" href="../core-libraries/global-constants-and-functions.html#env" title="env"><code class="xref php php-func docutils literal"><span class="pre">env()</span></code></a> to a regular expression.</li>
 <li>Option based comparison -  Option based comparisons use a list of options to
 create a regular expression. Subsequent calls to add an already defined
 options detector will merge the options.</li>
@@ -363,98 +498,98 @@ parameter.</li>
 <span class="p">);</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> also includes methods like <a class="reference internal" href="#CakeRequest::domain" title="CakeRequest::domain"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::domain()</span></tt></a>,
-<a class="reference internal" href="#CakeRequest::subdomains" title="CakeRequest::subdomains"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::subdomains()</span></tt></a> and <a class="reference internal" href="#CakeRequest::host" title="CakeRequest::host"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::host()</span></tt></a> to
+<p><a class="reference internal" href="#CakeRequest" title="CakeRequest"><code class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></code></a> also includes methods like <a class="reference internal" href="#CakeRequest::domain" title="CakeRequest::domain"><code class="xref php php-meth docutils literal"><span class="pre">CakeRequest::domain()</span></code></a>,
+<a class="reference internal" href="#CakeRequest::subdomains" title="CakeRequest::subdomains"><code class="xref php php-meth docutils literal"><span class="pre">CakeRequest::subdomains()</span></code></a> and <a class="reference internal" href="#CakeRequest::host" title="CakeRequest::host"><code class="xref php php-meth docutils literal"><span class="pre">CakeRequest::host()</span></code></a> to
 help applications with subdomains.</p>
 <p>There are several built-in detectors that you can use:</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">is('get')</span></tt> Check to see whether the current request is a GET.</li>
-<li><tt class="docutils literal"><span class="pre">is('put')</span></tt> Check to see whether the current request is a PUT.</li>
-<li><tt class="docutils literal"><span class="pre">is('post')</span></tt> Check to see whether the current request is a POST.</li>
-<li><tt class="docutils literal"><span class="pre">is('delete')</span></tt> Check to see whether the current request is a DELETE.</li>
-<li><tt class="docutils literal"><span class="pre">is('head')</span></tt> Check to see whether the current request is HEAD.</li>
-<li><tt class="docutils literal"><span class="pre">is('options')</span></tt> Check to see whether the current request is OPTIONS.</li>
-<li><tt class="docutils literal"><span class="pre">is('ajax')</span></tt> Check to see whether the current request came with
+<li><code class="docutils literal"><span class="pre">is('get')</span></code> Check to see whether the current request is a GET.</li>
+<li><code class="docutils literal"><span class="pre">is('put')</span></code> Check to see whether the current request is a PUT.</li>
+<li><code class="docutils literal"><span class="pre">is('post')</span></code> Check to see whether the current request is a POST.</li>
+<li><code class="docutils literal"><span class="pre">is('delete')</span></code> Check to see whether the current request is a DELETE.</li>
+<li><code class="docutils literal"><span class="pre">is('head')</span></code> Check to see whether the current request is HEAD.</li>
+<li><code class="docutils literal"><span class="pre">is('options')</span></code> Check to see whether the current request is OPTIONS.</li>
+<li><code class="docutils literal"><span class="pre">is('ajax')</span></code> Check to see whether the current request came with
 X-Requested-With = XMLHttpRequest.</li>
-<li><tt class="docutils literal"><span class="pre">is('ssl')</span></tt> Check to see whether the request is via SSL</li>
-<li><tt class="docutils literal"><span class="pre">is('flash')</span></tt> Check to see whether the request has a User-Agent of Flash</li>
-<li><tt class="docutils literal"><span class="pre">is('mobile')</span></tt> Check to see whether the request came from a common list
+<li><code class="docutils literal"><span class="pre">is('ssl')</span></code> Check to see whether the request is via SSL</li>
+<li><code class="docutils literal"><span class="pre">is('flash')</span></code> Check to see whether the request has a User-Agent of Flash</li>
+<li><code class="docutils literal"><span class="pre">is('mobile')</span></code> Check to see whether the request came from a common list
 of mobile agents.</li>
 </ul>
 </div>
 <div class="section" id="cakerequest-and-requesthandlercomponent">
 <h2>CakeRequest and RequestHandlerComponent<a class="headerlink" href="#cakerequest-and-requesthandlercomponent" title="Permalink to this headline">¶</a></h2>
-<p>Since many of the features <a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> offers used to be the realm of
-<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a>, some rethinking was required to figure out how it
-still fits into the picture. For 2.0, <a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a>
+<p>Since many of the features <a class="reference internal" href="#CakeRequest" title="CakeRequest"><code class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></code></a> offers used to be the realm of
+<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><code class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></code></a>, some rethinking was required to figure out how it
+still fits into the picture. For 2.0, <a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><code class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></code></a>
 provides a layer of sugar, such as switching layout
 and views based on content, on top of the utility that
-<a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> affords.
+<a class="reference internal" href="#CakeRequest" title="CakeRequest"><code class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></code></a> affords.
 This separation of utility and sugar between the two classes lets you
 more easily choose what you want.</p>
 </div>
 <div class="section" id="interacting-with-other-aspects-of-the-request">
 <h2>Interacting with other aspects of the request<a class="headerlink" href="#interacting-with-other-aspects-of-the-request" title="Permalink to this headline">¶</a></h2>
-<p>You can use <a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a> to introspect a variety of things about the request.
+<p>You can use <a class="reference internal" href="#CakeRequest" title="CakeRequest"><code class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></code></a> to introspect a variety of things about the request.
 Beyond the detectors, you can also find out other information from various
 properties and methods.</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;webroot</span></tt> contains the webroot directory.</li>
-<li><tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;base</span></tt> contains the base path.</li>
-<li><tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;here</span></tt> contains the full address to the current request.</li>
-<li><tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;query</span></tt> contains the query string parameters.</li>
+<li><code class="docutils literal"><span class="pre">$this-&gt;request-&gt;webroot</span></code> contains the webroot directory.</li>
+<li><code class="docutils literal"><span class="pre">$this-&gt;request-&gt;base</span></code> contains the base path.</li>
+<li><code class="docutils literal"><span class="pre">$this-&gt;request-&gt;here</span></code> contains the full address to the current request.</li>
+<li><code class="docutils literal"><span class="pre">$this-&gt;request-&gt;query</span></code> contains the query string parameters.</li>
 </ul>
 </div>
 <div class="section" id="cakerequest-api">
 <h2>CakeRequest API<a class="headerlink" href="#cakerequest-api" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="CakeRequest">
-<em class="property">class </em><tt class="descname">CakeRequest</tt><a class="headerlink" href="#CakeRequest" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descname">CakeRequest</code><a class="headerlink" href="#CakeRequest" title="Permalink to this definition">¶</a></dt>
 <dd><p>CakeRequest encapsulates request parameter handling and introspection.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeRequest::domain">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">domain</tt><big>(</big><em>$tldLength = 1</em><big>)</big><a class="headerlink" href="#CakeRequest::domain" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeRequest::</code><code class="descname">domain</code><span class="sig-paren">(</span><em>$tldLength = 1</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::domain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the domain name your application is running on.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeRequest::subdomains">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">subdomains</tt><big>(</big><em>$tldLength = 1</em><big>)</big><a class="headerlink" href="#CakeRequest::subdomains" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeRequest::</code><code class="descname">subdomains</code><span class="sig-paren">(</span><em>$tldLength = 1</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::subdomains" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the subdomains your application is running on as an array.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeRequest::host">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">host</tt><big>(</big><big>)</big><a class="headerlink" href="#CakeRequest::host" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeRequest::</code><code class="descname">host</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::host" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the host your application is on.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeRequest::method">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">method</tt><big>(</big><big>)</big><a class="headerlink" href="#CakeRequest::method" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeRequest::</code><code class="descname">method</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::method" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the HTTP method the request was made with.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeRequest::onlyAllow">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">onlyAllow</tt><big>(</big><em>$methods</em><big>)</big><a class="headerlink" href="#CakeRequest::onlyAllow" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeRequest::</code><code class="descname">onlyAllow</code><span class="sig-paren">(</span><em>$methods</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::onlyAllow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set allowed HTTP methods. If not matched, will throw MethodNotAllowedException.
-The 405 response will include the required <tt class="docutils literal"><span class="pre">Allow</span></tt> header with the passed methods</p>
+The 405 response will include the required <code class="docutils literal"><span class="pre">Allow</span></code> header with the passed methods</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 2.3.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified">Deprecated since version 2.5: </span>Use <a class="reference internal" href="#CakeRequest::allowMethod" title="CakeRequest::allowMethod"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::allowMethod()</span></tt></a> instead.</p>
+<p><span class="versionmodified">Deprecated since version 2.5: </span>Use <a class="reference internal" href="#CakeRequest::allowMethod" title="CakeRequest::allowMethod"><code class="xref php php-meth docutils literal"><span class="pre">CakeRequest::allowMethod()</span></code></a> instead.</p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeRequest::allowMethod">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">allowMethod</tt><big>(</big><em>$methods</em><big>)</big><a class="headerlink" href="#CakeRequest::allowMethod" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeRequest::</code><code class="descname">allowMethod</code><span class="sig-paren">(</span><em>$methods</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::allowMethod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set allowed HTTP methods. If not matched will throw MethodNotAllowedException.
-The 405 response will include the required <tt class="docutils literal"><span class="pre">Allow</span></tt> header with the passed methods</p>
+The 405 response will include the required <code class="docutils literal"><span class="pre">Allow</span></code> header with the passed methods</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 2.5.</span></p>
 </div>
@@ -462,20 +597,20 @@ The 405 response will include the required <tt class="docutils literal"><span cl
 
 <dl class="method">
 <dt id="CakeRequest::referer">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">referer</tt><big>(</big><em>$local = false</em><big>)</big><a class="headerlink" href="#CakeRequest::referer" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeRequest::</code><code class="descname">referer</code><span class="sig-paren">(</span><em>$local = false</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::referer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the referring address for the request.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeRequest::clientIp">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">clientIp</tt><big>(</big><em>$safe = true</em><big>)</big><a class="headerlink" href="#CakeRequest::clientIp" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeRequest::</code><code class="descname">clientIp</code><span class="sig-paren">(</span><em>$safe = true</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::clientIp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the current visitor&#8217;s IP address.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeRequest::header">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">header</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#CakeRequest::header" title="Permalink to this definition">¶</a></dt>
-<dd><p>Allows you to access any of the <tt class="docutils literal"><span class="pre">HTTP_*</span></tt> headers that were used
+<code class="descclassname">CakeRequest::</code><code class="descname">header</code><span class="sig-paren">(</span><em>$name</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows you to access any of the <code class="docutils literal"><span class="pre">HTTP_*</span></code> headers that were used
 for the request. For example:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">);</span>
 </pre></div>
@@ -485,7 +620,7 @@ for the request. For example:</p>
 
 <dl class="method">
 <dt id="CakeRequest::input">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">input</tt><big>(</big><em>$callback</em><span class="optional">[</span>, <em>$options</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#CakeRequest::input" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeRequest::</code><code class="descname">input</code><span class="sig-paren">(</span><em>$callback</em><span class="optional">[</span>, <em>$options</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::input" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve the input data for a request, and optionally pass it through a
 decoding function. Useful when interacting with XML or JSON
 request body content. Additional parameters for the decoding function
@@ -497,7 +632,7 @@ can be passed as arguments to input():</p>
 
 <dl class="method">
 <dt id="CakeRequest::data">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">data</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#CakeRequest::data" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeRequest::</code><code class="descname">data</code><span class="sig-paren">(</span><em>$name</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides dot notation access to request data. Allows request data to be read and
 modified. Calls can be chained together as well:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Modify some request data, so you can prepopulate some form fields.</span>
@@ -512,7 +647,7 @@ modified. Calls can be chained together as well:</p>
 
 <dl class="method">
 <dt id="CakeRequest::query">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">query</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#CakeRequest::query" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeRequest::</code><code class="descname">query</code><span class="sig-paren">(</span><em>$name</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::query" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides dot notation access to URL query data:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// URL is /posts/index?page=1&amp;sort=title</span>
 <span class="nv">$value</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">);</span>
@@ -525,22 +660,22 @@ modified. Calls can be chained together as well:</p>
 
 <dl class="method">
 <dt id="CakeRequest::is">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">is</tt><big>(</big><em>$type</em><big>)</big><a class="headerlink" href="#CakeRequest::is" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeRequest::</code><code class="descname">is</code><span class="sig-paren">(</span><em>$type</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::is" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check whether or not a Request matches a certain criterion. Uses
 the built-in detection rules as well as any additional rules defined
-with <a class="reference internal" href="#CakeRequest::addDetector" title="CakeRequest::addDetector"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::addDetector()</span></tt></a>.</p>
+with <a class="reference internal" href="#CakeRequest::addDetector" title="CakeRequest::addDetector"><code class="xref php php-meth docutils literal"><span class="pre">CakeRequest::addDetector()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeRequest::addDetector">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">addDetector</tt><big>(</big><em>$name</em>, <em>$options</em><big>)</big><a class="headerlink" href="#CakeRequest::addDetector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a detector to be used with <a class="reference internal" href="#CakeRequest::is" title="CakeRequest::is"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::is()</span></tt></a>. See <a class="reference internal" href="#check-the-request"><em>Inspecting the request</em></a>
+<code class="descclassname">CakeRequest::</code><code class="descname">addDetector</code><span class="sig-paren">(</span><em>$name</em>, <em>$options</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::addDetector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a detector to be used with <a class="reference internal" href="#CakeRequest::is" title="CakeRequest::is"><code class="xref php php-meth docutils literal"><span class="pre">CakeRequest::is()</span></code></a>. See <a class="reference internal" href="#check-the-request"><span class="std std-ref">Inspecting the request</span></a>
 for more information.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeRequest::accepts">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">accepts</tt><big>(</big><em>$type = null</em><big>)</big><a class="headerlink" href="#CakeRequest::accepts" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeRequest::</code><code class="descname">accepts</code><span class="sig-paren">(</span><em>$type = null</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::accepts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find out which content types the client accepts, or check whether it accepts a
 particular type of content.</p>
 <p>Get all types:</p>
@@ -555,7 +690,7 @@ particular type of content.</p>
 
 <dl class="staticmethod">
 <dt id="CakeRequest::acceptLanguage">
-<em class="property">static </em><tt class="descclassname">CakeRequest::</tt><tt class="descname">acceptLanguage</tt><big>(</big><em>$language = null</em><big>)</big><a class="headerlink" href="#CakeRequest::acceptLanguage" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descclassname">CakeRequest::</code><code class="descname">acceptLanguage</code><span class="sig-paren">(</span><em>$language = null</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::acceptLanguage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all the languages accepted by the client,
 or check whether a specific language is accepted.</p>
 <p>Get the list of accepted languages:</p>
@@ -570,9 +705,9 @@ or check whether a specific language is accepted.</p>
 
 <dl class="method">
 <dt id="CakeRequest::param">
-<tt class="descclassname">CakeRequest::</tt><tt class="descname">param</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#CakeRequest::param" title="Permalink to this definition">¶</a></dt>
-<dd><p>Safely read values in <tt class="docutils literal"><span class="pre">$request-&gt;params</span></tt>. This removes the need to call
-<tt class="docutils literal"><span class="pre">isset()</span></tt> or <tt class="docutils literal"><span class="pre">empty()</span></tt> before using param values.</p>
+<code class="descclassname">CakeRequest::</code><code class="descname">param</code><span class="sig-paren">(</span><em>$name</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeRequest::param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Safely read values in <code class="docutils literal"><span class="pre">$request-&gt;params</span></code>. This removes the need to call
+<code class="docutils literal"><span class="pre">isset()</span></code> or <code class="docutils literal"><span class="pre">empty()</span></code> before using param values.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 2.4.</span></p>
 </div>
@@ -580,39 +715,39 @@ or check whether a specific language is accepted.</p>
 
 <dl class="attr">
 <dt id="CakeRequest::$data">
-<em class="property">property </em><tt class="descclassname">CakeRequest::$</tt><tt class="descname">data</tt><a class="headerlink" href="#CakeRequest::$data" title="Permalink to this definition">¶</a></dt>
-<dd><p>An array of POST data. You can use <a class="reference internal" href="#CakeRequest::data" title="CakeRequest::data"><tt class="xref php php-meth docutils literal"><span class="pre">CakeRequest::data()</span></tt></a>
+<em class="property">property </em><code class="descclassname">CakeRequest::$</code><code class="descname">data</code><a class="headerlink" href="#CakeRequest::$data" title="Permalink to this definition">¶</a></dt>
+<dd><p>An array of POST data. You can use <a class="reference internal" href="#CakeRequest::data" title="CakeRequest::data"><code class="xref php php-meth docutils literal"><span class="pre">CakeRequest::data()</span></code></a>
 to read this property in a way that suppresses notice errors.</p>
 </dd></dl>
 
 <dl class="attr">
 <dt id="CakeRequest::$query">
-<em class="property">property </em><tt class="descclassname">CakeRequest::$</tt><tt class="descname">query</tt><a class="headerlink" href="#CakeRequest::$query" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="descclassname">CakeRequest::$</code><code class="descname">query</code><a class="headerlink" href="#CakeRequest::$query" title="Permalink to this definition">¶</a></dt>
 <dd><p>An array of query string parameters.</p>
 </dd></dl>
 
 <dl class="attr">
 <dt id="CakeRequest::$params">
-<em class="property">property </em><tt class="descclassname">CakeRequest::$</tt><tt class="descname">params</tt><a class="headerlink" href="#CakeRequest::$params" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="descclassname">CakeRequest::$</code><code class="descname">params</code><a class="headerlink" href="#CakeRequest::$params" title="Permalink to this definition">¶</a></dt>
 <dd><p>An array of route elements and request parameters.</p>
 </dd></dl>
 
 <dl class="attr">
 <dt id="CakeRequest::$here">
-<em class="property">property </em><tt class="descclassname">CakeRequest::$</tt><tt class="descname">here</tt><a class="headerlink" href="#CakeRequest::$here" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="descclassname">CakeRequest::$</code><code class="descname">here</code><a class="headerlink" href="#CakeRequest::$here" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the current request uri.</p>
 </dd></dl>
 
 <dl class="attr">
 <dt id="CakeRequest::$base">
-<em class="property">property </em><tt class="descclassname">CakeRequest::$</tt><tt class="descname">base</tt><a class="headerlink" href="#CakeRequest::$base" title="Permalink to this definition">¶</a></dt>
-<dd><p>The base path to the application, usually <tt class="docutils literal"><span class="pre">/</span></tt> unless your
+<em class="property">property </em><code class="descclassname">CakeRequest::$</code><code class="descname">base</code><a class="headerlink" href="#CakeRequest::$base" title="Permalink to this definition">¶</a></dt>
+<dd><p>The base path to the application, usually <code class="docutils literal"><span class="pre">/</span></code> unless your
 application is in a subdirectory.</p>
 </dd></dl>
 
 <dl class="attr">
 <dt id="CakeRequest::$webroot">
-<em class="property">property </em><tt class="descclassname">CakeRequest::$</tt><tt class="descname">webroot</tt><a class="headerlink" href="#CakeRequest::$webroot" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="descclassname">CakeRequest::$</code><code class="descname">webroot</code><a class="headerlink" href="#CakeRequest::$webroot" title="Permalink to this definition">¶</a></dt>
 <dd><p>The current webroot.</p>
 </dd></dl>
 
@@ -620,15 +755,15 @@ application is in a subdirectory.</p>
 </div>
 <div class="section" id="cakeresponse">
 <span id="index-1"></span><h1>CakeResponse<a class="headerlink" href="#cakeresponse" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> is the default response class in CakePHP. It
+<p><a class="reference internal" href="#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a> is the default response class in CakePHP. It
 encapsulates a number of features and functionality for generating HTTP
 responses in your application. It also assists in testing, as it can be
 mocked/stubbed allowing you to inspect headers that will be sent.
-Like <a class="reference internal" href="#CakeRequest" title="CakeRequest"><tt class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></tt></a>, <a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> consolidates a number
-of methods previously found on <a class="reference internal" href="../controllers.html#Controller" title="Controller"><tt class="xref php php-class docutils literal"><span class="pre">Controller</span></tt></a>,
-<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a> and <tt class="xref php php-class docutils literal"><span class="pre">Dispatcher</span></tt>. The old
-methods are deprecated in favour of using <a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a>.</p>
-<p><a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> provides an interface to wrap the common response-related
+Like <a class="reference internal" href="#CakeRequest" title="CakeRequest"><code class="xref php php-class docutils literal"><span class="pre">CakeRequest</span></code></a>, <a class="reference internal" href="#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a> consolidates a number
+of methods previously found on <a class="reference internal" href="../controllers.html#Controller" title="Controller"><code class="xref php php-class docutils literal"><span class="pre">Controller</span></code></a>,
+<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><code class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></code></a> and <code class="xref php php-class docutils literal"><span class="pre">Dispatcher</span></code>. The old
+methods are deprecated in favour of using <a class="reference internal" href="#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a>.</p>
+<p><a class="reference internal" href="#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a> provides an interface to wrap the common response-related
 tasks such as:</p>
 <ul class="simple">
 <li>Sending headers for redirects.</li>
@@ -638,22 +773,22 @@ tasks such as:</p>
 </ul>
 <div class="section" id="changing-the-response-class">
 <h2>Changing the response class<a class="headerlink" href="#changing-the-response-class" title="Permalink to this headline">¶</a></h2>
-<p>CakePHP uses <a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> by default. <a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> is a flexible and
+<p>CakePHP uses <a class="reference internal" href="#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a> by default. <a class="reference internal" href="#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a> is a flexible and
 transparent class. If you need to override it with your own application-specific class,
-you can replace <a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> in <tt class="docutils literal"><span class="pre">app/webroot/index.php</span></tt>.
-This will make all the controllers in your application use <tt class="docutils literal"><span class="pre">CustomResponse</span></tt>
-instead of <a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a>. You can also replace the response
-instance by setting <tt class="docutils literal"><span class="pre">$this-&gt;response</span></tt> in your controllers. Overriding the
+you can replace <a class="reference internal" href="#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a> in <code class="docutils literal"><span class="pre">app/webroot/index.php</span></code>.
+This will make all the controllers in your application use <code class="docutils literal"><span class="pre">CustomResponse</span></code>
+instead of <a class="reference internal" href="#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a>. You can also replace the response
+instance by setting <code class="docutils literal"><span class="pre">$this-&gt;response</span></code> in your controllers. Overriding the
 response object is handy during testing, as it allows you to stub
-out the methods that interact with <a class="reference internal" href="#CakeResponse::header" title="CakeResponse::header"><tt class="xref php php-meth docutils literal"><span class="pre">header()</span></tt></a>. See the section on
-<a class="reference internal" href="#cakeresponse-testing"><em>CakeResponse and testing</em></a> for more information.</p>
+out the methods that interact with <a class="reference internal" href="#CakeResponse::header" title="CakeResponse::header"><code class="xref php php-meth docutils literal"><span class="pre">header()</span></code></a>. See the section on
+<a class="reference internal" href="#cakeresponse-testing"><span class="std std-ref">CakeResponse and testing</span></a> for more information.</p>
 </div>
 <div class="section" id="dealing-with-content-types">
 <h2>Dealing with content types<a class="headerlink" href="#dealing-with-content-types" title="Permalink to this headline">¶</a></h2>
 <p>You can control the Content-Type of your application&#8217;s responses with
-<a class="reference internal" href="#CakeResponse::type" title="CakeResponse::type"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::type()</span></tt></a>. If your application needs to deal with
-content types that are not built into <a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a>, you can map them
-with <a class="reference internal" href="#CakeResponse::type" title="CakeResponse::type"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::type()</span></tt></a> as well:</p>
+<a class="reference internal" href="#CakeResponse::type" title="CakeResponse::type"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::type()</span></code></a>. If your application needs to deal with
+content types that are not built into <a class="reference internal" href="#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a>, you can map them
+with <a class="reference internal" href="#CakeResponse::type" title="CakeResponse::type"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::type()</span></code></a> as well:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Add a vCard type</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">type</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;vcf&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;text/v-card&#39;</span><span class="p">));</span>
 
@@ -662,14 +797,14 @@ with <a class="reference internal" href="#CakeResponse::type" title="CakeRespons
 </pre></div>
 </div>
 <p>Usually, you&#8217;ll want to map additional content types in your controller&#8217;s
-<a class="reference internal" href="../controllers.html#Controller::beforeFilter" title="Controller::beforeFilter"><tt class="xref php php-meth docutils literal"><span class="pre">beforeFilter()</span></tt></a> callback, so you can leverage the automatic view switching
-features of <a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a> if you are using it.</p>
+<a class="reference internal" href="../controllers.html#Controller::beforeFilter" title="Controller::beforeFilter"><code class="xref php php-meth docutils literal"><span class="pre">beforeFilter()</span></code></a> callback, so you can leverage the automatic view switching
+features of <a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><code class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></code></a> if you are using it.</p>
 </div>
 <div class="section" id="sending-files">
 <span id="cake-response-file"></span><h2>Sending files<a class="headerlink" href="#sending-files" title="Permalink to this headline">¶</a></h2>
 <p>There are times when you want to send files as responses for your requests.
-Prior to version 2.3, you could use <a class="reference internal" href="../views/media-view.html#MediaView" title="MediaView"><tt class="xref php php-class docutils literal"><span class="pre">MediaView</span></tt></a>.
-As of 2.3, <a class="reference internal" href="../views/media-view.html#MediaView" title="MediaView"><tt class="xref php php-class docutils literal"><span class="pre">MediaView</span></tt></a> is deprecated and you can use <a class="reference internal" href="#CakeResponse::file" title="CakeResponse::file"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::file()</span></tt></a>
+Prior to version 2.3, you could use <a class="reference internal" href="../views/media-view.html#MediaView" title="MediaView"><code class="xref php php-class docutils literal"><span class="pre">MediaView</span></code></a>.
+As of 2.3, <a class="reference internal" href="../views/media-view.html#MediaView" title="MediaView"><code class="xref php php-class docutils literal"><span class="pre">MediaView</span></code></a> is deprecated and you can use <a class="reference internal" href="#CakeResponse::file" title="CakeResponse::file"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::file()</span></code></a>
 to send a file as response:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">sendFile</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$file</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Attachment</span><span class="o">-&gt;</span><span class="na">getFile</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
@@ -682,8 +817,8 @@ to send a file as response:</p>
 </div>
 <p>As shown in the above example, you must pass the file path to the method.
 CakePHP will send a proper content type header if it&#8217;s a known file type listed in
-<tt class="xref php php-attr docutils literal"><span class="pre">CakeResponse::$_mimeTypes</span></tt>. You can add new types prior to calling <a class="reference internal" href="#CakeResponse::file" title="CakeResponse::file"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::file()</span></tt></a>
-by using the <a class="reference internal" href="#CakeResponse::type" title="CakeResponse::type"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::type()</span></tt></a> method.</p>
+<code class="xref php php-attr docutils literal"><span class="pre">CakeResponse::$_mimeTypes</span></code>. You can add new types prior to calling <a class="reference internal" href="#CakeResponse::file" title="CakeResponse::file"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::file()</span></code></a>
+by using the <a class="reference internal" href="#CakeResponse::type" title="CakeResponse::type"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::type()</span></code></a> method.</p>
 <p>If you want, you can also force a file to be downloaded instead of displayed in
 the browser by specifying the options:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">(</span>
@@ -714,7 +849,7 @@ a pdf or an ics generated on the fly from a string:</p>
 </div>
 <div class="section" id="setting-headers">
 <h2>Setting headers<a class="headerlink" href="#setting-headers" title="Permalink to this headline">¶</a></h2>
-<p>Setting headers is done with the <a class="reference internal" href="#CakeResponse::header" title="CakeResponse::header"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::header()</span></tt></a> method. It
+<p>Setting headers is done with the <a class="reference internal" href="#CakeResponse::header" title="CakeResponse::header"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::header()</span></code></a> method. It
 can be called with a few different parameter configurations:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Set a single header</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;http://example.com&#39;</span><span class="p">);</span>
@@ -731,20 +866,20 @@ can be called with a few different parameter configurations:</p>
 <span class="p">));</span>
 </pre></div>
 </div>
-<p>Setting the same <a class="reference internal" href="#CakeResponse::header" title="CakeResponse::header"><tt class="xref php php-meth docutils literal"><span class="pre">header()</span></tt></a> multiple times will result in overwriting the previous
+<p>Setting the same <a class="reference internal" href="#CakeResponse::header" title="CakeResponse::header"><code class="xref php php-meth docutils literal"><span class="pre">header()</span></code></a> multiple times will result in overwriting the previous
 values, just as regular header calls do. Headers are not sent when
-<a class="reference internal" href="#CakeResponse::header" title="CakeResponse::header"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::header()</span></tt></a> is called; instead they are buffered
+<a class="reference internal" href="#CakeResponse::header" title="CakeResponse::header"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::header()</span></code></a> is called; instead they are buffered
 until the response is actually sent.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 2.4.</span></p>
 </div>
-<p>You can now use the convenience method <a class="reference internal" href="#CakeResponse::location" title="CakeResponse::location"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::location()</span></tt></a> to directly set or get
+<p>You can now use the convenience method <a class="reference internal" href="#CakeResponse::location" title="CakeResponse::location"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::location()</span></code></a> to directly set or get
 the redirect location header.</p>
 </div>
 <div class="section" id="interacting-with-browser-caching">
 <h2>Interacting with browser caching<a class="headerlink" href="#interacting-with-browser-caching" title="Permalink to this headline">¶</a></h2>
 <p>You sometimes need to force browsers not to cache the results of a controller
-action. <a class="reference internal" href="#CakeResponse::disableCache" title="CakeResponse::disableCache"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::disableCache()</span></tt></a> is intended for just that:</p>
+action. <a class="reference internal" href="#CakeResponse::disableCache" title="CakeResponse::disableCache"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::disableCache()</span></code></a> is intended for just that:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// do something.</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">disableCache</span><span class="p">();</span>
@@ -757,7 +892,7 @@ action. <a class="reference internal" href="#CakeResponse::disableCache" title="
 files to Internet Explorer can result in errors.</p>
 </div>
 <p>You can also tell clients that you want them to cache responses. By using
-<a class="reference internal" href="#CakeResponse::cache" title="CakeResponse::cache"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::cache()</span></tt></a>:</p>
+<a class="reference internal" href="#CakeResponse::cache" title="CakeResponse::cache"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::cache()</span></code></a>:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">//do something</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">cache</span><span class="p">(</span><span class="s1">&#39;-1 minute&#39;</span><span class="p">,</span> <span class="s1">&#39;+5 days&#39;</span><span class="p">);</span>
@@ -765,10 +900,10 @@ files to Internet Explorer can result in errors.</p>
 </pre></div>
 </div>
 <p>The above would tell clients to cache the resulting response for 5 days,
-hopefully speeding up your visitors&#8217; experience. <a class="reference internal" href="#CakeResponse::cache" title="CakeResponse::cache"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::cache()</span></tt></a> sets the
-<tt class="docutils literal"><span class="pre">Last-Modified</span></tt> value to the first argument.
-<tt class="docutils literal"><span class="pre">Expires</span></tt> header and the <tt class="docutils literal"><span class="pre">max-age</span></tt> directive are set based on the second parameter.
-Cache-Control&#8217;s <tt class="docutils literal"><span class="pre">public</span></tt> directive is set as well.</p>
+hopefully speeding up your visitors&#8217; experience. <a class="reference internal" href="#CakeResponse::cache" title="CakeResponse::cache"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::cache()</span></code></a> sets the
+<code class="docutils literal"><span class="pre">Last-Modified</span></code> value to the first argument.
+<code class="docutils literal"><span class="pre">Expires</span></code> header and the <code class="docutils literal"><span class="pre">max-age</span></code> directive are set based on the second parameter.
+Cache-Control&#8217;s <code class="docutils literal"><span class="pre">public</span></code> directive is set as well.</p>
 </div>
 <div class="section" id="fine-tuning-http-cache">
 <span id="cake-response-caching"></span><h2>Fine tuning HTTP cache<a class="headerlink" href="#fine-tuning-http-cache" title="Permalink to this headline">¶</a></h2>
@@ -779,7 +914,7 @@ modified time and response entity tag.</p>
 <p>Rather than forcing you to code the logic for caching and for invalidating (refreshing)
 it once the data has changed, HTTP uses two models, expiration and validation,
 which usually are much simpler to use.</p>
-<p>Apart from using <a class="reference internal" href="#CakeResponse::cache" title="CakeResponse::cache"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::cache()</span></tt></a>, you can also use many other
+<p>Apart from using <a class="reference internal" href="#CakeResponse::cache" title="CakeResponse::cache"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::cache()</span></code></a>, you can also use many other
 methods to fine-tune HTTP cache headers to take advantage of browser or reverse
 proxy caching.</p>
 <div class="section" id="the-cache-control-header">
@@ -789,18 +924,18 @@ proxy caching.</p>
 </div>
 <p>Used under the expiration model, this header contains multiple indicators
 that can change the way browsers or proxies use the cached content. A
-<tt class="docutils literal"><span class="pre">Cache-Control</span></tt> header can look like this:</p>
+<code class="docutils literal"><span class="pre">Cache-Control</span></code> header can look like this:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">Cache</span><span class="o">-</span><span class="nx">Control</span><span class="o">:</span> <span class="k">private</span><span class="p">,</span> <span class="nb">max</span><span class="o">-</span><span class="nx">age</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span> <span class="nx">must</span><span class="o">-</span><span class="nx">revalidate</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> class helps you set this header with some utility methods that
-will produce a final valid <tt class="docutils literal"><span class="pre">Cache-Control</span></tt> header. The first is the <a class="reference internal" href="#CakeResponse::sharable" title="CakeResponse::sharable"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::sharable()</span></tt></a>
+<p><a class="reference internal" href="#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a> class helps you set this header with some utility methods that
+will produce a final valid <code class="docutils literal"><span class="pre">Cache-Control</span></code> header. The first is the <a class="reference internal" href="#CakeResponse::sharable" title="CakeResponse::sharable"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::sharable()</span></code></a>
 method, which indicates whether a response is to be considered sharable across
-different users or clients. This method actually controls the <tt class="docutils literal"><span class="pre">public</span></tt>
-or <tt class="docutils literal"><span class="pre">private</span></tt> part of this header. Setting a response as private indicates that
+different users or clients. This method actually controls the <code class="docutils literal"><span class="pre">public</span></code>
+or <code class="docutils literal"><span class="pre">private</span></code> part of this header. Setting a response as private indicates that
 all or part of it is intended for a single user. To take advantage of shared
 caches, the control directive must be set as public.</p>
-<p>The second parameter of this method is used to specify a <tt class="docutils literal"><span class="pre">max-age</span></tt> for the cache,
+<p>The second parameter of this method is used to specify a <code class="docutils literal"><span class="pre">max-age</span></code> for the cache,
 which is the number of seconds after which the response is no longer considered
 fresh:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">()</span> <span class="p">{</span>
@@ -816,24 +951,24 @@ fresh:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> exposes separate methods for setting each of the directives in
-the <tt class="docutils literal"><span class="pre">Cache-Control</span></tt> header.</p>
+<p><a class="reference internal" href="#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a> exposes separate methods for setting each of the directives in
+the <code class="docutils literal"><span class="pre">Cache-Control</span></code> header.</p>
 </div>
 <div class="section" id="the-expiration-header">
 <h3>The Expiration header<a class="headerlink" href="#the-expiration-header" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 2.1.</span></p>
 </div>
-<p>You can set the <tt class="docutils literal"><span class="pre">Expires</span></tt> header to a date and time after which the response is
+<p>You can set the <code class="docutils literal"><span class="pre">Expires</span></code> header to a date and time after which the response is
 no longer considered fresh. This header can be set using the
-<a class="reference internal" href="#CakeResponse::expires" title="CakeResponse::expires"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::expires()</span></tt></a> method:</p>
+<a class="reference internal" href="#CakeResponse::expires" title="CakeResponse::expires"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::expires()</span></code></a> method:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">expires</span><span class="p">(</span><span class="s1">&#39;+5 days&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>This method also accepts a <tt class="xref php php-class docutils literal"><span class="pre">DateTime</span></tt> instance or any string that can be parsed by the
-<tt class="xref php php-class docutils literal"><span class="pre">DateTime</span></tt> class.</p>
+<p>This method also accepts a <code class="xref php php-class docutils literal"><span class="pre">DateTime</span></code> instance or any string that can be parsed by the
+<code class="xref php php-class docutils literal"><span class="pre">DateTime</span></code> class.</p>
 </div>
 <div class="section" id="the-etag-header">
 <h3>The Etag header<a class="headerlink" href="#the-etag-header" title="Permalink to this headline">¶</a></h3>
@@ -846,12 +981,12 @@ longer fresh. Under this model, the client continues to store pages in the
 cache, but it asks the application every time
 whether the resource has changed, instead of using it directly.
 This is commonly used with static resources such as images and other assets.</p>
-<p>The <a class="reference internal" href="#CakeResponse::etag" title="CakeResponse::etag"><tt class="xref php php-meth docutils literal"><span class="pre">etag()</span></tt></a> method (called entity tag) is a string that uniquely identifies the
+<p>The <a class="reference internal" href="#CakeResponse::etag" title="CakeResponse::etag"><code class="xref php php-meth docutils literal"><span class="pre">etag()</span></code></a> method (called entity tag) is a string that uniquely identifies the
 requested resource, as a checksum does for a file, in order to determine whether
 it matches a cached resource.</p>
 <p>To take advantage of this header, you must either call the
-<a class="reference internal" href="#CakeResponse::checkNotModified" title="CakeResponse::checkNotModified"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::checkNotModified()</span></tt></a> method manually or include the
-<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a> in your controller:</p>
+<a class="reference internal" href="#CakeResponse::checkNotModified" title="CakeResponse::checkNotModified"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::checkNotModified()</span></code></a> method manually or include the
+<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><code class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></code></a> in your controller:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$articles</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">);</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">etag</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">generateHash</span><span class="p">(</span><span class="nv">$articles</span><span class="p">));</span>
@@ -868,13 +1003,13 @@ it matches a cached resource.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 2.1.</span></p>
 </div>
-<p>Under the HTTP cache validation model, you can also set the <tt class="docutils literal"><span class="pre">Last-Modified</span></tt>
+<p>Under the HTTP cache validation model, you can also set the <code class="docutils literal"><span class="pre">Last-Modified</span></code>
 header to indicate the date and time at which the resource was modified for the
 last time. Setting this header helps CakePHP tell caching clients whether
 the response was modified or not based on their cache.</p>
 <p>To take advantage of this header, you must either call the
-<a class="reference internal" href="#CakeResponse::checkNotModified" title="CakeResponse::checkNotModified"><tt class="xref php php-meth docutils literal"><span class="pre">CakeResponse::checkNotModified()</span></tt></a> method manually or include the
-<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><tt class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></tt></a> in your controller:</p>
+<a class="reference internal" href="#CakeResponse::checkNotModified" title="CakeResponse::checkNotModified"><code class="xref php php-meth docutils literal"><span class="pre">CakeResponse::checkNotModified()</span></code></a> method manually or include the
+<a class="reference internal" href="../core-libraries/components/request-handling.html#RequestHandlerComponent" title="RequestHandlerComponent"><code class="xref php php-class docutils literal"><span class="pre">RequestHandlerComponent</span></code></a> in your controller:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$article</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">modified</span><span class="p">(</span><span class="nv">$article</span><span class="p">[</span><span class="s1">&#39;Article&#39;</span><span class="p">][</span><span class="s1">&#39;modified&#39;</span><span class="p">]);</span>
@@ -890,7 +1025,7 @@ the response was modified or not based on their cache.</p>
 <h3>The Vary header<a class="headerlink" href="#the-vary-header" title="Permalink to this headline">¶</a></h3>
 <p>In some cases, you might want to serve different content using the same URL.
 This is often the case if you have a multilingual page or respond with different
-HTML depending on the browser. Under such circumstances you can use the <tt class="docutils literal"><span class="pre">Vary</span></tt> header:</p>
+HTML depending on the browser. Under such circumstances you can use the <code class="docutils literal"><span class="pre">Vary</span></code> header:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">vary</span><span class="p">(</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">vary</span><span class="p">(</span><span class="s1">&#39;Accept-Encoding&#39;</span><span class="p">,</span> <span class="s1">&#39;User-Agent&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">vary</span><span class="p">(</span><span class="s1">&#39;Accept-Language&#39;</span><span class="p">);</span>
@@ -900,10 +1035,10 @@ HTML depending on the browser. Under such circumstances you can use the <tt clas
 </div>
 <div class="section" id="cakeresponse-and-testing">
 <span id="cakeresponse-testing"></span><h2>CakeResponse and testing<a class="headerlink" href="#cakeresponse-and-testing" title="Permalink to this headline">¶</a></h2>
-<p>Probably one of the biggest wins from <a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a> comes from how it makes
+<p>Probably one of the biggest wins from <a class="reference internal" href="#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a> comes from how it makes
 testing controllers and components easier. Instead of having methods spread across
 several objects, you only have to mock a single object, since controllers and
-components delegate to <a class="reference internal" href="#CakeResponse" title="CakeResponse"><tt class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></tt></a>. This helps you to get closer to a unit
+components delegate to <a class="reference internal" href="#CakeResponse" title="CakeResponse"><code class="xref php php-class docutils literal"><span class="pre">CakeResponse</span></code></a>. This helps you to get closer to a unit
 test and makes testing controllers easier:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">testSomething</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">controller</span><span class="o">-&gt;</span><span class="na">response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMock</span><span class="p">(</span><span class="s1">&#39;CakeResponse&#39;</span><span class="p">);</span>
@@ -920,20 +1055,20 @@ headers in CLI.</p>
 <h2>CakeResponse API<a class="headerlink" href="#cakeresponse-api" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="CakeResponse">
-<em class="property">class </em><tt class="descname">CakeResponse</tt><a class="headerlink" href="#CakeResponse" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descname">CakeResponse</code><a class="headerlink" href="#CakeResponse" title="Permalink to this definition">¶</a></dt>
 <dd><p>CakeResponse provides a number of useful methods for interacting with
 the response you are sending to a client.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeResponse::header">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">header</tt><big>(</big><em>$header = null</em>, <em>$value = null</em><big>)</big><a class="headerlink" href="#CakeResponse::header" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeResponse::</code><code class="descname">header</code><span class="sig-paren">(</span><em>$header = null</em>, <em>$value = null</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows you to directly set one or more headers to be sent with the response.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeResponse::location">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">location</tt><big>(</big><em>$url = null</em><big>)</big><a class="headerlink" href="#CakeResponse::location" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeResponse::</code><code class="descname">location</code><span class="sig-paren">(</span><em>$url = null</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::location" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows you to directly set the redirect location header to be sent with the response:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Set the redirect location</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">location</span><span class="p">(</span><span class="s1">&#39;http://example.com&#39;</span><span class="p">);</span>
@@ -949,34 +1084,34 @@ the response you are sending to a client.</p>
 
 <dl class="method">
 <dt id="CakeResponse::charset">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">charset</tt><big>(</big><em>$charset = null</em><big>)</big><a class="headerlink" href="#CakeResponse::charset" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeResponse::</code><code class="descname">charset</code><span class="sig-paren">(</span><em>$charset = null</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::charset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the charset that will be used in the response.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeResponse::type">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">type</tt><big>(</big><em>$contentType = null</em><big>)</big><a class="headerlink" href="#CakeResponse::type" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeResponse::</code><code class="descname">type</code><span class="sig-paren">(</span><em>$contentType = null</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the content type of the response. You can either use a known content
 type alias or the full content type name.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeResponse::cache">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">cache</tt><big>(</big><em>$since</em>, <em>$time = '+1 day'</em><big>)</big><a class="headerlink" href="#CakeResponse::cache" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeResponse::</code><code class="descname">cache</code><span class="sig-paren">(</span><em>$since</em>, <em>$time = '+1 day'</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::cache" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows you to set caching headers in the response.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeResponse::disableCache">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">disableCache</tt><big>(</big><big>)</big><a class="headerlink" href="#CakeResponse::disableCache" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeResponse::</code><code class="descname">disableCache</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::disableCache" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the headers to disable client caching for the response.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeResponse::sharable">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">sharable</tt><big>(</big><em>$public = null</em>, <em>$time = null</em><big>)</big><a class="headerlink" href="#CakeResponse::sharable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the <tt class="docutils literal"><span class="pre">Cache-Control</span></tt> header to be either <tt class="docutils literal"><span class="pre">public</span></tt> or <tt class="docutils literal"><span class="pre">private</span></tt> and
-optionally sets a <tt class="docutils literal"><span class="pre">max-age</span></tt> directive of the resource</p>
+<code class="descclassname">CakeResponse::</code><code class="descname">sharable</code><span class="sig-paren">(</span><em>$public = null</em>, <em>$time = null</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::sharable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the <code class="docutils literal"><span class="pre">Cache-Control</span></code> header to be either <code class="docutils literal"><span class="pre">public</span></code> or <code class="docutils literal"><span class="pre">private</span></code> and
+optionally sets a <code class="docutils literal"><span class="pre">max-age</span></code> directive of the resource</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 2.1.</span></p>
 </div>
@@ -984,8 +1119,8 @@ optionally sets a <tt class="docutils literal"><span class="pre">max-age</span><
 
 <dl class="method">
 <dt id="CakeResponse::expires">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">expires</tt><big>(</big><em>$time = null</em><big>)</big><a class="headerlink" href="#CakeResponse::expires" title="Permalink to this definition">¶</a></dt>
-<dd><p>Allows the <tt class="docutils literal"><span class="pre">Expires</span></tt> header to be set to a specific date.</p>
+<code class="descclassname">CakeResponse::</code><code class="descname">expires</code><span class="sig-paren">(</span><em>$time = null</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::expires" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows the <code class="docutils literal"><span class="pre">Expires</span></code> header to be set to a specific date.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 2.1.</span></p>
 </div>
@@ -993,8 +1128,8 @@ optionally sets a <tt class="docutils literal"><span class="pre">max-age</span><
 
 <dl class="method">
 <dt id="CakeResponse::etag">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">etag</tt><big>(</big><em>$tag = null</em>, <em>$weak = false</em><big>)</big><a class="headerlink" href="#CakeResponse::etag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the <tt class="docutils literal"><span class="pre">Etag</span></tt> header to uniquely identify a response resource.</p>
+<code class="descclassname">CakeResponse::</code><code class="descname">etag</code><span class="sig-paren">(</span><em>$tag = null</em>, <em>$weak = false</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::etag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the <code class="docutils literal"><span class="pre">Etag</span></code> header to uniquely identify a response resource.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 2.1.</span></p>
 </div>
@@ -1002,8 +1137,8 @@ optionally sets a <tt class="docutils literal"><span class="pre">max-age</span><
 
 <dl class="method">
 <dt id="CakeResponse::modified">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">modified</tt><big>(</big><em>$time = null</em><big>)</big><a class="headerlink" href="#CakeResponse::modified" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the <tt class="docutils literal"><span class="pre">Last-Modified</span></tt> header to a specific date and time in the correct
+<code class="descclassname">CakeResponse::</code><code class="descname">modified</code><span class="sig-paren">(</span><em>$time = null</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the <code class="docutils literal"><span class="pre">Last-Modified</span></code> header to a specific date and time in the correct
 format.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 2.1.</span></p>
@@ -1012,7 +1147,7 @@ format.</p>
 
 <dl class="method">
 <dt id="CakeResponse::checkNotModified">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">checkNotModified</tt><big>(</big><em>CakeRequest $request</em><big>)</big><a class="headerlink" href="#CakeResponse::checkNotModified" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeResponse::</code><code class="descname">checkNotModified</code><span class="sig-paren">(</span><em>CakeRequest $request</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::checkNotModified" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compares the cache headers for the request object with the cache header from
 the response and determines whether it can still be considered fresh. If so,
 deletes the response content, and sends the <cite>304 Not Modified</cite> header.</p>
@@ -1023,40 +1158,40 @@ deletes the response content, and sends the <cite>304 Not Modified</cite> header
 
 <dl class="method">
 <dt id="CakeResponse::compress">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">compress</tt><big>(</big><big>)</big><a class="headerlink" href="#CakeResponse::compress" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeResponse::</code><code class="descname">compress</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::compress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Turns on gzip compression for the request.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeResponse::download">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">download</tt><big>(</big><em>$filename</em><big>)</big><a class="headerlink" href="#CakeResponse::download" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeResponse::</code><code class="descname">download</code><span class="sig-paren">(</span><em>$filename</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::download" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows you to send a response as an attachment, and to set its filename.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeResponse::statusCode">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">statusCode</tt><big>(</big><em>$code = null</em><big>)</big><a class="headerlink" href="#CakeResponse::statusCode" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeResponse::</code><code class="descname">statusCode</code><span class="sig-paren">(</span><em>$code = null</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::statusCode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows you to set the status code of the response.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeResponse::body">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">body</tt><big>(</big><em>$content = null</em><big>)</big><a class="headerlink" href="#CakeResponse::body" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">CakeResponse::</code><code class="descname">body</code><span class="sig-paren">(</span><em>$content = null</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::body" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the content body of the response.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeResponse::send">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">send</tt><big>(</big><big>)</big><a class="headerlink" href="#CakeResponse::send" title="Permalink to this definition">¶</a></dt>
-<dd><p>Once you are done creating a response, calling <a class="reference internal" href="#CakeResponse::send" title="CakeResponse::send"><tt class="xref php php-meth docutils literal"><span class="pre">send()</span></tt></a> will send all
+<code class="descclassname">CakeResponse::</code><code class="descname">send</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Once you are done creating a response, calling <a class="reference internal" href="#CakeResponse::send" title="CakeResponse::send"><code class="xref php php-meth docutils literal"><span class="pre">send()</span></code></a> will send all
 the set headers as well as the body. This is done automatically at the
-end of each request by <tt class="xref php php-class docutils literal"><span class="pre">Dispatcher</span></tt>.</p>
+end of each request by <code class="xref php php-class docutils literal"><span class="pre">Dispatcher</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="CakeResponse::file">
-<tt class="descclassname">CakeResponse::</tt><tt class="descname">file</tt><big>(</big><em>$path</em>, <em>$options = array()</em><big>)</big><a class="headerlink" href="#CakeResponse::file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Allows you to set the <tt class="docutils literal"><span class="pre">Content-Disposition</span></tt> header of a file either to display or to download.</p>
+<code class="descclassname">CakeResponse::</code><code class="descname">file</code><span class="sig-paren">(</span><em>$path</em>, <em>$options = array()</em><span class="sig-paren">)</span><a class="headerlink" href="#CakeResponse::file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows you to set the <code class="docutils literal"><span class="pre">Content-Disposition</span></code> header of a file either to display or to download.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 2.3.</span></p>
 </div>
@@ -1066,25 +1201,23 @@ end of each request by <tt class="xref php php-class docutils literal"><span cla
 </div>
 
 
+			</div>
 		</div>
-	</div>
 
-	<div class="sidebar columns three pull-nine">
-<div id="sidebar-navigation" class="hide-on-phones">
-	<h2 class="hide-on-desktops">Table of Contents</h2>
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="en">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cakephp-overview.html">CakePHP Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../controllers.html">Controllers</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="">Request and Response objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cakerequest">CakeRequest</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#cakeresponse">CakeResponse</a><ul class="simple">
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Request and Response objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cakerequest">CakeRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cakeresponse">CakeResponse</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scaffolding.html">Scaffolding</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pages-controller.html">The Pages Controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="components.html">Components</a></li>
@@ -1094,7 +1227,7 @@ end of each request by <tt class="xref php php-class docutils literal"><span cla
 <li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">Core Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins.html">Plugins</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Console and Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Shells, Tasks &amp; Console Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">Deployment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">Tutorials &amp; Examples</a></li>
@@ -1104,112 +1237,171 @@ end of each request by <tt class="xref php php-class docutils literal"><span cla
 
 </div>
 
-<div class="page-contents">
-	<h3>Page contents</h3>
-	<ul>
-<li><a class="reference internal" href="#">Request and Response objects</a></li>
-<li><a class="reference internal" href="#cakerequest">CakeRequest</a><ul>
-<li><a class="reference internal" href="#accessing-request-parameters">Accessing request parameters</a></li>
-<li><a class="reference internal" href="#accessing-querystring-parameters">Accessing Querystring parameters</a></li>
-<li><a class="reference internal" href="#accessing-post-data">Accessing POST data</a></li>
-<li><a class="reference internal" href="#accessing-put-or-post-data">Accessing PUT or POST data</a></li>
-<li><a class="reference internal" href="#accessing-xml-or-json-data">Accessing XML or JSON data</a></li>
-<li><a class="reference internal" href="#accessing-path-information">Accessing path information</a></li>
-<li><a class="reference internal" href="#inspecting-the-request">Inspecting the request</a></li>
-<li><a class="reference internal" href="#cakerequest-and-requesthandlercomponent">CakeRequest and RequestHandlerComponent</a></li>
-<li><a class="reference internal" href="#interacting-with-other-aspects-of-the-request">Interacting with other aspects of the request</a></li>
-<li><a class="reference internal" href="#cakerequest-api">CakeRequest API</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cakeresponse">CakeResponse</a><ul>
-<li><a class="reference internal" href="#changing-the-response-class">Changing the response class</a></li>
-<li><a class="reference internal" href="#dealing-with-content-types">Dealing with content types</a></li>
-<li><a class="reference internal" href="#sending-files">Sending files</a></li>
-<li><a class="reference internal" href="#sending-a-string-as-file">Sending a string as file</a></li>
-<li><a class="reference internal" href="#setting-headers">Setting headers</a></li>
-<li><a class="reference internal" href="#interacting-with-browser-caching">Interacting with browser caching</a></li>
-<li><a class="reference internal" href="#fine-tuning-http-cache">Fine tuning HTTP cache</a><ul>
-<li><a class="reference internal" href="#the-cache-control-header">The Cache Control header</a></li>
-<li><a class="reference internal" href="#the-expiration-header">The Expiration header</a></li>
-<li><a class="reference internal" href="#the-etag-header">The Etag header</a></li>
-<li><a class="reference internal" href="#the-last-modified-header">The Last Modified header</a></li>
-<li><a class="reference internal" href="#the-vary-header">The Vary header</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cakeresponse-and-testing">CakeResponse and testing</a></li>
-<li><a class="reference internal" href="#cakeresponse-api">CakeResponse API</a></li>
-</ul>
-</li>
-</ul>
-
-</div>
-	</div>
-
-</div>
-
-<div class="content row">
-	<ul class="related-pages inline">
-	<li>
-		<a href="../genindex.html" title="General Index" accesskey="I">index</a>
-	</li>
-	<li>
-		<a href="scaffolding.html" title="Scaffolding" accesskey="N">next</a>
-	</li>
-	<li>
-		<a href="../controllers.html" title="Controllers" accesskey="P">previous</a>
-	</li>
-	</ul>
-</div>
-
-	<div class="footer-push"> </div>
-</div>
-
-
-
-
-
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>发现翻译错误?</strong>
-			请在下面留言<br />
-			<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">[ 我要加入翻译 ]</a>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-					&copy; Copyright 2014, Cake Software Foundation, Inc.
-				Last updated on Jul 10, 2016.
-				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
 		</div>
 	</div>
 </div>
 
-<div id="nav-modal" class="reveal-modal"> </div>
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-8 social-footer text-center ">
+				<a href="#">发现翻译错误? 请在下面留言</a>
+				<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">我要加入翻译</a>
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="../_static/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="../_static/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
+</li>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
+
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
+
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							&copy; Copyright 2016, Cake Software Foundation, Inc.
+						Last updated on Aug 02, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
 <div id="inline-search-results"></div>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F201cbc61deaf9f7ffb521fb23e83db40' type='text/javascript'%3E%3C/script%3E"));
-</script>
 
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+
+</div>
+
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"cakephpchina"};
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
 	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	</script>
-<!-- Duoshuo Comment END -->
-
-<!-- Grunt Live Reload -->
-<script src="http://192.168.56.113:35729/livereload.js"></script>
+</script>
   </body>
 </html>

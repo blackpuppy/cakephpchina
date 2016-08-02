@@ -1,174 +1,300 @@
 
+
 <!DOCTYPE html>
-
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Saving Your Data" lang="zh_CN" name="title" />
-<meta content="doc models,validation rules,data validation,flash message,null model,table php,request data,php class,model data,database table,array,recipes,success,reason,snap,data model" lang="zh_CN" name="keywords" />
+    <meta content="Saving Your Data" lang="zh" name="title" />
+<meta content="doc models,validation rules,data validation,flash message,null model,table php,request data,php class,model data,database table,array,recipes,success,reason,snap,data model" lang="zh" name="keywords" />
 
-    <title>保存数据 &mdash; CakePHP Cookbook 2.x 文档</title>
+    <title>保存数据</title>
+    <link href="../_static/favicon.png" type="image/png" rel="icon" />
+
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/app.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.x',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/translations.js"></script>
     <script type="text/javascript" src="../_static/app.js"></script>
-    <script type="text/javascript" src="../_static/modernizr.foundation.js"></script>
-    <script type="text/javascript" src="../_static/foundation.js"></script>
+
+    <link rel="alternate" hreflang="en" href="../../en/models/saving-your-data.html" /><link rel="alternate" hreflang="pt" href="../../pt/models/saving-your-data.html" /><link rel="alternate" hreflang="es" href="../../es/models/saving-your-data.html" /><link rel="alternate" hreflang="ja" href="../../ja/models/saving-your-data.html" /><link rel="alternate" hreflang="fr" href="../../fr/models/saving-your-data.html" />
+
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within CakePHP Cookbook 2.x 文档" href="../_static/opensearchdescription-book-3-x.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="top" title="CakePHP Cookbook 2.x 文档" href="../index.html" />
     <link rel="up" title="模型" href="../models.html" />
     <link rel="next" title="删除数据" href="deleting-data.html" />
     <link rel="prev" title="检索数据" href="retrieving-your-data.html" />
-<link href="../_static/favicon.ico" type="image/x-icon" rel="icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="alternate" hreflang="en" href="../../en/models/saving-your-data.html" /><link rel="alternate" hreflang="pt" href="../../pt/models/saving-your-data.html" /><link rel="alternate" hreflang="es" href="../../es/models/saving-your-data.html" /><link rel="alternate" hreflang="ja" href="../../ja/models/saving-your-data.html" /><link rel="alternate" hreflang="fr" href="../../fr/models/saving-your-data.html" />
-
-<link rel="search" type="application/opensearchdescription+xml" title="CakePHP Book 2.x Search" href="../_static/opensearchdescription-book-2-x.xml">
-<script type="text/javascript">
-window.lang = "zh_CN";
-</script>
-
+    <script type="text/javascript">
+    window.lang = "zh";
+    </script>
   </head>
   <body>
 
 <div id="container">
+	
+	<header class="nav-down">
+		<div class="container-fluid hidden-xs hidden-sm">
+			<div class="row">
+				<div class="col-sm-3 col-md-3">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-<div id="cakephp-global-navigation">
-	<ul>
-		<li class="main"><a href="http://cakephp.org">CakePHP</a></li>
-		<li class="primary"><a href="#" class="empty">Downloads</a>
-			<ul class="second-level">
-				<li><a href="https://github.com/cakephp/cakephp/tags">Releases</a></li>
-				<li><a href="http://pear.cakephp.org">Pear channel</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="#" class="empty">Documentation</a>
-			<ul class="second-level">
-				<li><a href="http://api.cakephp.org">API</a></li>
-				<li><a href="http://book.cakephp.org">Book</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://community.cakephp.org">Community</a>
-			<ul class="second-level">
-				<li><a href="http://webchat.freenode.net/?channels=cakephp&uio=MT1mYWxzZSY5PXRydWUmMTE9MjQ2b8">Help &amp; Support</a></li>
-				<li><a href="https://github.com/cakephp/cakephp/issues">Issues</a></li>
-				<li><a href="http://bakery.cakephp.org">The Bakery</a></li>
-				<li><a href="http://stackoverflow.com/tags/cakephp">Stack Overflow</a></li>
-				<li><a href="http://www.facebook.com/groups/cake.community">Facebook Group</a></li>
-				<li><a href="http://goo.gl/mSC0s">Google+ Community</a></li>
-				<li><a href="http://www.youtube.com/user/CakePHP">YouTube Channel</a></li>
-				<li><a href="http://podcast.cakephp.org">CakePHP Podcast</a></li>
-				<li><a href="http://twitter.com/CakePHP">Follow us on Twitter</a></li>
-				<li><a href="http://groups.google.com/group/cake-php">Google Group</a></li>
-				<li><a href="http://github.com/cakephp/cakephp/contributors">Contributors</a></li>
-				<li><a href="http://plugins.cakephp.org">Plugins &amp; Packages</a></li>
-				<li><a href="http://community.cakephp.org/get-involved">Get Involved</a></li>
-				<li><a href="http://community.cakephp.org/guidelines">Guidelines</a></li>
-				<li><a href="http://cakefest.org">CakeFest</a></li>
-				<li><a href="http://cakephp.org/logos">Logo</a></li>
-			</ul>
-		</li>
-		<li class="primary"><a href="http://cakephp.org/services">Services</a>
-			<ul class="second-level">
-				<li><a href="http://certification.cakephp.org">Certification</a></li>
-				<li><a href="http://cakephp.org/services/consultation">Consultation</a></li>
-				<li><a href="http://cakephp.org/services/support">Support</a></li>
-				<li><a href="http://training.cakephp.org">Training</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
+				<div class="col-sm-9 col-md-9">
+					<nav class="navbar-right">
+						<ul class="menu">
+							<li class="first">
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Documentation</a>
+								<ul class="submenu">
+									
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
 
-<div class="masthead">
-	<div class="header-backing"></div>
-	<div class="searchbar row">
-		<div class="columns three phone-one">
-			<a class="logo" href="../contents.html">
-			<img src="../_static/cake-logo.png" alt="CakePHP" width="70" />
-			</a>
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+								</ul>
+							</li>
+
+							<li><a href="http://cakephp.org/business-solutions">Business Solutions</a></li>
+							<li><a href="http://cakephp.org/showcase">Showcase</a></li>
+
+							<li>
+								<a href="#"><i class="fa fa-menu fa-chevron-down"></i>Community</a>
+								<div class="megamenu full">
+									<div class="row">
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+											</ul>
+										</div>
+										<div class="col-6 pl30">
+											<ul class="megamenu-list">
+												
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
+
 		
-<div id="searchbox" class="columns nine phone-three">
+		<div class="container-fluid hidden-md hidden-lg">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="logo-cake" href="http://cakephp.org">
+						<img src="../_static/logo-cake.png" alt="CakePHP" />
+					</a>
+				</div>
 
-	<form id="searchform" class="search" action="../search.html" method="get">
-		<input class="search-input" autocomplete="off" type="search" name="q" size="18" />
-		<input class="search-submit search-big button red" type="submit" value="搜索" />
-		<input type="hidden" name="check_keywords" value="yes" />
-		<input type="hidden" name="area" value="default" />
-
-		<a href="#" id="tablet-nav" class="show-on-phones pale button small">Nav</a>
-	</form>
-
-</div>
-	</div>
-</div>
-<div class="breadcrumb-header">
-	<div class="related row">
-		<div class="columns three root-link">
-			<a href="../contents.html">Cookbook 2.x</a>
-		</div>
-		<div class="columns nine">
-			<ul class="inline breadcrumb">
-			<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="../models.html" accesskey="U" itemprop="url"><span itemprop="title">模型</span></a>
-			</li>
-			</ul>
-			<div class="versions dropdown">
-				<a href="#">2.x Book</a>
-				<ul>
-					<li><a href="http://book.cakephp.org/3.0/en">3.0 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.3/zh_CN/">1.3 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.2/zh_CN/">1.2 Book</a></li>
-					<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
-				</ul>
-			</div>
-
-			<div class="languages dropdown">
-				<a href="#">zh_CN</a>
-
-				<ul>
-				
-					<li><a href="../../en/models/saving-your-data.html">en</a></li>
-				
-					<li><a href="../../pt/models/saving-your-data.html">pt</a></li>
-				
-					<li><a href="../../es/models/saving-your-data.html">es</a></li>
-				
-					<li><a href="../../ja/models/saving-your-data.html">ja</a></li>
-				
-					<li><a href="../../fr/models/saving-your-data.html">fr</a></li>
-				
-					<li></li>
-				
-				</ul>
+				<div class="col-sm-6 col-xs-6">
+					<div class="navbar-right">
+						<button id="btn-menu" class="btn-menu" data-toggle="modal" data-target="#modal">
+							<i class="fa fa-bars toggle-modal"></i>
+						</button>
+					</div>
+					<div id="wrap">
+						<form class="search" action="../search.html" method="get">
+							<input name="q" type="search" placeholder="What are you looking for?">
+							<input id="search_submit" value="搜索" type="submit">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
-<div class="content row">
-	<div class="document columns nine push-three">
-		<div class="body"><a class="button pale improve" href="https://github.com/cakephp/docs/edit/master/zh/models/saving-your-data.rst" target="_blank">Improve this Doc</a>
+		
+		<section id="nav-cook" class="hidden-xs hidden-sm">
+			<div class="container-fluid ">
+				<div class="row ">
+					<div class="col-md-12 back-book">
+						<div class="col-md-4 col-md-offset-1 text-center t-cook-nav p0 hidden-sm hidden-xs">
+							<h2>
+								<a href="../contents.html">
+									<span class="glyph_range icon-submenu icon-submenu-cook">B</span>
+									CakePHP 2.x <strong>Cookbook</strong>
+								</a>
+							</h2>
+						</div>
+
+						<div class="col-md-4 hidden-sm">
+							<form class="search" action="../search.html" method="get">
+								<input type="hidden" name="check_keywords" value="yes" />
+								<input type="hidden" name="area" value="default" />
+
+								<div class="col-md-10 p0">
+									<input class="form-control form-cook" autocomplete="off" type="search" name="q" size="18" placeholder='Cookbook Search' />
+								</div>
+								<div class="col-md-2 p0 search-cook">
+									<button type="submit">
+										<span class="glyph_range icon-submenu icon-submenu-cook">A</span>
+									</button>
+								</div>
+							</form>
+						</div>
+
+						
+						<div class="col-md-3">
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Language:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"
+													role="button" aria-haspopup="true" aria-expanded="false" href="#">
+														zh
+														<i class="fa fa-menu-en fa-chevron-down"></i>
+													</a>
+											<ul class="dropdown-menu">
+											
+												<li><a href="../../en/models/saving-your-data.html">en</a></li>
+											
+												<li><a href="../../pt/models/saving-your-data.html">pt</a></li>
+											
+												<li><a href="../../es/models/saving-your-data.html">es</a></li>
+											
+												<li><a href="../../ja/models/saving-your-data.html">ja</a></li>
+											
+												<li><a href="../../fr/models/saving-your-data.html">fr</a></li>
+											
+												<li></li>
+											
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6 p0">
+								<div class="col-md-7 t-language p0">
+									<h6>Version:</h6>
+								</div>
+								<div class="col-md-5 p0">
+									<ul class="nav navbar-nav">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2.x <i class="fa fa-menu-en fa-chevron-down"></i></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://book.cakephp.org/3.0/zh">3.x Book</a></li>
+												<li><a href="http://book.cakephp.org/2.0/zh">2.x Book</a></li>
+												<li><a href="http://book.cakephp.org/1.3/zh/">1.3 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.2/zh/">1.2 Book</a></li>
+												<li><a href="http://book.cakephp.org/1.1/en">1.1 Book</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</header>
+
+	
+	<section class="nav-btn visible-sm visible-xs">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-nav" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Nav</strong></button>
+				</div>
+
+				<div class="col-sm-6 col-xs-6 text-center">
+					<button id="btn-toc" class="btn btn-b btn-nav" data-toggle="modal" data-target="#modal"><strong>Table of Contents</strong></button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-header">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title-cookbook" id="modal-header"></h4>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+<div class="container page-container"><div id="improve-slideout">
+		<i class="fa fa-pencil icon-improve"></i>
+		<a href="https://github.com/cakephp/docs/edit/master/zh/models/saving-your-data.rst" target="_blank">
+			<div id="improve-slideout-inner"><h6>Improve This Doc <i class="fa fa-github git-improve"></i></h6></div>
+		</a>
+	</div><a id="back-to-contents" href="#page-contents"><i class="fa fa-arrow-circle-up icon-improve" title="Back to Contents"></i></a>
+
+	
+	<div class="row">
+		<div class="col-sm-12 col-md-9 col-md-push-3 space-left push-off"><div class="page-contents col-sm-5">
+				<h3>Page Contents</h3>
+				<ul>
+<li><a class="reference internal" href="#">保存数据</a><ul>
+<li><a class="reference internal" href="#model-set-one-two-null"><code class="docutils literal"><span class="pre">Model::set($one,</span> <span class="pre">$two</span> <span class="pre">=</span> <span class="pre">null)</span></code></a></li>
+<li><a class="reference internal" href="#model-clear"><code class="docutils literal"><span class="pre">Model::clear()</span></code></a></li>
+<li><a class="reference internal" href="#model-save-array-data-null-boolean-validate-true-array-fieldlist-array"><code class="docutils literal"><span class="pre">Model::save(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">boolean</span> <span class="pre">$validate</span> <span class="pre">=</span> <span class="pre">true,</span> <span class="pre">array</span> <span class="pre">$fieldList</span> <span class="pre">=</span> <span class="pre">array())</span></code></a></li>
+<li><a class="reference internal" href="#model-create-array-data-array"><code class="docutils literal"><span class="pre">Model::create(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">array())</span></code></a></li>
+<li><a class="reference internal" href="#model-savefield-string-fieldname-string-fieldvalue-validate-false"><code class="docutils literal"><span class="pre">Model::saveField(string</span> <span class="pre">$fieldName,</span> <span class="pre">string</span> <span class="pre">$fieldValue,</span> <span class="pre">$validate</span> <span class="pre">=</span> <span class="pre">false)</span></code></a></li>
+<li><a class="reference internal" href="#model-updateall-array-fields-mixed-conditions"><code class="docutils literal"><span class="pre">Model::updateAll(array</span> <span class="pre">$fields,</span> <span class="pre">mixed</span> <span class="pre">$conditions)</span></code></a></li>
+<li><a class="reference internal" href="#model-savemany-array-data-null-array-options-array"><code class="docutils literal"><span class="pre">Model::saveMany(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></code></a></li>
+<li><a class="reference internal" href="#model-saveassociated-array-data-null-array-options-array"><code class="docutils literal"><span class="pre">Model::saveAssociated(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></code></a></li>
+<li><a class="reference internal" href="#model-saveall-array-data-null-array-options-array"><code class="docutils literal"><span class="pre">Model::saveAll(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></code></a></li>
+<li><a class="reference internal" href="#hasone-hasmany-belongsto">保存相关模型的数据(hasOne, hasMany, belongsTo)</a></li>
+<li><a class="reference internal" href="#hasmany">保存通过(连接模型)的 hasMany 数据</a><ul>
+<li><a class="reference internal" href="#habtm">保存相关模型数据 (HABTM)</a><ul>
+<li><a class="reference internal" href="#id2">自我 HABTM</a></li>
+<li><a class="reference internal" href="#id3">当 HABTM 变得复杂时怎么办？</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">数据表</a><ul>
+<li><a class="reference internal" href="#created-modified">使用 created 和 modified 列</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+			</div><div class="document-body">
+			
   <div class="section" id="id1">
 <h1>保存数据<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <p>CakePHP 使保存模型数据易如反掌。准备保存的数据应当以下面的基本格式传递给模型的
-<tt class="docutils literal"><span class="pre">save()</span></tt> 方法:</p>
+<code class="docutils literal"><span class="pre">save()</span></code> 方法:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="nx">ModelName</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
@@ -179,9 +305,9 @@ window.lang = "zh_CN";
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>大多数时候你根本无需担心这种格式：CakePHP 的 <a class="reference internal" href="../core-libraries/helpers/form.html#FormHelper" title="FormHelper"><tt class="xref php php-class docutils literal"><span class="pre">FormHelper</span></tt></a> 和模型的
-find 方法都会将数据包装成这种格式。如果使用 <a class="reference internal" href="../core-libraries/helpers/form.html#FormHelper" title="FormHelper"><tt class="xref php php-class docutils literal"><span class="pre">FormHelper</span></tt></a>，数据也在
-<tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></tt> 方便地可供立即使用。</p>
+<p>大多数时候你根本无需担心这种格式：CakePHP 的 <a class="reference internal" href="../core-libraries/helpers/form.html#FormHelper" title="FormHelper"><code class="xref php php-class docutils literal"><span class="pre">FormHelper</span></code></a> 和模型的
+find 方法都会将数据包装成这种格式。如果使用 <a class="reference internal" href="../core-libraries/helpers/form.html#FormHelper" title="FormHelper"><code class="xref php php-class docutils literal"><span class="pre">FormHelper</span></code></a>，数据也在
+<code class="docutils literal"><span class="pre">$this-&gt;request-&gt;data</span></code> 方便地可供立即使用。</p>
 <p>下面是控制器动作使用 CakePHP 模型向数据库表存入数据的简单示例:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">edit</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 是否有表单数据被提交(*POSTed*)？</span>
@@ -200,9 +326,9 @@ find 方法都会将数据包装成这种格式。如果使用 <a class="referen
 </pre></div>
 </div>
 <p>当调用 save 方法时，在第一个参数中传入的数据会使用 CakePHP 的验证机制进行验证(欲
-知详情，请参见 <a class="reference internal" href="data-validation.html"><em>数据验证</em></a> 一章)。如果因为某些原因，数据没有
+知详情，请参见 <a class="reference internal" href="data-validation.html"><span class="doc">数据验证</span></a> 一章)。如果因为某些原因，数据没有
 保存，一定要检查是否是某些验证规则没有通过。这种情况下，可以通过输出
-<tt class="xref php php-attr docutils literal"><span class="pre">Model::$validationErrors</span></tt> 来进行调试:</p>
+<code class="xref php php-attr docutils literal"><span class="pre">Model::$validationErrors</span></code> 来进行调试:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
     <span class="c1">// 处理成功的情况。</span>
 <span class="p">}</span>
@@ -211,16 +337,16 @@ find 方法都会将数据包装成这种格式。如果使用 <a class="referen
 </div>
 <p>模型中还有其它一些与保存相关的方法会对你有用：</p>
 <div class="section" id="model-set-one-two-null">
-<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::set($one,</span> <span class="pre">$two</span> <span class="pre">=</span> <span class="pre">null)</span></tt><a class="headerlink" href="#model-set-one-two-null" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">Model::set()</span></tt> 可以用于将一个或多个字段的数据设置到模型的 data 数组中。这可用
+<h2><code class="xref php php-meth docutils literal"><span class="pre">Model::set($one,</span> <span class="pre">$two</span> <span class="pre">=</span> <span class="pre">null)</span></code><a class="headerlink" href="#model-set-one-two-null" title="永久链接至标题">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Model::set()</span></code> 可以用于将一个或多个字段的数据设置到模型的 data 数组中。这可用
 于把模型和模型提供的 ActiveRecord 特性一起使用:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;New title for the article&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>此例展示了如何以 ActiveRecord 的方式，使用 <tt class="docutils literal"><span class="pre">set()</span></tt> 方法更新单个列。也可以使用
-<tt class="docutils literal"><span class="pre">set()</span></tt> 给多个字段赋予新值:</p>
+<p>此例展示了如何以 ActiveRecord 的方式，使用 <code class="docutils literal"><span class="pre">set()</span></code> 方法更新单个列。也可以使用
+<code class="docutils literal"><span class="pre">set()</span></code> 给多个字段赋予新值:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;New title&#39;</span><span class="p">,</span>
@@ -232,49 +358,49 @@ find 方法都会将数据包装成这种格式。如果使用 <a class="referen
 <p>上例会更新 title 和 published 字段，并把记录保存到数据库中。</p>
 </div>
 <div class="section" id="model-clear">
-<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::clear()</span></tt><a class="headerlink" href="#model-clear" title="永久链接至标题">¶</a></h2>
+<h2><code class="xref php php-meth docutils literal"><span class="pre">Model::clear()</span></code><a class="headerlink" href="#model-clear" title="永久链接至标题">¶</a></h2>
 <p>该方法可用于重置模型状态，并清除任何未保存数据及验证错误。</p>
 <div class="versionadded">
 <p><span class="versionmodified">2.4 新版功能.</span></p>
 </div>
 </div>
 <div class="section" id="model-save-array-data-null-boolean-validate-true-array-fieldlist-array">
-<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::save(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">boolean</span> <span class="pre">$validate</span> <span class="pre">=</span> <span class="pre">true,</span> <span class="pre">array</span> <span class="pre">$fieldList</span> <span class="pre">=</span> <span class="pre">array())</span></tt><a class="headerlink" href="#model-save-array-data-null-boolean-validate-true-array-fieldlist-array" title="永久链接至标题">¶</a></h2>
+<h2><code class="xref php php-meth docutils literal"><span class="pre">Model::save(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">boolean</span> <span class="pre">$validate</span> <span class="pre">=</span> <span class="pre">true,</span> <span class="pre">array</span> <span class="pre">$fieldList</span> <span class="pre">=</span> <span class="pre">array())</span></code><a class="headerlink" href="#model-save-array-data-null-boolean-validate-true-array-fieldlist-array" title="永久链接至标题">¶</a></h2>
 <p>如前所示，这个方法保存数组格式的数据。第二个参数让你可以跳过验证，第三个参数让你
-可以提供要保存的模型字段列表。为了增强安全性，可以使用 <tt class="docutils literal"><span class="pre">$fieldList</span></tt> 限制要保存
+可以提供要保存的模型字段列表。为了增强安全性，可以使用 <code class="docutils literal"><span class="pre">$fieldList</span></code> 限制要保存
 的字段。</p>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p class="last">如果不提供 <tt class="docutils literal"><span class="pre">$fieldList</span></tt>，恶意的用户能够向表单数据中添加额外的字段(在你没有
-使用 <a class="reference internal" href="../core-libraries/components/security-component.html#SecurityComponent" title="SecurityComponent"><tt class="xref php php-class docutils literal"><span class="pre">SecurityComponent</span></tt></a> 的情况下)，从而改变原本不希望被改变的字
+<p class="last">如果不提供 <code class="docutils literal"><span class="pre">$fieldList</span></code>，恶意的用户能够向表单数据中添加额外的字段(在你没有
+使用 <a class="reference internal" href="../core-libraries/components/security-component.html#SecurityComponent" title="SecurityComponent"><code class="xref php php-class docutils literal"><span class="pre">SecurityComponent</span></code></a> 的情况下)，从而改变原本不希望被改变的字
 段。</p>
 </div>
 <p>save 方法还有另外一种语法:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">save</span><span class="p">(</span><span class="k">array</span> <span class="nv">$data</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$params</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">$params</span></tt> 数组可以使用如下任意选项作为其键:</p>
+<p><code class="docutils literal"><span class="pre">$params</span></code> 数组可以使用如下任意选项作为其键:</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">validate</span></tt> 设置为 true/false 来开启/关闭验证。</li>
-<li><tt class="docutils literal"><span class="pre">fieldList</span></tt> 允许保存的字段数组。</li>
-<li><tt class="docutils literal"><span class="pre">callbacks</span></tt> 设置为 false 将禁止回调。使用 &#8216;before&#8217; 或 &#8216;after&#8217; 将仅开启指定的
+<li><code class="docutils literal"><span class="pre">validate</span></code> 设置为 true/false 来开启/关闭验证。</li>
+<li><code class="docutils literal"><span class="pre">fieldList</span></code> 允许保存的字段数组。</li>
+<li><code class="docutils literal"><span class="pre">callbacks</span></code> 设置为 false 将禁止回调。使用 &#8216;before&#8217; 或 &#8216;after&#8217; 将仅开启指定的
 回调。</li>
-<li><tt class="docutils literal"><span class="pre">counterCache</span></tt> (从 2.4 版本开始)控制计数器缓存(如果有的话)更新的布尔值</li>
-<li><tt class="docutils literal"><span class="pre">atomic</span></tt> (从 2.6 版本开始) 指定要使用事务保存记录的布尔值。</li>
+<li><code class="docutils literal"><span class="pre">counterCache</span></code> (从 2.4 版本开始)控制计数器缓存(如果有的话)更新的布尔值</li>
+<li><code class="docutils literal"><span class="pre">atomic</span></code> (从 2.6 版本开始) 指定要使用事务保存记录的布尔值。</li>
 </ul>
-<p>欲知模型回调的更多信息，请参见 <a class="reference internal" href="callback-methods.html"><em>这里</em></a>。</p>
+<p>欲知模型回调的更多信息，请参见 <a class="reference internal" href="callback-methods.html"><span class="doc">这里</span></a>。</p>
 <div class="admonition tip">
 <p class="first admonition-title">小技巧</p>
-<p class="last">如果你不希望保存某些数据时自动更新 <tt class="docutils literal"><span class="pre">modified</span></tt> 字段，在 $data 数组中添加
-<tt class="docutils literal"><span class="pre">'modified'</span> <span class="pre">=&gt;</span> <span class="pre">false</span></tt>。</p>
+<p class="last">如果你不希望保存某些数据时自动更新 <code class="docutils literal"><span class="pre">modified</span></code> 字段，在 $data 数组中添加
+<code class="docutils literal"><span class="pre">'modified'</span> <span class="pre">=&gt;</span> <span class="pre">false</span></code>。</p>
 </div>
-<p>一旦保存完成，可以使用模型对象的 <tt class="docutils literal"><span class="pre">$id</span></tt> 属性获得对象的 ID —— 在创建新对象时可能
+<p>一旦保存完成，可以使用模型对象的 <code class="docutils literal"><span class="pre">$id</span></code> 属性获得对象的 ID —— 在创建新对象时可能
 会非常方便。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Ingredient</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$newData</span><span class="p">);</span>
 <span class="nv">$newIngredientId</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Ingredient</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>创建或更新是通过模型的 <tt class="docutils literal"><span class="pre">id</span></tt> 字段来控制的。如果设置了 <tt class="docutils literal"><span class="pre">$Model-&gt;id</span></tt>，带有这个
+<p>创建或更新是通过模型的 <code class="docutils literal"><span class="pre">id</span></code> 字段来控制的。如果设置了 <code class="docutils literal"><span class="pre">$Model-&gt;id</span></code>，带有这个
 主键的记录将被更新，否则将创建新记录:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 建新记录：id 没有设置或为 null</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
@@ -287,7 +413,7 @@ find 方法都会将数据包装成这种格式。如果使用 <a class="referen
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">小技巧</p>
-<p class="last">在循环中调用 save 方法时，不要忘记调用 <tt class="docutils literal"><span class="pre">clear()</span></tt>。</p>
+<p class="last">在循环中调用 save 方法时，不要忘记调用 <code class="docutils literal"><span class="pre">clear()</span></code>。</p>
 </div>
 <p>如果想更新一条记录，而不是创建一条新记录，请确保向数据数组传入了主键字段:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My new title&#39;</span><span class="p">);</span>
@@ -297,13 +423,13 @@ find 方法都会将数据包装成这种格式。如果使用 <a class="referen
 </div>
 </div>
 <div class="section" id="model-create-array-data-array">
-<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::create(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">array())</span></tt><a class="headerlink" href="#model-create-array-data-array" title="永久链接至标题">¶</a></h2>
+<h2><code class="xref php php-meth docutils literal"><span class="pre">Model::create(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">array())</span></code><a class="headerlink" href="#model-create-array-data-array" title="永久链接至标题">¶</a></h2>
 <p>这个方法为保存新数据重置模型的状态。实际上它并不在数据库中创建新记录，而是清除
 Model::$id，并按照数据库字段的默认值设置 Model::$data。如果没有定义数据库字段的
 默认值，Model::$data 会被设置空数组。</p>
-<p>如果传入了 <tt class="docutils literal"><span class="pre">$data</span></tt> 参数(使用上面描述的数组格式)，这会和数据库字段的默认值合并，
-并准备好模型实例来保存这些数据(可由 <tt class="docutils literal"><span class="pre">$this-&gt;data</span></tt> 访问)。</p>
-<p>如果传入 <tt class="docutils literal"><span class="pre">false</span></tt> 或 <tt class="docutils literal"><span class="pre">null</span></tt> 给 <tt class="docutils literal"><span class="pre">$data</span></tt> 参数，Model::data 会被设置为空数组。</p>
+<p>如果传入了 <code class="docutils literal"><span class="pre">$data</span></code> 参数(使用上面描述的数组格式)，这会和数据库字段的默认值合并，
+并准备好模型实例来保存这些数据(可由 <code class="docutils literal"><span class="pre">$this-&gt;data</span></code> 访问)。</p>
+<p>如果传入 <code class="docutils literal"><span class="pre">false</span></code> 或 <code class="docutils literal"><span class="pre">null</span></code> 给 <code class="docutils literal"><span class="pre">$data</span></code> 参数，Model::$data 会被设置为空数组。</p>
 <div class="admonition tip">
 <p class="first admonition-title">小技巧</p>
 <p class="last">如果要插入一新行而不是更新已存在的一行，应当总是先调用 create()。这样能够在
@@ -311,36 +437,36 @@ Model::$id，并按照数据库字段的默认值设置 Model::$data。如果没
 </div>
 </div>
 <div class="section" id="model-savefield-string-fieldname-string-fieldvalue-validate-false">
-<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::saveField(string</span> <span class="pre">$fieldName,</span> <span class="pre">string</span> <span class="pre">$fieldValue,</span> <span class="pre">$validate</span> <span class="pre">=</span> <span class="pre">false)</span></tt><a class="headerlink" href="#model-savefield-string-fieldname-string-fieldvalue-validate-false" title="永久链接至标题">¶</a></h2>
-<p>用于保存单个字段的值。在将要调用 <tt class="docutils literal"><span class="pre">saveField()</span></tt> 之前要设置模型的 ID (
-<tt class="docutils literal"><span class="pre">$this-&gt;ModelName-&gt;id</span> <span class="pre">=</span> <span class="pre">$id</span></tt>)。在使用该方法时，<tt class="docutils literal"><span class="pre">$fieldName</span></tt> 应当只包含字段名，
+<h2><code class="xref php php-meth docutils literal"><span class="pre">Model::saveField(string</span> <span class="pre">$fieldName,</span> <span class="pre">string</span> <span class="pre">$fieldValue,</span> <span class="pre">$validate</span> <span class="pre">=</span> <span class="pre">false)</span></code><a class="headerlink" href="#model-savefield-string-fieldname-string-fieldvalue-validate-false" title="永久链接至标题">¶</a></h2>
+<p>用于保存单个字段的值。在将要调用 <code class="docutils literal"><span class="pre">saveField()</span></code> 之前要设置模型的 ID (
+<code class="docutils literal"><span class="pre">$this-&gt;ModelName-&gt;id</span> <span class="pre">=</span> <span class="pre">$id</span></code>)。在使用该方法时，<code class="docutils literal"><span class="pre">$fieldName</span></code> 应当只包含字段名，
 而不是模型名和字段名。</p>
-<p>例如，更新一篇博客文章(<em>blog post</em>)的标题(<em>title</em>)，在控制器中调用 <tt class="docutils literal"><span class="pre">saveField</span></tt>
+<p>例如，更新一篇博客文章(<em>blog post</em>)的标题(<em>title</em>)，在控制器中调用 <code class="docutils literal"><span class="pre">saveField</span></code>
 方法可以象下面这样:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Post</span><span class="o">-&gt;</span><span class="na">saveField</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;A New Title for a New Day&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">警告</p>
-<p class="last">在使用这个方法时不能阻止更新 <tt class="docutils literal"><span class="pre">modified</span></tt> 字段，你需要使用 save() 方法才行。</p>
+<p class="last">在使用这个方法时不能阻止更新 <code class="docutils literal"><span class="pre">modified</span></code> 字段，你需要使用 save() 方法才行。</p>
 </div>
 <p>saveField 方法也有另一种语法:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">saveField</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$fieldName</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$fieldValue</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$params</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">$params</span></tt> 数组可以用如下任意选项作为键：</p>
+<p><code class="docutils literal"><span class="pre">$params</span></code> 数组可以用如下任意选项作为键：</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">validate</span></tt> 设置为 true/false 来开启/关闭验证。</li>
-<li><tt class="docutils literal"><span class="pre">callbacks</span></tt> 设置为 false 来关闭回调。使用 &#8216;before&#8217; 或 &#8216;after&#8217; 将仅开启指定的
+<li><code class="docutils literal"><span class="pre">validate</span></code> 设置为 true/false 来开启/关闭验证。</li>
+<li><code class="docutils literal"><span class="pre">callbacks</span></code> 设置为 false 来关闭回调。使用 &#8216;before&#8217; 或 &#8216;after&#8217; 将仅开启指定的
 回调。</li>
-<li><tt class="docutils literal"><span class="pre">counterCache</span></tt> (从 2.4 版本开始)控制计数器缓存(如果有的话)更新的布尔值</li>
+<li><code class="docutils literal"><span class="pre">counterCache</span></code> (从 2.4 版本开始)控制计数器缓存(如果有的话)更新的布尔值</li>
 </ul>
 </div>
 <div class="section" id="model-updateall-array-fields-mixed-conditions">
-<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::updateAll(array</span> <span class="pre">$fields,</span> <span class="pre">mixed</span> <span class="pre">$conditions)</span></tt><a class="headerlink" href="#model-updateall-array-fields-mixed-conditions" title="永久链接至标题">¶</a></h2>
-<p>用一次调用更新一条或多条记录。要更新的字段和它们的值，由 <tt class="docutils literal"><span class="pre">$fields</span></tt> 数组确定。
-要更新的记录由 <tt class="docutils literal"><span class="pre">$conditions</span></tt> 数组确定。如果 <tt class="docutils literal"><span class="pre">$conditions</span></tt> 参数未提供或设置为
-<tt class="docutils literal"><span class="pre">true</span></tt>，全部记录都会被更新。</p>
+<h2><code class="xref php php-meth docutils literal"><span class="pre">Model::updateAll(array</span> <span class="pre">$fields,</span> <span class="pre">mixed</span> <span class="pre">$conditions)</span></code><a class="headerlink" href="#model-updateall-array-fields-mixed-conditions" title="永久链接至标题">¶</a></h2>
+<p>用一次调用更新一条或多条记录。要更新的字段和它们的值，由 <code class="docutils literal"><span class="pre">$fields</span></code> 数组确定。
+要更新的记录由 <code class="docutils literal"><span class="pre">$conditions</span></code> 数组确定。如果 <code class="docutils literal"><span class="pre">$conditions</span></code> 参数未提供或设置为
+<code class="docutils literal"><span class="pre">true</span></code>，全部记录都会被更新。</p>
 <p>例如，批准所有成为会员超过一年的 bakers，更新调用可以象下面这样:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$thisYear</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d H:i:s&#39;</span><span class="p">,</span> <span class="nb">strtotime</span><span class="p">(</span><span class="s1">&#39;-1 year&#39;</span><span class="p">));</span>
 
@@ -350,14 +476,14 @@ Model::$id，并按照数据库字段的默认值设置 Model::$data。如果没
 <span class="p">);</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">$fields</span></tt> 数组可接受 SQL 表达式。常量(<em>literal</em>)值应当使用
-<tt class="xref php php-meth docutils literal"><span class="pre">DboSource::value()</span></tt> 手动引用。例如，如果一个模型方法调用
-<tt class="docutils literal"><span class="pre">updateAll()</span></tt>，应该这样:</p>
+<p><code class="docutils literal"><span class="pre">$fields</span></code> 数组可接受 SQL 表达式。常量(<em>literal</em>)值应当使用
+<code class="xref php php-meth docutils literal"><span class="pre">DboSource::value()</span></code> 手动引用。例如，如果一个模型方法调用
+<code class="docutils literal"><span class="pre">updateAll()</span></code>，应该这样:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$db</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getDataSource</span><span class="p">();</span>
 <span class="nv">$value</span> <span class="o">=</span> <span class="nv">$db</span><span class="o">-&gt;</span><span class="na">value</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">updateAll</span><span class="p">(</span>
-    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Baker.approved&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
-    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Baker.created &lt;=&#39;</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Baker.status&#39;</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">),</span>
+    <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Baker.status&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;old&#39;</span><span class="p">)</span>
 <span class="p">);</span>
 </pre></div>
 </div>
@@ -377,20 +503,20 @@ Model::$id，并按照数据库字段的默认值设置 Model::$data。如果没
 止这种连接，临时解除绑定(<em>unbind</em>)该关联。</p>
 </div>
 <div class="section" id="model-savemany-array-data-null-array-options-array">
-<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::saveMany(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></tt><a class="headerlink" href="#model-savemany-array-data-null-array-options-array" title="永久链接至标题">¶</a></h2>
+<h2><code class="xref php php-meth docutils literal"><span class="pre">Model::saveMany(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></code><a class="headerlink" href="#model-savemany-array-data-null-array-options-array" title="永久链接至标题">¶</a></h2>
 <p>此方法用于同时保存同一模型的多行。可以使用如下选项：</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">validate</span></tt>: 设置为 false 将关闭验证，设置为 true 将在保存每条记录前进行验证，
+<li><code class="docutils literal"><span class="pre">validate</span></code>: 设置为 false 将关闭验证，设置为 true 将在保存每条记录前进行验证，
 设
 置为 &#8216;first&#8217; 将在保存任何记录前验证 <em>所有</em> 记录(默认值)</li>
-<li><tt class="docutils literal"><span class="pre">atomic</span></tt>: 如果为 true (默认值)，将试图用单个事务保存所有记录。如果数据库/表
+<li><code class="docutils literal"><span class="pre">atomic</span></code>: 如果为 true (默认值)，将试图用单个事务保存所有记录。如果数据库/表
 不支持事务，则应当设置为 false。</li>
-<li><tt class="docutils literal"><span class="pre">fieldList</span></tt>: 同 Model::save() 方法的 $fieldList 参数</li>
-<li><tt class="docutils literal"><span class="pre">deep</span></tt>: (从 2.1 版开始) 如果设置为 true，关联数据也被保存；也可参见
+<li><code class="docutils literal"><span class="pre">fieldList</span></code>: 同 Model::save() 方法的 $fieldList 参数</li>
+<li><code class="docutils literal"><span class="pre">deep</span></code>: (从 2.1 版开始) 如果设置为 true，关联数据也被保存；也可参见
 saveAssociated 方法。</li>
-<li><tt class="docutils literal"><span class="pre">callbacks</span></tt> 设置为 false 将关闭回调。使用 &#8216;before&#8217; 或 &#8216;after&#8217; 将仅开启指定的
+<li><code class="docutils literal"><span class="pre">callbacks</span></code> 设置为 false 将关闭回调。使用 &#8216;before&#8217; 或 &#8216;after&#8217; 将仅开启指定的
 回调。</li>
-<li><tt class="docutils literal"><span class="pre">counterCache</span></tt> (从 2.4 版本开始)控制计数器缓存(如果有的话)更新的布尔值</li>
+<li><code class="docutils literal"><span class="pre">counterCache</span></code> (从 2.4 版本开始)控制计数器缓存(如果有的话)更新的布尔值</li>
 </ul>
 <p>为保存单个模型的多条记录，$data 必须是数字索引的记录数组，象这样:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -401,7 +527,7 @@ saveAssociated 方法。</li>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
-<p class="last">注意，我们传递了数字索引、而非通常情况下 <tt class="docutils literal"><span class="pre">$data</span></tt> 包含的 Article 键。在保存
+<p class="last">注意，我们传递了数字索引、而非通常情况下 <code class="docutils literal"><span class="pre">$data</span></code> 包含的 Article 键。在保存
 同一模型的多条记录时，记录数组应当只使用数字索引，而不是模型的键。</p>
 </div>
 <p>也可以使用如下格式的数据:</p>
@@ -411,7 +537,7 @@ saveAssociated 方法。</li>
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>如果要使用 <tt class="docutils literal"><span class="pre">$options['deep']</span> <span class="pre">=</span> <span class="pre">true</span></tt> (从 2.1 版本开始)一起保存关联数据，上面的
+<p>如果要使用 <code class="docutils literal"><span class="pre">$options['deep']</span> <span class="pre">=</span> <span class="pre">true</span></code> (从 2.1 版本开始)一起保存关联数据，上面的
 两个例子将象下面这样:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;title 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Assoc&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;field&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span><span class="p">)),</span>
@@ -440,17 +566,17 @@ saveAssociated 方法。</li>
 </div>
 </div>
 <div class="section" id="model-saveassociated-array-data-null-array-options-array">
-<span id="model-saveassociated"></span><h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::saveAssociated(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></tt><a class="headerlink" href="#model-saveassociated-array-data-null-array-options-array" title="永久链接至标题">¶</a></h2>
+<span id="model-saveassociated"></span><h2><code class="xref php php-meth docutils literal"><span class="pre">Model::saveAssociated(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></code><a class="headerlink" href="#model-saveassociated-array-data-null-array-options-array" title="永久链接至标题">¶</a></h2>
 <p>此方法用于同时保存多个模型关联。可以使用如下选项：</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">validate</span></tt>: 设置为 false 将关闭验证，设置为 true 将在保存每条记录前进行验证，
+<li><code class="docutils literal"><span class="pre">validate</span></code>: 设置为 false 将关闭验证，设置为 true 将在保存每条记录前进行验证，
 设置为 &#8216;first&#8217; 将在保存任何记录前验证 <em>全部</em> 记录(默认值)</li>
-<li><tt class="docutils literal"><span class="pre">atomic</span></tt>: 如果为 true (默认值)，将试图用单个事务保存所有记录。如果数据库/表
+<li><code class="docutils literal"><span class="pre">atomic</span></code>: 如果为 true (默认值)，将试图用单个事务保存所有记录。如果数据库/表
 不支持事务，则应当设置为 false。</li>
-<li><tt class="docutils literal"><span class="pre">fieldList</span></tt>: 同 Model::save() 方法的 $fieldList 参数</li>
-<li><tt class="docutils literal"><span class="pre">deep</span></tt>: (从 2.1 版开始) 如果设置为 true，不仅保存直接相关的关联数据，也会保
+<li><code class="docutils literal"><span class="pre">fieldList</span></code>: 同 Model::save() 方法的 $fieldList 参数</li>
+<li><code class="docutils literal"><span class="pre">deep</span></code>: (从 2.1 版开始) 如果设置为 true，不仅保存直接相关的关联数据，也会保
 存深度嵌套的关联数据。默认值为 false。</li>
-<li><tt class="docutils literal"><span class="pre">counterCache</span></tt> (从 2.4 版本开始)控制计数器缓存(如果有的话)更新的布尔值</li>
+<li><code class="docutils literal"><span class="pre">counterCache</span></code> (从 2.4 版本开始)控制计数器缓存(如果有的话)更新的布尔值</li>
 </ul>
 <p>要同时保存一条记录及与其有着 hasOne 或者 belongsTo 关联的相关记录，data 数组应当
 象下面这样:</p>
@@ -499,7 +625,7 @@ saveAssociated 方法。</li>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
 <p class="last">如果保存成功，主模型的外键将被存储在相关模型的 id 字段中，即
-<tt class="docutils literal"><span class="pre">$this-&gt;RelatedModel-&gt;id</span></tt>。</p>
+<code class="docutils literal"><span class="pre">$this-&gt;RelatedModel-&gt;id</span></code>。</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">警告</p>
@@ -507,7 +633,7 @@ saveAssociated 方法。</li>
 回的是一个数组，而不是布尔值。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.1 版更改: </span>现在你可以设置 <tt class="docutils literal"><span class="pre">$options['deep']</span> <span class="pre">=</span> <span class="pre">true;</span></tt> 来保存深层关联的数据。</p>
+<p><span class="versionmodified">在 2.1 版更改: </span>现在你可以设置 <code class="docutils literal"><span class="pre">$options['deep']</span> <span class="pre">=</span> <span class="pre">true;</span></code> 来保存深层关联的数据。</p>
 </div>
 <p>为了同时保存一条记录及与其有 hasMany 关联的相关记录、以及深层关联的 Comment
 belongsTo User 数据，data 数组应当象这样:</p>
@@ -528,9 +654,9 @@ belongsTo User 数据，data 数组应当象这样:</p>
 </pre></div>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.1 版更改: </span><tt class="docutils literal"><span class="pre">Model::saveAll()</span></tt> 和类似方法现在支持传入多个模型的 <cite>fieldList</cite> 选项。</p>
+<p><span class="versionmodified">在 2.1 版更改: </span><code class="docutils literal"><span class="pre">Model::saveAll()</span></code> 和类似方法现在支持传入多个模型的 <cite>fieldList</cite> 选项。</p>
 </div>
-<p>传入多个模型的 <tt class="docutils literal"><span class="pre">fieldList</span></tt> 的例子:</p>
+<p>传入多个模型的 <code class="docutils literal"><span class="pre">fieldList</span></code> 的例子:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">SomeModel</span><span class="o">-&gt;</span><span class="na">saveAll</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;fieldList&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;SomeModel&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;field_1&#39;</span><span class="p">),</span>
@@ -543,12 +669,12 @@ belongsTo User 数据，data 数组应当象这样:</p>
 保存的数据中那样，不能嵌套。</p>
 </div>
 <div class="section" id="model-saveall-array-data-null-array-options-array">
-<h2><tt class="xref php php-meth docutils literal"><span class="pre">Model::saveAll(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></tt><a class="headerlink" href="#model-saveall-array-data-null-array-options-array" title="永久链接至标题">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">saveAll</span></tt> 函数只是 <tt class="docutils literal"><span class="pre">saveMany</span></tt> 方法和 <tt class="docutils literal"><span class="pre">saveAssociated</span></tt> 方法的包装。它会检查
+<h2><code class="xref php php-meth docutils literal"><span class="pre">Model::saveAll(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></code><a class="headerlink" href="#model-saveall-array-data-null-array-options-array" title="永久链接至标题">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">saveAll</span></code> 函数只是 <code class="docutils literal"><span class="pre">saveMany</span></code> 方法和 <code class="docutils literal"><span class="pre">saveAssociated</span></code> 方法的包装。它会检查
 数据并且决定应当执行哪种类型的保存。如果数据是数字索引数组的格式，就会调用
-<tt class="docutils literal"><span class="pre">saveMany</span></tt> 方法，否则调用 <tt class="docutils literal"><span class="pre">saveAssociated</span></tt> 方法。</p>
+<code class="docutils literal"><span class="pre">saveMany</span></code> 方法，否则调用 <code class="docutils literal"><span class="pre">saveAssociated</span></code> 方法。</p>
 <p>此方法接受与前面的两个方法相同的选项，基本上只是个向后兼容方法。建议(不要使用该
-方法，而是)根据情况使用 <tt class="docutils literal"><span class="pre">saveMany</span></tt> 方法或 <tt class="docutils literal"><span class="pre">saveAssociated</span></tt> 方法。</p>
+方法，而是)根据情况使用 <code class="docutils literal"><span class="pre">saveMany</span></code> 方法或 <code class="docutils literal"><span class="pre">saveAssociated</span></code> 方法。</p>
 </div>
 <div class="section" id="hasone-hasmany-belongsto">
 <h2>保存相关模型的数据(hasOne, hasMany, belongsTo)<a class="headerlink" href="#hasone-hasmany-belongsto" title="永久链接至标题">¶</a></h2>
@@ -583,18 +709,18 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
 </div>
 <p>规则是，当使用 hasOne、hasMany 和 belongsTo 关联时，重要的是如何设置键。基本思路
 是从一个模型中获取键，并将其放入另一个模型的外键字段中。有时这可能需要在调用
-<tt class="docutils literal"><span class="pre">save()</span></tt> 方法之后使用模型类的 <tt class="docutils literal"><span class="pre">$id</span></tt> 属性，不过其它情况下可能只需要从刚提交(
+<code class="docutils literal"><span class="pre">save()</span></code> 方法之后使用模型类的 <code class="docutils literal"><span class="pre">$id</span></code> 属性，不过其它情况下可能只需要从刚提交(
 <em>POSTed</em>)给控制器动作的表单中的隐藏输入项(<em>hidden input</em>)获得 ID。</p>
 <p>为了补充上面使用的基本方法，CakePHP 还提供了一个非常方便的方法
-<tt class="docutils literal"><span class="pre">saveAssociated()</span></tt>，这让你可以一次验证和保存多个模型的数据。而且，
-<tt class="docutils literal"><span class="pre">saveAssociated()</span></tt> 方法还提供了事务支持以确保数据库中的数据完整性(例如，如果一
+<code class="docutils literal"><span class="pre">saveAssociated()</span></code>，这让你可以一次验证和保存多个模型的数据。而且，
+<code class="docutils literal"><span class="pre">saveAssociated()</span></code> 方法还提供了事务支持以确保数据库中的数据完整性(例如，如果一
 个模型保存失败，其它模型也不会保存)。</p>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
 <p class="last">要在 MySQL 中使事务正常工作，表必须使用 InnoDB 引擎。记住，MyISAM 表不支持事
 务。</p>
 </div>
-<p>来看看如何使用 <tt class="docutils literal"><span class="pre">saveAssociated()</span></tt> 方法同时保存 Company 和 Account 模型吧。</p>
+<p>来看看如何使用 <code class="docutils literal"><span class="pre">saveAssociated()</span></code> 方法同时保存 Company 和 Account 模型吧。</p>
 <p>首先，需要为 Company 和 Account 模型一起创建表单(假设 Company hasMany Account):</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Company&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span><span class="p">));</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Company.name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Company name&#39;</span><span class="p">));</span>
@@ -609,14 +735,14 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
 </pre></div>
 </div>
 <p>注意看一下命名 Acount 模型的表单字段的方式。如果 Company 是主模型，
-<tt class="docutils literal"><span class="pre">saveAssociated()</span></tt> 方法期望相关模型(Account)的数据以特定的格式提供，而
-<tt class="docutils literal"><span class="pre">Account.0.fieldName</span></tt> 恰恰是我们需要的。</p>
+<code class="docutils literal"><span class="pre">saveAssociated()</span></code> 方法期望相关模型(Account)的数据以特定的格式提供，而
+<code class="docutils literal"><span class="pre">Account.0.fieldName</span></code> 恰恰是我们需要的。</p>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
 <p class="last">上面的字段命名对于 hasMany 关联是必须的。如果模型之间的关联是 hasOne，对关联
 模型就要使用 ModelName.fieldName 标记方法了。</p>
 </div>
-<p>现在，可以在 CompaniesController 中创建 <tt class="docutils literal"><span class="pre">add()</span></tt> 动作了:</p>
+<p>现在，可以在 CompaniesController 中创建 <code class="docutils literal"><span class="pre">add()</span></code> 动作了:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
         <span class="c1">// 用下面的方法来避免验证错误：</span>
@@ -627,12 +753,12 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
 </pre></div>
 </div>
 <p>就是这些。现在 Company 和 Account 模型将同时被验证和保存。默认情况下，
-<tt class="docutils literal"><span class="pre">saveAssociated</span></tt> 方法会验证所有传入的值，然后尝试对每一个进行保存。</p>
+<code class="docutils literal"><span class="pre">saveAssociated</span></code> 方法会验证所有传入的值，然后尝试对每一个进行保存。</p>
 </div>
 <div class="section" id="hasmany">
 <h2>保存通过(连接模型)的 hasMany 数据<a class="headerlink" href="#hasmany" title="永久链接至标题">¶</a></h2>
 <p>让我们来看看如何保存两个模型的连接(<em>join</em>)表中的数据。就像
-<a class="reference internal" href="associations-linking-models-together.html#hasmany-through"><em>通过(连接模型)的 hasMany</em></a> 一节展示的那样，连接表用 <cite>hasMany</cite> 类型的关系关联到各个模
+<a class="reference internal" href="associations-linking-models-together.html#hasmany-through"><span class="std std-ref">通过(连接模型)的 hasMany</span></a> 一节展示的那样，连接表用 <cite>hasMany</cite> 类型的关系关联到各个模
 型。在我们的例子中，Cake 学校的负责人要求我们写一个应用程序，让他可以记录一个学
 生在某门课上的出勤天数和分数。查看下面的代码。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Controller/CourseMembershipController.php</span>
@@ -782,8 +908,8 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
 <div class="section" id="habtm">
 <span id="saving-habtm"></span><h3>保存相关模型数据 (HABTM)<a class="headerlink" href="#habtm" title="永久链接至标题">¶</a></h3>
 <p>保存通过 hasOne、belongsTo 和 hasMany 关联的模型非常简单：只需要将关联模型的 ID
-填入外键字段。 一旦完成，只要调用模型的 <tt class="docutils literal"><span class="pre">save()</span></tt> 方法，所有数据就被正确地连接
-起来了。下面的示例是传递给 Tag 模型的 <tt class="docutils literal"><span class="pre">save()</span></tt> 方法的数据数组的格式:</p>
+填入外键字段。 一旦完成，只要调用模型的 <code class="docutils literal"><span class="pre">save()</span></code> 方法，所有数据就被正确地连接
+起来了。下面的示例是传递给 Tag 模型的 <code class="docutils literal"><span class="pre">save()</span></code> 方法的数据数组的格式:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
     <span class="p">[</span><span class="nx">Recipe</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
@@ -797,7 +923,7 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>也可以使用这种格式调用 <tt class="docutils literal"><span class="pre">saveAll()</span></tt> 来保存多条记录和它们的 HABTM 关联(模型)，使
+<p>也可以使用这种格式调用 <code class="docutils literal"><span class="pre">saveAll()</span></code> 来保存多条记录和它们的 HABTM 关联(模型)，使
 用下面这样的数组:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">Array</span>
 <span class="p">(</span>
@@ -848,7 +974,7 @@ User 和相关 Profile 的保存。下面的示例动作假设已经(使用 Form
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>将上面的数组传递给 <tt class="docutils literal"><span class="pre">saveAll()</span></tt> 方法将创建所包含的标签(<em>tag</em>)，各自与它们相应的
+<p>将上面的数组传递给 <code class="docutils literal"><span class="pre">saveAll()</span></code> 方法将创建所包含的标签(<em>tag</em>)，各自与它们相应的
 菜单(<em>recipe</em>)关联。</p>
 <p>另一个有用的例子是，当需要保存多个标签(<em>Tag</em>)到文章(<em>Post</em>)中。这需要用以下的
 HABTM 数组格式传入关联的 HABTM 数据。注意，只需要传入关联的 HABTM 模型的 id，不
@@ -902,11 +1028,11 @@ HABTM 数组格式传入关联的 HABTM 数据。注意，只需要传入关联�
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>把上面的数组传入 <tt class="docutils literal"><span class="pre">saveAll($data,</span> <span class="pre">array('deep'</span> <span class="pre">=&gt;</span> <span class="pre">true))</span></tt>，会在 posts_tags 连接
+<p>把上面的数组传入 <code class="docutils literal"><span class="pre">saveAll($data,</span> <span class="pre">array('deep'</span> <span class="pre">=&gt;</span> <span class="pre">true))</span></code>，会在 posts_tags 连接
 表中填入 Tag 和 Post 之间的关联。</p>
 <p>作为示例，我们来创建一个表单，用来创建新的标签(<em>tag</em>)，动态生成正确的数据数组与
 某个菜单(<em>recipe</em>)关联。</p>
-<p>最简单的表单可以象这样(我们假定 <tt class="docutils literal"><span class="pre">$recipe_id</span></tt> 已经设置为某值了):</p>
+<p>最简单的表单可以象这样(我们假定 <code class="docutils literal"><span class="pre">$recipe_id</span></code> 已经设置为某值了):</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="s1">&#39;Tag&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
 <span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span>
         <span class="s1">&#39;Recipe.id&#39;</span><span class="p">,</span>
@@ -916,9 +1042,9 @@ HABTM 数组格式传入关联的 HABTM 数据。注意，只需要传入关联�
 <span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">end</span><span class="p">(</span><span class="s1">&#39;Add Tag&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 </div>
-<p>在这个例子中，你可以看到 <tt class="docutils literal"><span class="pre">Recipe.id</span></tt> 隐藏字段的值被设置为 tag 要连接的 recipe
+<p>在这个例子中，你可以看到 <code class="docutils literal"><span class="pre">Recipe.id</span></code> 隐藏字段的值被设置为 tag 要连接的 recipe
 的 ID。</p>
-<p>当在控制器中调用 <tt class="docutils literal"><span class="pre">save()</span></tt> 方法时，它将自动将 HABTM 数据保存到数据库:</p>
+<p>当在控制器中调用 <code class="docutils literal"><span class="pre">save()</span></code> 方法时，它将自动将 HABTM 数据保存到数据库:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// Save the association</span>
     <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Tag</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">))</span> <span class="p">{</span>
@@ -928,10 +1054,10 @@ HABTM 数组格式传入关联的 HABTM 数据。注意，只需要传入关联�
 </pre></div>
 </div>
 <p>调用上面这段代码，将创建新的 Tag 并与 Recipe 相关联，其 ID 为
-<tt class="docutils literal"><span class="pre">$this-&gt;request-&gt;data['Recipe']['id']</span></tt>。</p>
+<code class="docutils literal"><span class="pre">$this-&gt;request-&gt;data['Recipe']['id']</span></code>。</p>
 <p>其它我们可能希望呈现关联数据的方式，可以包括下拉列表。数据可以使用
-<tt class="docutils literal"><span class="pre">find('list')</span></tt> 方法从模型中取出，并且赋给用模型名命名的视图变量。同名的输入项(
-<em>input</em>)会自动把该数据放入 <tt class="docutils literal"><span class="pre">&lt;select&gt;</span></tt> 元素中:</p>
+<code class="docutils literal"><span class="pre">find('list')</span></code> 方法从模型中取出，并且赋给用模型名命名的视图变量。同名的输入项(
+<em>input</em>)会自动把该数据放入 <code class="docutils literal"><span class="pre">&lt;select&gt;</span></code> 元素中:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 在控制器中:</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">Tag</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">));</span>
 
@@ -939,9 +1065,9 @@ HABTM 数组格式传入关联的 HABTM 数据。注意，只需要传入关联�
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>HABTM 关系更可能的情形会包含一个允许多选的 <tt class="docutils literal"><span class="pre">&lt;select&gt;</span></tt> 元素。例如，一个菜单(
+<p>HABTM 关系更可能的情形会包含一个允许多选的 <code class="docutils literal"><span class="pre">&lt;select&gt;</span></code> 元素。例如，一个菜单(
 <em>Recipe</em>)可以被贴上多个标签(<em>Tag</em>)。在这种情况下，数据以相同的方式从模型中取出，
-但是表单的输入项(<em>input</em>)定义稍有不同。tag 名称使用 <tt class="docutils literal"><span class="pre">ModelName</span></tt> 约定来定义:</p>
+但是表单的输入项(<em>input</em>)定义稍有不同。tag 名称使用 <code class="docutils literal"><span class="pre">ModelName</span></code> 约定来定义:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 在控制器中:</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Recipe</span><span class="o">-&gt;</span><span class="na">Tag</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">));</span>
 
@@ -954,8 +1080,8 @@ HABTM 数组格式传入关联的 HABTM 数据。注意，只需要传入关联�
 <div class="section" id="id2">
 <h4>自我 HABTM<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h4>
 <p>通常 HABTM 关联用于绑定2个模型，但是它也可以用于1个模型，不过这需要更加小心。</p>
-<p>关键在于模型的设置 <tt class="docutils literal"><span class="pre">className</span></tt>。简单地添加 <tt class="docutils literal"><span class="pre">Project</span></tt> HABTM <tt class="docutils literal"><span class="pre">Project</span></tt> 关联
-会引起保存数据时的错误。设置 <tt class="docutils literal"><span class="pre">className</span></tt> 为模型名称，并用别名作为键，就避免了
+<p>关键在于模型的设置 <code class="docutils literal"><span class="pre">className</span></code>。简单地添加 <code class="docutils literal"><span class="pre">Project</span></code> HABTM <code class="docutils literal"><span class="pre">Project</span></code> 关联
+会引起保存数据时的错误。设置 <code class="docutils literal"><span class="pre">className</span></code> 为模型名称，并用别名作为键，就避免了
 这些问题。</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Project</span> <span class="k">extends</span> <span class="nx">AppModel</span> <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$hasAndBelongsToMany</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -1002,11 +1128,11 @@ HABTM 数组格式传入关联的 HABTM 数据。注意，只需要传入关联�
 型。重要的区别是，&#8221;连接(<em>join</em>)&#8221; 模型命名不同，并且其行为更容易预知。</p>
 <div class="admonition tip">
 <p class="first admonition-title">小技巧</p>
-<p class="last">当连接表包含两个外键以外的额外字段时，通过将数组的键 <tt class="docutils literal"><span class="pre">'unique'</span></tt> 设置为
-<tt class="docutils literal"><span class="pre">'keepExisting'</span></tt>，能够防止丢失额外字段的值。你可以认为这与设置
+<p class="last">当连接表包含两个外键以外的额外字段时，通过将数组的键 <code class="docutils literal"><span class="pre">'unique'</span></code> 设置为
+<code class="docutils literal"><span class="pre">'keepExisting'</span></code>，能够防止丢失额外字段的值。你可以认为这与设置
 &#8216;unique&#8217; =&gt; true 类似，但在保存操作过程中不会丢失额外字段的数据。另外，如果
 你使用 bake 来创建模型，自动会设置成这样。参见
-<a class="reference internal" href="associations-linking-models-together.html#ref-habtm-arrays"><em>HABTM 关联数组</em></a>。</p>
+<a class="reference internal" href="associations-linking-models-together.html#ref-habtm-arrays"><span class="std std-ref">HABTM 关联数组</span></a>。</p>
 </div>
 <p>不过，在大多数情况下，象上面的例子那样为连接表建立模型，设置 hasMany、belongsTo
 关联，比使用 HABTM 关联更简单。</p>
@@ -1024,15 +1150,15 @@ CakePHP 会检视表来决定每个字段的数据类型，并使用这些信息
 视图中的表单字段。按照约定，字段名为小写并用下划线分隔。</p>
 <div class="section" id="created-modified">
 <h3>使用 created 和 modified 列<a class="headerlink" href="#created-modified" title="永久链接至标题">¶</a></h3>
-<p>如果在数据库表中定义 <tt class="docutils literal"><span class="pre">created</span></tt> 和/或 <tt class="docutils literal"><span class="pre">modified</span></tt> 字段为 datetime 字段(缺省值
+<p>如果在数据库表中定义 <code class="docutils literal"><span class="pre">created</span></code> 和/或 <code class="docutils literal"><span class="pre">modified</span></code> 字段为 datetime 字段(缺省值
 null)，CakePHP 能够识别这些字段，每当创建或保存一条记录到数据库时，自动填入这两
 个字段(除非要保存的数据中已经包含了这两个字段的值)。</p>
-<p>在最初添加记录时，<tt class="docutils literal"><span class="pre">created</span></tt> 和 <tt class="docutils literal"><span class="pre">modified</span></tt> 字段会被设置为当前日期和时间。每当
+<p>在最初添加记录时，<code class="docutils literal"><span class="pre">created</span></code> 和 <code class="docutils literal"><span class="pre">modified</span></code> 字段会被设置为当前日期和时间。每当
 保存现有记录时，modified 字段会被更新为当前日期和时间。</p>
-<p>如果在调用 Model::save() 之前 ，$this-&gt;data 中包含了 <tt class="docutils literal"><span class="pre">created</span></tt> 或 <tt class="docutils literal"><span class="pre">modified</span></tt>
+<p>如果在调用 Model::save() 之前 ，$this-&gt;data 中包含了 <code class="docutils literal"><span class="pre">created</span></code> 或 <code class="docutils literal"><span class="pre">modified</span></code>
 字段的数据(例如来自 Model::read 或者 Model::set 方法)，那么这些值将从
 $this-&gt;data 中获取，而不会自动魔法更新。如果不希望那样，可以用
-<tt class="docutils literal"><span class="pre">unset($this-&gt;data['Model']['modified'])</span></tt> 等。另一种方法，可以重载
+<code class="docutils literal"><span class="pre">unset($this-&gt;data['Model']['modified'])</span></code> 等。另一种方法，可以重载
 Model::save() 方法来帮你总是这么做:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AppModel</span> <span class="k">extends</span> <span class="nx">Model</span> <span class="p">{</span>
 
@@ -1053,12 +1179,14 @@ Model::save() 方法来帮你总是这么做:</p>
 </div>
 
 
+			</div>
 		</div>
-	</div>
 
-	<div class="sidebar columns three pull-nine">
-<div id="sidebar-navigation" class="hide-on-phones">
-	<h2 class="hide-on-desktops">Table of Contents</h2>
+		
+		<div class="col-md-3 col-md-pull-9 pull-off hidden-xs hidden-sm" lang="zh">
+			<aside class="sidebar">
+				<div class="mb30 row">
+<div id="sidebar-navigation" class="hidden-xs">
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">欢迎</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">安装</a></li>
@@ -1069,9 +1197,7 @@ Model::save() 方法来帮你总是这么做:</p>
 <li class="toctree-l1 current"><a class="reference internal" href="../models.html">模型</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="associations-linking-models-together.html">关联：将模型连接在一起</a></li>
 <li class="toctree-l2"><a class="reference internal" href="retrieving-your-data.html">检索数据</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">保存数据</a><ul class="simple">
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">保存数据</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deleting-data.html">删除数据</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data-validation.html">数据验证</a></li>
 <li class="toctree-l2"><a class="reference internal" href="callback-methods.html">回调方法</a></li>
@@ -1085,7 +1211,7 @@ Model::save() 方法来帮你总是这么做:</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../core-libraries.html">核心库</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins.html">插件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">命令行与Shells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console-and-shells.html">Shells，任务与命令行工具</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">开发</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment.html">部署</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials-and-examples.html">教程 &amp; 实例</a></li>
@@ -1095,104 +1221,171 @@ Model::save() 方法来帮你总是这么做:</p>
 
 </div>
 
-<div class="page-contents">
-	<h3>Page contents</h3>
-	<ul>
-<li><a class="reference internal" href="#">保存数据</a><ul>
-<li><a class="reference internal" href="#model-set-one-two-null"><tt class="docutils literal"><span class="pre">Model::set($one,</span> <span class="pre">$two</span> <span class="pre">=</span> <span class="pre">null)</span></tt></a></li>
-<li><a class="reference internal" href="#model-clear"><tt class="docutils literal"><span class="pre">Model::clear()</span></tt></a></li>
-<li><a class="reference internal" href="#model-save-array-data-null-boolean-validate-true-array-fieldlist-array"><tt class="docutils literal"><span class="pre">Model::save(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">boolean</span> <span class="pre">$validate</span> <span class="pre">=</span> <span class="pre">true,</span> <span class="pre">array</span> <span class="pre">$fieldList</span> <span class="pre">=</span> <span class="pre">array())</span></tt></a></li>
-<li><a class="reference internal" href="#model-create-array-data-array"><tt class="docutils literal"><span class="pre">Model::create(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">array())</span></tt></a></li>
-<li><a class="reference internal" href="#model-savefield-string-fieldname-string-fieldvalue-validate-false"><tt class="docutils literal"><span class="pre">Model::saveField(string</span> <span class="pre">$fieldName,</span> <span class="pre">string</span> <span class="pre">$fieldValue,</span> <span class="pre">$validate</span> <span class="pre">=</span> <span class="pre">false)</span></tt></a></li>
-<li><a class="reference internal" href="#model-updateall-array-fields-mixed-conditions"><tt class="docutils literal"><span class="pre">Model::updateAll(array</span> <span class="pre">$fields,</span> <span class="pre">mixed</span> <span class="pre">$conditions)</span></tt></a></li>
-<li><a class="reference internal" href="#model-savemany-array-data-null-array-options-array"><tt class="docutils literal"><span class="pre">Model::saveMany(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></tt></a></li>
-<li><a class="reference internal" href="#model-saveassociated-array-data-null-array-options-array"><tt class="docutils literal"><span class="pre">Model::saveAssociated(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></tt></a></li>
-<li><a class="reference internal" href="#model-saveall-array-data-null-array-options-array"><tt class="docutils literal"><span class="pre">Model::saveAll(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></tt></a></li>
-<li><a class="reference internal" href="#hasone-hasmany-belongsto">保存相关模型的数据(hasOne, hasMany, belongsTo)</a></li>
-<li><a class="reference internal" href="#hasmany">保存通过(连接模型)的 hasMany 数据</a><ul>
-<li><a class="reference internal" href="#habtm">保存相关模型数据 (HABTM)</a><ul>
-<li><a class="reference internal" href="#id2">自我 HABTM</a></li>
-<li><a class="reference internal" href="#id3">当 HABTM 变得复杂时怎么办？</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id4">数据表</a><ul>
-<li><a class="reference internal" href="#created-modified">使用 created 和 modified 列</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-</div>
-	</div>
-
-</div>
-
-<div class="content row">
-	<ul class="related-pages inline">
-	<li>
-		<a href="../genindex.html" title="总目录" accesskey="I">索引</a>
-	</li>
-	<li>
-		<a href="deleting-data.html" title="删除数据" accesskey="N">下一页</a>
-	</li>
-	<li>
-		<a href="retrieving-your-data.html" title="检索数据" accesskey="P">上一页</a>
-	</li>
-	</ul>
-</div>
-
-	<div class="footer-push"> </div>
-</div>
-
-
-
-
-
-
-<div class="footer">
-	<div class="row">
-		<div class="columns six offset-by-three contribute">
-			<strong>发现翻译错误?</strong>
-			请在下面留言<br />
-			<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">[ 我要加入翻译 ]</a>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="columns nine offset-by-three copyright">
-					&copy; 版权所有 2014, Cake Software Foundation, Inc.
-				最后更新于 Jul 10, 2016.
-				Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+				</div>
+			</aside>
+			<aside class="sidebar">
+				<div class="mb30 row">
+				</div>
+			</aside>
 		</div>
 	</div>
 </div>
 
-<div id="nav-modal" class="reveal-modal"> </div>
+<section id="socials" class="back-3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4  social text-center">
+				<div class="col-sm-3 col-xs-3">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+						</script>
+						<div id="fb-root-face" class="fb-like" data-href="https://www.facebook.com/CakePHP/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<iframe src="https://ghbtns.com/github-btn.html?user=cakephp&amp;repo=cakephp&amp;type=fork&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="120px" height="30px"></iframe>
+				</div>
+
+				<div class="col-sm-3 col-xs-3">
+					<a href="https://twitter.com/CakePHP" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @CakePHP</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-8 social-footer text-center ">
+				<a href="#">发现翻译错误? 请在下面留言</a>
+				<a href="https://github.com/blackpuppy/docs/wiki" target="_blank">我要加入翻译</a>
+				<a href="https://twitter.com/cakephp" data-toggle="tooltip" title="Twitter"><i class="fa icon-social fa-twitter"></i>
+				<a href="http://www.facebook.com/groups/cake.community" data-toggle="tooltip" title="Facebook"><i class="fa icon-social fa-facebook"></i></a>
+				<a href="http://goo.gl/mSC0s" data-toggle="tooltip" title="Google Plus"><i class="fa icon-social  fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/user/CakePHP" data-toggle="tooltip" title="Youtube"><i class="fa icon-social fa-youtube-play"></i></a>
+				<a href="https://github.com/cakephp" data-toggle="tooltip" title="Github"><i class="fa icon-social fa-git"></i></a>
+				<a href="http://cakesf.herokuapp.com/" target="_blank" title="Slack" data-toggle="tooltip"><i class="fa fa-slack icon-social"></i></a>
+				<a href="http://stackoverflow.com/tags/cakephp" data-toggle="tooltip" title="Stack Overflow"><i class="fa icon-social fa-stack-overflow"></i></a>
+				<a href="http://webchat.freenode.net/?channels=cakephp" data-toggle="tooltip" title="IRC" class="icon-irc">#IRC</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer id="footer" class="footer-wrapper">
+	<div class="container">
+
+		<div class="row col-p30">
+			<div class="col-sm-12 col-md-3">
+				<div class="footer-widget t-footer">
+					<div class="col-md-12">
+						<a href="https://www.openhub.net/p/cakephp">
+							<img src="../_static/open-hub.png">
+						</a>
+						<div class="mt10">
+							<a href="https://www.rackspace.com/">
+								<img src="../_static/rackspace.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-9">
+				<div class="col-md-3 col-sm-6 business-solution">
+					<ul class="footer-menu">
+						<li class="menu-title">
+	<a href="http://cakephp.org/business-solutions"><i class="fa fa-menu-title fa-briefcase"></i>Business Solutions</a>
+</li>
+<li class="menu-title mt30">
+	<a href="http://cakephp.org/showcase"><i class="fa fa-menu-title fa-desktop"></i>Showcase</a>
+</li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title">
+	<i class="fa fa-menu-title fa-book"></i>Documentation
+</li>
+
+<li><a href="http://book.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>CookBook</a></li>
+<li><a href="http://api.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>API</a></li>
+
+<li><a href="http://cakephp.org/documentation/videos"><i class="fa fa-menu fa-chevron-right"></i>Videos</a></li>
+<li><a href="http://cakephp.org/privacy"><i class="fa fa-menu fa-chevron-right"></i>Privacy Policy</a></li>
+<li><a href="http://cakephp.org/pages/trademark"><i class="fa fa-menu fa-chevron-right"></i>Logos &amp; Trademarks</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-users"></i>Community</li>
+
+<li><a href="http://cakephp.org/team"><i class="fa fa-menu fa-chevron-right"></i>Team</a></li>
+<li><a href="https://github.com/cakephp/cakephp/issues"><i class="fa fa-menu fa-chevron-right"></i>Issues (Github)</a></li>
+<li><a href="http://www.youtube.com/user/CakePHP"><i class="fa fa-menu fa-chevron-right"></i>YouTube Channel</a></li>
+<li><a href="http://cakephp.org/get-involved"><i class="fa fa-menu fa-chevron-right"></i>Get Involved</a></li>
+
+<li><a href="http://bakery.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Bakery</a></li>
+<li><a href="http://cakephp.org/newsletter/signup"><i class="fa fa-menu fa-chevron-right"></i>Newsletter</a></li>
+<li><a href="http://certification.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Certification</a></li>
+<li><a href="http://my.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>My CakePHP</a></li>
+<li><a href="http://cakefest.org"><i class="fa fa-menu fa-chevron-right"></i>CakeFest</a></li>
+<li><a href="http://www.facebook.com/groups/cake.community"><i class="fa fa-menu fa-chevron-right"></i>Facebook</a></li>
+<li><a href="http://twitter.com/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Twitter</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-3 col-sm-6">
+					<ul class="footer-menu">
+						
+<li class="menu-title"><i class="fa fa-menu-title fa-comments-o"></i>Help &amp; Support</li>
+
+<li><a href="http://discourse.cakephp.org"><i class="fa fa-menu fa-chevron-right"></i>Forum</a></li>
+<li><a href="http://stackoverflow.com/tags/cakephp"><i class="fa fa-menu fa-chevron-right"></i>Stack Overflow</a></li>
+<li><a href="http://webchat.freenode.net/?channels=cakephp"><i class="fa fa-menu fa-chevron-right"></i>IRC</a></li>
+<li><a href="http://cakesf.herokuapp.com/"><i class="fa fa-menu fa-chevron-right"></i>Slack</a></li>
+<li><a href="http://cakedc.com"><i class="fa fa-menu fa-chevron-right"></i>Paid Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center mt30">
+				<p class="copyright">
+							&copy; 版权所有 2016, Cake Software Foundation, Inc.
+						最后更新于 8月 02, 2016.
+						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
 <div id="inline-search-results"></div>
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F201cbc61deaf9f7ffb521fb23e83db40' type='text/javascript'%3E%3C/script%3E"));
-</script>
 
-<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
+
+</div>
+
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"cakephpchina"};
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-743287-3']);
+	_gaq.push(['_trackPageview']);
 	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = 'http://static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	</script>
-<!-- Duoshuo Comment END -->
-
-<!-- Grunt Live Reload -->
-<script src="http://192.168.56.113:35729/livereload.js"></script>
+</script>
   </body>
 </html>
