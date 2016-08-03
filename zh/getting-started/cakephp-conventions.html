@@ -360,11 +360,13 @@ CakePHP 会默认执行那个控制器的 <code class="docutils literal"><span c
 _id。所以，如果 Baker 有多个 Cake，cakes 数据库表会通过 baker_id 这个外键与
 bakers 数据库表关联。对于包含多个单词的数据库表名，比如 category_types，其外键应
 该为 category_type_id。</p>
-<p>连接表，在 hasAndBelongsToMany (HABTM) 关系中用于连接模型，应当根据它连接的两个模
-型的表来命名，并且依照字母先后次序(即应当是 apples_zebras，而不是 zebras_apples)。</p>
+<p>连接表，在 hasAndBelongsToMany (HABTM) 关系中用于连接模型，必须根据它连接的两个模
+型的表来命名，例如 users HABTM groups 就会以 groups_users 表来连接，并且应当按照
+字母先后次序，例如，apes_zoos 就比 zoos_apes 要好。</p>
 <p>所有与 CakePHP 的模型有关的数据库表(除了连接表)，都必须有一个单列主键，来唯一识别
 每一行。如果你要为一个还没有单列主键的数据库表建立模型，CakePHP 的约定就是为该表
 增加单列主键。如果你要使用该表的模型，就必须为该表增加单列主键。</p>
+<p>如果主键名称不是 <code class="docutils literal"><span class="pre">id</span></code>，那么必须设置 <code class="docutils literal"><span class="pre">Model.primaryKey</span></code> 属性。</p>
 <p>CakePHP 不支持复合主键。如果你要直接操作连接表的数据，请直接调用
 <a class="reference internal" href="../models/retrieving-your-data.html#model-query"><span class="std std-ref">query</span></a>，或者，增加一个主键，作为正常的模型来使用。例如：</p>
 <blockquote>
@@ -578,7 +580,7 @@ PeopleController 控制器的 index() 方法的调用，并自动加载 Person �
 			<div class="col-md-12 text-center mt30">
 				<p class="copyright">
 							&copy; 版权所有 2016, Cake Software Foundation, Inc.
-						最后更新于 8月 02, 2016.
+						最后更新于 8月 03, 2016.
 						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
 				</p>
 			</div>

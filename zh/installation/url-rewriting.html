@@ -301,6 +301,15 @@
 <span class="o">&lt;/</span><span class="nx">Directory</span><span class="o">&gt;</span>
 </pre></div>
 </div>
+<p>对于 apache 2.4 及更高版本的用户，你需要象下面这样修改 <code class="docutils literal"><span class="pre">httpd.conf</span></code> 的配置
+文件或者 虚拟主机（<em>Virtual Host</em>）的配置:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nx">Directory</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nx">www</span><span class="o">/&gt;</span>
+     <span class="nx">Options</span> <span class="nx">FollowSymLinks</span>
+     <span class="nx">AllowOverride</span> <span class="nx">All</span>
+     <span class="k">Require</span> <span class="nx">all</span> <span class="nx">granted</span>
+<span class="o">&lt;/</span><span class="nx">Directory</span><span class="o">&gt;</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first">确保正确加载了 mod_rewrite。你应当看到类似于:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nx">LoadModule</span> <span class="nx">rewrite_module</span> <span class="nx">libexec</span><span class="o">/</span><span class="nx">apache2</span><span class="o">/</span><span class="nx">mod_rewrite</span><span class="o">.</span><span class="nx">so</span>
@@ -340,9 +349,9 @@
 </pre></div>
 </div>
 <p>如果你的 CakePHP 网站仍然有 mod_rewrite 的问题，你也许可以尝试修改虚拟主机
-(<em>Virtual Host</em>)的设置。在 Ubuntu 系统中，编辑文件
-/etc/apache2/sites-available/default (其位置取决于发行版本)。在该文件中，确保
-<code class="docutils literal"><span class="pre">AllowOverride</span> <span class="pre">None</span></code> 改为 <code class="docutils literal"><span class="pre">AllowOverride</span> <span class="pre">All</span></code> ，所以就是:</p>
+的设置。在 Ubuntu 系统中，编辑文件 /etc/apache2/sites-available/default (其
+位置取决于发行版本)。在该文件中，确保 <code class="docutils literal"><span class="pre">AllowOverride</span> <span class="pre">None</span></code> 改为
+<code class="docutils literal"><span class="pre">AllowOverride</span> <span class="pre">All</span></code> ，所以就是:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nx">Directory</span> <span class="o">/&gt;</span>
     <span class="nx">Options</span> <span class="nx">FollowSymLinks</span>
     <span class="nx">AllowOverride</span> <span class="nx">All</span>
@@ -357,7 +366,7 @@
 </div>
 <p>在 Mac OSX 中，另一个方法是使用
 <a class="reference external" href="http://clickontyler.com/virtualhostx/">virtualhostx</a> 工具来创建一个虚拟主机
-(<em>Virtual Host</em>)，指向你的目录。</p>
+，指向你的目录。</p>
 <p>对于很多托管服务(GoDaddy, 1and1)，你的 web 服务器实际上是从一个已经使用
 mod_rewrite 的用户目录提供的。如果你把 CakePHP 安装到一个用户目录(
 <a class="reference external" href="http://example.com/~username/cakephp/">http://example.com/~username/cakephp/</a>)，或者任何已经使用 mod_rewrite 的网址结
@@ -446,6 +455,13 @@ example.com/subfolder/这样的子目录来运行你的项目，你就不得不�
    <span class="o">...</span> <span class="nx">php</span> <span class="nx">handling</span> <span class="o">...</span>
 <span class="p">}</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">较新的 PHP-FPM 配置设置为监听 php-fpm 套接字（<em>socket</em>），而不是 127.0.0.1
+地址的 9000 TCP 端口。如果你使用上面的配置，遇到 502 bad gateway 的错误，尝试
+把 fastcgi_pass 从 TCP 端口改为套接字路径（例如：
+fastcgi_pass unix:/var/run/php5-fpm.sock;）。</p>
 </div>
 </div>
 <div class="section" id="iis7-windows">
@@ -707,7 +723,7 @@ JavaScript和路由就应该可以正常工作了。</p>
 			<div class="col-md-12 text-center mt30">
 				<p class="copyright">
 							&copy; 版权所有 2016, Cake Software Foundation, Inc.
-						最后更新于 8月 02, 2016.
+						最后更新于 8月 03, 2016.
 						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
 				</p>
 			</div>

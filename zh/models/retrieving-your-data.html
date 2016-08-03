@@ -273,6 +273,7 @@
 <li><a class="reference internal" href="#model-custom-find">创建自定义查询类型</a></li>
 <li><a class="reference internal" href="#id3">魔法查找类型</a><ul>
 <li><a class="reference internal" href="#findallby">findAllBy</a></li>
+<li><a class="reference internal" href="#finders">自定义魔法查询（<em>Finders</em>）</a></li>
 <li><a class="reference internal" href="#findby">findBy</a></li>
 </ul>
 </li>
@@ -878,6 +879,21 @@ recursive 变量。recursive 设置必须在每次调用中在参数中传入。
 </table>
 <p>返回结果数组的格式与 <code class="docutils literal"><span class="pre">find('all')</span></code> 的返回值格式一样。</p>
 </div>
+<div class="section" id="finders">
+<h3>自定义魔法查询（<em>Finders</em>）<a class="headerlink" href="#finders" title="永久链接至标题">¶</a></h3>
+<p>自 2.8 版本开始，你可以使用任何带有魔法方法接口的自定义查询方法。例如，如果模型实现了 <code class="docutils literal"><span class="pre">published</span></code> 查询，你就可以通过魔法 <code class="docutils literal"><span class="pre">findBy</span></code> 方法来使用这些查询:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$results</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">findPublishedByAuthorId</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+<span class="c1">// 等同于</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Article</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;published&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;conditions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Article.author_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">5</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">2.8.0 新版功能: </span>2.8.0 版本增加了自定义魔法查询。</p>
+</div>
+</div>
 <div class="section" id="findby">
 <h3>findBy<a class="headerlink" href="#findby" title="永久链接至标题">¶</a></h3>
 <p><code class="docutils literal"><span class="pre">findBy&lt;fieldName&gt;(string</span> <span class="pre">$value);</span></code></p>
@@ -1466,7 +1482,7 @@ Posts 和 Authors 模型之间有 belongsTo 关系，而且要查找所有包含
 			<div class="col-md-12 text-center mt30">
 				<p class="copyright">
 							&copy; 版权所有 2016, Cake Software Foundation, Inc.
-						最后更新于 8月 02, 2016.
+						最后更新于 8月 03, 2016.
 						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
 				</p>
 			</div>

@@ -278,6 +278,8 @@
 <li><a class="reference internal" href="#field-naming-conventions">Field naming conventions</a></li>
 <li><a class="reference internal" href="#id6">选项</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#get-input">GET 表单 input 字段</a></li>
+<li><a class="reference internal" href="#get-form-inputs">GET Form Inputs</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#input">生成特定类型的input元素</a></li>
@@ -526,6 +528,12 @@ supply an $options array like the following:</p>
 <div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">form</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;UserLoginForm&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;/users/login&quot;</span><span class="p">&gt;</span>
 </pre></div>
 </div>
+<div class="deprecated">
+<p><span class="versionmodified">2.8.0 版后已移除: </span>在 2.8.0 版本中，<code class="docutils literal"><span class="pre">$options['action']</span></code> 选项已经作废。
+请使用 <code class="docutils literal"><span class="pre">$options['url']</span></code> 和 <code class="docutils literal"><span class="pre">$options['id']</span></code> 选项。
+The <code class="docutils literal"><span class="pre">$options['action']</span></code> option was deprecated as of 2.8.0.
+Use the <code class="docutils literal"><span class="pre">$options['url']</span></code> and <code class="docutils literal"><span class="pre">$options['id']</span></code> options instead.</p>
+</div>
 </li>
 <li><p class="first"><code class="docutils literal"><span class="pre">$options['url']</span></code> 如果需要的表单动作不在当前控制器中，你可以用$options数组的
 ‘url’键来为表单动作指定一个网址。提供的网址可以是相对于你的CakePHP应用程序:</p>
@@ -534,8 +542,9 @@ supply an $options array like the following:</p>
 controller, you can specify a URL for the form action using the &#8216;url&#8217; key of
 the $options array. The supplied URL can be relative to your CakePHP
 application:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;recipes&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span><span class="p">)</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">false</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;recipes&#39;</span><span class="p">,</span> <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;add&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;RecipesAdd&#39;</span>
 <span class="p">));</span>
 </pre></div>
 </div>
@@ -546,7 +555,7 @@ application:</p>
 </div>
 <p>或者也可以指向外部域名:</p>
 <p>or can point to an external domain:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="k">false</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;http://www.google.com/search&#39;</span><span class="p">,</span>
     <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;get&#39;</span>
 <span class="p">));</span>
@@ -560,6 +569,10 @@ application:</p>
 <p>也请查看 <a class="reference internal" href="html.html#HtmlHelper::url" title="HtmlHelper::url"><code class="xref php php-meth docutils literal"><span class="pre">HtmlHelper::url()</span></code></a> 方法，以了解更多不同类型的网址的例子。</p>
 <p>Also check <a class="reference internal" href="html.html#HtmlHelper::url" title="HtmlHelper::url"><code class="xref php php-meth docutils literal"><span class="pre">HtmlHelper::url()</span></code></a> method for more examples of
 different types of URLs.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.8.0 版更改: </span>如果你不希望输出网址作为表单的动作（<em>action</em>），请使用 <code class="docutils literal"><span class="pre">'url'</span> <span class="pre">=&gt;</span> <span class="pre">false</span></code>。</p>
+<p>Use <code class="docutils literal"><span class="pre">'url'</span> <span class="pre">=&gt;</span> <span class="pre">false</span></code> if you don’t want to output a URL as the form action.</p>
+</div>
 </li>
 <li><p class="first"><code class="docutils literal"><span class="pre">$options['default']</span></code> 如果&#8217;default&#8217;被设为布尔值false，表单的提交动作就会改成
 按动提交按键时不会提交表单。如果表单要通过AJAX提交，设置&#8217;default&#8217;为false阻止了
@@ -655,8 +668,8 @@ closing form tag:</p>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </pre></div>
 </div>
-<p>欲知更多细节，请参看 <a class="reference external" href="http://api.cakephp.org/2.7/class-FormHelper.html">Form Helper API</a>。</p>
-<p>See the <a class="reference external" href="http://api.cakephp.org/2.7/class-FormHelper.html">Form Helper API</a> for further details.</p>
+<p>欲知更多细节，请参看 <a class="reference external" href="http://api.cakephp.org/2.8/class-FormHelper.html">Form Helper API</a>。</p>
+<p>See the <a class="reference external" href="http://api.cakephp.org/2.8/class-FormHelper.html">Form Helper API</a> for further details.</p>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
 <p>如果你在应用程序中使用 <a class="reference internal" href="../components/security-component.html#SecurityComponent" title="SecurityComponent"><code class="xref php php-class docutils literal"><span class="pre">SecurityComponent</span></code></a> 组件，你应当总是用 <code class="docutils literal"><span class="pre">end()</span></code> 方法结束表单。</p>
@@ -1140,7 +1153,8 @@ inject markup to separate each input/label pair:</p>
     <span class="s1">&#39;after&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--after--&#39;</span><span class="p">,</span>
     <span class="s1">&#39;between&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--between---&#39;</span><span class="p">,</span>
     <span class="s1">&#39;separator&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;--separator--&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
+    <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;radio&#39;</span>
 <span class="p">));</span>
 </pre></div>
 </div>
@@ -1200,7 +1214,42 @@ default options by declaring the option in the input() call:</p>
 <p>If you need to later change the defaults you can use
 <code class="xref php php-meth docutils literal"><span class="pre">FormHelper::inputDefaults()</span></code>.</p>
 </li>
+<li><p class="first"><code class="docutils literal"><span class="pre">$options['maxlength']</span></code> 设置该键来设置 <code class="docutils literal"><span class="pre">input</span></code> 字段的 <code class="docutils literal"><span class="pre">maxlength</span></code> 属性为特定值。当该键省略时，且 input 类型是 <code class="docutils literal"><span class="pre">text</span></code>、<code class="docutils literal"><span class="pre">textarea</span></code>、<code class="docutils literal"><span class="pre">email</span></code>、<code class="docutils literal"><span class="pre">tel</span></code>、<code class="docutils literal"><span class="pre">url</span></code> 或 <code class="docutils literal"><span class="pre">search</span></code> 时，而字段定义不是 <code class="docutils literal"><span class="pre">decimal</span></code>、<code class="docutils literal"><span class="pre">time</span></code> 或 <code class="docutils literal"><span class="pre">datetime</span></code> 之一，就会使用数据库字段的长度。</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">$options['maxlength']</span></code> Set this key to set the <code class="docutils literal"><span class="pre">maxlength</span></code> attribute of the <code class="docutils literal"><span class="pre">input</span></code>
+field to a specific value. When this key is omitted and the input-type is <code class="docutils literal"><span class="pre">text</span></code>,
+<code class="docutils literal"><span class="pre">textarea</span></code>, <code class="docutils literal"><span class="pre">email</span></code>, <code class="docutils literal"><span class="pre">tel</span></code>, <code class="docutils literal"><span class="pre">url</span></code> or <code class="docutils literal"><span class="pre">search</span></code> and the field-definition is not
+one of <code class="docutils literal"><span class="pre">decimal</span></code>, <code class="docutils literal"><span class="pre">time</span></code> or <code class="docutils literal"><span class="pre">datetime</span></code>, the length option of the database field is
+used.</p>
+</li>
 </ul>
+</div>
+<div class="section" id="get-input">
+<h3>GET 表单 input 字段<a class="headerlink" href="#get-input" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="get-form-inputs">
+<h3>GET Form Inputs<a class="headerlink" href="#get-form-inputs" title="永久链接至标题">¶</a></h3>
+<p>当使用 <code class="docutils literal"><span class="pre">FormHelper</span></code> 来生成 <code class="docutils literal"><span class="pre">GET</span></code> 的 input 元素时，input 的 name 会自动缩写，提供更易读的名称。例如:</p>
+<p>When using <code class="docutils literal"><span class="pre">FormHelper</span></code> to generate inputs for <code class="docutils literal"><span class="pre">GET</span></code> forms, the input names
+will automatically be shortened to provide more human friendly names. For
+example:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 生成 &lt;input name=&quot;email&quot; type=&quot;text&quot; /&gt;</span>
+<span class="c1">// Makes &lt;input name=&quot;email&quot; type=&quot;text&quot; /&gt;</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.email&#39;</span><span class="p">);</span>
+
+<span class="c1">// 生成 &lt;select name=&quot;Tags&quot; multiple=&quot;multiple&quot;&gt;</span>
+<span class="c1">// Makes &lt;select name=&quot;Tags&quot; multiple=&quot;multiple&quot;&gt;</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;Tags.Tags&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;multiple&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>如果你想要改变生成的 name 属性，可以使用 <code class="docutils literal"><span class="pre">name</span></code> 选项:</p>
+<p>If you want to override the generated name attributes you can use the <code class="docutils literal"><span class="pre">name</span></code>
+option:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 生成更标准的 &lt;input name=&quot;data[User][email]&quot; type=&quot;text&quot; /&gt;</span>
+<span class="c1">// Makes the more typical &lt;input name=&quot;data[User][email]&quot; type=&quot;text&quot; /&gt;</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;User.email&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;data[User][email]&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="input">
@@ -1332,11 +1381,54 @@ string to empty:</p>
 <div class="admonition note">
 <p class="first admonition-title">注解</p>
 <p>如果你要设置一个密码（<em>password</em>）字段为空，请使用 &#8216;value&#8217; =&gt; &#8216;&#8217;。</p>
-<p class="last">If you need to set the default value in a password field to blank,
+<p>If you need to set the default value in a password field to blank,
 use &#8216;value&#8217; =&gt; &#8216;&#8217; instead.</p>
+<p>对 date 或 datetime 类型的字段，可以提供键值对列表:</p>
+<p>A list of key-value pairs can be supplied for a date or datetime field:</p>
+<div class="last highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Form</span><span class="o">-&gt;</span><span class="na">dateTime</span><span class="p">(</span><span class="s1">&#39;Contact.date&#39;</span><span class="p">,</span> <span class="s1">&#39;DMY&#39;</span><span class="p">,</span> <span class="s1">&#39;12&#39;</span><span class="p">,</span>
+  <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;empty&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;day&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;DAY&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;MONTH&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;YEAR&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;hour&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HOUR&#39;</span><span class="p">,</span> <span class="s1">&#39;minute&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;MINUTE&#39;</span><span class="p">,</span> <span class="s1">&#39;meridian&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
 </div>
-<p>多个 option 元素也可以以多个键值对的方式提供。</p>
-<p>Options can also supplied as key-value pairs.</p>
+</div>
+<p>输出:</p>
+<p>Output:</p>
+<div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;data[Contact][date][day]&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;ContactDateDay&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>DAY<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;01&quot;</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+    // ...
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;31&quot;</span><span class="p">&gt;</span>31<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span> - <span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;data[Contact][date][month]&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;ContactDateMonth&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>MONTH<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;01&quot;</span><span class="p">&gt;</span>January<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+    // ...
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;12&quot;</span><span class="p">&gt;</span>December<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span> - <span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;data[Contact][date][year]&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;ContactDateYear&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>YEAR<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;2036&quot;</span><span class="p">&gt;</span>2036<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+    // ...
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;1996&quot;</span><span class="p">&gt;</span>1996<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;data[Contact][date][hour]&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;ContactDateHour&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>HOUR<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;01&quot;</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+    // ...
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;12&quot;</span><span class="p">&gt;</span>12<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>:<span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;data[Contact][date][min]&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;ContactDateMin&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>MINUTE<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;00&quot;</span><span class="p">&gt;</span>00<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+    // ...
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;59&quot;</span><span class="p">&gt;</span>59<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;data[Contact][date][meridian]&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;ContactDateMeridian&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;am&quot;</span><span class="p">&gt;</span>am<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;pm&quot;</span><span class="p">&gt;</span>pm<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first"><code class="docutils literal"><span class="pre">$options['hiddenField']</span></code> 对某些 input 类型(checkboxe、radio)会创建一个 hidden 类型的 input 元素，从而使 $this-&gt;request-&gt;data 中有一个键，即使没有值:</p>
 </li>
@@ -1730,9 +1822,18 @@ them.</p>
 <p>If for some reason you don&#8217;t want the hidden input, setting
 <code class="docutils literal"><span class="pre">$attributes['value']</span></code> to a selected value or boolean false will
 do just that.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">$attributes['fieldset']</span></code> 如果 legend 属性没有设置成 false，那么这个属性可以用来设置 fieldset 元素的样式类名。</li>
+<li><code class="docutils literal"><span class="pre">$attributes['fieldset']</span></code> If legend attribute is not set to false, then this
+attribute can be used to set the class of the fieldset element.</li>
+</ul>
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.1 版更改: </span><code class="docutils literal"><span class="pre">$attributes['disabled']</span></code> 选项是在2.1版本中增加的。
+<p><span class="versionmodified">在 2.1 版更改: </span>在 2.1 版本中增加了 <code class="docutils literal"><span class="pre">$attributes['disabled']</span></code> 选项。
 The <code class="docutils literal"><span class="pre">$attributes['disabled']</span></code> option was added in 2.1.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.8.5 版更改: </span>在 2.8.5 版本中增加了 <code class="docutils literal"><span class="pre">$attributes['fieldset']</span></code> 选项。
+The <code class="docutils literal"><span class="pre">$attributes['fieldset']</span></code> option was added in 2.8.5.</p>
 </div>
 </dd></dl>
 
@@ -1798,6 +1899,7 @@ the FormHelper will assume that the target output is a select input:</p>
 <p>输出:</p>
 <p>Output:</p>
 <div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;data[User][field]&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;UserField&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Value 1&quot;</span><span class="p">&gt;</span>Label 1<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Value 2&quot;</span><span class="p">&gt;</span>Label 2<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Value 3&quot;</span><span class="p">&gt;</span>Label 3<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
@@ -2111,21 +2213,24 @@ opened form. Instead use <a class="reference internal" href="#FormHelper::submit
 <dd><p>创建一个 HTML 链接，但使用 POST 来访问该链接。要求浏览器启用 javascript。</p>
 <p>Creates an HTML link, but access the URL using method POST. Requires
 JavaScript to be enabled in browser.</p>
-<p>该方法创建一个 <code class="docutils literal"><span class="pre">&lt;form&gt;</span></code> 元素，故此不要在表单内使用该方法，而是应当用 <a class="reference internal" href="#FormHelper::submit" title="FormHelper::submit"><code class="xref php php-meth docutils literal"><span class="pre">FormHelper::submit()</span></code></a> 方法来添加提交按键。</p>
-<p>This method creates a <code class="docutils literal"><span class="pre">&lt;form&gt;</span></code> element. So do not use this method inside
-an existing form. Instead you should add a submit button using
-<a class="reference internal" href="#FormHelper::submit" title="FormHelper::submit"><code class="xref php php-meth docutils literal"><span class="pre">FormHelper::submit()</span></code></a></p>
+<p>该方法创建一个 <code class="docutils literal"><span class="pre">&lt;form&gt;</span></code> 元素。如果你要在现有表单中使用该方法，必须用 <code class="docutils literal"><span class="pre">inline</span></code> 或 <code class="docutils literal"><span class="pre">block</span></code> 选项，这样新的表单就生成会在现有表单之外。</p>
+<p>This method creates a <code class="docutils literal"><span class="pre">&lt;form&gt;</span></code> element. If you want to use this method
+inside of an existing form, you must use the <code class="docutils literal"><span class="pre">inline</span></code> or <code class="docutils literal"><span class="pre">block</span></code> options
+so that the new form can be rendered outside of the existing form.</p>
+<p>如果你需要的只是一个按键来提交表单，那么就应当使用 <a class="reference internal" href="#FormHelper::submit" title="FormHelper::submit"><code class="xref php php-meth docutils literal"><span class="pre">FormHelper::submit()</span></code></a>。</p>
+<p>If all you are looking for is a button to submit your form, then you should
+use <a class="reference internal" href="#FormHelper::submit" title="FormHelper::submit"><code class="xref php php-meth docutils literal"><span class="pre">FormHelper::submit()</span></code></a> instead.</p>
 <div class="versionchanged">
 <p><span class="versionmodified">在 2.3 版更改: </span>增加了 <code class="docutils literal"><span class="pre">method</span></code> 选项。
 The <code class="docutils literal"><span class="pre">method</span></code> option was added.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.5 版更改: </span>增加了 <code class="docutils literal"><span class="pre">inline</span></code> 和 <code class="docutils literal"><span class="pre">block</span></code> 选项。这允许缓存生成的 form 标签，而不是直接返回。这有助于避免嵌套的 form 标签。设置 <code class="docutils literal"><span class="pre">'inline'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></code> 会把 form 标签加到 <code class="docutils literal"><span class="pre">postLink</span></code> 代码块，或者用 <code class="docutils literal"><span class="pre">block</span></code> 选项指定自定义代码块。
+<p><span class="versionmodified">在 2.5 版更改: </span>增加了 <code class="docutils literal"><span class="pre">inline</span></code> 和 <code class="docutils literal"><span class="pre">block</span></code> 选项。这允许缓存生成的 form 标签，而不是直接返回。这有助于避免嵌套的 form 标签。设置 <code class="docutils literal"><span class="pre">'inline'</span> <span class="pre">=&gt;</span> <span class="pre">false</span></code> 会把 form 标签加到 <code class="docutils literal"><span class="pre">postLink</span></code> 代码块，不过如果你想使用自定义的代码块，可以转而用 <code class="docutils literal"><span class="pre">block</span></code> 选项指定自定义代码块。
 The <code class="docutils literal"><span class="pre">inline</span></code> and <code class="docutils literal"><span class="pre">block</span></code> options were added. They allow buffering
 the generated form tag, instead of returning with the link. This helps
-avoiding nested form tags. Setting <code class="docutils literal"><span class="pre">'inline'</span> <span class="pre">=&gt;</span> <span class="pre">true</span></code> will add
-the form tag to <code class="docutils literal"><span class="pre">postLink</span></code> content block or you can use option <code class="docutils literal"><span class="pre">block</span></code>
-to specify a custom block.</p>
+avoiding nested form tags. Setting <code class="docutils literal"><span class="pre">'inline'</span> <span class="pre">=&gt;</span> <span class="pre">false</span></code> will add
+the form tag to the <code class="docutils literal"><span class="pre">postLink</span></code> content block, if you want to use a
+custom block you can specify it using the <code class="docutils literal"><span class="pre">block</span></code> option instead.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified">在 2.6 版更改: </span>参数 <code class="docutils literal"><span class="pre">$confirmMessage</span></code> 已经作废。请使用 <code class="docutils literal"><span class="pre">$options</span></code> 中的 <code class="docutils literal"><span class="pre">confirm</span></code> 键。
@@ -2612,7 +2717,7 @@ the error-field class name will be applied.</p>
 			<div class="col-md-12 text-center mt30">
 				<p class="copyright">
 							&copy; 版权所有 2016, Cake Software Foundation, Inc.
-						最后更新于 8月 02, 2016.
+						最后更新于 8月 03, 2016.
 						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
 				</p>
 			</div>

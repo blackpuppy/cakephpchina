@@ -281,7 +281,7 @@
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id4">数据表</a><ul>
+<li><a class="reference internal" href="#id4">数据库表</a><ul>
 <li><a class="reference internal" href="#created-modified">使用 created 和 modified 列</a></li>
 </ul>
 </li>
@@ -627,14 +627,6 @@ saveAssociated 方法。</li>
 <p class="last">如果保存成功，主模型的外键将被存储在相关模型的 id 字段中，即
 <code class="docutils literal"><span class="pre">$this-&gt;RelatedModel-&gt;id</span></code>。</p>
 </div>
-<div class="admonition warning">
-<p class="first admonition-title">警告</p>
-<p class="last">在检查 atomic 选项设置为 false 的 saveAssociated 方法的调用时，要小心。它返
-回的是一个数组，而不是布尔值。</p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">在 2.1 版更改: </span>现在你可以设置 <code class="docutils literal"><span class="pre">$options['deep']</span> <span class="pre">=</span> <span class="pre">true;</span></code> 来保存深层关联的数据。</p>
-</div>
 <p>为了同时保存一条记录及与其有 hasMany 关联的相关记录、以及深层关联的 Comment
 belongsTo User 数据，data 数组应当象这样:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -653,8 +645,10 @@ belongsTo User 数据，data 数组应当象这样:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$Article</span><span class="o">-&gt;</span><span class="na">saveAssociated</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;deep&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">));</span>
 </pre></div>
 </div>
-<div class="versionchanged">
-<p><span class="versionmodified">在 2.1 版更改: </span><code class="docutils literal"><span class="pre">Model::saveAll()</span></code> 和类似方法现在支持传入多个模型的 <cite>fieldList</cite> 选项。</p>
+<div class="admonition warning">
+<p class="first admonition-title">警告</p>
+<p class="last">当 atomic 选项设置为 false 时，在检查 saveAssociated 的调用（返回值）时要
+当心，它返回数组，而不是布尔值。</p>
 </div>
 <p>传入多个模型的 <code class="docutils literal"><span class="pre">fieldList</span></code> 的例子:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">SomeModel</span><span class="o">-&gt;</span><span class="na">saveAll</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
@@ -667,6 +661,10 @@ belongsTo User 数据，data 数组应当象这样:</p>
 </div>
 <p>(这里的) fieldList 是一个以模型别名为键，以字段数组为值的数组。模型名不同于在要
 保存的数据中那样，不能嵌套。</p>
+<div class="versionchanged">
+<p><span class="versionmodified">在 2.1 版更改: </span><code class="docutils literal"><span class="pre">Model::saveAll()</span></code> 和类似方法现在支持传入多个模型的 <cite>fieldList</cite> 选项。</p>
+<p>现在你也可以设置 <code class="docutils literal"><span class="pre">$options['deep']</span> <span class="pre">=</span> <span class="pre">true;</span></code> 来保存深层关联的数据。</p>
+</div>
 </div>
 <div class="section" id="model-saveall-array-data-null-array-options-array">
 <h2><code class="xref php php-meth docutils literal"><span class="pre">Model::saveAll(array</span> <span class="pre">$data</span> <span class="pre">=</span> <span class="pre">null,</span> <span class="pre">array</span> <span class="pre">$options</span> <span class="pre">=</span> <span class="pre">array())</span></code><a class="headerlink" href="#model-saveall-array-data-null-array-options-array" title="永久链接至标题">¶</a></h2>
@@ -1140,7 +1138,7 @@ HABTM 数组格式传入关联的 HABTM 数据。注意，只需要传入关联�
 </div>
 </div>
 <div class="section" id="id4">
-<h2>数据表<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>数据库表<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 <p>虽然 CakePHP 可以有非数据库驱动的数据源，但大多数时候是数据库驱动的。CakePHP 被
 设计成与(数据库)无关，可以使用 MySQL、Microsoft SQL Server、PostgreSQL 和其它数据库。你可以象平
 时那样创建数据库表。在创建模型类时，模型将自动映射到你创建的表上。按照约定，表名
@@ -1174,6 +1172,9 @@ Model::save() 方法来帮你总是这么做:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>如果你保存数据时设置了 <code class="docutils literal"><span class="pre">fieldList</span></code>，并且 <code class="docutils literal"><span class="pre">created</span></code> 和 <code class="docutils literal"><span class="pre">modified</span></code> 不在允许
+保存的字段列表中，这两个字段还是会自动设置。当 <code class="docutils literal"><span class="pre">created</span></code> 和 <code class="docutils literal"><span class="pre">modified</span></code> 包括在
+<code class="docutils literal"><span class="pre">fieldList</span></code> 中时，它们就和任何别的字段一样处理（即，不会自动设置）。</p>
 </div>
 </div>
 </div>
@@ -1364,7 +1365,7 @@ Model::save() 方法来帮你总是这么做:</p>
 			<div class="col-md-12 text-center mt30">
 				<p class="copyright">
 							&copy; 版权所有 2016, Cake Software Foundation, Inc.
-						最后更新于 8月 02, 2016.
+						最后更新于 8月 03, 2016.
 						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
 				</p>
 			</div>
