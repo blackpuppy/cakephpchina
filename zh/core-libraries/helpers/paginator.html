@@ -268,6 +268,7 @@
 <li><a class="reference internal" href="#creating-sort-links">Creating sort links</a></li>
 <li><a class="reference internal" href="#id2">创建页数链接</a></li>
 <li><a class="reference internal" href="#creating-page-number-links">Creating page number links</a></li>
+<li><a class="reference internal" href="#id5">创建跳转链接</a></li>
 <li><a class="reference internal" href="#creating-jump-links">Creating jump links</a></li>
 <li><a class="reference internal" href="#creating-a-page-counter">Creating a page counter</a></li>
 <li><a class="reference internal" href="#modifying-the-options-paginatorhelper-uses">Modifying the options PaginatorHelper uses</a><ul>
@@ -515,6 +516,7 @@ also ok to just call the method without any params.</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">numbers</span><span class="p">();</span>
 </pre></div>
 </div>
+<p>使用 first 和 last 选项可以创建开始和末尾的页数的链接。下面的代码会创建一组页数的链接，包括分页结果中开始 2 页和最后 2 页的链接:</p>
 <p>Using the first and last options you can create links to the beginning
 and end of the page set. The following would create a set of page links that
 include links to the first 2 and last 2 pages in the paged results:</p>
@@ -522,14 +524,20 @@ include links to the first 2 and last 2 pages in the paged results:</p>
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">2.1 新版功能: </span>The <code class="docutils literal"><span class="pre">currentClass</span></code> option was added in 2.1.</p>
+<p><span class="versionmodified">2.1 新版功能: </span>在 2.1 版本中加入了 <code class="docutils literal"><span class="pre">currentClass</span></code> 选项。
+The <code class="docutils literal"><span class="pre">currentClass</span></code> option was added in 2.1.</p>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">2.3 新版功能: </span>The <code class="docutils literal"><span class="pre">currentTag</span></code> option was added in 2.3.</p>
+<p><span class="versionmodified">2.3 新版功能: </span>在 2.3 版本中加入了 <code class="docutils literal"><span class="pre">currentTag</span></code> 选项。
+The <code class="docutils literal"><span class="pre">currentTag</span></code> option was added in 2.3.</p>
 </div>
+</div>
+<div class="section" id="id5">
+<h2>创建跳转链接<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
 </div>
 <div class="section" id="creating-jump-links">
 <h2>Creating jump links<a class="headerlink" href="#creating-jump-links" title="永久链接至标题">¶</a></h2>
+<p>除了生成直接前往特定页数的链接外，经常也需要前往前一页和后一页的链接、分页数据集中第一页和最后一页的链接。</p>
 <p>In addition to generating links that go directly to specific page numbers,
 you&#8217;ll often want links that go to the previous and next links, first and last
 pages in the paged data set.</p>
@@ -541,25 +549,36 @@ pages in the paged data set.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
-<li><strong>$title</strong> (<em>string</em>) &#8211; Title for the link.</li>
-<li><strong>$options</strong> (<em>mixed</em>) &#8211; Options for pagination link.</li>
-<li><strong>$disabledTitle</strong> (<em>string</em>) &#8211; Title when the link is disabled, as when
+<li><strong>$title</strong> (<em>string</em>) &#8211; 链接的标题。</li>
+<li><strong>$options</strong> (<em>mixed</em>) &#8211; 分页链接的选项。</li>
+<li><strong>$disabledTitle</strong> (<em>string</em>) &#8211; 当链接无效时的标题，比如已经在第一页、没有前一页可去时。</li>
+<li><strong>$disabledOptions</strong> (<em>mixed</em>) &#8211; 无效链接的选项。</li>
+<li><strong>$title</strong> &#8211; Title for the link.</li>
+<li><strong>$options</strong> &#8211; Options for pagination link.</li>
+<li><strong>$disabledTitle</strong> &#8211; Title when the link is disabled, as when
 you&#8217;re already on the first page, no previous page to go.</li>
-<li><strong>$disabledOptions</strong> (<em>mixed</em>) &#8211; Options for the disabled pagination link.</li>
+<li><strong>$disabledOptions</strong> &#8211; Options for the disabled pagination link.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+<p>前往分页记录集中前一页的链接。</p>
 <p>Generates a link to the previous page in a set of paged records.</p>
-<p><code class="docutils literal"><span class="pre">$options</span></code> and <code class="docutils literal"><span class="pre">$disabledOptions</span></code> supports the following keys:</p>
+<p><code class="docutils literal"><span class="pre">$options</span></code> 和 <code class="docutils literal"><span class="pre">$disabledOptions</span></code> 支持下面这些键：
+<code class="docutils literal"><span class="pre">$options</span></code> and <code class="docutils literal"><span class="pre">$disabledOptions</span></code> supports the following keys:</p>
 <ul class="simple">
+<li><code class="docutils literal"><span class="pre">tag</span></code> 要使用的包裹标签，默认为 &#8216;span&#8217;。设置为 <code class="docutils literal"><span class="pre">false</span></code> 来关闭该选项。</li>
+<li><code class="docutils literal"><span class="pre">escape</span></code> 内容是否要 HTML 实体编码（<em>HTML entity encode</em>），默认为 true。</li>
+<li><code class="docutils literal"><span class="pre">model</span></code> 要使用的模型，默认为 <a class="reference internal" href="#PaginatorHelper::defaultModel" title="PaginatorHelper::defaultModel"><code class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::defaultModel()</span></code></a>。</li>
+<li><code class="docutils literal"><span class="pre">disabledTag</span></code> 当没有前一页时代替 A 标签的标签。</li>
 <li><code class="docutils literal"><span class="pre">tag</span></code> The tag wrapping tag you want to use, defaults to &#8216;span&#8217;. Set this to <code class="docutils literal"><span class="pre">false</span></code> to disable this option.</li>
 <li><code class="docutils literal"><span class="pre">escape</span></code> Whether you want the contents HTML entity encoded,
 defaults to true.</li>
 <li><code class="docutils literal"><span class="pre">model</span></code> The model to use, defaults to <a class="reference internal" href="#PaginatorHelper::defaultModel" title="PaginatorHelper::defaultModel"><code class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::defaultModel()</span></code></a>.</li>
 <li><code class="docutils literal"><span class="pre">disabledTag</span></code> Tag to use instead of A tag when there is no previous page</li>
 </ul>
+<p>这是一个简单的例子:</p>
 <p>A simple example would be:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">prev</span><span class="p">(</span>
   <span class="s1">&#39; &lt;&lt; &#39;</span> <span class="o">.</span> <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;previous&#39;</span><span class="p">),</span>
@@ -569,6 +588,7 @@ defaults to true.</li>
 <span class="p">);</span>
 </pre></div>
 </div>
+<p>如果现在正在文章（<em>posts</em>）的第二页，就会得到如下输出：</p>
 <p>If you were currently on the second page of posts, you would get the following:</p>
 <div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;prev&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">a</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;prev&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/posts/index/page:1/sort:title/order:desc&quot;</span><span class="p">&gt;</span>
@@ -577,14 +597,17 @@ defaults to true.</li>
 <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 </pre></div>
 </div>
+<p>如果之前没有更多页，得到的就是：</p>
 <p>If there were no previous pages you would get:</p>
 <div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;prev disabled&quot;</span><span class="p">&gt;</span><span class="cp">&lt;?= __(&#39;&lt;&lt; previous&#39;) ?&gt;</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 </pre></div>
 </div>
+<p>可以用 <code class="docutils literal"><span class="pre">tag</span></code> 标签改变包裹的标签:</p>
 <p>You can change the wrapping tag using the <code class="docutils literal"><span class="pre">tag</span></code> option:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">prev</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;previous&#39;</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;tag&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;li&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
+<p>输出：</p>
 <p>Output:</p>
 <div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;prev&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">a</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;prev&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/posts/index/page:1/sort:title/order:desc&quot;</span><span class="p">&gt;</span>
@@ -593,10 +616,12 @@ defaults to true.</li>
 <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 </pre></div>
 </div>
+<p>也可以不用包裹的:</p>
 <p>You can also disable the wrapping tag:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">prev</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">&#39;previous&#39;</span><span class="p">),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;tag&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
 </pre></div>
 </div>
+<p>输出：</p>
 <p>Output:</p>
 <div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;prev&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;prev&quot;</span>
   <span class="na">href</span><span class="o">=</span><span class="s">&quot;/posts/index/page:1/sort:title/order:desc&quot;</span><span class="p">&gt;</span>
@@ -607,9 +632,12 @@ defaults to true.</li>
 </dd></dl>
 
 <div class="versionchanged">
-<p><span class="versionmodified">在 2.3 版更改: </span>For methods: <a class="reference internal" href="#PaginatorHelper::prev" title="PaginatorHelper::prev"><code class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::prev()</span></code></a> and <a class="reference internal" href="#PaginatorHelper::next" title="PaginatorHelper::next"><code class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::next()</span></code></a> it
+<p><span class="versionmodified">在 2.3 版更改: </span>对 methods: <a class="reference internal" href="#PaginatorHelper::prev" title="PaginatorHelper::prev"><code class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::prev()</span></code></a> 和 <a class="reference internal" href="#PaginatorHelper::next" title="PaginatorHelper::next"><code class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::next()</span></code></a> 方法，现在可以设置 <code class="docutils literal"><span class="pre">tag</span></code> 选项为 <code class="docutils literal"><span class="pre">false</span></code> 来不使用包裹元素。
+新增了 <code class="docutils literal"><span class="pre">disabledTag</span></code> 选项。
+For methods: <a class="reference internal" href="#PaginatorHelper::prev" title="PaginatorHelper::prev"><code class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::prev()</span></code></a> and <a class="reference internal" href="#PaginatorHelper::next" title="PaginatorHelper::next"><code class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::next()</span></code></a> it
 is now possible to set the <code class="docutils literal"><span class="pre">tag</span></code> option to <code class="docutils literal"><span class="pre">false</span></code> to disable the wrapper.
 New options <code class="docutils literal"><span class="pre">disabledTag</span></code> has been added.</p>
+<p>如果设置 <code class="docutils literal"><span class="pre">$disabledOptions</span></code> 参数为空，就会使用 <code class="docutils literal"><span class="pre">$options</span></code> 参数。如果两组选项相同，这就可以少敲一些代码。</p>
 <p>If you leave the <code class="docutils literal"><span class="pre">$disabledOptions</span></code> empty the <code class="docutils literal"><span class="pre">$options</span></code> parameter will be
 used. This can save some additional typing if both sets of options are the
 same.</p>
@@ -617,7 +645,8 @@ same.</p>
 <dl class="method">
 <dt id="PaginatorHelper::next">
 <code class="descclassname">PaginatorHelper::</code><code class="descname">next</code><span class="sig-paren">(</span><em>$title = 'Next &gt;&gt;'</em>, <em>$options = array()</em>, <em>$disabledTitle = null</em>, <em>$disabledOptions = array()</em><span class="sig-paren">)</span><a class="headerlink" href="#PaginatorHelper::next" title="永久链接至目标">¶</a></dt>
-<dd><p>This method is identical to <code class="xref php php-meth docutils literal"><span class="pre">prev()</span></code> with a few exceptions. It
+<dd><p>该方法与 <code class="xref php php-meth docutils literal"><span class="pre">prev()</span></code> 方法除了一些差别，完全相同。它生成指向下一页而不是前一页的链接，使用 <code class="docutils literal"><span class="pre">next</span></code> 而不是 <code class="docutils literal"><span class="pre">prev</span></code> 作为 rel 属性的值。</p>
+<p>This method is identical to <code class="xref php php-meth docutils literal"><span class="pre">prev()</span></code> with a few exceptions. It
 creates links pointing to the next page instead of the previous one. It also
 uses <code class="docutils literal"><span class="pre">next</span></code> as the rel attribute value instead of <code class="docutils literal"><span class="pre">prev</span></code></p>
 </dd></dl>
@@ -625,21 +654,30 @@ uses <code class="docutils literal"><span class="pre">next</span></code> as the 
 <dl class="method">
 <dt id="PaginatorHelper::first">
 <code class="descclassname">PaginatorHelper::</code><code class="descname">first</code><span class="sig-paren">(</span><em>$first = '&lt;&lt; first'</em>, <em>$options = array()</em><span class="sig-paren">)</span><a class="headerlink" href="#PaginatorHelper::first" title="永久链接至目标">¶</a></dt>
-<dd><p>Returns a first or set of numbers for the first pages. If a string is given,
+<dd><p>返回第一页或者开始一些页数的链接。如果给出的是字符串，就以提供的文字创建指向第一页的链接:</p>
+<p>Returns a first or set of numbers for the first pages. If a string is given,
 then only a link to the first page with the provided text will be created:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">(</span><span class="s1">&#39;&lt; first&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
+<p>以上代码会创建单个指向第一页的链接。如果在第一页上，什么也不会输出。也可以使用整数来指明要生成开始的多少个链接:</p>
 <p>The above creates a single link for the first page. Will output nothing if you
 are on the first page. You can also use an integer to indicate how many first
 paging links you want generated:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
 </pre></div>
 </div>
+<p>如果在第 3 页或之后的页上，上面的代码就会创建开始 3 页的链接。在之前的页上，什么也不会输出。</p>
 <p>The above will create links for the first 3 pages, once you get to the third or
 greater page. Prior to that nothing will be output.</p>
+<p>参数 options 接受下面（这些键）：</p>
 <p>The options parameter accepts the following:</p>
 <ul class="simple">
+<li><code class="docutils literal"><span class="pre">tag</span></code> 同来包裹的标签，默认为 &#8216;span&#8217;。</li>
+<li><code class="docutils literal"><span class="pre">after</span></code> 链接/标签之后要插入的内容。</li>
+<li><code class="docutils literal"><span class="pre">model</span></code> 要使用的模型，默认为 <a class="reference internal" href="#PaginatorHelper::defaultModel" title="PaginatorHelper::defaultModel"><code class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::defaultModel()</span></code></a>。</li>
+<li><code class="docutils literal"><span class="pre">separator</span></code> 生成的链接之间的内容，默认为 &#8216; | &#8216;。</li>
+<li><code class="docutils literal"><span class="pre">ellipsis</span></code> 代表省略的内容，默认为 &#8216;...&#8217;。</li>
 <li><code class="docutils literal"><span class="pre">tag</span></code> The tag wrapping tag you want to use, defaults to &#8216;span&#8217;</li>
 <li><code class="docutils literal"><span class="pre">after</span></code> Content to insert after the link/tag</li>
 <li><code class="docutils literal"><span class="pre">model</span></code> The model to use defaults to <a class="reference internal" href="#PaginatorHelper::defaultModel" title="PaginatorHelper::defaultModel"><code class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::defaultModel()</span></code></a></li>
@@ -651,7 +689,8 @@ greater page. Prior to that nothing will be output.</p>
 <dl class="method">
 <dt id="PaginatorHelper::last">
 <code class="descclassname">PaginatorHelper::</code><code class="descname">last</code><span class="sig-paren">(</span><em>$last = 'last &gt;&gt;'</em>, <em>$options = array()</em><span class="sig-paren">)</span><a class="headerlink" href="#PaginatorHelper::last" title="永久链接至目标">¶</a></dt>
-<dd><p>This method works very much like the <a class="reference internal" href="#PaginatorHelper::first" title="PaginatorHelper::first"><code class="xref php php-meth docutils literal"><span class="pre">first()</span></code></a>
+<dd><p>该方法与 <a class="reference internal" href="#PaginatorHelper::first" title="PaginatorHelper::first"><code class="xref php php-meth docutils literal"><span class="pre">first()</span></code></a> 方法很相似。不过有一些不同。对 <code class="docutils literal"><span class="pre">$last</span></code> 参数的字符串值，如果在最后一页就不会生成任何链接。对 <code class="docutils literal"><span class="pre">$last</span></code> 参数的整数值，如果在最后几页的范围内就不会生成任何链接。</p>
+<p>This method works very much like the <a class="reference internal" href="#PaginatorHelper::first" title="PaginatorHelper::first"><code class="xref php php-meth docutils literal"><span class="pre">first()</span></code></a>
 method. It has a few differences though. It will not generate any links if you
 are on the last page for a string values of <code class="docutils literal"><span class="pre">$last</span></code>. For an integer value of
 <code class="docutils literal"><span class="pre">$last</span></code> no links will be generated once the user is inside the range of last
