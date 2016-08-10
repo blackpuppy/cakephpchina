@@ -270,6 +270,7 @@
 <li><a class="reference internal" href="#creating-page-number-links">Creating page number links</a></li>
 <li><a class="reference internal" href="#id5">创建跳转链接</a></li>
 <li><a class="reference internal" href="#creating-jump-links">Creating jump links</a></li>
+<li><a class="reference internal" href="#id6">创建页数计数器</a></li>
 <li><a class="reference internal" href="#creating-a-page-counter">Creating a page counter</a></li>
 <li><a class="reference internal" href="#modifying-the-options-paginatorhelper-uses">Modifying the options PaginatorHelper uses</a><ul>
 <li><a class="reference internal" href="#using-get-parameters-for-pagination">Using GET parameters for pagination</a></li>
@@ -700,9 +701,12 @@ pages.</p>
 <dl class="method">
 <dt id="PaginatorHelper::current">
 <code class="descclassname">PaginatorHelper::</code><code class="descname">current</code><span class="sig-paren">(</span><em>string $model = null</em><span class="sig-paren">)</span><a class="headerlink" href="#PaginatorHelper::current" title="永久链接至目标">¶</a></dt>
-<dd><p>Gets the current page of the recordset for the given model:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Our URL is: http://example.com/comments/view/page:3</span>
+<dd><p>得到给定模型的记录集的当前页:</p>
+<p>Gets the current page of the recordset for the given model:</p>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 网址是： http://example.com/comments/view/page:3</span>
+<span class="c1">// Our URL is: http://example.com/comments/view/page:3</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">current</span><span class="p">(</span><span class="s1">&#39;Comment&#39;</span><span class="p">);</span>
+<span class="c1">// 输出为 3</span>
 <span class="c1">// Output is 3</span>
 </pre></div>
 </div>
@@ -711,21 +715,27 @@ pages.</p>
 <dl class="method">
 <dt id="PaginatorHelper::hasNext">
 <code class="descclassname">PaginatorHelper::</code><code class="descname">hasNext</code><span class="sig-paren">(</span><em>string $model = null</em><span class="sig-paren">)</span><a class="headerlink" href="#PaginatorHelper::hasNext" title="永久链接至目标">¶</a></dt>
-<dd><p>Returns true if the given result set is not at the last page.</p>
+<dd><p>如果给定结果集不在最后一页就返回 true。</p>
+<p>Returns true if the given result set is not at the last page.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="PaginatorHelper::hasPrev">
 <code class="descclassname">PaginatorHelper::</code><code class="descname">hasPrev</code><span class="sig-paren">(</span><em>string $model = null</em><span class="sig-paren">)</span><a class="headerlink" href="#PaginatorHelper::hasPrev" title="永久链接至目标">¶</a></dt>
-<dd><p>Returns true if the given result set is not at the first page.</p>
+<dd><p>如果给定结果集不在第一页就返回 true。</p>
+<p>Returns true if the given result set is not at the first page.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="PaginatorHelper::hasPage">
 <code class="descclassname">PaginatorHelper::</code><code class="descname">hasPage</code><span class="sig-paren">(</span><em>string $model = null</em>, <em>integer $page = 1</em><span class="sig-paren">)</span><a class="headerlink" href="#PaginatorHelper::hasPage" title="永久链接至目标">¶</a></dt>
-<dd><p>Returns true if the given result set has the page number given by <code class="docutils literal"><span class="pre">$page</span></code>.</p>
+<dd><p>如果给定结果集有 <code class="docutils literal"><span class="pre">$page</span></code> 参数指定的页就返回 true。</p>
+<p>Returns true if the given result set has the page number given by <code class="docutils literal"><span class="pre">$page</span></code>.</p>
 </dd></dl>
 
+</div>
+<div class="section" id="id6">
+<h2>创建页数计数器<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
 </div>
 <div class="section" id="creating-a-page-counter">
 <h2>Creating a page counter<a class="headerlink" href="#creating-a-page-counter" title="永久链接至标题">¶</a></h2>
@@ -734,16 +744,28 @@ pages.</p>
 <code class="descclassname">PaginatorHelper::</code><code class="descname">counter</code><span class="sig-paren">(</span><em>$options = array()</em><span class="sig-paren">)</span><a class="headerlink" href="#PaginatorHelper::counter" title="永久链接至目标">¶</a></dt>
 <dd></dd></dl>
 
+<p>返回结果集的计数器字符串。使用提供的格式字符串和一系列选项，就可以创建本地化的和应用程序特有的方式来说明在分页的数据集中所在位置。</p>
 <p>Returns a counter string for the paged result set. Using a provided format
 string and a number of options you can create localized and application
 specific indicators of where a user is in the paged data set.</p>
+<p><code class="docutils literal"><span class="pre">counter()</span></code> 方法有一系列选项。支持的选项有：</p>
 <p>There are a number of options for <code class="docutils literal"><span class="pre">counter()</span></code>. The supported ones are:</p>
 <ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">format</span></code> 计数器的格式。支持的格式为 &#8216;range&#8217;、&#8217;pages&#8217; 和自定义。默认的页数，输出类似于 &#8216;1 of 10&#8217;。在自定义模式中，提供的字符串会被解析，得到的标记会用实际值代替。可以使用的标记为：</p>
+</li>
 <li><p class="first"><code class="docutils literal"><span class="pre">format</span></code> Format of the counter. Supported formats are &#8216;range&#8217;, &#8216;pages&#8217;
 and custom. Defaults to pages which would output like &#8216;1 of 10&#8217;. In the
 custom mode the supplied string is parsed and tokens are replaced with
 actual values. The available tokens are:</p>
 <ul class="simple">
+<li><code class="docutils literal"><span class="pre">{:page}</span></code> - 显示的当前页。</li>
+<li><code class="docutils literal"><span class="pre">{:pages}</span></code> - 总页数。</li>
+<li><code class="docutils literal"><span class="pre">{:current}</span></code> - 当前显示的记录数。</li>
+<li><code class="docutils literal"><span class="pre">{:count}</span></code> - 结果集中的总记录数。</li>
+<li><code class="docutils literal"><span class="pre">{:start}</span></code> - 显示的第一条记录的序号。</li>
+<li><code class="docutils literal"><span class="pre">{:end}</span></code> - 显示的最后一条记录的序号。</li>
+<li><code class="docutils literal"><span class="pre">{:model}</span></code> - 模型名称的复数可读形式。如果模型为 &#8216;RecipePage&#8217;，<code class="docutils literal"><span class="pre">{:model}</span></code> 就会是 &#8216;recipe pages&#8217;。
+在 2.0 版本中加入了该选项。</li>
 <li><code class="docutils literal"><span class="pre">{:page}</span></code> - the current page displayed.</li>
 <li><code class="docutils literal"><span class="pre">{:pages}</span></code> - total number of pages.</li>
 <li><code class="docutils literal"><span class="pre">{:current}</span></code> - current number of records being shown.</li>
@@ -754,6 +776,7 @@ actual values. The available tokens are:</p>
 If your model was &#8216;RecipePage&#8217;, <code class="docutils literal"><span class="pre">{:model}</span></code> would be &#8216;recipe pages&#8217;.
 This option was added in 2.0.</li>
 </ul>
+<p>也可以为 counter 方法只提供包含可用标记的字符串。例如:</p>
 <p>You could also supply only a string to the counter method using the tokens
 available. For example:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">counter</span><span class="p">(</span>
@@ -762,6 +785,7 @@ available. For example:</p>
 <span class="p">);</span>
 </pre></div>
 </div>
+<p>设置 &#8216;format&#8217; 选项为 range，则输出类似于 &#8216;1 - 3 of 13&#8217;:</p>
 <p>Setting &#8216;format&#8217; to range would output like &#8216;1 - 3 of 13&#8217;:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">counter</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;format&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;range&#39;</span>
@@ -1269,7 +1293,7 @@ initialized.</p>
 			<div class="col-md-12 text-center mt30">
 				<p class="copyright">
 							&copy; 版权所有 2016, Cake Software Foundation, Inc.
-						最后更新于 8月 09, 2016.
+						最后更新于 8月 10, 2016.
 						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
 				</p>
 			</div>
