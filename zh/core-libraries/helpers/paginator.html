@@ -272,7 +272,9 @@
 <li><a class="reference internal" href="#creating-jump-links">Creating jump links</a></li>
 <li><a class="reference internal" href="#id6">创建页数计数器</a></li>
 <li><a class="reference internal" href="#creating-a-page-counter">Creating a page counter</a></li>
+<li><a class="reference internal" href="#id7">改变 PaginatorHelper 助件使用的选项</a></li>
 <li><a class="reference internal" href="#modifying-the-options-paginatorhelper-uses">Modifying the options PaginatorHelper uses</a><ul>
+<li><a class="reference internal" href="#get">使用 GET 参数进行分页</a></li>
 <li><a class="reference internal" href="#using-get-parameters-for-pagination">Using GET parameters for pagination</a></li>
 <li><a class="reference internal" href="#configuring-the-paginatorhelper-to-use-a-javascript-helper">Configuring the PaginatorHelper to use a JavaScript helper</a></li>
 </ul>
@@ -793,6 +795,9 @@ available. For example:</p>
 </pre></div>
 </div>
 </li>
+<li><p class="first"><code class="docutils literal"><span class="pre">separator</span></code> 在真正的页数和总页数之间的分隔符。默认为 &#8216; of &#8216;。这和 &#8216;format&#8217; =
+&#8216;pages&#8217; 结合使用，是 &#8216;format&#8217; 的默认值:</p>
+</li>
 <li><p class="first"><code class="docutils literal"><span class="pre">separator</span></code> The separator between the actual page and the number of
 pages. Defaults to &#8216; of &#8216;. This is used in conjunction with &#8216;format&#8217; =
 &#8216;pages&#8217; which is &#8216;format&#8217; default value:</p>
@@ -802,11 +807,16 @@ pages. Defaults to &#8216; of &#8216;. This is used in conjunction with &#8216;f
 </pre></div>
 </div>
 </li>
+<li><p class="first"><code class="docutils literal"><span class="pre">model</span></code> 分页查询的模型名称，默认为 <a class="reference internal" href="#PaginatorHelper::defaultModel" title="PaginatorHelper::defaultModel"><code class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::defaultModel()</span></code></a>。这和 &#8216;format&#8217; 选项的自定义字符串结合使用。</p>
+</li>
 <li><p class="first"><code class="docutils literal"><span class="pre">model</span></code> The name of the model being paginated, defaults to
 <a class="reference internal" href="#PaginatorHelper::defaultModel" title="PaginatorHelper::defaultModel"><code class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::defaultModel()</span></code></a>. This is used in
 conjunction with the custom string on &#8216;format&#8217; option.</p>
 </li>
 </ul>
+</div>
+<div class="section" id="id7">
+<h2>改变 PaginatorHelper 助件使用的选项<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
 </div>
 <div class="section" id="modifying-the-options-paginatorhelper-uses">
 <h2>Modifying the options PaginatorHelper uses<a class="headerlink" href="#modifying-the-options-paginatorhelper-uses" title="永久链接至标题">¶</a></h2>
@@ -818,7 +828,8 @@ conjunction with the custom string on &#8216;format&#8217; option.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first last simple">
-<li><strong>$options</strong> (<em>mixed</em>) &#8211; Default options for pagination links. If a
+<li><strong>$options</strong> (<em>mixed</em>) &#8211; 分页链接的默认选项。如果提供字符串——就会作为元素使用的 DOM id。</li>
+<li><strong>$options</strong> &#8211; Default options for pagination links. If a
 string is supplied - it is used as the DOM id element to update.</li>
 </ul>
 </td>
@@ -827,14 +838,21 @@ string is supplied - it is used as the DOM id element to update.</li>
 </table>
 </dd></dl>
 
+<p>设置 Paginator 助件的所有选项。支持的选项为：</p>
 <p>Sets all the options for the Paginator Helper. Supported options are:</p>
 <ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">url</span></code> 分页动作的网址（<em>URL</em>）。&#8217;url&#8217; 也有一些子选项：</p>
+</li>
 <li><p class="first"><code class="docutils literal"><span class="pre">url</span></code> The URL of the paginating action. &#8216;url&#8217; has a few sub options as well:</p>
 <ul class="simple">
+<li><code class="docutils literal"><span class="pre">sort</span></code> 记录排序的键。</li>
+<li><code class="docutils literal"><span class="pre">direction</span></code> 排序的方向。默认为 &#8216;ASC&#8217;。</li>
+<li><code class="docutils literal"><span class="pre">page</span></code> 显示的页数。</li>
 <li><code class="docutils literal"><span class="pre">sort</span></code> The key that the records are sorted by.</li>
 <li><code class="docutils literal"><span class="pre">direction</span></code> The direction of the sorting. Defaults to &#8216;ASC&#8217;.</li>
 <li><code class="docutils literal"><span class="pre">page</span></code> The page number to display.</li>
 </ul>
+<p>上述选项可以用来强制到特定的页/方向。也可以附加额外的网址片段到所有助件生成的网址:</p>
 <p>The above mentioned options can be used to force particular pages/directions.
 You can also append additional URL content into all URLs generated in the
 helper:</p>
@@ -846,29 +864,41 @@ helper:</p>
 <span class="p">));</span>
 </pre></div>
 </div>
+<p>上面的代码添加 <code class="docutils literal"><span class="pre">en</span></code> 路由参数到所有助件会生成的网址。这也会带有特定排序、方向和页数的值的链接。默认情况下，PaginatorHelper 助件会合并所有当前传入（<em>pass</em>）和命名（<em>named</em>）参数。所以不必在每个视图（<em>view</em>）文件设置这些。</p>
 <p>The above adds the <code class="docutils literal"><span class="pre">en</span></code> route parameter to all links the helper will
 generate. It will also create links with specific sort, direction and page
 values. By default PaginatorHelper will merge in all of the current pass and
 named parameters. So you don&#8217;t have to do that in each view file.</p>
 </li>
+<li><p class="first"><code class="docutils literal"><span class="pre">escape</span></code> 指定链接的 title 属性是否要进行 HTML 转义。默认为 true。</p>
+</li>
 <li><p class="first"><code class="docutils literal"><span class="pre">escape</span></code> Defines if the title field for links should be HTML escaped.
 Defaults to true.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">update</span></code> AJAX 分页调用的结果要更新的元素的 CSS 选择器。如果未指定，就会生成标准的链接:</p>
 </li>
 <li><p class="first"><code class="docutils literal"><span class="pre">update</span></code> The CSS selector of the element to update with the results of AJAX
 pagination calls. If not specified, regular links will be created:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;update&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;#content&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
+<p>这在进行 <a class="reference internal" href="js.html#ajax-pagination"><span class="std std-ref">Ajax Pagination</span></a> 时会有用。记住 update 的值可以是任何合法的 CSS 选择器，但是通常只是简单的 id 选择器。</p>
 <p>This is useful when doing <a class="reference internal" href="js.html#ajax-pagination"><span class="std std-ref">Ajax Pagination</span></a>. Keep in mind that the value
 of update can be any valid CSS selector, but most often is simpler to use an
 id selector.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">model</span></code> 分页查询的模型名称，默认为 <a class="reference internal" href="#PaginatorHelper::defaultModel" title="PaginatorHelper::defaultModel"><code class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::defaultModel()</span></code></a>。</p>
 </li>
 <li><p class="first"><code class="docutils literal"><span class="pre">model</span></code> The name of the model being paginated, defaults to
 <a class="reference internal" href="#PaginatorHelper::defaultModel" title="PaginatorHelper::defaultModel"><code class="xref php php-meth docutils literal"><span class="pre">PaginatorHelper::defaultModel()</span></code></a>.</p>
 </li>
 </ul>
+<div class="section" id="get">
+<h3>使用 GET 参数进行分页<a class="headerlink" href="#get" title="永久链接至标题">¶</a></h3>
+</div>
 <div class="section" id="using-get-parameters-for-pagination">
 <h3>Using GET parameters for pagination<a class="headerlink" href="#using-get-parameters-for-pagination" title="永久链接至标题">¶</a></h3>
+<p>通常 CakePHP 的分页使用 <a class="reference internal" href="../../development/routing.html#named-parameters"><span class="std std-ref">命名参数</span></a>。不过，有时你想使用 GET 参数。尽管分页的配置选项主要在 <a class="reference internal" href="../components/pagination.html#PaginatorComponent" title="PaginatorComponent"><code class="xref php php-class docutils literal"><span class="pre">PaginatorComponent</span></code></a> 中，在视图中也有一些额外的控制。你可以使用 <code class="docutils literal"><span class="pre">options()</span></code> 方法来说明也要包括其他命名参数:</p>
 <p>Normally Pagination in CakePHP uses <a class="reference internal" href="../../development/routing.html#named-parameters"><span class="std std-ref">命名参数</span></a>. There are times
 you want to use GET parameters instead. While the main configuration option for
 this feature is in <a class="reference internal" href="../components/pagination.html#PaginatorComponent" title="PaginatorComponent"><code class="xref php php-class docutils literal"><span class="pre">PaginatorComponent</span></code></a>, you have some additional
@@ -1293,7 +1323,7 @@ initialized.</p>
 			<div class="col-md-12 text-center mt30">
 				<p class="copyright">
 							&copy; 版权所有 2016, Cake Software Foundation, Inc.
-						最后更新于 8月 10, 2016.
+						最后更新于 8月 11, 2016.
 						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
 				</p>
 			</div>
