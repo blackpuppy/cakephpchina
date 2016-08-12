@@ -276,10 +276,13 @@
 <li><a class="reference internal" href="#modifying-the-options-paginatorhelper-uses">Modifying the options PaginatorHelper uses</a><ul>
 <li><a class="reference internal" href="#get">使用 GET 参数进行分页</a></li>
 <li><a class="reference internal" href="#using-get-parameters-for-pagination">Using GET parameters for pagination</a></li>
+<li><a class="reference internal" href="#paginatorhelper-javascript">配置 PaginatorHelper 助件使用 JavaScript 助件</a></li>
 <li><a class="reference internal" href="#configuring-the-paginatorhelper-to-use-a-javascript-helper">Configuring the PaginatorHelper to use a JavaScript helper</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#id8">视图中的分页</a></li>
 <li><a class="reference internal" href="#pagination-in-views">Pagination in Views</a></li>
+<li><a class="reference internal" href="#id11">其他方法</a></li>
 <li><a class="reference internal" href="#other-methods">Other Methods</a></li>
 </ul>
 </li>
@@ -910,29 +913,40 @@ named parameters to be converted:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="paginatorhelper-javascript">
+<h3>配置 PaginatorHelper 助件使用 JavaScript 助件<a class="headerlink" href="#paginatorhelper-javascript" title="永久链接至标题">¶</a></h3>
+</div>
 <div class="section" id="configuring-the-paginatorhelper-to-use-a-javascript-helper">
 <h3>Configuring the PaginatorHelper to use a JavaScript helper<a class="headerlink" href="#configuring-the-paginatorhelper-to-use-a-javascript-helper" title="永久链接至标题">¶</a></h3>
+<p>默认情况下，<code class="docutils literal"><span class="pre">PaginatorHelper</span></code> 助件使用 <a class="reference internal" href="js.html#JsHelper" title="JsHelper"><code class="xref php php-class docutils literal"><span class="pre">JsHelper</span></code></a> 助件来执行 AJAX 功能。不过，如果你不想用它，而想用自定义助件生成AJAX 链接，你可以通过改变控制器中的 <code class="docutils literal"><span class="pre">$helpers</span></code> 数组来达到目的。在运行 <code class="docutils literal"><span class="pre">paginate()</span></code> 方法后执行:</p>
 <p>By default the <code class="docutils literal"><span class="pre">PaginatorHelper</span></code> uses <a class="reference internal" href="js.html#JsHelper" title="JsHelper"><code class="xref php php-class docutils literal"><span class="pre">JsHelper</span></code></a> to do AJAX
 features. However, if you don&#8217;t want that and want to use a custom helper
 for AJAX links, you can do so by changing the <code class="docutils literal"><span class="pre">$helpers</span></code> array in your controller.
 After running <code class="docutils literal"><span class="pre">paginate()</span></code> do the following:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// In your controller action.</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 在控制器动作中。</span>
+<span class="c1">// In your controller action.</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">());</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">helpers</span><span class="p">[</span><span class="s1">&#39;Paginator&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ajax&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CustomJs&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
+<p>这会改变 <code class="docutils literal"><span class="pre">PaginatorHelper</span></code> 助件使用 <code class="docutils literal"><span class="pre">CustomJs</span></code> 助件来执行 AJAX 操作。也可以设置 &#8216;ajax&#8217; 键为任何助件，只要该类实现了类似于 <a class="reference internal" href="html.html#HtmlHelper::link" title="HtmlHelper::link"><code class="xref php php-meth docutils literal"><span class="pre">HtmlHelper::link()</span></code></a> 方法的 <code class="docutils literal"><span class="pre">link()</span></code> 方法。</p>
 <p>Will change the <code class="docutils literal"><span class="pre">PaginatorHelper</span></code> to use the <code class="docutils literal"><span class="pre">CustomJs</span></code> for
 AJAX operations. You could also set the &#8216;ajax&#8217; key to be any
 helper, as long as that class implements a <code class="docutils literal"><span class="pre">link()</span></code> method that
 behaves like <a class="reference internal" href="html.html#HtmlHelper::link" title="HtmlHelper::link"><code class="xref php php-meth docutils literal"><span class="pre">HtmlHelper::link()</span></code></a></p>
 </div>
 </div>
+<div class="section" id="id8">
+<h2>视图中的分页<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+</div>
 <div class="section" id="pagination-in-views">
 <h2>Pagination in Views<a class="headerlink" href="#pagination-in-views" title="永久链接至标题">¶</a></h2>
+<p>如何显示记录给用户，由你决定，但是通常这是在表格内。下面的例子假定使用表格个布局，但是可以用于视图的 PaginatorHelper 助件并不总是要受此限制。</p>
 <p>It&#8217;s up to you to decide how to show records to the user, but most
 often this will be done inside HTML tables. The examples below
 assume a tabular layout, but the PaginatorHelper available in views
 doesn&#8217;t always need to be restricted as such.</p>
+<p>详情可见 <a class="reference external" href="http://api.cakephp.org/2.8/class-PaginatorHelper.html">PaginatorHelper</a> API 文档。正如之前提到的，PaginatorHelper 助件也提供排序功能，可以容易地集成到表格列的标题中：</p>
 <p>See the details on
 <a class="reference external" href="http://api.cakephp.org/2.8/class-PaginatorHelper.html">PaginatorHelper</a>
 in the API. As mentioned, the PaginatorHelper also offers sorting features
@@ -952,9 +966,11 @@ which can be easily integrated into your table column headers:</p>
 <span class="x">&lt;/table&gt;</span>
 </pre></div>
 </div>
+<p>从 <code class="docutils literal"><span class="pre">PaginatorHelper</span></code> &#8216;助件的 <code class="docutils literal"><span class="pre">sort()</span></code> 方法输出的链接让用户可以通过点击表格的标题来切换数据按照某一字段的排序。</p>
 <p>The links output from the <code class="docutils literal"><span class="pre">sort()</span></code> method of the <code class="docutils literal"><span class="pre">PaginatorHelper</span></code>
 allow users to click on table headers to toggle the sorting of the
 data by a given field.</p>
+<p>也可以按照关联（模型）的字段排序：</p>
 <p>It is also possible to sort a column based on associations:</p>
 <div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
@@ -970,11 +986,14 @@ data by a given field.</p>
 <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
 </pre></div>
 </div>
+<p>视图中分页显示的最终组成是页面导航的叠加，也是由 PaginationHelper 助件提供的:</p>
 <p>The final ingredient to pagination display in views is the addition
 of page navigation, also supplied by the PaginationHelper:</p>
-<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// Shows the page numbers</span>
+<div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="c1">// 显示也数</span>
+<span class="c1">// Shows the page numbers</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">numbers</span><span class="p">();</span>
 
+<span class="c1">// 显示前一页和后一页的链接</span>
 <span class="c1">// Shows the next and previous links</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">prev</span><span class="p">(</span>
   <span class="s1">&#39;« Previous&#39;</span><span class="p">,</span>
@@ -989,10 +1008,12 @@ of page navigation, also supplied by the PaginationHelper:</p>
   <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;disabled&#39;</span><span class="p">)</span>
 <span class="p">);</span>
 
+<span class="c1">// 显示 X of Y，其中 X 是当前页，Y 是总页数</span>
 <span class="c1">// prints X of Y, where X is current page and Y is number of pages</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">counter</span><span class="p">();</span>
 </pre></div>
 </div>
+<p>counter() 方法输出的文字可以用特定的标记定制:</p>
 <p>The wording output by the counter() method can also be customized
 using special markers:</p>
 <div class="highlight-phpinline"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Paginator</span><span class="o">-&gt;</span><span class="na">counter</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
@@ -1002,12 +1023,18 @@ using special markers:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="id11">
+<h2>其他方法<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+</div>
 <div class="section" id="other-methods">
 <h2>Other Methods<a class="headerlink" href="#other-methods" title="永久链接至标题">¶</a></h2>
 <dl class="method">
 <dt id="PaginatorHelper::link">
 <code class="descclassname">PaginatorHelper::</code><code class="descname">link</code><span class="sig-paren">(</span><em>$title</em>, <em>$url = array()</em>, <em>$options = array()</em><span class="sig-paren">)</span><a class="headerlink" href="#PaginatorHelper::link" title="永久链接至目标">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p>:param string $title：链接的标题。
+:param mixed $url：网址的动作。参见 Router::url()。
+:param array $options：链接的选项。键的列表可参见 options() 方法。</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -1323,7 +1350,7 @@ initialized.</p>
 			<div class="col-md-12 text-center mt30">
 				<p class="copyright">
 							&copy; 版权所有 2016, Cake Software Foundation, Inc.
-						最后更新于 8月 11, 2016.
+						最后更新于 8月 12, 2016.
 						Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.5.
 				</p>
 			</div>
